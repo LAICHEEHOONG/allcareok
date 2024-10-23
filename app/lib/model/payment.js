@@ -7,6 +7,7 @@ const PaymentSchema = new mongoose.Schema({
   currency: { type: String, required: true },
   paymentMethod: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
+  error: { type: String }, 
 });
 
 export default mongoose.models.Payment || mongoose.model('Payment', PaymentSchema);
