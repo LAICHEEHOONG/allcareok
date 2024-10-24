@@ -2,11 +2,13 @@ import Stripe from "stripe";
 import { NextResponse, NextRequest } from "next/server";
 import dbConnect from "../../lib/mongodb";
 import Payment from "../../models/Payment";
+import Checker from "@/app/models/Checker";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export async function POST(req) {
   await dbConnect(); // Connect to MongoDB
+
   const payload = await req.text();
   const res = JSON.parse(payload);
   const sig = req.headers.get("Stripe-Signature");
@@ -17,6 +19,9 @@ export async function POST(req) {
       sig,
       process.env.STRIPE_WEBHOOK_SECRET
     );
+
+    const checker = new Checker({ Fire: "fire", FireType: event.type });
+    await checker.save();
 
     // Check if the event is for a successful payment
     if (event.type === "payment_intent.succeeded") {
