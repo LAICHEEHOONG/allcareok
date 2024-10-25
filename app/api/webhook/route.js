@@ -39,7 +39,7 @@ export async function POST(req) {
         receiptEmail: RES?.receipt_email,
         status: RES?.status,
       };
-      console.log(paymentData);
+      // console.log(paymentData);
 
       const payment = new Payment(paymentData);
       await payment.save();
