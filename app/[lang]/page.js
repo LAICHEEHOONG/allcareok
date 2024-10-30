@@ -1,7 +1,8 @@
-'use client'
+"use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { getDictionary } from "@/lib/dictionary";
+import xx from "./images/allcareok_icon.svg";
 
 export default function Home({ params }) {
   const [pageData, setPageData] = useState(null);
@@ -15,7 +16,7 @@ export default function Home({ params }) {
           params instanceof Promise ? await params : params;
         const lang = resolvedParams?.lang || "en";
         const { page } = await getDictionary(lang);
-        console.log(page)
+        console.log(page);
         setPageData(page);
       } catch (error) {
         console.error("Error fetching dictionary:", error);
@@ -30,6 +31,14 @@ export default function Home({ params }) {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+        <Image
+          className="dark:invert"
+          src={xx}
+          alt="Next.js logo"
+          // width={180}
+          // height={38}
+          priority
+        />
         <Image
           className="dark:invert"
           src="https://nextjs.org/icons/next.svg"
