@@ -5,6 +5,8 @@ export default async function About({ params }) {
   const lang = resolvedParams?.lang || "en"; // Fallback to 'en' if lang is undefined
   const { page } = await getDictionary(lang);
 
+  
+
   return (
     <section className="py-24">
       <div className="container">
@@ -14,3 +16,4 @@ export default async function About({ params }) {
     </section>
   );
 }
+
