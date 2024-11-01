@@ -3,10 +3,11 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { getDictionary } from "@/lib/dictionary";
 import allcareokLogoText from "./images/allcareok_logo_text.svg";
-import allcareokLogo from './images/allcareok_logo.svg'
-import allcareokText from './images/allcareok_text.svg'
+import allcareokLogo from "./images/allcareok_logo.svg";
+import allcareokText from "./images/allcareok_text.svg";
 // import logo from "./images/allcareok_icon_no_text.svg";
 // import allcareok from "./images/allcareok_logo_text.svg";
+import { GoogleMapsEmbed } from "@next/third-parties/google";
 
 export default function Home({ params }) {
   const [pageData, setPageData] = useState(null);
@@ -43,7 +44,7 @@ export default function Home({ params }) {
           // height={38}
           priority
         />
-        <Image
+        {/* <Image
           className="dark:invert"
           src={allcareokLogo}
           alt="allcareokLogo"
@@ -58,7 +59,7 @@ export default function Home({ params }) {
           // width={180}
           // height={38}
           priority
-        />
+        /> */}
         {/* <Image
           className="dark:invert"
           src="https://nextjs.org/icons/next.svg"
@@ -105,6 +106,13 @@ export default function Home({ params }) {
         </div> */}
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
+        <GoogleMapsEmbed
+          apiKey="AIzaSyBvSmftem94fcOEtNH9qUDn9ESrw-8AtHk"
+          height={200}
+          width="100%"
+          mode="place"
+          q="Brooklyn+Bridge,New+York,NY"
+        />
         {/* <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
           href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
