@@ -1,20 +1,21 @@
 {
-    "navigation": {
-      "home": "首页",
-      "about": "关于"
+  "navigation": {
+    "home": "首页",
+    "about": "关于",
+    "share": "分享您的服务"
+  },
+  "page": {
+    "home": {
+      "title": "欢迎来到 NextJs i18n",
+      "description": "在 NextJs 13 应用程序路由中实现国际化"
     },
-    "page": {
-      "home": {
-        "title": "欢迎来到 NextJs i18n",
-        "description": "在 NextJs 13 应用程序路由中实现国际化"
-      },
-      "about": {
-        "title": "关于我们",
-        "description": "这是关于页面"
-      },
-      "button": {
-        "deploy": "立即部署",
-        "read": "阅读文档"
-      }
+    "about": {
+      "title": "关于我们",
+      "description": "这是关于页面"
+    },
+    "button": {
+      "deploy": "立即部署",
+      "read": "阅读文档"
     }
   }
+}

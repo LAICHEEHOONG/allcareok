@@ -12,14 +12,29 @@ import AllcareokLogo from "./AllcareokLogo.js";
 import SearchField from "./SearchField.js";
 import LanguageIcon from "@mui/icons-material/Language";
 import ProfileMenu from "./ProfileMenu.js";
+import LanguageMenu from "./LanguageMenu.js";
+import { Poppins } from "next/font/google";
+import { getDictionary } from "@/lib/dictionary.js";
 
-export default function Nav() {
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
+
+export default async function Nav({ lang }) {
+  const { navigation } = await getDictionary(lang);
+
   return (
     <Navbar shouldHideOnScroll>
-      <NavbarBrand>
-        {/* <AllcareokLogo /> */}
+      <NavbarBrand className={poppins.className}>
+        {/* <AcmeLogo /> */}
         <AllcareokLogo />
-        {/* <p className="font-bold text-inherit">allcareok</p> */}
+        <p
+          className="font-bold text-inherit ml-2 text-2xl"
+          style={{ color: "#f31260" }}
+        >
+          allcareok
+        </p>
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <SearchField />
@@ -57,11 +72,19 @@ export default function Nav() {
         <NavbarItem className="hidden lg:flex items-center">
           {/* <Link href="#">Login</Link> */}
           <Button color="default" variant="light" radius="full">
-            Share Your Services
+            {/* Share Your Services */}
+            {navigation.share}
           </Button>
-          <Button isIconOnly color="default" variant="light" aria-label="Like" radius="full">
+          {/* <Button
+            isIconOnly
+            color="default"
+            variant="light"
+            aria-label="Like"
+            radius="full"
+          >
             <LanguageIcon />
-          </Button>
+          </Button> */}
+          <LanguageMenu />
         </NavbarItem>
         <NavbarItem>
           {/* <Button as={Link} color="primary" href="#" variant="flat">

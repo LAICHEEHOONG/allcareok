@@ -1,7 +1,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import AllProvider from "@/components/AllProvider";
-import Nav from "@/components/Nav";
+import Nav from "@/components/nav/Nav";
 import { i18n } from "@/i18n.config";
 import Header from "@/components/header";
 
@@ -28,6 +28,7 @@ export async function generateStaticParams() {
 export default async function RootLayout({ children, params }) {
   const resolvedParams = params instanceof Promise ? await params : params;
   const lang = resolvedParams?.lang || "en"; // Fallback to 'en' if lang is undefined
+  console.log(lang)
   return (
     <html lang="en">
       <body
@@ -35,7 +36,7 @@ export default async function RootLayout({ children, params }) {
       >
         {/* <Header lang={lang} />  */}
         <AllProvider>
-          <Nav />
+          <Nav lang={lang} />
           {children}
         </AllProvider>
       </body>

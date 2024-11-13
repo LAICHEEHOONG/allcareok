@@ -1,8 +1,8 @@
-'use client'
+"use client";
 
-import {Autocomplete, AutocompleteItem} from "@nextui-org/react";
+import { Autocomplete, AutocompleteItem } from "@nextui-org/react";
 import { SearchIcon } from "./SearchIcon";
-import {animals} from "./data";
+import { animals } from "./data";
 
 export default function SearchField() {
   return (
@@ -18,7 +18,9 @@ export default function SearchField() {
       size="lg"
       aria-label="search where"
     >
-      {(item) => <AutocompleteItem key={item.value}>{item.label}</AutocompleteItem>}
+      {(item) => (
+        <AutocompleteItem key={item.value}>{item.label}</AutocompleteItem>
+      )}
     </Autocomplete>
   );
 }

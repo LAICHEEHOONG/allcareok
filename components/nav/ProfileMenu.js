@@ -13,7 +13,7 @@ export default function ProfileMenu() {
   return (
     <Dropdown >
       <DropdownTrigger>
-        <Button variant="bordered" radius="full" size="md">
+        <Button variant="bordered"  radius="full" size="lg">
           <MenuIcon />
           <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" size="sm" />
         </Button>
