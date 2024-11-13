@@ -1,8 +1,9 @@
 import localFont from "next/font/local";
 import "./globals.css";
-import { GoogleTagManager } from "@next/third-parties/google";
+import AllProvider from "@/components/AllProvider";
+import Nav from "@/components/Nav";
 import { i18n } from "@/i18n.config";
-import Header from "./components/header";
+import Header from "@/components/header";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -25,20 +26,18 @@ export async function generateStaticParams() {
 }
 
 export default async function RootLayout({ children, params }) {
-  // Await the params if they're a promise
   const resolvedParams = params instanceof Promise ? await params : params;
   const lang = resolvedParams?.lang || "en"; // Fallback to 'en' if lang is undefined
   return (
-    <html
-      // lang="en"
-      lang={lang}
-    >
-      <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />
+    <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header lang={lang} />
-        {children}
+        {/* <Header lang={lang} />  */}
+        <AllProvider>
+          <Nav />
+          {children}
+        </AllProvider>
       </body>
     </html>
   );
