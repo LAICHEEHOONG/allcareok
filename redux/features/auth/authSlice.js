@@ -5,7 +5,7 @@ const initialState = {
   email: "",
   image: "",
   name: "",
-  signIn: false,
+  signIn: "",
 };
 
 export const authSlice = createSlice({

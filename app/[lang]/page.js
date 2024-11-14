@@ -1,3 +1,18 @@
+import Badges from "@/components/Badge";
+import { CarouselDemo } from "@/components/CarouselDemo";
+
+export default function Home() {
+  return (
+    <div className="">
+      <main className="">
+        {/* <Badges />
+        <CarouselDemo /> */}
+      </main>
+      <footer className=""> </footer>
+    </div>
+  );
+}
+
 // import Image from "next/image";
 
 // export default function Home() {
@@ -100,17 +115,4 @@
 //   );
 // }
 
-import Badges from "@/components/Badge";
-import { CarouselDemo } from "@/components/CarouselDemo";
 
-export default function Home() {
-  return (
-    <div className="">
-      <main className="">
-        {/* <Badges />
-        <CarouselDemo /> */}
-      </main>
-      <footer className=""> </footer>
-    </div>
-  );
-}

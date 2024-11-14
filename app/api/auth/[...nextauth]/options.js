@@ -28,7 +28,7 @@ export const options = {
   theme: {
     colorScheme: "light",
     brandColor: "",
-    logo: "/signin_logo.jpeg",
+    logo: "/images/allcareok_logo_text.jpg",
     buttonText: "",
   },
 };

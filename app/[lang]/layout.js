@@ -4,7 +4,7 @@ import AllProvider from "@/components/AllProvider";
 import Nav from "@/components/nav/Nav";
 import { i18n } from "@/i18n.config";
 import { getServerSession } from "next-auth";
-import { options } from "../api/[...nextauth]/options";
+import { options } from "../api/auth/[...nextauth]/options";
 
 // import Header from "@/components/header";
 
@@ -42,7 +42,7 @@ export default async function RootLayout({ children, params }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {/* <Header lang={lang} />  */}
-        <AllProvider session={session}>
+        <AllProvider>
           <Nav lang={lang} />
           {children}
         </AllProvider>

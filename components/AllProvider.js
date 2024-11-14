@@ -9,7 +9,7 @@ import { SessionProvider } from "next-auth/react";
 export default function AllProvider({ children, session }) {
   return (
     <Provider store={store}>
-      <SessionProvider session={session}>
+      <SessionProvider>
         <NextUIProvider>{children}</NextUIProvider>
       </SessionProvider>
       <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />
