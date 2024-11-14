@@ -110,7 +110,7 @@ export default function Home() {
         {/* <Badges />
         <CarouselDemo /> */}
       </main>
-      <footer className=""></footer>
+      <footer className=""> </footer>
     </div>
   );
 }
