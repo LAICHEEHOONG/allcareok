@@ -4,11 +4,12 @@ import { Autocomplete, AutocompleteItem } from "@nextui-org/react";
 import { SearchIcon } from "./SearchIcon";
 import { animals } from "./data";
 
-export default function SearchField() {
+export default function SearchField({navigation}) {
+
   return (
     <Autocomplete
       // label="Where"
-      placeholder="Search..."
+      placeholder={navigation.placeholder}
       variant="bordered"
       defaultItems={animals}
       startContent={<SearchIcon className="text-xl" />}

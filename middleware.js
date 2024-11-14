@@ -19,11 +19,11 @@ function getLocale(request) {
 
 export function middleware(request) {
   const pathname = request.nextUrl.pathname;
+  console.log(pathname)
   const pathnameIsMissingLocale = i18n.locales.every(
     (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
   );
 
-  // Redirect if there is no locale
   if (pathnameIsMissingLocale) {
     const locale = getLocale(request);
     return NextResponse.redirect(
@@ -35,17 +35,11 @@ export function middleware(request) {
   }
 }
 
-// export const config = {
-//   // Matcher ignoring `/_next/` and `/api/`
-//   matcher: [
-//     "/((?!api|_next/static|_next/image|favicon.ico).*)",
-//     "/admin/:path*",
-//   ],
-// };
-
 export const config = {
   matcher: [
     "/((?!api|_next/static|_next/image|favicon.ico|images).*)",
     "/admin/:path*",
   ],
 };
+
+export { default } from "next-auth/middleware";

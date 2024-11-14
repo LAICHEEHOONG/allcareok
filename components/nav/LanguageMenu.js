@@ -41,6 +41,7 @@ export default function LanguageMenu() {
             <DropdownItem
               key={locale}
               onPress={() => router.push(redirectedPathName(locale))}
+              textValue={locale}
             >
               {locale === 'en' && "English"}
               {locale === 'zh' && "中文"}

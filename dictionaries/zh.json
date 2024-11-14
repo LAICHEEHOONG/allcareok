@@ -2,7 +2,12 @@
   "navigation": {
     "home": "首页",
     "about": "关于",
-    "share": "分享您的服务"
+    "share": "分享您的服务",
+    "placeholder": "地点...",
+    "login": "登入",
+    "whishlists": "浏览记录",
+    "help": "帮助中心",
+    "logout": "登出"
   },
   "page": {
     "home": {

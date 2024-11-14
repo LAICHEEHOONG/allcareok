@@ -37,7 +37,7 @@ export default async function Nav({ lang }) {
         </p>
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <SearchField />
+        <SearchField navigation={navigation} />
         {/* <Input
           // classNames={{
           //   base: "max-w-full sm:max-w-[10rem] h-10",
@@ -90,7 +90,7 @@ export default async function Nav({ lang }) {
           {/* <Button as={Link} color="primary" href="#" variant="flat">
             Sign Up
           </Button> */}
-          <ProfileMenu />
+          <ProfileMenu navigation={navigation} />
         </NavbarItem>
       </NavbarContent>
     </Navbar>

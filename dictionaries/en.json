@@ -2,7 +2,12 @@
     "navigation": {
       "home": "Home",
       "about": "About",
-      "share": "Share Your Services"
+      "share": "Share Your Services",
+      "placeholder": "Where...",
+      "login": "Log in",
+      "whishlists": "Wishlists",
+      "help": "Help Centre",
+      "logout": "Log out"
     },
     "page": {
       "home": {
