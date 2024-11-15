@@ -18,9 +18,7 @@ import { userInfo, signInStatus } from "@/redux/features/auth/authSlice";
 export default function ProfileMenu({ navigation }) {
   const { data: session, status } = useSession();
   const dispatch = useDispatch();
-  const auth = useSelector(state => state.auth)
-
-  
+  const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
     const signUpUser = async (user) => {
@@ -46,15 +44,18 @@ export default function ProfileMenu({ navigation }) {
         </Button>
       </DropdownTrigger>
       <DropdownMenu aria-label="Static Actions">
-        <DropdownItem
-          key={navigation.login}
-          showDivider
-          textValue="log in"
-          onPress={() => signIn()}
-        >
-          <GoogleIcon className="mr-1" />
-          {navigation.login}
-        </DropdownItem>
+        {auth.signIn !== "authenticated" && (
+          <DropdownItem
+            key={navigation.login}
+            showDivider
+            textValue="log in"
+            onPress={() => signIn()}
+          >
+            <GoogleIcon className="mr-1" />
+            {navigation.login}
+          </DropdownItem>
+        )}
+
         <DropdownItem key={navigation.whishlists} textValue="whish lists">
           {navigation.whishlists}
         </DropdownItem>
@@ -64,15 +65,17 @@ export default function ProfileMenu({ navigation }) {
         <DropdownItem key={navigation.help} textValue="help center">
           {navigation.help}
         </DropdownItem>
-        <DropdownItem
-          key={navigation.logout}
-          className="text-danger"
-          color="danger"
-          textValue="log out"
-          onPress={() => signOut()}
-        >
-          {navigation.logout}
-        </DropdownItem>
+        {auth.signIn === "authenticated" && (
+          <DropdownItem
+            key={navigation.logout}
+            className="text-danger"
+            color="danger"
+            textValue="log out"
+            onPress={() => signOut()}
+          >
+            {navigation.logout}
+          </DropdownItem>
+        )}
       </DropdownMenu>
     </Dropdown>
   );

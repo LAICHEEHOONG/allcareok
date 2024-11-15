@@ -5,6 +5,7 @@ import Nav from "@/components/nav/Nav";
 import { i18n } from "@/i18n.config";
 import { getServerSession } from "next-auth";
 import { options } from "../api/auth/[...nextauth]/options";
+import NavBottom from "@/components/navBottom/NavBottom";
 
 // import Header from "@/components/header";
 
@@ -32,19 +33,15 @@ export default async function RootLayout({ children, params }) {
   const resolvedParams = params instanceof Promise ? await params : params;
   const lang = resolvedParams?.lang || "en"; // Fallback to 'en' if lang is undefined
 
-  const session = await getServerSession(options);
-  // const user = session?.user;
-  // console.log(user)
-
   return (
     <html lang={lang}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* <Header lang={lang} />  */}
         <AllProvider>
           <Nav lang={lang} />
           {children}
+          <NavBottom />
         </AllProvider>
       </body>
     </html>

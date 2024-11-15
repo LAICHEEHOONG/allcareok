@@ -1,5 +1,6 @@
 import Badges from "@/components/Badge";
 import { CarouselDemo } from "@/components/CarouselDemo";
+import Fruits from "@/components/Fruits";
 
 export default function Home() {
   return (
@@ -7,6 +8,10 @@ export default function Home() {
       <main className="">
         {/* <Badges />
         <CarouselDemo /> */}
+        <div className="m-2">
+          <Fruits />
+          <Fruits />
+        </div>
       </main>
       <footer className=""> </footer>
     </div>
@@ -114,5 +119,3 @@ export default function Home() {
 //     </div>
 //   );
 // }
-
-

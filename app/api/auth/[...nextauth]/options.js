@@ -28,7 +28,7 @@ export const options = {
   theme: {
     colorScheme: "light",
     brandColor: "",
-    logo: "/images/allcareok_logo_text.jpg",
+    logo: "/images/allcareok_logo_horizotal.png",
     buttonText: "",
   },
 };
