@@ -3,8 +3,8 @@ import "./globals.css";
 import AllProvider from "@/components/AllProvider";
 import Nav from "@/components/nav/Nav";
 import { i18n } from "@/i18n.config";
-import { getServerSession } from "next-auth";
-import { options } from "../api/auth/[...nextauth]/options";
+
+import NavBottomWrap from "@/components/navBottom/NavBottomWrap";
 import NavBottom from "@/components/navBottom/NavBottom";
 
 // import Header from "@/components/header";
@@ -41,7 +41,8 @@ export default async function RootLayout({ children, params }) {
         <AllProvider>
           <Nav lang={lang} />
           {children}
-          <NavBottom />
+          <NavBottomWrap lang={lang} />
+          {/* <NavBottom lang={lang} /> */}
         </AllProvider>
       </body>
     </html>

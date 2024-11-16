@@ -4,17 +4,24 @@ import { motion } from "framer-motion";
 import Box from "@mui/material/Box";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import RestoreIcon from "@mui/icons-material/Restore";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
 import SearchIcon from "@mui/icons-material/Search";
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import LanguageIcon from '@mui/icons-material/Language';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import LanguageIcon from "@mui/icons-material/Language";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { useRouter, usePathname } from "next/navigation";
+import { useSelector } from "react-redux";
 
-export default function NavBottom() {
+export default function NavBottom({ bottom_navigation }) {
+  const router = useRouter();
+  const pathname = usePathname();
+
+  // Extract current locale from pathname
+  const currentLocale = pathname.split("/")[1] || "en";
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const language = useSelector((state) => state.auth.language);
+
+  const [lan, setLan] = useState(language);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,6 +45,15 @@ export default function NavBottom() {
     };
   }, [lastScrollY]);
 
+  useEffect(() => {
+    if (language === "en") {
+      setLan("English");
+    }
+    if (language === "zh") {
+      setLan("中文");
+    }
+  }, [language]);
+
   return (
     <motion.div
       className="fixed bottom-0 z-50 w-full block sm:hidden"
@@ -60,10 +76,20 @@ export default function NavBottom() {
             // Handle navigation state if necessary
           }}
         >
-          <BottomNavigationAction label="Explore" icon={<SearchIcon />} />
-          <BottomNavigationAction label="Wishlists" icon={<FavoriteBorderIcon />} />
-          <BottomNavigationAction label="English" icon={<LanguageIcon />} />
-          <BottomNavigationAction label="Profile" icon={<AccountCircleIcon />} />
+          <BottomNavigationAction
+            label={bottom_navigation.explore}
+            icon={<SearchIcon />}
+            onClick={() => router.push(`/${currentLocale}`)}
+          />
+          <BottomNavigationAction
+            label={bottom_navigation.whishlists}
+            icon={<FavoriteBorderIcon />}
+          />
+          <BottomNavigationAction label={lan} icon={<LanguageIcon />} />
+          <BottomNavigationAction
+            label={bottom_navigation.profile}
+            icon={<AccountCircleIcon />}
+          />
         </BottomNavigation>
       </Box>
     </motion.div>

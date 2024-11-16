@@ -14,16 +14,31 @@ import { useEffect } from "react";
 import { signUp } from "@/lib/action/userAction";
 import { useDispatch, useSelector } from "react-redux";
 import { userInfo, signInStatus } from "@/redux/features/auth/authSlice";
+import { useRouter, usePathname } from "next/navigation";
 
 export default function ProfileMenu({ navigation }) {
   const { data: session, status } = useSession();
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
+  const router = useRouter();
+  const pathName = usePathname();
+
+  const redirectedPathName = (locale) => {
+    if (!pathName) return "/";
+    const segments = pathName.split("/");
+    segments[1] = locale;
+    return segments.join("/");
+  };
 
   useEffect(() => {
     const signUpUser = async (user) => {
       try {
         const res = await signUp(user);
+        // console.log(res)
+        // if (res.language !== "en") {
+
+        // }
+        router.push(redirectedPathName(res.language));
         dispatch(userInfo(res));
       } catch (err) {
         console.log(err);
@@ -35,6 +50,7 @@ export default function ProfileMenu({ navigation }) {
       dispatch(signInStatus(status));
     }
   }, [session, status, dispatch]);
+
   return (
     <Dropdown>
       <DropdownTrigger>

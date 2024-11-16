@@ -9,6 +9,11 @@
       "help": "Help Centre",
       "logout": "Log out"
     },
+    "bottom_navigation": {
+      "explore": "Explore",
+      "whishlists": "Wishlists",
+      "profile": "Profile"
+    },
     "page": {
       "home": {
         "title": "Welcome to NextJs i18n",
