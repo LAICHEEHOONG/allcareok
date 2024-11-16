@@ -1,34 +1,3 @@
-// 'use client'
-// import Box from '@mui/material/Box';
-// import BottomNavigation from '@mui/material/BottomNavigation';
-// import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-// import RestoreIcon from '@mui/icons-material/Restore';
-// import FavoriteIcon from '@mui/icons-material/Favorite';
-// import LocationOnIcon from '@mui/icons-material/LocationOn';
-// import { useState } from 'react';
-
-// export default function NavBottom() {
-//   const [value, setValue] = useState(0);
-
-//   return (
-//     <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md z-50">
-//       <Box>
-//         <BottomNavigation
-//           showLabels
-//           value={value}
-//           onChange={(event, newValue) => {
-//             setValue(newValue);
-//           }}
-//         >
-//           <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-//           <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-//           <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
-//         </BottomNavigation>
-//       </Box>
-//     </div>
-//   );
-// }
-
 "use client";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
@@ -38,6 +7,10 @@ import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import RestoreIcon from "@mui/icons-material/Restore";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import SearchIcon from "@mui/icons-material/Search";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import LanguageIcon from '@mui/icons-material/Language';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export default function NavBottom() {
   const [isVisible, setIsVisible] = useState(true);
@@ -87,9 +60,10 @@ export default function NavBottom() {
             // Handle navigation state if necessary
           }}
         >
-          <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-          <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-          <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
+          <BottomNavigationAction label="Explore" icon={<SearchIcon />} />
+          <BottomNavigationAction label="Wishlists" icon={<FavoriteBorderIcon />} />
+          <BottomNavigationAction label="English" icon={<LanguageIcon />} />
+          <BottomNavigationAction label="Profile" icon={<AccountCircleIcon />} />
         </BottomNavigation>
       </Box>
     </motion.div>

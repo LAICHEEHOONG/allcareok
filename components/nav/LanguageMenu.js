@@ -7,7 +7,6 @@ import {
   Button,
 } from "@nextui-org/react";
 import LanguageIcon from "@mui/icons-material/Language";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { i18n } from "@/i18n.config";
 import { useRouter } from "next/navigation";

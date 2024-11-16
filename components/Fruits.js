@@ -51,7 +51,7 @@ export default function Fruits() {
       {list.map((item, index) => (
         <Card shadow="sm" key={index} isPressable onPress={() => console.log("item pressed")}>
           <CardBody className="overflow-visible p-0">
-            <Image
+            <Image 
               shadow="sm"
               radius="lg"
               width="100%"

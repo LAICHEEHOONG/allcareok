@@ -1,3 +1,4 @@
+
 import {
   Navbar,
   NavbarBrand,
@@ -16,6 +17,7 @@ import LanguageMenu from "./LanguageMenu.js";
 import { Poppins } from "next/font/google";
 import { getDictionary } from "@/lib/dictionary.js";
 
+
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -27,69 +29,31 @@ export default async function Nav({ lang }) {
   return (
     <Navbar shouldHideOnScroll>
       <NavbarBrand className={poppins.className}>
-        {/* <AcmeLogo /> */}
         <AllcareokLogo />
-        <p
+        {/* <p
           className="font-bold text-inherit ml-2 text-2xl hidden sm:flex"
           style={{ color: "#f31260" }}
         >
           allcareok
-        </p>
+        </p> */}
       </NavbarBrand>
       <NavbarContent className="flex gap-4" justify="center">
         <SearchField navigation={navigation} />
-        {/* <Input
-          // classNames={{
-          //   base: "max-w-full sm:max-w-[10rem] h-10",
-          //   mainWrapper: "h-full",
-          //   input: "text-small",
-          //   inputWrapper:
-          //     "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
-          // }}
-          placeholder="Where..."
-          size="lg"
-          startContent={<SearchIcon size={18} />}
-          type="search"
-          radius="full"
-        /> */}
-        {/* <NavbarItem>
-          <Link color="foreground" href="#">
-            Features
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive>
-          <Link href="#" aria-current="page">
-            Customers
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Integrations
-          </Link>
-        </NavbarItem> */}
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden sm:flex items-center">
-          {/* <Link href="#">Login</Link> */}
-          <Button className="hidden lg:flex " color="default" variant="light" radius="full">
-            {/* Share Your Services */}
-            {navigation.share}
-          </Button>
-          {/* <Button
-            isIconOnly
+          <Button
+            className="hidden lg:flex "
             color="default"
             variant="light"
-            aria-label="Like"
             radius="full"
           >
-            <LanguageIcon />
-          </Button> */}
+            {navigation.share}
+          </Button>
+
           <LanguageMenu />
         </NavbarItem>
         <NavbarItem className="hidden sm:flex">
-          {/* <Button as={Link} color="primary" href="#" variant="flat">
-            Sign Up
-          </Button> */}
           <ProfileMenu navigation={navigation} />
         </NavbarItem>
       </NavbarContent>
