@@ -41,7 +41,7 @@ export default async function RootLayout({ children, params }) {
         <AllProvider>
           <Nav lang={lang} />
           {children}
-          {/* <NavBottomWrap lang={lang} /> */}
+          <NavBottomWrap lang={lang} />
           {/* <NavBottom lang={lang} /> */}
         </AllProvider>
       </body>

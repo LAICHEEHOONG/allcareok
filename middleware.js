@@ -79,10 +79,18 @@ const middleware = withAuth(
 export default middleware;
 
 // Exclude specific paths from middleware
+// export const config = {
+//   matcher: [
+//     "/((?!api|_next/static|_next/image|favicon.ico|images).*)",
+//     "/((?!public|images).*)", // Ensure public/images paths are accessible
+//     "/admin/:path*",
+//   ],
+// };
+
 export const config = {
   matcher: [
-    "/((?!api|_next/static|_next/image|favicon.ico|images).*)",
-    "/((?!public|images).*)", // Ensure public/images paths are accessible
+    "/((?!api|_next/static|_next/image|favicon.ico|images|.well-known).*)",
+    "/admin/:path*",
   ],
 };
 
