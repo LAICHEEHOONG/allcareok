@@ -1,6 +1,7 @@
+"use client";
+import { Button } from "@/components/ui/button";
+import { DrawerDemo } from "@/components/Drawer";
 
-export default async function Admin() {
-    return (
-        <div>Admin</div>
-    )
+export default function Admin() {
+  return <DrawerDemo />;
 }

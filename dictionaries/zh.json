@@ -12,7 +12,8 @@
   "bottom_navigation": {
     "explore": "探索",
     "whishlists": "心愿单",
-    "profile": "登入"
+    "profile": "个人资料",
+    "login": "登入"
   },
   "page": {
     "home": {

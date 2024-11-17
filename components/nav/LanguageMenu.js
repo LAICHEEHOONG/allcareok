@@ -7,21 +7,21 @@ import {
   Button,
 } from "@nextui-org/react";
 import LanguageIcon from "@mui/icons-material/Language";
-import { usePathname } from "next/navigation";
+// import { usePathname } from "next/navigation";
 import { i18n } from "@/i18n.config";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
 import { updateUserLanguage } from "@/lib/action/userAction";
 
 export default function LanguageMenu() {
   const router = useRouter();
-  const pathName = usePathname();
+  const pathname = usePathname();
   const id = useSelector((state) => state.auth._id);
   // const auth = useSelector((state) => state.auth);
 
   const redirectedPathName = (locale) => {
-    if (!pathName) return "/";
-    const segments = pathName.split("/");
+    if (!pathname) return "/";
+    const segments = pathname.split("/");
     segments[1] = locale;
     return segments.join("/");
   };
@@ -65,19 +65,6 @@ export default function LanguageMenu() {
             </DropdownItem>
           );
         })}
-        {/* <DropdownItem
-          key="en"
-          onPress={() => router.push(redirectedPathName(locale))}
-        >
-          English
-        </DropdownItem>
-        <DropdownItem key="zh">中文</DropdownItem> */}
-        {/* <DropdownItem key="new">New file</DropdownItem>
-        <DropdownItem key="copy">Copy link</DropdownItem>
-        <DropdownItem key="edit">Edit file</DropdownItem>
-        <DropdownItem key="delete" className="text-danger" color="danger">
-          Delete file
-        </DropdownItem> */}
       </DropdownMenu>
     </Dropdown>
   );

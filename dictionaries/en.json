@@ -12,7 +12,8 @@
     "bottom_navigation": {
       "explore": "Explore",
       "whishlists": "Wishlists",
-      "profile": "Profile"
+      "profile": "Profile",
+      "login": "Log in"
     },
     "page": {
       "home": {

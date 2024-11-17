@@ -1,13 +1,13 @@
-import Badges from "@/components/Badge";
-import { CarouselDemo } from "@/components/CarouselDemo";
+// import Badges from "@/components/Badge";
+// import { CarouselDemo } from "@/components/CarouselDemo";
 import Fruits from "@/components/Fruits";
 
 export default function Home() {
   return (
     <div className="">
       <main className="">
-        {/* <Badges />
-        <CarouselDemo /> */}
+        {/* <Badges /> */}
+        {/* <CarouselDemo /> */}
         <div className="m-2">
           <Fruits />
           <Fruits />

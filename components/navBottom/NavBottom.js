@@ -10,8 +10,20 @@ import LanguageIcon from "@mui/icons-material/Language";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useRouter, usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  Button,
+} from "@nextui-org/react";
+import { i18n } from "@/i18n.config";
+import { updateUserLanguage } from "@/lib/action/userAction";
+import { DrawerProfile } from "../Drawer";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function NavBottom({ bottom_navigation }) {
+  const { data: session, status } = useSession();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -20,6 +32,26 @@ export default function NavBottom({ bottom_navigation }) {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const language = useSelector((state) => state.auth.language);
+  const id = useSelector((state) => state.auth._id);
+
+  const redirectedPathName = (locale) => {
+    if (!pathname) return "/";
+    const segments = pathname.split("/");
+    segments[1] = locale;
+    return segments.join("/");
+  };
+
+  const changeLanguage = async (locale) => {
+    try {
+      router.push(redirectedPathName(locale)); // Navigate to the new language route
+
+      if (id) {
+        await updateUserLanguage({ id, locale }); // Update the user's language preference
+      }
+    } catch (error) {
+      console.error("Failed to update language:", error);
+    }
+  };
 
   const [lan, setLan] = useState(language);
 
@@ -84,12 +116,31 @@ export default function NavBottom({ bottom_navigation }) {
           <BottomNavigationAction
             label={bottom_navigation.whishlists}
             icon={<FavoriteBorderIcon />}
-          />
-          <BottomNavigationAction label={lan} icon={<LanguageIcon />} />
-          <BottomNavigationAction
-            label={bottom_navigation.profile}
-            icon={<AccountCircleIcon />}
-          />
+            showLabel
+          ></BottomNavigationAction>
+          {/* <DrawerDemo>
+            <BottomNavigationAction
+              showLabel
+              label={lan}
+              icon={<LanguageIcon />}
+            />
+          </DrawerDemo> */}
+          {session ? (
+            <DrawerProfile>
+              <BottomNavigationAction
+                showLabel
+                label={bottom_navigation.profile}
+                icon={<AccountCircleIcon />}
+              />
+            </DrawerProfile>
+          ) : (
+            <BottomNavigationAction
+              showLabel
+              label={bottom_navigation.login}
+              icon={<AccountCircleIcon />}
+              onClick={() => signIn()}
+            />
+          )}
         </BottomNavigation>
       </Box>
     </motion.div>
