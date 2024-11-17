@@ -1,3 +1,4 @@
+'use server'
 import { getDictionary } from "@/lib/dictionary";
 import NavBottom from "./NavBottom";
 

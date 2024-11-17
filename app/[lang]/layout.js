@@ -5,7 +5,7 @@ import Nav from "@/components/nav/Nav";
 import { i18n } from "@/i18n.config";
 
 import NavBottomWrap from "@/components/navBottom/NavBottomWrap";
-import NavBottom from "@/components/navBottom/NavBottom";
+// import NavBottom from "@/components/navBottom/NavBottom";
 
 // import Header from "@/components/header";
 
@@ -41,7 +41,7 @@ export default async function RootLayout({ children, params }) {
         <AllProvider>
           <Nav lang={lang} />
           {children}
-          <NavBottomWrap lang={lang} />
+          {/* <NavBottomWrap lang={lang} /> */}
           {/* <NavBottom lang={lang} /> */}
         </AllProvider>
       </body>

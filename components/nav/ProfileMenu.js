@@ -34,10 +34,11 @@ export default function ProfileMenu({ navigation }) {
     const signUpUser = async (user) => {
       try {
         const res = await signUp(user);
-        // console.log(res)
+        console.log(res)
         // if (res.language !== "en") {
 
         // }
+
         router.push(redirectedPathName(res.language));
         dispatch(userInfo(res));
       } catch (err) {
