@@ -56,28 +56,56 @@ export default function NavBottom({ bottom_navigation }) {
 
   const [lan, setLan] = useState(language);
 
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const currentScrollY = window.scrollY;
+
+  //     if (currentScrollY > lastScrollY) {
+  //       // Scrolling down
+  //       setIsVisible(false);
+  //     } else {
+  //       // Scrolling up
+  //       setIsVisible(true);
+  //     }
+
+  //     setLastScrollY(currentScrollY);
+  //   };
+
+  //   window.addEventListener("scroll", handleScroll);
+
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, [lastScrollY]);
+
   useEffect(() => {
+    let timeoutId;
+
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
+      clearTimeout(timeoutId);
 
-      if (currentScrollY > lastScrollY) {
-        // Scrolling down
-        setIsVisible(false);
-      } else {
-        // Scrolling up
-        setIsVisible(true);
-      }
+      timeoutId = setTimeout(() => {
+        const currentScrollY = window.scrollY;
 
-      setLastScrollY(currentScrollY);
+        if (currentScrollY > lastScrollY) {
+          // Scrolling down
+          setIsVisible(false);
+        } else {
+          // Scrolling up
+          setIsVisible(true);
+        }
+
+        setLastScrollY(currentScrollY);
+      }, 200); // 1-second delay
     };
 
     window.addEventListener("scroll", handleScroll);
 
     return () => {
+      clearTimeout(timeoutId);
       window.removeEventListener("scroll", handleScroll);
     };
   }, [lastScrollY]);
-
   useEffect(() => {
     if (language === "en") {
       setLan("English");
