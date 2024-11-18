@@ -33,6 +33,7 @@ export default function NavBottom({ bottom_navigation }) {
   const [lastScrollY, setLastScrollY] = useState(0);
   const language = useSelector((state) => state.auth.language);
   const id = useSelector((state) => state.auth._id);
+  const [clickIcon, setClickIcon] = useState(3);
 
   const redirectedPathName = (locale) => {
     if (!pathname) return "/";
@@ -103,20 +104,27 @@ export default function NavBottom({ bottom_navigation }) {
       <Box>
         <BottomNavigation
           showLabels
-          value={0}
+          value={clickIcon}
           onChange={(event, newValue) => {
             // Handle navigation state if necessary
+            console.log(newValue);
           }}
         >
           <BottomNavigationAction
             label={bottom_navigation.explore}
             icon={<SearchIcon />}
-            onClick={() => router.push(`/${currentLocale}`)}
+            onClick={() => {
+              router.push(`/${currentLocale}`);
+              setClickIcon(0);
+            }}
           />
           <BottomNavigationAction
             label={bottom_navigation.whishlists}
             icon={<FavoriteBorderIcon />}
             showLabel
+            onClick={() => {
+              setClickIcon(1);
+            }}
           ></BottomNavigationAction>
           {/* <DrawerDemo>
             <BottomNavigationAction
@@ -131,6 +139,9 @@ export default function NavBottom({ bottom_navigation }) {
                 showLabel
                 label={bottom_navigation.profile}
                 icon={<AccountCircleIcon />}
+                onClick={() => {
+                  setClickIcon(2);
+                }}
               />
             </DrawerProfile>
           ) : (
@@ -138,7 +149,10 @@ export default function NavBottom({ bottom_navigation }) {
               showLabel
               label={bottom_navigation.login}
               icon={<AccountCircleIcon />}
-              onClick={() => signIn()}
+              onClick={() => {
+                signIn();
+                setClickIcon(2);
+              }}
             />
           )}
         </BottomNavigation>
