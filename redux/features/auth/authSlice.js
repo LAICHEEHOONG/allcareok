@@ -26,9 +26,12 @@ export const authSlice = createSlice({
       state._id = _id;
       state.language = language;
     },
+    updateLanguage: (state, action) => {
+      state.language = action.payload.replace(/^\//, "");
+    },
   },
 });
 
-export const { signInStatus, userInfo } = authSlice.actions;
+export const { signInStatus, userInfo, updateLanguage } = authSlice.actions;
 
 export default authSlice.reducer;

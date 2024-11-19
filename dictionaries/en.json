@@ -1,32 +1,37 @@
 {
-    "navigation": {
-      "home": "Home",
-      "about": "About",
-      "share": "Share Your Services",
-      "placeholder": "Where...",
-      "login": "Log in",
-      "whishlists": "Wishlists",
-      "help": "Help Centre",
-      "logout": "Log out"
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "share": "Share Your Services",
+    "placeholder": "Where...",
+    "login": "Log in",
+    "whishlists": "Wishlists",
+    "help": "Help Centre",
+    "logout": "Log out"
+  },
+  "bottom_navigation": {
+    "explore": "Explore",
+    "whishlists": "Wishlists",
+    "profile": "Profile",
+    "login": "Log in",
+    "drawerTitle": "Choose a language and region",
+    "logout": "Log out",
+    "help": "Visit the Help Center",
+    "share": "Share Your Services",
+    "shareContent": "Post Services & Earn Extra Income Easily"
+  },
+  "page": {
+    "home": {
+      "title": "Welcome to NextJs i18n",
+      "description": "Internationalization in NextJs 13 App router"
     },
-    "bottom_navigation": {
-      "explore": "Explore",
-      "whishlists": "Wishlists",
-      "profile": "Profile",
-      "login": "Log in"
+    "about": {
+      "title": "About Us",
+      "description": "This is the about page"
     },
-    "page": {
-      "home": {
-        "title": "Welcome to NextJs i18n",
-        "description": "Internationalization in NextJs 13 App router"
-      },
-      "about": {
-        "title": "About Us",
-        "description": "This is the about page"
-      },
-      "button": {
-        "deploy": "Deploy now",
-        "read": "Read our docs"
-      }
+    "button": {
+      "deploy": "Deploy now",
+      "read": "Read our docs"
     }
   }
+}

@@ -70,7 +70,7 @@ const data = [
   },
 ];
 
-export function DrawerProfile({ children }) {
+export function DrawerProfile({ children, bottom_navigation }) {
   const [goal, setGoal] = React.useState(350);
   const auth = useSelector((state) => state.auth);
 
@@ -120,9 +120,11 @@ export function DrawerProfile({ children }) {
               </p> */}
               <div className="flex">
                 <div className="flex flex-col justify-center tracking-wider">
-                  <p className="text-md leading-10">Share Your Services</p>
+                  <p className="text-md leading-10">
+                    {bottom_navigation.share}
+                  </p>
                   <p className="text-small tracking-wide text-default-400">
-                    {"Post Services & Earn Extra Income Easily"}
+                    {bottom_navigation.shareContent}
                   </p>
                 </div>
                 <Image
@@ -138,19 +140,20 @@ export function DrawerProfile({ children }) {
           <DrawerFooter>
             {/* <Button variant="outline" onClick={() => signOut()}>Log out</Button> */}
 
-            <DrawerClose asChild>
-              <Button color="danger" radius="full" onPress={() => signOut()}>
-                Log out
-              </Button>
-            </DrawerClose>
             <Button
               color="default"
               radius="full"
               variant="light"
               startContent={<HelpOutlineIcon />}
             >
-              Visit the Help Center
+              {bottom_navigation.help}
             </Button>
+
+            <DrawerClose asChild>
+              <Button color="danger" radius="full" onPress={() => signOut()}>
+                {bottom_navigation.logout}
+              </Button>
+            </DrawerClose>
           </DrawerFooter>
         </div>
       </DrawerContent>

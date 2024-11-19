@@ -21,6 +21,7 @@ import { i18n } from "@/i18n.config";
 import { updateUserLanguage } from "@/lib/action/userAction";
 import { DrawerProfile } from "../Drawer";
 import { useSession, signIn, signOut } from "next-auth/react";
+import { DrawerLanguage } from "../DrawerLanguage";
 
 export default function NavBottom({ bottom_navigation }) {
   const { data: session, status } = useSession();
@@ -56,56 +57,56 @@ export default function NavBottom({ bottom_navigation }) {
 
   const [lan, setLan] = useState(language);
 
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     const currentScrollY = window.scrollY;
-
-  //     if (currentScrollY > lastScrollY) {
-  //       // Scrolling down
-  //       setIsVisible(false);
-  //     } else {
-  //       // Scrolling up
-  //       setIsVisible(true);
-  //     }
-
-  //     setLastScrollY(currentScrollY);
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, [lastScrollY]);
-
   useEffect(() => {
-    let timeoutId;
-
     const handleScroll = () => {
-      clearTimeout(timeoutId);
+      const currentScrollY = window.scrollY;
 
-      timeoutId = setTimeout(() => {
-        const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY) {
+        // Scrolling down
+        setIsVisible(false);
+      } else {
+        // Scrolling up
+        setIsVisible(true);
+      }
 
-        if (currentScrollY > lastScrollY) {
-          // Scrolling down
-          setIsVisible(false);
-        } else {
-          // Scrolling up
-          setIsVisible(true);
-        }
-
-        setLastScrollY(currentScrollY);
-      }, 200); // 1-second delay
+      setLastScrollY(currentScrollY);
     };
 
     window.addEventListener("scroll", handleScroll);
 
     return () => {
-      clearTimeout(timeoutId);
       window.removeEventListener("scroll", handleScroll);
     };
   }, [lastScrollY]);
+
+  // useEffect(() => {
+  //   let timeoutId;
+
+  //   const handleScroll = () => {
+  //     clearTimeout(timeoutId);
+
+  //     timeoutId = setTimeout(() => {
+  //       const currentScrollY = window.scrollY;
+
+  //       if (currentScrollY > lastScrollY) {
+  //         // Scrolling down
+  //         setIsVisible(false);
+  //       } else {
+  //         // Scrolling up
+  //         setIsVisible(true);
+  //       }
+
+  //       setLastScrollY(currentScrollY);
+  //     }, 200); // 1-second delay
+  //   };
+
+  //   window.addEventListener("scroll", handleScroll);
+
+  //   return () => {
+  //     clearTimeout(timeoutId);
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, [lastScrollY]);
   useEffect(() => {
     if (language === "en") {
       setLan("English");
@@ -154,6 +155,17 @@ export default function NavBottom({ bottom_navigation }) {
               setClickIcon(1);
             }}
           ></BottomNavigationAction>
+          <DrawerLanguage bottom_navigation={bottom_navigation}>
+            <BottomNavigationAction
+              showLabel
+              label={lan}
+              icon={<LanguageIcon />}
+              onClick={() => {
+                setClickIcon(2);
+              }}
+            />
+          </DrawerLanguage>
+
           {/* <DrawerDemo>
             <BottomNavigationAction
               showLabel
@@ -162,13 +174,13 @@ export default function NavBottom({ bottom_navigation }) {
             />
           </DrawerDemo> */}
           {session ? (
-            <DrawerProfile>
+            <DrawerProfile bottom_navigation={bottom_navigation}>
               <BottomNavigationAction
                 showLabel
                 label={bottom_navigation.profile}
                 icon={<AccountCircleIcon />}
                 onClick={() => {
-                  setClickIcon(2);
+                  setClickIcon(3);
                 }}
               />
             </DrawerProfile>
@@ -179,7 +191,7 @@ export default function NavBottom({ bottom_navigation }) {
               icon={<AccountCircleIcon />}
               onClick={() => {
                 signIn();
-                setClickIcon(2);
+                setClickIcon(3);
               }}
             />
           )}

@@ -13,7 +13,12 @@
     "explore": "探索",
     "whishlists": "心愿单",
     "profile": "个人资料",
-    "login": "登入"
+    "login": "登入",
+    "drawerTitle": "选择语言和地区",
+    "logout": "登出",
+    "help": "访问帮助中心",
+    "share": "分享您的服务",
+    "shareContent": "发布服务并轻松赚取额外收入"
   },
   "page": {
     "home": {
