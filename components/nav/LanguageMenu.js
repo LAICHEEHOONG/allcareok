@@ -7,7 +7,6 @@ import {
   Button,
 } from "@nextui-org/react";
 import LanguageIcon from "@mui/icons-material/Language";
-// import { usePathname } from "next/navigation";
 import { i18n } from "@/i18n.config";
 import { useRouter, usePathname } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
@@ -20,7 +19,6 @@ export default function LanguageMenu() {
   const pathname = usePathname();
   const id = useSelector((state) => state.auth._id);
   const dispatch = useDispatch()
-  // const auth = useSelector((state) => state.auth);
 
   const redirectedPathName = (locale) => {
     if (!pathname) return "/";

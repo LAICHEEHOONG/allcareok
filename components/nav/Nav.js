@@ -4,14 +4,10 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  Link,
   Button,
-  Input,
 } from "@nextui-org/react";
-
 import AllcareokLogo from "./AllcareokLogo.js";
 import SearchField from "./SearchField.js";
-// import LanguageIcon from "@mui/icons-material/Language";
 import ProfileMenu from "./ProfileMenu.js";
 import LanguageMenu from "./LanguageMenu.js";
 import { Poppins } from "next/font/google";
@@ -27,15 +23,12 @@ export default async function Nav({ lang }) {
   const { navigation } = await getDictionary(lang);
 
   return (
-    <Navbar shouldHideOnScroll>
+    <Navbar 
+    // shouldHideOnScroll
+    >
       <NavbarBrand className={poppins.className}>
         <AllcareokLogo />
-        {/* <p
-          className="font-bold text-inherit ml-2 text-2xl hidden sm:flex"
-          style={{ color: "#f31260" }}
-        >
-          allcareok
-        </p> */}
+   
       </NavbarBrand>
       <NavbarContent className="flex gap-4" justify="center">
         <SearchField navigation={navigation} />

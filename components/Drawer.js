@@ -1,10 +1,5 @@
 "use client";
 
-import * as React from "react";
-import { Minus, Plus } from "lucide-react";
-import { Bar, BarChart, ResponsiveContainer } from "recharts";
-
-// import { Button } from "@/components/ui/button";
 import {
   Drawer,
   DrawerClose,
@@ -71,19 +66,11 @@ const data = [
 ];
 
 export function DrawerProfile({ children, bottom_navigation }) {
-  const [goal, setGoal] = React.useState(350);
   const auth = useSelector((state) => state.auth);
-
-  function onClick(adjustment) {
-    setGoal(Math.max(200, Math.min(400, goal + adjustment)));
-  }
 
   return (
     <Drawer>
-      <DrawerTrigger asChild>
-        {/* <Button variant="outline">Open Drawer</Button> */}
-        {children}
-      </DrawerTrigger>
+      <DrawerTrigger asChild>{children}</DrawerTrigger>
       <DrawerContent>
         <div className="mx-auto w-full max-w-sm p-2">
           <DrawerHeader>
@@ -112,12 +99,6 @@ export function DrawerProfile({ children, bottom_navigation }) {
             onPress={() => console.log("item pressed")}
           >
             <CardBody>
-              {/* <p>
-                Share Your Services
-              </p>
-              <p>
-              It's easy to start post services and earn extra income
-              </p> */}
               <div className="flex">
                 <div className="flex flex-col justify-center tracking-wider">
                   <p className="text-md leading-10">
@@ -136,10 +117,7 @@ export function DrawerProfile({ children, bottom_navigation }) {
               </div>
             </CardBody>
           </Card>
-          {/* <Divider className="mb-4" /> */}
           <DrawerFooter>
-            {/* <Button variant="outline" onClick={() => signOut()}>Log out</Button> */}
-
             <Button
               color="default"
               radius="full"

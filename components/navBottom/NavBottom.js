@@ -10,17 +10,9 @@ import LanguageIcon from "@mui/icons-material/Language";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useRouter, usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
-import {
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
-  Button,
-} from "@nextui-org/react";
-import { i18n } from "@/i18n.config";
-import { updateUserLanguage } from "@/lib/action/userAction";
+// import { updateUserLanguage } from "@/lib/action/userAction";
 import { DrawerProfile } from "../Drawer";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
 import { DrawerLanguage } from "../DrawerLanguage";
 
 export default function NavBottom({ bottom_navigation }) {
@@ -33,27 +25,8 @@ export default function NavBottom({ bottom_navigation }) {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const language = useSelector((state) => state.auth.language);
-  const id = useSelector((state) => state.auth._id);
-  const [clickIcon, setClickIcon] = useState(3);
-
-  const redirectedPathName = (locale) => {
-    if (!pathname) return "/";
-    const segments = pathname.split("/");
-    segments[1] = locale;
-    return segments.join("/");
-  };
-
-  const changeLanguage = async (locale) => {
-    try {
-      router.push(redirectedPathName(locale)); // Navigate to the new language route
-
-      if (id) {
-        await updateUserLanguage({ id, locale }); // Update the user's language preference
-      }
-    } catch (error) {
-      console.error("Failed to update language:", error);
-    }
-  };
+  // const id = useSelector((state) => state.auth._id);
+  const [clickIcon, setClickIcon] = useState(-1);
 
   const [lan, setLan] = useState(language);
 
@@ -79,34 +52,6 @@ export default function NavBottom({ bottom_navigation }) {
     };
   }, [lastScrollY]);
 
-  // useEffect(() => {
-  //   let timeoutId;
-
-  //   const handleScroll = () => {
-  //     clearTimeout(timeoutId);
-
-  //     timeoutId = setTimeout(() => {
-  //       const currentScrollY = window.scrollY;
-
-  //       if (currentScrollY > lastScrollY) {
-  //         // Scrolling down
-  //         setIsVisible(false);
-  //       } else {
-  //         // Scrolling up
-  //         setIsVisible(true);
-  //       }
-
-  //       setLastScrollY(currentScrollY);
-  //     }, 200); // 1-second delay
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-
-  //   return () => {
-  //     clearTimeout(timeoutId);
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, [lastScrollY]);
   useEffect(() => {
     if (language === "en") {
       setLan("English");
@@ -166,13 +111,6 @@ export default function NavBottom({ bottom_navigation }) {
             />
           </DrawerLanguage>
 
-          {/* <DrawerDemo>
-            <BottomNavigationAction
-              showLabel
-              label={lan}
-              icon={<LanguageIcon />}
-            />
-          </DrawerDemo> */}
           {session ? (
             <DrawerProfile bottom_navigation={bottom_navigation}>
               <BottomNavigationAction
