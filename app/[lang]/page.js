@@ -6,6 +6,7 @@ export default function Home() {
     <div className="">
       <main className="flex justify-center flex-col items-center">
         <NavCarousel />
+
         {/* <Badges /> */}
         {/* <CarouselDemo /> */}
         <div className="m-2">

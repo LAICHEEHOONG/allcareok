@@ -3,11 +3,7 @@ import "./globals.css";
 import AllProvider from "@/components/AllProvider";
 import Nav from "@/components/nav/Nav";
 import { i18n } from "@/i18n.config";
-
 import NavBottomWrap from "@/components/navBottom/NavBottomWrap";
-// import NavBottom from "@/components/navBottom/NavBottom";
-
-// import Header from "@/components/header";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -42,7 +38,6 @@ export default async function RootLayout({ children, params }) {
           <Nav lang={lang} />
           {children}
           <NavBottomWrap lang={lang} />
-          {/* <NavBottom lang={lang} /> */}
         </AllProvider>
       </body>
     </html>

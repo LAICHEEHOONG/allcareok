@@ -1,4 +1,3 @@
-
 import {
   Navbar,
   NavbarBrand,
@@ -13,7 +12,6 @@ import LanguageMenu from "./LanguageMenu.js";
 import { Poppins } from "next/font/google";
 import { getDictionary } from "@/lib/dictionary.js";
 
-
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -23,12 +21,9 @@ export default async function Nav({ lang }) {
   const { navigation } = await getDictionary(lang);
 
   return (
-    <Navbar 
-    // shouldHideOnScroll
-    >
+    <Navbar shouldHideOnScroll>
       <NavbarBrand className={poppins.className}>
         <AllcareokLogo />
-   
       </NavbarBrand>
       <NavbarContent className="flex gap-4" justify="center">
         <SearchField navigation={navigation} />
