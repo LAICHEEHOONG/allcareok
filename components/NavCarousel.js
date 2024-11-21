@@ -17,6 +17,7 @@ export function NavCarousel() {
       opts={{
         align: "start",
         loop: true,
+        dragFree:true
       }}
     >
       <CarouselContent className="-ml-1">
