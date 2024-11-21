@@ -1,5 +1,6 @@
 import { NavCarousel } from "@/components/NavCarousel";
 import Fruits from "@/components/Fruits";
+import { Navbar } from "@nextui-org/react";
 
 export default function Home() {
   return (
@@ -7,8 +8,6 @@ export default function Home() {
       <main className="flex justify-center flex-col items-center">
         <NavCarousel />
 
-        {/* <Badges /> */}
-        {/* <CarouselDemo /> */}
         <div className="m-2">
           <Fruits />
           <Fruits />

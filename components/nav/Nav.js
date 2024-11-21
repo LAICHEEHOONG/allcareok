@@ -21,7 +21,7 @@ export default async function Nav({ lang }) {
   const { navigation } = await getDictionary(lang);
 
   return (
-    <Navbar shouldHideOnScroll>
+    <Navbar shouldHideOnScroll={false}>
       <NavbarBrand className={poppins.className}>
         <AllcareokLogo />
       </NavbarBrand>
