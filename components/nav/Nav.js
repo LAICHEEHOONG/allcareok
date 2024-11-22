@@ -4,6 +4,7 @@ import {
   NavbarContent,
   NavbarItem,
   Button,
+  Divider,
 } from "@nextui-org/react";
 import AllcareokLogo from "./AllcareokLogo.js";
 import SearchField from "./SearchField.js";
@@ -11,6 +12,7 @@ import ProfileMenu from "./ProfileMenu.js";
 import LanguageMenu from "./LanguageMenu.js";
 import { Poppins } from "next/font/google";
 import { getDictionary } from "@/lib/dictionary.js";
+import { NavCarousel } from "../NavCarousel.js";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -18,33 +20,40 @@ const poppins = Poppins({
 });
 
 export default async function Nav({ lang }) {
-  const { navigation } = await getDictionary(lang);
+  const { navigation, service_type } = await getDictionary(lang);
 
   return (
-    <Navbar shouldHideOnScroll={false}>
-      <NavbarBrand className={poppins.className}>
-        <AllcareokLogo />
-      </NavbarBrand>
-      <NavbarContent className="flex gap-4" justify="center">
-        <SearchField navigation={navigation} />
-      </NavbarContent>
-      <NavbarContent justify="end">
-        <NavbarItem className="hidden sm:flex items-center">
-          <Button
-            className="hidden lg:flex "
-            color="default"
-            variant="light"
-            radius="full"
-          >
-            {navigation.share}
-          </Button>
+    <>
+      <Navbar shouldHideOnScroll={false}>
+        <NavbarBrand className={`${poppins.className} hidden xs:block`}>
+          <AllcareokLogo />
+        </NavbarBrand>
+        <NavbarContent justify="center">
+          <SearchField navigation={navigation} />
+        </NavbarContent>
+        <NavbarContent justify="end">
+          <NavbarItem className="hidden sm:flex items-center">
+            <Button
+              className="hidden lg:flex "
+              color="default"
+              variant="light"
+              radius="full"
+              size="lg"
+            >
+              {navigation.share}
+            </Button>
 
-          <LanguageMenu />
-        </NavbarItem>
-        <NavbarItem className="hidden sm:flex">
-          <ProfileMenu navigation={navigation} />
-        </NavbarItem>
-      </NavbarContent>
-    </Navbar>
+            <LanguageMenu />
+          </NavbarItem>
+          <NavbarItem className="hidden sm:flex">
+            <ProfileMenu navigation={navigation} />
+          </NavbarItem>
+        </NavbarContent>
+      </Navbar>
+      <div className="flex flex-col justify-center items-center">
+        <Divider className="m-3" />
+        <NavCarousel service_type={service_type} />
+      </div>
+    </>
   );
 }

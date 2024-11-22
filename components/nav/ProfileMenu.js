@@ -50,9 +50,9 @@ export default function ProfileMenu({ navigation }) {
   return (
     <Dropdown>
       <DropdownTrigger>
-        <Button variant="bordered" radius="full" size="lg">
+        <Button variant="flat" radius="full" size="lg" color="default">
           <MenuIcon />
-          <Avatar src={auth.image} size="sm" />
+          <Avatar src={auth.image} size="sm"  />
         </Button>
       </DropdownTrigger>
       <DropdownMenu aria-label="Static Actions">

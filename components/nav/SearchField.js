@@ -12,7 +12,7 @@ export default function SearchField({ navigation }) {
       <Autocomplete
         // label="Where"
         placeholder={navigation.placeholder}
-        variant="bordered"
+        variant="flat"
         defaultItems={animals}
         startContent={<PlaceIcon className="text-gray-400"  />}
         defaultSelectedKey=""

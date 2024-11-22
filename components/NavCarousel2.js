@@ -235,7 +235,7 @@ export function NavCarousel2() {
         {carouselItems.map(({ label, icon: Icon }, idx) => (
           <CarouselItem
             key={idx}
-            className="pl-3 basis-1/7 cursor-pointer group select-none z-30"
+            className="pl-1 basis-1/7 cursor-pointer group select-none z-30"
             onClick={() => handleItemClick(label)}
           >
             <div className="flex justify-center flex-col items-center gap-1 m-3 active:scale-85 transition-transform">

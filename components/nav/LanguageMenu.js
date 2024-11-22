@@ -52,6 +52,7 @@ export default function LanguageMenu() {
           variant="light"
           aria-label="Like"
           radius="full"
+          size="lg"
         >
           <LanguageIcon />
         </Button>

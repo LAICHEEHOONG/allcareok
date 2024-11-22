@@ -20,18 +20,23 @@
     "share": "分享您的服务",
     "shareContent": "发布服务并轻松赚取额外收入"
   },
-  "page": {
-    "home": {
-      "title": "欢迎来到 NextJs i18n",
-      "description": "在 NextJs 13 应用程序路由中实现国际化"
-    },
-    "about": {
-      "title": "关于我们",
-      "description": "这是关于页面"
-    },
-    "button": {
-      "deploy": "立即部署",
-      "read": "阅读文档"
-    }
+  "service_type": {
+    "home_cleaning": "家庭清洁",
+    "aircon_servicing": "空调维修",
+    "move_in_out_cleaning": "搬入/搬出清洁",
+    "sofa_cleaning": "沙发清洁",
+    "mattress_cleaning": "床垫清洁",
+    "curtain_cleaning": "窗帘清洁",
+    "car_washing": "汽车清洗",
+    "disinfection_service": "消毒服务",
+    "landscaping_service": "园艺服务",
+    "handyman_services": "杂工服务",
+    "painting_services": "油漆服务",
+    "moving_service": "搬家服务",
+    "flooring_services": "地板服务",
+    "pest_control": "害虫控制",
+    "elderly_care": "老人照护",
+    "child_care": "儿童照料",
+    "full_time_maid": "全职女佣"
   }
 }

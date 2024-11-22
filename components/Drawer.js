@@ -23,47 +23,47 @@ import { signOut } from "next-auth/react";
 import { useSelector } from "react-redux";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 
-const data = [
-  {
-    goal: 400,
-  },
-  {
-    goal: 300,
-  },
-  {
-    goal: 200,
-  },
-  {
-    goal: 300,
-  },
-  {
-    goal: 200,
-  },
-  {
-    goal: 278,
-  },
-  {
-    goal: 189,
-  },
-  {
-    goal: 239,
-  },
-  {
-    goal: 300,
-  },
-  {
-    goal: 200,
-  },
-  {
-    goal: 278,
-  },
-  {
-    goal: 189,
-  },
-  {
-    goal: 349,
-  },
-];
+// const data = [
+//   {
+//     goal: 400,
+//   },
+//   {
+//     goal: 300,
+//   },
+//   {
+//     goal: 200,
+//   },
+//   {
+//     goal: 300,
+//   },
+//   {
+//     goal: 200,
+//   },
+//   {
+//     goal: 278,
+//   },
+//   {
+//     goal: 189,
+//   },
+//   {
+//     goal: 239,
+//   },
+//   {
+//     goal: 300,
+//   },
+//   {
+//     goal: 200,
+//   },
+//   {
+//     goal: 278,
+//   },
+//   {
+//     goal: 189,
+//   },
+//   {
+//     goal: 349,
+//   },
+// ];
 
 export function DrawerProfile({ children, bottom_navigation }) {
   const auth = useSelector((state) => state.auth);

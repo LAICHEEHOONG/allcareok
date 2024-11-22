@@ -20,18 +20,24 @@
     "share": "Share Your Services",
     "shareContent": "Post Services & Earn Extra Income Easily"
   },
-  "page": {
-    "home": {
-      "title": "Welcome to NextJs i18n",
-      "description": "Internationalization in NextJs 13 App router"
-    },
-    "about": {
-      "title": "About Us",
-      "description": "This is the about page"
-    },
-    "button": {
-      "deploy": "Deploy now",
-      "read": "Read our docs"
-    }
+  "service_type": {
+    "home_cleaning": "Home Cleaning",
+    "aircon_servicing": "Aircon Servicing",
+    "move_in_out_cleaning": "Move In/Out Cleaning",
+    "sofa_cleaning": "Sofa Cleaning",
+    "mattress_cleaning": "Mattress Cleaning",
+    "curtain_cleaning": "Curtain Cleaning",
+    "car_washing": "Car Washing",
+    "disinfection_service": "Disinfection Service",
+    "landscaping_service": "Landscaping Service",
+    "handyman_services": "Handyman Services",
+    "painting_services": "Painting Services",
+    "moving_service": "Moving Service",
+    "flooring_services": "Flooring Services",
+    "pest_control": "Pest Control",
+    "elderly_care": "Elderly Care",
+    "child_care": "Child Care",
+    "full_time_maid": "Full Time Maid"
   }
+
 }

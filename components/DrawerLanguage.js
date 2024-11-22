@@ -19,7 +19,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { updateUserLanguage } from "@/lib/action/userAction";
 
 export function DrawerLanguage({ children, bottom_navigation }) {
-  const [goal, setGoal] = useState(350);
+  // const [goal, setGoal] = useState(350);
 
   return (
     <Drawer>
