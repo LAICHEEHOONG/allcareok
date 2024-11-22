@@ -106,7 +106,7 @@ export function NavCarousel() {
                 className={`text-xs font-semibold mt-1 group-hover:text-default-900 ${
                   activeIndex === index
                     ? "text-black border-b-2 border-black pb-3"
-                    : "text-default-500  group-hover:border-b-2  group-hover:pb-3"
+                    : "text-default-500  "
                 }`}
               >
                 {"Castles" + index}

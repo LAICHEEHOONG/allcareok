@@ -1,13 +1,13 @@
 import { NavCarousel } from "@/components/NavCarousel";
 import Fruits from "@/components/Fruits";
-import { Navbar } from "@nextui-org/react";
+import { NavCarousel2 } from "@/components/NavCarousel2";
 
 export default function Home() {
   return (
     <div className="">
       <main className="flex justify-center flex-col items-center">
-        <NavCarousel />
-
+        {/* <NavCarousel /> */}
+        <NavCarousel2 />
         <div className="m-2">
           <Fruits />
           <Fruits />
