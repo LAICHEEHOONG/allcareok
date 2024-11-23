@@ -22,51 +22,11 @@ import {
 import { signOut } from "next-auth/react";
 import { useSelector } from "react-redux";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-
-// const data = [
-//   {
-//     goal: 400,
-//   },
-//   {
-//     goal: 300,
-//   },
-//   {
-//     goal: 200,
-//   },
-//   {
-//     goal: 300,
-//   },
-//   {
-//     goal: 200,
-//   },
-//   {
-//     goal: 278,
-//   },
-//   {
-//     goal: 189,
-//   },
-//   {
-//     goal: 239,
-//   },
-//   {
-//     goal: 300,
-//   },
-//   {
-//     goal: 200,
-//   },
-//   {
-//     goal: 278,
-//   },
-//   {
-//     goal: 189,
-//   },
-//   {
-//     goal: 349,
-//   },
-// ];
+import { useRouter } from "next/navigation";
 
 export function DrawerProfile({ children, bottom_navigation }) {
   const auth = useSelector((state) => state.auth);
+  const router = useRouter();
 
   return (
     <Drawer>
@@ -87,16 +47,14 @@ export function DrawerProfile({ children, bottom_navigation }) {
                 </div>
               </div>
             </DrawerTitle>
-            <DrawerDescription>
-              {/* <Divider className="mt-2" /> */}
-            </DrawerDescription>
+            <DrawerDescription></DrawerDescription>
           </DrawerHeader>
 
           <Divider className="mb-4" />
           <Card
             className="m-2 mb-4"
             isPressable
-            onPress={() => console.log("item pressed")}
+            onPress={() => router.push("/dashboard")}
           >
             <CardBody>
               <div className="flex">

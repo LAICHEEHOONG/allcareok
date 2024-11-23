@@ -52,7 +52,7 @@ export default function ProfileMenu({ navigation }) {
       <DropdownTrigger>
         <Button variant="flat" radius="full" size="lg" color="default">
           <MenuIcon />
-          <Avatar src={auth.image} size="sm"  />
+          <Avatar src={auth.image} size="sm" />
         </Button>
       </DropdownTrigger>
       <DropdownMenu aria-label="Static Actions">
@@ -71,7 +71,13 @@ export default function ProfileMenu({ navigation }) {
         <DropdownItem key={navigation.whishlists} textValue="whish lists">
           {navigation.whishlists}
         </DropdownItem>
-        <DropdownItem key={navigation.share} textValue="share services">
+        <DropdownItem
+          key={navigation.share}
+          textValue="share services"
+          onPress={() => {
+            router.push("/dashboard");
+          }}
+        >
           {navigation.share}
         </DropdownItem>
         <DropdownItem key={navigation.help} textValue="help center">

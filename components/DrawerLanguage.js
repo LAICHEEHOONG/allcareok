@@ -1,8 +1,6 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
-
+import { useEffect, useState } from "react";
 import { Listbox, ListboxItem } from "@nextui-org/react";
-
 import {
   Drawer,
   DrawerContent,
@@ -12,15 +10,12 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-
 import { useSelector } from "react-redux";
 import { i18n } from "@/i18n.config";
 import { useRouter, usePathname } from "next/navigation";
 import { updateUserLanguage } from "@/lib/action/userAction";
 
 export function DrawerLanguage({ children, bottom_navigation }) {
-  // const [goal, setGoal] = useState(350);
-
   return (
     <Drawer>
       <DrawerTrigger asChild>{children}</DrawerTrigger>
@@ -28,13 +23,9 @@ export function DrawerLanguage({ children, bottom_navigation }) {
         <div className="mx-auto w-full max-w-sm p-2 ">
           <DrawerHeader>
             <DrawerTitle>{bottom_navigation.drawerTitle}</DrawerTitle>
-            <DrawerDescription>
-              {/* <Divider className="mt-2" /> */}
-            </DrawerDescription>
+            <DrawerDescription></DrawerDescription>
           </DrawerHeader>
-
           <ListBox_ />
-
           <DrawerFooter></DrawerFooter>
         </div>
       </DrawerContent>
@@ -55,11 +46,6 @@ function ListBox_() {
     segments[1] = locale;
     return segments.join("/");
   };
-
-  // const selectedValue = useMemo(
-  //   () => Array.from(selectedKeys).join(", "),
-  //   [selectedKeys]
-  // );
 
   useEffect(() => {
     const changeLanguage = async (locale) => {

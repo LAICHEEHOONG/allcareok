@@ -14,10 +14,8 @@ export default function SearchField({ navigation }) {
         placeholder={navigation.placeholder}
         variant="flat"
         defaultItems={animals}
-        startContent={<PlaceIcon className="text-gray-400"  />}
+        startContent={<PlaceIcon className="text-gray-400" />}
         defaultSelectedKey=""
-        // className="max-w-xs"
-        // className="max-w-96"
         radius="full"
         size="lg"
         aria-label="search where"

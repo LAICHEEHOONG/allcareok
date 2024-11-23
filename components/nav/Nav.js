@@ -3,7 +3,6 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  Button,
   Divider,
 } from "@nextui-org/react";
 import AllcareokLogo from "./AllcareokLogo.js";
@@ -13,6 +12,7 @@ import LanguageMenu from "./LanguageMenu.js";
 import { Poppins } from "next/font/google";
 import { getDictionary } from "@/lib/dictionary.js";
 import { NavCarousel } from "../NavCarousel.js";
+import NavShareBtn from "./NavShareBtn.js";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -33,16 +33,7 @@ export default async function Nav({ lang }) {
         </NavbarContent>
         <NavbarContent justify="end">
           <NavbarItem className="hidden sm:flex items-center">
-            <Button
-              className="hidden lg:flex "
-              color="default"
-              variant="light"
-              radius="full"
-              size="lg"
-            >
-              {navigation.share}
-            </Button>
-
+            <NavShareBtn share={navigation.share} />
             <LanguageMenu />
           </NavbarItem>
           <NavbarItem className="hidden sm:flex">
