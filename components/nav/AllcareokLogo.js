@@ -22,7 +22,7 @@ export default function AllcareokLogo() {
         src="/images/allcareok_logo.png"
       />
       <p
-        className="font-bold text-inherit ml-2 text-2xl hidden sm:flex"
+        className="font-bold text-inherit ml-2 text-2xl hidden md:flex"
         style={{ color: "#f31260" }}
       >
         allcareok
