@@ -10,7 +10,6 @@ import LanguageIcon from "@mui/icons-material/Language";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useRouter, usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
-// import { updateUserLanguage } from "@/lib/action/userAction";
 import { DrawerProfile } from "../Drawer";
 import { useSession, signIn } from "next-auth/react";
 import { DrawerLanguage } from "../DrawerLanguage";

@@ -20,12 +20,13 @@ export default function SearchField({ navigation }) {
         size="lg"
         aria-label="search where"
         fullWidth={true}
+        // isDisabled={true}
       >
         {(item) => (
           <AutocompleteItem key={item.value}>{item.label}</AutocompleteItem>
         )}
       </Autocomplete>
-      <Button isIconOnly color="danger" aria-label="Search Icon" radius="full">
+      <Button isIconOnly color="danger" aria-label="Search Icon" radius="full" >
         <SearchIcon className="w-5"/>
       </Button> 
     </div>

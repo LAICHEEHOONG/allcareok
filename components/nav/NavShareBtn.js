@@ -6,12 +6,13 @@ export default function NavShareBtn({share}) {
     const router = useRouter()
   return (
     <Button
-      className="hidden lg:flex "
+      className="hidden lg:flex"
       color="default"
       variant="light"
       radius="full"
       size="lg"
       onPress={() => router.push('/dashboard')}
+      // isDisabled={true}
     >
       {share}
     </Button>

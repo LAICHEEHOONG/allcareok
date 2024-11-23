@@ -2,7 +2,7 @@
 import { Image } from "@nextui-org/react";
 import { useRouter, usePathname } from "next/navigation";
 
-export default function AllcareokLogo() {
+export default function AllcareokLogo({ isDashboard }) {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -21,8 +21,11 @@ export default function AllcareokLogo() {
         alt="Allcareok logo"
         src="/images/allcareok_logo.png"
       />
+
       <p
-        className="font-bold text-inherit ml-2 text-2xl hidden md:flex"
+        className={`font-bold text-inherit ml-2 text-2xl ${
+          isDashboard ? "" : "hidden md:flex"
+        } `}
         style={{ color: "#f31260" }}
       >
         allcareok
