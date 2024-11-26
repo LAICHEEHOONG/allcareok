@@ -40,7 +40,7 @@ export default function NavChild({ navigation, service_type, poppins }) {
       </Navbar> */}
 
       {isDashboard ? (
-        <Navbar shouldHideOnScroll={false} >
+        <Navbar shouldHideOnScroll={true} >
           <NavbarBrand className={`${poppins.className} flex justify-center sm:justify-start`}>
             <AllcareokLogo isDashboard={isDashboard} />
           </NavbarBrand>
