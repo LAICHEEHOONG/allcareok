@@ -64,10 +64,10 @@ export default function Overview() {
         </div>
       </div>
 
-      <div className="sm:hidden w-full h-[100vh]">
+      <div className="sm:hidden w-full ">
         <div className="flex flex-col items-start  ml-8 mr-8">
           <div className="flex w-full justify-start mb-6">
-            <Button radius="full" color="default" variant="bordered" size="sm">
+            <Button radius="full" color="default" variant="bordered" size="md">
               Exit
             </Button>
           </div>
@@ -107,16 +107,14 @@ export default function Overview() {
             </div>
           </div>
         </div>
-        {/* <div className="absolute bottom-10 w-full"> */}
-          <div className="flex flex-col justify-center items-center  mt-5">
-            <Divider className="h-1" />
-            <div className="w-full p-6">
-              <Button color="danger" radius="full" size="lg" fullWidth={true}>
-                Get started
-              </Button>
-            </div>
+        <div className="flex flex-col justify-center items-center m-5 mb-28">
+          <Divider className="h-1" />
+          <div className="w-full p-6">
+            <Button color="danger" radius="full" size="lg" fullWidth={true}>
+              Get started
+            </Button>
           </div>
-        {/* </div> */}
+        </div>
 
         {/* <div className="absolute w-full ">
           <Divider className="h-1" />

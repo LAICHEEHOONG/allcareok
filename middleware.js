@@ -92,7 +92,9 @@ import { i18n } from "./i18n.config";
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 
-const protectedPaths = ["/dashboard"];
+const protectedPaths = [
+  // "/dashboard"
+];
 
 function getProtectedRoutes(protectedPaths, locales) {
   let protectedPathsWithLocale = [...protectedPaths];
