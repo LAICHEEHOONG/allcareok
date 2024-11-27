@@ -13,7 +13,6 @@ import LanguageMenu from "./LanguageMenu.js";
 import { NavCarousel } from "../NavCarousel.js";
 import NavShareBtn from "./NavShareBtn.js";
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
 
 export default function NavChild({ navigation, service_type, poppins }) {
   const pathname = usePathname();
@@ -21,23 +20,6 @@ export default function NavChild({ navigation, service_type, poppins }) {
 
   return (
     <>
-      {/* <Navbar shouldHideOnScroll={false}>
-        <NavbarBrand className={`${poppins.className} hidden xs:block`}>
-          <AllcareokLogo />
-        </NavbarBrand>
-        <NavbarContent justify="center">
-          <SearchField navigation={navigation} />
-        </NavbarContent>
-        <NavbarContent justify="end">
-          <NavbarItem className="hidden sm:flex items-center">
-            <NavShareBtn share={navigation.share} />
-          </NavbarItem>
-          <NavbarItem className="hidden sm:flex gap-2">
-            <LanguageMenu />
-            <ProfileMenu navigation={navigation} />
-          </NavbarItem>
-        </NavbarContent>
-      </Navbar> */}
 
       {isDashboard ? (
         <Navbar shouldHideOnScroll={true} >
