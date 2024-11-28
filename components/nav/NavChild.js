@@ -20,20 +20,20 @@ export default function NavChild({ navigation, service_type, poppins }) {
 
   return (
     <>
-
       {isDashboard ? (
-        <Navbar shouldHideOnScroll={false} >
-          <NavbarBrand className={`${poppins.className} flex justify-center sm:justify-start`}>
-            <AllcareokLogo isDashboard={isDashboard} />
-          </NavbarBrand>
+        // <Navbar shouldHideOnScroll={false} >
+        //   <NavbarBrand className={`${poppins.className} flex justify-center sm:justify-start`}>
+        //     <AllcareokLogo isDashboard={isDashboard} />
+        //   </NavbarBrand>
 
-          <NavbarContent justify="end" className="hidden sm:flex">
-            <NavbarItem className="hidden sm:flex gap-2">
-              <LanguageMenu />
-              <ProfileMenu navigation={navigation} />
-            </NavbarItem>
-          </NavbarContent>
-        </Navbar>
+        //   <NavbarContent justify="end" className="hidden sm:flex">
+        //     <NavbarItem className="hidden sm:flex gap-2">
+        //       <LanguageMenu />
+        //       <ProfileMenu navigation={navigation} />
+        //     </NavbarItem>
+        //   </NavbarContent>
+        // </Navbar>
+        <></>
       ) : (
         <Navbar shouldHideOnScroll={false}>
           <NavbarBrand className={`${poppins.className} hidden xs:block`}>
@@ -54,10 +54,14 @@ export default function NavChild({ navigation, service_type, poppins }) {
         </Navbar>
       )}
 
-      <div className="flex flex-col justify-center items-center">
-        <Divider className="m-3" />
-        <NavCarousel service_type={service_type} />
-      </div>
+      {isDashboard ? (
+        <></>
+      ) : (
+        <div className="flex flex-col justify-center items-center">
+          <Divider className="m-3" />
+          <NavCarousel service_type={service_type} />
+        </div>
+      )}
     </>
   );
 }

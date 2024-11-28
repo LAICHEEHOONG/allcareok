@@ -18,6 +18,7 @@ export default function NavBottom({ bottom_navigation }) {
   const { data: session, status } = useSession();
   const router = useRouter();
   const pathname = usePathname();
+  const isDashboard = pathname.endsWith("/dashboard");
 
   // Extract current locale from pathname
   const currentLocale = pathname.split("/")[1] || "en";
@@ -61,79 +62,85 @@ export default function NavBottom({ bottom_navigation }) {
   }, [language]);
 
   return (
-    <motion.div
-      className="fixed bottom-0 z-50 w-full block sm:hidden"
-      animate={{
-        y: isVisible ? 0 : 100, // Animate the y-axis position
-      }}
-      initial={{
-        y: 0, // Initial position
-      }}
-      transition={{
-        duration: 0.3, // Animation duration
-        ease: "easeInOut", // Smooth easing
-      }}
-    >
-      <Box>
-        <BottomNavigation
-          showLabels
-          value={clickIcon}
-          onChange={(event, newValue) => {
-            // Handle navigation state if necessary
-            console.log(newValue);
+    <>
+      {isDashboard ? (
+        <></>
+      ) : (
+        <motion.div
+          className="fixed bottom-0 z-50 w-full block sm:hidden"
+          animate={{
+            y: isVisible ? 0 : 100, // Animate the y-axis position
+          }}
+          initial={{
+            y: 0, // Initial position
+          }}
+          transition={{
+            duration: 0.3, // Animation duration
+            ease: "easeInOut", // Smooth easing
           }}
         >
-          <BottomNavigationAction
-            label={bottom_navigation.explore}
-            icon={<SearchIcon />}
-            onClick={() => {
-              router.push(`/${currentLocale}`);
-              setClickIcon(0);
-            }}
-          />
-          <BottomNavigationAction
-            label={bottom_navigation.whishlists}
-            icon={<FavoriteBorderIcon />}
-            showLabel
-            onClick={() => {
-              setClickIcon(1);
-            }}
-          ></BottomNavigationAction>
-          <DrawerLanguage bottom_navigation={bottom_navigation}>
-            <BottomNavigationAction
-              showLabel
-              label={lan}
-              icon={<LanguageIcon />}
-              onClick={() => {
-                setClickIcon(2);
+          <Box>
+            <BottomNavigation
+              showLabels
+              value={clickIcon}
+              onChange={(event, newValue) => {
+                // Handle navigation state if necessary
+                console.log(newValue);
               }}
-            />
-          </DrawerLanguage>
-
-          {session ? (
-            <DrawerProfile bottom_navigation={bottom_navigation}>
+            >
               <BottomNavigationAction
-                showLabel
-                label={bottom_navigation.profile}
-                icon={<AccountCircleIcon />}
+                label={bottom_navigation.explore}
+                icon={<SearchIcon />}
                 onClick={() => {
-                  setClickIcon(3);
+                  router.push(`/${currentLocale}`);
+                  setClickIcon(0);
                 }}
               />
-            </DrawerProfile>
-          ) : (
-            <BottomNavigationAction
-              showLabel
-              label={bottom_navigation.login}
-              icon={<AccountCircleIcon />}
-              onClick={() => {
-                signIn();
-                setClickIcon(3);
-              }}
-            />
-          )}
-        </BottomNavigation>
-      </Box>
-    </motion.div>
+              <BottomNavigationAction
+                label={bottom_navigation.whishlists}
+                icon={<FavoriteBorderIcon />}
+                showLabel
+                onClick={() => {
+                  setClickIcon(1);
+                }}
+              ></BottomNavigationAction>
+              <DrawerLanguage bottom_navigation={bottom_navigation}>
+                <BottomNavigationAction
+                  showLabel
+                  label={lan}
+                  icon={<LanguageIcon />}
+                  onClick={() => {
+                    setClickIcon(2);
+                  }}
+                />
+              </DrawerLanguage>
+
+              {session ? (
+                <DrawerProfile bottom_navigation={bottom_navigation}>
+                  <BottomNavigationAction
+                    showLabel
+                    label={bottom_navigation.profile}
+                    icon={<AccountCircleIcon />}
+                    onClick={() => {
+                      setClickIcon(3);
+                    }}
+                  />
+                </DrawerProfile>
+              ) : (
+                <BottomNavigationAction
+                  showLabel
+                  label={bottom_navigation.login}
+                  icon={<AccountCircleIcon />}
+                  onClick={() => {
+                    signIn();
+                    setClickIcon(3);
+                  }}
+                />
+              )}
+            </BottomNavigation>
+          </Box>
+        </motion.div>
+      )}
+    </>
   );
 }
