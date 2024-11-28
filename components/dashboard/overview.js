@@ -185,7 +185,7 @@ export default function Overview() {
             </div>
             <Divider />
           </div>
-          <div className="mt-6 mb-6">
+          <div className="mt-6 mb-24">
             <div className="flex gap-3 text-xl font-medium">
               <div>3</div>
               <div>Finish up and publish</div>
@@ -198,7 +198,7 @@ export default function Overview() {
         </div>
         <div className="fixed bottom-0 w-full bg-white">
           <Divider className="h-1" />
-          <div className="w-full p-6">
+          <div className="w-full p-5">
             <Button color="danger" radius="full" size="lg" fullWidth={true}>
               Get started
             </Button>
