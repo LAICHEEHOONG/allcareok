@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 export default function Overview() {
   const router = useRouter();
-  const overview = useSelector((state) => state.auth.lang.overview);
+  const overview = useSelector((state) => state?.auth?.lang?.overview);
   return (
     <>
       <div className="hidden sm:flex flex-col w-full h-[766px] justify-center">
@@ -41,7 +41,7 @@ export default function Overview() {
               variant="bordered"
               onPress={() => router.push("/")}
             >
-              {overview.exit}
+              {overview?.exit}
             </Button>
           </div>
         </div>
@@ -57,10 +57,10 @@ export default function Overview() {
             <div className="max-w-lg m-7 mr-12">
               <div className="flex gap-3 text-2xl font-medium">
                 <div>1</div>
-                <div>{overview.title_1}</div>
+                <div>{overview?.title_1}</div>
               </div>
               <div className="text-gray-500 ml-6 mt-2 mb-7 text-lg">
-                {overview.content_1}
+                {overview?.content_1}
               </div>
               <Divider />
             </div>
@@ -68,12 +68,12 @@ export default function Overview() {
             <div className="max-w-lg m-7 mr-12">
               <div className="flex gap-3 text-2xl font-medium">
                 <div>2</div>
-                <div>{overview.title_2}</div>
+                <div>{overview?.title_2}</div>
               </div>
               <div className="text-gray-500 ml-6 mt-2 mb-7">
                 {/* Upload at least one photo, along with a title and
                 description—we’ll assist you with the rest. */}
-                {overview.content_2}
+                {overview?.content_2}
               </div>
               <Divider />
             </div>
@@ -81,10 +81,10 @@ export default function Overview() {
             <div className="max-w-lg m-7 mr-12">
               <div className="flex gap-3 text-2xl font-medium">
                 <div>3</div>
-                <div>{overview.title_3}</div>
+                <div>{overview?.title_3}</div>
               </div>
               <div className="text-gray-500 ml-6 mt-2 mb-7">
-                {overview.content_3}
+                {overview?.content_3}
               </div>
             </div>
           </div>
@@ -101,7 +101,7 @@ export default function Overview() {
                 router.push("/editor");
               }}
             >
-              {overview.get_started}
+              {overview?.get_started}
               {/* Get started */}
             </Button>
           </div>
@@ -118,37 +118,37 @@ export default function Overview() {
               size="sm"
               onPress={() => router.push("/")}
             >
-              {overview.exit}
+              {overview?.exit}
             </Button>
           </div>
           <p className="text-3xl font-medium leading-tight">{overview?.main}</p>
           <div className="mt-6">
             <div className="flex gap-3 text-xl font-medium">
               <div>1</div>
-              <div>{overview.title_1}</div>
+              <div>{overview?.title_1}</div>
             </div>
             <div className="text-gray-500 ml-6 mt-2 mb-7 text-sm">
-              {overview.content_1}
+              {overview?.content_1}
             </div>
             <Divider />
           </div>
           <div className="mt-6">
             <div className="flex gap-3 text-xl font-medium">
               <div>2</div>
-              <div>{overview.title_2}</div>
+              <div>{overview?.title_2}</div>
             </div>
             <div className="text-gray-500 ml-6 mt-2 mb-7 text-sm">
-              {overview.content_2}
+              {overview?.content_2}
             </div>
             <Divider />
           </div>
           <div className="mt-6 mb-24">
             <div className="flex gap-3 text-xl font-medium">
               <div>3</div>
-              <div>{overview.title_3}</div>
+              <div>{overview?.title_3}</div>
             </div>
             <div className="text-gray-500 ml-6 mt-2 text-sm">
-              {overview.content_3}
+              {overview?.content_3}
             </div>
           </div>
         </div>
@@ -164,7 +164,7 @@ export default function Overview() {
                 router.push("/editor");
               }}
             >
-              {overview.get_started}
+              {overview?.get_started}
             </Button>
           </div>
         </div>
