@@ -16,7 +16,8 @@ import { usePathname } from "next/navigation";
 
 export default function NavChild({ navigation, service_type, poppins }) {
   const pathname = usePathname();
-  const isDashboard = pathname.endsWith("/dashboard");
+  const isDashboard =
+    pathname.endsWith("/dashboard") || pathname.endsWith("/editor");
 
   return (
     <>

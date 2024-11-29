@@ -93,7 +93,8 @@ import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 
 const protectedPaths = [
-  "/dashboard"
+  "/dashboard",
+  "/editor"
 ];
 
 function getProtectedRoutes(protectedPaths, locales) {
