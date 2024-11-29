@@ -13,8 +13,19 @@ import LanguageMenu from "./LanguageMenu.js";
 import { NavCarousel } from "../NavCarousel.js";
 import NavShareBtn from "./NavShareBtn.js";
 import { usePathname } from "next/navigation";
+import { setLang } from "@/redux/features/auth/authSlice.js";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-export default function NavChild({ navigation, service_type, poppins }) {
+export default function NavChild({ navigation, service_type, poppins, dic }) {
+
+  const language = useSelector(state => state.auth.language)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(setLang(dic))
+  }, [language])
+
   const pathname = usePathname();
   const isDashboard =
     pathname.endsWith("/dashboard") || pathname.endsWith("/editor");

@@ -38,6 +38,17 @@
     "elderly_care": "Elderly Care",
     "child_care": "Child Care",
     "full_time_maid": "Full Time Maid"
+  },
+  "overview": {
+    "main": "It’s easy to get started on Allcareok",
+    "title_1": "Tell us about your services",
+    "content_1": "Provide basic information, such as the types of services offered and the service areas covered.",
+    "title_2": "Make it stand out",
+    "content_2": "Upload at least one photo, along with a title and description—we’ll assist you with the rest.",
+    "title_3": "Finish up and publish",
+    "content_3": "Verify a few details, then share your service listing with the world.",
+    "exit": "Exit",
+    "get_started": "Get started"
   }
 
 }

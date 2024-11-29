@@ -9,13 +9,15 @@ const poppins = Poppins({
 });
 
 export default async function Nav({ lang }) {
-  const { navigation, service_type } = await getDictionary(lang);
+  // const { navigation, service_type } = await getDictionary(lang);
+  const dic = await getDictionary(lang);
 
   return (
     <NavChild
-      navigation={navigation}
-      service_type={service_type}
+      navigation={dic.navigation}
+      service_type={dic.service_type}
       poppins={poppins}
+      dic={dic}
     />
   );
 }

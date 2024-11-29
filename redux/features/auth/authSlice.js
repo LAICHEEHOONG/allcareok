@@ -8,6 +8,7 @@ const initialState = {
   signIn: "",
   _id: "",
   language: "",
+  lang: ""
 };
 
 export const authSlice = createSlice({
@@ -29,9 +30,12 @@ export const authSlice = createSlice({
     updateLanguage: (state, action) => {
       state.language = action.payload.replace(/^\//, "");
     },
+    setLang: (state, action) => {
+      state.lang = action.payload
+    }
   },
 });
 
-export const { signInStatus, userInfo, updateLanguage } = authSlice.actions;
+export const { signInStatus, userInfo, updateLanguage, setLang } = authSlice.actions;
 
 export default authSlice.reducer;
