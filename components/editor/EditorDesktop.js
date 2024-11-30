@@ -20,14 +20,14 @@ export default function EditorDesktop() {
             variant="flat"
             aria-label="Like"
             onPress={() => {
-              router.push("/dashboard");
+              router.push("/");
             }}
           >
             <ArrowBackIcon />
           </Button>
           <div className="">
             <div className="text-3xl font-semibold ml-5 mb-5">Listing editor</div>
-            <ScrollShadow className="h-[80vh]">
+            <ScrollShadow className="h-[80vh] w-full">
               <PhotoCard />
               {/* <PhotoCard />
               <PhotoCard />

@@ -21,17 +21,13 @@
 
 "use client";
 import { Button } from "@nextui-org/react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
 
 export default function NavShareBtn({ share }) {
   const router = useRouter();
-  const language = useSelector(state => state.auth.language)
-  // const pathname = usePathname(); // Get the current path
-  // const searchParams = useSearchParams(); // Get current query parameters
-
-  // // Extract the current locale from the pathname
-  // const currentLocale = pathname.split("/")[1] || "en"; // Default to 'en' if locale is missing
+  const pathname = usePathname(); // Get the current path
+  const currentLocale = pathname.split("/")[1] || "en";
 
   return (
     <Button
@@ -40,11 +36,7 @@ export default function NavShareBtn({ share }) {
       variant="light"
       radius="full"
       size="lg"
-      onPress={() => router.push(`${language}/dashboard`)
-        // router.push(
-        //   `/${currentLocale}/dashboard${searchParams ? `?${searchParams}` : ""}`
-        // )
-      }
+      onPress={() => router.push(`/${currentLocale}/dashboard`)}
     >
       {share}
     </Button>

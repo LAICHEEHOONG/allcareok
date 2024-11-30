@@ -22,11 +22,15 @@ import {
 import { signOut } from "next-auth/react";
 import { useSelector } from "react-redux";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 export function DrawerProfile({ children, bottom_navigation }) {
   const auth = useSelector((state) => state.auth);
   const router = useRouter();
+  const pathname = usePathname();
+
+  // Extract current locale from pathname
+  const currentLocale = pathname.split("/")[1] || "en";
 
   return (
     <Drawer>
@@ -54,7 +58,7 @@ export function DrawerProfile({ children, bottom_navigation }) {
           <Card
             className="m-2 mb-4"
             isPressable
-            onPress={() => router.push(`${auth.language}/dashboard`)}
+            onPress={() => router.push(`/${currentLocale}/dashboard`)}
           >
             <CardBody>
               <div className="flex">

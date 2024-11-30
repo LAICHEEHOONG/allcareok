@@ -23,6 +23,7 @@ export default function ProfileMenu({ navigation }) {
   const router = useRouter();
   const pathName = usePathname();
   const language = useSelector(state => state.auth.language)
+  const currentLocale = pathName.split("/")[1] || "en";
 
   const redirectedPathName = (locale) => {
     if (!pathName) return "/";
@@ -76,7 +77,7 @@ export default function ProfileMenu({ navigation }) {
           key={navigation.share}
           textValue="share services"
           onPress={() => {
-            router.push(`${language}/dashboard`);
+            router.push(`/${currentLocale}/dashboard`);
           }}
         >
           {navigation.share}

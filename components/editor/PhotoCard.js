@@ -2,15 +2,27 @@ import { Card, CardHeader, CardBody, Image } from "@nextui-org/react";
 
 export default function PhotoCard() {
   return (
-    <Card className={`m-5 w-full xborder-solid xborder-2 xborder-black`} isPressable>
-      <CardBody>
-        <div className="">
-          <div>Photo tour</div>
-          <div>8 photos</div>
-          <div></div>
+    <Card
+      className={`m-10 p-3 xborder-solid xborder-2 xborder-black w-[444px]`}
+      isPressable
+    >
+      <CardBody className="">
+        <div className="flex flex-col justify-center items-center">
+          <div className="font-medium self-start">Photo upload</div>
+          <div className="text-small tracking-tight text-default-400 self-start">
+            8 photos
+          </div>
+          <Image
+            // className="min-w-[37px] "
+
+            className="m-4"
+            width={350}
+            // radius="none"
+            alt="photos upload poster"
+            src="/images/poster_sample.png"
+          />
         </div>
-        {/* <Content /> */}
-        {/* <p>Make beautiful websites regardless of your design experience.</p> */}
+
       </CardBody>
     </Card>
   );

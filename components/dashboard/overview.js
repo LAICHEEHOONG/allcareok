@@ -1,10 +1,14 @@
 import { Button, Divider, Image } from "@nextui-org/react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
 
 export default function Overview() {
   const router = useRouter();
   const overview = useSelector((state) => state?.auth?.lang?.overview);
+  const pathname = usePathname();
+
+  // Extract current locale from pathname
+  const currentLocale = pathname.split("/")[1] || "en";
   return (
     <>
       <div className="hidden sm:flex flex-col w-full h-[766px] justify-center">
@@ -98,7 +102,7 @@ export default function Overview() {
               radius="full"
               size="lg"
               onPress={() => {
-                router.push("/editor");
+                router.push(`/${currentLocale}/editor`);
               }}
             >
               {overview?.get_started}
@@ -108,7 +112,7 @@ export default function Overview() {
         </div>
       </div>
       {/* MOBILE */}
-      <div className="sm:hidden w-full h-full relative">
+      <div className="sm:hidden w-full h-full flex justify-center items-center">
         <div className="flex flex-col items-start m-8">
           <div className="flex w-full justify-start mb-4">
             <Button
@@ -161,7 +165,7 @@ export default function Overview() {
               size="lg"
               fullWidth={true}
               onPress={() => {
-                router.push("/editor");
+                router.push(`/${currentLocale}/editor`);
               }}
             >
               {overview?.get_started}
