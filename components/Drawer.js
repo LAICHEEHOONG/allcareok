@@ -54,7 +54,7 @@ export function DrawerProfile({ children, bottom_navigation }) {
           <Card
             className="m-2 mb-4"
             isPressable
-            onPress={() => router.push("/dashboard")}
+            onPress={() => router.push(`${auth.language}/dashboard`)}
           >
             <CardBody>
               <div className="flex">

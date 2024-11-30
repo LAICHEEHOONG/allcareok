@@ -22,9 +22,11 @@
 "use client";
 import { Button } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
 
 export default function NavShareBtn({ share }) {
   const router = useRouter();
+  const language = useSelector(state => state.auth.language)
   // const pathname = usePathname(); // Get the current path
   // const searchParams = useSearchParams(); // Get current query parameters
 
@@ -38,7 +40,7 @@ export default function NavShareBtn({ share }) {
       variant="light"
       radius="full"
       size="lg"
-      onPress={() => router.push('/dashboard')
+      onPress={() => router.push(`${language}/dashboard`)
         // router.push(
         //   `/${currentLocale}/dashboard${searchParams ? `?${searchParams}` : ""}`
         // )
