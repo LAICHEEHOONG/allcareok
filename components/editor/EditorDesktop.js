@@ -1,8 +1,10 @@
 "use client";
 import { ScrollShadow, Button } from "@nextui-org/react";
-import PhotoCard from "./PhotoCard";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useRouter } from "next/navigation";
+import PhotoCard from "./PhotoCard";
+import TitleCard from "./TitleCard";
+import ServiceCard from "./ServiceCard";
 
 export default function EditorDesktop() {
   const router = useRouter();
@@ -29,12 +31,8 @@ export default function EditorDesktop() {
             <div className="text-3xl font-semibold ml-5 mb-5">Listing editor</div>
             <ScrollShadow className="h-[80vh] w-full">
               <PhotoCard />
-              {/* <PhotoCard />
-              <PhotoCard />
-              <PhotoCard />
-              <PhotoCard />
-              <PhotoCard /> */}
-              {/* <Content /> */}
+              <TitleCard />
+              <ServiceCard />
             </ScrollShadow>
           </div>
         </div>

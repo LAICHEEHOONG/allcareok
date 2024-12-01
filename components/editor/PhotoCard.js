@@ -1,10 +1,20 @@
 import { Card, CardHeader, CardBody, Image } from "@nextui-org/react";
+import { useSelector, useDispatch } from "react-redux";
+import { setFocus } from "@/redux/features/editor/editorSlice";
 
 export default function PhotoCard() {
+  const dispatch = useDispatch();
+  const cardFocus = useSelector((state) => state.editor?.cardFocus);
+
   return (
     <Card
-      className={`m-10 p-3 xborder-solid xborder-2 xborder-black w-[444px]`}
+      className={`m-5 p-3 ${
+        cardFocus === 'photo' ? "border-solid border-2 border-black" : ""
+      }  w-[444px]`}
       isPressable
+      onPress={() => {
+        dispatch(setFocus("photo"));
+      }}
     >
       <CardBody className="">
         <div className="flex flex-col justify-center items-center">
@@ -12,17 +22,17 @@ export default function PhotoCard() {
           <div className="text-small tracking-tight text-default-400 self-start">
             8 photos
           </div>
+
           <Image
             // className="min-w-[37px] "
 
-            className="m-4"
+            className="flex justify-center items-center mt-4"
             width={350}
             // radius="none"
             alt="photos upload poster"
             src="/images/poster_sample.png"
           />
         </div>
-
       </CardBody>
     </Card>
   );
