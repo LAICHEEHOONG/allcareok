@@ -7,6 +7,8 @@ import TitleCard from "./TitleCard";
 import ServiceCard from "./ServiceCard";
 import AreaCard from "./AreaCard";
 import ContactCard from "./ContactCard";
+import DescriptionCard from "./DescriptionCard";
+import MapCard from "./MapCard";
 
 export default function EditorDesktop() {
   const router = useRouter();
@@ -35,12 +37,14 @@ export default function EditorDesktop() {
             </div>
           </div>
           <div>
-            <ScrollShadow className="h-[80vh]" hideScrollBar>
+            <ScrollShadow className="h-[85vh]" hideScrollBar>
               <PhotoCard />
               <TitleCard />
               <ServiceCard />
               <AreaCard />
               <ContactCard />
+              <DescriptionCard />
+              <MapCard />
             </ScrollShadow>
           </div>
           {/* <Button

@@ -37,7 +37,7 @@ export default function ServiceCard() {
           <div className="font-medium mb-2">Types of Services</div>
 
           {servicesItems.map(({ label, icon: Icon }, id) => (
-            <div key={id} className="flex gap-3 text-default-500">
+            <div key={id} className="flex gap-3 text-default-400">
               {/* <Icon
                 className={`w-6 h-6 ${
                   activeIndex === label ? "text-black" : "text-default-500"

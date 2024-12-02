@@ -50,7 +50,7 @@ export default function AreaCard() {
           <div className="font-medium mb-2">Service Area</div>
 
           {servicesItems.map(({ label, icon: Icon }, id) => (
-            <div key={id} className="flex gap-3 text-default-500">
+            <div key={id} className="flex gap-3 text-default-400">
               <Icon className={`w-6 h-6 ${label}`} />
               <div>{label}</div>
             </div>
