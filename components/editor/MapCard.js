@@ -30,7 +30,7 @@
 //           {/* <div className="text-small tracking-tight text-default-400 self-start">
 //             8 photos
 //           </div> */}
-//           {/* 
+//           {/*
 //           <Image
 //             // className="min-w-[37px] "
 
@@ -45,7 +45,6 @@
 //     </Card>
 //   );
 // }
-
 
 import { Card, CardHeader, CardBody } from "@nextui-org/react";
 import { useSelector, useDispatch } from "react-redux";
@@ -67,16 +66,19 @@ export default function MapCard() {
       }}
     >
       <CardBody>
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center gap-3 items-center">
           <div className="font-medium self-start">Location</div>
-          <GoogleMapsEmbed
-            apiKey="AIzaSyBvSmftem94fcOEtNH9qUDn9ESrw-8AtHk"
-            height={200}
-            width={268}
-            mode="place"
-            q="Brooklyn+Bridge,New+York,NY"
-            style={{ borderRadius: "10px" }}
-          />
+          <div className="rounded-lg overflow-hidden border-solid border-2 border-indigo-600 ">
+            <GoogleMapsEmbed
+              apiKey="AIzaSyBvSmftem94fcOEtNH9qUDn9ESrw-8AtHk"
+              height={130}
+              width={268}
+              mode="place"
+              q="Brooklyn+Bridge,New+York,NY"
+            />
+          </div>
+          <div className="self-start text-sm text-default-400 ">123, Jalan Medan Ipoh, Medan Ipoh Bestari, 99999 Ipoh, Perak</div>
+
         </div>
       </CardBody>
     </Card>
