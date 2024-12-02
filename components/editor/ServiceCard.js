@@ -24,9 +24,9 @@ export default function ServiceCard() {
   ];
   return (
     <Card
-      className={`m-5 p-3 ${
+      className={`m-5 p-3 w-[300px] ${
         cardFocus === "service" ? "border-solid border-2 border-black" : ""
-      } w-[444px]`}
+      } `}
       isPressable
       onPress={() => {
         dispatch(setFocus("service"));

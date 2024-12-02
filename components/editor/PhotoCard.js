@@ -8,13 +8,14 @@ export default function PhotoCard() {
 
   return (
     <Card
-      className={`m-5 p-3 ${
+      className={`m-5 p-1 w-[300px] ${
         cardFocus === 'photo' ? "border-solid border-2 border-black" : ""
-      }  w-[444px]`}
+      } `}
       isPressable
       onPress={() => {
         dispatch(setFocus("photo"));
       }}
+    
     >
       <CardBody className="">
         <div className="flex flex-col justify-center items-center">

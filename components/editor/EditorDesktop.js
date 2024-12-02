@@ -12,10 +12,34 @@ export default function EditorDesktop() {
     <div className="flex h-screen">
       {/* Left Section */}
 
-      <div className="w-1/2 flex flex-col m-10">
+      <div className="w-[350x] flex flex-col m-3">
         {/* <p className="text-white text-2xl">Left 50%</p> */}
-        <div className="flex ">
-          <Button
+        <div className="flex flex-col">
+          <div className="flex">
+            <Button
+              isIconOnly
+              radius="full"
+              color="default"
+              variant="flat"
+              aria-label="Like"
+              onPress={() => {
+                router.push("/");
+              }}
+            >
+              <ArrowBackIcon />
+            </Button>
+            <div className="text-3xl font-semibold ml-5 mb-3">
+              Listing editor
+            </div>
+          </div>
+          <div>
+            <ScrollShadow className="h-[80vh]" hideScrollBar>
+              <PhotoCard />
+              <TitleCard />
+              <ServiceCard />
+            </ScrollShadow>
+          </div>
+          {/* <Button
             isIconOnly
             radius="full"
             color="default"
@@ -27,22 +51,19 @@ export default function EditorDesktop() {
           >
             <ArrowBackIcon />
           </Button>
-          <div className="">
-            <div className="text-3xl font-semibold ml-5 mb-5">Listing editor</div>
+          <div>
+            <div className="text-3xl font-semibold ml-5 mb-3">Listing editor</div>
             <ScrollShadow className="h-[80vh] w-full">
               <PhotoCard />
               <TitleCard />
               <ServiceCard />
             </ScrollShadow>
-          </div>
+          </div> */}
         </div>
-        {/* <ScrollShadow className="w-4/5 h-screen ">
-          <PhotoCard />
-        </ScrollShadow> */}
       </div>
 
       {/* Right Section */}
-      <div className="w-1/2 bg-green-500 flex items-center justify-center">
+      <div className="w-full bg-green-500 flex items-center justify-center">
         <p className="text-white text-2xl">Right 50%</p>
       </div>
     </div>

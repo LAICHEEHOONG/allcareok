@@ -7,9 +7,9 @@ export default function TitleCard() {
   const cardFocus = useSelector((state) => state.editor?.cardFocus);
   return (
     <Card
-      className={`m-5 p-3 ${
+      className={`m-5 p-3 w-[300px] ${
         cardFocus === "title" ? "border-solid border-2 border-black" : ""
-      } w-[444px]`}
+      }`}
       isPressable
       onPress={() => {
         dispatch(setFocus("title"));
