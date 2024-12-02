@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import PhotoCard from "./PhotoCard";
 import TitleCard from "./TitleCard";
 import ServiceCard from "./ServiceCard";
+import AreaCard from "./AreaCard";
+import ContactCard from "./ContactCard";
 
 export default function EditorDesktop() {
   const router = useRouter();
@@ -37,6 +39,8 @@ export default function EditorDesktop() {
               <PhotoCard />
               <TitleCard />
               <ServiceCard />
+              <AreaCard />
+              <ContactCard />
             </ScrollShadow>
           </div>
           {/* <Button

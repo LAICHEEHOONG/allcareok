@@ -8,7 +8,7 @@ export default function PhotoCard() {
 
   return (
     <Card
-      className={`m-5 p-1 w-[300px] ${
+      className={` m-5 p-1 w-[300px] ${
         cardFocus === 'photo' ? "border-solid border-2 border-black" : ""
       } `}
       isPressable
