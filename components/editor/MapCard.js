@@ -70,7 +70,7 @@ export default function MapCard() {
         <div className="flex flex-col justify-center items-center">
           <div className="font-medium self-start">Location</div>
           <GoogleMapsEmbed
-            apiKey="YOUR_API_KEY"
+            apiKey="AIzaSyBvSmftem94fcOEtNH9qUDn9ESrw-8AtHk"
             height={200}
             width={268}
             mode="place"
