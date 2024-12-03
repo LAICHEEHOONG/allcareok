@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  cardFocus: "",
+  cardFocus: "photo",
 };
 
 export const editorSlice = createSlice({
