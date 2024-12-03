@@ -6,6 +6,7 @@ import { GoogleMapsEmbed } from "@next/third-parties/google";
 export default function MapCard() {
   const dispatch = useDispatch();
   const cardFocus = useSelector((state) => state.editor?.cardFocus);
+  const l = useSelector((state) => state.auth?.lang?.listing_editor_card);
 
   return (
     <Card
@@ -19,10 +20,9 @@ export default function MapCard() {
     >
       <CardBody>
         <div className="flex flex-col justify-center gap-3 items-center">
-          <div className="font-medium self-start">Location</div>
+          <div className="font-medium self-start">{l?.location}</div>
           <div className="rounded-lg overflow-hidden">
             <GoogleMapsEmbed
-              //   apiKey="AIzaSyBvSmftem94fcOEtNH9qUDn9ESrw-8AtHk"
               apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
               height={130}
               width={268}

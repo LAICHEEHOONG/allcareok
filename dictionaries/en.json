@@ -49,6 +49,16 @@
     "content_3": "Verify a few details, then share your service listing with the world.",
     "exit": "Exit",
     "get_started": "Get started"
+  },
+  "listing_editor_card": {
+    "listing": "Listing editor",
+    "photo_upload": "Photo Upload",
+    "title": "Title",
+    "service": "Types of Services",
+    "area": "Service Area",
+    "contact": "Contact & Social Links",
+    "description": "Description",
+    "location": "Location"
   }
 
 }

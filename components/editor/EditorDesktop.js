@@ -16,6 +16,7 @@ import PhotoRightCard from "./PhotoRightCard";
 export default function EditorDesktop() {
   const router = useRouter();
   const cardFocus = useSelector((state) => state.editor?.cardFocus);
+  const l = useSelector(state => state.auth?.lang?.listing_editor_card)
 
   return (
     <div className="flex h-screen m-3">
@@ -36,11 +37,12 @@ export default function EditorDesktop() {
               <ArrowBackIcon />
             </Button>
             <div className="text-3xl font-semibold ml-5 mb-3">
-              Listing editor
+              {/* Listing editor */}
+              {l?.listing}
             </div>
           </div>
           <div>
-            <ScrollShadow className="h-[85vh]" hideScrollBar>
+            <ScrollShadow className="h-[85vh]" hideScrollBar={false}>
               <PhotoCard />
               <TitleCard />
               <ServiceCard />

@@ -49,5 +49,15 @@
     "content_3": "核实一些细节，然后将您的服务信息分享给全世界。",
     "exit": "退出",
     "get_started": "开始"
+  },
+  "listing_editor_card": {
+    "listing": "列表编辑器",
+    "photo_upload": "上传照片",
+    "title": "标题",
+    "service": "服务类型",
+    "area": "服务区域",
+    "contact": "联系方式和社交链接",
+    "description": "描述",
+    "location": "位置"
   }
 }

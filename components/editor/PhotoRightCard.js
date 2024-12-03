@@ -11,7 +11,6 @@ import {
 } from "@nextui-org/react";
 import { useSelector, useDispatch } from "react-redux";
 import FilterIcon from "@mui/icons-material/Filter";
-// import { setFocus } from "@/redux/features/editor/editorSlice";
 
 export default function PhotoRightCard() {
   const dispatch = useDispatch();

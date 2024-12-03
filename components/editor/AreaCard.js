@@ -1,27 +1,13 @@
 import { Card, CardBody } from "@nextui-org/react";
 import { useSelector, useDispatch } from "react-redux";
 import { setFocus } from "@/redux/features/editor/editorSlice";
-import { GiBroom } from "react-icons/gi";
-import { TbAirConditioning } from "react-icons/tb";
-import HouseIcon from "@mui/icons-material/House";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 export default function AreaCard() {
   const dispatch = useDispatch();
   const cardFocus = useSelector((state) => state.editor?.cardFocus);
+  const l = useSelector((state) => state.auth?.lang?.listing_editor_card);
   const servicesItems = [
-    // {
-    //   label: "Home Cleaning",
-    //   icon: GiBroom,
-    // },
-    // {
-    //   label: "Aircon Servicing",
-    //   icon: TbAirConditioning,
-    // },
-    // {
-    //   label: "Move In/Out Cleaning",
-    //   icon: HouseIcon,
-    // },
     {
       label: "Ipoh",
       icon: LocationOnIcon,
@@ -47,7 +33,7 @@ export default function AreaCard() {
     >
       <CardBody>
         <div className="flex flex-col justify-start gap-2">
-          <div className="font-medium mb-2">Service Area</div>
+          <div className="font-medium mb-2">{l?.area}</div>
 
           {servicesItems.map(({ label, icon: Icon }, id) => (
             <div key={id} className="flex gap-3 text-default-400">

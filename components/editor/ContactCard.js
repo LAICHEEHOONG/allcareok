@@ -15,11 +15,13 @@ import { FaTiktok } from "react-icons/fa";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
-import PublicIcon from '@mui/icons-material/Public';
+import PublicIcon from "@mui/icons-material/Public";
 
 export default function ContactCard() {
   const dispatch = useDispatch();
   const cardFocus = useSelector((state) => state.editor?.cardFocus);
+  const l = useSelector((state) => state.auth?.lang?.listing_editor_card);
+
   const servicesItems = [
     {
       label: "+60 12-345 6789", // Fake Malaysian phone number
@@ -82,15 +84,10 @@ export default function ContactCard() {
     >
       <CardBody>
         <div className="flex flex-col justify-start gap-2">
-          <div className="font-medium mb-2">Contact & Social Links</div>
+          <div className="font-medium mb-2">{l?.contact}</div>
 
           {servicesItems.map(({ label, icon: Icon }, id) => (
             <div key={id} className="flex gap-3 p-1 text-default-400">
-              {/* <Icon
-                className={`w-6 h-6 ${
-                  activeIndex === label ? "text-black" : "text-default-500"
-                } group-hover:text-default-900`}
-              /> */}
               <Icon className={`w-6 h-6 ${label}`} />
               <div>{label}</div>
             </div>

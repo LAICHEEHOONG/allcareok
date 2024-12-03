@@ -8,6 +8,8 @@ import HouseIcon from "@mui/icons-material/House";
 export default function ServiceCard() {
   const dispatch = useDispatch();
   const cardFocus = useSelector((state) => state.editor?.cardFocus);
+  const l = useSelector((state) => state.auth?.lang?.listing_editor_card);
+
   const servicesItems = [
     {
       label: "Home Cleaning",
@@ -34,15 +36,10 @@ export default function ServiceCard() {
     >
       <CardBody>
         <div className="flex flex-col justify-start gap-2">
-          <div className="font-medium mb-2">Types of Services</div>
+          <div className="font-medium mb-2">{l?.service}</div>
 
           {servicesItems.map(({ label, icon: Icon }, id) => (
             <div key={id} className="flex gap-3 text-default-400">
-              {/* <Icon
-                className={`w-6 h-6 ${
-                  activeIndex === label ? "text-black" : "text-default-500"
-                } group-hover:text-default-900`}
-              /> */}
               <Icon className={`w-6 h-6 ${label}`} />
               <div>{label}</div>
             </div>
