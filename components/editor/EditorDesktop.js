@@ -9,6 +9,7 @@ import AreaCard from "./AreaCard";
 import ContactCard from "./ContactCard";
 import DescriptionCard from "./DescriptionCard";
 import MapCard from "./MapCard";
+import YoutubeCard from "./YoutubeCard";
 
 export default function EditorDesktop() {
   const router = useRouter();
@@ -45,6 +46,7 @@ export default function EditorDesktop() {
               <ContactCard />
               <DescriptionCard />
               <MapCard />
+              <YoutubeCard />
             </ScrollShadow>
           </div>
           {/* <Button
