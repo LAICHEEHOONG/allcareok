@@ -7,29 +7,10 @@ export default function Overview() {
   const overview = useSelector((state) => state?.auth?.lang?.overview);
   const pathname = usePathname();
 
-  // Extract current locale from pathname
   const currentLocale = pathname.split("/")[1] || "en";
   return (
     <>
       <div className="hidden sm:flex flex-col w-full h-[766px] justify-center">
-        {/* <div className="flex justify-between m-8">
-          <Image
-            className="min-w-[37px]"
-            width={37}
-            radius="none"
-            alt="Allcareok logo"
-            src="/images/allcareok_logo.png"
-          />
-          <Button
-            radius="full"
-            color="default"
-            variant="bordered"
-            onPress={() => router.push("/")}
-          >
-    
-            {overview.exit}
-          </Button>
-        </div> */}
         <div className="fixed top-0 w-full bg-white">
           <div className="flex justify-between m-8">
             <Image
@@ -51,7 +32,7 @@ export default function Overview() {
         </div>
         <div className="flex justify-center items-center">
           <div className="w-1/2 flex items-center justify-center">
-            <p className="text-5xl font-medium max-w-xl m-10 leading-tight">
+            <p className="text-5xl font-medium max-w-2xl m-10 leading-tight">
               {/* It’s easy to get started on Allcareok */}
               {overview?.main}
             </p>
@@ -75,8 +56,6 @@ export default function Overview() {
                 <div>{overview?.title_2}</div>
               </div>
               <div className="text-gray-500 ml-6 mt-2 mb-7">
-                {/* Upload at least one photo, along with a title and
-                description—we’ll assist you with the rest. */}
                 {overview?.content_2}
               </div>
               <Divider />
