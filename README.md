@@ -35,5 +35,10 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=duhukuukg
+CLOUDINARY_API_KEY=546153873273874
+CLOUDINARY_API_SECRET=QlkLg61vw4-0c-vDXUNlIyXtG2w
+NEXT_PUBLIC_CLOUDINARY_URL=https://api.cloudinary.com/v1_1/duhukuukg/image/upload
+
 
 

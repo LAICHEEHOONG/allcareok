@@ -16,6 +16,7 @@ import Masonry from "react-masonry-css";
 import AddIcon from "@mui/icons-material/Add";
 import { useDropzone } from "react-dropzone";
 import { useCallback, useState, useEffect } from "react";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 const breakpointColumnsObj = {
   default: 4,
@@ -32,6 +33,12 @@ export default function PhotoRightCard() {
   const dispatch = useDispatch();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [photos, setPhotos] = useState([]);
+
+  const filterOurPreview = (previewToRemove) => {
+    setPhotos((prev) =>
+      prev.filter((item) => item.preview !== previewToRemove)
+    );
+  };
 
   const M = () => {
     const items = [
@@ -79,26 +86,27 @@ export default function PhotoRightCard() {
         columnClassName="my-masonry-grid_column"
       >
         {photos.map((item) => (
-          // <div
-          //   key={item.preview}
-          //   className="py-4 m-2 flex flex-col justify-center items-center"
-          // >
-          //   <Image
-          //     alt="Card background"
-          //     className="object-cover rounded-xl"
-          //     src={item.preview}
-          //     width={210}
-          //     height={210}
-          //   />
-          // </div>
-          <Image
-            key={item.preview}
-            alt="Card background"
-            className="object-cover rounded-xl"
-            src={item.preview}
-            width={240}
-            height={240}
-          />
+          <div key={item.preview} className="relative">
+            <Image
+              alt="Card background"
+              className="object-cover rounded-xl"
+              src={item.preview}
+              width={240}
+              height={240}
+            />
+            <Button
+              isIconOnly
+              color="primary"
+              aria-label="delete image"
+              radius="full"
+              size="sm"
+              className="absolute top-2 right-2 z-50"
+              variant="shadow"
+              onPress={() => filterOurPreview(item.preview)}
+            >
+              <DeleteForeverIcon sx={{ fontSize: 22 }} />
+            </Button>
+          </div>
         ))}
         <input
           id="fileInput"
@@ -147,6 +155,46 @@ export default function PhotoRightCard() {
     console.log(photos);
   }, [photos]);
 
+  const closeModal = () => setPhotos([]);
+
+  const submitToCloudinary = async () => {
+    try {
+      if (photos.length > 0) {
+        // setLoading(true);
+        const URL = process.env.NEXT_PUBLIC_CLOUDINARY_URL;
+        const uploadPhoto = async (photo) => {
+          const photoFormData = new FormData();
+          photoFormData.append("file", photo);
+          photoFormData.append("upload_preset", "model_preset");
+          const response = await fetch(URL, {
+            method: "POST",
+            body: photoFormData,
+          });
+
+          return response.json();
+        };
+
+        const responses = await Promise.all(
+          photos.map((photo) => uploadPhoto(photo))
+        );
+        console.log(responses);
+        // responses.forEach((obj1) => {
+        //   setModelForm((obj2) => ({
+        //     ...obj2,
+        //     images: [
+        //       ...obj2.images,
+        //       { url: obj1.secure_url, publicId: obj1.public_id },
+        //     ],
+        //   }));
+        // });
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      // setUploadToggle(true);
+    }
+  };
+
   return (
     <div className="h-screen m-3">
       <div className="flex justify-between items-start ">
@@ -166,6 +214,7 @@ export default function PhotoRightCard() {
             onOpenChange={onOpenChange}
             backdrop="blur"
             size="lg"
+            onClose={closeModal}
           >
             <ModalContent>
               {(onClose) => (
@@ -257,7 +306,7 @@ export default function PhotoRightCard() {
                         </div>
                       </div>
                     ) : (
-                      <ScrollShadow className="h-[400px]">
+                      <ScrollShadow className=" max-h-[500px]">
                         <M2 />
                       </ScrollShadow>
                     )}
@@ -269,18 +318,28 @@ export default function PhotoRightCard() {
                         <Button
                           // color="danger"
                           variant="light"
-                          onPress={onClose}
+                          onPress={() => {
+                            closeModal();
+                            onClose();
+                          }}
                           size="lg"
                           radius="full"
                         >
-                          Done
+                          {photos.length === 0 ? "Done" : "Cancel"}
                         </Button>
                         <Button
                           color="primary"
-                          onPress={onClose}
+                          onPress={async () => {
+                            try {
+                              await submitToCloudinary(); // Wait for the upload to complete
+                              onClose(); // Close the modal only after upload completes
+                            } catch (error) {
+                              console.error("Upload failed:", error); // Handle any errors
+                            }
+                          }}
                           size="lg"
                           radius="full"
-                          isDisabled
+                          isDisabled={photos.length === 0 ? true : false}
                         >
                           Upload
                         </Button>
