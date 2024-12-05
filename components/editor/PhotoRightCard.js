@@ -24,9 +24,14 @@ const breakpointColumnsObj = {
   900: 1,
 };
 
+const breakpointColumnsObj_2 = {
+  default: 2,
+};
+
 export default function PhotoRightCard() {
   const dispatch = useDispatch();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [photos, setPhotos] = useState([]);
 
   const M = () => {
     const items = [
@@ -60,7 +65,59 @@ export default function PhotoRightCard() {
     );
   };
 
-  const [photos, setPhotos] = useState([]);
+  const M2 = () => {
+    const items = [
+      { label: "Handyman", image: "/images/handyman_2.webp" },
+      { label: "Cleaning", image: "/images/cleaning_2.jpeg" },
+      { label: "Childcare", image: "/images/childcare_2.webp" },
+      { label: "Hourly Maid", image: "/images/cleaning_1.webp" },
+    ];
+    return (
+      <Masonry
+        breakpointCols={breakpointColumnsObj_2}
+        className="my-masonry-grid"
+        columnClassName="my-masonry-grid_column"
+      >
+        {photos.map((item) => (
+          // <div
+          //   key={item.preview}
+          //   className="py-4 m-2 flex flex-col justify-center items-center"
+          // >
+          //   <Image
+          //     alt="Card background"
+          //     className="object-cover rounded-xl"
+          //     src={item.preview}
+          //     width={210}
+          //     height={210}
+          //   />
+          // </div>
+          <Image
+            key={item.preview}
+            alt="Card background"
+            className="object-cover rounded-xl"
+            src={item.preview}
+            width={240}
+            height={240}
+          />
+        ))}
+        <input
+          id="fileInput"
+          type="file"
+          multiple
+          accept="image/*"
+          className="hidden"
+          onChange={(e) => {
+            const files = Array.from(e.target.files).map((file) =>
+              Object.assign(file, {
+                preview: URL.createObjectURL(file),
+              })
+            );
+            setPhotos((prev) => [...prev, ...files]);
+          }}
+        />
+      </Masonry>
+    );
+  };
 
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     if (acceptedFiles?.length) {
@@ -91,7 +148,7 @@ export default function PhotoRightCard() {
   }, [photos]);
 
   return (
-    <div className=" h-screen m-3">
+    <div className="h-screen m-3">
       <div className="flex justify-between items-start ">
         <div className="text-3xl font-semibold">Photo upload</div>
         <>
@@ -113,8 +170,8 @@ export default function PhotoRightCard() {
             <ModalContent>
               {(onClose) => (
                 <>
-                  <ModalHeader className="flex flex-col gap-1">
-                    <div className="flex justify-between items-center ">
+                  <ModalHeader className="flex flex-col gap-1 ">
+                    <div className="flex justify-between items-center  ">
                       <Button
                         isIconOnly
                         radius="full"
@@ -135,74 +192,80 @@ export default function PhotoRightCard() {
                             : `${photos.length} items selected`}
                         </div>
                       </div>
+                      {/* <input
+                        id="fileInput"
+                        type="file"
+                        multiple
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => {
+                          const files = Array.from(e.target.files).map((file) =>
+                            Object.assign(file, {
+                              preview: URL.createObjectURL(file),
+                            })
+                          );
+                          setPhotos((prev) => [...prev, ...files]);
+                        }}
+                      /> */}
                     </div>
                   </ModalHeader>
                   <ModalBody>
-                    <div
-                      {...getRootProps({
-                        className: `p-8 border-dashed border-2 border-slate-400  ${
-                          isDragActive && `bg-slate-100`
-                        } cursor-pointer rounded-lg`,
-                      })}
-                    >
-                      {/* <input {...getInputProps()} /> */}
-                      <div className="flex flex-col items-center justify-center gap-4">
-                        <FilterIcon sx={{ fontSize: 50 }} />
-                        <div className="text-xl font-semibold">
-                          Drag and drop
+                    {photos.length === 0 ? (
+                      <div
+                        {...getRootProps({
+                          className: `p-8 border-dashed border-2 border-slate-400  ${
+                            isDragActive && `bg-slate-100`
+                          } cursor-pointer rounded-lg`,
+                        })}
+                      >
+                        {/* <input {...getInputProps()} /> */}
+                        <div className="flex flex-col items-center justify-center gap-4">
+                          <FilterIcon sx={{ fontSize: 50 }} />
+                          <div className="text-xl font-semibold">
+                            Drag and drop
+                          </div>
+                          <div className="text-xs font-light ">
+                            or browse for photos
+                          </div>
+                          <Button
+                            radius="full"
+                            size="lg"
+                            onPress={() =>
+                              document.getElementById("fileInput").click()
+                            }
+                            color="primary"
+                            // variant="flat"
+                          >
+                            Browse
+                          </Button>
+                          <input
+                            id="fileInput"
+                            type="file"
+                            multiple
+                            accept="image/*"
+                            className="hidden"
+                            onChange={(e) => {
+                              const files = Array.from(e.target.files).map(
+                                (file) =>
+                                  Object.assign(file, {
+                                    preview: URL.createObjectURL(file),
+                                  })
+                              );
+                              setPhotos((prev) => [...prev, ...files]);
+                            }}
+                          />
                         </div>
-                        <div className="text-xs font-light ">
-                          or browse for photos
-                        </div>
-                        <Button
-                          radius="full"
-                          size="lg"
-                          onPress={() =>
-                            document.getElementById("fileInput").click()
-                          }
-                          color="primary" 
-                          // variant="flat"
-                        >
-                          Browse
-                        </Button>
-                        <input
-                          id="fileInput"
-                          type="file"
-                          multiple
-                          accept="image/*"
-                          className="hidden"
-                          onChange={(e) => {
-                            const files = Array.from(e.target.files).map(
-                              (file) =>
-                                Object.assign(file, {
-                                  preview: URL.createObjectURL(file),
-                                })
-                            );
-                            setPhotos((prev) => [...prev, ...files]);
-                          }}
-                        />
-                        {/* <AddIcon
-                          className={`w-5 h-5 fill-current ${
-                            isDragActive && "customPink"
-                          }`}
-                        />
-                        <Chip
-                          startContent={<AddIcon />}
-                          className="capitalize text-medium p-5 hover:bg-customPink hover:text-white"
-                          // color={isDragActive ? "secondary" : "default"}
-                          color={isDragActive ? "danger" : "default"}
-                          radius="full"
-                          variant="shadow"
-                        >
-                          {isDragActive ? "Drag" : "Upload"}
-                        </Chip> */}
                       </div>
-                    </div>
+                    ) : (
+                      <ScrollShadow className="h-[400px]">
+                        <M2 />
+                      </ScrollShadow>
+                    )}
                   </ModalBody>
                   <ModalFooter>
                     <div className="flex flex-col gap-4 w-full">
                       <Divider />
-                      <div className="flex justify-between items-center" >
+                      <div className="flex justify-between items-center">
                         <Button
                           // color="danger"
                           variant="light"
@@ -212,7 +275,13 @@ export default function PhotoRightCard() {
                         >
                           Done
                         </Button>
-                        <Button color="primary" onPress={onClose} size="lg" radius="full" isDisabled>
+                        <Button
+                          color="primary"
+                          onPress={onClose}
+                          size="lg"
+                          radius="full"
+                          isDisabled
+                        >
                           Upload
                         </Button>
                       </div>
