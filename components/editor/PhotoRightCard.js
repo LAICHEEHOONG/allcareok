@@ -9,6 +9,7 @@ import {
   useDisclosure,
   Image,
   Divider,
+  Spinner,
 } from "@nextui-org/react";
 import { useSelector, useDispatch } from "react-redux";
 import FilterIcon from "@mui/icons-material/Filter";
@@ -33,6 +34,7 @@ export default function PhotoRightCard() {
   const dispatch = useDispatch();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [photos, setPhotos] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const filterOurPreview = (previewToRemove) => {
     setPhotos((prev) =>
@@ -86,6 +88,51 @@ export default function PhotoRightCard() {
         columnClassName="my-masonry-grid_column"
       >
         {photos.map((item) => (
+          // <div key={item.preview} className="relative">
+          //   <Image
+          //     alt="Card background"
+          //     className="object-cover rounded-xl"
+          //     src={item.preview}
+          //     width={240}
+          //     height={240}
+          //   />
+          //   <Button
+          //     isIconOnly
+          //     color="primary"
+          //     aria-label="delete image"
+          //     radius="full"
+          //     size="sm"
+          //     className="absolute top-2 right-2 z-30"
+          //     variant="shadow"
+          //     onPress={() => filterOurPreview(item.preview)}
+          //   >
+          //     <DeleteForeverIcon sx={{ fontSize: 22 }} />
+          //   </Button>
+          // </div>
+          // <div key={item.preview} className="relative group">
+          //   <Image
+          //     alt="Card background"
+          //     className="object-cover rounded-xl"
+          //     src={item.preview}
+          //     width={240}
+          //     height={240}
+          //   />
+          //   {/* Dark transparent overlay */}
+          //   <div className="absolute inset-0 bg-black bg-opacity-50 rounded-xl z-40"></div>
+          //   <Spinner color="default"/>
+          //   <Button
+          //     isIconOnly
+          //     color="primary"
+          //     aria-label="delete image"
+          //     radius="full"
+          //     size="sm"
+          //     className="absolute top-2 right-2 z-30"
+          //     variant="shadow"
+          //     onPress={() => filterOurPreview(item.preview)}
+          //   >
+          //     <DeleteForeverIcon sx={{ fontSize: 22 }} />
+          //   </Button>
+          // </div>
           <div key={item.preview} className="relative">
             <Image
               alt="Card background"
@@ -94,13 +141,25 @@ export default function PhotoRightCard() {
               width={240}
               height={240}
             />
+
+            {loading && (
+              <>
+                {/* Dark transparent overlay */}
+                <div className="absolute inset-0 bg-black bg-opacity-50 rounded-xl z-40"></div>
+                {/* Centered spinner */}
+                <div className="absolute inset-0 flex items-center justify-center z-40">
+                  <Spinner color="default" />
+                </div>
+              </>
+            )}
+
             <Button
               isIconOnly
               color="primary"
               aria-label="delete image"
               radius="full"
               size="sm"
-              className="absolute top-2 right-2 z-50"
+              className="absolute top-2 right-2 z-30"
               variant="shadow"
               onPress={() => filterOurPreview(item.preview)}
             >
@@ -159,6 +218,7 @@ export default function PhotoRightCard() {
 
   const submitToCloudinary = async () => {
     try {
+      setLoading(true);
       if (photos.length > 0) {
         // setLoading(true);
         const URL = process.env.NEXT_PUBLIC_CLOUDINARY_URL;
@@ -191,6 +251,7 @@ export default function PhotoRightCard() {
     } catch (err) {
       console.log(err);
     } finally {
+      setLoading(false);
       // setUploadToggle(true);
     }
   };
@@ -340,6 +401,7 @@ export default function PhotoRightCard() {
                           size="lg"
                           radius="full"
                           isDisabled={photos.length === 0 ? true : false}
+                          isLoading={loading}
                         >
                           Upload
                         </Button>
