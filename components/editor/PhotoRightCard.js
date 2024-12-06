@@ -18,6 +18,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { useDropzone } from "react-dropzone";
 import { useCallback, useState, useEffect } from "react";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { createAD } from "@/lib/action/adAction";
 
 const breakpointColumnsObj = {
   default: 4,
@@ -32,6 +33,7 @@ const breakpointColumnsObj_2 = {
 
 export default function PhotoRightCard() {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth._id);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [photos, setPhotos] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -75,12 +77,12 @@ export default function PhotoRightCard() {
   };
 
   const M2 = () => {
-    const items = [
-      { label: "Handyman", image: "/images/handyman_2.webp" },
-      { label: "Cleaning", image: "/images/cleaning_2.jpeg" },
-      { label: "Childcare", image: "/images/childcare_2.webp" },
-      { label: "Hourly Maid", image: "/images/cleaning_1.webp" },
-    ];
+    // const items = [
+    //   { label: "Handyman", image: "/images/handyman_2.webp" },
+    //   { label: "Cleaning", image: "/images/cleaning_2.jpeg" },
+    //   { label: "Childcare", image: "/images/childcare_2.webp" },
+    //   { label: "Hourly Maid", image: "/images/cleaning_1.webp" },
+    // ];
     return (
       <Masonry
         breakpointCols={breakpointColumnsObj_2}
@@ -88,51 +90,6 @@ export default function PhotoRightCard() {
         columnClassName="my-masonry-grid_column"
       >
         {photos.map((item) => (
-          // <div key={item.preview} className="relative">
-          //   <Image
-          //     alt="Card background"
-          //     className="object-cover rounded-xl"
-          //     src={item.preview}
-          //     width={240}
-          //     height={240}
-          //   />
-          //   <Button
-          //     isIconOnly
-          //     color="primary"
-          //     aria-label="delete image"
-          //     radius="full"
-          //     size="sm"
-          //     className="absolute top-2 right-2 z-30"
-          //     variant="shadow"
-          //     onPress={() => filterOurPreview(item.preview)}
-          //   >
-          //     <DeleteForeverIcon sx={{ fontSize: 22 }} />
-          //   </Button>
-          // </div>
-          // <div key={item.preview} className="relative group">
-          //   <Image
-          //     alt="Card background"
-          //     className="object-cover rounded-xl"
-          //     src={item.preview}
-          //     width={240}
-          //     height={240}
-          //   />
-          //   {/* Dark transparent overlay */}
-          //   <div className="absolute inset-0 bg-black bg-opacity-50 rounded-xl z-40"></div>
-          //   <Spinner color="default"/>
-          //   <Button
-          //     isIconOnly
-          //     color="primary"
-          //     aria-label="delete image"
-          //     radius="full"
-          //     size="sm"
-          //     className="absolute top-2 right-2 z-30"
-          //     variant="shadow"
-          //     onPress={() => filterOurPreview(item.preview)}
-          //   >
-          //     <DeleteForeverIcon sx={{ fontSize: 22 }} />
-          //   </Button>
-          // </div>
           <div key={item.preview} className="relative">
             <Image
               alt="Card background"
@@ -216,6 +173,15 @@ export default function PhotoRightCard() {
 
   const closeModal = () => setPhotos([]);
 
+  const submitToMongoDB = async (data) => {
+    try {
+      const save = await createAD(data);
+      console.log(save);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const submitToCloudinary = async () => {
     try {
       setLoading(true);
@@ -237,16 +203,19 @@ export default function PhotoRightCard() {
         const responses = await Promise.all(
           photos.map((photo) => uploadPhoto(photo))
         );
-        console.log(responses);
-        // responses.forEach((obj1) => {
-        //   setModelForm((obj2) => ({
-        //     ...obj2,
-        //     images: [
-        //       ...obj2.images,
-        //       { url: obj1.secure_url, publicId: obj1.public_id },
-        //     ],
-        //   }));
-        // });
+        // console.log(responses);
+        let photo = responses.map((item) => ({
+          url: item.secure_url,
+          publicId: item.public_id,
+        }));
+        // console.log(photo)
+        // let photo = [{
+        //   url: responses.secure_url,
+        //   publicId: responses.public_id
+        // }]
+
+        const createAD = await submitToMongoDB({photo, user});
+
       }
     } catch (err) {
       console.log(err);

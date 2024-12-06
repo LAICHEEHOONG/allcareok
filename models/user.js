@@ -28,6 +28,17 @@ const userSchema = new mongoose.Schema(
   }
 );
 
+// Define a virtual field for ads
+userSchema.virtual("ads", {
+  ref: "AD", // Reference the AD model
+  localField: "_id", // User's `_id`
+  foreignField: "user", // The `user` field in the `adSchema`
+});
+
+// Enable virtuals in JSON and object outputs
+userSchema.set("toJSON", { virtuals: true });
+userSchema.set("toObject", { virtuals: true });
+
 // Create the User model
 const User = mongoose.models.User || mongoose.model("User", userSchema);
 

@@ -22,7 +22,7 @@ export default function ProfileMenu({ navigation }) {
   const auth = useSelector((state) => state.auth);
   const router = useRouter();
   const pathName = usePathname();
-  const language = useSelector(state => state.auth.language)
+  // const language = useSelector(state => state.auth.language)
   const currentLocale = pathName.split("/")[1] || "en";
 
   const redirectedPathName = (locale) => {
@@ -36,6 +36,7 @@ export default function ProfileMenu({ navigation }) {
     const signUpUser = async (user) => {
       try {
         const res = await signUp(user);
+        console.log(redirectedPathName(res.language));
         router.push(redirectedPathName(res.language));
         dispatch(userInfo(res));
       } catch (err) {
