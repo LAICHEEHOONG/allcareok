@@ -34,6 +34,8 @@ const breakpointColumnsObj_2 = {
 export default function PhotoRightCard() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth._id);
+  const adsId = useSelector((state) => state.editor?.adsId);
+
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [photos, setPhotos] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -175,8 +177,12 @@ export default function PhotoRightCard() {
 
   const submitToMongoDB = async (data) => {
     try {
-      const save = await createAD(data);
-      console.log(save);
+      if (adsId) {
+        const updateAD = await createAD(data);
+        console.log(updateAD);
+      } else {
+        console.log("adsId not found");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -214,8 +220,7 @@ export default function PhotoRightCard() {
         //   publicId: responses.public_id
         // }]
 
-        const createAD = await submitToMongoDB({photo, user});
-
+        await submitToMongoDB({ photo, user, adsId });
       }
     } catch (err) {
       console.log(err);

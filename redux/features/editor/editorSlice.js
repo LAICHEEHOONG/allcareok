@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   cardFocus: "photo",
+  adsId: ""
 };
 
 export const editorSlice = createSlice({
@@ -11,6 +12,9 @@ export const editorSlice = createSlice({
     setFocus: (state, action) => {
       state.cardFocus = action.payload;
     },
+    setAdsID: (state, action) => {
+      state.adsId = action.payload
+    }
     // signInStatus: (state, action) => {
     //   state.signIn = action.payload;
     // },
@@ -32,6 +36,6 @@ export const editorSlice = createSlice({
   },
 });
 
-export const { setFocus } = editorSlice.actions;
+export const { setFocus, setAdsID } = editorSlice.actions;
 
 export default editorSlice.reducer;

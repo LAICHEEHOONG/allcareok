@@ -10,13 +10,56 @@ import ContactCard from "./ContactCard";
 import DescriptionCard from "./DescriptionCard";
 import MapCard from "./MapCard";
 import YoutubeCard from "./YoutubeCard";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import PhotoRightCard from "./PhotoRightCard";
+import { createAD } from "@/lib/action/adAction";
+import { useEffect, useRef } from "react";
+import { setAdsID } from "@/redux/features/editor/editorSlice";
 
 export default function EditorDesktop() {
+  const dispatch = useDispatch();
   const router = useRouter();
   const cardFocus = useSelector((state) => state.editor?.cardFocus);
-  const l = useSelector(state => state.auth?.lang?.listing_editor_card)
+  const l = useSelector((state) => state.auth?.lang?.listing_editor_card);
+  const adsId = useSelector((state) => state.editor?.adsId);
+  const user = useSelector((state) => state.auth?._id);
+
+  // useEffect(() => {
+  //   const fetchAndCreateAd = async () => {
+  //     if (!adsId) {
+  //       try {
+  //         const createAD_ = await createAD({user});
+  //         dispatch(setAdsID(createAD_._id));
+  //       } catch (error) {
+  //         console.error("Failed to create ad:", error);
+  //       }
+  //     }
+  //   };
+
+  //   fetchAndCreateAd();
+
+  //   console.log(adsId)
+  // }, [adsId]);
+  const isEffectRan = useRef(false);
+
+  useEffect(() => {
+    if (!isEffectRan.current) {
+      isEffectRan.current = true;
+
+      const fetchAndCreateAd = async () => {
+        if (!adsId) {
+          try {
+            const createAD_ = await createAD({ user });
+            dispatch(setAdsID(createAD_._id));
+          } catch (error) {
+            console.error("Failed to create ad:", error);
+          }
+        }
+      };
+
+      fetchAndCreateAd();
+    }
+  }, [adsId]);
 
   return (
     <div className="flex h-screen m-3">
@@ -59,9 +102,7 @@ export default function EditorDesktop() {
       {/* Right Section */}
       <div className="w-full flex items-center justify-center">
         {/* <p className="text-white text-2xl">Right 50%</p> */}
-        {
-          cardFocus === 'photo' && <PhotoRightCard />
-        }
+        {cardFocus === "photo" && <PhotoRightCard />}
       </div>
     </div>
   );
