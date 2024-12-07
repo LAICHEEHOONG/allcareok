@@ -23,23 +23,6 @@ export default function EditorDesktop() {
   const l = useSelector((state) => state.auth?.lang?.listing_editor_card);
   const adsId = useSelector((state) => state.editor?.adsId);
   const user = useSelector((state) => state.auth?._id);
-
-  // useEffect(() => {
-  //   const fetchAndCreateAd = async () => {
-  //     if (!adsId) {
-  //       try {
-  //         const createAD_ = await createAD({user});
-  //         dispatch(setAdsID(createAD_._id));
-  //       } catch (error) {
-  //         console.error("Failed to create ad:", error);
-  //       }
-  //     }
-  //   };
-
-  //   fetchAndCreateAd();
-
-  //   console.log(adsId)
-  // }, [adsId]);
   const isEffectRan = useRef(false);
 
   useEffect(() => {
