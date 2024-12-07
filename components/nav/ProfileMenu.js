@@ -15,15 +15,26 @@ import { signUp } from "@/lib/action/userAction";
 import { useDispatch, useSelector } from "react-redux";
 import { userInfo, signInStatus } from "@/redux/features/auth/authSlice";
 import { useRouter, usePathname } from "next/navigation";
+import { findUserAds } from "@/lib/action/adAction";
+import { setAds } from "@/redux/features/editor/editorSlice";
 
 export default function ProfileMenu({ navigation }) {
   const { data: session, status } = useSession();
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
+  const user = useSelector((state) => state.auth._id);
   const router = useRouter();
   const pathName = usePathname();
-  // const language = useSelector(state => state.auth.language)
   const currentLocale = pathName.split("/")[1] || "en";
+  const ads = useSelector((state) => state.editor.ads);
+
+  const changeRouter = () => {
+    if (ads.length === 0) {
+      router.push(`/${currentLocale}/overview`);
+    } else {
+      router.push(`/${currentLocale}/dashboard`);
+    }
+  };
 
   const redirectedPathName = (locale) => {
     if (!pathName) return "/";
@@ -48,7 +59,23 @@ export default function ProfileMenu({ navigation }) {
       signUpUser(session.user);
       dispatch(signInStatus(status));
     }
-  }, [session, status, dispatch]);
+  }, [session]);
+
+  useEffect(() => {
+    // Only fetch ads if the userId is available
+    if (!user) return;
+
+    const fetchAds = async () => {
+      try {
+        const ads = await findUserAds({ user }); // Pass only the userId
+        dispatch(setAds(ads));
+      } catch (error) {
+        console.error("Error fetching user ads:", error);
+      }
+    };
+
+    fetchAds();
+  }, [user]); // Add userId as a dependency
 
   return (
     <Dropdown>
@@ -78,10 +105,10 @@ export default function ProfileMenu({ navigation }) {
           key={navigation.share}
           textValue="share services"
           onPress={() => {
-            router.push(`/${currentLocale}/dashboard`);
+            changeRouter();
           }}
         >
-          {navigation.share}
+          {ads.length === 0 ? navigation.share : navigation.my_service}
         </DropdownItem>
         <DropdownItem key={navigation.help} textValue="help center">
           {navigation.help}

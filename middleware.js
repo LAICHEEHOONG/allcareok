@@ -96,7 +96,8 @@ import Negotiator from "negotiator";
 
 const protectedPaths = [
   "/dashboard",
-  "/editor"
+  "/editor",
+  "overview"
 ];
 
 function getProtectedRoutes(protectedPaths, locales) {

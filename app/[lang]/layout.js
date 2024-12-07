@@ -29,6 +29,7 @@ export default async function RootLayout({ children, params }) {
   const resolvedParams = params instanceof Promise ? await params : params;
   const lang = resolvedParams?.lang || "en"; // Fallback to 'en' if lang is undefined
 
+
   return (
     <html lang={lang}>
       <body

@@ -3,6 +3,7 @@
     "home": "Home",
     "about": "About",
     "share": "Share Your Services",
+    "my_service": "My Services",
     "placeholder": "Where...",
     "login": "Log in",
     "whishlists": "Wishlists",
@@ -18,6 +19,7 @@
     "logout": "Log out",
     "help": "Visit the Help Center",
     "share": "Share Your Services",
+    "my_service": "My Services",
     "shareContent": "Post Services & Earn Extra Income Easily"
   },
   "service_type": {

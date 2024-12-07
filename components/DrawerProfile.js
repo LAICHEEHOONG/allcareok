@@ -28,9 +28,16 @@ export function DrawerProfile({ children, bottom_navigation }) {
   const auth = useSelector((state) => state.auth);
   const router = useRouter();
   const pathname = usePathname();
-
-  // Extract current locale from pathname
   const currentLocale = pathname.split("/")[1] || "en";
+  const ads = useSelector((state) => state.editor.ads);
+
+  const changeRouter = () => {
+    if (ads.length === 0) {
+      router.push(`/${currentLocale}/overview`);
+    } else {
+      router.push(`/${currentLocale}/dashboard`);
+    }
+  };
 
   return (
     <Drawer>
@@ -58,13 +65,16 @@ export function DrawerProfile({ children, bottom_navigation }) {
           <Card
             className="m-2 mb-4"
             isPressable
-            onPress={() => router.push(`/${currentLocale}/dashboard`)}
+            onPress={() => {
+              // router.push(`/${currentLocale}/overview`)
+              changeRouter();
+            }}
           >
             <CardBody>
               <div className="flex">
                 <div className="flex flex-col justify-center tracking-wider">
                   <p className="text-md leading-10">
-                    {bottom_navigation.share}
+                    {ads.length === 0 ? bottom_navigation.share : bottom_navigation.my_service}
                   </p>
                   <p className="text-small tracking-wide text-default-400">
                     {bottom_navigation.shareContent}

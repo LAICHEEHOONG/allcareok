@@ -110,7 +110,7 @@ export function NavCarousel({ service_type }) {
   }, [activeIndex]);
 
   const pathname = usePathname();
-  const isDashboard = pathname.endsWith("/dashboard");
+  // const isDashboard = pathname.endsWith("/dashboard");
 
   // React.useEffect(() => {
   //   console.log(isDashboard);

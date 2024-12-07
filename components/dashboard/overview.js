@@ -24,7 +24,7 @@ export default function Overview() {
               radius="full"
               color="default"
               variant="bordered"
-              onPress={() => router.push("/")}
+              onPress={() => router.push(`/${currentLocale}`)}
             >
               {overview?.exit}
             </Button>
@@ -99,7 +99,7 @@ export default function Overview() {
               color="default"
               variant="bordered"
               size="sm"
-              onPress={() => router.push("/")}
+              onPress={() => router.push(`/${currentLocale}`)}
             >
               {overview?.exit}
             </Button>

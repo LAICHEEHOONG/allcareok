@@ -28,7 +28,7 @@ export default function NavChild({ navigation, service_type, poppins, dic }) {
 
   const pathname = usePathname();
   const isDashboard =
-    pathname.endsWith("/dashboard") || pathname.endsWith("/editor");
+    pathname.endsWith("/dashboard") || pathname.endsWith("/editor") || pathname.endsWith("/overview") ;
 
   return (
     <>
@@ -56,7 +56,7 @@ export default function NavChild({ navigation, service_type, poppins, dic }) {
           </NavbarContent>
           <NavbarContent justify="end">
             <NavbarItem className="hidden sm:flex items-center">
-              <NavShareBtn share={navigation.share} />
+              <NavShareBtn share={navigation.share} myService={navigation.my_service} />
             </NavbarItem>
             <NavbarItem className="hidden sm:flex gap-2">
               <LanguageMenu />
