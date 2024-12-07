@@ -8,6 +8,7 @@ export default function NavShareBtn({ share, myService }) {
   const pathname = usePathname(); // Get the current path
   const currentLocale = pathname.split("/")[1] || "en";
   const ads = useSelector((state) => state.editor.ads);
+  const blockServiceBtn = useSelector(state => state.editor.blockServiceBtn)
 
   const changeRouter = () => {
     if (ads.length === 0) {
@@ -25,6 +26,7 @@ export default function NavShareBtn({ share, myService }) {
       radius="full"
       size="lg"
       onPress={() => changeRouter()}
+      isLoading={blockServiceBtn}
     >
       {ads.length === 0 ? share : myService}
     </Button>

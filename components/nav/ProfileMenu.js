@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { userInfo, signInStatus } from "@/redux/features/auth/authSlice";
 import { useRouter, usePathname } from "next/navigation";
 import { findUserAds } from "@/lib/action/adAction";
-import { setAds } from "@/redux/features/editor/editorSlice";
+import { setAds, setBlockServiceBtn } from "@/redux/features/editor/editorSlice";
 
 export default function ProfileMenu({ navigation }) {
   const { data: session, status } = useSession();
@@ -27,6 +27,7 @@ export default function ProfileMenu({ navigation }) {
   const pathName = usePathname();
   const currentLocale = pathName.split("/")[1] || "en";
   const ads = useSelector((state) => state.editor.ads);
+  const blockServiceBtn = useSelector(state => state.editor.blockServiceBtn)
 
   const changeRouter = () => {
     if (ads.length === 0) {
@@ -46,12 +47,15 @@ export default function ProfileMenu({ navigation }) {
   useEffect(() => {
     const signUpUser = async (user) => {
       try {
+        dispatch(setBlockServiceBtn(true))
         const res = await signUp(user);
         console.log(redirectedPathName(res.language));
         router.push(redirectedPathName(res.language));
         dispatch(userInfo(res));
       } catch (err) {
         console.log(err);
+      } finally {
+        dispatch(setBlockServiceBtn(false))
       }
     };
 
@@ -107,6 +111,7 @@ export default function ProfileMenu({ navigation }) {
           onPress={() => {
             changeRouter();
           }}
+          isDisabled={blockServiceBtn}
         >
           {ads.length === 0 ? navigation.share : navigation.my_service}
         </DropdownItem>

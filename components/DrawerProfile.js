@@ -30,6 +30,8 @@ export function DrawerProfile({ children, bottom_navigation }) {
   const pathname = usePathname();
   const currentLocale = pathname.split("/")[1] || "en";
   const ads = useSelector((state) => state.editor.ads);
+  const blockServiceBtn = useSelector(state => state.editor.blockServiceBtn)
+
 
   const changeRouter = () => {
     if (ads.length === 0) {
@@ -64,11 +66,11 @@ export function DrawerProfile({ children, bottom_navigation }) {
           <Divider className="mb-4" />
           <Card
             className="m-2 mb-4"
-            isPressable
+            isPressable={blockServiceBtn}
             onPress={() => {
-              // router.push(`/${currentLocale}/overview`)
               changeRouter();
             }}
+            isDisabled={blockServiceBtn}
           >
             <CardBody>
               <div className="flex">
