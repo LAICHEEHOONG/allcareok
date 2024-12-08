@@ -70,7 +70,7 @@ export default function EditorDesktop() {
               variant="flat"
               aria-label="Back button"
               onPress={() => {
-                router.push(`/${currentLocale}`);
+                router.push(`/${currentLocale}/dashboard`);
               }}
             >
               <ArrowBackIcon />

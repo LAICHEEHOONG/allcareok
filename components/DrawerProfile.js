@@ -30,7 +30,7 @@ export function DrawerProfile({ children, bottom_navigation }) {
   const pathname = usePathname();
   const currentLocale = pathname.split("/")[1] || "en";
   const ads = useSelector((state) => state.editor.ads);
-  const blockServiceBtn = useSelector((state) => state.editor.blockServiceBtn);
+  // const blockServiceBtn = useSelector((state) => state.editor.blockServiceBtn);
 
   const changeRouter = () => {
     if (ads.length === 0) {

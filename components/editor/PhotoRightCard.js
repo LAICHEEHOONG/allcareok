@@ -79,12 +79,6 @@ export default function PhotoRightCard() {
   };
 
   const M2 = () => {
-    // const items = [
-    //   { label: "Handyman", image: "/images/handyman_2.webp" },
-    //   { label: "Cleaning", image: "/images/cleaning_2.jpeg" },
-    //   { label: "Childcare", image: "/images/childcare_2.webp" },
-    //   { label: "Hourly Maid", image: "/images/cleaning_1.webp" },
-    // ];
     return (
       <Masonry
         breakpointCols={breakpointColumnsObj_2}
@@ -209,16 +203,11 @@ export default function PhotoRightCard() {
         const responses = await Promise.all(
           photos.map((photo) => uploadPhoto(photo))
         );
-        // console.log(responses);
+
         let photo = responses.map((item) => ({
           url: item.secure_url,
           publicId: item.public_id,
         }));
-        // console.log(photo)
-        // let photo = [{
-        //   url: responses.secure_url,
-        //   publicId: responses.public_id
-        // }]
 
         await submitToMongoDB({ photo, user, adsId });
       }
@@ -226,7 +215,6 @@ export default function PhotoRightCard() {
       console.log(err);
     } finally {
       setLoading(false);
-      // setUploadToggle(true);
     }
   };
 
@@ -276,21 +264,6 @@ export default function PhotoRightCard() {
                             : `${photos.length} items selected`}
                         </div>
                       </div>
-                      {/* <input
-                        id="fileInput"
-                        type="file"
-                        multiple
-                        accept="image/*"
-                        className="hidden"
-                        onChange={(e) => {
-                          const files = Array.from(e.target.files).map((file) =>
-                            Object.assign(file, {
-                              preview: URL.createObjectURL(file),
-                            })
-                          );
-                          setPhotos((prev) => [...prev, ...files]);
-                        }}
-                      /> */}
                     </div>
                   </ModalHeader>
                   <ModalBody>
