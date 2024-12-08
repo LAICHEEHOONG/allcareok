@@ -1,9 +1,18 @@
 "use client";
+import { Button } from "@nextui-org/react";
+import AddIcon from "@mui/icons-material/Add";
 
 export default function Dashboard() {
   return (
-    <div>Dashboard</div>
-  )
+    <div className="m-10">
+      <div className="flex justify-between">
+        <div className="text-3xl font-semibold">Your listings</div>
+        <Button isIconOnly aria-label="new ad" radius="full">
+          <AddIcon />
+        </Button>
+      </div>
+    </div>
+  );
 }
 
 // import Overview from "@/components/dashboard/overview";
@@ -45,7 +54,7 @@ export default function Dashboard() {
 //   return (
 //     <div className="w-full flex justify-center items-center">
 //       <Overview />
- 
+
 //     </div>
 //   );
 // }
