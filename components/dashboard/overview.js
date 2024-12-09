@@ -6,7 +6,6 @@ export default function Overview() {
   const router = useRouter();
   const overview = useSelector((state) => state?.auth?.lang?.overview);
   const pathname = usePathname();
-
   const currentLocale = pathname.split("/")[1] || "en";
   return (
     <>

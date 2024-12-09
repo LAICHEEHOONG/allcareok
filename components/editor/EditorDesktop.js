@@ -13,7 +13,7 @@ import YoutubeCard from "./YoutubeCard";
 import { useSelector, useDispatch } from "react-redux";
 import PhotoRightCard from "./PhotoRightCard";
 import { createAD } from "@/lib/action/adAction";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { setAdsID, setAds } from "@/redux/features/editor/editorSlice";
 import { findUserAds } from "@/lib/action/adAction";
 
@@ -27,6 +27,9 @@ export default function EditorDesktop() {
   const isEffectRan = useRef(false);
   const pathName = usePathname();
   const currentLocale = pathName.split("/")[1] || "en";
+  let ads = useSelector((state) => state.editor.ads);
+  const [AD, setAD] = useState("");
+  const editor = useSelector(state => state.editor)
 
   useEffect(() => {
     if (!isEffectRan.current) {
@@ -57,6 +60,19 @@ export default function EditorDesktop() {
     }
   }, []);
 
+  useEffect(() => {
+    let AD_ = ads.filter((item) => item._id !== adsId);
+    setAD(AD_[0]);
+  }, []);
+
+  useEffect(() => {
+    console.log(AD)
+  }, [AD])
+
+  useEffect(() => {
+    console.log(editor)
+  }, [editor])
+
   return (
     <div className="flex h-screen m-3">
       {/* Left Section */}
@@ -79,7 +95,7 @@ export default function EditorDesktop() {
           </div>
           <div>
             <ScrollShadow className="h-[85vh]" hideScrollBar={false}>
-              <PhotoCard />
+              <PhotoCard AD={AD} />
               <TitleCard />
               <ServiceCard />
               <AreaCard />

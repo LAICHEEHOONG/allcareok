@@ -1,5 +1,5 @@
 "use client";
-import { Button, Image } from "@nextui-org/react";
+import { Button, Image, Card, CardBody, CardFooter } from "@nextui-org/react";
 import AddIcon from "@mui/icons-material/Add";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useRouter, usePathname } from "next/navigation";
@@ -9,11 +9,9 @@ import { useEffect } from "react";
 import Masonry from "react-masonry-css";
 
 const breakpointColumnsObj = {
-  default: 5,
-  1550: 4,
-  1260: 3,
-  950: 2,
-  666: 1
+  default: 3,
+  1100: 2,
+  700: 1,
 };
 
 export default function Dashboard() {
@@ -25,6 +23,9 @@ export default function Dashboard() {
 
   useEffect(() => {
     dispatch(setAdsID(""));
+    if (ads.length === 0) {
+      router.push(`/${currentLocale}`);
+    }
   }, []);
 
   return (
@@ -62,28 +63,41 @@ export default function Dashboard() {
         </div>
         <Masonry
           breakpointCols={breakpointColumnsObj}
-          className="my-masonry-grid border-solid border-2"
-          columnClassName="my-masonry-grid_column"
+          className="my-masonry-grid"
+          columnClassName="my-masonry-grid_column "
         >
           {ads.map((item) => (
-            <div
+            <Card
               key={item._id}
-              className="py-4 m-2 flex flex-col justify-center items-start"
+              className=" m-5"
+              isPressable
+              shadow="sm"
+              onPress={() => {
+                dispatch(setAdsID(item._id));
+                router.push(`/${currentLocale}/editor`);
+              }}
             >
-              <Image
-                alt="Card background"
-                className="object-cover rounded-xl"
-                src="/images/handyman_2.webp"
-                width={270}
-                height={270}
-              />
-              <div className="truncate max-w-[270px] font-semibold text-sm mt-2">
-                {"PRO SERVICES & Documents Clearing"}
-              </div>
-              <div className="text-base text-default-500 truncate text-sm">
-                {"Ipoh, Perak"}
-              </div>
-            </div>
+              <CardBody className="overflow-visible p-0">
+                <Image
+                  alt="Card background"
+                  className="object-cover rounded-xl"
+                  src="/images/handyman_2.webp"
+                  width="100%"
+                  // width={270}
+                  // height={270}
+                />
+              </CardBody>
+              <CardFooter className="text-small flex-col items-start ">
+                <b className=" truncate max-w-[270px]">
+                  {
+                    "PRO SERVICES & Documents ClearingClearingClearingClearingClearing"
+                  }
+                </b>
+                <p className="text-default-500  truncate max-w-[270px]">
+                  {"Ipoh, Perak"}
+                </p>
+              </CardFooter>
+            </Card>
           ))}
         </Masonry>
       </div>
