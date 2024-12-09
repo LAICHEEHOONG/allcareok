@@ -2,7 +2,7 @@ import { Card, CardBody, Image } from "@nextui-org/react";
 import { useSelector, useDispatch } from "react-redux";
 import { setFocus } from "@/redux/features/editor/editorSlice";
 
-export default function PhotoCard({AD}) {
+export default function PhotoCard() {
   const dispatch = useDispatch();
   const cardFocus = useSelector((state) => state.editor?.cardFocus);
   const l = useSelector((state) => state.auth?.lang?.listing_editor_card);
@@ -21,8 +21,8 @@ export default function PhotoCard({AD}) {
         <div className="flex flex-col justify-center items-center">
           <div className="font-medium self-start">{l?.photo_upload}</div>
           <div className="text-small tracking-tight text-default-400 self-start">
-            {/* 8 photos */}
-            {`${AD?.photo?.length} photos`}
+            8 photos
+            {/* {`${AD?.photo?.length} photos`} */}
           </div>
 
           <Image

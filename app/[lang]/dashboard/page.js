@@ -3,7 +3,7 @@ import { Button, Image, Card, CardBody, CardFooter } from "@nextui-org/react";
 import AddIcon from "@mui/icons-material/Add";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useRouter, usePathname } from "next/navigation";
-import { setAdsID } from "@/redux/features/editor/editorSlice";
+import { setAdsID, setAd } from "@/redux/features/editor/editorSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import Masonry from "react-masonry-css";
@@ -23,10 +23,19 @@ export default function Dashboard() {
 
   useEffect(() => {
     dispatch(setAdsID(""));
+    dispatch(setAd({}))
     if (ads.length === 0) {
       router.push(`/${currentLocale}`);
     }
   }, []);
+
+  const selectedCard = (id) => {
+    let AD_ = ads.filter((item) => item._id === id);
+    console.log(AD_)
+    dispatch(setAdsID(id));
+    dispatch(setAd(AD_[0]));
+    router.push(`/${currentLocale}/editor`);
+  };
 
   return (
     <div className="flex justify-center items-center m-10  ">
@@ -73,8 +82,9 @@ export default function Dashboard() {
               isPressable
               shadow="sm"
               onPress={() => {
-                dispatch(setAdsID(item._id));
-                router.push(`/${currentLocale}/editor`);
+                selectedCard(item._id)
+                // dispatch(setAdsID(item._id));
+                // router.push(`/${currentLocale}/editor`);
               }}
             >
               <CardBody className="overflow-visible p-0">

@@ -21,7 +21,7 @@ export default function Overview_() {
       try {
         const ads = await findUserAds({ user }); // Pass only the userId
         setUserAds(ads); // Store fetched ads in state
-        console.log(ads); // Optional: Log the fetched ads
+        // console.log(ads); // Optional: Log the fetched ads
       } catch (error) {
         console.error("Error fetching user ads:", error);
       }

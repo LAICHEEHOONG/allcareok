@@ -19,6 +19,7 @@ import { useDropzone } from "react-dropzone";
 import { useCallback, useState, useEffect } from "react";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { createAD } from "@/lib/action/adAction";
+import { setAd } from "@/redux/features/editor/editorSlice";
 
 const breakpointColumnsObj = {
   default: 4,
@@ -33,8 +34,9 @@ const breakpointColumnsObj_2 = {
 
 export default function PhotoRightCard() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth._id);
+  // const user = useSelector((state) => state.auth._id);
   const adsId = useSelector((state) => state.editor?.adsId);
+  const ad = useSelector((state) => state.editor.ad);
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [photos, setPhotos] = useState([]);
@@ -53,27 +55,45 @@ export default function PhotoRightCard() {
       { label: "Childcare", image: "/images/childcare_2.webp" },
       { label: "Hourly Maid", image: "/images/cleaning_1.webp" },
     ];
+
     return (
       <Masonry
         breakpointCols={breakpointColumnsObj}
         className="my-masonry-grid"
         columnClassName="my-masonry-grid_column"
       >
-        {items.map((item) => (
-          <div
-            key={item.label}
-            className="py-4 m-2 flex flex-col justify-center items-center"
-          >
-            <h4 className="font-bold text-large m-1">{item.label}</h4>
-            <Image
-              alt="Card background"
-              className="object-cover rounded-xl"
-              src={item.image}
-              width={270}
-              height={270}
-            />
-          </div>
-        ))}
+        {ad.photo?.length === 0 &&
+          items.map((item) => (
+            <div
+              key={item.label}
+              className="py-4 m-2 flex flex-col justify-center items-center"
+            >
+              <h4 className="font-bold text-large m-1">{item.label}</h4>
+              <Image
+                alt="Card service demo"
+                className="object-cover rounded-xl"
+                src={item.image}
+                width={270}
+                height={270}
+              />
+            </div>
+          ))}
+        {ad.photo?.length > 0 &&
+          ad.photo?.map((item) => (
+            <div
+              key={item.url}
+              // className="py-4 m-2 flex"
+            >
+              {/* <h4 className="font-bold text-large m-1">{item.label}</h4> */}
+              <Image
+                alt="Card service demo"
+                className="object-cover rounded-xl"
+                src={item.url}
+                width={270}
+                height={270}
+              />
+            </div>
+          ))}
       </Masonry>
     );
   };
@@ -163,9 +183,9 @@ export default function PhotoRightCard() {
     onDrop,
   });
 
-  useEffect(() => {
-    console.log(photos);
-  }, [photos]);
+  // useEffect(() => {
+  //   console.log(photos);
+  // }, [photos]);
 
   const closeModal = () => setPhotos([]);
 
@@ -173,6 +193,7 @@ export default function PhotoRightCard() {
     try {
       if (adsId) {
         const updateAD = await createAD(data);
+        dispatch(setAd(updateAD));
         console.log(updateAD);
       } else {
         console.log("adsId not found");
@@ -204,12 +225,23 @@ export default function PhotoRightCard() {
           photos.map((photo) => uploadPhoto(photo))
         );
 
-        let photo = responses.map((item) => ({
+        let photo_ = responses.map((item) => ({
           url: item.secure_url,
           publicId: item.public_id,
         }));
 
-        await submitToMongoDB({ photo, user, adsId });
+        // await submitToMongoDB({ photo, user, adsId });
+        let { user, photo, service, area, contact, youtube } = ad;
+        photo = [...photo, ...photo_];
+        await submitToMongoDB({
+          user,
+          photo,
+          service,
+          area,
+          contact,
+          youtube,
+          adsId,
+        });
       }
     } catch (err) {
       console.log(err);

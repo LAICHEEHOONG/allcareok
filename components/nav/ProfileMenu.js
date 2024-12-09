@@ -49,7 +49,6 @@ export default function ProfileMenu({ navigation }) {
       try {
         dispatch(setBlockServiceBtn(true))
         const res = await signUp(user);
-        console.log(redirectedPathName(res.language));
         router.push(redirectedPathName(res.language));
         dispatch(userInfo(res));
       } catch (err) {

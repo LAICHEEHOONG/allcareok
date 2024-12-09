@@ -14,7 +14,7 @@ import { useSelector, useDispatch } from "react-redux";
 import PhotoRightCard from "./PhotoRightCard";
 import { createAD } from "@/lib/action/adAction";
 import { useEffect, useRef, useState } from "react";
-import { setAdsID, setAds } from "@/redux/features/editor/editorSlice";
+import { setAdsID, setAds, setAd } from "@/redux/features/editor/editorSlice";
 import { findUserAds } from "@/lib/action/adAction";
 
 export default function EditorDesktop() {
@@ -27,9 +27,9 @@ export default function EditorDesktop() {
   const isEffectRan = useRef(false);
   const pathName = usePathname();
   const currentLocale = pathName.split("/")[1] || "en";
-  let ads = useSelector((state) => state.editor.ads);
-  const [AD, setAD] = useState("");
-  const editor = useSelector(state => state.editor)
+  // let ads = useSelector((state) => state.editor.ads);
+  // const [AD, setAD] = useState("");
+  // const editor = useSelector(state => state.editor)
 
   useEffect(() => {
     if (!isEffectRan.current) {
@@ -47,6 +47,8 @@ export default function EditorDesktop() {
         if (!adsId) {
           try {
             const createAD_ = await createAD({ user });
+            // console.log(createAD_)
+            dispatch(setAd(createAD_))
             dispatch(setAdsID(createAD_._id));
             await fetchAds();
           } catch (error) {
@@ -60,18 +62,19 @@ export default function EditorDesktop() {
     }
   }, []);
 
-  useEffect(() => {
-    let AD_ = ads.filter((item) => item._id !== adsId);
-    setAD(AD_[0]);
-  }, []);
 
-  useEffect(() => {
-    console.log(AD)
-  }, [AD])
+  // useEffect(() => {
+  //   let AD_ = ads.filter((item) => item._id !== adsId);
+  //   setAD(AD_[0]);
+  // }, []);
 
-  useEffect(() => {
-    console.log(editor)
-  }, [editor])
+  // useEffect(() => {
+  //   console.log(AD)
+  // }, [AD])
+
+  // useEffect(() => {
+  //   console.log(editor)
+  // }, [editor])
 
   return (
     <div className="flex h-screen m-3">
@@ -95,7 +98,7 @@ export default function EditorDesktop() {
           </div>
           <div>
             <ScrollShadow className="h-[85vh]" hideScrollBar={false}>
-              <PhotoCard AD={AD} />
+              <PhotoCard />
               <TitleCard />
               <ServiceCard />
               <AreaCard />
