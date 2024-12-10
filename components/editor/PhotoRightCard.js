@@ -10,6 +10,9 @@ import {
   Image,
   Divider,
   Spinner,
+  Chip,
+  Card,
+  CardBody,
 } from "@nextui-org/react";
 import { useSelector, useDispatch } from "react-redux";
 import FilterIcon from "@mui/icons-material/Filter";
@@ -19,7 +22,9 @@ import { useDropzone } from "react-dropzone";
 import { useCallback, useState, useEffect } from "react";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { createAD } from "@/lib/action/adAction";
-import { setAd } from "@/redux/features/editor/editorSlice";
+import { setAd, setAds } from "@/redux/features/editor/editorSlice";
+import { findUserAds } from "@/lib/action/adAction";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const breakpointColumnsObj = {
   default: 4,
@@ -34,13 +39,18 @@ const breakpointColumnsObj_2 = {
 
 export default function PhotoRightCard() {
   const dispatch = useDispatch();
-  // const user = useSelector((state) => state.auth._id);
+  const user = useSelector((state) => state.auth._id);
   const adsId = useSelector((state) => state.editor?.adsId);
   const ad = useSelector((state) => state.editor.ad);
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [photos, setPhotos] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [manageAd, setManageAd] = useState({});
+
+  useEffect(() => {
+    console.log(manageAd);
+  }, [manageAd]);
 
   const filterOurPreview = (previewToRemove) => {
     setPhotos((prev) =>
@@ -57,44 +67,109 @@ export default function PhotoRightCard() {
     ];
 
     return (
-      <Masonry
-        breakpointCols={breakpointColumnsObj}
-        className="my-masonry-grid"
-        columnClassName="my-masonry-grid_column"
-      >
-        {ad.photo?.length === 0 &&
-          items.map((item) => (
-            <div
-              key={item.label}
-              className="py-4 m-2 flex flex-col justify-center items-center"
-            >
-              <h4 className="font-bold text-large m-1">{item.label}</h4>
-              <Image
-                alt="Card service demo"
-                className="object-cover rounded-xl"
-                src={item.image}
-                width={270}
-                height={270}
-              />
+      <>
+        {manageAd?._id ? (
+          <div>
+            <div className="flex justify-between mb-7">
+              <Button
+                isIconOnly
+                radius="full"
+                color="default"
+                variant="flat"
+                aria-label="Back button"
+                onPress={() => {
+                  setManageAd({});
+                }}
+              >
+                <ArrowBackIcon />
+              </Button>
+              <div className="flex gap-2">
+                <Button
+                  radius="full"
+                  color="default"
+                  variant="flat"
+                  aria-label="Back button"
+                  onPress={() => {
+               
+                  }}
+                >
+                  Make cover photo
+                </Button>
+                <Button
+                  isIconOnly
+                  radius="full"
+                  color="default"
+                  variant="flat"
+                  aria-label="Back button"
+                  onPress={() => {
+                    
+                  }}
+                >
+                  <DeleteForeverIcon />
+                </Button>
+              </div>
             </div>
-          ))}
-        {ad.photo?.length > 0 &&
-          ad.photo?.map((item) => (
-            <div
-              key={item.url}
-              // className="py-4 m-2 flex"
-            >
-              {/* <h4 className="font-bold text-large m-1">{item.label}</h4> */}
-              <Image
-                alt="Card service demo"
-                className="object-cover rounded-xl"
-                src={item.url}
-                width={270}
-                height={270}
-              />
-            </div>
-          ))}
-      </Masonry>
+            <Image
+              alt="Card service demo"
+              className="object-cover rounded-xl"
+              src={manageAd.url}
+              // width="100%"
+              width={700}
+              // height={270}
+            />
+          </div>
+        ) : (
+          <Masonry
+            breakpointCols={breakpointColumnsObj}
+            className="my-masonry-grid p-4 mb-3"
+            columnClassName="my-masonry-grid_column"
+          >
+            {(!ad.photo || ad.photo.length === 0) &&
+              items.map((item) => (
+                <div
+                  key={item.label}
+                  className="py-4 m-2 flex flex-col justify-center items-center"
+                >
+                  <h4 className="font-bold text-large m-1">{item.label}</h4>
+                  <Image
+                    alt="Card service demo"
+                    className="object-cover rounded-xl"
+                    src={item.image}
+                    width={270}
+                    height={270}
+                  />
+                </div>
+              ))}
+            {ad.photo?.length > 0 &&
+              !manageAd?._id &&
+              ad.photo.map((item, i) => (
+                <Card
+                  key={item.url}
+                  isPressable
+                  className="ml-1 mt-2"
+                  onPress={() => setManageAd(item)}
+                >
+                  <CardBody className="m-0 p-0">
+                    <div className="relative">
+                      {i === 0 && (
+                        <Chip className="absolute z-40 m-3" color="default">
+                          Cover
+                        </Chip>
+                      )}
+                      <Image
+                        alt="Card service"
+                        className="object-cover rounded-xl cursor-pointer"
+                        src={item.url}
+                        width={270}
+                        height={270}
+                      />
+                    </div>
+                  </CardBody>
+                </Card>
+              ))}
+          </Masonry>
+        )}
+      </>
     );
   };
 
@@ -183,10 +258,6 @@ export default function PhotoRightCard() {
     onDrop,
   });
 
-  // useEffect(() => {
-  //   console.log(photos);
-  // }, [photos]);
-
   const closeModal = () => setPhotos([]);
 
   const submitToMongoDB = async (data) => {
@@ -194,7 +265,8 @@ export default function PhotoRightCard() {
       if (adsId) {
         const updateAD = await createAD(data);
         dispatch(setAd(updateAD));
-        console.log(updateAD);
+        const ads = await findUserAds({ user }); // Pass only the userId
+        dispatch(setAds(ads));
       } else {
         console.log("adsId not found");
       }

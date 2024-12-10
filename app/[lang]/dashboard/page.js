@@ -23,7 +23,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     dispatch(setAdsID(""));
-    dispatch(setAd({}))
+    dispatch(setAd({}));
     if (ads.length === 0) {
       router.push(`/${currentLocale}`);
     }
@@ -31,7 +31,7 @@ export default function Dashboard() {
 
   const selectedCard = (id) => {
     let AD_ = ads.filter((item) => item._id === id);
-    console.log(AD_)
+    console.log(AD_);
     dispatch(setAdsID(id));
     dispatch(setAd(AD_[0]));
     router.push(`/${currentLocale}/editor`);
@@ -82,19 +82,20 @@ export default function Dashboard() {
               isPressable
               shadow="sm"
               onPress={() => {
-                selectedCard(item._id)
-                // dispatch(setAdsID(item._id));
-                // router.push(`/${currentLocale}/editor`);
+                selectedCard(item._id);
               }}
             >
               <CardBody className="overflow-visible p-0">
                 <Image
                   alt="Card background"
                   className="object-cover rounded-xl"
-                  src="/images/handyman_2.webp"
+                  // src="/images/handyman_2.webp"
+                  src={
+                    item.photo.length === 0
+                      ? "/images/handyman_2.webp"
+                      : item.photo[0].url
+                  }
                   width="100%"
-                  // width={270}
-                  // height={270}
                 />
               </CardBody>
               <CardFooter className="text-small flex-col items-start ">
