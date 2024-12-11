@@ -9,9 +9,14 @@ import { useEffect } from "react";
 import Masonry from "react-masonry-css";
 
 const breakpointColumnsObj = {
-  default: 3,
-  1100: 2,
-  700: 1,
+  default: 5,
+  1450: 4,
+  1150: 3,
+  850: 2,
+  570: 1,
+  // 800: 1
+  // 1180: 2,
+  // 810: 1
 };
 
 export default function Dashboard() {
@@ -38,9 +43,9 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="flex justify-center items-center m-10  ">
-      <div className="min-w-80 max-w-[1600px] w-full ">
-        <div className="flex justify-between">
+    <div className="m-10 flex justify-center items-center">
+      <div>
+        <div className="flex justify-between mb-10">
           <div className="flex gap-4">
             <Button
               isIconOnly
@@ -73,12 +78,12 @@ export default function Dashboard() {
         <Masonry
           breakpointCols={breakpointColumnsObj}
           className="my-masonry-grid"
-          columnClassName="my-masonry-grid_column "
+          columnClassName="my-masonry-grid_column"
         >
           {ads.map((item) => (
             <Card
               key={item._id}
-              className=" m-5"
+              className="flex mb-2"
               isPressable
               shadow="sm"
               onPress={() => {
@@ -88,23 +93,26 @@ export default function Dashboard() {
               <CardBody className="overflow-visible p-0">
                 <Image
                   alt="Card background"
-                  className="object-cover rounded-xl"
+                  // className="object-cover rounded-xl"
                   // src="/images/handyman_2.webp"
+                  className="z-0 object-cover"
                   src={
                     item.photo.length === 0
                       ? "/images/handyman_2.webp"
                       : item.photo[0].url
                   }
-                  width="100%"
+                  // width="100%"
+                  width={500}
+                  height={300}
                 />
               </CardBody>
-              <CardFooter className="text-small flex-col items-start ">
-                <b className=" truncate max-w-[270px]">
+              <CardFooter className="text-small flex-col items-start overflow-visible truncate max-w-[250px]">
+                <b className="truncate max-w-[240px]">
                   {
                     "PRO SERVICES & Documents ClearingClearingClearingClearingClearing"
                   }
                 </b>
-                <p className="text-default-500  truncate max-w-[270px]">
+                <p className="text-default-500 truncate max-w-[240px]">
                   {"Ipoh, Perak"}
                 </p>
               </CardFooter>
