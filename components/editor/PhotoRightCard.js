@@ -25,6 +25,7 @@ import { createAD } from "@/lib/action/adAction";
 import { setAd, setAds } from "@/redux/features/editor/editorSlice";
 import { findUserAds } from "@/lib/action/adAction";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { deleteImages } from "@/util/deleteImage";
 
 const breakpointColumnsObj = {
   default: 5,
@@ -80,7 +81,7 @@ export default function PhotoRightCard() {
                 <ArrowBackIcon />
               </Button>
               <div className="flex gap-2">
-                {manageAd._id !== ad.photo[0]._id && (
+                {manageAd._id !== ad.photo[0]?._id && (
                   <Button
                     radius="full"
                     color="default"
@@ -100,7 +101,9 @@ export default function PhotoRightCard() {
                   color="default"
                   variant="flat"
                   aria-label="Back button"
-                  onPress={() => {}}
+                  onPress={() => {
+                    deletePhoto();
+                  }}
                 >
                   <DeleteForeverIcon />
                 </Button>
@@ -327,8 +330,6 @@ export default function PhotoRightCard() {
       photo = photo.filter((item) => item._id !== manageAd._id);
       photo = [manageAd, ...photo];
 
-      console.log(photo);
-
       await submitToMongoDB({
         user,
         photo,
@@ -344,6 +345,30 @@ export default function PhotoRightCard() {
     }
   };
 
+  const deletePhoto = async () => {
+    try {
+      const { user, service, area, contact, youtube } = ad;
+
+      let photo = ad.photo;
+      photo = photo.filter((item) => item._id !== manageAd._id);
+
+      await submitToMongoDB({
+        user,
+        photo,
+        service,
+        area,
+        contact,
+        youtube,
+        adsId,
+      });
+      setManageAd({});
+
+      await deleteImages([manageAd.publicId])
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="h-screen m-3 w-full">
       <div className="flex justify-between items-start ">

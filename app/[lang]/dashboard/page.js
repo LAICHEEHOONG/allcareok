@@ -36,7 +36,6 @@ export default function Dashboard() {
 
   const selectedCard = (id) => {
     let AD_ = ads.filter((item) => item._id === id);
-    console.log(AD_);
     dispatch(setAdsID(id));
     dispatch(setAd(AD_[0]));
     router.push(`/${currentLocale}/editor`);
