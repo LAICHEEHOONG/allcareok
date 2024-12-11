@@ -44,7 +44,7 @@ export default function Dashboard() {
 
   return (
     <div className="m-10 flex justify-center items-center">
-      <div>
+      <div className="w-full">
         <div className="flex justify-between mb-10">
           <div className="flex gap-4">
             <Button
