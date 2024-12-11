@@ -27,10 +27,11 @@ import { findUserAds } from "@/lib/action/adAction";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const breakpointColumnsObj = {
-  default: 4,
-  1550: 3,
-  1260: 2,
-  900: 1,
+  default: 5,
+  1650: 4,
+  1320: 3,
+  1111: 2,
+  800: 1,
 };
 
 const breakpointColumnsObj_2 = {
@@ -67,7 +68,7 @@ export default function PhotoRightCard() {
     ];
 
     return (
-      <>
+      <div className="">
         {manageAd?._id ? (
           <div>
             <div className="flex justify-between mb-7">
@@ -89,9 +90,7 @@ export default function PhotoRightCard() {
                   color="default"
                   variant="flat"
                   aria-label="Back button"
-                  onPress={() => {
-               
-                  }}
+                  onPress={() => {}}
                 >
                   Make cover photo
                 </Button>
@@ -101,27 +100,25 @@ export default function PhotoRightCard() {
                   color="default"
                   variant="flat"
                   aria-label="Back button"
-                  onPress={() => {
-                    
-                  }}
+                  onPress={() => {}}
                 >
                   <DeleteForeverIcon />
                 </Button>
               </div>
             </div>
-            <Image
-              alt="Card service demo"
-              className="object-cover rounded-xl"
-              src={manageAd.url}
-              // width="100%"
-              width={700}
-              // height={270}
-            />
+            <div className="flex justify-center items-center">
+              <Image
+                alt="Card service demo"
+                className="object-cover rounded-xl"
+                src={manageAd.url}
+                width={600}
+              />
+            </div>
           </div>
         ) : (
           <Masonry
             breakpointCols={breakpointColumnsObj}
-            className="my-masonry-grid p-4 mb-3"
+            className="my-masonry-grid"
             columnClassName="my-masonry-grid_column"
           >
             {(!ad.photo || ad.photo.length === 0) &&
@@ -146,7 +143,7 @@ export default function PhotoRightCard() {
                 <Card
                   key={item.url}
                   isPressable
-                  className="ml-1 mt-2"
+                  className="mb-1"
                   onPress={() => setManageAd(item)}
                 >
                   <CardBody className="m-0 p-0">
@@ -160,7 +157,7 @@ export default function PhotoRightCard() {
                         alt="Card service"
                         className="object-cover rounded-xl cursor-pointer"
                         src={item.url}
-                        width={270}
+                        width={400}
                         height={270}
                       />
                     </div>
@@ -169,7 +166,7 @@ export default function PhotoRightCard() {
               ))}
           </Masonry>
         )}
-      </>
+      </div>
     );
   };
 
@@ -323,7 +320,7 @@ export default function PhotoRightCard() {
   };
 
   return (
-    <div className="h-screen m-3">
+    <div className="h-screen m-3 w-full">
       <div className="flex justify-between items-start ">
         <div className="text-3xl font-semibold">Photo upload</div>
         <>
