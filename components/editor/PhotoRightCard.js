@@ -43,15 +43,10 @@ export default function PhotoRightCard() {
   const user = useSelector((state) => state.auth._id);
   const adsId = useSelector((state) => state.editor?.adsId);
   const ad = useSelector((state) => state.editor.ad);
-
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [photos, setPhotos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [manageAd, setManageAd] = useState({});
-
-  useEffect(() => {
-    console.log(manageAd);
-  }, [manageAd]);
 
   const filterOurPreview = (previewToRemove) => {
     setPhotos((prev) =>
@@ -85,15 +80,20 @@ export default function PhotoRightCard() {
                 <ArrowBackIcon />
               </Button>
               <div className="flex gap-2">
-                <Button
-                  radius="full"
-                  color="default"
-                  variant="flat"
-                  aria-label="Back button"
-                  onPress={() => {}}
-                >
-                  Make cover photo
-                </Button>
+                {manageAd._id !== ad.photo[0]._id && (
+                  <Button
+                    radius="full"
+                    color="default"
+                    variant="flat"
+                    aria-label="Back button"
+                    onPress={() => {
+                      makeCover();
+                    }}
+                  >
+                    Make cover photo
+                  </Button>
+                )}
+
                 <Button
                   isIconOnly
                   radius="full"
@@ -316,6 +316,31 @@ export default function PhotoRightCard() {
       console.log(err);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const makeCover = async () => {
+    try {
+      const { user, service, area, contact, youtube } = ad;
+
+      let photo = ad.photo;
+      photo = photo.filter((item) => item._id !== manageAd._id);
+      photo = [manageAd, ...photo];
+
+      console.log(photo);
+
+      await submitToMongoDB({
+        user,
+        photo,
+        service,
+        area,
+        contact,
+        youtube,
+        adsId,
+      });
+      setManageAd({});
+    } catch (error) {
+      console.log(error);
     }
   };
 

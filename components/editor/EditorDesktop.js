@@ -27,9 +27,6 @@ export default function EditorDesktop() {
   const isEffectRan = useRef(false);
   const pathName = usePathname();
   const currentLocale = pathName.split("/")[1] || "en";
-  // let ads = useSelector((state) => state.editor.ads);
-  // const [AD, setAD] = useState("");
-  // const editor = useSelector(state => state.editor)
 
   useEffect(() => {
     if (!isEffectRan.current) {
@@ -47,7 +44,6 @@ export default function EditorDesktop() {
         if (!adsId) {
           try {
             const createAD_ = await createAD({ user });
-            // console.log(createAD_)
             dispatch(setAd(createAD_))
             dispatch(setAdsID(createAD_._id));
             await fetchAds();
