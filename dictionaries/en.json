@@ -60,7 +60,8 @@
     "area": "Service Area",
     "contact": "Contact & Social Links",
     "description": "Description",
-    "location": "Location"
+    "location": "Location",
+    "delete": "Delete Service"
   }
 
 }

@@ -10,6 +10,8 @@ import ContactCard from "./ContactCard";
 import DescriptionCard from "./DescriptionCard";
 import MapCard from "./MapCard";
 import YoutubeCard from "./YoutubeCard";
+import DeleteCard from "./DeleteCard";
+import DeleteRightCard from "./DeleteRightCard";
 import { useSelector, useDispatch } from "react-redux";
 import PhotoRightCard from "./PhotoRightCard";
 import { createAD } from "@/lib/action/adAction";
@@ -102,6 +104,7 @@ export default function EditorDesktop() {
               <DescriptionCard />
               <MapCard />
               <YoutubeCard />
+              <DeleteCard />
             </ScrollShadow>
           </div>
         </div>
@@ -111,6 +114,7 @@ export default function EditorDesktop() {
       <div className="w-full flex items-center justify-center">
         {/* <p className="text-white text-2xl">Right 50%</p> */}
         {cardFocus === "photo" && <PhotoRightCard />}
+        {cardFocus === "delete" && <DeleteRightCard />}
       </div>
     </div>
   );
