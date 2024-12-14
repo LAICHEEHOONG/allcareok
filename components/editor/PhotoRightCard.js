@@ -516,7 +516,7 @@ export default function PhotoRightCard() {
         Upload your service poster with contact info, service details, and
         coverage area. Include real case photos to assist customers.
       </div>
-      <ScrollShadow className="h-[73vh]" hideScrollBar={false}>
+      <ScrollShadow className="h-[73vh]" hideScrollBar={true}>
         <M />
       </ScrollShadow>
     </div>

@@ -16,7 +16,7 @@ import { useSelector, useDispatch } from "react-redux";
 import PhotoRightCard from "./PhotoRightCard";
 import { createAD } from "@/lib/action/adAction";
 import { useEffect, useRef, useState } from "react";
-import { setAdsID, setAds, setAd } from "@/redux/features/editor/editorSlice";
+import { setAdsID, setAds, setAd, setFocus } from "@/redux/features/editor/editorSlice";
 import { findUserAds } from "@/lib/action/adAction";
 
 export default function EditorDesktop() {
@@ -57,6 +57,9 @@ export default function EditorDesktop() {
       };
 
       fetchAndCreateAd();
+      if(cardFocus !== 'photo') {
+        dispatch(setFocus('photo'))
+      }
     }
   }, []);
 

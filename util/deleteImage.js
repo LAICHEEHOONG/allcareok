@@ -1,4 +1,4 @@
-'use server'
+"use server";
 // deleteImage.js
 const cloudinary = require("./cloudinary");
 
@@ -6,6 +6,8 @@ export async function deleteImages(publicIds) {
   if (!Array.isArray(publicIds)) {
     publicIds = [publicIds];
   }
+
+  publicIds = publicIds.filter((item) => item !== "");
 
   const results = await Promise.allSettled(
     publicIds.map(async (publicId) => {

@@ -6,6 +6,7 @@ export default function PhotoCard() {
   const dispatch = useDispatch();
   const cardFocus = useSelector((state) => state.editor?.cardFocus);
   const l = useSelector((state) => state.auth?.lang?.listing_editor_card);
+  const photo = useSelector(state => state.editor.ad.photo)
 
   return (
     <Card
@@ -21,8 +22,8 @@ export default function PhotoCard() {
         <div className="flex flex-col justify-center items-center">
           <div className="font-medium self-start">{l?.photo_upload}</div>
           <div className="text-small tracking-tight text-default-400 self-start">
-            8 photos
-            {/* {`${AD?.photo?.length} photos`} */}
+            {/* 8 photos */}
+            {`${photo ? photo.length : '0'} photos`}
           </div>
 
           <Image

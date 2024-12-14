@@ -3,17 +3,18 @@ import {
   Image,
   Modal,
   ModalContent,
-  ModalHeader,
   ModalBody,
   ModalFooter,
   useDisclosure,
+  ScrollShadow,
 } from "@nextui-org/react";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteAd, findUserAds } from "@/lib/action/adAction";
 import { useRouter, usePathname } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { setAds } from "@/redux/features/editor/editorSlice";
+import { deleteImages } from "@/util/deleteImage";
 
 export default function DeleteRightCard() {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ export default function DeleteRightCard() {
   const userId = useSelector((state) => state.auth._id);
   const role = useSelector((state) => state.auth.role);
   const adId = useSelector((state) => state.editor.adsId);
+  const [toggleDelete, setToggleDelete] = useState(false);
 
   const fetchAds = async () => {
     try {
@@ -39,12 +41,29 @@ export default function DeleteRightCard() {
     try {
       const res = await deleteAd({ userId, role, adId });
       await fetchAds();
-
-      console.log(res);
+      setToggleDelete(true);
+      // console.log(res);
     } catch (error) {
       console.log(error);
     }
   };
+  useEffect(() => {
+    const deleteAllPhoto = async () => {
+      try {
+        const publicIds = ad.photo.map((item) => item.publicId);
+        if (publicIds && publicIds.length > 0) {
+          await deleteImages(publicIds); // Assuming deleteImages handles arrays of publicIds
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    if (toggleDelete) {
+      deleteAllPhoto(); // Call the async function
+      setToggleDelete(false);
+    }
+  }, [toggleDelete]); // Add ad.photo to dependencies if it's dynamic
 
   return (
     <div className="h-screen m-3 w-full">
@@ -113,19 +132,19 @@ export default function DeleteRightCard() {
         </>
       </div>
       <div className="py-4 m-2 flex flex-col justify-center items-center">
-        <h4 className="font-bold text-large m-1">
-          Card service title Card service title
-        </h4>
-        <Image
-          alt="Card service demo"
-          className="object-cover rounded-xl"
-          src={
-            ad.photo?.length > 0
-              ? ad.photo[0].url
-              : "/images/handyman_2.webp"
-          }
-          width={600}
-        />
+        <ScrollShadow className="h-[65vh]" hideScrollBar={true}>
+          <h4 className="font-bold text-large m-1">
+            Card service title Card service title
+          </h4>
+          <Image
+            alt="Card service demo"
+            className="object-cover rounded-xl"
+            src={
+              ad.photo?.length > 0 ? ad.photo[0].url : "/images/handyman_2.webp"
+            }
+            width={600}
+          />
+        </ScrollShadow>
       </div>
     </div>
   );
