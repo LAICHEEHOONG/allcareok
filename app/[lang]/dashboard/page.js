@@ -22,6 +22,7 @@ export default function Dashboard() {
   const pathName = usePathname();
   const currentLocale = pathName.split("/")[1] || "en";
   const ads = useSelector((state) => state.editor.ads);
+  const lang = useSelector(state => state.auth.lang?.listing_editor_card)
 
   useEffect(() => {
     dispatch(setAdsID(""));
@@ -55,7 +56,7 @@ export default function Dashboard() {
             >
               <ArrowBackIcon />
             </Button>
-            <div className="text-3xl font-semibold"> Your listings</div>
+            <div className="text-3xl font-semibold">{lang?.your_listing ? lang?.your_listing : 'Your Listing'}</div>
           </div>
 
           <Button
@@ -89,15 +90,14 @@ export default function Dashboard() {
               <CardBody className="overflow-visible p-0">
                 <Image
                   alt="Card background"
-                  // className="object-cover rounded-xl"
-                  // src="/images/handyman_2.webp"
+       
                   className="z-0 object-cover"
                   src={
                     item.photo.length === 0
                       ? "/images/handyman_2.webp"
                       : item.photo[0].url
                   }
-                  // width="100%"
+          
                   width={500}
                   height={300}
                 />

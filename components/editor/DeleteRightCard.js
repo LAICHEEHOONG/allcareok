@@ -106,7 +106,7 @@ export default function DeleteRightCard() {
                         width={200}
                       />
                       <div className="text-xl font-semibold flex m-5">
-                        Permanently delete this service from your listing?
+                        Permanently delete this service?
                       </div>
                     </div>
                   </ModalBody>
@@ -132,10 +132,10 @@ export default function DeleteRightCard() {
         </>
       </div>
       <div className="py-4 m-2 flex flex-col justify-center items-center">
-        <ScrollShadow className="h-[65vh]" hideScrollBar={true}>
-          <h4 className="font-bold text-large m-1">
-            Card service title Card service title
-          </h4>
+        <h4 className="font-bold text-large m-1">
+          Card service title Card service title
+        </h4>
+        <ScrollShadow className="h-[66vh]" hideScrollBar={true}>
           <Image
             alt="Card service demo"
             className="object-cover rounded-xl"

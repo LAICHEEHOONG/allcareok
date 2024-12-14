@@ -61,6 +61,21 @@
     "contact": "联系方式和社交链接",
     "description": "描述",
     "location": "位置",
-    "delete": "删除服务"
+    "delete": "删除服务",
+    "your_listing": "你的服务",
+    "photo_upload_description": "上传您的服务海报，包含联系方式、服务内容和覆盖范围。请附上真实案例照片，帮助客户更好地了解您的服务",
+    "add_photo": "添加照片",
+    "handyman": "维修",
+    "cleaning": "清洁",
+    "childcare": "儿童护理",
+    "hourly_maid": "小时工",
+    "no_items_selected": "未选择任何项目",
+    "items_selected": "已选择项目",
+    "drag": "拖放",
+    "browse": "或浏览照片",
+    "browseBtn": "浏览",
+    "done": "完成",
+    "upload": "上传",
+    "cancel": "取消"
   }
 }

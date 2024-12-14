@@ -48,6 +48,7 @@ export default function PhotoRightCard() {
   const [photos, setPhotos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [manageAd, setManageAd] = useState({});
+  const lang = useSelector((state) => state.auth.lang?.listing_editor_card);
 
   const filterOurPreview = (previewToRemove) => {
     setPhotos((prev) =>
@@ -57,10 +58,22 @@ export default function PhotoRightCard() {
 
   const M = () => {
     const items = [
-      { label: "Handyman", image: "/images/handyman_2.webp" },
-      { label: "Cleaning", image: "/images/cleaning_2.jpeg" },
-      { label: "Childcare", image: "/images/childcare_2.webp" },
-      { label: "Hourly Maid", image: "/images/cleaning_1.webp" },
+      {
+        label: lang?.handyman ? lang.handyman : "Handyman",
+        image: "/images/handyman_2.webp",
+      },
+      {
+        label: lang?.cleaning ? lang.cleaning : "Cleaning",
+        image: "/images/cleaning_2.jpeg",
+      },
+      {
+        label: lang?.childcare ? lang.childcare : "Childcare",
+        image: "/images/childcare_2.webp",
+      },
+      {
+        label: lang?.hourly_maid ? lang.hourly_maid : "Hourly Maid",
+        image: "/images/cleaning_1.webp",
+      },
     ];
 
     return (
@@ -363,8 +376,7 @@ export default function PhotoRightCard() {
       });
       setManageAd({});
 
-      await deleteImages([manageAd.publicId])
-
+      await deleteImages([manageAd.publicId]);
     } catch (error) {
       console.log(error);
     }
@@ -372,7 +384,9 @@ export default function PhotoRightCard() {
   return (
     <div className="h-screen m-3 w-full">
       <div className="flex justify-between items-start ">
-        <div className="text-3xl font-semibold">Photo upload</div>
+        <div className="text-3xl font-semibold">
+          {lang?.photo_upload ? lang.photo_upload : "Photo upload"}
+        </div>
         <>
           <Button
             color="default"
@@ -381,7 +395,7 @@ export default function PhotoRightCard() {
             startContent={<FilterIcon />}
             onPress={onOpen}
           >
-            Add photos
+            {lang?.add_photo ? lang.add_photo : "Add photos"}
           </Button>
           <Modal
             isOpen={isOpen}
@@ -408,11 +422,11 @@ export default function PhotoRightCard() {
                         <AddIcon />
                       </Button>
                       <div className="flex-1 text-center">
-                        <div>Upload photos</div>
+                        <div>{lang?.photo_upload}</div>
                         <div className="text-xs font-light tracking-tight text-default-500 ">
                           {photos.length === 0
-                            ? "No items selected"
-                            : `${photos.length} items selected`}
+                            ? lang?.no_items_selected
+                            : `${photos.length} ${lang?.items_selected}`}
                         </div>
                       </div>
                     </div>
@@ -430,10 +444,10 @@ export default function PhotoRightCard() {
                         <div className="flex flex-col items-center justify-center gap-4">
                           <FilterIcon sx={{ fontSize: 50 }} />
                           <div className="text-xl font-semibold">
-                            Drag and drop
+                            {lang?.drag}
                           </div>
                           <div className="text-xs font-light ">
-                            or browse for photos
+                            {lang?.browse}
                           </div>
                           <Button
                             radius="full"
@@ -442,9 +456,8 @@ export default function PhotoRightCard() {
                               document.getElementById("fileInput").click()
                             }
                             color="primary"
-                            // variant="flat"
                           >
-                            Browse
+                            {lang?.browseBtn}
                           </Button>
                           <input
                             id="fileInput"
@@ -475,7 +488,6 @@ export default function PhotoRightCard() {
                       <Divider />
                       <div className="flex justify-between items-center">
                         <Button
-                          // color="danger"
                           variant="light"
                           onPress={() => {
                             closeModal();
@@ -484,7 +496,7 @@ export default function PhotoRightCard() {
                           size="lg"
                           radius="full"
                         >
-                          {photos.length === 0 ? "Done" : "Cancel"}
+                          {photos.length === 0 ? lang?.done : lang?.cancel}
                         </Button>
                         <Button
                           color="primary"
@@ -501,7 +513,7 @@ export default function PhotoRightCard() {
                           isDisabled={photos.length === 0 ? true : false}
                           isLoading={loading}
                         >
-                          Upload
+                          {lang?.upload}
                         </Button>
                       </div>
                     </div>
@@ -513,8 +525,10 @@ export default function PhotoRightCard() {
         </>
       </div>
       <div className="mt-6 mb-6 text-default-400 max-w-[500px]">
-        Upload your service poster with contact info, service details, and
-        coverage area. Include real case photos to assist customers.
+        {lang?.photo_upload_description
+          ? lang.photo_upload_description
+          : `Upload your service poster with contact info, service details, and
+        coverage area. Include real case photos to assist customers.`}
       </div>
       <ScrollShadow className="h-[73vh]" hideScrollBar={true}>
         <M />

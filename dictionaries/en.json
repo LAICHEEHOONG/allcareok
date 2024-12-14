@@ -61,7 +61,21 @@
     "contact": "Contact & Social Links",
     "description": "Description",
     "location": "Location",
-    "delete": "Delete Service"
+    "delete": "Delete Service",
+    "your_listing": "Your Listing",
+    "photo_upload_description": "Upload your service poster with contact info, service details, and coverage area. Include real case photos to assist customers.",
+    "add_photo": "Add photos",
+    "handyman": "Handyman",
+    "cleaning": "Cleaning",
+    "childcare": "Childcare",
+    "hourly_maid": "Hourly Maid",
+    "no_items_selected": "No items selected",
+    "items_selected": "items selected",
+    "drag": "Drag and drop",
+    "browse": "or browse for photos",
+    "browseBtn": "Browse",
+    "done": "Done",
+    "upload": "Upload",
+    "cancel": "Cancel"
   }
-
 }
