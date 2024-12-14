@@ -14,9 +14,6 @@ const breakpointColumnsObj = {
   1150: 3,
   850: 2,
   570: 1,
-  // 800: 1
-  // 1180: 2,
-  // 810: 1
 };
 
 export default function Dashboard() {

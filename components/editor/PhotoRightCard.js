@@ -19,7 +19,7 @@ import FilterIcon from "@mui/icons-material/Filter";
 import Masonry from "react-masonry-css";
 import AddIcon from "@mui/icons-material/Add";
 import { useDropzone } from "react-dropzone";
-import { useCallback, useState, useEffect } from "react";
+import { useCallback, useState } from "react";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { createAD } from "@/lib/action/adAction";
 import { setAd, setAds } from "@/redux/features/editor/editorSlice";

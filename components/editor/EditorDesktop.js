@@ -46,7 +46,7 @@ export default function EditorDesktop() {
         if (!adsId) {
           try {
             const createAD_ = await createAD({ user });
-            dispatch(setAd(createAD_))
+            dispatch(setAd(createAD_));
             dispatch(setAdsID(createAD_._id));
             await fetchAds();
           } catch (error) {
@@ -59,20 +59,6 @@ export default function EditorDesktop() {
       fetchAndCreateAd();
     }
   }, []);
-
-
-  // useEffect(() => {
-  //   let AD_ = ads.filter((item) => item._id !== adsId);
-  //   setAD(AD_[0]);
-  // }, []);
-
-  // useEffect(() => {
-  //   console.log(AD)
-  // }, [AD])
-
-  // useEffect(() => {
-  //   console.log(editor)
-  // }, [editor])
 
   return (
     <div className="flex h-screen m-3">

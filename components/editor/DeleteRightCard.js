@@ -9,11 +9,42 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteAd, findUserAds } from "@/lib/action/adAction";
+import { useRouter, usePathname } from "next/navigation";
+import { useEffect } from "react";
+import { setAds } from "@/redux/features/editor/editorSlice";
 
 export default function DeleteRightCard() {
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const pathname = usePathname();
+  const currentLocale = pathname.split("/")[1] || "en";
   const ad = useSelector((state) => state.editor.ad);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const userId = useSelector((state) => state.auth._id);
+  const role = useSelector((state) => state.auth.role);
+  const adId = useSelector((state) => state.editor.adsId);
+
+  const fetchAds = async () => {
+    try {
+      const ads = await findUserAds({ user: userId }); // Pass only the userId
+      dispatch(setAds(ads));
+    } catch (error) {
+      console.error("Error fetching user ads:", error);
+    }
+  };
+
+  const deleteAd_ = async () => {
+    try {
+      const res = await deleteAd({ userId, role, adId });
+      await fetchAds();
+
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="h-screen m-3 w-full">
@@ -49,7 +80,7 @@ export default function DeleteRightCard() {
                         alt="Card service demo"
                         className="object-cover rounded-xl"
                         src={
-                          ad.photo[0]
+                          ad.photo?.length > 0
                             ? ad.photo[0].url
                             : "/images/handyman_2.webp"
                         }
@@ -59,29 +90,16 @@ export default function DeleteRightCard() {
                         Permanently delete this service from your listing?
                       </div>
                     </div>
-
-                    {/* <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Nullam pulvinar risus non risus hendrerit venenatis.
-                      Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                    </p>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Nullam pulvinar risus non risus hendrerit venenatis.
-                      Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                    </p>
-                    <p>
-                      Magna exercitation reprehenderit magna aute tempor
-                      cupidatat consequat elit dolor adipisicing. Mollit dolor
-                      eiusmod sunt ex incididunt cillum quis. Velit duis sit
-                      officia eiusmod Lorem aliqua enim laboris do dolor
-                      eiusmod. Et mollit incididunt nisi consectetur esse
-                      laborum eiusmod pariatur proident Lorem eiusmod et. Culpa
-                      deserunt nostrud ad veniam.
-                    </p> */}
                   </ModalBody>
                   <ModalFooter className="flex flex-col">
-                    <Button color="danger"  onPress={onClose}>
+                    <Button
+                      color="danger"
+                      onPress={async () => {
+                        await deleteAd_();
+                        onClose();
+                        router.push(`/${currentLocale}/dashboard`);
+                      }}
+                    >
                       Delete
                     </Button>
                     <Button color="primary" variant="light" onPress={onClose}>
@@ -101,7 +119,11 @@ export default function DeleteRightCard() {
         <Image
           alt="Card service demo"
           className="object-cover rounded-xl"
-          src={ad.photo[0] ? ad.photo[0].url : "/images/handyman_2.webp"}
+          src={
+            ad.photo?.length > 0
+              ? ad.photo[0].url
+              : "/images/handyman_2.webp"
+          }
           width={600}
         />
       </div>
