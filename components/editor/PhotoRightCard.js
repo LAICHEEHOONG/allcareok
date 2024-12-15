@@ -134,7 +134,7 @@ export default function PhotoRightCard() {
         ) : (
           <Masonry
             breakpointCols={breakpointColumnsObj}
-            className="my-masonry-grid"
+            className="my-masonry-grid max-w-[1500px]"
             columnClassName="my-masonry-grid_column"
           >
             {(!ad.photo || ad.photo.length === 0) &&

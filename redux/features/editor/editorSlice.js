@@ -6,6 +6,7 @@ const initialState = {
   ads: [],
   blockServiceBtn: false,
   ad: {},
+  popUp: false,
 };
 
 export const editorSlice = createSlice({
@@ -25,12 +26,25 @@ export const editorSlice = createSlice({
       state.blockServiceBtn = action.payload;
     },
     setAd: (state, action) => {
-      state.ad = action.payload
-    }
+      state.ad = action.payload;
+    },
+    setPopUp: (state) => {
+      if (state.popUp) {
+        state.popUp = false;
+      } else {
+        state.popUp = true;
+      }
+    },
   },
 });
 
-export const { setFocus, setAdsID, setAds, setBlockServiceBtn, setAd } =
-  editorSlice.actions;
+export const {
+  setFocus,
+  setAdsID,
+  setAds,
+  setBlockServiceBtn,
+  setAd,
+  setPopUp,
+} = editorSlice.actions;
 
 export default editorSlice.reducer;

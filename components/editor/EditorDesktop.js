@@ -16,8 +16,23 @@ import { useSelector, useDispatch } from "react-redux";
 import PhotoRightCard from "./PhotoRightCard";
 import { createAD } from "@/lib/action/adAction";
 import { useEffect, useRef, useState } from "react";
-import { setAdsID, setAds, setAd, setFocus } from "@/redux/features/editor/editorSlice";
+import {
+  setAdsID,
+  setAds,
+  setAd,
+  setFocus,
+  setPopUp,
+} from "@/redux/features/editor/editorSlice";
 import { findUserAds } from "@/lib/action/adAction";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "../ui/drawer";
 
 export default function EditorDesktop() {
   const dispatch = useDispatch();
@@ -57,8 +72,8 @@ export default function EditorDesktop() {
       };
 
       fetchAndCreateAd();
-      if(cardFocus !== 'photo') {
-        dispatch(setFocus('photo'))
+      if (cardFocus !== "photo") {
+        dispatch(setFocus("photo"));
       }
     }
   }, []);
@@ -81,7 +96,9 @@ export default function EditorDesktop() {
             >
               <ArrowBackIcon />
             </Button>
-            <div className="text-3xl font-semibold ml-5 mb-3 ">{l?.listing}</div>
+            <div className="text-3xl font-semibold ml-5 mb-3 ">
+              {l?.listing}
+            </div>
           </div>
           <div>
             <ScrollShadow className="h-[90vh] pr-1" hideScrollBar={true}>
@@ -105,6 +122,28 @@ export default function EditorDesktop() {
         {cardFocus === "photo" && <PhotoRightCard />}
         {cardFocus === "delete" && <DeleteRightCard />}
       </div>
+      {/* Right Mobile */}
+      <DrawerEditor />
     </div>
+  );
+}
+
+function DrawerEditor() {
+  const popUp = useSelector((state) => state.editor.popUp);
+  const dispatch = useDispatch();
+  return (
+    <Drawer open={popUp} onOpenChange={() => dispatch(setPopUp())}>
+      {/* <DrawerTrigger asChild>{children}</DrawerTrigger> */}
+      <DrawerContent>
+        <div className="mx-auto w-full max-w-sm p-2 ">
+          <DrawerHeader>
+            <DrawerTitle>DrawerTitle</DrawerTitle>
+            <DrawerDescription>DrawerDescription</DrawerDescription>
+          </DrawerHeader>
+
+          <DrawerFooter>DrawerFooter</DrawerFooter>
+        </div>
+      </DrawerContent>
+    </Drawer>
   );
 }

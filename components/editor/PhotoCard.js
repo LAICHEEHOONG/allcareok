@@ -1,6 +1,6 @@
 import { Card, CardBody, Image } from "@nextui-org/react";
 import { useSelector, useDispatch } from "react-redux";
-import { setFocus } from "@/redux/features/editor/editorSlice";
+import { setFocus, setPopUp } from "@/redux/features/editor/editorSlice";
 
 export default function PhotoCard() {
   const dispatch = useDispatch();
@@ -16,6 +16,7 @@ export default function PhotoCard() {
       isPressable
       onPress={() => {
         dispatch(setFocus("photo"));
+        dispatch(setPopUp())
       }}
     >
       <CardBody className="">
