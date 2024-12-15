@@ -74,7 +74,7 @@ export default function ContactCard() {
   ];
   return (
     <Card
-      className={`m-5 p-1 w-[300px] ${
+      className={`m-5 p-1 w-11/12 ${
         cardFocus === "contact" ? "border-solid border-2 border-black" : ""
       } `}
       isPressable

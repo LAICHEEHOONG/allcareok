@@ -22,7 +22,7 @@ export default function YoutubeCard() {
   ];
   return (
     <Card
-      className={`m-5 p-1 w-[300px] ${
+      className={`m-5 p-1 w-11/12 ${
         cardFocus === "youtube" ? "border-solid border-2 border-black" : ""
       } `}
       isPressable

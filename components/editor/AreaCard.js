@@ -23,7 +23,7 @@ export default function AreaCard() {
   ];
   return (
     <Card
-      className={`m-5 p-1 w-[300px] ${
+      className={`m-5 p-1 w-11/12 ${
         cardFocus === "area" ? "border-solid border-2 border-black" : ""
       } `}
       isPressable

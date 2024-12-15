@@ -10,7 +10,7 @@ export default function PhotoCard() {
 
   return (
     <Card
-      className={` m-5 p-1 w-[300px] ${
+      className={` m-5 p-1 w-11/12 ${
         cardFocus === "photo" ? "border-solid border-2 border-black" : ""
       } `}
       isPressable
@@ -27,8 +27,9 @@ export default function PhotoCard() {
           </div>
 
           <Image
-            className="flex justify-center items-center mt-4"
-            width={350}
+            className="flex justify-center items-center mt-4 md:max-w-[270px]"
+            // width={350}
+            width={500}
             alt="photos upload poster"
             src="/images/childcare.jpeg"
           />

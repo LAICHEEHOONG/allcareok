@@ -32,7 +32,7 @@ const breakpointColumnsObj = {
   1650: 4,
   1320: 3,
   1111: 2,
-  800: 1,
+  900: 1,
 };
 
 const breakpointColumnsObj_2 = {

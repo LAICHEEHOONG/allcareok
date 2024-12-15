@@ -9,7 +9,7 @@ export default function DeleteCard() {
 
   return (
     <Card
-      className={`m-5 p-1 w-[300px] ${
+      className={`m-5 p-1 w-11/12 ${
         cardFocus === "delete" ? "border-solid border-2 border-rose-300" : ""
       }`}
       isPressable

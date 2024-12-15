@@ -64,10 +64,10 @@ export default function EditorDesktop() {
   }, []);
 
   return (
-    <div className="flex h-screen m-3">
+    <div className="flex h-screen m-3 md:justify-start justify-center ">
       {/* Left Section */}
-      <div className="w-[350x] flex flex-col">
-        <div className="flex flex-col">
+      <div className="flex flex-col w-full md:w-[330px]">
+        <div className="flex flex-col ">
           <div className="flex">
             <Button
               isIconOnly
@@ -81,10 +81,10 @@ export default function EditorDesktop() {
             >
               <ArrowBackIcon />
             </Button>
-            <div className="text-3xl font-semibold ml-5 mb-3">{l?.listing}</div>
+            <div className="text-3xl font-semibold ml-5 mb-3 ">{l?.listing}</div>
           </div>
           <div>
-            <ScrollShadow className="h-[85vh]" hideScrollBar={false}>
+            <ScrollShadow className="h-[85vh] pr-1" hideScrollBar={false}>
               <PhotoCard />
               <TitleCard />
               <ServiceCard />
@@ -100,7 +100,7 @@ export default function EditorDesktop() {
       </div>
 
       {/* Right Section */}
-      <div className="w-full flex items-center justify-center">
+      <div className="w-full hidden md:flex items-center justify-center">
         {/* <p className="text-white text-2xl">Right 50%</p> */}
         {cardFocus === "photo" && <PhotoRightCard />}
         {cardFocus === "delete" && <DeleteRightCard />}
