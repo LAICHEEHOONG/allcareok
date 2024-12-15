@@ -84,7 +84,7 @@ export default function EditorDesktop() {
             <div className="text-3xl font-semibold ml-5 mb-3 ">{l?.listing}</div>
           </div>
           <div>
-            <ScrollShadow className="h-[85vh] pr-1" hideScrollBar={false}>
+            <ScrollShadow className="h-[90vh] pr-1" hideScrollBar={true}>
               <PhotoCard />
               <TitleCard />
               <ServiceCard />

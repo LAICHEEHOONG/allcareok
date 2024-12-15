@@ -382,7 +382,7 @@ export default function PhotoRightCard() {
     }
   };
   return (
-    <div className="h-screen m-3 w-full">
+    <div className="h-screen m-3 pl-3 w-full">
       <div className="flex justify-between items-start ">
         <div className="text-3xl font-semibold">
           {lang?.photo_upload ? lang.photo_upload : "Photo upload"}
@@ -530,7 +530,7 @@ export default function PhotoRightCard() {
           : `Upload your service poster with contact info, service details, and
         coverage area. Include real case photos to assist customers.`}
       </div>
-      <ScrollShadow className="h-[73vh]" hideScrollBar={true}>
+      <ScrollShadow className="h-[77vh]" hideScrollBar={true}>
         <M />
       </ScrollShadow>
     </div>
