@@ -95,7 +95,7 @@ export default function DeleteRightCard() {
           >
             {l?.delete_btn ? l.delete_btn : "Delete service"}
           </Button>
-          <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+          <Modal isOpen={isOpen} onOpenChange={onOpenChange} backdrop={'blur'}>
             <ModalContent>
               {(onClose) => (
                 <>
