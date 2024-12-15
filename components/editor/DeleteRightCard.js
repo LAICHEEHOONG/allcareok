@@ -27,6 +27,8 @@ export default function DeleteRightCard() {
   const role = useSelector((state) => state.auth.role);
   const adId = useSelector((state) => state.editor.adsId);
   const [toggleDelete, setToggleDelete] = useState(false);
+  const l = useSelector((state) => state.auth?.lang?.listing_editor_card);
+  const [loading, setLoading] = useState(false);
 
   const fetchAds = async () => {
     try {
@@ -39,12 +41,15 @@ export default function DeleteRightCard() {
 
   const deleteAd_ = async () => {
     try {
+      setLoading(true);
       const res = await deleteAd({ userId, role, adId });
       await fetchAds();
       setToggleDelete(true);
       // console.log(res);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
   useEffect(() => {
@@ -67,11 +72,15 @@ export default function DeleteRightCard() {
 
   return (
     <div className="h-screen m-3 w-full">
-      <div className="text-3xl font-semibold">Delete Service</div>
-      <div className="text-default-400 mt-6 mb-6 max-w-[520px]">
-        The service, along with its image and all associated information, will
+      <div className="text-3xl font-semibold">
+        {l?.delete_btn ? l.delete_btn : "Delete Service"}
+      </div>
+      <div className="text-default-400 mt-6 mb-6 max-w-[530px]">
+        {l?.delete_right_content
+          ? l.delete_right_content
+          : `The service, along with its image and all associated information, will
         be permanently deleted. This action is irreversible and cannot be
-        undone.
+        undone.`}
       </div>
 
       <div className="flex justify-end items-center">
@@ -84,15 +93,12 @@ export default function DeleteRightCard() {
             startContent={<DeleteForeverIcon />}
             onPress={onOpen}
           >
-            Delete service
+            {l?.delete_btn ? l.delete_btn : "Delete service"}
           </Button>
           <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
             <ModalContent>
               {(onClose) => (
                 <>
-                  {/* <ModalHeader className="flex flex-col gap-1">
-                    Modal Title
-                  </ModalHeader> */}
                   <ModalBody>
                     <div className="flex flex-col justify-center items-center gap-5 mt-10">
                       <Image
@@ -106,7 +112,9 @@ export default function DeleteRightCard() {
                         width={200}
                       />
                       <div className="text-xl font-semibold flex m-5">
-                        Permanently delete this service?
+                        {l?.delete_modal_title
+                          ? l.delete_modal_title
+                          : "Permanently delete this service?"}
                       </div>
                     </div>
                   </ModalBody>
@@ -118,11 +126,12 @@ export default function DeleteRightCard() {
                         onClose();
                         router.push(`/${currentLocale}/dashboard`);
                       }}
+                      isLoading={loading}
                     >
-                      Delete
+                      {l?.delete_modal_btn ? l.delete_modal_btn : "Delete"}
                     </Button>
                     <Button color="primary" variant="light" onPress={onClose}>
-                      Cancel
+                      {l?.cancel ? l.cancel : "Cancel"}
                     </Button>
                   </ModalFooter>
                 </>

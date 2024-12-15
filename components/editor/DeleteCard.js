@@ -17,12 +17,14 @@ export default function DeleteCard() {
         dispatch(setFocus("delete"));
       }}
     >
-      <CardBody className="">
+      <CardBody>
         <div className="flex flex-col justify-start gap-1">
           <div className="font-medium ">{l?.delete}</div>
           <div className="text-base text-default-400  ">
-            Once you delete a service, there is no going back. Please be
-            certain.
+            {l?.delete_left_content
+              ? l.delete_left_content
+              : `Once you delete a service, there is no going back. Please be
+            certain.`}
           </div>
         </div>
       </CardBody>

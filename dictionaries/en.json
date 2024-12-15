@@ -76,6 +76,12 @@
     "browseBtn": "Browse",
     "done": "Done",
     "upload": "Upload",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "delete_left_content": "Once you delete a service, there is no going back. Please be certain.",
+    "delete_right_content": "The service, along with its image and all associated information, will be permanently deleted. This action is irreversible and cannot be undone.",
+    "delete_btn": "Delete service",
+    "delete_modal_title": "Permanently delete this service?",
+    "delete_modal_btn": "Delete"
+
   }
 }

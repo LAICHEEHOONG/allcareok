@@ -76,6 +76,11 @@
     "browseBtn": "浏览",
     "done": "完成",
     "upload": "上传",
-    "cancel": "取消"
+    "cancel": "取消",
+    "delete_left_content": "一旦您删除服务，将无法恢复。请确认您的操作。",
+    "delete_right_content": "该服务及其图片和所有相关信息将被永久删除。此操作不可逆，无法撤销。",
+    "delete_btn": "删除服务",
+    "delete_modal_title": "确定永久删除此服务？",
+    "delete_modal_btn": "删除"
   }
 }
