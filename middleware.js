@@ -97,7 +97,8 @@ import Negotiator from "negotiator";
 const protectedPaths = [
   "/dashboard",
   "/editor",
-  "overview"
+  "/overview",
+  "/editor/mobile/photo"
 ];
 
 function getProtectedRoutes(protectedPaths, locales) {

@@ -28,7 +28,7 @@ export default function NavChild({ navigation, service_type, poppins, dic }) {
 
   const pathname = usePathname();
   const isDashboard =
-    pathname.endsWith("/dashboard") || pathname.endsWith("/editor") || pathname.endsWith("/overview") ;
+    pathname.endsWith("/dashboard") || pathname.endsWith("/editor") || pathname.endsWith("/overview") || pathname.endsWith("/editor/mobile/photo") ;
 
   return (
     <>

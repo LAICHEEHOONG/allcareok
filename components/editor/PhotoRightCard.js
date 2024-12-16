@@ -26,6 +26,7 @@ import { setAd, setAds } from "@/redux/features/editor/editorSlice";
 import { findUserAds } from "@/lib/action/adAction";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { deleteImages } from "@/util/deleteImage";
+import { useRouter, usePathname } from "next/navigation";
 
 const breakpointColumnsObj = {
   default: 5,
@@ -49,6 +50,9 @@ export default function PhotoRightCard() {
   const [loading, setLoading] = useState(false);
   const [manageAd, setManageAd] = useState({});
   const lang = useSelector((state) => state.auth.lang?.listing_editor_card);
+  const router = useRouter();
+  const pathName = usePathname();
+  const currentLocale = pathName.split("/")[1] || "en";
 
   const filterOurPreview = (previewToRemove) => {
     setPhotos((prev) =>
@@ -384,11 +388,29 @@ export default function PhotoRightCard() {
   return (
     <div className="h-screen md:m-3 md:pl-3 w-full">
       <div className="flex justify-between items-start ">
-        <div className="text-3xl font-semibold">
-          {lang?.photo_upload ? lang.photo_upload : "Photo upload"}
+        <div className="flex justify-center items-center gap-3">
+          <Button
+            isIconOnly
+            radius="full"
+            color="default"
+            variant="flat"
+            aria-label="Back button"
+            onPress={() => {
+              router.push(`/${currentLocale}/editor`);
+            }}
+          >
+            <ArrowBackIcon />
+          </Button>
+          <div className="text-3xl font-semibold">
+            {lang?.photo_upload ? lang.photo_upload : "Photo upload"}
+          </div>
         </div>
+        {/* <div className="text-3xl font-semibold">
+          {lang?.photo_upload ? lang.photo_upload : "Photo upload"}
+        </div> */}
         <>
           <Button
+            className="hidden md:relative"
             color="default"
             variant="flat"
             radius="full"
@@ -396,6 +418,19 @@ export default function PhotoRightCard() {
             onPress={onOpen}
           >
             {lang?.add_photo ? lang.add_photo : "Add photos"}
+          </Button>
+          <Button
+            className="md:hidden"
+            color="default"
+            variant="flat"
+            radius="full"
+            isIconOnly
+            // size={'lg'}
+            // startContent={<FilterIcon />}
+            onPress={onOpen}
+          >
+            <FilterIcon fontSize={'small'} />
+            {/* {lang?.add_photo ? lang.add_photo : "Add photos"} */}
           </Button>
           <Modal
             isOpen={isOpen}

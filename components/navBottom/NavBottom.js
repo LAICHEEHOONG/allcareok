@@ -19,7 +19,10 @@ export default function NavBottom({ bottom_navigation }) {
   const router = useRouter();
   const pathname = usePathname();
   const isDashboard =
-    pathname.endsWith("/dashboard") || pathname.endsWith("/editor") || pathname.endsWith("/overview");
+    pathname.endsWith("/dashboard") ||
+    pathname.endsWith("/editor") ||
+    pathname.endsWith("/overview") ||
+    pathname.endsWith("/editor/mobile/photo");
 
   // Extract current locale from pathname
   const currentLocale = pathname.split("/")[1] || "en";

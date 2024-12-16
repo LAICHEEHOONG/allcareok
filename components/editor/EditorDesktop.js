@@ -33,6 +33,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "../ui/drawer";
+import FilterIcon from "@mui/icons-material/Filter";
 
 export default function EditorDesktop() {
   const dispatch = useDispatch();
@@ -137,12 +138,30 @@ function DrawerEditor({ cardFocus }) {
       <DrawerContent>
         <div className="mx-auto w-full max-w-sm p-2 ">
           <DrawerHeader>
-            <DrawerTitle></DrawerTitle>
-            <DrawerDescription></DrawerDescription>
+            <DrawerTitle>
+              <div className="flex justify-between items-center">
+                <div className="text-3xl font-semibold">Photo upload</div>
+                <Button
+                  isIconOnly
+                  color="default"
+                  variant="flat"
+                  radius="full"
+                  size="lg"
+                  // startContent={<FilterIcon />}
+                  // onPress={onOpen}
+                >
+                  <FilterIcon />
+                </Button>
+              </div>
+            </DrawerTitle>
+            <DrawerDescription >
+              {/* Upload your service poster with contact info, service details, and
+              coverage area. Include real case photos to assist customers. */}
+            </DrawerDescription>
           </DrawerHeader>
-          <div className="h-[500px]">{cardFocus === "photo" && <PhotoRightCard />}</div>
+          {/* <div className="h-[500px]">{cardFocus === "photo" && <PhotoRightCard />}</div> */}
 
-          <DrawerFooter></DrawerFooter>
+          <DrawerFooter>Footer</DrawerFooter>
         </div>
       </DrawerContent>
     </Drawer>

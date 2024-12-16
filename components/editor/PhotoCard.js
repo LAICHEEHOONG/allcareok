@@ -1,12 +1,34 @@
 import { Card, CardBody, Image } from "@nextui-org/react";
 import { useSelector, useDispatch } from "react-redux";
 import { setFocus, setPopUp } from "@/redux/features/editor/editorSlice";
+import { useRouter, usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function PhotoCard() {
   const dispatch = useDispatch();
   const cardFocus = useSelector((state) => state.editor?.cardFocus);
   const l = useSelector((state) => state.auth?.lang?.listing_editor_card);
   const photo = useSelector(state => state.editor.ad.photo)
+  const router = useRouter()
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const pathName = usePathname();
+  const currentLocale = pathName.split("/")[1] || "en";
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 768px)"); // Tailwind's md breakpoint
+    const handleResize = () => setIsSmallScreen(mediaQuery.matches);
+    handleResize(); // Initialize state
+    mediaQuery.addEventListener("change", handleResize);
+    return () => mediaQuery.removeEventListener("change", handleResize);
+  }, []);
+
+  const handlePress = () => {
+    dispatch(setFocus("photo"));
+    if (isSmallScreen) {
+      router.push(`/${currentLocale}/editor/mobile/photo`);
+    }
+    // Add other logic if needed
+  };
 
   return (
     <Card
@@ -14,10 +36,12 @@ export default function PhotoCard() {
         cardFocus === "photo" ? "border-solid border-2 border-black" : ""
       } `}
       isPressable
-      onPress={() => {
-        dispatch(setFocus("photo"));
-        dispatch(setPopUp())
-      }}
+      // onPress={() => {
+      //   dispatch(setFocus("photo"));
+      //   router.push('/editor/mobile/photo')
+      //   // dispatch(setPopUp())
+      // }}
+      onPress={handlePress}
     >
       <CardBody className="">
         <div className="flex flex-col justify-center items-center">
