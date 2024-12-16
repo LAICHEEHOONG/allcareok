@@ -123,12 +123,12 @@ export default function EditorDesktop() {
         {cardFocus === "delete" && <DeleteRightCard />}
       </div>
       {/* Right Mobile */}
-      <DrawerEditor />
+      <DrawerEditor cardFocus={cardFocus} />
     </div>
   );
 }
 
-function DrawerEditor() {
+function DrawerEditor({ cardFocus }) {
   const popUp = useSelector((state) => state.editor.popUp);
   const dispatch = useDispatch();
   return (
@@ -137,11 +137,12 @@ function DrawerEditor() {
       <DrawerContent>
         <div className="mx-auto w-full max-w-sm p-2 ">
           <DrawerHeader>
-            <DrawerTitle>DrawerTitle</DrawerTitle>
-            <DrawerDescription>DrawerDescription</DrawerDescription>
+            <DrawerTitle></DrawerTitle>
+            <DrawerDescription></DrawerDescription>
           </DrawerHeader>
+          <div className="h-[500px]">{cardFocus === "photo" && <PhotoRightCard />}</div>
 
-          <DrawerFooter>DrawerFooter</DrawerFooter>
+          <DrawerFooter></DrawerFooter>
         </div>
       </DrawerContent>
     </Drawer>

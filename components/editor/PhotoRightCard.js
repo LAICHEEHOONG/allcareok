@@ -174,7 +174,7 @@ export default function PhotoRightCard() {
                         className="object-cover rounded-xl cursor-pointer"
                         src={item.url}
                         width={400}
-                        height={270}
+                        height={357}
                       />
                     </div>
                   </CardBody>
@@ -382,7 +382,7 @@ export default function PhotoRightCard() {
     }
   };
   return (
-    <div className="h-screen m-3 pl-3 w-full">
+    <div className="h-screen md:m-3 md:pl-3 w-full">
       <div className="flex justify-between items-start ">
         <div className="text-3xl font-semibold">
           {lang?.photo_upload ? lang.photo_upload : "Photo upload"}
