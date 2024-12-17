@@ -8,14 +8,14 @@ export default function PhotoCard() {
   const dispatch = useDispatch();
   const cardFocus = useSelector((state) => state.editor?.cardFocus);
   const l = useSelector((state) => state.auth?.lang?.listing_editor_card);
-  const photo = useSelector(state => state.editor.ad.photo)
-  const router = useRouter()
+  const photo = useSelector((state) => state.editor.ad.photo);
+  const router = useRouter();
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const pathName = usePathname();
   const currentLocale = pathName.split("/")[1] || "en";
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 768px)"); // Tailwind's md breakpoint
+    const mediaQuery = window.matchMedia("(max-width: 767px)"); // Tailwind's md breakpoint
     const handleResize = () => setIsSmallScreen(mediaQuery.matches);
     handleResize(); // Initialize state
     mediaQuery.addEventListener("change", handleResize);
@@ -36,11 +36,6 @@ export default function PhotoCard() {
         cardFocus === "photo" ? "border-solid border-2 border-black" : ""
       } `}
       isPressable
-      // onPress={() => {
-      //   dispatch(setFocus("photo"));
-      //   router.push('/editor/mobile/photo')
-      //   // dispatch(setPopUp())
-      // }}
       onPress={handlePress}
     >
       <CardBody className="">
@@ -48,7 +43,7 @@ export default function PhotoCard() {
           <div className="font-medium self-start">{l?.photo_upload}</div>
           <div className="text-small tracking-tight text-default-400 self-start">
             {/* 8 photos */}
-            {`${photo ? photo.length : '0'} photos`}
+            {`${photo ? photo.length : "0"} photos`}
           </div>
 
           <Image

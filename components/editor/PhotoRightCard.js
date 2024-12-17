@@ -33,11 +33,12 @@ const breakpointColumnsObj = {
   1650: 4,
   1320: 3,
   1111: 2,
-  600: 1,
+  820: 1,
 };
 
 const breakpointColumnsObj_2 = {
   default: 2,
+  // 820: 1,
 };
 
 export default function PhotoRightCard() {
@@ -111,7 +112,6 @@ export default function PhotoRightCard() {
                     Make cover photo
                   </Button>
                 )}
-
                 <Button
                   isIconOnly
                   radius="full"
@@ -160,29 +160,30 @@ export default function PhotoRightCard() {
             {ad.photo?.length > 0 &&
               !manageAd?._id &&
               ad.photo.map((item, i) => (
-                <Card
-                  key={item.url}
-                  isPressable
-                  className="mb-1"
-                  onPress={() => setManageAd(item)}
-                >
-                  <CardBody className="m-0 p-0">
-                    <div className="relative">
-                      {i === 0 && (
-                        <Chip className="absolute z-40 m-3" color="default">
-                          Cover
-                        </Chip>
-                      )}
-                      <Image
-                        alt="Card service"
-                        className="object-cover rounded-xl cursor-pointer"
-                        src={item.url}
-                        width={400}
-                        height={357}
-                      />
-                    </div>
-                  </CardBody>
-                </Card>
+                <div key={item.url} className="flex justify-center">
+                  <Card
+                    isPressable
+                    className="mb-1"
+                    onPress={() => setManageAd(item)}
+                  >
+                    <CardBody className="m-0 p-0">
+                      <div className="relative">
+                        {i === 0 && (
+                          <Chip className="absolute z-40 m-3" color="default">
+                            Cover
+                          </Chip>
+                        )}
+                        <Image
+                          alt="Card service"
+                          className="object-cover rounded-xl cursor-pointer"
+                          src={item.url}
+                          width={400}
+                          height={357}
+                        />
+                      </div>
+                    </CardBody>
+                  </Card>
+                </div>
               ))}
           </Masonry>
         )}
@@ -201,10 +202,10 @@ export default function PhotoRightCard() {
           <div key={item.preview} className="relative">
             <Image
               alt="Card background"
-              className="object-cover rounded-xl"
+              className="object-cover rounded-xl md:h-[240px] sm:h-[220px] h-[200px]"
               src={item.preview}
               width={240}
-              height={240}
+              // height={240}
             />
 
             {loading && (
@@ -386,8 +387,8 @@ export default function PhotoRightCard() {
     }
   };
   return (
-    <div className="h-screen md:m-3 md:pl-3 w-full">
-      <div className="flex justify-between items-start ">
+    <div className="h-screen w-full ">
+      <div className="flex justify-between items-start mb-2">
         <div className="flex justify-center items-center gap-3">
           <Button
             className="md:hidden flex"
@@ -430,7 +431,7 @@ export default function PhotoRightCard() {
             // startContent={<FilterIcon />}
             onPress={onOpen}
           >
-            <FilterIcon fontSize={'small'} />
+            <FilterIcon fontSize={"small"} />
             {/* {lang?.add_photo ? lang.add_photo : "Add photos"} */}
           </Button>
           <Modal
@@ -514,7 +515,7 @@ export default function PhotoRightCard() {
                         </div>
                       </div>
                     ) : (
-                      <ScrollShadow className=" max-h-[500px]">
+                      <ScrollShadow className="  max-h-[400px]">
                         <M2 />
                       </ScrollShadow>
                     )}
@@ -561,13 +562,13 @@ export default function PhotoRightCard() {
         </>
       </div>
       <ScrollShadow className="h-[92vh]" hideScrollBar={true}>
-      <div className="mt-6 mb-6 text-default-400 max-w-[500px]">
-        {lang?.photo_upload_description
-          ? lang.photo_upload_description
-          : `Upload your service poster with contact info, service details, and
+        <div className="mb-6 text-default-400 max-w-[500px]">
+          {lang?.photo_upload_description
+            ? lang.photo_upload_description
+            : `Upload your service poster with contact info, service details, and
         coverage area. Include real case photos to assist customers.`}
-      </div>
-      {/* <ScrollShadow className="h-[77vh]" hideScrollBar={true}> */}
+        </div>
+        {/* <ScrollShadow className="h-[77vh]" hideScrollBar={true}> */}
         <M />
       </ScrollShadow>
     </div>
