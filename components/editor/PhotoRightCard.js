@@ -27,6 +27,7 @@ import { findUserAds } from "@/lib/action/adAction";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { deleteImages } from "@/util/deleteImage";
 import { useRouter, usePathname } from "next/navigation";
+import CollectionsIcon from '@mui/icons-material/Collections';
 
 const breakpointColumnsObj = {
   default: 5,
@@ -49,6 +50,7 @@ export default function PhotoRightCard() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [photos, setPhotos] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [loading2, setLoading2] = useState(false);
   const [manageAd, setManageAd] = useState({});
   const lang = useSelector((state) => state.auth.lang?.listing_editor_card);
   const router = useRouter();
@@ -84,8 +86,8 @@ export default function PhotoRightCard() {
     return (
       <div className="">
         {manageAd?._id ? (
-          <div>
-            <div className="flex justify-between mb-7">
+          <div className="">
+            <div className="flex justify-between mb-7 w-full">
               <Button
                 isIconOnly
                 radius="full"
@@ -96,9 +98,9 @@ export default function PhotoRightCard() {
                   setManageAd({});
                 }}
               >
-                <ArrowBackIcon />
+                <CollectionsIcon />
               </Button>
-              <div className="flex gap-2">
+              <div className="flex gap-3">
                 {manageAd._id !== ad.photo[0]?._id && (
                   <Button
                     radius="full"
@@ -122,18 +124,26 @@ export default function PhotoRightCard() {
                   onPress={() => {
                     deletePhoto();
                   }}
-                  isLoading={loading}
+                  isLoading={loading2}
                 >
                   <DeleteForeverIcon />
                 </Button>
               </div>
             </div>
-            <div className="flex justify-center items-center">
+            <div className="flex justify-center items-center  ">
               <Image
                 alt="Card service demo"
-                className="object-cover rounded-xl"
+                className="object-cover rounded-xl hidden md:flex"
                 src={manageAd.url}
                 width={600}
+                height={600}
+              />
+              <Image
+                alt="Card service demo"
+                className="object-cover rounded-xl flex md:hidden"
+                src={manageAd.url}
+                width={400}
+                height={400}
               />
             </div>
           </div>
@@ -165,7 +175,7 @@ export default function PhotoRightCard() {
                 <div key={item.url} className="flex justify-center">
                   <Card
                     isPressable
-                    className="mb-1"
+                    className=""
                     onPress={() => setManageAd(item)}
                   >
                     <CardBody className="m-0 p-0">
@@ -370,7 +380,7 @@ export default function PhotoRightCard() {
 
   const deletePhoto = async () => {
     try {
-      setLoading(true);
+      setLoading2(true);
       const { user, service, area, contact, youtube } = ad;
 
       let photo = ad.photo;
@@ -391,11 +401,11 @@ export default function PhotoRightCard() {
     } catch (error) {
       console.log(error);
     } finally {
-      setLoading(false);
+      setLoading2(false);
     }
   };
   return (
-    <div className="h-screen w-full">
+    <div className="h-screen max-w-[1500px]">
       <div className="flex justify-between items-start mb-2">
         <div className="flex justify-center items-center gap-3">
           <Button
@@ -415,9 +425,7 @@ export default function PhotoRightCard() {
             {lang?.photo_upload ? lang.photo_upload : "Photo upload"}
           </div>
         </div>
-        {/* <div className="text-3xl font-semibold">
-          {lang?.photo_upload ? lang.photo_upload : "Photo upload"}
-        </div> */}
+
         <>
           <Button
             className="md:flex hidden"

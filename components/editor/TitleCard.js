@@ -8,7 +8,7 @@ export default function TitleCard() {
   const l = useSelector((state) => state.auth?.lang?.listing_editor_card);
   return (
     <Card
-      className={`m-5 p-1 border-solid border-2 w-11/12  ${
+      className={`m-5 p-1 w-11/12  ${
         cardFocus === "title" ? "border-solid border-2 border-black" : ""
       }`}
       isPressable
