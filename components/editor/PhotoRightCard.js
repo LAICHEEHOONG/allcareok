@@ -108,6 +108,7 @@ export default function PhotoRightCard() {
                     onPress={() => {
                       makeCover();
                     }}
+                    isLoading={loading}
                   >
                     Make cover photo
                   </Button>
@@ -121,6 +122,7 @@ export default function PhotoRightCard() {
                   onPress={() => {
                     deletePhoto();
                   }}
+                  isLoading={loading}
                 >
                   <DeleteForeverIcon />
                 </Button>
@@ -342,6 +344,7 @@ export default function PhotoRightCard() {
 
   const makeCover = async () => {
     try {
+      setLoading(true);
       const { user, service, area, contact, youtube } = ad;
 
       let photo = ad.photo;
@@ -360,11 +363,14 @@ export default function PhotoRightCard() {
       setManageAd({});
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   const deletePhoto = async () => {
     try {
+      setLoading(true);
       const { user, service, area, contact, youtube } = ad;
 
       let photo = ad.photo;
@@ -384,10 +390,12 @@ export default function PhotoRightCard() {
       await deleteImages([manageAd.publicId]);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
   return (
-    <div className="h-screen w-full ">
+    <div className="h-screen w-full">
       <div className="flex justify-between items-start mb-2">
         <div className="flex justify-center items-center gap-3">
           <Button
@@ -477,13 +485,12 @@ export default function PhotoRightCard() {
                           } cursor-pointer rounded-lg`,
                         })}
                       >
-                        {/* <input {...getInputProps()} /> */}
                         <div className="flex flex-col items-center justify-center gap-4">
                           <FilterIcon sx={{ fontSize: 50 }} />
-                          <div className="text-xl font-semibold">
+                          <div className="text-xl font-semibold hidden md:flex">
                             {lang?.drag}
                           </div>
-                          <div className="text-xs font-light ">
+                          <div className="text-xs font-light hidden md:flex">
                             {lang?.browse}
                           </div>
                           <Button
@@ -515,7 +522,7 @@ export default function PhotoRightCard() {
                         </div>
                       </div>
                     ) : (
-                      <ScrollShadow className="  max-h-[400px]">
+                      <ScrollShadow className="max-h-[400px]">
                         <M2 />
                       </ScrollShadow>
                     )}
@@ -568,7 +575,6 @@ export default function PhotoRightCard() {
             : `Upload your service poster with contact info, service details, and
         coverage area. Include real case photos to assist customers.`}
         </div>
-        {/* <ScrollShadow className="h-[77vh]" hideScrollBar={true}> */}
         <M />
       </ScrollShadow>
     </div>
