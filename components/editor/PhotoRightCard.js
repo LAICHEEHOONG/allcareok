@@ -27,7 +27,7 @@ import { findUserAds } from "@/lib/action/adAction";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { deleteImages } from "@/util/deleteImage";
 import { useRouter, usePathname } from "next/navigation";
-import CollectionsIcon from '@mui/icons-material/Collections';
+import CollectionsIcon from "@mui/icons-material/Collections";
 
 const breakpointColumnsObj = {
   default: 5,
@@ -112,7 +112,7 @@ export default function PhotoRightCard() {
                     }}
                     isLoading={loading}
                   >
-                    Make cover photo
+                    {lang?.make_cover ? lang.make_cover : "Make cover photo"}
                   </Button>
                 )}
                 <Button

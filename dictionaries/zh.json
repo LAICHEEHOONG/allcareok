@@ -81,6 +81,7 @@
     "delete_right_content": "该服务及其图片和所有相关信息将被永久删除。此操作不可逆，无法撤销。",
     "delete_btn": "删除服务",
     "delete_modal_title": "确定永久删除此服务？",
-    "delete_modal_btn": "删除"
+    "delete_modal_btn": "删除",
+    "make_cover": "设为封面"
   }
 }
