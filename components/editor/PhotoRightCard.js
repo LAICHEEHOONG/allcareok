@@ -33,7 +33,7 @@ const breakpointColumnsObj = {
   1650: 4,
   1320: 3,
   1111: 2,
-  900: 1,
+  600: 1,
 };
 
 const breakpointColumnsObj_2 = {
@@ -390,6 +390,7 @@ export default function PhotoRightCard() {
       <div className="flex justify-between items-start ">
         <div className="flex justify-center items-center gap-3">
           <Button
+            className="md:hidden flex"
             isIconOnly
             radius="full"
             color="default"
@@ -410,7 +411,7 @@ export default function PhotoRightCard() {
         </div> */}
         <>
           <Button
-            className="hidden md:relative"
+            className="md:flex hidden"
             color="default"
             variant="flat"
             radius="full"
@@ -559,13 +560,14 @@ export default function PhotoRightCard() {
           </Modal>
         </>
       </div>
+      <ScrollShadow className="h-[92vh]" hideScrollBar={true}>
       <div className="mt-6 mb-6 text-default-400 max-w-[500px]">
         {lang?.photo_upload_description
           ? lang.photo_upload_description
           : `Upload your service poster with contact info, service details, and
         coverage area. Include real case photos to assist customers.`}
       </div>
-      <ScrollShadow className="h-[77vh]" hideScrollBar={true}>
+      {/* <ScrollShadow className="h-[77vh]" hideScrollBar={true}> */}
         <M />
       </ScrollShadow>
     </div>
