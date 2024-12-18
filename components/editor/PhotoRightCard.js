@@ -83,6 +83,10 @@ export default function PhotoRightCard() {
         label: lang?.hourly_maid ? lang.hourly_maid : "Hourly Maid",
         image: "/images/cleaning_1.webp",
       },
+      {
+        label: lang?.plumber ? lang.plumber : "Plumber",
+        image: "/images/plumber.png",
+      },
     ];
 
     return (
@@ -159,7 +163,7 @@ export default function PhotoRightCard() {
               items.map((item) => (
                 <div
                   key={item.label}
-                  className="py-4 m-2 flex flex-col justify-center items-center"
+                  className=" flex flex-col justify-center items-center"
                 >
                   <h4 className="font-bold text-large m-1">{item.label}</h4>
                   <Image

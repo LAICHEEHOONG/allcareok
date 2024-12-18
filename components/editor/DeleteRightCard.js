@@ -183,7 +183,7 @@ export default function DeleteRightCard() {
           {/* <ScrollShadow className="h-[46vh]" hideScrollBar={true}> */}
           <Image
             alt="Card service demo"
-            className="object-cover rounded-xl  md:w-[600px] md:h-[600px] xs:w-[400px] xs:h-[350px]"
+            className="object-cover rounded-xl  lg:w-[600px] lg:h-[600px] md:w-[400px] md:h-[400px]  xs:w-[400px] xs:h-[350px]"
             src={
               ad.photo?.length > 0 ? ad.photo[0].url : "/images/handyman_2.webp"
             }
