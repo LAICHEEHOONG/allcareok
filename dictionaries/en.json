@@ -83,7 +83,10 @@
     "delete_btn": "Delete service",
     "delete_modal_title": "Permanently delete this service?",
     "delete_modal_btn": "Delete",
-    "make_cover": "Make cover photo"
+    "make_cover": "Make cover photo",
+    "boosts_card_title": "Boosts your service",
+    "boosts_card_content": "Find the ideal plan to boost your services."
+
 
   }
 }

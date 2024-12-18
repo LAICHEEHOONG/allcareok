@@ -34,6 +34,7 @@ import {
   DrawerTrigger,
 } from "../ui/drawer";
 import FilterIcon from "@mui/icons-material/Filter";
+import BoostsCard from "./BoostsCard";
 
 export default function EditorDesktop() {
   const dispatch = useDispatch();
@@ -111,6 +112,7 @@ export default function EditorDesktop() {
               <DescriptionCard />
               <MapCard />
               <YoutubeCard />
+              <BoostsCard />
               <DeleteCard />
             </ScrollShadow>
           </div>

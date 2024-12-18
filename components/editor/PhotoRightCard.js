@@ -583,7 +583,7 @@ export default function PhotoRightCard() {
         </>
       </div>
       <ScrollShadow className="h-[92vh]" hideScrollBar={true}>
-        <div className="mb-6 text-default-400 max-w-[500px]">
+        <div className="mb-6 mt-2 text-default-400 max-w-[500px]">
           {lang?.photo_upload_description
             ? lang.photo_upload_description
             : `Upload your service poster with contact info, service details, and
