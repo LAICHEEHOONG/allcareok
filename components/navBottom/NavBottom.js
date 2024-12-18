@@ -22,7 +22,8 @@ export default function NavBottom({ bottom_navigation }) {
     pathname.endsWith("/dashboard") ||
     pathname.endsWith("/editor") ||
     pathname.endsWith("/overview") ||
-    pathname.endsWith("/editor/mobile/photo");
+    pathname.endsWith("/editor/mobile/photo") ||
+    pathname.endsWith("/editor/mobile/delete");
 
   // Extract current locale from pathname
   const currentLocale = pathname.split("/")[1] || "en";

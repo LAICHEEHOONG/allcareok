@@ -138,30 +138,17 @@ function DrawerEditor({ cardFocus }) {
       <DrawerContent>
         <div className="mx-auto w-full max-w-sm p-2 ">
           <DrawerHeader>
-            <DrawerTitle>
-              <div className="flex justify-between items-center">
-                <div className="text-3xl font-semibold">Photo upload</div>
-                <Button
-                  isIconOnly
-                  color="default"
-                  variant="flat"
-                  radius="full"
-                  size="lg"
-                  // startContent={<FilterIcon />}
-                  // onPress={onOpen}
-                >
-                  <FilterIcon />
-                </Button>
-              </div>
-            </DrawerTitle>
-            <DrawerDescription >
+            <DrawerTitle></DrawerTitle>
+            <DrawerDescription>
               {/* Upload your service poster with contact info, service details, and
               coverage area. Include real case photos to assist customers. */}
             </DrawerDescription>
           </DrawerHeader>
           {/* <div className="h-[500px]">{cardFocus === "photo" && <PhotoRightCard />}</div> */}
 
-          <DrawerFooter>Footer</DrawerFooter>
+          <DrawerFooter>
+            {/* {cardFocus === "delete" && <DeleteRightCard />} */}
+          </DrawerFooter>
         </div>
       </DrawerContent>
     </Drawer>

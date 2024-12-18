@@ -28,6 +28,8 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { deleteImages } from "@/util/deleteImage";
 import { useRouter, usePathname } from "next/navigation";
 import CollectionsIcon from "@mui/icons-material/Collections";
+import { FcStackOfPhotos } from "react-icons/fc";
+import { RiGalleryView2 } from "react-icons/ri";
 
 const breakpointColumnsObj = {
   default: 5,
@@ -98,7 +100,7 @@ export default function PhotoRightCard() {
                   setManageAd({});
                 }}
               >
-                <CollectionsIcon />
+                <RiGalleryView2 className="text-2xl" />
               </Button>
               <div className="flex gap-3">
                 {manageAd._id !== ad.photo[0]?._id && (

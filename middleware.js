@@ -85,9 +85,6 @@
 //   ],
 // };
 
-
-
-
 import { withAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
 import { i18n } from "./i18n.config";
@@ -98,7 +95,8 @@ const protectedPaths = [
   "/dashboard",
   "/editor",
   "/overview",
-  "/editor/mobile/photo"
+  "/editor/mobile/photo",
+  "/editor/mobile/delete",
 ];
 
 function getProtectedRoutes(protectedPaths, locales) {

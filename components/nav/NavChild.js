@@ -18,33 +18,24 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function NavChild({ navigation, service_type, poppins, dic }) {
-
-  const language = useSelector(state => state.auth.language)
-  const dispatch = useDispatch()
+  const language = useSelector((state) => state.auth.language);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setLang(dic))
-  }, [language])
+    dispatch(setLang(dic));
+  }, [language]);
 
   const pathname = usePathname();
   const isDashboard =
-    pathname.endsWith("/dashboard") || pathname.endsWith("/editor") || pathname.endsWith("/overview") || pathname.endsWith("/editor/mobile/photo") ;
+    pathname.endsWith("/dashboard") ||
+    pathname.endsWith("/editor") ||
+    pathname.endsWith("/overview") ||
+    pathname.endsWith("/editor/mobile/photo") ||
+    pathname.endsWith("/editor/mobile/delete");
 
   return (
     <>
       {isDashboard ? (
-        // <Navbar shouldHideOnScroll={false} >
-        //   <NavbarBrand className={`${poppins.className} flex justify-center sm:justify-start`}>
-        //     <AllcareokLogo isDashboard={isDashboard} />
-        //   </NavbarBrand>
-
-        //   <NavbarContent justify="end" className="hidden sm:flex">
-        //     <NavbarItem className="hidden sm:flex gap-2">
-        //       <LanguageMenu />
-        //       <ProfileMenu navigation={navigation} />
-        //     </NavbarItem>
-        //   </NavbarContent>
-        // </Navbar>
         <></>
       ) : (
         <Navbar shouldHideOnScroll={false}>
@@ -56,7 +47,10 @@ export default function NavChild({ navigation, service_type, poppins, dic }) {
           </NavbarContent>
           <NavbarContent justify="end">
             <NavbarItem className="hidden sm:flex items-center">
-              <NavShareBtn share={navigation.share} myService={navigation.my_service} />
+              <NavShareBtn
+                share={navigation.share}
+                myService={navigation.my_service}
+              />
             </NavbarItem>
             <NavbarItem className="hidden sm:flex gap-2">
               <LanguageMenu />

@@ -1,6 +1,6 @@
 import { Card, CardBody, Image } from "@nextui-org/react";
 import { useSelector, useDispatch } from "react-redux";
-import { setFocus, setPopUp } from "@/redux/features/editor/editorSlice";
+import { setFocus } from "@/redux/features/editor/editorSlice";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
