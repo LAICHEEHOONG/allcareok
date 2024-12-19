@@ -15,7 +15,7 @@ import DeleteRightCard from "./DeleteRightCard";
 import { useSelector, useDispatch } from "react-redux";
 import PhotoRightCard from "./PhotoRightCard";
 import { createAD } from "@/lib/action/adAction";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import {
   setAdsID,
   setAds,
@@ -31,10 +31,9 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
-  DrawerTrigger,
 } from "../ui/drawer";
-import FilterIcon from "@mui/icons-material/Filter";
 import BoostsCard from "./BoostsCard";
+import TitleRightCard from "./TitleRightCard";
 
 export default function EditorDesktop() {
   const dispatch = useDispatch();
@@ -124,6 +123,7 @@ export default function EditorDesktop() {
         {/* <p className="text-white text-2xl">Right 50%</p> */}
         {cardFocus === "photo" && <PhotoRightCard />}
         {cardFocus === "delete" && <DeleteRightCard />}
+        {cardFocus === "title" && <TitleRightCard />}
       </div>
       {/* Right Mobile */}
       <DrawerEditor cardFocus={cardFocus} />

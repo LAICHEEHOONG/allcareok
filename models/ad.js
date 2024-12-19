@@ -14,7 +14,7 @@ const adSchema = new mongoose.Schema(
       required: true, // Ensure every ad is linked to a user
     },
     photo: [photoSchema],
-    title: { type: String },
+    title: { type: String, default: "Your service title" },
     service: [{ type: String }],
     area: [{ type: String }],
     contact: [{ type: String }],
