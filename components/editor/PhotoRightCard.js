@@ -411,8 +411,8 @@ export default function PhotoRightCard() {
     }
   };
   return (
-    <div className="h-screen max-w-[1500px]">
-      <div className="flex justify-between items-start mb-2">
+    <div className="h-screen w-full">
+      <div className="flex justify-between items-start mb-2 max-w-[1600px]">
         <div className="flex justify-center items-center gap-3">
           <Button
             className="md:hidden flex"
@@ -583,7 +583,7 @@ export default function PhotoRightCard() {
         </>
       </div>
       <ScrollShadow className="h-[92vh]" hideScrollBar={true}>
-        <div className="mb-6 mt-2 text-default-400 max-w-[500px]">
+        <div className="mb-6 mt-2 text-default-400 ">
           {lang?.photo_upload_description
             ? lang.photo_upload_description
             : `Upload your service poster with contact info, service details, and
