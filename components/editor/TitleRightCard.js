@@ -60,7 +60,7 @@ export default function TitleRightCard() {
         color={title_.length > 50 ? 'danger' : 'default'}
         // variant="underlined"
       />
-      <div className="text-default-400 text-xs mt-5 mb-5">
+      <div className="text-default-400 text-xs mt-5 mb-5 select-none">
         {title_.length <= 50 && `${50 - title_.length} characters available`}
         {title_.length > 50 && (
           <div className="flex gap-1 items-center text-red-600">
@@ -74,7 +74,7 @@ export default function TitleRightCard() {
       </div>
 
       <ScrollShadow className="max-h-32 md:hidden max-w-80"  hideScrollBar={true}>
-      <div className=" md:hidden max-w-80  text-4xl font-semibold   text-center text-ellipsis overflow-hidden">
+      <div className="select-none md:hidden max-w-80  text-4xl font-semibold   text-center text-ellipsis overflow-hidden">
         {title_}
       </div>
       </ScrollShadow>
