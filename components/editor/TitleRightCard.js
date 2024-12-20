@@ -54,6 +54,7 @@ export default function TitleRightCard() {
         type="text"
         radius="full"
         fullWidth
+        size="lg"
         onChange={handleChange}
       />
       <div className="text-default-400 text-xs mt-5 mb-5">
