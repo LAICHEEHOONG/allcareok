@@ -1,4 +1,4 @@
-import { Input, Button } from "@nextui-org/react";
+import { Input, Button, ScrollShadow } from "@nextui-org/react";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import ErrorIcon from "@mui/icons-material/Error";
@@ -65,9 +65,15 @@ export default function TitleRightCard() {
           </div>
         )}
       </div>
-      <div className="text-5xl font-semibold p-4 max-w-2xl text-center text-ellipsis overflow-hidden ">
+      <div className="hidden md:flex text-5xl font-semibold p-4 max-w-2xl text-center text-ellipsis overflow-hidden">
         {title_}
       </div>
+
+      <ScrollShadow className="h-[25vh] md:hidden max-w-80"  hideScrollBar={true}>
+        <div className="  text-4xl font-semibold p-4  text-center text-ellipsis overflow-hidden">
+          {title_}
+        </div>
+      </ScrollShadow>
 
       <div className=" w-full flex p-10 justify-center items-center">
         <Button

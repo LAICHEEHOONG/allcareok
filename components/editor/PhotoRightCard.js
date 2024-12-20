@@ -411,7 +411,7 @@ export default function PhotoRightCard() {
     }
   };
   return (
-    <div className="h-screen w-full">
+    <div className="h-screen w-full md:pl-2">
       <div className="flex justify-between items-start mb-2 max-w-[1600px]">
         <div className="flex justify-center items-center gap-3">
           <Button

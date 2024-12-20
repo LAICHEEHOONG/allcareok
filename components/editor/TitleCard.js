@@ -1,6 +1,6 @@
 import { Card, CardBody } from "@nextui-org/react";
 import { useSelector, useDispatch } from "react-redux";
-import { setFocus } from "@/redux/features/editor/editorSlice";
+import { setFocus, setPopUp } from "@/redux/features/editor/editorSlice";
 
 export default function TitleCard() {
   const dispatch = useDispatch();
@@ -11,11 +11,12 @@ export default function TitleCard() {
   return (
     <Card
       className={`m-5 p-1 w-11/12  ${
-        cardFocus === "title" ? "border-solid border-2 border-black" : ""
+        cardFocus === "title" ? "md:border-2 md:border-black" : ""
       }`}
       isPressable
       onPress={() => {
         dispatch(setFocus("title"));
+        dispatch(setPopUp());
       }}
       
     >

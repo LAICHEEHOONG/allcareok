@@ -42,13 +42,11 @@ export default function PhotoCard() {
         <div className="flex flex-col justify-center items-center">
           <div className="font-medium self-start">{l?.photo_upload}</div>
           <div className="text-small tracking-tight text-default-400 self-start">
-            {/* 8 photos */}
             {`${photo ? photo.length : "0"} photos`}
           </div>
 
           <Image
             className="flex justify-center items-center mt-4 md:max-w-[270px]"
-            // width={350}
             width={500}
             alt="photos upload poster"
             src="/images/childcare.jpeg"

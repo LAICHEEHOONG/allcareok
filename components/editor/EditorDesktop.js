@@ -150,6 +150,7 @@ function DrawerEditor({ cardFocus }) {
 
           <DrawerFooter>
             {/* {cardFocus === "delete" && <DeleteRightCard />} */}
+            {cardFocus === "title" && <TitleRightCard />}
           </DrawerFooter>
         </div>
       </DrawerContent>
