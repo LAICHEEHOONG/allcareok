@@ -2,8 +2,9 @@ import { Input, Button, ScrollShadow } from "@nextui-org/react";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import ErrorIcon from "@mui/icons-material/Error";
-import { setAd, setAds } from "@/redux/features/editor/editorSlice";
+import { setAd, setAds, setPopUp } from "@/redux/features/editor/editorSlice";
 import { createAD, findUserAds } from "@/lib/action/adAction";
+
 
 export default function TitleRightCard() {
   const dispatch = useDispatch();
@@ -41,6 +42,7 @@ export default function TitleRightCard() {
     const adsId = ad._id;
     toDB(adsId, title_);
     fetchAds();
+    dispatch(setPopUp())
   };
 
   return (

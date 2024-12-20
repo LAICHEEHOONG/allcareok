@@ -25,12 +25,10 @@ export default function NavBottom({ bottom_navigation }) {
     pathname.endsWith("/editor/mobile/photo") ||
     pathname.endsWith("/editor/mobile/delete");
 
-  // Extract current locale from pathname
   const currentLocale = pathname.split("/")[1] || "en";
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const language = useSelector((state) => state.auth.language);
-  // const id = useSelector((state) => state.auth._id);
   const [clickIcon, setClickIcon] = useState(-1);
 
   const [lan, setLan] = useState(language);
@@ -39,13 +37,6 @@ export default function NavBottom({ bottom_navigation }) {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-      // if (currentScrollY > lastScrollY) {
-      //   // Scrolling down
-      //   setIsVisible(false);
-      // } else {
-      //   // Scrolling up
-      //   setIsVisible(true);
-      // }
 
           // If at the top of the page, always show the navigation
     if (currentScrollY === 0) {
