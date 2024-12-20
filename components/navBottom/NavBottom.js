@@ -37,17 +37,16 @@ export default function NavBottom({ bottom_navigation }) {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-
-          // If at the top of the page, always show the navigation
-    if (currentScrollY === 0) {
-      setIsVisible(true);
-    } else if (currentScrollY > lastScrollY) {
-      // Scrolling down
-      setIsVisible(false);
-    } else {
-      // Scrolling up
-      setIsVisible(true);
-    }
+      // If at the top of the page, always show the navigation
+      if (currentScrollY === 0) {
+        setIsVisible(true);
+      } else if (currentScrollY > lastScrollY) {
+        // Scrolling down
+        setIsVisible(false);
+      } else {
+        // Scrolling up
+        setIsVisible(true);
+      }
 
       setLastScrollY(currentScrollY);
     };

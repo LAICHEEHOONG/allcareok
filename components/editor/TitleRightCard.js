@@ -5,7 +5,6 @@ import ErrorIcon from "@mui/icons-material/Error";
 import { setAd, setAds, setPopUp } from "@/redux/features/editor/editorSlice";
 import { createAD, findUserAds } from "@/lib/action/adAction";
 
-
 export default function TitleRightCard() {
   const dispatch = useDispatch();
   const ad = useSelector((state) => state.editor?.ad);
@@ -35,6 +34,7 @@ export default function TitleRightCard() {
       console.log(error);
     } finally {
       setLoading(false);
+      dispatch(setPopUp());
     }
   };
 
@@ -42,7 +42,6 @@ export default function TitleRightCard() {
     const adsId = ad._id;
     toDB(adsId, title_);
     fetchAds();
-    dispatch(setPopUp())
   };
 
   return (
@@ -50,7 +49,7 @@ export default function TitleRightCard() {
       <Input
         isRequired
         labelPlacement="outside"
-        className="max-w-xs"
+        className="max-w-md"
         defaultValue={title_}
         label="Title"
         type="text"
@@ -58,6 +57,8 @@ export default function TitleRightCard() {
         fullWidth
         size="lg"
         onChange={handleChange}
+        color={title_.length > 50 ? 'danger' : 'default'}
+        // variant="underlined"
       />
       <div className="text-default-400 text-xs mt-5 mb-5">
         {title_.length <= 50 && `${50 - title_.length} characters available`}
@@ -73,9 +74,9 @@ export default function TitleRightCard() {
       </div>
 
       {/* <ScrollShadow className="h-[17vh] md:hidden max-w-80"  hideScrollBar={true}> */}
-        <div className="h-[17vh] md:hidden max-w-80  text-4xl font-semibold   text-center text-ellipsis overflow-hidden">
-          {title_}
-        </div>
+      <div className="h-[17vh] md:hidden max-w-80  text-4xl font-semibold   text-center text-ellipsis overflow-hidden">
+        {title_}
+      </div>
       {/* </ScrollShadow> */}
 
       <div className=" w-full flex p-5 justify-center items-center">
