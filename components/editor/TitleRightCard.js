@@ -72,11 +72,11 @@ export default function TitleRightCard() {
         {title_}
       </div>
 
-      <ScrollShadow className="h-[17vh] md:hidden max-w-80"  hideScrollBar={true}>
-        <div className="  text-4xl font-semibold   text-center text-ellipsis overflow-hidden">
+      {/* <ScrollShadow className="h-[17vh] md:hidden max-w-80"  hideScrollBar={true}> */}
+        <div className="h-[17vh] md:hidden max-w-80  text-4xl font-semibold   text-center text-ellipsis overflow-hidden">
           {title_}
         </div>
-      </ScrollShadow>
+      {/* </ScrollShadow> */}
 
       <div className=" w-full flex p-5 justify-center items-center">
         <Button
