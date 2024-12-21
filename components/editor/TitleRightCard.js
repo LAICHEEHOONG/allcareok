@@ -11,6 +11,7 @@ export default function TitleRightCard() {
   const [title_, setTitle_] = useState(ad?.title);
   const [loading, setLoading] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const l = useSelector((state) => state.auth?.lang?.listing_editor_card);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 767px)"); // Tailwind's md breakpoint
@@ -62,33 +63,48 @@ export default function TitleRightCard() {
         labelPlacement="outside"
         className="max-w-md"
         defaultValue={title_}
-        label="Title"
+        label={l?.title_right_label}
         type="text"
         radius="full"
         fullWidth
         size="lg"
         onChange={handleChange}
         color={title_.length > 50 ? "danger" : "default"}
-        // variant="underlined"
       />
       <div className="text-default-400 text-xs mt-5 mb-5 select-none">
-        {title_.length <= 50 && `${50 - title_.length} characters available`}
+        {title_.length <= 50 &&
+          `${50 - title_.length} ${l?.character_available}`}
         {title_.length > 50 && (
           <div className="flex gap-1 items-center text-red-600">
             <ErrorIcon sx={{ fontSize: "1rem" }} />
-            <div> {`${title_.length - 50} character over limit`} </div>
+            <div> {`${title_.length - 50} ${l?.over_limit}`} </div>
           </div>
         )}
       </div>
-      <div className="hidden md:flex text-5xl font-semibold p-4 max-w-2xl text-center text-ellipsis overflow-hidden">
+      {/* <div className="hidden md:flex text-5xl font-semibold p-4 max-w-2xl text-center text-ellipsis overflow-hidden">
         {title_}
-      </div>
-
+      </div> */}
+      {/* <div className="hidden md:flex text-5xl font-semibold p-4 max-w-2xl text-center max-h-48">
+        <div className=" text-ellipsis overflow-hidden">{title_}</div>
+      </div> */}
+      {/* 
       <ScrollShadow
         className="max-h-32 md:hidden max-w-80"
         hideScrollBar={true}
       >
-        <div className="select-none md:hidden max-w-80  text-4xl font-semibold   text-center text-ellipsis overflow-hidden">
+        <div className="select-none md:hidden text-4xl font-semibold  text-center text-ellipsis overflow-hidden">
+          {title_}
+        </div>
+      </ScrollShadow> */}
+      {/* <div className="hidden md:flex text-5xl font-semibold p-4  text-center max-h-48">
+        <div className=" text-ellipsis overflow-hidden">{title_}</div>
+      </div> */}
+
+      <ScrollShadow
+        className="max-h-32 md:max-h-48 max-w-80 md:max-w-2xl text-4xl md:text-5xl text-center"
+        hideScrollBar={true}
+      >
+        <div className="select-none font-semibold text-ellipsis overflow-hidden">
           {title_}
         </div>
       </ScrollShadow>
@@ -102,7 +118,7 @@ export default function TitleRightCard() {
           isLoading={loading}
           onPress={handleSave}
         >
-          Save
+          {`${l?.title_save}`}
         </Button>
       </div>
     </div>

@@ -85,8 +85,10 @@
     "delete_modal_btn": "Delete",
     "make_cover": "Make cover photo",
     "boosts_card_title": "Boosts your service",
-    "boosts_card_content": "Find the ideal plan to boost your services."
-
-
+    "boosts_card_content": "Find the ideal plan to boost your services.",
+    "title_right_label": "Title",
+    "character_available": "characters available",
+    "over_limit": "character over limit",
+    "title_save": "Save"
   }
 }

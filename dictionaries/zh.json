@@ -85,6 +85,10 @@
     "delete_modal_btn": "删除",
     "make_cover": "设为封面",
     "boosts_card_title": "提升您的服务",
-    "boosts_card_content": "选择理想的计划来提升您的服务名次。"
+    "boosts_card_content": "选择理想的计划来提升您的服务名次。",
+    "title_right_label": "标题",
+    "character_available": "可用字符数",
+    "over_limit": "字符超出限制",
+    "title_save": "保存"
   }
 }

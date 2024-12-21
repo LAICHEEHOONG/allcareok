@@ -12,10 +12,19 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteAd, findUserAds } from "@/lib/action/adAction";
 import { useRouter, usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { setAds } from "@/redux/features/editor/editorSlice";
 import { deleteImages } from "@/util/deleteImage";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "../ui/carousel";
+import { Card, CardContent } from "../ui/card";
+import Autoplay from "embla-carousel-autoplay";
 
 export default function DeleteRightCard() {
   const dispatch = useDispatch();
@@ -72,7 +81,7 @@ export default function DeleteRightCard() {
   }, [toggleDelete]); // Add ad.photo to dependencies if it's dynamic
 
   return (
-    <div className="h-screen max-w-[600px]  p-2">
+    <div className="h-screen max-w-[600px] p-2">
       <div className="flex justify-start items-center gap-3">
         <Button
           className="md:hidden flex"
@@ -91,10 +100,7 @@ export default function DeleteRightCard() {
           {l?.delete_btn ? l.delete_btn : "Delete Service"}
         </div>
       </div>
-      <ScrollShadow
-        className="h-[92vh]"
-        hideScrollBar={true}
-      >
+      <ScrollShadow className="h-[92vh]" hideScrollBar={true}>
         <div className="text-default-400 mt-6 mb-6 max-w-[530px]">
           {l?.delete_right_content
             ? l.delete_right_content
@@ -177,40 +183,76 @@ export default function DeleteRightCard() {
           </>
         </div>
         <div className="py-4 m-2 flex flex-col justify-center items-center">
-          <h4 className="font-bold text-large m-1">
-            Card service title Card service title
-          </h4>
-          {/* <ScrollShadow className="h-[46vh]" hideScrollBar={true}> */}
-          <Image
+          <h4 className="font-bold text-large m-1">{ad?.title}</h4>
+          {/* <Image
             alt="Card service demo"
             className="object-cover rounded-xl  lg:w-[600px] lg:h-[600px] md:w-[400px] md:h-[400px]  xs:w-[400px] xs:h-[350px]"
             src={
               ad.photo?.length > 0 ? ad.photo[0].url : "/images/handyman_2.webp"
             }
             width={600}
-            // height={600}
-          />
-          {/* <Image
-            alt="Card service demo"
-            className="object-cover rounded-xl hidden md:flex"
-            src={
-              ad.photo?.length > 0 ? ad.photo[0].url : "/images/handyman_2.webp"
-            }
-            width={600}
-            height={600}
           /> */}
-          {/* <Image
-            alt="Card service demo"
-            className="object-cover rounded-xl flex md:hidden"
-            src={
-              ad.photo?.length > 0 ? ad.photo[0].url : "/images/handyman_2.webp"
-            }
-            width={400}
-            height={400}
-          /> */}
-          {/* </ScrollShadow> */}
+          {ad.photo?.length > 0 ? (
+            <CarouselDemo ad={ad} />
+          ) : (
+            <Image
+              alt="Card service demo"
+              className="object-cover rounded-xl  lg:w-[600px] lg:h-[600px] md:w-[400px] md:h-[400px]  xs:w-[400px] xs:h-[350px]"
+              src={"/images/handyman_2.webp"}
+              width={600}
+            />
+          )}
         </div>
       </ScrollShadow>
     </div>
+  );
+}
+
+function CarouselDemo({ ad }) {
+  const plugin = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
+
+  return (
+    <Carousel
+      className="w-full  "
+      plugins={[plugin.current]}
+      onMouseEnter={plugin.current.stop}
+      onMouseLeave={plugin.current.reset}
+    >
+      <CarouselContent className="">
+        {/* {Array.from({ length: 5 }).map((_, index) => (
+          <CarouselItem key={index}>
+            <div className="p-1">
+              <Card>
+                <CardContent className="flex aspect-square items-center justify-center p-6">
+                  <span className="text-4xl font-semibold">{index + 1}</span>
+                </CardContent>
+              </Card>
+            </div>
+          </CarouselItem>
+        ))} */}
+        {ad.photo.map((item) => (
+          <CarouselItem
+            key={item.url}
+            className="flex justify-center items-center"
+          >
+            <Image
+              alt="Card service demo"
+              className="object-cover rounded-xl lg:w-[600px] lg:h-[500px] md:w-[400px] md:h-[400px]  xs:w-[400px] xs:h-[350px]"
+              src={item.url}
+              width={600}
+            />
+            {/* <div className="p-1">
+              <Card>
+                <CardContent className="flex aspect-square items-center justify-center p-6">
+                  <span className="text-4xl font-semibold">{index + 1}</span>
+                </CardContent>
+              </Card>
+            </div> */}
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+      <CarouselPrevious />
+      <CarouselNext />
+    </Carousel>
   );
 }
