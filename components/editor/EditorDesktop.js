@@ -34,6 +34,7 @@ import {
 } from "../ui/drawer";
 import BoostsCard from "./BoostsCard";
 import TitleRightCard from "./TitleRightCard";
+import ServiceRightCard from "./ServiceRightCard";
 
 export default function EditorDesktop() {
   const dispatch = useDispatch();
@@ -124,6 +125,7 @@ export default function EditorDesktop() {
         {cardFocus === "photo" && <PhotoRightCard />}
         {cardFocus === "delete" && <DeleteRightCard />}
         {cardFocus === "title" && <TitleRightCard />}
+        {cardFocus === "service" && <ServiceRightCard />}
       </div>
       {/* Right Mobile */}
       <DrawerEditor cardFocus={cardFocus} />

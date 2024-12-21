@@ -24,7 +24,7 @@ import ElderlyWomanIcon from "@mui/icons-material/ElderlyWoman";
 import { LuBaby } from "react-icons/lu";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { GiBroom } from "react-icons/gi";
-import { usePathname } from "next/navigation";
+// import { usePathname } from "next/navigation";
 
 export function NavCarousel({ service_type }) {
   // Define icons and labels in a list
@@ -109,7 +109,7 @@ export function NavCarousel({ service_type }) {
     // console.log(activeIndex);
   }, [activeIndex]);
 
-  const pathname = usePathname();
+  // const pathname = usePathname();
   // const isDashboard = pathname.endsWith("/dashboard");
 
   // React.useEffect(() => {

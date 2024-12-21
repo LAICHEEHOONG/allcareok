@@ -27,8 +27,6 @@ import { findUserAds } from "@/lib/action/adAction";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { deleteImages } from "@/util/deleteImage";
 import { useRouter, usePathname } from "next/navigation";
-import CollectionsIcon from "@mui/icons-material/Collections";
-import { FcStackOfPhotos } from "react-icons/fc";
 import { RiGalleryView2 } from "react-icons/ri";
 
 const breakpointColumnsObj = {
