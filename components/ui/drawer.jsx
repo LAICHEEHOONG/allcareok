@@ -31,7 +31,9 @@ DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName;
 const DrawerContent = React.forwardRef(
   ({ className, children, ...props }, ref) => (
     <DrawerPortal>
-      <div className=" md:hidden block">
+      <div 
+      // className=" md:hidden block"
+      >
         <DrawerOverlay />
         <DrawerPrimitive.Content
           ref={ref}

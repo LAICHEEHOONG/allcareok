@@ -1,6 +1,6 @@
 import { Input, Button, ScrollShadow } from "@nextui-org/react";
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ErrorIcon from "@mui/icons-material/Error";
 import { setAd, setAds, setPopUp } from "@/redux/features/editor/editorSlice";
 import { createAD, findUserAds } from "@/lib/action/adAction";
@@ -10,6 +10,15 @@ export default function TitleRightCard() {
   const ad = useSelector((state) => state.editor?.ad);
   const [title_, setTitle_] = useState(ad?.title);
   const [loading, setLoading] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 767px)"); // Tailwind's md breakpoint
+    const handleResize = () => setIsSmallScreen(mediaQuery.matches);
+    handleResize(); // Initialize state
+    mediaQuery.addEventListener("change", handleResize);
+    return () => mediaQuery.removeEventListener("change", handleResize);
+  }, []);
 
   const handleChange = (e) => {
     let inputValue = e.target.value;
@@ -34,7 +43,9 @@ export default function TitleRightCard() {
       console.log(error);
     } finally {
       setLoading(false);
-      dispatch(setPopUp());
+      if (isSmallScreen) {
+        dispatch(setPopUp());
+      }
     }
   };
 
@@ -57,7 +68,7 @@ export default function TitleRightCard() {
         fullWidth
         size="lg"
         onChange={handleChange}
-        color={title_.length > 50 ? 'danger' : 'default'}
+        color={title_.length > 50 ? "danger" : "default"}
         // variant="underlined"
       />
       <div className="text-default-400 text-xs mt-5 mb-5 select-none">
@@ -73,10 +84,13 @@ export default function TitleRightCard() {
         {title_}
       </div>
 
-      <ScrollShadow className="max-h-32 md:hidden max-w-80"  hideScrollBar={true}>
-      <div className="select-none md:hidden max-w-80  text-4xl font-semibold   text-center text-ellipsis overflow-hidden">
-        {title_}
-      </div>
+      <ScrollShadow
+        className="max-h-32 md:hidden max-w-80"
+        hideScrollBar={true}
+      >
+        <div className="select-none md:hidden max-w-80  text-4xl font-semibold   text-center text-ellipsis overflow-hidden">
+          {title_}
+        </div>
       </ScrollShadow>
 
       <div className=" w-full flex pt-5 justify-center items-center">
