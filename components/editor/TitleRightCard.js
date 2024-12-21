@@ -109,7 +109,7 @@ export default function TitleRightCard() {
         </div>
       </ScrollShadow>
 
-      <div className=" w-full flex pt-5 justify-center items-center">
+      <div className=" w-full flex pt-5 mb-10 justify-center items-center">
         <Button
           radius="full"
           size="lg"
