@@ -81,7 +81,7 @@ export default function DeleteRightCard() {
   }, [toggleDelete]); // Add ad.photo to dependencies if it's dynamic
 
   return (
-    <div className="h-screen max-w-[600px] p-2">
+    <div className="h-screen max-w-[650px] p-2">
       <div className="flex justify-start items-center gap-3">
         <Button
           className="md:hidden flex"
@@ -109,7 +109,7 @@ export default function DeleteRightCard() {
         undone.`}
         </div>
 
-        <div className="flex justify-end items-center">
+        {/* <div className="flex justify-end items-center">
           <>
             <Button
               className="hidden md:flex"
@@ -181,9 +181,89 @@ export default function DeleteRightCard() {
               </ModalContent>
             </Modal>
           </>
+        </div> */}
+        <div className="">
+          <>
+            <div className=" flex justify-between items-center">
+              <div className="font-bold text-base md:text-lg pr-2">{ad?.title}</div>
+              <div>
+                <Button
+                  className="hidden md:flex"
+                  radius="full"
+                  color="danger"
+                  variant="flat"
+                  aria-label="Back button"
+                  startContent={<DeleteForeverIcon />}
+                  onPress={onOpen}
+                >
+                  {l?.delete_btn ? l.delete_btn : "Delete service"}
+                </Button>
+                <Button
+                  className="flex md:hidden"
+                  radius="full"
+                  color="danger"
+                  variant="flat"
+                  aria-label="Back button"
+                  onPress={onOpen}
+                  isIconOnly
+                >
+                  <DeleteForeverIcon />
+                </Button>
+              </div>
+            </div>
+
+            <Modal
+              isOpen={isOpen}
+              onOpenChange={onOpenChange}
+              backdrop={"blur"}
+            >
+              <ModalContent>
+                {(onClose) => (
+                  <>
+                    <ModalBody>
+                      <div className="flex flex-col justify-center items-center gap-5 mt-10">
+                        <Image
+                          alt="Card service demo"
+                          className="object-cover rounded-xl"
+                          src={
+                            ad.photo?.length > 0
+                              ? ad.photo[0].url
+                              : "/images/handyman_2.webp"
+                          }
+                          width={200}
+                        />
+                        <div className="text-xl font-semibold flex m-5">
+                          {l?.delete_modal_title
+                            ? l.delete_modal_title
+                            : "Permanently delete this service?"}
+                        </div>
+                      </div>
+                    </ModalBody>
+                    <ModalFooter className="flex flex-col">
+                      <Button
+                        color="danger"
+                        onPress={async () => {
+                          await deleteAd_();
+                          onClose();
+                          router.push(`/${currentLocale}/dashboard`);
+                        }}
+                        isLoading={loading}
+                      >
+                        {l?.delete_modal_btn ? l.delete_modal_btn : "Delete"}
+                      </Button>
+                      <Button color="primary" variant="light" onPress={onClose}>
+                        {l?.cancel ? l.cancel : "Cancel"}
+                      </Button>
+                    </ModalFooter>
+                  </>
+                )}
+              </ModalContent>
+            </Modal>
+          </>
         </div>
+
         <div className="py-4 m-2 flex flex-col justify-center items-center">
-          <h4 className="font-bold text-large m-1">{ad?.title}</h4>
+          {/* <h4 className="font-bold text-large m-1">{ad?.title}</h4> */}
           {/* <Image
             alt="Card service demo"
             className="object-cover rounded-xl  lg:w-[600px] lg:h-[600px] md:w-[400px] md:h-[400px]  xs:w-[400px] xs:h-[350px]"
