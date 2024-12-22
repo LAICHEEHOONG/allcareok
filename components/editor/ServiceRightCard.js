@@ -1,11 +1,15 @@
 import { Button, ScrollShadow } from "@nextui-org/react";
 import { getCarouselItems } from "../carouselItems";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import AddIcon from "@mui/icons-material/Add";
 import CheckIcon from "@mui/icons-material/Check";
 import { useEffect, useState } from "react";
+import { setAd, setAds } from "@/redux/features/editor/editorSlice";
+import { createAD, findUserAds } from "@/lib/action/adAction";
 
 export default function ServiceRightCard() {
+  const dispatch = useDispatch();
+  const ad = useSelector((state) => state.editor?.ad);
   const service_type = useSelector((state) => state.auth?.lang?.service_type);
   const carouselItems = getCarouselItems(service_type);
   const initService = carouselItems.map((item) => ({
@@ -13,6 +17,7 @@ export default function ServiceRightCard() {
     selected: false,
   }));
   const [serviceItem, setServiceItem] = useState(initService);
+  const [loading, setLoading] = useState(false);
 
   const handleAddService = (label) => {
     let newService = serviceItem.map((item) => {
@@ -27,29 +32,71 @@ export default function ServiceRightCard() {
     setServiceItem(newService);
   };
 
-  useEffect(() => {
-    console.log(carouselItems);
-  }, [carouselItems]);
+  const fetchAds = async () => {
+    try {
+      const ads = await findUserAds({ user: ad.user }); // Pass only the userId
+      dispatch(setAds(ads));
+    } catch (error) {
+      console.error("Error fetching user ads:", error);
+    }
+  };
+
+  const toDB = async (adsId, newService) => {
+    try {
+      setLoading(true);
+      const updateService = await createAD({
+        ...ad,
+        adsId,
+        service: newService,
+      });
+      dispatch(setAd(updateService));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+      // if (isSmallScreen) {
+      //   dispatch(setPopUp());
+      // }
+    }
+  };
+
+  const handleSave = () => {
+    const adsId = ad._id;
+    const newService = serviceItem
+      .filter((item) => item.selected)
+      .map((item) => item.id);
+
+    toDB(adsId, newService);
+    fetchAds();
+    // const newAd = { ...ad, service: newService };
+    // dispatch(setAd(newAd));
+  };
+
+  // useEffect(() => {
+  //   console.log(serviceItem);
+  // }, [serviceItem]);
 
   return (
-    <div className="h-screen w-full md:pl-2">
-      <div className="flex justify-between items-start mb-2 max-w-[1600px]">
-        <div className="flex justify-center items-center gap-3">
+    <div className="h-screen w-full ">
+      <div className="flex justify-center items-center mb-5">
+        <div className="w-full max-w-[500px] flex justify-between items-center">
           <div className="text-3xl font-semibold">{"Types of Services"}</div>
-        </div>
-        <>
           <Button
-            className="md:flex hidden"
             radius="full"
             size="lg"
             color="primary"
+            onPress={handleSave}
+            isLoading={loading}
           >
             {"Save"}
           </Button>
-        </>
+        </div>
       </div>
 
-      <ScrollShadow className="w-full flex justify-center items-start  h-[90vh]">
+      <ScrollShadow
+        hideScrollBar
+        className="w-full flex justify-center items-start h-[90vh]"
+      >
         <div className="flex flex-col gap-6 justify-center items-center p-5 w-full">
           {serviceItem.map(({ label, icon: Icon, selected }, idx) => (
             <div
@@ -61,31 +108,14 @@ export default function ServiceRightCard() {
                 <div>{label}</div>
               </div>
 
-              {/* <Button
-                className=""
-                isIconOnly
-                radius="full"
-                // color={selected ? "primary" : "default"}
-
-                color={selected ? "default" : "primary"}
-                variant={selected ? "flat" : "default"}
-                aria-label="add service button"
-                size="md"
-                onPress={() => {
-                  handleAddService(label)
-                }}
-              >
-                {selected ? <CheckIcon /> : <AddIcon />}
-              </Button> */}
               <Button
                 isIconOnly
                 color={selected ? "primary" : "default"}
                 aria-label="service selector Icon"
                 radius="full"
-                variant={selected ? "solid" : "light"}
-
+                variant={selected ? "solid" : "flat"}
                 onPress={() => {
-                  handleAddService(label)
+                  handleAddService(label);
                 }}
               >
                 {selected ? <CheckIcon /> : <AddIcon />}{" "}

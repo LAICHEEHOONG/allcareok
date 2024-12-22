@@ -81,24 +81,6 @@ export default function TitleRightCard() {
           </div>
         )}
       </div>
-      {/* <div className="hidden md:flex text-5xl font-semibold p-4 max-w-2xl text-center text-ellipsis overflow-hidden">
-        {title_}
-      </div> */}
-      {/* <div className="hidden md:flex text-5xl font-semibold p-4 max-w-2xl text-center max-h-48">
-        <div className=" text-ellipsis overflow-hidden">{title_}</div>
-      </div> */}
-      {/* 
-      <ScrollShadow
-        className="max-h-32 md:hidden max-w-80"
-        hideScrollBar={true}
-      >
-        <div className="select-none md:hidden text-4xl font-semibold  text-center text-ellipsis overflow-hidden">
-          {title_}
-        </div>
-      </ScrollShadow> */}
-      {/* <div className="hidden md:flex text-5xl font-semibold p-4  text-center max-h-48">
-        <div className=" text-ellipsis overflow-hidden">{title_}</div>
-      </div> */}
 
       <ScrollShadow
         className="max-h-32 md:max-h-48 max-w-80 md:max-w-2xl text-4xl md:text-5xl text-center"
