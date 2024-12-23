@@ -71,6 +71,7 @@ export default function ServiceRightCard() {
     // const newAd = { ...ad, service: newService };
     // dispatch(setAd(newAd));
   };
+  
   useEffect(() => {
     setServiceItem((prevState) =>
       prevState.map((item) => {
@@ -121,6 +122,7 @@ export default function ServiceRightCard() {
                 aria-label="service selector Icon"
                 radius="full"
                 variant={selected ? "solid" : "flat"}
+                size="sm"
                 onPress={() => {
                   handleAddService(label);
                 }}
