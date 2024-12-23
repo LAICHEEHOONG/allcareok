@@ -64,8 +64,7 @@ export default function ServiceCard() {
 
   useEffect(() => {
     const carouselItems = getCarouselItems(service_type) || [];
-    const resolvedServices = serviceIds
-      .map((serviceId) => carouselItems.find((obj) => obj?.id === serviceId))
+    const resolvedServices = serviceIds?.map((serviceId) => carouselItems.find((obj) => obj?.id === serviceId))
     setServices(resolvedServices);
   }, [service_type, serviceIds]);
 
@@ -82,19 +81,19 @@ export default function ServiceCard() {
       <CardBody>
         <div className="flex flex-col justify-start gap-2">
           <div className="font-medium mb-2">{l?.service}</div>
-          {services.length === 0 && (
+          {services?.length === 0 && (
             <div className="text-default-400 p-2">{`Add details`}</div>
           )}
 
-          {services.slice(0, 3).map(({ label, icon: Icon, id }) => (
+          {services?.slice(0, 3).map(({ label, icon: Icon, id }) => (
             <div key={id} className="flex gap-3 text-default-400">
               <Icon className={`w-6 h-6 ${label}`} />
               <div>{label}</div>
             </div>
           ))}
 
-          {services.length > 3 && (
-            <div className="text-sm text-default-400 p-2">{`+${services.length - 3} more`}</div>
+          {services?.length > 3 && (
+            <div className="text-sm text-default-400 p-2">{`+${services?.length - 3} more`}</div>
           )}
         </div>
       </CardBody>
