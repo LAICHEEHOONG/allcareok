@@ -66,7 +66,7 @@ export default function DeleteRightCard() {
     const deleteAllPhoto = async () => {
       try {
         const publicIds = ad.photo.map((item) => item.publicId);
-        if (publicIds && publicIds.length > 0) {
+        if (publicIds && publicIds?.length > 0) {
           await deleteImages(publicIds); // Assuming deleteImages handles arrays of publicIds
         }
       } catch (error) {
@@ -109,83 +109,12 @@ export default function DeleteRightCard() {
         undone.`}
         </div>
 
-        {/* <div className="flex justify-end items-center">
-          <>
-            <Button
-              className="hidden md:flex"
-              radius="full"
-              color="danger"
-              variant="flat"
-              aria-label="Back button"
-              startContent={<DeleteForeverIcon />}
-              onPress={onOpen}
-            >
-              {l?.delete_btn ? l.delete_btn : "Delete service"}
-            </Button>
-            <Button
-              className="flex md:hidden"
-              radius="full"
-              color="danger"
-              variant="flat"
-              aria-label="Back button"
-              onPress={onOpen}
-              isIconOnly
-            >
-              <DeleteForeverIcon />
-            </Button>
-            <Modal
-              isOpen={isOpen}
-              onOpenChange={onOpenChange}
-              backdrop={"blur"}
-            >
-              <ModalContent>
-                {(onClose) => (
-                  <>
-                    <ModalBody>
-                      <div className="flex flex-col justify-center items-center gap-5 mt-10">
-                        <Image
-                          alt="Card service demo"
-                          className="object-cover rounded-xl"
-                          src={
-                            ad.photo?.length > 0
-                              ? ad.photo[0].url
-                              : "/images/handyman_2.webp"
-                          }
-                          width={200}
-                        />
-                        <div className="text-xl font-semibold flex m-5">
-                          {l?.delete_modal_title
-                            ? l.delete_modal_title
-                            : "Permanently delete this service?"}
-                        </div>
-                      </div>
-                    </ModalBody>
-                    <ModalFooter className="flex flex-col">
-                      <Button
-                        color="danger"
-                        onPress={async () => {
-                          await deleteAd_();
-                          onClose();
-                          router.push(`/${currentLocale}/dashboard`);
-                        }}
-                        isLoading={loading}
-                      >
-                        {l?.delete_modal_btn ? l.delete_modal_btn : "Delete"}
-                      </Button>
-                      <Button color="primary" variant="light" onPress={onClose}>
-                        {l?.cancel ? l.cancel : "Cancel"}
-                      </Button>
-                    </ModalFooter>
-                  </>
-                )}
-              </ModalContent>
-            </Modal>
-          </>
-        </div> */}
         <div className="">
           <>
             <div className=" flex justify-between items-center">
-              <div className="font-bold text-base md:text-lg pr-2">{ad?.title}</div>
+              <div className="font-bold text-base md:text-lg pr-2">
+                {ad?.title}
+              </div>
               <div>
                 <Button
                   className="hidden md:flex"
@@ -226,7 +155,7 @@ export default function DeleteRightCard() {
                           alt="Card service demo"
                           className="object-cover rounded-xl"
                           src={
-                            ad.photo?.length > 0
+                            ad?.photo?.length > 0
                               ? ad.photo[0].url
                               : "/images/handyman_2.webp"
                           }
@@ -263,16 +192,8 @@ export default function DeleteRightCard() {
         </div>
 
         <div className="py-4 m-2 flex flex-col justify-center items-center">
-          {/* <h4 className="font-bold text-large m-1">{ad?.title}</h4> */}
-          {/* <Image
-            alt="Card service demo"
-            className="object-cover rounded-xl  lg:w-[600px] lg:h-[600px] md:w-[400px] md:h-[400px]  xs:w-[400px] xs:h-[350px]"
-            src={
-              ad.photo?.length > 0 ? ad.photo[0].url : "/images/handyman_2.webp"
-            }
-            width={600}
-          /> */}
-          {ad.photo?.length > 0 ? (
+  
+          {ad?.photo?.length > 0 ? (
             <CarouselDemo ad={ad} />
           ) : (
             <Image
@@ -299,17 +220,7 @@ function CarouselDemo({ ad }) {
       onMouseLeave={plugin.current.reset}
     >
       <CarouselContent className="">
-        {/* {Array.from({ length: 5 }).map((_, index) => (
-          <CarouselItem key={index}>
-            <div className="p-1">
-              <Card>
-                <CardContent className="flex aspect-square items-center justify-center p-6">
-                  <span className="text-4xl font-semibold">{index + 1}</span>
-                </CardContent>
-              </Card>
-            </div>
-          </CarouselItem>
-        ))} */}
+
         {ad.photo.map((item) => (
           <CarouselItem
             key={item.url}
@@ -321,13 +232,7 @@ function CarouselDemo({ ad }) {
               src={item.url}
               width={600}
             />
-            {/* <div className="p-1">
-              <Card>
-                <CardContent className="flex aspect-square items-center justify-center p-6">
-                  <span className="text-4xl font-semibold">{index + 1}</span>
-                </CardContent>
-              </Card>
-            </div> */}
+ 
           </CarouselItem>
         ))}
       </CarouselContent>

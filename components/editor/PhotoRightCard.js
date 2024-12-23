@@ -157,7 +157,7 @@ export default function PhotoRightCard() {
             className="my-masonry-grid max-w-[1500px]"
             columnClassName="my-masonry-grid_column"
           >
-            {(!ad.photo || ad.photo.length === 0) &&
+            {(!ad.photo || ad?.photo?.length === 0) &&
               items.map((item) => (
                 <div
                   key={item.label}
@@ -173,7 +173,7 @@ export default function PhotoRightCard() {
                   />
                 </div>
               ))}
-            {ad.photo?.length > 0 &&
+            {ad?.photo?.length > 0 &&
               !manageAd?._id &&
               ad.photo.map((item, i) => (
                 <div key={item.url} className="flex justify-center">
@@ -481,7 +481,7 @@ export default function PhotoRightCard() {
                       <div className="flex-1 text-center">
                         <div>{lang?.photo_upload}</div>
                         <div className="text-xs font-light tracking-tight text-default-500 ">
-                          {photos.length === 0
+                          {photos?.length === 0
                             ? lang?.no_items_selected
                             : `${photos.length} ${lang?.items_selected}`}
                         </div>
@@ -489,7 +489,7 @@ export default function PhotoRightCard() {
                     </div>
                   </ModalHeader>
                   <ModalBody>
-                    {photos.length === 0 ? (
+                    {photos?.length === 0 ? (
                       <div
                         {...getRootProps({
                           className: `p-8 border-dashed border-2 border-slate-400  ${
@@ -552,7 +552,7 @@ export default function PhotoRightCard() {
                           size="lg"
                           radius="full"
                         >
-                          {photos.length === 0 ? lang?.done : lang?.cancel}
+                          {photos?.length === 0 ? lang?.done : lang?.cancel}
                         </Button>
                         <Button
                           color="primary"
@@ -566,7 +566,7 @@ export default function PhotoRightCard() {
                           }}
                           size="lg"
                           radius="full"
-                          isDisabled={photos.length === 0 ? true : false}
+                          isDisabled={photos?.length === 0 ? true : false}
                           isLoading={loading}
                         >
                           {lang?.upload}

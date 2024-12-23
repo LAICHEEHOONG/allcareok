@@ -69,15 +69,15 @@ export default function TitleRightCard() {
         fullWidth
         size="lg"
         onChange={handleChange}
-        color={title_.length > 50 ? "danger" : "default"}
+        color={title_?.length > 50 ? "danger" : "default"}
       />
       <div className="text-default-400 text-xs mt-5 mb-5 select-none">
-        {title_.length <= 50 &&
+        {title_?.length <= 50 &&
           `${50 - title_.length} ${l?.character_available}`}
-        {title_.length > 50 && (
+        {title_?.length > 50 && (
           <div className="flex gap-1 items-center text-red-600">
             <ErrorIcon sx={{ fontSize: "1rem" }} />
-            <div> {`${title_.length - 50} ${l?.over_limit}`} </div>
+            <div> {`${title_?.length - 50} ${l?.over_limit}`} </div>
           </div>
         )}
       </div>
@@ -96,7 +96,7 @@ export default function TitleRightCard() {
           radius="full"
           size="lg"
           color="primary"
-          isDisabled={title_.length <= 50 && title_.length > 0 ? false : true}
+          isDisabled={title_?.length <= 50 && title_?.length > 0 ? false : true}
           isLoading={loading}
           onPress={handleSave}
         >
