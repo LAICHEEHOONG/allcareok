@@ -71,10 +71,17 @@ export default function ServiceRightCard() {
     // const newAd = { ...ad, service: newService };
     // dispatch(setAd(newAd));
   };
-
-  // useEffect(() => {
-  //   console.log(serviceItem);
-  // }, [serviceItem]);
+  useEffect(() => {
+    setServiceItem((prevState) =>
+      prevState.map((item) => {
+        const isSelected = ad.service.includes(item.id); // Check if the item's id exists in ad.service
+        return {
+          ...item,
+          selected: isSelected, // Update the selected status based on ad.service
+        };
+      })
+    );
+  }, []);
 
   return (
     <div className="h-screen w-full ">
