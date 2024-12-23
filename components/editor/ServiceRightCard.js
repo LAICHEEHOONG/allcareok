@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import AddIcon from "@mui/icons-material/Add";
 import CheckIcon from "@mui/icons-material/Check";
 import { useEffect, useState } from "react";
-import { setAd, setAds } from "@/redux/features/editor/editorSlice";
+import { setAd, setAds, setPopUp } from "@/redux/features/editor/editorSlice";
 import { createAD, findUserAds } from "@/lib/action/adAction";
 
 export default function ServiceRightCard() {
@@ -18,6 +18,17 @@ export default function ServiceRightCard() {
   }));
   const [serviceItem, setServiceItem] = useState(initService);
   const [loading, setLoading] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const l = useSelector((state) => state.auth?.lang?.listing_editor_card);
+
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 767px)"); // Tailwind's md breakpoint
+    const handleResize = () => setIsSmallScreen(mediaQuery.matches);
+    handleResize(); // Initialize state
+    mediaQuery.addEventListener("change", handleResize);
+    return () => mediaQuery.removeEventListener("change", handleResize);
+  }, []);
 
   const handleAddService = (label) => {
     let newService = serviceItem.map((item) => {
@@ -54,9 +65,9 @@ export default function ServiceRightCard() {
       console.log(error);
     } finally {
       setLoading(false);
-      // if (isSmallScreen) {
-      //   dispatch(setPopUp());
-      // }
+      if (isSmallScreen) {
+        dispatch(setPopUp());
+      }
     }
   };
 
@@ -71,7 +82,7 @@ export default function ServiceRightCard() {
     // const newAd = { ...ad, service: newService };
     // dispatch(setAd(newAd));
   };
-  
+
   useEffect(() => {
     setServiceItem((prevState) =>
       prevState.map((item) => {
@@ -85,25 +96,27 @@ export default function ServiceRightCard() {
   }, []);
 
   return (
-    <div className="h-screen w-full ">
-      <div className="flex justify-center items-center mb-5">
+    <div className="h-[50vh] md:h-screen w-full ">
+      <div className="flex justify-center items-start mb-5">
         <div className="w-full max-w-[500px] flex justify-between items-center">
-          <div className="text-3xl font-semibold">{"Types of Services"}</div>
+          <div className="text-2xl md:text-3xl font-semibold">
+            {`${l?.service}`}
+          </div>
           <Button
             radius="full"
-            size="lg"
+            size="md"
             color="primary"
             onPress={handleSave}
             isLoading={loading}
           >
-            {"Save"}
+            {l?.title_save}
           </Button>
         </div>
       </div>
 
       <ScrollShadow
         hideScrollBar
-        className="w-full flex justify-center items-start h-[90vh]"
+        className="w-full flex justify-center items-start h-[40vh] md:h-[90vh]"
       >
         <div className="flex flex-col gap-6 justify-center items-center p-5 w-full">
           {serviceItem.map(({ label, icon: Icon, selected }, idx) => (

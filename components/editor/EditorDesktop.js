@@ -148,11 +148,10 @@ function DrawerEditor({ cardFocus }) {
               coverage area. Include real case photos to assist customers. */}
             </DrawerDescription>
           </DrawerHeader>
-          {/* <div className="h-[500px]">{cardFocus === "photo" && <PhotoRightCard />}</div> */}
 
           <DrawerFooter>
-            {/* {cardFocus === "delete" && <DeleteRightCard />} */}
             {cardFocus === "title" && <TitleRightCard />}
+            {cardFocus === "service" && <ServiceRightCard />}
           </DrawerFooter>
         </div>
       </DrawerContent>

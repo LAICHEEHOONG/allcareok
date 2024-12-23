@@ -1,9 +1,7 @@
-
-
 import { Card, CardBody } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setFocus } from "@/redux/features/editor/editorSlice";
+import { setFocus, setPopUp } from "@/redux/features/editor/editorSlice";
 import { getCarouselItems } from "../carouselItems";
 
 export default function ServiceCard() {
@@ -13,21 +11,35 @@ export default function ServiceCard() {
   const service_type = useSelector((state) => state.auth?.lang?.service_type);
   const serviceIds = useSelector((state) => state.editor?.ad?.service);
   const [services, setServices] = useState([]);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 767px)"); // Tailwind's md breakpoint
+    const handleResize = () => setIsSmallScreen(mediaQuery.matches);
+    handleResize(); // Initialize state
+    mediaQuery.addEventListener("change", handleResize);
+    return () => mediaQuery.removeEventListener("change", handleResize);
+  }, []);
 
   useEffect(() => {
     const carouselItems = getCarouselItems(service_type) || [];
-    const resolvedServices = serviceIds?.map((serviceId) => carouselItems.find((obj) => obj?.id === serviceId))
+    const resolvedServices = serviceIds?.map((serviceId) =>
+      carouselItems.find((obj) => obj?.id === serviceId)
+    );
     setServices(resolvedServices);
   }, [service_type, serviceIds]);
 
   return (
     <Card
       className={`m-5 p-1 w-11/12 ${
-        cardFocus === "service" ? "border-solid border-2 border-black" : ""
+        cardFocus === "service" ? "md:border-2 md:border-black" : ""
       }`}
       isPressable
       onPress={() => {
         dispatch(setFocus("service"));
+        if (isSmallScreen) {
+          dispatch(setPopUp());
+        }
       }}
     >
       <CardBody>
@@ -45,7 +57,9 @@ export default function ServiceCard() {
           ))}
 
           {services?.length > 3 && (
-            <div className="text-sm text-default-400 p-2">{`+${services?.length - 3} more`}</div>
+            <div className="text-sm text-default-400 p-2">{`+${
+              services?.length - 3
+            } more`}</div>
           )}
         </div>
       </CardBody>
