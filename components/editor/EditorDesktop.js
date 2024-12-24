@@ -35,6 +35,7 @@ import {
 import BoostsCard from "./BoostsCard";
 import TitleRightCard from "./TitleRightCard";
 import ServiceRightCard from "./ServiceRightCard";
+import AreaRightCard from "./AreaRightCard";
 
 export default function EditorDesktop() {
   const dispatch = useDispatch();
@@ -126,6 +127,7 @@ export default function EditorDesktop() {
         {cardFocus === "delete" && <DeleteRightCard />}
         {cardFocus === "title" && <TitleRightCard />}
         {cardFocus === "service" && <ServiceRightCard />}
+        {cardFocus === "area" && <AreaRightCard />}
       </div>
       {/* Right Mobile */}
       <DrawerEditor cardFocus={cardFocus} />
