@@ -21,6 +21,7 @@ const adSchema = new mongoose.Schema(
         country: { type: String },
         state: { type: String },
         city: { type: String },
+        town: { type: String },
       },
     ],
     contact: [{ type: String }],
@@ -38,6 +39,7 @@ adSchema.index({
   "area.country": 1,
   "area.state": 1,
   "area.city": 1,
+  "area.town": 1,
 });
 
 const AD = mongoose.models.AD || mongoose.model("AD", adSchema);
