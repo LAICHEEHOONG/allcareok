@@ -13,6 +13,7 @@ import {
   Chip,
   Card,
   CardBody,
+  CardHeader,
 } from "@nextui-org/react";
 import { useSelector, useDispatch } from "react-redux";
 import FilterIcon from "@mui/icons-material/Filter";
@@ -27,15 +28,15 @@ import { useCallback, useState } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 // import { deleteImages } from "@/util/deleteImage";
 import { useRouter, usePathname } from "next/navigation";
-// import { RiGalleryView2 } from "react-icons/ri";
-import AddLocationIcon from '@mui/icons-material/AddLocation';
+import { RiGalleryView2 } from "react-icons/ri";
+import AddLocationIcon from "@mui/icons-material/AddLocation";
 
 const breakpointColumnsObj = {
-  default: 5,
-  1650: 4,
-  1320: 3,
+  default: 4,
+  1700: 3,
+  1400: 2,
   1111: 2,
-  820: 1,
+  1050: 1,
 };
 
 //   const breakpointColumnsObj_2 = {
@@ -44,19 +45,20 @@ const breakpointColumnsObj = {
 //   };
 
 export default function AreaRightCard() {
-//   const dispatch = useDispatch();
-//   const user = useSelector((state) => state.auth._id);
-//   const adsId = useSelector((state) => state.editor?.adsId);
-//   const ad = useSelector((state) => state.editor.ad);
+  //   const dispatch = useDispatch();
+  //   const user = useSelector((state) => state.auth._id);
+  //   const adsId = useSelector((state) => state.editor?.adsId);
+  //   const ad = useSelector((state) => state.editor.ad);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   // const [photos, setPhotos] = useState([]);
   const [loading, setLoading] = useState(false);
-//   const [loading2, setLoading2] = useState(false);
-//   const [manageAd, setManageAd] = useState({});
+  //   const [loading2, setLoading2] = useState(false);
+  //   const [manageAd, setManageAd] = useState({});
   const lang = useSelector((state) => state.auth.lang?.listing_editor_card);
   const router = useRouter();
   const pathName = usePathname();
   const currentLocale = pathName.split("/")[1] || "en";
+  const area = useSelector((state) => state.editor?.ad?.area);
 
   // const filterOurPreview = (previewToRemove) => {
   //   setPhotos((prev) =>
@@ -207,6 +209,343 @@ export default function AreaRightCard() {
   //     </div>
   //   );
   // };
+
+  const M = () => {
+    // const items = [
+    //   {
+    //     label: lang?.handyman ? lang.handyman : "Handyman",
+    //     image: "/images/handyman_2.webp",
+    //   },
+    //   {
+    //     label: lang?.cleaning ? lang.cleaning : "Cleaning",
+    //     image: "/images/cleaning_2.jpeg",
+    //   },
+    //   {
+    //     label: lang?.childcare ? lang.childcare : "Childcare",
+    //     image: "/images/childcare_2.webp",
+    //   },
+    //   {
+    //     label: lang?.hourly_maid ? lang.hourly_maid : "Hourly Maid",
+    //     image: "/images/cleaning_1.webp",
+    //   },
+    //   {
+    //     label: lang?.plumber ? lang.plumber : "Plumber",
+    //     image: "/images/plumber.png",
+    //   },
+    // ];
+
+    // const items = [
+    //   "/images/china.webp",
+    //   "/images/france.png",
+    //   "/images/greece.webp",
+    //   "/images/malaysia.png",
+    //   "/images/japan.png",
+    // ];
+    // const items = [
+    //   {
+    //     map: "/images/beijing.png",
+    //     country: "China",
+    //     state: "Beijing",
+    //     city: "The Palace Museum", // Correct
+    //   },
+    //   {
+    //     map: "/images/france.png",
+    //     country: "France",
+    //     state: "Île-de-France", // Paris is a city; Île-de-France is the region (state equivalent)
+    //     city: "Paris",
+    //   },
+    //   {
+    //     map: "/images/greece.webp",
+    //     country: "Greece",
+    //     state: "Attica", // Athens is a city; Attica is the region
+    //     city: "Athens",
+    //   },
+    //   {
+    //     map: "/images/malaysia.png",
+    //     country: "Malaysia",
+    //     state: "Perak", // Kuala Lumpur is a city; Federal Territory is its administrative division
+    //     city: "Ipoh",
+    //   },
+    //   {
+    //     map: "/images/japan.png",
+    //     country: "Japan",
+    //     state: "Tokyo Metropolis", // Tokyo is both a city and a metropolis (state-equivalent in Japan)
+    //     city: "Tokyo",
+    //   },
+    //   {
+    //     map: "/images/malaysia.png",
+    //     country: "Malaysia",
+    //     state: "Selangor", // Kuala Lumpur is a city; Federal Territory is its administrative division
+    //     city: "Kuala Lumpur",
+    //   },
+    //   {
+    //     map: "/images/malaysia.png",
+    //     country: "Taiwan",
+    //     state: "Taipei", // Kuala Lumpur is a city; Federal Territory is its administrative division
+    //     city: "Taipei City",
+    //   },
+    //   {
+    //     map: "/images/malaysia.png",
+    //     country: "Thailand",
+    //     state: "Bangkok", // Kuala Lumpur is a city; Federal Territory is its administrative division
+    //     city: "he Grand Palace",
+    //   },
+    //   {
+    //     map: "/images/vietnam.png",
+    //     country: "Vietnam",
+    //     state: "", // Kuala Lumpur is a city; Federal Territory is its administrative division
+    //     city: "Ho Chi Minh City",
+    //   },
+    //   {
+    //     map: "/images/korea.png",
+    //     country: "Soul korea",
+    //     state: "", // Kuala Lumpur is a city; Federal Territory is its administrative division
+    //     city: "soul",
+    //   },
+    // ];
+    const items = [
+      {
+        map: "/images/kl.png",
+        country: "Malaysia",
+        state: "Selangor", // Correct administrative division for Kuala Lumpur
+        city: "Kuala Lumpur",
+      },
+      {
+        map: "/images/singapore.png",
+        country: "Singapore",
+        state: "Singapore", // Correct administrative division for Kuala Lumpur
+        city: "Marina Bay Sands",
+      },
+      {
+        map: "/images/beijing.png",
+        country: "China",
+        state: "Beijing",
+        city: "The Palace Museum",
+      },
+      {
+        map: "/images/france.png",
+        country: "France",
+        state: "Île-de-France", // Correct region for Paris
+        city: "Paris",
+      },
+      {
+        map: "/images/greece.webp",
+        country: "Greece",
+        state: "Attica", // Correct region for Athens
+        city: "Athens",
+      },
+      {
+        map: "/images/malaysia.png",
+        country: "Malaysia",
+        state: "Perak", // Correct state for Ipoh
+        city: "Ipoh",
+      },
+      {
+        map: "/images/japan.png",
+        country: "Japan",
+        state: "Tokyo Metropolis", // Correct administrative division for Tokyo
+        city: "Tokyo",
+      },
+
+      {
+        map: "/images/taiwan.png", // Correct image path for Taiwan
+        country: "Taiwan",
+        state: "Taipei City", // Correct administrative division for Taipei
+        city: "Taipei 101",
+      },
+      {
+        map: "/images/thailand.png", // Correct image path for Thailand
+        country: "Thailand",
+        state: "Bangkok", // Bangkok is both a state and a city
+        city: "The Grand Palace",
+      },
+      {
+        map: "/images/vietnam.png",
+        country: "Vietnam",
+        state: "Ho Chi Minh City", // Use the city's name as the administrative division
+        city: "Landmark 81",
+      },
+      {
+        map: "/images/korea.png",
+        country: "South Korea", // Fixed typo: "Soul Korea" → "South Korea"
+        state: "Seoul", // Correct state for Seoul
+        city: "Seoul",
+      },
+    ];
+
+    return (
+      <div className="p-1">
+        <Masonry
+          breakpointCols={breakpointColumnsObj}
+          className="my-masonry-grid max-w-[1500px]"
+          columnClassName="my-masonry-grid_column"
+        >
+          {area &&
+            area?.length === 0 &&
+            items.map((item) => (
+              <div key={item?.map} className="flex justify-center">
+                <Card
+                // isPressable
+                // className=""
+                // onPress={() => setManageAd(item)}
+                >
+                  <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+                    <p className="text-tiny uppercase font-bold">
+                      {item?.state}
+                    </p>
+                    <small className="text-default-500">{item?.country}</small>
+                    <h4 className="font-bold text-large">{item?.city}</h4>
+                  </CardHeader>
+                  <CardBody className="m-0 p-0">
+                    <div className="relative">
+                      {/* {i === 0 && (
+                      <Chip className="absolute z-40 m-3" color="default">
+                        Cover
+                      </Chip>
+                    )} */}
+                      <Image
+                        alt="Card service"
+                        className="object-cover rounded-xl "
+                        src={item?.map}
+                        width={550}
+                        height={357}
+                      />
+                    </div>
+                  </CardBody>
+                </Card>
+              </div>
+              // <div
+              //   key={item}
+              //   className=" flex flex-col justify-center items-center"
+              // >
+              //   {/* <h4 className="font-bold text-large m-1">{item.label}</h4> */}
+              //   <Image
+              //     alt="Card area"
+              //     className="object-cover rounded-xl"
+              //     src={item}
+              //     width={270}
+              //     height={270}
+              //   />
+              // </div>
+            ))}
+        </Masonry>
+        {/* {manageAd?._id ? (
+          <div className="">
+            <div className="flex justify-between mb-7 w-full">
+              <Button
+                isIconOnly
+                radius="full"
+                color="default"
+                variant="flat"
+                aria-label="Back button"
+                onPress={() => {
+                  setManageAd({});
+                }}
+              >
+                <RiGalleryView2 className="text-2xl" />
+              </Button>
+              <div className="flex gap-3">
+                {manageAd._id !== ad.photo[0]?._id && (
+                  <Button
+                    radius="full"
+                    color="default"
+                    variant="flat"
+                    aria-label="Back button"
+                    onPress={() => {
+                      makeCover();
+                    }}
+                    isLoading={loading}
+                  >
+                    {lang?.make_cover ? lang.make_cover : "Make cover photo"}
+                  </Button>
+                )}
+                <Button
+                  isIconOnly
+                  radius="full"
+                  color="default"
+                  variant="flat"
+                  aria-label="Back button"
+                  onPress={() => {
+                    deletePhoto();
+                  }}
+                  isLoading={loading2}
+                >
+                  <DeleteForeverIcon />
+                </Button>
+              </div>
+            </div>
+            <div className="flex justify-center items-center  ">
+              <Image
+                alt="Card service demo"
+                className="object-cover rounded-xl hidden md:flex"
+                src={manageAd.url}
+                width={600}
+                height={600}
+              />
+              <Image
+                alt="Card service demo"
+                className="object-cover rounded-xl flex md:hidden"
+                src={manageAd.url}
+                width={400}
+                height={400}
+              />
+            </div>
+          </div>
+        ) : (
+          <Masonry
+            breakpointCols={breakpointColumnsObj}
+            className="my-masonry-grid max-w-[1500px]"
+            columnClassName="my-masonry-grid_column"
+          >
+            {(!ad.photo || ad?.photo?.length === 0) &&
+              items.map((item) => (
+                <div
+                  key={item.label}
+                  className=" flex flex-col justify-center items-center"
+                >
+                  <h4 className="font-bold text-large m-1">{item.label}</h4>
+                  <Image
+                    alt="Card service demo"
+                    className="object-cover rounded-xl"
+                    src={item.image}
+                    width={270}
+                    height={270}
+                  />
+                </div>
+              ))}
+            {ad?.photo?.length > 0 &&
+              !manageAd?._id &&
+              ad.photo.map((item, i) => (
+                <div key={item.url} className="flex justify-center">
+                  <Card
+                    isPressable
+                    className=""
+                    onPress={() => setManageAd(item)}
+                  >
+                    <CardBody className="m-0 p-0">
+                      <div className="relative">
+                        {i === 0 && (
+                          <Chip className="absolute z-40 m-3" color="default">
+                            Cover
+                          </Chip>
+                        )}
+                        <Image
+                          alt="Card service"
+                          className="object-cover rounded-xl cursor-pointer"
+                          src={item.url}
+                          width={400}
+                          height={357}
+                        />
+                      </div>
+                    </CardBody>
+                  </Card>
+                </div>
+              ))}
+          </Masonry>
+        )} */}
+      </div>
+    );
+  };
 
   // const M2 = () => {
   //   return (
@@ -410,6 +749,7 @@ export default function AreaRightCard() {
   //     setLoading2(false);
   //   }
   // };
+
   return (
     <div className="h-screen w-full md:pl-2">
       <div className="flex justify-between items-start mb-2 max-w-[1600px]">
@@ -568,7 +908,7 @@ export default function AreaRightCard() {
                           //   }}
                           size="lg"
                           radius="full"
-                        //   isDisabled={photos?.length === 0 ? true : false}
+                          //   isDisabled={photos?.length === 0 ? true : false}
                           isLoading={loading}
                         >
                           {lang?.upload}
@@ -582,15 +922,18 @@ export default function AreaRightCard() {
           </Modal>
         </>
       </div>
-      {/* <ScrollShadow className="h-[92vh]" hideScrollBar={true}>
-          <div className="mb-6 mt-2 text-default-400 ">
-            {lang?.photo_upload_description
+      <ScrollShadow className="h-[92vh]" hideScrollBar={true}>
+        <div className="mb-6 mt-2 text-default-400 ">
+          {
+            "Please clearly mention your service area, as customers often look for services by location."
+          }
+          {/* {lang?.photo_upload_description
               ? lang.photo_upload_description
               : `Upload your service poster with contact info, service details, and
-          coverage area. Include real case photos to assist customers.`}
-          </div>
-          <M />
-        </ScrollShadow> */}
+          coverage area. Include real case photos to assist customers.`} */}
+        </div>
+        <M />
+      </ScrollShadow>
     </div>
   );
 }

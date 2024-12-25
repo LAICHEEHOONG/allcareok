@@ -16,7 +16,13 @@ const adSchema = new mongoose.Schema(
     photo: [photoSchema],
     title: { type: String, default: "Your service title" },
     service: [{ type: String }],
-    area: [{ type: String }],
+    area: [
+      {
+        country: { type: String },
+        state: { type: String },
+        city: { type: String },
+      },
+    ],
     contact: [{ type: String }],
     description: { type: String },
     map: { type: String },
@@ -27,8 +33,12 @@ const adSchema = new mongoose.Schema(
   }
 );
 
-// Add indexes for faster queries
-// adSchema.index({ title: "text", areas: 1, services: 1 });
+// Index for efficient searches across all areas
+adSchema.index({
+  "area.country": 1,
+  "area.state": 1,
+  "area.city": 1,
+});
 
 const AD = mongoose.models.AD || mongoose.model("AD", adSchema);
 
