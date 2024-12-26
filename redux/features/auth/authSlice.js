@@ -8,7 +8,8 @@ const initialState = {
   signIn: "",
   _id: "",
   language: "",
-  lang: ""
+  lang: "",
+  country: "",
 };
 
 export const authSlice = createSlice({
@@ -31,11 +32,15 @@ export const authSlice = createSlice({
       state.language = action.payload.replace(/^\//, "");
     },
     setLang: (state, action) => {
-      state.lang = action.payload
-    }
+      state.lang = action.payload;
+    },
+    setCountry: (state, action) => {
+      state.country = action.payload;
+    },
   },
 });
 
-export const { signInStatus, userInfo, updateLanguage, setLang } = authSlice.actions;
+export const { signInStatus, userInfo, updateLanguage, setLang, setCountry } =
+  authSlice.actions;
 
 export default authSlice.reducer;

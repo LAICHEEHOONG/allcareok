@@ -26,16 +26,15 @@ import AddIcon from "@mui/icons-material/Add";
 // import { useDropzone } from "react-dropzone";
 import { useCallback, useEffect, useState } from "react";
 // import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-// import { createAD } from "@/lib/action/adAction";
-// import { setAd, setAds } from "@/redux/features/editor/editorSlice";
-// import { findUserAds } from "@/lib/action/adAction";
+import { createAD } from "@/lib/action/adAction";
+import { setAd, setAds } from "@/redux/features/editor/editorSlice";
+import { findUserAds } from "@/lib/action/adAction";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 // import { deleteImages } from "@/util/deleteImage";
 import { useRouter, usePathname } from "next/navigation";
 import { RiGalleryView2 } from "react-icons/ri";
 import AddLocationIcon from "@mui/icons-material/AddLocation";
 import { countryData } from "@/lib/countryData";
-import { malaysiaState } from "@/lib/malaysiaState";
 import { Switch } from "@nextui-org/react";
 import { GoogleMapsEmbed } from "@next/third-parties/google";
 
@@ -53,10 +52,10 @@ const breakpointColumnsObj = {
 //   };
 
 export default function AreaRightCard() {
-  //   const dispatch = useDispatch();
+  const dispatch = useDispatch();
   //   const user = useSelector((state) => state.auth._id);
-  //   const adsId = useSelector((state) => state.editor?.adsId);
-  //   const ad = useSelector((state) => state.editor.ad);
+  const adsId = useSelector((state) => state.editor?.adsId);
+  const ad = useSelector((state) => state.editor.ad);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   // const [photos, setPhotos] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -67,18 +66,15 @@ export default function AreaRightCard() {
   const pathName = usePathname();
   const currentLocale = pathName.split("/")[1] || "en";
   const area = useSelector((state) => state.editor?.ad?.area);
+  const userCountry = useSelector((state) => state.auth?.country) || "";
   const initialArea = {
-    country: "",
-    state: "",
-    city: "",
-    town: "",
+    country: area?.country ? area.country : userCountry,
+    state: area?.state ? area.state : "",
+    city: area?.city ? area.city : "",
+    town: area?.town ? area.town : "",
   };
   const [newArea, setNewArea] = useState(initialArea);
   const [showMap, setShowMap] = useState(false);
-
-  useEffect(() => {
-    console.log(newArea);
-  }, [newArea]);
 
   const M = () => {
     const items = [
@@ -164,54 +160,50 @@ export default function AreaRightCard() {
           className="my-masonry-grid max-w-[1500px]"
           columnClassName="my-masonry-grid_column"
         >
-          {area &&
-            area?.length === 0 &&
-            items.map((item) => (
-              <div key={item?.map} className="flex justify-center">
-                <Card
-                // isPressable
-                // className=""
-                // onPress={() => setManageAd(item)}
-                >
-                  <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-                    <p className="text-tiny uppercase font-bold">
-                      {item?.state}
-                    </p>
-                    <small className="text-default-500">{item?.country}</small>
-                    <h4 className="font-bold text-large">{item?.city}</h4>
-                  </CardHeader>
-                  <CardBody className="m-0 p-0">
-                    <div className="relative">
-                      {/* {i === 0 && (
+          {items.map((item) => (
+            <div key={item?.map} className="flex justify-center">
+              <Card
+              // isPressable
+              // className=""
+              // onPress={() => setManageAd(item)}
+              >
+                <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+                  <p className="text-tiny uppercase font-bold">{item?.state}</p>
+                  <small className="text-default-500">{item?.country}</small>
+                  <h4 className="font-bold text-large">{item?.city}</h4>
+                </CardHeader>
+                <CardBody className="m-0 p-0">
+                  <div className="relative">
+                    {/* {i === 0 && (
                       <Chip className="absolute z-40 m-3" color="default">
                         Cover
                       </Chip>
                     )} */}
-                      <Image
-                        alt="Card service"
-                        className="object-cover rounded-xl "
-                        src={item?.map}
-                        width={550}
-                        height={357}
-                      />
-                    </div>
-                  </CardBody>
-                </Card>
-              </div>
-              // <div
-              //   key={item}
-              //   className=" flex flex-col justify-center items-center"
-              // >
-              //   {/* <h4 className="font-bold text-large m-1">{item.label}</h4> */}
-              //   <Image
-              //     alt="Card area"
-              //     className="object-cover rounded-xl"
-              //     src={item}
-              //     width={270}
-              //     height={270}
-              //   />
-              // </div>
-            ))}
+                    <Image
+                      alt="Card service"
+                      className="object-cover rounded-xl "
+                      src={item?.map}
+                      width={550}
+                      height={357}
+                    />
+                  </div>
+                </CardBody>
+              </Card>
+            </div>
+            // <div
+            //   key={item}
+            //   className=" flex flex-col justify-center items-center"
+            // >
+            //   {/* <h4 className="font-bold text-large m-1">{item.label}</h4> */}
+            //   <Image
+            //     alt="Card area"
+            //     className="object-cover rounded-xl"
+            //     src={item}
+            //     width={270}
+            //     height={270}
+            //   />
+            // </div>
+          ))}
         </Masonry>
         {/* {manageAd?._id ? (
           <div className="">
@@ -355,6 +347,8 @@ export default function AreaRightCard() {
   const countryAutocomplete = () => (
     <Autocomplete
       allowsCustomValue
+      isRequired
+      // defaultItems={countryData}
       className="max-w-xs"
       label="Select Country"
       variant="bordered"
@@ -440,6 +434,7 @@ export default function AreaRightCard() {
         checked={showMap} // Bind the switch's value to the state
         aria-label="Map toggle"
         onChange={(e) => setShowMap(e.target.checked)} // Update the state on toggle
+        size="sm"
       >
         Map
       </Switch>
@@ -470,9 +465,35 @@ export default function AreaRightCard() {
     );
   };
 
-  useEffect(() => {
-    console.log(showMap);
-  }, [showMap]);
+  const fetchAds = async () => {
+    try {
+      const ads = await findUserAds({ user: ad.user }); // Pass only the userId
+      dispatch(setAds(ads));
+    } catch (error) {
+      console.error("Error fetching user ads:", error);
+    }
+  };
+
+  const toDB = async (adsId, area) => {
+    try {
+      setLoading(true);
+      const saveArea = await createAD({ ...ad, adsId, area });
+      dispatch(setAd(saveArea));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+      // if (isSmallScreen) {
+      //   dispatch(setPopUp());
+      // }
+    }
+  };
+
+  const handleSave = () => {
+    const adsId = ad._id;
+    toDB(adsId, newArea);
+    fetchAds();
+  };
 
   return (
     <div className="h-screen w-full md:pl-2">
@@ -500,11 +521,10 @@ export default function AreaRightCard() {
             color="default"
             variant="flat"
             radius="full"
-            startContent={<AddLocationIcon />}
+            startContent={<AddLocationIcon fontSize="medium" />}
             onPress={onOpen}
           >
-            {"Add Area"}
-            {/* {lang?.add_photo ? lang.add_photo : "Add photos"} */}
+            {"Area"}
           </Button>
           <Button
             className="md:hidden"
@@ -512,12 +532,10 @@ export default function AreaRightCard() {
             variant="flat"
             radius="full"
             isIconOnly
-            // size={'lg'}
-            // startContent={<FilterIcon />}
+          
             onPress={onOpen}
           >
             <AddLocationIcon fontSize={"small"} />
-            {/* {lang?.add_photo ? lang.add_photo : "Add photos"} */}
           </Button>
           <Modal
             isOpen={isOpen}
@@ -530,15 +548,17 @@ export default function AreaRightCard() {
               {(onClose) => (
                 <>
                   <ModalHeader className="flex flex-col gap-1 ">
-                    <div className="flex justify-between items-center  ">
+                    {/* <div className="flex justify-between items-center  ">
                       {MapSwitch()}
-                      <div className="flex-1 text-center">
-                        <div>{"Add Service Area"}</div>
-                        {/* <div className="text-xs font-light tracking-tight text-default-500 ">
-                          {photos?.length === 0
-                            ? lang?.no_items_selected
-                            : `${photos.length} ${lang?.items_selected}`}
-                        </div> */}
+                      <div className="flex-1 text-center -ml-10">
+                        <div>{"Service Area"}</div>
+              
+                      </div>
+                    </div> */}
+                    <div className="flex justify-start items-center w-full ">
+                      {MapSwitch()}
+                      <div className="w-full flex justify-center items-center mr-[100px]">
+                        <div>{"Service Area"}</div>
                       </div>
                     </div>
                   </ModalHeader>
@@ -632,13 +652,11 @@ export default function AreaRightCard() {
                           //   }}
                           size="lg"
                           radius="full"
-                          //   isDisabled={photos?.length === 0 ? true : false}
+                          isDisabled={newArea.country === ""}
                           isLoading={loading}
-                          onPress={() => {
-                            console.log(newArea);
-                          }}
+                          onPress={handleSave}
                         >
-                          {"Add"}
+                          {"Save"}
                         </Button>
                       </div>
                     </div>

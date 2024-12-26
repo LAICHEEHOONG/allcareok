@@ -16,14 +16,12 @@ const adSchema = new mongoose.Schema(
     photo: [photoSchema],
     title: { type: String, default: "Your service title" },
     service: [{ type: String }],
-    area: [
-      {
-        country: { type: String },
-        state: { type: String },
-        city: { type: String },
-        town: { type: String },
-      },
-    ],
+    area: {
+      country: { type: String },
+      state: { type: String },
+      city: { type: String },
+      town: { type: String },
+    },
     contact: [{ type: String }],
     description: { type: String },
     map: { type: String },

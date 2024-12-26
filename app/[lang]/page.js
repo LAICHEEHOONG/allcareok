@@ -1,11 +1,19 @@
 "use client";
 import Fruits from "@/components/Fruits";
-// import { useEffect } from "react";
-// import { useDispatch } from "react-redux";
+import { getCountryFromIP } from "@/lib/action/userAction";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setCountry } from "@/redux/features/auth/authSlice";
 // import { setIsSmallScreen } from "@/redux/features/screen/screenSlice";
 
 export default function Home() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    getCountryFromIP().then((country) => {
+      dispatch(setCountry(country));
+    });
+  }, [dispatch]);
+
   // const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   // useEffect(() => {
