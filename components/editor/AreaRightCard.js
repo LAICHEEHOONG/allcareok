@@ -360,6 +360,7 @@ export default function AreaRightCard() {
       variant="bordered"
       size="lg"
       onSelectionChange={onSelectionChangeCountry}
+      selectedKey={newArea.country}
     >
       {countryData.map((country) => (
         <AutocompleteItem
@@ -447,22 +448,22 @@ export default function AreaRightCard() {
 
   const MapCard = () => {
     return (
-      <Card className={`m-5 p-1`}>
+      <Card>
         <CardBody>
           <div className="flex flex-col justify-center gap-3 items-center">
             {/* <div className="font-medium self-start">{l?.location}</div> */}
             <div className="rounded-lg overflow-hidden">
               <GoogleMapsEmbed
                 apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
-                height={130}
-                width={268}
+                height={300}
+                width={300}
                 mode="place"
                 q={`${newArea.town},${newArea.city},${newArea.state},${newArea.country}`}
               />
             </div>
-            {/* <div className="self-start text-sm text-default-400 ">
-              123, Jalan Medan Ipoh, Medan Ipoh Bestari, 99999 Ipoh, Perak
-            </div> */}
+            <div className="self-start text-sm text-default-400 truncate w-full max-w-[300px]">
+              {`${newArea.town} ${newArea.city} ${newArea.state} ${newArea.country}`}
+            </div>
           </div>
         </CardBody>
       </Card>
