@@ -17,6 +17,7 @@ import {
   Autocomplete,
   AutocompleteItem,
   Avatar,
+  Input,
 } from "@nextui-org/react";
 import { useSelector, useDispatch } from "react-redux";
 import FilterIcon from "@mui/icons-material/Filter";
@@ -34,7 +35,9 @@ import { useRouter, usePathname } from "next/navigation";
 import { RiGalleryView2 } from "react-icons/ri";
 import AddLocationIcon from "@mui/icons-material/AddLocation";
 import { countryData } from "@/lib/countryData";
-import {malaysiaState} from "@/lib/malaysiaState";
+import { malaysiaState } from "@/lib/malaysiaState";
+import { Switch } from "@nextui-org/react";
+import { GoogleMapsEmbed } from "@next/third-parties/google";
 
 const breakpointColumnsObj = {
   default: 4,
@@ -71,6 +74,7 @@ export default function AreaRightCard() {
     town: "",
   };
   const [newArea, setNewArea] = useState(initialArea);
+  const [showMap, setShowMap] = useState(false);
 
   useEffect(() => {
     console.log(newArea);
@@ -348,7 +352,6 @@ export default function AreaRightCard() {
       };
     });
   };
-
   const countryAutocomplete = () => (
     <Autocomplete
       allowsCustomValue
@@ -376,32 +379,100 @@ export default function AreaRightCard() {
     </Autocomplete>
   );
 
-  const stateAutocomplete = () => (
-    <Autocomplete
-      allowsCustomValue
-      className="max-w-xs"
-      label="Select State"
-      variant="bordered"
-      size="lg"
-      onSelectionChange={onSelectionChangeState}
-    >
-      {malaysiaState.map((state) => (
-        <AutocompleteItem
-          key={state.value}
-          value={state.label} // Ensure value is set for onSelect to work
-          // startContent={
-          //   <Avatar
-          //     alt={state.label}
-          //     className="w-6 h-6"
-          //     src={country.description}
-          //   />
-          // }
-        >
-          {state.label}
-        </AutocompleteItem>
-      ))}
-    </Autocomplete>
-  );
+  const stateField = () => {
+    return (
+      <Input
+        className="max-w-xs"
+        label="State / federal territory"
+        variant="bordered"
+        size="lg"
+        value={newArea.state} // Bind the current value of newArea.state
+        onChange={(e) => {
+          setNewArea((prevState) => ({
+            ...prevState,
+            state: e.target.value,
+          }));
+        }} // Update newArea.state on input change
+      />
+    );
+  };
+
+  const cityField = () => {
+    return (
+      <Input
+        className="max-w-xs"
+        label="City / mulicipality"
+        variant="bordered"
+        size="lg"
+        value={newArea.city} // Bind the current value of newArea.state
+        onChange={(e) => {
+          setNewArea((prevState) => ({
+            ...prevState,
+            city: e.target.value,
+          }));
+        }} // Update newArea.state on input change
+      />
+    );
+  };
+
+  const townField = () => {
+    return (
+      <Input
+        className="max-w-xs"
+        label="Town / neighborhood"
+        variant="bordered"
+        size="lg"
+        value={newArea.town} // Bind the current value of newArea.state
+        onChange={(e) => {
+          setNewArea((prevState) => ({
+            ...prevState,
+            town: e.target.value,
+          }));
+        }} // Update newArea.state on input change
+      />
+    );
+  };
+
+  const MapSwitch = () => {
+    return (
+      <Switch
+        checked={showMap} // Bind the switch's value to the state
+        aria-label="Map toggle"
+        onChange={(e) => setShowMap(e.target.checked)} // Update the state on toggle
+      >
+        Map
+      </Switch>
+    );
+  };
+
+  const MapCard = () => {
+    return (
+      <Card className={`m-5 p-1`}>
+        <CardBody>
+          <div className="flex flex-col justify-center gap-3 items-center">
+            {/* <div className="font-medium self-start">{l?.location}</div> */}
+            <div className="rounded-lg overflow-hidden">
+              <GoogleMapsEmbed
+                apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
+                height={130}
+                width={268}
+                mode="place"
+                q={`${newArea.town},${newArea.city},${newArea.state},${newArea.country}`}
+              />
+            </div>
+            {/* <div className="self-start text-sm text-default-400 ">
+              123, Jalan Medan Ipoh, Medan Ipoh Bestari, 99999 Ipoh, Perak
+            </div> */}
+          </div>
+        </CardBody>
+      </Card>
+    );
+  };
+
+  useEffect(() => {
+    console.log(showMap);
+  }, [showMap]);
+
   return (
     <div className="h-screen w-full md:pl-2">
       <div className="flex justify-between items-start mb-2 max-w-[1600px]">
@@ -459,16 +530,7 @@ export default function AreaRightCard() {
                 <>
                   <ModalHeader className="flex flex-col gap-1 ">
                     <div className="flex justify-between items-center  ">
-                      {/* <Button
-                        isIconOnly
-                        radius="full"
-                        color="default"
-                        variant="light"
-                        aria-label="add photo"
-            
-                      >
-                        <AddIcon />
-                      </Button> */}
+                      {MapSwitch()}
                       <div className="flex-1 text-center">
                         <div>{"Add Service Area"}</div>
                         {/* <div className="text-xs font-light tracking-tight text-default-500 ">
@@ -480,8 +542,16 @@ export default function AreaRightCard() {
                     </div>
                   </ModalHeader>
                   <ModalBody className=" flex flex-col justify-center items-center gap-4 p-4">
-                    {countryAutocomplete()}
-                    {stateAutocomplete()}
+                    {showMap ? (
+                      <MapCard />
+                    ) : (
+                      <>
+                        {countryAutocomplete()}
+                        {stateField()}
+                        {cityField()}
+                        {townField()}
+                      </>
+                    )}
 
                     {/* {photos?.length === 0 ? (
                       <div
