@@ -452,16 +452,16 @@ export default function AreaRightCard() {
         <CardBody>
           <div className="flex flex-col justify-center gap-3 items-center">
             {/* <div className="font-medium self-start">{l?.location}</div> */}
-            <div className="rounded-lg overflow-hidden">
+            <div className="rounded-lg overflow-hidden ">
               <GoogleMapsEmbed
                 apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
                 height={300}
-                width={300}
+                width={400}
                 mode="place"
                 q={`${newArea.town},${newArea.city},${newArea.state},${newArea.country}`}
               />
             </div>
-            <div className="self-start text-sm text-default-400 truncate w-full max-w-[300px]">
+            <div className="self-start text-sm text-default-400 truncate w-full max-w-[300px] capitalize p-2">
               {`${newArea.town} ${newArea.city} ${newArea.state} ${newArea.country}`}
             </div>
           </div>
