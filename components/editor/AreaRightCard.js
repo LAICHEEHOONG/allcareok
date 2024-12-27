@@ -450,8 +450,12 @@ export default function AreaRightCard() {
           <div className="flex flex-col justify-center  items-center h-full">
             <div className="rounded-lg overflow-hidden w-full  h-[380px]  ">
               <GoogleMapsEmbed
+              className="border-2 border-red-400 bg-black"
                 apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
-                // height={300}
+                allowfullscreen={false}
+                width="100%"
+                height="100%"
+                // height={380}
                 // width={400}
                 mode="place"
                 q={`${newArea.town},${newArea.city},${newArea.state},${newArea.country}`}
