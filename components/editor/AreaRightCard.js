@@ -451,9 +451,8 @@ export default function AreaRightCard() {
               <GoogleMapsEmbed
                 className="border-2 border-red-400 bg-black"
                 apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
-                allowfullscreen={false}
                 width="100%"
-                height={300}
+                height={276}
                 // height={380}
                 // width={400}
                 mode="place"
