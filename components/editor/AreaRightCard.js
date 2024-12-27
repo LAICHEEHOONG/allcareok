@@ -14,6 +14,7 @@ import {
   Card,
   CardBody,
   CardHeader,
+  CardFooter,
   Autocomplete,
   AutocompleteItem,
   Avatar,
@@ -45,11 +46,6 @@ const breakpointColumnsObj = {
   1111: 2,
   1050: 1,
 };
-
-//   const breakpointColumnsObj_2 = {
-//     default: 2,
-//     // 820: 1,
-//   };
 
 export default function AreaRightCard() {
   const dispatch = useDispatch();
@@ -347,17 +343,10 @@ export default function AreaRightCard() {
       };
     });
   };
-  // const onSelectionChangeState = (key) => {
-  //   setNewArea((prevState) => {
-  //     return {
-  //       ...prevState,
-  //       state: key || "",
-  //     };
-  //   });
-  // };
+
   const countryAutocomplete = () => (
     <Autocomplete
-      allowsCustomValue
+      // allowsCustomValue
       isRequired
       // defaultItems={countryData}
       className="max-w-xs"
@@ -368,7 +357,6 @@ export default function AreaRightCard() {
       // defaultSelectedKey={newArea.country}
       // selectedKey={newArea.country}
       selectedKey={newArea.country}
-
     >
       {countryData.map((country) => (
         <AutocompleteItem
@@ -457,15 +445,14 @@ export default function AreaRightCard() {
 
   const MapCard = () => {
     return (
-      <Card>
+      <Card className=" w-full h-screen max-h-[300px]">
         <CardBody>
-          <div className="flex flex-col justify-center gap-3 items-center">
-            {/* <div className="font-medium self-start">{l?.location}</div> */}
-            <div className="rounded-lg overflow-hidden ">
+          <div className="flex flex-col justify-center  items-center h-full">
+            <div className="rounded-lg overflow-hidden w-full  h-[380px]  ">
               <GoogleMapsEmbed
                 apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
-                height={300}
-                width={400}
+                // height={300}
+                // width={400}
                 mode="place"
                 q={`${newArea.town},${newArea.city},${newArea.state},${newArea.country}`}
               />
@@ -508,6 +495,10 @@ export default function AreaRightCard() {
     toDB(adsId, newArea);
     fetchAds();
   };
+
+  useEffect(() => {
+    console.log(newArea);
+  }, [newArea]);
 
   return (
     <div className="h-screen w-full md:pl-2">
@@ -561,21 +552,14 @@ export default function AreaRightCard() {
               {(onClose) => (
                 <>
                   <ModalHeader className="flex flex-col gap-1 ">
-                    {/* <div className="flex justify-between items-center  ">
-                      {MapSwitch()}
-                      <div className="flex-1 text-center -ml-10">
-                        <div>{"Service Area"}</div>
-              
-                      </div>
-                    </div> */}
                     <div className="flex justify-start items-center w-full ">
                       {MapSwitch()}
-                      <div className="w-full flex justify-center items-center mr-[100px]">
+                      <div className="w-full flex justify-center items-center mr-[90px]">
                         <div>{"Service Area"}</div>
                       </div>
                     </div>
                   </ModalHeader>
-                  <ModalBody className=" flex flex-col justify-center items-center gap-4 p-4">
+                  <ModalBody className=" flex flex-col justify-center items-center gap-4 p-4 ">
                     {showMap ? (
                       <MapCard />
                     ) : (
@@ -586,56 +570,6 @@ export default function AreaRightCard() {
                         {townField()}
                       </>
                     )}
-
-                    {/* {photos?.length === 0 ? (
-                      <div
-                        {...getRootProps({
-                          className: `p-8 border-dashed border-2 border-slate-400  ${
-                            isDragActive && `bg-slate-100`
-                          } cursor-pointer rounded-lg`,
-                        })}
-                      >
-                        <div className="flex flex-col items-center justify-center gap-4">
-                          <FilterIcon sx={{ fontSize: 50 }} />
-                          <div className="text-xl font-semibold hidden md:flex">
-                            {lang?.drag}
-                          </div>
-                          <div className="text-xs font-light hidden md:flex">
-                            {lang?.browse}
-                          </div>
-                          <Button
-                            radius="full"
-                            size="lg"
-                            onPress={() =>
-                              document.getElementById("fileInput").click()
-                            }
-                            color="primary"
-                          >
-                            {lang?.browseBtn}
-                          </Button>
-                          <input
-                            id="fileInput"
-                            type="file"
-                            multiple
-                            accept="image/*"
-                            className="hidden"
-                            onChange={(e) => {
-                              const files = Array.from(e.target.files).map(
-                                (file) =>
-                                  Object.assign(file, {
-                                    preview: URL.createObjectURL(file),
-                                  })
-                              );
-                              setPhotos((prev) => [...prev, ...files]);
-                            }}
-                          />
-                        </div>
-                      </div>
-                    ) : (
-                      <ScrollShadow className="max-h-[400px]">
-                        <M2 />
-                      </ScrollShadow>
-                    )} */}
                   </ModalBody>
                   <ModalFooter>
                     <div className="flex flex-col gap-4 w-full">
@@ -655,17 +589,11 @@ export default function AreaRightCard() {
                         </Button>
                         <Button
                           color="primary"
-                          //   onPress={async () => {
-                          //     try {
-                          //       await submitToCloudinary(); // Wait for the upload to complete
-                          //       onClose(); // Close the modal only after upload completes
-                          //     } catch (error) {
-                          //       console.error("Upload failed:", error); // Handle any errors
-                          //     }
-                          //   }}
                           size="lg"
                           radius="full"
-                          isDisabled={newArea.country === ""}
+                          isDisabled={
+                            newArea.country === "" || newArea.country === null
+                          }
                           isLoading={loading}
                           onPress={handleSave}
                         >
