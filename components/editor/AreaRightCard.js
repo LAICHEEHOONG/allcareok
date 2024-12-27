@@ -77,7 +77,7 @@ export default function AreaRightCard() {
   const [showMap, setShowMap] = useState(false);
 
   useEffect(() => {
-    if(newArea.country === ""){
+    if (newArea.country === "") {
       setNewArea((prevState) => {
         return {
           ...prevState,
@@ -343,18 +343,18 @@ export default function AreaRightCard() {
     setNewArea((prevState) => {
       return {
         ...prevState,
-        country: key || "",
+        country: key,
       };
     });
   };
-  const onSelectionChangeState = (key) => {
-    setNewArea((prevState) => {
-      return {
-        ...prevState,
-        state: key || "",
-      };
-    });
-  };
+  // const onSelectionChangeState = (key) => {
+  //   setNewArea((prevState) => {
+  //     return {
+  //       ...prevState,
+  //       state: key || "",
+  //     };
+  //   });
+  // };
   const countryAutocomplete = () => (
     <Autocomplete
       allowsCustomValue
@@ -365,7 +365,10 @@ export default function AreaRightCard() {
       variant="bordered"
       size="lg"
       onSelectionChange={onSelectionChangeCountry}
+      // defaultSelectedKey={newArea.country}
+      // selectedKey={newArea.country}
       selectedKey={newArea.country}
+
     >
       {countryData.map((country) => (
         <AutocompleteItem
