@@ -169,11 +169,7 @@ export default function AreaRightCard() {
         >
           {items.map((item) => (
             <div key={item?.map} className="flex justify-center">
-              <Card
-              // isPressable
-              // className=""
-              // onPress={() => setManageAd(item)}
-              >
+              <Card>
                 <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
                   <p className="text-tiny uppercase font-bold">{item?.state}</p>
                   <small className="text-default-500">{item?.country}</small>
@@ -197,135 +193,8 @@ export default function AreaRightCard() {
                 </CardBody>
               </Card>
             </div>
-            // <div
-            //   key={item}
-            //   className=" flex flex-col justify-center items-center"
-            // >
-            //   {/* <h4 className="font-bold text-large m-1">{item.label}</h4> */}
-            //   <Image
-            //     alt="Card area"
-            //     className="object-cover rounded-xl"
-            //     src={item}
-            //     width={270}
-            //     height={270}
-            //   />
-            // </div>
           ))}
         </Masonry>
-        {/* {manageAd?._id ? (
-          <div className="">
-            <div className="flex justify-between mb-7 w-full">
-              <Button
-                isIconOnly
-                radius="full"
-                color="default"
-                variant="flat"
-                aria-label="Back button"
-                onPress={() => {
-                  setManageAd({});
-                }}
-              >
-                <RiGalleryView2 className="text-2xl" />
-              </Button>
-              <div className="flex gap-3">
-                {manageAd._id !== ad.photo[0]?._id && (
-                  <Button
-                    radius="full"
-                    color="default"
-                    variant="flat"
-                    aria-label="Back button"
-                    onPress={() => {
-                      makeCover();
-                    }}
-                    isLoading={loading}
-                  >
-                    {lang?.make_cover ? lang.make_cover : "Make cover photo"}
-                  </Button>
-                )}
-                <Button
-                  isIconOnly
-                  radius="full"
-                  color="default"
-                  variant="flat"
-                  aria-label="Back button"
-                  onPress={() => {
-                    deletePhoto();
-                  }}
-                  isLoading={loading2}
-                >
-                  <DeleteForeverIcon />
-                </Button>
-              </div>
-            </div>
-            <div className="flex justify-center items-center  ">
-              <Image
-                alt="Card service demo"
-                className="object-cover rounded-xl hidden md:flex"
-                src={manageAd.url}
-                width={600}
-                height={600}
-              />
-              <Image
-                alt="Card service demo"
-                className="object-cover rounded-xl flex md:hidden"
-                src={manageAd.url}
-                width={400}
-                height={400}
-              />
-            </div>
-          </div>
-        ) : (
-          <Masonry
-            breakpointCols={breakpointColumnsObj}
-            className="my-masonry-grid max-w-[1500px]"
-            columnClassName="my-masonry-grid_column"
-          >
-            {(!ad.photo || ad?.photo?.length === 0) &&
-              items.map((item) => (
-                <div
-                  key={item.label}
-                  className=" flex flex-col justify-center items-center"
-                >
-                  <h4 className="font-bold text-large m-1">{item.label}</h4>
-                  <Image
-                    alt="Card service demo"
-                    className="object-cover rounded-xl"
-                    src={item.image}
-                    width={270}
-                    height={270}
-                  />
-                </div>
-              ))}
-            {ad?.photo?.length > 0 &&
-              !manageAd?._id &&
-              ad.photo.map((item, i) => (
-                <div key={item.url} className="flex justify-center">
-                  <Card
-                    isPressable
-                    className=""
-                    onPress={() => setManageAd(item)}
-                  >
-                    <CardBody className="m-0 p-0">
-                      <div className="relative">
-                        {i === 0 && (
-                          <Chip className="absolute z-40 m-3" color="default">
-                            Cover
-                          </Chip>
-                        )}
-                        <Image
-                          alt="Card service"
-                          className="object-cover rounded-xl cursor-pointer"
-                          src={item.url}
-                          width={400}
-                          height={357}
-                        />
-                      </div>
-                    </CardBody>
-                  </Card>
-                </div>
-              ))}
-          </Masonry>
-        )} */}
       </div>
     );
   };
@@ -449,7 +318,7 @@ export default function AreaRightCard() {
           <div className="flex flex-col justify-center  items-center h-full">
             <div className="rounded-lg overflow-hidden w-full  h-[380px]  ">
               <GoogleMapsEmbed
-                className="border-2 border-red-400 bg-black"
+                className=" bg-black"
                 apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
                 width="100%"
                 height={276}
@@ -465,6 +334,70 @@ export default function AreaRightCard() {
           </div>
         </CardBody>
       </Card>
+    );
+  };
+
+  const MapCard2 = () => {
+    return (
+      <div className="flex justify-center m-4">
+        <Card className="w-full max-w-[1600px]">
+          <CardHeader className="pb-0 p-2 px-4 flex-col items-start">
+            <p className="text-tiny uppercase font-bold">{area?.state}</p>
+            <small className="text-default-500">{area?.country}</small>
+            <h4 className="font-bold text-large">{`${area?.city} ${area?.town}`}</h4>
+          </CardHeader>
+          <CardBody className="m-0 p-0">
+            <GoogleMapsEmbed
+              className=" bg-black"
+              apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
+              width="100%"
+              height={500}
+              mode="place"
+              q={`${area?.town},${area?.city},${area?.state},${area?.country}`}
+            />
+            {/* <div className="relative">
+              <Image
+                alt="Card service"
+                className="object-cover rounded-xl "
+                src={item?.map}
+                width={550}
+                height={357}
+              />
+            </div> */}
+            {/* <div className="flex flex-col justify-center  items-center h-full">
+              <div className="rounded-lg overflow-hidden w-full  h-[380px]  ">
+                <GoogleMapsEmbed
+                  className="border-2 border-red-400 bg-black"
+                  apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
+                  width="100%"
+                  height={357}
+                  mode="place"
+                  q={`${area?.town},${area?.city},${area?.state},${area?.country}`}
+                />
+              </div>
+            </div> */}
+          </CardBody>
+        </Card>
+      </div>
+
+      // <Card className=" w-full h-screen max-h-[300px]">
+      //   <CardBody>
+      //     <div className="flex flex-col justify-center  items-center h-full">
+      //       <div className="rounded-lg overflow-hidden w-full  h-[380px]  ">
+      //         <GoogleMapsEmbed
+      //           className="border-2 border-red-400 bg-black"
+      //           apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
+      //           width="100%"
+      //           height={276}
+
+      //           mode="place"
+      //           q={`${newArea.town},${newArea.city},${newArea.state},${newArea.country}`}
+      //         />
+      //       </div>
+
+      //     </div>
+      //   </CardBody>
+      // </Card>
     );
   };
 
@@ -622,12 +555,8 @@ export default function AreaRightCard() {
           {
             "Please clearly mention your service area, as customers often look for services by location."
           }
-          {/* {lang?.photo_upload_description
-              ? lang.photo_upload_description
-              : `Upload your service poster with contact info, service details, and
-          coverage area. Include real case photos to assist customers.`} */}
         </div>
-        <M />
+        {area?.country ? <MapCard2 /> : <M />}
       </ScrollShadow>
     </div>
   );
