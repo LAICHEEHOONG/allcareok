@@ -330,10 +330,9 @@ export default function AreaRightCard() {
     );
   };
 
-  const closeModal = () => {
-    setNewArea(initialArea);
-    // onOpenChange();
-  };
+  // const closeModal = () => {
+  //   setNewArea(initialArea);
+  // };
 
   const onSelectionChangeCountry = (key) => {
     setNewArea((prevState) => {
@@ -454,16 +453,16 @@ export default function AreaRightCard() {
                 apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
                 allowfullscreen={false}
                 width="100%"
-                height={247}
+                height={300}
                 // height={380}
                 // width={400}
                 mode="place"
                 q={`${newArea.town},${newArea.city},${newArea.state},${newArea.country}`}
               />
             </div>
-            <div className="self-start text-sm text-default-400 truncate w-full max-w-[300px] capitalize p-2">
+            {/* <div className="self-start text-sm text-default-400 truncate w-full max-w-[300px] capitalize p-2">
               {`${newArea.town} ${newArea.city} ${newArea.state} ${newArea.country}`}
-            </div>
+            </div> */}
           </div>
         </CardBody>
       </Card>
@@ -479,7 +478,7 @@ export default function AreaRightCard() {
     }
   };
 
-  const toDB = async (adsId, area) => {
+  const toDB = async (adsId, area, fn) => {
     try {
       setLoading(true);
       const saveArea = await createAD({ ...ad, adsId, area });
@@ -488,15 +487,16 @@ export default function AreaRightCard() {
       console.log(error);
     } finally {
       setLoading(false);
+      fn();
       // if (isSmallScreen) {
       //   dispatch(setPopUp());
       // }
     }
   };
 
-  const handleSave = () => {
+  const handleSave = (fn) => {
     const adsId = ad._id;
-    toDB(adsId, newArea);
+    toDB(adsId, newArea, fn);
     fetchAds();
   };
 
@@ -550,7 +550,9 @@ export default function AreaRightCard() {
             onOpenChange={onOpenChange}
             backdrop="blur"
             size="lg"
-            onClose={closeModal}
+            onClose={() => {
+              setShowMap(false);
+            }}
           >
             <ModalContent>
               {(onClose) => (
@@ -582,7 +584,7 @@ export default function AreaRightCard() {
                         <Button
                           variant="light"
                           onPress={() => {
-                            closeModal();
+                            // closeModal();
                             onClose();
                           }}
                           size="lg"
@@ -599,7 +601,11 @@ export default function AreaRightCard() {
                             newArea.country === "" || newArea.country === null
                           }
                           isLoading={loading}
-                          onPress={handleSave}
+                          onPress={() => {
+                            handleSave(onClose);
+                            // onClose();
+                            // closeModal();
+                          }}
                         >
                           {"Save"}
                         </Button>
