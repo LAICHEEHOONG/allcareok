@@ -68,13 +68,15 @@ export default function AreaRightCard() {
   const area = useSelector((state) => state.editor?.ad?.area);
   const userCountry = useSelector((state) => state.auth?.country) || "";
   const initialArea = {
-    country: area?.country ? area.country : userCountry,
+    country: area?.country ? area?.country : userCountry,
     state: area?.state ? area.state : "",
     city: area?.city ? area.city : "",
     town: area?.town ? area.town : "",
   };
   const [newArea, setNewArea] = useState(initialArea);
   const [showMap, setShowMap] = useState(false);
+
+  useEffect(() => {console.log(area)}, [area]);
 
   const M = () => {
     const items = [
