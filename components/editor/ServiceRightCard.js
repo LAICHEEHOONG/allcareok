@@ -6,6 +6,12 @@ import CheckIcon from "@mui/icons-material/Check";
 import { useEffect, useState } from "react";
 import { setAd, setAds, setPopUp } from "@/redux/features/editor/editorSlice";
 import { createAD, findUserAds } from "@/lib/action/adAction";
+import Masonry from "react-masonry-css";
+
+const breakpointColumnsObj = {
+  default: 2,
+  1300: 1,
+};
 
 export default function ServiceRightCard() {
   const dispatch = useDispatch();
@@ -20,7 +26,6 @@ export default function ServiceRightCard() {
   const [loading, setLoading] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const l = useSelector((state) => state.auth?.lang?.listing_editor_card);
-
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 767px)"); // Tailwind's md breakpoint
@@ -116,9 +121,10 @@ export default function ServiceRightCard() {
 
       <ScrollShadow
         hideScrollBar
-        className="w-full flex justify-center items-start h-[40vh] md:h-[90vh]"
+        className="flex justify-center w-full h-[40vh] md:h-[90vh]"
+        // className="w-full flex justify-center items-start h-[40vh] md:h-[90vh]"
       >
-        <div className="flex flex-col gap-6 justify-center items-center p-5 w-full">
+        {/* <div className="flex flex-col gap-6 justify-center items-center p-5 w-full">
           {serviceItem.map(({ label, icon: Icon, selected }, idx) => (
             <div
               key={idx}
@@ -144,7 +150,40 @@ export default function ServiceRightCard() {
               </Button>
             </div>
           ))}
-        </div>
+        </div> */}
+        <Masonry
+          breakpointCols={breakpointColumnsObj}
+          // className="my-masonry-grid border-2 border-red-500 !w-full max-w-[1000px] "
+          // columnClassName="my-masonry-grid_column"
+          className="my-masonry-grid !w-full max-w-[1000px]"
+          columnClassName="my-masonry-grid_column flex flex-col gap-3 items-center p-5"
+        >
+          {serviceItem.map(({ label, icon: Icon, selected }, idx) => (
+            <div
+              key={idx}
+              className="text-default-500 flex justify-between items-center w-full max-w-[400px]  m-3 "
+            >
+              <div className="flex gap-5">
+                <Icon className={`w-6 h-6 `} />
+                <div>{label}</div>
+              </div>
+
+              <Button
+                isIconOnly
+                color={selected ? "primary" : "default"}
+                aria-label="service selector Icon"
+                radius="full"
+                variant={selected ? "solid" : "flat"}
+                size="sm"
+                onPress={() => {
+                  handleAddService(label);
+                }}
+              >
+                {selected ? <CheckIcon /> : <AddIcon />}
+              </Button>
+            </div>
+          ))}
+        </Masonry>
       </ScrollShadow>
     </div>
   );

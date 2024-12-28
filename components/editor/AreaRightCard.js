@@ -74,10 +74,6 @@ export default function AreaRightCard() {
   }, []);
 
   useEffect(() => {
-    console.log(screenHeight);
-  }, [screenHeight]);
-
-  useEffect(() => {
     if (newArea.country === "") {
       setNewArea((prevState) => {
         return {
