@@ -89,6 +89,13 @@
     "title_right_label": "标题",
     "character_available": "可用字符数",
     "over_limit": "字符超出限制",
-    "title_save": "保存"
+    "title_save": "保存",
+    "area_button": "区域",
+    "area_content": "请明确注明您的服务地区，因为客户通常会根据地点寻找服务。",
+    "map": "地图",
+    "select_country": "选择国家",
+    "state": "州/联邦直辖区",
+    "city": "城市/市区",
+    "town": "镇/社区"
   }
 }

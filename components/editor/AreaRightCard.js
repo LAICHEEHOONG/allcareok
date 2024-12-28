@@ -49,15 +49,10 @@ const breakpointColumnsObj = {
 
 export default function AreaRightCard() {
   const dispatch = useDispatch();
-  //   const user = useSelector((state) => state.auth._id);
-  const adsId = useSelector((state) => state.editor?.adsId);
   const ad = useSelector((state) => state.editor.ad);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  // const [photos, setPhotos] = useState([]);
   const [loading, setLoading] = useState(false);
-  //   const [loading2, setLoading2] = useState(false);
-  //   const [manageAd, setManageAd] = useState({});
-  const lang = useSelector((state) => state.auth.lang?.listing_editor_card);
+  // const lang = useSelector((state) => state.auth.lang?.listing_editor_card);
   const router = useRouter();
   const pathName = usePathname();
   const currentLocale = pathName.split("/")[1] || "en";
@@ -71,6 +66,7 @@ export default function AreaRightCard() {
   };
   const [newArea, setNewArea] = useState(initialArea);
   const [showMap, setShowMap] = useState(false);
+  const l = useSelector((state) => state.auth?.lang?.listing_editor_card);
 
   useEffect(() => {
     if (newArea.country === "") {
@@ -199,10 +195,6 @@ export default function AreaRightCard() {
     );
   };
 
-  // const closeModal = () => {
-  //   setNewArea(initialArea);
-  // };
-
   const onSelectionChangeCountry = (key) => {
     setNewArea((prevState) => {
       return {
@@ -218,7 +210,7 @@ export default function AreaRightCard() {
       isRequired
       // defaultItems={countryData}
       className="max-w-xs"
-      label="Select Country"
+      label={l?.select_country}
       variant="bordered"
       size="lg"
       onSelectionChange={onSelectionChangeCountry}
@@ -248,7 +240,7 @@ export default function AreaRightCard() {
     return (
       <Input
         className="max-w-xs"
-        label="State / federal territory"
+        label={l?.state}
         variant="bordered"
         size="lg"
         value={newArea.state} // Bind the current value of newArea.state
@@ -266,7 +258,7 @@ export default function AreaRightCard() {
     return (
       <Input
         className="max-w-xs"
-        label="City / mulicipality"
+        label={l?.city}
         variant="bordered"
         size="lg"
         value={newArea.city} // Bind the current value of newArea.state
@@ -284,7 +276,7 @@ export default function AreaRightCard() {
     return (
       <Input
         className="max-w-xs"
-        label="Town / neighborhood"
+        label={l?.town}
         variant="bordered"
         size="lg"
         value={newArea.town} // Bind the current value of newArea.state
@@ -301,12 +293,16 @@ export default function AreaRightCard() {
   const MapSwitch = () => {
     return (
       <Switch
+
         checked={showMap} // Bind the switch's value to the state
         aria-label="Map toggle"
         onChange={(e) => setShowMap(e.target.checked)} // Update the state on toggle
         size="sm"
       >
-        Map
+        <div className="w-12">
+        {l?.map}
+
+        </div>
       </Switch>
     );
   };
@@ -322,15 +318,10 @@ export default function AreaRightCard() {
                 apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
                 width="100%"
                 height={276}
-                // height={380}
-                // width={400}
                 mode="place"
                 q={`${newArea.town},${newArea.city},${newArea.state},${newArea.country}`}
               />
             </div>
-            {/* <div className="self-start text-sm text-default-400 truncate w-full max-w-[300px] capitalize p-2">
-              {`${newArea.town} ${newArea.city} ${newArea.state} ${newArea.country}`}
-            </div> */}
           </div>
         </CardBody>
       </Card>
@@ -341,10 +332,10 @@ export default function AreaRightCard() {
     return (
       <div className="flex justify-center m-4">
         <Card className="w-full max-w-[1600px]">
-          <CardHeader className="pb-0 p-2 px-4 flex-col items-start">
-            <p className="text-tiny uppercase font-bold">{area?.state}</p>
-            <small className="text-default-500">{area?.country}</small>
-            <h4 className="font-bold text-large">{`${area?.city} ${area?.town}`}</h4>
+          <CardHeader className="pb-0 p-2 px-4 flex-col items-start uppercase tracking-wide">
+            <p className="text-tiny  font-bold">{area?.state}</p>
+            <small className="text-default-500 ">{area?.country}</small>
+            <h4 className="font-bold text-large ">{`${area?.city} ${area?.town}`}</h4>
           </CardHeader>
           <CardBody className="m-0 p-0">
             <GoogleMapsEmbed
@@ -355,49 +346,9 @@ export default function AreaRightCard() {
               mode="place"
               q={`${area?.town},${area?.city},${area?.state},${area?.country}`}
             />
-            {/* <div className="relative">
-              <Image
-                alt="Card service"
-                className="object-cover rounded-xl "
-                src={item?.map}
-                width={550}
-                height={357}
-              />
-            </div> */}
-            {/* <div className="flex flex-col justify-center  items-center h-full">
-              <div className="rounded-lg overflow-hidden w-full  h-[380px]  ">
-                <GoogleMapsEmbed
-                  className="border-2 border-red-400 bg-black"
-                  apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
-                  width="100%"
-                  height={357}
-                  mode="place"
-                  q={`${area?.town},${area?.city},${area?.state},${area?.country}`}
-                />
-              </div>
-            </div> */}
           </CardBody>
         </Card>
       </div>
-
-      // <Card className=" w-full h-screen max-h-[300px]">
-      //   <CardBody>
-      //     <div className="flex flex-col justify-center  items-center h-full">
-      //       <div className="rounded-lg overflow-hidden w-full  h-[380px]  ">
-      //         <GoogleMapsEmbed
-      //           className="border-2 border-red-400 bg-black"
-      //           apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
-      //           width="100%"
-      //           height={276}
-
-      //           mode="place"
-      //           q={`${newArea.town},${newArea.city},${newArea.state},${newArea.country}`}
-      //         />
-      //       </div>
-
-      //     </div>
-      //   </CardBody>
-      // </Card>
     );
   };
 
@@ -453,7 +404,7 @@ export default function AreaRightCard() {
           >
             <ArrowBackIcon />
           </Button>
-          <div className="text-3xl font-semibold">{lang?.area}</div>
+          <div className="text-3xl font-semibold">{l?.area}</div>
         </div>
 
         <>
@@ -465,7 +416,7 @@ export default function AreaRightCard() {
             startContent={<AddLocationIcon fontSize="medium" />}
             onPress={onOpen}
           >
-            {"Area"}
+            {l?.area_button}
           </Button>
           <Button
             className="md:hidden"
@@ -493,7 +444,7 @@ export default function AreaRightCard() {
                     <div className="flex justify-start items-center w-full ">
                       {MapSwitch()}
                       <div className="w-full flex justify-center items-center mr-[90px]">
-                        <div>{"Service Area"}</div>
+                        <div>{l?.area}</div>
                       </div>
                     </div>
                   </ModalHeader>
@@ -522,7 +473,7 @@ export default function AreaRightCard() {
                           size="lg"
                           radius="full"
                         >
-                          {lang?.cancel}
+                          {l?.cancel}
                           {/* {photos?.length === 0 ? lang?.done : lang?.cancel} */}
                         </Button>
                         <Button
@@ -539,7 +490,7 @@ export default function AreaRightCard() {
                             // closeModal();
                           }}
                         >
-                          {"Save"}
+                          {l?.title_save}
                         </Button>
                       </div>
                     </div>
@@ -551,11 +502,7 @@ export default function AreaRightCard() {
         </>
       </div>
       <ScrollShadow className="h-[92vh]" hideScrollBar={true}>
-        <div className="mb-6 mt-2 text-default-400 ">
-          {
-            "Please clearly mention your service area, as customers often look for services by location."
-          }
-        </div>
+        <div className="mb-6 mt-2 text-default-400 ">{l.area_content}</div>
         {area?.country ? <MapCard2 /> : <M />}
       </ScrollShadow>
     </div>

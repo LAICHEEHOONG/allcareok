@@ -89,6 +89,13 @@
     "title_right_label": "Title",
     "character_available": "characters available",
     "over_limit": "character over limit",
-    "title_save": "Save"
+    "title_save": "Save",
+    "area_button": "Area",
+    "area_content": "Please clearly mention your service area, as customers often look for services by location.",
+    "map": "Map",
+    "select_country": "Select Country",
+    "state": "State / federal territory",
+    "city": "City / mulicipality",
+    "town": "Town / neighborhood"
   }
 }
