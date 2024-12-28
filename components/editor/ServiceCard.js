@@ -46,7 +46,7 @@ export default function ServiceCard() {
         <div className="flex flex-col justify-start gap-2">
           <div className="font-medium mb-2">{l?.service}</div>
           {services?.length === 0 && (
-            <div className="text-default-400 p-2">{`Add details`}</div>
+            <div className="text-default-400 p-2">{l?.add_detail}</div>
           )}
 
           {services?.slice(0, 3).map(({ label, icon: Icon, id }) => (

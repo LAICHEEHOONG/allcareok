@@ -96,6 +96,8 @@
     "select_country": "Select Country",
     "state": "State / federal territory",
     "city": "City / mulicipality",
-    "town": "Town / neighborhood"
+    "town": "Town / neighborhood",
+    "add_service_area": "Add service area",
+    "add_detail": "Add detail"
   }
 }

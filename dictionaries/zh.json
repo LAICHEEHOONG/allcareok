@@ -96,6 +96,8 @@
     "select_country": "选择国家",
     "state": "州/联邦直辖区",
     "city": "城市/市区",
-    "town": "镇/社区"
+    "town": "镇/社区",
+    "add_service_area": "添加服务区域",
+    "add_detail": "添加详情"
   }
 }

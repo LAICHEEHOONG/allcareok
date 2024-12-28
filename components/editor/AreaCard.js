@@ -59,6 +59,9 @@ export default function AreaCard() {
               </div>
             ) : null
           )}
+          {area?.country === "" && (
+            <div className="text-default-400 p-2">{l?.add_service_area}</div>
+          )}
         </div>
       </CardBody>
     </Card>
