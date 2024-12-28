@@ -330,44 +330,44 @@ export default function AreaRightCard() {
 
   const MapCard2 = () => {
     return (
-      <div className="flex justify-center items-center m-4 border-2 border-red-400 h-[80vh]">
-      <Card className="w-full max-w-[1600px] h-[70vh] flex flex-col">
-        <CardHeader className="pb-0 p-2 px-4 flex-col items-start uppercase tracking-wide">
-          <p className="text-tiny font-bold">{area?.state}</p>
-          <small className="text-default-500">{area?.country}</small>
-          <h4 className="font-bold text-large">{`${area?.city} ${area?.town}`}</h4>
-        </CardHeader>
-        <CardBody className="flex-grow m-0 p-0">
-          <GoogleMapsEmbed
-            className="w-full h-full"
-            apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
-            width="100%"
-            height="100%"
-            mode="place"
-            q={`${area?.town},${area?.city},${area?.state},${area?.country}`}
-          />
-        </CardBody>
-      </Card>
-    </div>
-      // <div className="flex justify-center items-center m-4 border-2 border-red-400 h-[80vh]">
-      //   <Card className="w-full max-w-[1600px] h-[70vh]">
-      //     <CardHeader className="pb-0 p-2 px-4 flex-col items-start uppercase tracking-wide">
-      //       <p className="text-tiny  font-bold">{area?.state}</p>
-      //       <small className="text-default-500 ">{area?.country}</small>
-      //       <h4 className="font-bold text-large ">{`${area?.city} ${area?.town}`}</h4>
-      //     </CardHeader>
-      //     <CardBody className="m-0 p-0">
-      //       <GoogleMapsEmbed
-      //         className=" bg-black"
-      //         apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
-      //         width="100%"
-      //         height={500}
-      //         mode="place"
-      //         q={`${area?.town},${area?.city},${area?.state},${area?.country}`}
-      //       />
-      //     </CardBody>
-      //   </Card>
-      // </div>
+    //   <div className="flex justify-center items-center m-4 border-2 border-red-400 h-[80vh]">
+    //   <Card className="w-full max-w-[1600px] h-[70vh] flex flex-col">
+    //     <CardHeader className="pb-0 p-2 px-4 flex-col items-start uppercase tracking-wide">
+    //       <p className="text-tiny font-bold">{area?.state}</p>
+    //       <small className="text-default-500">{area?.country}</small>
+    //       <h4 className="font-bold text-large">{`${area?.city} ${area?.town}`}</h4>
+    //     </CardHeader>
+    //     <CardBody className="flex-grow m-0 p-0">
+    //       <GoogleMapsEmbed
+    //         className="w-full h-full"
+    //         apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
+    //         width="100%"
+    //         height="100%"
+    //         mode="place"
+    //         q={`${area?.town},${area?.city},${area?.state},${area?.country}`}
+    //       />
+    //     </CardBody>
+    //   </Card>
+    // </div>
+      <div className="flex justify-center items-center m-4 h-[80vh]">
+        <Card className="w-full max-w-[1600px] h-[500px]">
+          <CardHeader className="pb-0 p-2 px-4 flex-col items-start uppercase tracking-wide">
+            <p className="text-tiny  font-bold">{area?.state}</p>
+            <small className="text-default-500 ">{area?.country}</small>
+            <h4 className="font-bold text-large ">{`${area?.city} ${area?.town}`}</h4>
+          </CardHeader>
+          <CardBody className="m-0 p-0">
+            <GoogleMapsEmbed
+              className=" bg-black"
+              apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
+              width="100%"
+              height={421}
+              mode="place"
+              q={`${area?.town},${area?.city},${area?.state},${area?.country}`}
+            />
+          </CardBody>
+        </Card>
+      </div>
     );
   };
 
