@@ -9,31 +9,22 @@ import {
   useDisclosure,
   Image,
   Divider,
-  Spinner,
-  Chip,
   Card,
   CardBody,
   CardHeader,
-  CardFooter,
   Autocomplete,
   AutocompleteItem,
   Avatar,
   Input,
 } from "@nextui-org/react";
 import { useSelector, useDispatch } from "react-redux";
-import FilterIcon from "@mui/icons-material/Filter";
 import Masonry from "react-masonry-css";
-import AddIcon from "@mui/icons-material/Add";
-// import { useDropzone } from "react-dropzone";
-import { useCallback, useEffect, useState } from "react";
-// import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { useEffect, useState } from "react";
 import { createAD } from "@/lib/action/adAction";
 import { setAd, setAds } from "@/redux/features/editor/editorSlice";
 import { findUserAds } from "@/lib/action/adAction";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-// import { deleteImages } from "@/util/deleteImage";
 import { useRouter, usePathname } from "next/navigation";
-import { RiGalleryView2 } from "react-icons/ri";
 import AddLocationIcon from "@mui/icons-material/AddLocation";
 import { countryData } from "@/lib/countryData";
 import { Switch } from "@nextui-org/react";
@@ -52,7 +43,6 @@ export default function AreaRightCard() {
   const ad = useSelector((state) => state.editor.ad);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [loading, setLoading] = useState(false);
-  // const lang = useSelector((state) => state.auth.lang?.listing_editor_card);
   const router = useRouter();
   const pathName = usePathname();
   const currentLocale = pathName.split("/")[1] || "en";
@@ -67,6 +57,25 @@ export default function AreaRightCard() {
   const [newArea, setNewArea] = useState(initialArea);
   const [showMap, setShowMap] = useState(false);
   const l = useSelector((state) => state.auth?.lang?.listing_editor_card);
+  const [screenHeight, setScreenHeight] = useState(window.innerHeight);
+
+  const checkScreenHeight = () => {
+    setScreenHeight(window.innerHeight);
+  };
+
+  useEffect(() => {
+    // Add event listener to track window resize
+    window.addEventListener("resize", checkScreenHeight);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", checkScreenHeight);
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log(screenHeight);
+  }, [screenHeight]);
 
   useEffect(() => {
     if (newArea.country === "") {
@@ -333,12 +342,12 @@ export default function AreaRightCard() {
             <small className="text-default-500 ">{area?.country}</small>
             <h4 className="font-bold text-large ">{`${area?.city} ${area?.town}`}</h4>
           </CardHeader>
-          <CardBody className="m-0 p-0 h-[450px]">
+          <CardBody className={`m-0 p-0 h-[${screenHeight * 0.6}px]  `}>
             <GoogleMapsEmbed
               className=" bg-black"
               apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
               width="100%"
-              height={450}
+              height={screenHeight * 0.6}
               mode="place"
               q={`${area?.town},${area?.city},${area?.state},${area?.country}`}
             />
@@ -378,10 +387,6 @@ export default function AreaRightCard() {
     toDB(adsId, newArea, fn);
     fetchAds();
   };
-
-  useEffect(() => {
-    console.log(newArea);
-  }, [newArea]);
 
   return (
     <div className="h-screen w-full md:pl-2">
