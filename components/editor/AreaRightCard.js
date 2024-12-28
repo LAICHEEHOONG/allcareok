@@ -361,7 +361,7 @@ export default function AreaRightCard() {
               className=" bg-black"
               apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
               width="100%"
-              height={421}
+              height={437}
               mode="place"
               q={`${area?.town},${area?.city},${area?.state},${area?.country}`}
             />
