@@ -330,8 +330,8 @@ export default function AreaRightCard() {
 
   const MapCard2 = () => {
     return (
-      <div className="flex justify-center m-4">
-        <Card className="w-full max-w-[1600px]">
+      <div className="flex justify-center items-center m-4 border-2 border-red-400 h-[80vh]">
+        <Card className="w-full max-w-[1600px] h-[70vh]">
           <CardHeader className="pb-0 p-2 px-4 flex-col items-start uppercase tracking-wide">
             <p className="text-tiny  font-bold">{area?.state}</p>
             <small className="text-default-500 ">{area?.country}</small>
