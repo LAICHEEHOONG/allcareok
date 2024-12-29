@@ -57,21 +57,21 @@ export default function AreaRightCard() {
   const [newArea, setNewArea] = useState(initialArea);
   const [showMap, setShowMap] = useState(false);
   const l = useSelector((state) => state.auth?.lang?.listing_editor_card);
-  const [screenHeight, setScreenHeight] = useState(window.innerHeight);
+  // const [screenHeight, setScreenHeight] = useState(window.innerHeight);
 
-  const checkScreenHeight = () => {
-    setScreenHeight(window.innerHeight);
-  };
+  // const checkScreenHeight = () => {
+  //   setScreenHeight(window.innerHeight);
+  // };
 
-  useEffect(() => {
-    // Add event listener to track window resize
-    window.addEventListener("resize", checkScreenHeight);
+  // useEffect(() => {
+  //   // Add event listener to track window resize
+  //   window.addEventListener("resize", checkScreenHeight);
 
-    // Cleanup event listener on component unmount
-    return () => {
-      window.removeEventListener("resize", checkScreenHeight);
-    };
-  }, []);
+  //   // Cleanup event listener on component unmount
+  //   return () => {
+  //     window.removeEventListener("resize", checkScreenHeight);
+  //   };
+  // }, []);
 
   useEffect(() => {
     if (newArea?.country === "") {

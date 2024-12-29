@@ -1,12 +1,13 @@
 "use client";
-import dynamic from "next/dynamic";
+import AreaRightCard from "@/components/editor/AreaRightCard";
+// import dynamic from "next/dynamic";
 
-const AreaRightCard = dynamic(
-  () => import("@/components/editor/AreaRightCard"),
-  {
-    ssr: false,
-  }
-);
+// const AreaRightCard = dynamic(
+//   () => import("@/components/editor/AreaRightCard"),
+//   {
+//     ssr: false,
+//   }
+// );
 
 export default function MobileArea() {
   return (
