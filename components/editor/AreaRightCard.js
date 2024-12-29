@@ -196,6 +196,7 @@ export default function AreaRightCard() {
   };
 
   const onSelectionChangeCountry = (key) => {
+    console.log(key);
     setNewArea((prevState) => {
       return {
         ...prevState,
@@ -206,14 +207,14 @@ export default function AreaRightCard() {
 
   const countryAutocomplete = () => (
     <Autocomplete
-      // allowsCustomValue
+      allowsCustomValue
       isRequired
       className="max-w-xs"
       label={l?.select_country}
       variant="bordered"
       size="lg"
-      onSelectionChange={onSelectionChangeCountry}
-      selectedKey={newArea?.country}
+      onInputChange={onSelectionChangeCountry}
+      defaultInputValue={newArea?.country}
     >
       {countryData.map((country) => (
         <AutocompleteItem
@@ -232,6 +233,35 @@ export default function AreaRightCard() {
       ))}
     </Autocomplete>
   );
+
+  // const countryAutocomplete = () => (
+  //   <Autocomplete
+  //     allowsCustomValue
+  //     isRequired
+  //     className="max-w-xs"
+  //     label={l?.select_country}
+  //     variant="bordered"
+  //     size="lg"
+  //     onSelectionChange={onSelectionChangeCountry}
+  //     defaultSelectedKey={newArea?.country}
+  //   >
+  //     {countryData.map((country) => (
+  //       <AutocompleteItem
+  //         key={country?.value}
+  //         value={country?.label} // Ensure value is set for onSelect to work
+  //         startContent={
+  //           <Avatar
+  //             alt={country?.label}
+  //             className="w-6 h-6"
+  //             src={country?.description}
+  //           />
+  //         }
+  //       >
+  //         {country?.label}
+  //       </AutocompleteItem>
+  //     ))}
+  //   </Autocomplete>
+  // );
 
   const stateField = () => {
     return (
@@ -364,9 +394,6 @@ export default function AreaRightCard() {
     } finally {
       setLoading(false);
       fn();
-      // if (isSmallScreen) {
-      //   dispatch(setPopUp());
-      // }
     }
   };
 
@@ -491,10 +518,18 @@ export default function AreaRightCard() {
         </>
       </div>
       <div className="md:hidden">{area?.country ? <MapCard2 /> : <M />}</div>
-      <ScrollShadow className="h-[92vh] hidden md:block" hideScrollBar={true}>
+      <div className="hidden md:block">
+        <ScrollShadow className="h-[92vh]" hideScrollBar={true}>
+          <div className="mb-6 mt-2 text-default-400 ">{l?.area_content}</div>
+          {area?.country ? <MapCard2 /> : <M />}
+        </ScrollShadow>
+      </div>
+
+      {/* <div className="md:hidden">{area?.country ? <MapCard2 /> : <M />}</div> */}
+      {/* <ScrollShadow className="h-[92vh] hidden md:block" hideScrollBar={true}>
         <div className="mb-6 mt-2 text-default-400 ">{l?.area_content}</div>
         {area?.country ? <MapCard2 /> : <M />}
-      </ScrollShadow>
+      </ScrollShadow> */}
     </div>
   );
 }
