@@ -1,4 +1,3 @@
-
 import {
   ScrollShadow,
   Button,
@@ -492,7 +491,9 @@ export default function AreaRightCard() {
         </>
       </div>
       <ScrollShadow className="h-[92vh]" hideScrollBar={true}>
-        <div className="mb-6 mt-2 text-default-400 ">{l?.area_content}</div>
+        {area?.country === "" && (
+          <div className="mb-6 mt-2 text-default-400 ">{l?.area_content}</div>
+        )}
         {area?.country ? <MapCard2 /> : <M />}
       </ScrollShadow>
     </div>
