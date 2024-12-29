@@ -84,8 +84,7 @@ export default function ServiceRightCard() {
 
     toDB(adsId, newService);
     fetchAds();
-    // const newAd = { ...ad, service: newService };
-    // dispatch(setAd(newAd));
+
   };
 
   useEffect(() => {
@@ -103,7 +102,7 @@ export default function ServiceRightCard() {
   return (
     <div className="h-[50vh] md:h-screen w-full ">
       <div className="flex justify-center items-start mb-5">
-        <div className="w-full max-w-[500px] flex justify-between items-center">
+        <div className="w-full max-w-[1000px] flex justify-between items-center">
           <div className="text-2xl md:text-3xl font-semibold">
             {`${l?.service}`}
           </div>
@@ -122,39 +121,9 @@ export default function ServiceRightCard() {
       <ScrollShadow
         hideScrollBar
         className="flex justify-center w-full h-[40vh] md:h-[90vh]"
-        // className="w-full flex justify-center items-start h-[40vh] md:h-[90vh]"
       >
-        {/* <div className="flex flex-col gap-6 justify-center items-center p-5 w-full">
-          {serviceItem.map(({ label, icon: Icon, selected }, idx) => (
-            <div
-              key={idx}
-              className="text-default-500 flex justify-between items-center w-full max-w-[500px]"
-            >
-              <div className="flex gap-5">
-                <Icon className={`w-6 h-6 `} />
-                <div>{label}</div>
-              </div>
-
-              <Button
-                isIconOnly
-                color={selected ? "primary" : "default"}
-                aria-label="service selector Icon"
-                radius="full"
-                variant={selected ? "solid" : "flat"}
-                size="sm"
-                onPress={() => {
-                  handleAddService(label);
-                }}
-              >
-                {selected ? <CheckIcon /> : <AddIcon />}{" "}
-              </Button>
-            </div>
-          ))}
-        </div> */}
         <Masonry
           breakpointCols={breakpointColumnsObj}
-          // className="my-masonry-grid border-2 border-red-500 !w-full max-w-[1000px] "
-          // columnClassName="my-masonry-grid_column"
           className="my-masonry-grid !w-full max-w-[1000px]"
           columnClassName="my-masonry-grid_column flex flex-col gap-3 items-center p-5"
         >
