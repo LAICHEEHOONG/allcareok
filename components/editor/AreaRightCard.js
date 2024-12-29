@@ -1,3 +1,4 @@
+
 import {
   ScrollShadow,
   Button,
@@ -40,7 +41,7 @@ const breakpointColumnsObj = {
 
 export default function AreaRightCard() {
   const dispatch = useDispatch();
-  const ad = useSelector((state) => state.editor.ad);
+  const ad = useSelector((state) => state.editor?.ad);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -74,7 +75,7 @@ export default function AreaRightCard() {
   }, []);
 
   useEffect(() => {
-    if (newArea.country === "") {
+    if (newArea?.country === "") {
       setNewArea((prevState) => {
         return {
           ...prevState,
@@ -178,11 +179,6 @@ export default function AreaRightCard() {
                 </CardHeader>
                 <CardBody className="m-0 p-0">
                   <div className="relative">
-                    {/* {i === 0 && (
-                      <Chip className="absolute z-40 m-3" color="default">
-                        Cover
-                      </Chip>
-                    )} */}
                     <Image
                       alt="Card service"
                       className="object-cover rounded-xl "
@@ -213,29 +209,26 @@ export default function AreaRightCard() {
     <Autocomplete
       // allowsCustomValue
       isRequired
-      // defaultItems={countryData}
       className="max-w-xs"
       label={l?.select_country}
       variant="bordered"
       size="lg"
       onSelectionChange={onSelectionChangeCountry}
-      // defaultSelectedKey={newArea.country}
-      // selectedKey={newArea.country}
-      selectedKey={newArea.country}
+      selectedKey={newArea?.country}
     >
       {countryData.map((country) => (
         <AutocompleteItem
-          key={country.value}
-          value={country.label} // Ensure value is set for onSelect to work
+          key={country?.value}
+          value={country?.label} // Ensure value is set for onSelect to work
           startContent={
             <Avatar
-              alt={country.label}
+              alt={country?.label}
               className="w-6 h-6"
-              src={country.description}
+              src={country?.description}
             />
           }
         >
-          {country.label}
+          {country?.label}
         </AutocompleteItem>
       ))}
     </Autocomplete>
@@ -248,7 +241,7 @@ export default function AreaRightCard() {
         label={l?.state}
         variant="bordered"
         size="lg"
-        value={newArea.state} // Bind the current value of newArea.state
+        value={newArea?.state} // Bind the current value of newArea.state
         onChange={(e) => {
           setNewArea((prevState) => ({
             ...prevState,
@@ -266,7 +259,7 @@ export default function AreaRightCard() {
         label={l?.city}
         variant="bordered"
         size="lg"
-        value={newArea.city} // Bind the current value of newArea.state
+        value={newArea?.city} // Bind the current value of newArea.state
         onChange={(e) => {
           setNewArea((prevState) => ({
             ...prevState,
@@ -284,7 +277,7 @@ export default function AreaRightCard() {
         label={l?.town}
         variant="bordered"
         size="lg"
-        value={newArea.town} // Bind the current value of newArea.state
+        value={newArea?.town} // Bind the current value of newArea.state
         onChange={(e) => {
           setNewArea((prevState) => ({
             ...prevState,
@@ -320,7 +313,7 @@ export default function AreaRightCard() {
                 width="100%"
                 height={276}
                 mode="place"
-                q={`${newArea.town},${newArea.city},${newArea.state},${newArea.country}`}
+                q={`${newArea?.town},${newArea?.city},${newArea?.state},${newArea?.country}`}
               />
             </div>
           </div>
@@ -499,7 +492,7 @@ export default function AreaRightCard() {
         </>
       </div>
       <ScrollShadow className="h-[92vh]" hideScrollBar={true}>
-        <div className="mb-6 mt-2 text-default-400 ">{l.area_content}</div>
+        <div className="mb-6 mt-2 text-default-400 ">{l?.area_content}</div>
         {area?.country ? <MapCard2 /> : <M />}
       </ScrollShadow>
     </div>

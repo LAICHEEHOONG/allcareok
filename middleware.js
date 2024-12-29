@@ -97,6 +97,8 @@ const protectedPaths = [
   "/overview",
   "/editor/mobile/photo",
   "/editor/mobile/delete",
+  "/editor/mobile/area",
+
 ];
 
 function getProtectedRoutes(protectedPaths, locales) {
