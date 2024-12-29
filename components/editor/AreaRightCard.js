@@ -490,10 +490,9 @@ export default function AreaRightCard() {
           </Modal>
         </>
       </div>
-      <ScrollShadow className="h-[92vh]" hideScrollBar={true}>
-        {area?.country === "" && (
-          <div className="mb-6 mt-2 text-default-400 ">{l?.area_content}</div>
-        )}
+      <div className="md:hidden">{area?.country ? <MapCard2 /> : <M />}</div>
+      <ScrollShadow className="h-[92vh] hidden md:block" hideScrollBar={true}>
+        <div className="mb-6 mt-2 text-default-400 ">{l?.area_content}</div>
         {area?.country ? <MapCard2 /> : <M />}
       </ScrollShadow>
     </div>
