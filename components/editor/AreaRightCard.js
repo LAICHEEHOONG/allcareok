@@ -446,16 +446,16 @@ export default function AreaRightCard() {
                       </div>
                     </div>
                   </ModalHeader>
-                  <ModalBody className=" flex flex-col justify-center items-center gap-4 p-4 ">
+                  <ModalBody className="flex flex-col justify-center items-center gap-4 p-4 ">
                     {showMap ? (
                       <MapCard />
                     ) : (
-                      <>
+                      <ScrollShadow className="w-full flex flex-col  items-center gap-5 h-[250px]">
                         {townField()}
                         {cityField()}
                         {stateField()}
                         {countryAutocomplete()}
-                      </>
+                      </ScrollShadow>
                     )}
                   </ModalBody>
                   <ModalFooter>
