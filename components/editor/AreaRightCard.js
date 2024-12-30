@@ -206,7 +206,7 @@ export default function AreaRightCard() {
 
   const countryAutocomplete = () => (
     <Autocomplete
-      // allowsCustomValue
+      allowsCustomValue
       isRequired
       className="max-w-xs"
       label={l?.select_country}
@@ -232,35 +232,6 @@ export default function AreaRightCard() {
       ))}
     </Autocomplete>
   );
-
-  // const countryAutocomplete = () => (
-  //   <Autocomplete
-  //     allowsCustomValue
-  //     isRequired
-  //     className="max-w-xs"
-  //     label={l?.select_country}
-  //     variant="bordered"
-  //     size="lg"
-  //     onSelectionChange={onSelectionChangeCountry}
-  //     defaultSelectedKey={newArea?.country}
-  //   >
-  //     {countryData.map((country) => (
-  //       <AutocompleteItem
-  //         key={country?.value}
-  //         value={country?.label} // Ensure value is set for onSelect to work
-  //         startContent={
-  //           <Avatar
-  //             alt={country?.label}
-  //             className="w-6 h-6"
-  //             src={country?.description}
-  //           />
-  //         }
-  //       >
-  //         {country?.label}
-  //       </AutocompleteItem>
-  //     ))}
-  //   </Autocomplete>
-  // );
 
   const stateField = () => {
     return (
@@ -359,9 +330,7 @@ export default function AreaRightCard() {
             <small className="text-default-500 ">{area?.country}</small>
             <h4 className="font-bold text-large ">{`${area?.city} ${area?.town}`}</h4>
           </CardHeader>
-          <CardBody
-            className={`m-0 p-0 h-[450px]  md:h-[500px]`}
-          >
+          <CardBody className={`m-0 p-0 h-[450px]  md:h-[500px]`}>
             <div className="md:hidden">
               <GoogleMapsEmbed
                 className="bg-black"
@@ -482,10 +451,10 @@ export default function AreaRightCard() {
                       <MapCard />
                     ) : (
                       <>
-                        {countryAutocomplete()}
-                        {stateField()}
-                        {cityField()}
                         {townField()}
+                        {cityField()}
+                        {stateField()}
+                        {countryAutocomplete()}
                       </>
                     )}
                   </ModalBody>
@@ -540,9 +509,6 @@ export default function AreaRightCard() {
 
         {area?.country ? <MapCard2 /> : <M />}
       </ScrollShadow>
-  
-
-    
     </div>
   );
 }
