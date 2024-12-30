@@ -15,7 +15,9 @@ import { useSession, signIn } from "next-auth/react";
 import { DrawerLanguage } from "../DrawerLanguage";
 
 export default function NavBottom({ bottom_navigation }) {
-  const { data: session, status } = useSession();
+  // const { data: session, status } = useSession();
+  const session = useSelector((state) => state.auth.session);
+
   const router = useRouter();
   const pathname = usePathname();
   const isDashboard =

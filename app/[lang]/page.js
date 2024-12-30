@@ -2,8 +2,12 @@
 import Fruits from "@/components/Fruits";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { setCountry } from "@/redux/features/auth/authSlice";
-
+import {
+  setCountry,
+  setSession,
+  setStatus,
+} from "@/redux/features/auth/authSlice";
+import { useSession } from "next-auth/react";
 import axios from "axios"; // Ensure axios is imported
 
 async function getCountryFromIP() {
@@ -11,18 +15,24 @@ async function getCountryFromIP() {
     const response = await axios.get("https://ipapi.co/json/");
     return response.data.country_name;
   } catch (error) {
-    console.error("Error getting country from IP:", error);
+    console.log("Error getting country from IP:", error);
     return null;
   }
 }
 
 export default function Home() {
+  const { data: session, status } = useSession();
   const dispatch = useDispatch();
   useEffect(() => {
     getCountryFromIP().then((country) => {
       dispatch(setCountry(country));
     });
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(setSession(session));
+    dispatch(setStatus(status));
+  }, [session, dispatch, status]);
 
   return (
     <div className="">

@@ -16,10 +16,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { userInfo, signInStatus } from "@/redux/features/auth/authSlice";
 import { useRouter, usePathname } from "next/navigation";
 import { findUserAds } from "@/lib/action/adAction";
-import { setAds, setBlockServiceBtn } from "@/redux/features/editor/editorSlice";
+import {
+  setAds,
+  setBlockServiceBtn,
+} from "@/redux/features/editor/editorSlice";
 
 export default function ProfileMenu({ navigation }) {
-  const { data: session, status } = useSession();
+  // const { data: session, status } = useSession();
+  const session = useSelector((state) => state.auth.session);
+  const status = useSelector((state) => state.auth.status);
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
   const user = useSelector((state) => state.auth._id);
@@ -27,7 +32,7 @@ export default function ProfileMenu({ navigation }) {
   const pathName = usePathname();
   const currentLocale = pathName.split("/")[1] || "en";
   const ads = useSelector((state) => state.editor.ads);
-  const blockServiceBtn = useSelector(state => state.editor.blockServiceBtn)
+  const blockServiceBtn = useSelector((state) => state.editor.blockServiceBtn);
 
   const changeRouter = () => {
     if (ads.length === 0) {
@@ -47,14 +52,14 @@ export default function ProfileMenu({ navigation }) {
   useEffect(() => {
     const signUpUser = async (user) => {
       try {
-        dispatch(setBlockServiceBtn(true))
+        dispatch(setBlockServiceBtn(true));
         const res = await signUp(user);
         router.push(redirectedPathName(res.language));
         dispatch(userInfo(res));
       } catch (err) {
         console.log(err);
       } finally {
-        dispatch(setBlockServiceBtn(false))
+        dispatch(setBlockServiceBtn(false));
       }
     };
 

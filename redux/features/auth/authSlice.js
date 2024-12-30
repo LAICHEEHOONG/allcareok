@@ -10,6 +10,8 @@ const initialState = {
   language: "",
   lang: "",
   country: "",
+  session: null,
+  status: "",
 };
 
 export const authSlice = createSlice({
@@ -37,10 +39,23 @@ export const authSlice = createSlice({
     setCountry: (state, action) => {
       state.country = action.payload;
     },
+    setSession: (state, action) => {
+      state.session = action.payload;
+    },
+    setStatus: (state, action) => {
+      state.status = action.payload || "";
+    },
   },
 });
 
-export const { signInStatus, userInfo, updateLanguage, setLang, setCountry } =
-  authSlice.actions;
+export const {
+  signInStatus,
+  userInfo,
+  updateLanguage,
+  setLang,
+  setCountry,
+  setSession,
+  setStatus
+} = authSlice.actions;
 
 export default authSlice.reducer;

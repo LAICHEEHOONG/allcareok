@@ -16,7 +16,7 @@ export default function SearchField({ navigation }) {
         defaultSelectedKey=""
         radius="full"
         size="lg"
-        // aria-label="search where"
+        aria-label="search where"
         fullWidth={true}
       >
         {(item) => (
