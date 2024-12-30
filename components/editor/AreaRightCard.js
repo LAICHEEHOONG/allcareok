@@ -206,7 +206,7 @@ export default function AreaRightCard() {
 
   const countryAutocomplete = () => (
     <Autocomplete
-      allowsCustomValue
+      // allowsCustomValue
       isRequired
       className="max-w-xs"
       label={l?.select_country}
@@ -360,17 +360,14 @@ export default function AreaRightCard() {
             <h4 className="font-bold text-large ">{`${area?.city} ${area?.town}`}</h4>
           </CardHeader>
           <CardBody
-            // className={`m-0 p-0 h-[${screenHeight * 0.6}px]  `}
-            className={`m-0 p-0 h-[480px]  md:h-[580px]`}
+            className={`m-0 p-0 h-[450px]  md:h-[500px]`}
           >
-          
             <div className="md:hidden">
               <GoogleMapsEmbed
                 className="bg-black"
                 apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
                 width="100%"
-                height="480"
-                // height={screenHeight * 0.6}
+                height="450"
                 mode="place"
                 q={`${area?.town},${area?.city},${area?.state},${area?.country}`}
               />
@@ -380,8 +377,7 @@ export default function AreaRightCard() {
                 className="bg-black"
                 apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
                 width="100%"
-                height="580"
-                // height={screenHeight * 0.6}
+                height="500"
                 mode="place"
                 q={`${area?.town},${area?.city},${area?.state},${area?.country}`}
               />
@@ -534,21 +530,19 @@ export default function AreaRightCard() {
           </Modal>
         </>
       </div>
-      {/* <div className="md:hidden">{area?.country ? <MapCard2 /> : <M />}</div> */}
-      {/* <div className="hidden md:block"> */}
+
       <ScrollShadow className="h-[94vh]" hideScrollBar={true}>
-        <div className="mb-6 mt-2 text-default-400 hidden md:block ">
-          {l?.area_content}
-        </div>
+        {area?.country === "" && (
+          <div className="mb-6 mt-2 text-default-400 hidden md:block ">
+            {l?.area_content}
+          </div>
+        )}
+
         {area?.country ? <MapCard2 /> : <M />}
       </ScrollShadow>
-      {/* </div> */}
+  
 
-      {/* <div className="md:hidden">{area?.country ? <MapCard2 /> : <M />}</div> */}
-      {/* <ScrollShadow className="h-[92vh] hidden md:block" hideScrollBar={true}>
-        <div className="mb-6 mt-2 text-default-400 ">{l?.area_content}</div>
-        {area?.country ? <MapCard2 /> : <M />}
-      </ScrollShadow> */}
+    
     </div>
   );
 }
