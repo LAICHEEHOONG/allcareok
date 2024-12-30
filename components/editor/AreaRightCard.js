@@ -91,7 +91,7 @@ export default function AreaRightCard() {
         city: "Marina Bay Sands",
       },
       {
-        map: "/images/beijing.png",
+        map: "/images/beijing.jpg",
         country: "China",
         state: "Beijing",
         city: "The Palace Museum",
@@ -201,6 +201,7 @@ export default function AreaRightCard() {
       allowsCustomValue
       isRequired
       className="max-w-xs"
+      aria-label="country"
       // label={l?.select_country}
       radius="full"
       placeholder={l?.select_country}
