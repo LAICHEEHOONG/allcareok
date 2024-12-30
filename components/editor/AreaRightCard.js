@@ -29,6 +29,7 @@ import AddLocationIcon from "@mui/icons-material/AddLocation";
 import { countryData } from "@/lib/countryData";
 import { Switch } from "@nextui-org/react";
 import { GoogleMapsEmbed } from "@next/third-parties/google";
+import FlagIcon from "@mui/icons-material/Flag";
 
 const breakpointColumnsObj = {
   default: 4,
@@ -57,21 +58,6 @@ export default function AreaRightCard() {
   const [newArea, setNewArea] = useState(initialArea);
   const [showMap, setShowMap] = useState(false);
   const l = useSelector((state) => state.auth?.lang?.listing_editor_card);
-  // const [screenHeight, setScreenHeight] = useState(window.innerHeight);
-
-  // const checkScreenHeight = () => {
-  //   setScreenHeight(window.innerHeight);
-  // };
-
-  // useEffect(() => {
-  //   // Add event listener to track window resize
-  //   window.addEventListener("resize", checkScreenHeight);
-
-  //   // Cleanup event listener on component unmount
-  //   return () => {
-  //     window.removeEventListener("resize", checkScreenHeight);
-  //   };
-  // }, []);
 
   useEffect(() => {
     if (newArea?.country === "") {
@@ -81,6 +67,12 @@ export default function AreaRightCard() {
           country: userCountry,
         };
       });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!ad?.user) {
+      router.push(`/`);
     }
   }, []);
 
@@ -209,11 +201,14 @@ export default function AreaRightCard() {
       allowsCustomValue
       isRequired
       className="max-w-xs"
-      label={l?.select_country}
+      // label={l?.select_country}
+      radius="full"
+      placeholder={l?.select_country}
       variant="bordered"
       size="lg"
       onInputChange={onSelectionChangeCountry}
       defaultInputValue={newArea?.country}
+      startContent={<FlagIcon className="text-gray-400" />}
     >
       {countryData.map((country) => (
         <AutocompleteItem
@@ -237,9 +232,11 @@ export default function AreaRightCard() {
     return (
       <Input
         className="max-w-xs"
-        label={l?.state}
+        // label={l?.state}
+        placeholder={l?.state}
         variant="bordered"
         size="lg"
+        radius="full"
         value={newArea?.state} // Bind the current value of newArea.state
         onChange={(e) => {
           setNewArea((prevState) => ({
@@ -255,7 +252,9 @@ export default function AreaRightCard() {
     return (
       <Input
         className="max-w-xs"
-        label={l?.city}
+        // label={l?.city}
+        placeholder={l?.city}
+        radius="full"
         variant="bordered"
         size="lg"
         value={newArea?.city} // Bind the current value of newArea.state
@@ -273,7 +272,9 @@ export default function AreaRightCard() {
     return (
       <Input
         className="max-w-xs"
-        label={l?.town}
+        // label={l?.town}
+        placeholder={l?.town}
+        radius="full"
         variant="bordered"
         size="lg"
         value={newArea?.town} // Bind the current value of newArea.state
@@ -450,7 +451,7 @@ export default function AreaRightCard() {
                     {showMap ? (
                       <MapCard />
                     ) : (
-                      <ScrollShadow className="w-full flex flex-col  items-center gap-3 h-[160px] md:h-[300px] ">
+                      <ScrollShadow className="w-full flex flex-col  items-center gap-3 h-[160px] md:h-[250px] p-2">
                         {townField()}
                         {cityField()}
                         {stateField()}
