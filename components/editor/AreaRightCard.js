@@ -450,7 +450,7 @@ export default function AreaRightCard() {
                     {showMap ? (
                       <MapCard />
                     ) : (
-                      <ScrollShadow className="w-full flex flex-col  items-center gap-5 h-[250px]">
+                      <ScrollShadow className="w-full flex flex-col  items-center gap-3 h-[160px] md:h-[300px] ">
                         {townField()}
                         {cityField()}
                         {stateField()}
@@ -459,7 +459,7 @@ export default function AreaRightCard() {
                     )}
                   </ModalBody>
                   <ModalFooter>
-                    <div className="flex flex-col gap-4 w-full">
+                    <div className="flex flex-col gap-3 w-full">
                       <Divider />
                       <div className="flex justify-between items-center">
                         <Button
@@ -468,7 +468,7 @@ export default function AreaRightCard() {
                             // closeModal();
                             onClose();
                           }}
-                          size="lg"
+                          size="md"
                           radius="full"
                         >
                           {l?.cancel}
@@ -476,7 +476,7 @@ export default function AreaRightCard() {
                         </Button>
                         <Button
                           color="primary"
-                          size="lg"
+                          size="md"
                           radius="full"
                           isDisabled={
                             newArea.country === "" || newArea.country === null
