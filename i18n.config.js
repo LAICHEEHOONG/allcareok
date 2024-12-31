@@ -1,7 +1,7 @@
 
 export const i18n = {
   defaultLocale: "en",
-  locales: ["en", "zh"],
+  locales: ["en", "zh", "ms"],
 };
 
 // Define the Locale type array in JavaScript

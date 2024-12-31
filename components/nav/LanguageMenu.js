@@ -68,6 +68,8 @@ export default function LanguageMenu() {
             >
               {locale === "en" && "English"}
               {locale === "zh" && "中文"}
+              {locale === "ms" && "Malay"}
+
             </DropdownItem>
           );
         })}

@@ -426,7 +426,7 @@ export default function AreaRightCard() {
             isIconOnly
             onPress={onOpen}
           >
-            <AddLocationIcon fontSize={"small"} />
+            <AddLocationIcon fontSize={"medium"} />
           </Button>
           <Modal
             isOpen={isOpen}

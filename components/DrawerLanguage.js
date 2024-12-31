@@ -85,6 +85,9 @@ function ListBox_() {
             if (locale === "zh") {
               lan = "中文";
             }
+            if (locale === "ms") {
+              lan = "Malay";
+            }
             return <ListboxItem key={locale}>{lan}</ListboxItem>;
           })}
         </Listbox>

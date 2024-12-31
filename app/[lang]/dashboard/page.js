@@ -119,12 +119,6 @@ export default function Dashboard() {
                     </div>
                   </>
                 )}
-                {/* <>
-                  <div className="absolute inset-0 bg-black bg-opacity-50 rounded-xl z-40"></div>
-                  <div className="absolute inset-0 flex items-center justify-center z-40">
-                    <Spinner color="default" />
-                  </div>
-                </> */}
               </CardBody>
               <CardFooter className="text-small flex-col items-start overflow-visible truncate max-w-[250px]">
                 <b className="truncate max-w-[240px]">{item?.title}</b>

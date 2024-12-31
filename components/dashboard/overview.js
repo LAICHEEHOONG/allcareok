@@ -1,12 +1,21 @@
 import { Button, Divider, Image } from "@nextui-org/react";
 import { useRouter, usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 export default function Overview() {
   const router = useRouter();
   const overview = useSelector((state) => state?.auth?.lang?.overview);
   const pathname = usePathname();
   const currentLocale = pathname.split("/")[1] || "en";
+  const session = useSelector((state) => state.auth.session);
+
+  useEffect(() => {
+    if (!session) {
+      router.push(`/`);
+    }
+  }, []);
+
   return (
     <>
       <div className="hidden sm:flex flex-col w-full h-[766px] justify-center">
