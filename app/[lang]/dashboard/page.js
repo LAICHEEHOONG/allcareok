@@ -1,5 +1,12 @@
 "use client";
-import { Button, Image, Card, CardBody, CardFooter } from "@nextui-org/react";
+import {
+  Button,
+  Image,
+  Card,
+  CardBody,
+  CardFooter,
+  Spinner,
+} from "@nextui-org/react";
 import AddIcon from "@mui/icons-material/Add";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useRouter, usePathname } from "next/navigation";
@@ -23,6 +30,7 @@ export default function Dashboard() {
   const currentLocale = pathName.split("/")[1] || "en";
   const ads = useSelector((state) => state.editor.ads);
   const lang = useSelector((state) => state.auth.lang?.listing_editor_card);
+  const adsId = useSelector((state) => state.editor.adsId);
 
   useEffect(() => {
     dispatch(setAdsID(""));
@@ -101,6 +109,22 @@ export default function Dashboard() {
                   width={500}
                   height={300}
                 />
+                {adsId === item._id && (
+                  <>
+                    {/* Dark transparent overlay */}
+                    <div className="absolute inset-0 bg-black bg-opacity-50 rounded-xl z-40"></div>
+                    {/* Centered spinner */}
+                    <div className="absolute inset-0 flex items-center justify-center z-40">
+                      <Spinner color="default" />
+                    </div>
+                  </>
+                )}
+                {/* <>
+                  <div className="absolute inset-0 bg-black bg-opacity-50 rounded-xl z-40"></div>
+                  <div className="absolute inset-0 flex items-center justify-center z-40">
+                    <Spinner color="default" />
+                  </div>
+                </> */}
               </CardBody>
               <CardFooter className="text-small flex-col items-start overflow-visible truncate max-w-[250px]">
                 <b className="truncate max-w-[240px]">{item?.title}</b>
