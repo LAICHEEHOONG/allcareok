@@ -35,7 +35,12 @@ export default function ProfileMenu({ navigation }) {
   const blockServiceBtn = useSelector((state) => state.editor.blockServiceBtn);
 
   const changeRouter = () => {
-    if (ads.length === 0) {
+    if (!session) {
+      signIn();
+      return;
+    }
+
+    if (ads.length === 0 && user) {
       router.push(`/${currentLocale}/overview`);
     } else {
       router.push(`/${currentLocale}/dashboard`);
@@ -112,9 +117,10 @@ export default function ProfileMenu({ navigation }) {
         <DropdownItem
           key={navigation.share}
           textValue="share services"
-          onPress={() => {
-            changeRouter();
-          }}
+          // onPress={() => {
+          //   changeRouter();
+          // }}
+          onPress={changeRouter}
           isDisabled={blockServiceBtn}
         >
           {ads.length === 0 ? navigation.share : navigation.my_service}

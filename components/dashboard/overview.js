@@ -32,7 +32,6 @@ export default function Overview() {
         <div className="flex justify-center items-center">
           <div className="w-1/2 flex items-center justify-center">
             <p className="text-5xl font-medium max-w-2xl m-10 leading-tight">
-              {/* It’s easy to get started on Allcareok */}
               {overview?.main}
             </p>
           </div>
@@ -84,7 +83,6 @@ export default function Overview() {
               }}
             >
               {overview?.get_started}
-              {/* Get started */}
             </Button>
           </div>
         </div>

@@ -19,12 +19,13 @@ import {
   Image,
   Button,
 } from "@nextui-org/react";
-import { signOut } from "next-auth/react";
+import { signOut, signIn } from "next-auth/react";
 import { useSelector } from "react-redux";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import { useRouter, usePathname } from "next/navigation";
 
 export function DrawerProfile({ children, bottom_navigation }) {
+  const session = useSelector((state) => state.auth.session);
   const auth = useSelector((state) => state.auth);
   const router = useRouter();
   const pathname = usePathname();
@@ -33,6 +34,10 @@ export function DrawerProfile({ children, bottom_navigation }) {
   const blockServiceBtn = useSelector((state) => state.editor.blockServiceBtn);
 
   const changeRouter = () => {
+    if (!session) {
+      signIn();
+      return;
+    }
     if (ads.length === 0) {
       router.push(`/${currentLocale}/overview`);
     } else {
@@ -68,9 +73,10 @@ export function DrawerProfile({ children, bottom_navigation }) {
             // isPressable
             isPressable={!blockServiceBtn}
             isDisabled={blockServiceBtn}
-            onPress={() => {
-              changeRouter();
-            }}
+            // onPress={() => {
+            //   changeRouter();
+            // }}
+            onPress={changeRouter}
           >
             <CardBody>
               <div className="flex">
