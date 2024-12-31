@@ -1,9 +1,9 @@
 import { Card, CardBody } from "@nextui-org/react";
 import { useSelector, useDispatch } from "react-redux";
 import { setFocus } from "@/redux/features/editor/editorSlice";
-import { GiBroom } from "react-icons/gi";
-import { TbAirConditioning } from "react-icons/tb";
-import HouseIcon from "@mui/icons-material/House";
+// import { GiBroom } from "react-icons/gi";
+// import { TbAirConditioning } from "react-icons/tb";
+// import HouseIcon from "@mui/icons-material/House";
 import CallIcon from "@mui/icons-material/Call";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import TelegramIcon from "@mui/icons-material/Telegram";

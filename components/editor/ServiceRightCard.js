@@ -84,7 +84,6 @@ export default function ServiceRightCard() {
 
     toDB(adsId, newService);
     fetchAds();
-
   };
 
   useEffect(() => {
@@ -102,7 +101,7 @@ export default function ServiceRightCard() {
   return (
     <div className="h-[50vh] md:h-screen w-full ">
       <div className="flex justify-center items-start mb-5">
-        <div className="w-full max-w-[1000px] flex justify-between items-center">
+        <div className="w-full max-w-[910px]  flex justify-between items-center">
           <div className="text-2xl md:text-3xl font-semibold">
             {`${l?.service}`}
           </div>
@@ -120,11 +119,14 @@ export default function ServiceRightCard() {
 
       <ScrollShadow
         hideScrollBar
-        className="flex justify-center w-full h-[40vh] md:h-[90vh]"
+        className="flex flex-col items-center  w-full h-[40vh] md:h-[90vh] "
       >
+        <div className="mb-6 mt-2 text-default-400 hidden md:block  w-full max-w-[910px]">
+          {l?.service_type_title}
+        </div>
         <Masonry
           breakpointCols={breakpointColumnsObj}
-          className="my-masonry-grid !w-full max-w-[1000px]"
+          className="my-masonry-grid !w-full max-w-[1000px] "
           columnClassName="my-masonry-grid_column flex flex-col gap-3 items-center p-5"
         >
           {serviceItem.map(({ label, icon: Icon, selected }, idx) => (

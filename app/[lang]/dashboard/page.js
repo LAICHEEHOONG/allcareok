@@ -115,7 +115,7 @@ export default function Dashboard() {
                     <div className="absolute inset-0 bg-black bg-opacity-50 rounded-xl z-40"></div>
                     {/* Centered spinner */}
                     <div className="absolute inset-0 flex items-center justify-center z-40">
-                      <Spinner color="default" />
+                      <Spinner color="default" size="lg" />
                     </div>
                   </>
                 )}

@@ -6,7 +6,7 @@ import { NextUIProvider } from "@nextui-org/react";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { SessionProvider } from "next-auth/react";
 
-export default function AllProvider({ children, session }) {
+export default function AllProvider({ children }) {
   return (
     <Provider store={store}>
       <SessionProvider>

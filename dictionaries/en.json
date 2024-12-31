@@ -98,6 +98,8 @@
     "city": "City / mulicipality",
     "town": "Town / neighborhood",
     "add_service_area": "Add service area",
-    "add_detail": "Add detail"
+    "add_detail": "Add detail",
+    "service_type_title": "Select the services you offer. This information is essential for customers to find and connect with your service ads.",
+    "service_contact_title": "Please include your contact details, social media links, website, and email to make it easy for customers to connect with you and learn about your services."
   }
 }

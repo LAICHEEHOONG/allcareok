@@ -52,7 +52,7 @@ export default function PhotoRightCard() {
   const [loading, setLoading] = useState(false);
   const [loading2, setLoading2] = useState(false);
   const [manageAd, setManageAd] = useState({});
-  const lang = useSelector((state) => state.auth.lang?.listing_editor_card);
+  const l = useSelector((state) => state.auth.lang?.listing_editor_card);
   const router = useRouter();
   const pathName = usePathname();
   const currentLocale = pathName.split("/")[1] || "en";
@@ -72,23 +72,23 @@ export default function PhotoRightCard() {
   const M = () => {
     const items = [
       {
-        label: lang?.handyman ? lang.handyman : "Handyman",
+        label: l?.handyman ? l.handyman : "Handyman",
         image: "/images/handyman_2.webp",
       },
       {
-        label: lang?.cleaning ? lang.cleaning : "Cleaning",
+        label: l?.cleaning ? l.cleaning : "Cleaning",
         image: "/images/cleaning_2.jpeg",
       },
       {
-        label: lang?.childcare ? lang.childcare : "Childcare",
+        label: l?.childcare ? l.childcare : "Childcare",
         image: "/images/childcare_2.webp",
       },
       {
-        label: lang?.hourly_maid ? lang.hourly_maid : "Hourly Maid",
+        label: l?.hourly_maid ? l.hourly_maid : "Hourly Maid",
         image: "/images/cleaning_1.webp",
       },
       {
-        label: lang?.plumber ? lang.plumber : "Plumber",
+        label: l?.plumber ? l.plumber : "Plumber",
         image: "/images/plumber.png",
       },
     ];
@@ -122,7 +122,7 @@ export default function PhotoRightCard() {
                     }}
                     isLoading={loading}
                   >
-                    {lang?.make_cover ? lang.make_cover : "Make cover photo"}
+                    {l?.make_cover ? l.make_cover : "Make cover photo"}
                   </Button>
                 )}
                 <Button
@@ -432,7 +432,7 @@ export default function PhotoRightCard() {
             <ArrowBackIcon />
           </Button>
           <div className="text-3xl font-semibold">
-            {lang?.photo_upload ? lang.photo_upload : "Photo upload"}
+            {l?.photo_upload ? l.photo_upload : "Photo upload"}
           </div>
         </div>
 
@@ -445,7 +445,7 @@ export default function PhotoRightCard() {
             startContent={<FilterIcon />}
             onPress={onOpen}
           >
-            {lang?.add_photo ? lang.add_photo : "Add photos"}
+            {l?.add_photo ? l.add_photo : "Add photos"}
           </Button>
           <Button
             className="md:hidden"
@@ -458,7 +458,6 @@ export default function PhotoRightCard() {
             onPress={onOpen}
           >
             <FilterIcon fontSize={"small"} />
-            {/* {lang?.add_photo ? lang.add_photo : "Add photos"} */}
           </Button>
           <Modal
             isOpen={isOpen}
@@ -485,11 +484,11 @@ export default function PhotoRightCard() {
                         <AddIcon />
                       </Button>
                       <div className="flex-1 text-center">
-                        <div>{lang?.photo_upload}</div>
+                        <div>{l?.photo_upload}</div>
                         <div className="text-xs font-light tracking-tight text-default-500 ">
                           {photos?.length === 0
-                            ? lang?.no_items_selected
-                            : `${photos.length} ${lang?.items_selected}`}
+                            ? l?.no_items_selected
+                            : `${photos.length} ${l?.items_selected}`}
                         </div>
                       </div>
                     </div>
@@ -506,10 +505,10 @@ export default function PhotoRightCard() {
                         <div className="flex flex-col items-center justify-center gap-4">
                           <FilterIcon sx={{ fontSize: 50 }} />
                           <div className="text-xl font-semibold hidden md:flex">
-                            {lang?.drag}
+                            {l?.drag}
                           </div>
                           <div className="text-xs font-light hidden md:flex">
-                            {lang?.browse}
+                            {l?.browse}
                           </div>
                           <Button
                             radius="full"
@@ -519,7 +518,7 @@ export default function PhotoRightCard() {
                             }
                             color="primary"
                           >
-                            {lang?.browseBtn}
+                            {l?.browseBtn}
                           </Button>
                           <input
                             id="fileInput"
@@ -558,7 +557,7 @@ export default function PhotoRightCard() {
                           size="lg"
                           radius="full"
                         >
-                          {photos?.length === 0 ? lang?.done : lang?.cancel}
+                          {photos?.length === 0 ? l?.done : l?.cancel}
                         </Button>
                         <Button
                           color="primary"
@@ -575,7 +574,7 @@ export default function PhotoRightCard() {
                           isDisabled={photos?.length === 0 ? true : false}
                           isLoading={loading}
                         >
-                          {lang?.upload}
+                          {l?.upload}
                         </Button>
                       </div>
                     </div>
@@ -588,8 +587,8 @@ export default function PhotoRightCard() {
       </div>
       <ScrollShadow className="h-[92vh]" hideScrollBar={true}>
         <div className="mb-6 mt-2 text-default-400 ">
-          {lang?.photo_upload_description
-            ? lang.photo_upload_description
+          {l?.photo_upload_description
+            ? l.photo_upload_description
             : `Upload your service poster with contact info, service details, and
         coverage area. Include real case photos to assist customers.`}
         </div>
