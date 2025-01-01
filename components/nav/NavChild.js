@@ -32,7 +32,8 @@ export default function NavChild({ navigation, service_type, poppins, dic }) {
     pathname.endsWith("/overview") ||
     pathname.endsWith("/editor/mobile/photo") ||
     pathname.endsWith("/editor/mobile/delete") ||
-    pathname.endsWith("/editor/mobile/area");
+    pathname.endsWith("/editor/mobile/area") ||
+    pathname.endsWith("/editor/mobile/contact");
 
   return (
     <>

@@ -26,7 +26,8 @@ export default function NavBottom({ bottom_navigation }) {
     pathname.endsWith("/overview") ||
     pathname.endsWith("/editor/mobile/photo") ||
     pathname.endsWith("/editor/mobile/delete") ||
-    pathname.endsWith("/editor/mobile/area");
+    pathname.endsWith("/editor/mobile/area") ||
+    pathname.endsWith("/editor/mobile/contact");
 
   const currentLocale = pathname.split("/")[1] || "en";
   const [isVisible, setIsVisible] = useState(true);

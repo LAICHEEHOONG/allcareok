@@ -8,8 +8,6 @@ import { GiVillage } from "react-icons/gi";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-
-
 export default function AreaCard() {
   const dispatch = useDispatch();
   const cardFocus = useSelector((state) => state.editor?.cardFocus);
@@ -61,20 +59,11 @@ export default function AreaCard() {
       } `}
       isPressable
       onPress={handlePress}
-      // onPress={() => {
-      //   dispatch(setFocus("area"));
-      // }}
     >
       <CardBody>
         <div className="flex flex-col justify-start gap-2">
           <div className="font-medium mb-2">{l?.area}</div>
-          {/* 
-          {servicesItems.map(({ label, icon: Icon }, id) => (
-            <div key={id} className="flex gap-3 text-default-400">
-              <Icon className={`w-6 h-6 ${label}`} />
-              <div>{label}</div>
-            </div>
-          ))} */}
+
           {servicesItems.map(({ label, icon: Icon }, id) =>
             label ? (
               <div key={id} className="flex gap-3 text-default-400">

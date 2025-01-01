@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Card, CardBody } from "@nextui-org/react";
 import { useSelector, useDispatch } from "react-redux";
 import { setFocus } from "@/redux/features/editor/editorSlice";
@@ -13,12 +14,17 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import PublicIcon from "@mui/icons-material/Public";
+import { useRouter, usePathname } from "next/navigation";
 
 export default function ContactCard() {
   const dispatch = useDispatch();
   const cardFocus = useSelector((state) => state.editor?.cardFocus);
   const l = useSelector((state) => state.auth?.lang?.listing_editor_card);
   const contact = useSelector((state) => state.editor.ad?.contact);
+  const router = useRouter();
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const pathName = usePathname();
+  const currentLocale = pathName.split("/")[1] || "en";
 
   const servicesItems = [
     {
@@ -95,78 +101,36 @@ export default function ContactCard() {
     },
   ];
 
-  // const servicesItems = [
-  //   {
-  //     label: "+60 12-345 6789", // Fake Malaysian phone number
-  //     icon: CallIcon,
-  //   },
-  //   {
-  //     label: "https://wa.me/60123456789", // Fake WhatsApp link
-  //     icon: WhatsAppIcon,
-  //   },
-  //   {
-  //     label: "@FakeTelegramUser", // Fake Telegram username
-  //     icon: TelegramIcon,
-  //   },
-  //   {
-  //     label: "fakeemail@example.com", // Fake email address
-  //     icon: AlternateEmailIcon,
-  //   },
-  //   {
-  //     label: "facebook.com/FakeUser", // Fake Facebook profile
-  //     icon: FacebookIcon,
-  //   },
-  //   {
-  //     label: "tiktok.com/@FakeUser", // Fake TikTok username
-  //     icon: FaTiktok,
-  //   },
-  //   {
-  //     label: "instagram.com/FakeUser", // Fake Instagram profile
-  //     icon: InstagramIcon,
-  //   },
-  //   {
-  //     label: "youtube.com/c/FakeChannel", // Fake YouTube channel
-  //     icon: YouTubeIcon,
-  //   },
-  //   {
-  //     label: "twitter.com/FakeUser", // Fake X (Twitter) profile
-  //     icon: XIcon,
-  //   },
-  //   {
-  //     label: "WeChat ID: fakewechatid", // Fake WeChat ID
-  //     icon: IoLogoWechat,
-  //   },
-  //   {
-  //     label: "LINE ID: fakelineid", // Fake LINE ID
-  //     icon: FaLine,
-  //   },
-  //   {
-  //     label: "https://www.allcareok.com",
-  //     icon: PublicIcon,
-  //   },
-  // ];
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 767px)"); // Tailwind's md breakpoint
+    const handleResize = () => setIsSmallScreen(mediaQuery.matches);
+    handleResize(); // Initialize state
+    mediaQuery.addEventListener("change", handleResize);
+    return () => mediaQuery.removeEventListener("change", handleResize);
+  }, []);
+
+  const handlePress = () => {
+    dispatch(setFocus("contact"));
+    if (isSmallScreen) {
+      router.push(`/${currentLocale}/editor/mobile/contact`);
+    }
+    // Add other logic if needed
+  };
+
   return (
     <Card
       className={`m-5 p-1 w-11/12 ${
-        cardFocus === "contact" ? "border-solid border-2 border-black" : ""
+        cardFocus === "contact" ? "md:border-2 md:border-black" : ""
       } `}
       isPressable
-      onPress={() => {
-        dispatch(setFocus("contact"));
-      }}
+      onPress={handlePress}
+      // onPress={() => {
+      //   dispatch(setFocus("contact"));
+      // }}
     >
       <CardBody>
         <div className="flex flex-col justify-start gap-2">
           <div className="font-medium mb-2">{l?.contact}</div>
-          {/* 
-          {servicesItems
-            .filter(({ value }) => value) // Filter out items with empty values
-            .map(({ label, icon: Icon, value }) => (
-              <div key={label} className="flex gap-3 p-1 text-default-400">
-                <Icon className={`w-6 h-6 ${label}`} />
-                <div>{value}</div>
-              </div>
-            ))} */}
 
           {servicesItems.filter(({ value }) => value).length > 0 ? (
             servicesItems
@@ -178,7 +142,9 @@ export default function ContactCard() {
                 </div>
               ))
           ) : (
-            <div className="text-default-400 p-2">{"No contact or social links. Add some!"}</div>
+            <div className="text-default-400 p-2">
+              {"No contact or social links. Add some!"}
+            </div>
           )}
         </div>
       </CardBody>

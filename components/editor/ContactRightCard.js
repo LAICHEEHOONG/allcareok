@@ -18,6 +18,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import PublicIcon from "@mui/icons-material/Public";
+import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import { createAD, findUserAds } from "@/lib/action/adAction";
 
 export default function ContactRightCard() {
@@ -204,24 +205,34 @@ export default function ContactRightCard() {
           >
             <ArrowBackIcon />
           </Button>
-          <div className="text-3xl font-semibold">{l?.contact}</div>
+          <div className="text-xl md:text-3xl font-semibold">{l?.contact}</div>
         </div>
         <Button
+          className="hidden md:flex"
           radius="full"
           size="lg"
           color="primary"
-          // onPress={() => {
-          //   console.log(contactRef.current);
-          // }}
-          // isDisabled={title_?.length <= 50 && title_?.length > 0 ? false : true}
           isLoading={loading}
           onPress={handleSave}
         >
           {`${l?.title_save}`}
         </Button>
+        <Button
+          className="flex md:hidden"
+          radius="full"
+          size="md"
+          color="default"
+          variant="flat"
+          // color="primary"
+          isLoading={loading}
+          onPress={handleSave}
+          isIconOnly
+        >
+          <SaveAltIcon />
+        </Button>
       </div>
       <ScrollShadow className="h-[92vh]" hideScrollBar={true}>
-        <div className="mb-12 mt-2 text-default-400">
+        <div className="mb-12 mt-2 text-default-400 md:flex hidden">
           {l?.service_contact_title}
         </div>
         <div className="w-full flex justify-center items-center">

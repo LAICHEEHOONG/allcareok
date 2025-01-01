@@ -98,6 +98,7 @@ const protectedPaths = [
   "/editor/mobile/photo",
   "/editor/mobile/delete",
   "/editor/mobile/area",
+  "/editor/mobile/contact",
 
 ];
 
