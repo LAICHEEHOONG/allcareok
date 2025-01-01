@@ -1,7 +1,10 @@
+import { useState, useEffect, useRef } from "react";
 import { Button, ScrollShadow, Input } from "@nextui-org/react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useRouter, usePathname } from "next/navigation";
+import { setAd, setAds } from "@/redux/features/editor/editorSlice";
+
 import Masonry from "react-masonry-css";
 import CallIcon from "@mui/icons-material/Call";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
@@ -15,89 +18,135 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import PublicIcon from "@mui/icons-material/Public";
+import { createAD, findUserAds } from "@/lib/action/adAction";
 
 export default function ContactRightCard() {
+  const dispatch = useDispatch();
+  const ad = useSelector((state) => state.editor?.ad);
   const l = useSelector((state) => state.auth?.lang?.listing_editor_card);
   const router = useRouter();
   const pathName = usePathname();
   const currentLocale = pathName.split("/")[1] || "en";
+  const contact = useSelector((state) => state.editor.ad?.contact);
+  const [loading, setLoading] = useState(false);
 
-  // const aa = (e) => {
-  //   console.log(e.target.value);
-  // };
+  const contactRef = useRef({ ...contact }); // Use a ref for contact data
 
-  // const bb = (e) => {
-  //   console.log(e.target.value);
-  // };
+  const handleInputChange = (key, value) => {
+    contactRef.current[key] = value; // Update the ref value
+  };
 
-  // const items = [
-  //   { placeHolder: "aa", value: "aa", fn: aa },
-  //   { placeHolder: "bb", value: "bb", fn: bb },
-  //   { placeHolder: "aa", value: "aa", fn: aa },
-  //   { placeHolder: "bb", value: "bb", fn: bb },
-  //   { placeHolder: "aa", value: "aa", fn: aa },
-  //   { placeHolder: "bb", value: "bb", fn: bb },
-  //   { placeHolder: "aa", value: "aa", fn: aa },
-  //   { placeHolder: "bb", value: "bb", fn: bb },
-  //   { placeHolder: "aa", value: "aa", fn: aa },
-  //   { placeHolder: "bb", value: "bb", fn: bb },
-  //   { placeHolder: "aa", value: "aa", fn: aa },
-  //   { placeHolder: "bb", value: "bb", fn: bb },
-  //   { placeHolder: "aa", value: "aa", fn: aa },
-  //   { placeHolder: "bb", value: "bb", fn: bb },
-  //   { placeHolder: "aa", value: "aa", fn: aa },
-  //   { placeHolder: "bb", value: "bb", fn: bb },
-  // ];
   const servicesItems = [
     {
+      name: "phone",
       label: "+60 12-345 6789", // Example Malaysian phone number
       icon: CallIcon,
+      value: contact?.phone,
     },
     {
+      name: "whatsapp",
       label: "https://wa.me/60123456789", // Example WhatsApp link
       icon: WhatsAppIcon,
+      value: contact?.whatsapp,
     },
     {
+      name: "telegram",
       label: "@JohnDoe123", // Example Telegram username
       icon: TelegramIcon,
+      value: contact?.telegram,
     },
     {
+      name: "email",
       label: "johndoe@example.com", // Example email address
       icon: AlternateEmailIcon,
+      value: contact?.email,
     },
     {
+      name: "facebook",
       label: "facebook.com/JohnDoe", // Example Facebook profile
       icon: FacebookIcon,
+      value: contact?.facebook,
     },
     {
+      name: "tiktok",
       label: "tiktok.com/@JohnDoe", // Example TikTok username
       icon: FaTiktok,
+      value: contact?.tiktok,
     },
     {
+      name: "instagram",
       label: "instagram.com/JohnDoe", // Example Instagram profile
       icon: InstagramIcon,
+      value: contact?.instagram,
     },
     {
+      name: "youtube",
       label: "youtube.com/c/JohnDoeChannel", // Example YouTube channel
       icon: YouTubeIcon,
+      value: contact?.youtube,
     },
     {
-      label: "twitter.com/JohnDoe", // Example X (Twitter) profile
+      name: "x",
+      label: "x.com/JohnDoe", // Example X (Twitter) profile
       icon: XIcon,
+      value: contact?.x,
     },
     {
+      name: "wechat",
       label: "WeChat ID: johndoe123", // Example WeChat ID
       icon: IoLogoWechat,
+      value: contact?.wechat,
     },
     {
+      name: "line",
       label: "LINE ID: johndoe.line", // Example LINE ID
       icon: FaLine,
+      value: contact?.line,
     },
     {
+      name: "website",
       label: "https://www.examplewebsite.com", // Example website link
       icon: PublicIcon,
+      value: contact?.website,
     },
   ];
+
+  const fetchAds = async () => {
+    try {
+      const ads = await findUserAds({ user: ad.user }); // Pass only the userId
+      dispatch(setAds(ads));
+    } catch (error) {
+      console.error("Error fetching user ads:", error);
+    }
+  };
+
+  const toDB = async (adsId, newContact) => {
+    try {
+      setLoading(true);
+      const updateContact = await createAD({
+        ...ad,
+        adsId,
+        contact: newContact,
+      });
+      dispatch(setAd(updateContact));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+      // if (isSmallScreen) {
+      //   dispatch(setPopUp());
+      // }
+    }
+  };
+
+  const handleSave = () => {
+    const adsId = ad._id;
+    const newContact = contactRef.current;
+
+    toDB(adsId, newContact);
+    fetchAds();
+  };
+
   const M = () => {
     return (
       <Masonry
@@ -107,19 +156,32 @@ export default function ContactRightCard() {
       >
         {servicesItems.map((item, i) => (
           <Input
-            key={item.label}
+            key={item.name}
             className="max-w-96 m-2"
-    
             placeholder={item.label}
             variant="bordered"
             size="lg"
             radius="full"
-            // value={item.value} // Bind the current value of newArea.state
-            // onChange={(e) => {
-            //   fn(e);
-            // }} // Update newArea.state on input change
+            defaultValue={contactRef.current[item.name]} // Use ref for value
+            onValueChange={(v) => handleInputChange(item.name, v)}
             endContent={<item.icon className="text-xl text-default-500" />}
           />
+          // <Input
+          //   key={item.name}
+          //   className="max-w-96 m-2"
+          //   placeholder={item.label}
+          //   variant="bordered"
+          //   size="lg"
+          //   radius="full"
+          //   value={contact_[item.name]} // Use state value
+          //   onValueChange={(v) => {
+          //     setContact_((prev) => ({
+          //       ...prev,
+          //       [item.name]: v,
+          //     }));
+          //   }}
+          //   endContent={<item.icon className="text-xl text-default-500" />}
+          // />
         ))}
       </Masonry>
     );
@@ -148,9 +210,12 @@ export default function ContactRightCard() {
           radius="full"
           size="lg"
           color="primary"
+          // onPress={() => {
+          //   console.log(contactRef.current);
+          // }}
           // isDisabled={title_?.length <= 50 && title_?.length > 0 ? false : true}
-          // isLoading={loading}
-          // onPress={handleSave}
+          isLoading={loading}
+          onPress={handleSave}
         >
           {`${l?.title_save}`}
         </Button>
