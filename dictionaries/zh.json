@@ -100,6 +100,7 @@
     "add_service_area": "添加服务区域",
     "add_detail": "添加详情",
     "service_type_title": "选择您提供的服务。这些信息对于客户找到并联系您的服务广告至关重要。",
-    "service_contact_title": "请提供您的联系方式、社交媒体链接、网站和电子邮件，以便客户轻松联系您并了解您的服务。"
+    "service_contact_title": "请提供您的联系方式、社交媒体链接、网站和电子邮件，以便客户轻松联系您并了解您的服务。",
+    "contact_empty_title": "没有联系方式或社交链接，请添加一些！"
   }
 }

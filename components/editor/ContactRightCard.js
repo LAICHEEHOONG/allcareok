@@ -158,6 +158,7 @@ export default function ContactRightCard() {
         {servicesItems.map((item, i) => (
           <Input
             key={item.name}
+            isClearable
             className="max-w-96 m-2"
             placeholder={item.label}
             variant="bordered"
@@ -165,7 +166,9 @@ export default function ContactRightCard() {
             radius="full"
             defaultValue={contactRef.current[item.name]} // Use ref for value
             onValueChange={(v) => handleInputChange(item.name, v)}
-            endContent={<item.icon className="text-xl text-default-500" />}
+            onClear={() => handleInputChange(item.name, "")}
+   
+            startContent={<item.icon className="text-xl text-default-400" />}
           />
           // <Input
           //   key={item.name}

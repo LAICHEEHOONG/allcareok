@@ -142,9 +142,7 @@ export default function ContactCard() {
                 </div>
               ))
           ) : (
-            <div className="text-default-400 p-2">
-              {"No contact or social links. Add some!"}
-            </div>
+            <div className="text-default-400 p-2">{l?.contact_empty_title}</div>
           )}
         </div>
       </CardBody>
