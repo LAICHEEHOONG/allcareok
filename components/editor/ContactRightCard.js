@@ -18,7 +18,6 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import PublicIcon from "@mui/icons-material/Public";
-import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import { createAD, findUserAds } from "@/lib/action/adAction";
 import SaveIcon from '@mui/icons-material/Save';
 
@@ -174,6 +173,12 @@ export default function ContactRightCard() {
       </Masonry>
     );
   };
+
+  useEffect(() => {
+    if (!ad?.user) {
+      router.push(`/`);
+    }
+  }, []);
 
   return (
     <div className="h-screen w-full md:pl-2">

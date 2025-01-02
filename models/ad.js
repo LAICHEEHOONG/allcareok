@@ -38,7 +38,7 @@ const adSchema = new mongoose.Schema(
     },
     description: { 
       type: String, 
-      default: "", 
+      default: "Enter your service description here", 
       /* HTML content stored as a string */ 
     },    map: { type: String },
     youtube: [{ type: String }],

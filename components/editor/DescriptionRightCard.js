@@ -4,21 +4,10 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter, usePathname } from "next/navigation";
 import { setAd, setAds } from "@/redux/features/editor/editorSlice";
+import ErrorIcon from "@mui/icons-material/Error";
 
-import Masonry from "react-masonry-css";
-import CallIcon from "@mui/icons-material/Call";
-import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import TelegramIcon from "@mui/icons-material/Telegram";
-import { IoLogoWechat } from "react-icons/io5";
-import { FaLine } from "react-icons/fa6";
-import XIcon from "@mui/icons-material/X";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import { FaTiktok } from "react-icons/fa";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import YouTubeIcon from "@mui/icons-material/YouTube";
-import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
-import PublicIcon from "@mui/icons-material/Public";
-import SaveAltIcon from "@mui/icons-material/SaveAlt";
+import SaveIcon from '@mui/icons-material/Save';
+
 import { createAD, findUserAds } from "@/lib/action/adAction";
 
 export default function DescriptionRightCard() {
@@ -30,94 +19,7 @@ export default function DescriptionRightCard() {
   const currentLocale = pathName.split("/")[1] || "en";
   const description = useSelector((state) => state.editor.ad?.description);
   const [loading, setLoading] = useState(false);
-
-  //   const [newDescription, setNewDescription] = useState(description);
-
-  //   useEffect(() => {
-  //     console.log(newDescription);
-  //   }, [newDescription]);
-  const descriptionRef = useRef(description); // Use a ref for contact data
-
-  //   const contactRef = useRef({ ...contact }); // Use a ref for contact data
-
-  const handleInputChange = (value) => {
-    descriptionRef.current = value; // Update the ref value
-  };
-
-  //   const servicesItems = [
-  //     {
-  //       name: "phone",
-  //       label: "+60 12-345 6789", // Example Malaysian phone number
-  //       icon: CallIcon,
-  //       value: contact?.phone,
-  //     },
-  //     {
-  //       name: "whatsapp",
-  //       label: "https://wa.me/60123456789", // Example WhatsApp link
-  //       icon: WhatsAppIcon,
-  //       value: contact?.whatsapp,
-  //     },
-  //     {
-  //       name: "telegram",
-  //       label: "@JohnDoe123", // Example Telegram username
-  //       icon: TelegramIcon,
-  //       value: contact?.telegram,
-  //     },
-  //     {
-  //       name: "email",
-  //       label: "johndoe@example.com", // Example email address
-  //       icon: AlternateEmailIcon,
-  //       value: contact?.email,
-  //     },
-  //     {
-  //       name: "facebook",
-  //       label: "facebook.com/JohnDoe", // Example Facebook profile
-  //       icon: FacebookIcon,
-  //       value: contact?.facebook,
-  //     },
-  //     {
-  //       name: "tiktok",
-  //       label: "tiktok.com/@JohnDoe", // Example TikTok username
-  //       icon: FaTiktok,
-  //       value: contact?.tiktok,
-  //     },
-  //     {
-  //       name: "instagram",
-  //       label: "instagram.com/JohnDoe", // Example Instagram profile
-  //       icon: InstagramIcon,
-  //       value: contact?.instagram,
-  //     },
-  //     {
-  //       name: "youtube",
-  //       label: "youtube.com/c/JohnDoeChannel", // Example YouTube channel
-  //       icon: YouTubeIcon,
-  //       value: contact?.youtube,
-  //     },
-  //     {
-  //       name: "x",
-  //       label: "x.com/JohnDoe", // Example X (Twitter) profile
-  //       icon: XIcon,
-  //       value: contact?.x,
-  //     },
-  //     {
-  //       name: "wechat",
-  //       label: "WeChat ID: johndoe123", // Example WeChat ID
-  //       icon: IoLogoWechat,
-  //       value: contact?.wechat,
-  //     },
-  //     {
-  //       name: "line",
-  //       label: "LINE ID: johndoe.line", // Example LINE ID
-  //       icon: FaLine,
-  //       value: contact?.line,
-  //     },
-  //     {
-  //       name: "website",
-  //       label: "https://www.examplewebsite.com", // Example website link
-  //       icon: PublicIcon,
-  //       value: contact?.website,
-  //     },
-  //   ];
+  const [newDescription, setNewDescription] = useState(description);
 
   const fetchAds = async () => {
     try {
@@ -149,54 +51,20 @@ export default function DescriptionRightCard() {
 
   const handleSave = () => {
     const adsId = ad._id;
-    const newDescription = descriptionRef.current;
+    const newDescription_ = newDescription;
 
-    toDB(adsId, newDescription);
+    toDB(adsId, newDescription_);
     fetchAds();
   };
 
-  const TextAreaComponent = () => {
-    return (
-      <Textarea
-        // className="max-w-2xl h-[50vh]"
-        classNames={{
-          base: "max-w-2xl",
-          input: "resize-y min-h-[60vh]",
-        }}
-        // label="Description"
-        placeholder="Enter your description"
-        variant="bordered"
-        defaultValue={description}
-        onValueChange={(v) => handleInputChange(v)}
-      />
-    );
-  };
+  const textLimit = 1000;
 
-  //   const M = () => {
-  //     return (
-  //       <Masonry
-  //         breakpointCols={breakpointColumnsObj}
-  //         className="my-masonry-grid !w-full !max-w-[900px]"
-  //         columnClassName="my-masonry-grid_column flex flex-col gap-3 items-center p-5 "
-  //       >
-  //         {servicesItems.map((item, i) => (
-  //           <Input
-  //             key={item.name}
-  //             isClearable
-  //             className="max-w-96 m-2"
-  //             placeholder={item.label}
-  //             variant="bordered"
-  //             size="lg"
-  //             radius="full"
-  //             defaultValue={contactRef.current[item.name]} // Use ref for value
-  //             onValueChange={(v) => handleInputChange(item.name, v)}
-  //             onClear={() => handleInputChange(item.name, "")}
-  //             startContent={<item.icon className="text-xl text-default-400" />}
-  //           />
-  //         ))}
-  //       </Masonry>
-  //     );
-  //   };
+  // Redirect to home page if ad is not found
+  useEffect(() => {
+    if (!ad?.user) {
+      router.push(`/`);
+    }
+  }, []);
 
   return (
     <div className="h-screen w-full md:pl-2">
@@ -225,6 +93,11 @@ export default function DescriptionRightCard() {
           size="lg"
           color="primary"
           isLoading={loading}
+          isDisabled={
+            newDescription?.length <= textLimit && newDescription?.length > 0
+              ? false
+              : true
+          }
           onPress={handleSave}
         >
           {`${l?.title_save}`}
@@ -235,12 +108,16 @@ export default function DescriptionRightCard() {
           size="md"
           color="default"
           variant="flat"
-          // color="primary"
+          isDisabled={
+            newDescription?.length <= textLimit && newDescription?.length > 0
+              ? false
+              : true
+          }
           isLoading={loading}
           onPress={handleSave}
           isIconOnly
         >
-          <SaveAltIcon />
+          <SaveIcon />
         </Button>
       </div>
       <ScrollShadow className="h-[92vh]" hideScrollBar={true}>
@@ -248,17 +125,37 @@ export default function DescriptionRightCard() {
           {l?.service_description_title}
         </div>
         <div className="w-full flex justify-center items-center">
-          <div className="w-full max-w-[1500px] flex justify-center items-center ">
-            {/* <M /> */}
-            <TextAreaComponent />
+          <div className="w-full max-w-2xl flex flex-col justify-center items-center">
+            <div className="text-default-400 text-xs mt-5 mb-1 pl-4 select-none self-start">
+              {newDescription?.length <= textLimit &&
+                `${textLimit - newDescription?.length} ${
+                  l?.character_available
+                }`}
+              {newDescription?.length > textLimit && (
+                <div className="flex gap-1 items-center text-red-600">
+                  <ErrorIcon sx={{ fontSize: "1rem" }} />
+                  <div>
+                    {" "}
+                    {`${newDescription?.length - textLimit} ${l?.over_limit}`}
+                  </div>
+                </div>
+              )}
+            </div>
+            <Textarea
+              // className="max-w-2xl h-[50vh]"
+              classNames={{
+                base: "max-w-2xl",
+                input: "resize-y min-h-[64vh]",
+              }}
+              // label="Description"
+              placeholder={l?.description_placeholder}
+              variant="bordered"
+              defaultValue={description}
+              onValueChange={(v) => setNewDescription(v)}
+            />
           </div>
         </div>
       </ScrollShadow>
     </div>
   );
 }
-
-// const breakpointColumnsObj = {
-//   default: 2,
-//   1024: 1,
-// };
