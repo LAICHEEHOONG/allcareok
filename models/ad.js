@@ -36,8 +36,11 @@ const adSchema = new mongoose.Schema(
       line: { type: String, default: "" },
       website: { type: String, default: "" },
     },
-    description: { type: String },
-    map: { type: String },
+    description: { 
+      type: String, 
+      default: "", 
+      /* HTML content stored as a string */ 
+    },    map: { type: String },
     youtube: [{ type: String }],
   },
   {

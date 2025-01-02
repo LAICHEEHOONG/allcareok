@@ -20,6 +20,7 @@ import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import PublicIcon from "@mui/icons-material/Public";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import { createAD, findUserAds } from "@/lib/action/adAction";
+import SaveIcon from '@mui/icons-material/Save';
 
 export default function ContactRightCard() {
   const dispatch = useDispatch();
@@ -167,25 +168,8 @@ export default function ContactRightCard() {
             defaultValue={contactRef.current[item.name]} // Use ref for value
             onValueChange={(v) => handleInputChange(item.name, v)}
             onClear={() => handleInputChange(item.name, "")}
-   
             startContent={<item.icon className="text-xl text-default-400" />}
           />
-          // <Input
-          //   key={item.name}
-          //   className="max-w-96 m-2"
-          //   placeholder={item.label}
-          //   variant="bordered"
-          //   size="lg"
-          //   radius="full"
-          //   value={contact_[item.name]} // Use state value
-          //   onValueChange={(v) => {
-          //     setContact_((prev) => ({
-          //       ...prev,
-          //       [item.name]: v,
-          //     }));
-          //   }}
-          //   endContent={<item.icon className="text-xl text-default-500" />}
-          // />
         ))}
       </Masonry>
     );
@@ -231,7 +215,7 @@ export default function ContactRightCard() {
           onPress={handleSave}
           isIconOnly
         >
-          <SaveAltIcon />
+          <SaveIcon />
         </Button>
       </div>
       <ScrollShadow className="h-[92vh]" hideScrollBar={true}>

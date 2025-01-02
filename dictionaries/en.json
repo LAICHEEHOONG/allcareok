@@ -101,6 +101,7 @@
     "add_detail": "Add detail",
     "service_type_title": "Select the services you offer. This information is essential for customers to find and connect with your service ads.",
     "service_contact_title": "Please include your contact details, social media links, website, and email to make it easy for customers to connect with you and learn about your services.",
-    "contact_empty_title": "No contact or social links. Add some!"
+    "contact_empty_title": "No contact or social links. Add some!",
+    "service_description_title": "Clearly describing your services allows customers to quickly understand the information, build trust, and get in touch with you."
   }
 }

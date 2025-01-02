@@ -52,7 +52,7 @@ export default function ServiceCard() {
           {services?.slice(0, 3).map(({ label, icon: Icon, id }) => (
             <div key={id} className="flex gap-3 text-default-400">
               <Icon className={`w-6 h-6 ${label}`} />
-              <div>{label}</div>
+              <div className="truncate">{label}</div>
             </div>
           ))}
 
