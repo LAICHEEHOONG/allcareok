@@ -124,9 +124,6 @@ export default function ContactCard() {
       } `}
       isPressable
       onPress={handlePress}
-      // onPress={() => {
-      //   dispatch(setFocus("contact"));
-      // }}
     >
       <CardBody>
         <div className="flex flex-col justify-start gap-2">
@@ -136,9 +133,9 @@ export default function ContactCard() {
             servicesItems
               .filter(({ value }) => value) // Filter out items with empty values
               .map(({ label, icon: Icon, value }) => (
-                <div key={label} className="flex gap-3 p-1 text-default-400">
+                <div key={label} className="flex gap-3 p-1 text-default-400 ">
                   <Icon className={`w-6 h-6 ${label}`} />
-                  <div>{value}</div>
+                  <div className="truncate">{value}</div>
                 </div>
               ))
           ) : (
