@@ -139,7 +139,7 @@ export default function YoutubeRightCard() {
           <div className="w-full max-w-2xl flex flex-col justify-center items-center">
             <Input
               isClearable
-              className="max-w-96 m-2"
+              className="max-w-96 m-2 mb-6"
               placeholder={"Youtube link"}
               variant="bordered"
               size="lg"
@@ -156,11 +156,81 @@ export default function YoutubeRightCard() {
               }
             />
 
-            <YouTubeEmbed
+            <div className="w-full max-w-4xl">
+              <div className="relative overflow-hidden rounded-lg w-full aspect-video">
+                <iframe
+                  className="absolute inset-0 w-full h-full rounded-lg"
+                  src={`https://www.youtube.com/embed/${
+                    newYoutube ? newYoutube : "ogfYd705cRs"
+                  }`}
+                  title="YouTube video"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
+              {/* {newYoutube ? (
+            <div className="relative overflow-hidden rounded-lg w-full aspect-video">
+              <iframe
+                className="absolute inset-0 w-full h-full rounded-lg"
+                src={`https://www.youtube.com/embed/${newYoutube ? newYoutube : "ogfYd705cRs"}`}
+                title="YouTube video"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+          ) : (
+            <div className="w-full text-center text-gray-500">
+              Enter a valid YouTube URL to preview the video.
+            </div>
+          )} */}
+            </div>
+            {/* <div
+              style={{
+                position: "relative",
+                paddingBottom: "56.25%",
+                height: 0,
+              }}
+            >
+              <iframe
+                src={`https://www.youtube.com/embed/${newYoutube ? newYoutube : "ogfYd705cRs"}`}
+                title="YouTube video"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="absolute inset-0 w-full h-full"
+                // style={{
+                //   position: "absolute",
+                //   top: 0,
+                //   left: 0,
+                //   width: "100%",
+                //   height: "100%",
+                // }}
+              ></iframe>
+            </div> */}
+
+            {/* <YouTubeEmbed
               videoid={newYoutube ? newYoutube : "ogfYd705cRs"}
               height={400}
               params="controls=0"
-            />
+            /> */}
+            {/* <div className="w-full flex justify-center items-center border-2">
+              <YouTubeEmbed
+                className="rounded"
+                videoid={newYoutube ? newYoutube : "ogfYd705cRs"} // Dynamically set video ID
+                height={400} // Use auto for responsive height
+                params="controls=0"
+                width={600}
+                style={{
+                    width: "100%", // Full width of the container
+                    aspectRatio: "16/9", // Maintain 16:9 aspect ratio
+                    borderRadius: "16px", // Rounded corners
+                    overflow: "hidden", // Ensure content doesn’t spill
+                  }}
+              />
+            </div> */}
+
             {/* <div className="text-default-400 text-xs mt-5 mb-1 pl-4 select-none self-start">
               {newDescription?.length <= textLimit &&
                 `${textLimit - newDescription?.length} ${
