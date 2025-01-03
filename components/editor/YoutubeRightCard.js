@@ -21,13 +21,23 @@ export default function YoutubeRightCard() {
   const currentLocale = pathName.split("/")[1] || "en";
   const youtube = useSelector((state) => state.editor.ad?.youtube);
   const [loading, setLoading] = useState(false);
-  const [newYoutube, setNewYoutube] = useState(youtube || "");
+  const [newYoutube, setNewYoutube] = useState(youtube);
+  const [youtubeId, setYoutubeId] = useState("ogfYd705cRs");
 
+  // const extractVideoId = (url) => {
+  //   const regex =
+  //     /(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([^&]+)|youtu\.be\/([^?&]+)/;
+  //   const match = url.match(regex);
+  //   return match ? match[1] || match[2] : "";
+  // };
   const extractVideoId = (url) => {
-    const regex =
-      /(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([^&]+)|youtu\.be\/([^?&]+)/;
+    if (typeof url !== "string" || !url.trim()) {
+      return ""; // Return an empty string if the URL is invalid
+    }
+  
+    const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|shorts\/)|youtu\.be\/)([^?&]+)/;
     const match = url.match(regex);
-    return match ? match[1] || match[2] : "";
+    return match ? match[1] : "";
   };
 
   const fetchAds = async () => {
@@ -60,13 +70,16 @@ export default function YoutubeRightCard() {
 
   const handleSave = () => {
     const adsId = ad._id;
-    const youtube = newYoutube;
+    const youtube_ = newYoutube;
 
-    toDB(adsId, youtube);
+    toDB(adsId, youtube_);
     fetchAds();
   };
 
-  //   const textLimit = 1500;
+  useEffect(() => {
+    setYoutubeId(extractVideoId(newYoutube));
+    // setYoutubeId(newYoutube);
+  }, [newYoutube]);
 
   // Redirect to home page if ad is not found
   useEffect(() => {
@@ -74,10 +87,6 @@ export default function YoutubeRightCard() {
       router.push(`/`);
     }
   }, []);
-
-  useEffect(() => {
-    console.log("newYoutube", newYoutube);
-  }, [newYoutube]);
 
   return (
     <div className="h-screen w-full md:pl-2">
@@ -131,12 +140,61 @@ export default function YoutubeRightCard() {
           <SaveIcon />
         </Button>
       </div>
-      <ScrollShadow className="h-[92vh]" hideScrollBar={true}>
-        <div className="mb-12 mt-2 text-default-400 md:flex hidden">
+      <div
+        className=" w-full max-w-[1600px]"
+        // hideScrollBar={true}
+      >
+        <div className=" mt-2 text-default-400 md:flex hidden">
+          {l?.youtube_description}
+        </div>
+        <div className=" h-full flex flex-col justify-center items-center pt-10">
+          <div className="w-full flex justify-center items-center">
+            <div className="w-full flex flex-col justify-center items-center ">
+              <Input
+                isClearable
+                className="max-w-96 mb-6"
+                placeholder={"Youtube link"}
+                variant="bordered"
+                size="lg"
+                radius="full"
+                defaultValue={newYoutube} // Use ref for value
+                onValueChange={(youtubeUrl) => {
+                  // const videoId = extractVideoId(youtubeUrl);
+                  // setNewYoutube(videoId);
+                  setNewYoutube(youtubeUrl);
+                }}
+                //   onValueChange={(youtubeUrl) => setNewYoutube(youtubeUrl)}
+                onClear={() => setNewYoutube("")}
+                startContent={
+                  <YouTubeIcon className="text-xl text-default-400" />
+                }
+              />
+
+              <div className="w-full max-w-[1200px]">
+                <div className="relative overflow-hidden rounded-lg w-full aspect-video">
+                  <iframe
+                    className="absolute inset-0 w-full h-full rounded-lg"
+                    // src={`https://www.youtube.com/embed/${
+                    //   newYoutube ? newYoutube : "ogfYd705cRs"
+                    // }`}
+                    src={`https://www.youtube.com/embed/${
+                      youtubeId ? youtubeId : "ogfYd705cRs"
+                    }`}
+                    title="YouTube video"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* <div className="mb-2 mt-2 text-default-400 md:flex hidden">
           {l?.youtube_description}
         </div>
         <div className="w-full flex justify-center items-center">
-          <div className="w-full max-w-2xl flex flex-col justify-center items-center">
+          <div className="w-full flex flex-col justify-center items-center ">
             <Input
               isClearable
               className="max-w-96 m-2 mb-6"
@@ -148,6 +206,7 @@ export default function YoutubeRightCard() {
               onValueChange={(youtubeUrl) => {
                 const videoId = extractVideoId(youtubeUrl);
                 setNewYoutube(videoId);
+                console.log(videoId)
               }}
               //   onValueChange={(youtubeUrl) => setNewYoutube(youtubeUrl)}
               onClear={() => setNewYoutube("")}
@@ -156,7 +215,7 @@ export default function YoutubeRightCard() {
               }
             />
 
-            <div className="w-full max-w-4xl">
+            <div className="w-full max-w-[1200px]">
               <div className="relative overflow-hidden rounded-lg w-full aspect-video">
                 <iframe
                   className="absolute inset-0 w-full h-full rounded-lg"
@@ -169,98 +228,17 @@ export default function YoutubeRightCard() {
                   allowFullScreen
                 ></iframe>
               </div>
-              {/* {newYoutube ? (
-            <div className="relative overflow-hidden rounded-lg w-full aspect-video">
-              <iframe
-                className="absolute inset-0 w-full h-full rounded-lg"
-                src={`https://www.youtube.com/embed/${newYoutube ? newYoutube : "ogfYd705cRs"}`}
-                title="YouTube video"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-            </div>
-          ) : (
-            <div className="w-full text-center text-gray-500">
-              Enter a valid YouTube URL to preview the video.
-            </div>
-          )} */}
-            </div>
-            {/* <div
-              style={{
-                position: "relative",
-                paddingBottom: "56.25%",
-                height: 0,
-              }}
-            >
-              <iframe
-                src={`https://www.youtube.com/embed/${newYoutube ? newYoutube : "ogfYd705cRs"}`}
-                title="YouTube video"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="absolute inset-0 w-full h-full"
-                // style={{
-                //   position: "absolute",
-                //   top: 0,
-                //   left: 0,
-                //   width: "100%",
-                //   height: "100%",
-                // }}
-              ></iframe>
-            </div> */}
 
-            {/* <YouTubeEmbed
-              videoid={newYoutube ? newYoutube : "ogfYd705cRs"}
-              height={400}
-              params="controls=0"
-            /> */}
-            {/* <div className="w-full flex justify-center items-center border-2">
-              <YouTubeEmbed
-                className="rounded"
-                videoid={newYoutube ? newYoutube : "ogfYd705cRs"} // Dynamically set video ID
-                height={400} // Use auto for responsive height
-                params="controls=0"
-                width={600}
-                style={{
-                    width: "100%", // Full width of the container
-                    aspectRatio: "16/9", // Maintain 16:9 aspect ratio
-                    borderRadius: "16px", // Rounded corners
-                    overflow: "hidden", // Ensure content doesn’t spill
-                  }}
-              />
-            </div> */}
+            </div>
+ 
 
-            {/* <div className="text-default-400 text-xs mt-5 mb-1 pl-4 select-none self-start">
-              {newDescription?.length <= textLimit &&
-                `${textLimit - newDescription?.length} ${
-                  l?.character_available
-                }`}
-              {newDescription?.length > textLimit && (
-                <div className="flex gap-1 items-center text-red-600">
-                  <ErrorIcon sx={{ fontSize: "1rem" }} />
-                  <div>
-                    {" "}
-                    {`${newDescription?.length - textLimit} ${l?.over_limit}`}
-                  </div>
-                </div>
-              )}
-            </div> */}
-            {/* <Textarea
-              // className="max-w-2xl h-[50vh]"
-              classNames={{
-                base: "max-w-2xl",
-                input: "resize-y min-h-[64vh]",
-              }}
-              // label="Description"
-              placeholder={l?.description_placeholder}
-              variant="bordered"
-              defaultValue={description}
-              onValueChange={(v) => setNewDescription(v)}
-            /> */}
+
+
+
+     
           </div>
-        </div>
-      </ScrollShadow>
+        </div> */}
+      </div>
     </div>
   );
 }
