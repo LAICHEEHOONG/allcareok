@@ -18,9 +18,9 @@ const adSchema = new mongoose.Schema(
     service: [{ type: String }],
     area: {
       country: { type: String, default: "" },
-      state: { type: String, default: ""  },
-      city: { type: String, default: ""  },
-      town: { type: String, default: ""  },
+      state: { type: String, default: "" },
+      city: { type: String, default: "" },
+      town: { type: String, default: "" },
     },
     contact: {
       phone: { type: String, default: "" },
@@ -36,12 +36,13 @@ const adSchema = new mongoose.Schema(
       line: { type: String, default: "" },
       website: { type: String, default: "" },
     },
-    description: { 
-      type: String, 
-      default: "Enter your service description here", 
-      /* HTML content stored as a string */ 
-    },    map: { type: String },
-    youtube: [{ type: String }],
+    description: {
+      type: String,
+      default: "Enter your service description here",
+      /* HTML content stored as a string */
+    },
+    // map: { type: String },
+    youtube: { type: String, default: "" },
   },
   {
     timestamps: true,

@@ -1,25 +1,34 @@
 import { useState, useEffect } from "react";
-import { Button, ScrollShadow, Textarea } from "@nextui-org/react";
+import { Button, ScrollShadow, Input } from "@nextui-org/react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter, usePathname } from "next/navigation";
 import { setAd, setAds } from "@/redux/features/editor/editorSlice";
 import ErrorIcon from "@mui/icons-material/Error";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import { YouTubeEmbed } from "@next/third-parties/google";
 
-import SaveIcon from '@mui/icons-material/Save';
+import SaveIcon from "@mui/icons-material/Save";
 
 import { createAD, findUserAds } from "@/lib/action/adAction";
 
-export default function DescriptionRightCard() {
+export default function YoutubeRightCard() {
   const dispatch = useDispatch();
   const ad = useSelector((state) => state.editor?.ad);
   const l = useSelector((state) => state.auth?.lang?.listing_editor_card);
   const router = useRouter();
   const pathName = usePathname();
   const currentLocale = pathName.split("/")[1] || "en";
-  const description = useSelector((state) => state.editor.ad?.description);
+  const youtube = useSelector((state) => state.editor.ad?.youtube);
   const [loading, setLoading] = useState(false);
-  const [newDescription, setNewDescription] = useState(description);
+  const [newYoutube, setNewYoutube] = useState(youtube || "");
+
+  const extractVideoId = (url) => {
+    const regex =
+      /(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([^&]+)|youtu\.be\/([^?&]+)/;
+    const match = url.match(regex);
+    return match ? match[1] || match[2] : "";
+  };
 
   const fetchAds = async () => {
     try {
@@ -30,15 +39,15 @@ export default function DescriptionRightCard() {
     }
   };
 
-  const toDB = async (adsId, newDescription_) => {
+  const toDB = async (adsId, newYoutube_) => {
     try {
       setLoading(true);
-      const updateDescription = await createAD({
+      const updateYoutube = await createAD({
         ...ad,
         adsId,
-        description: newDescription_,
+        youtube: newYoutube_,
       });
-      dispatch(setAd(updateDescription));
+      dispatch(setAd(updateYoutube));
     } catch (error) {
       console.log(error);
     } finally {
@@ -51,13 +60,13 @@ export default function DescriptionRightCard() {
 
   const handleSave = () => {
     const adsId = ad._id;
-    const newDescription_ = newDescription;
+    const youtube = newYoutube;
 
-    toDB(adsId, newDescription_);
+    toDB(adsId, youtube);
     fetchAds();
   };
 
-  const textLimit = 1500;
+  //   const textLimit = 1500;
 
   // Redirect to home page if ad is not found
   useEffect(() => {
@@ -65,6 +74,10 @@ export default function DescriptionRightCard() {
       router.push(`/`);
     }
   }, []);
+
+  useEffect(() => {
+    console.log("newYoutube", newYoutube);
+  }, [newYoutube]);
 
   return (
     <div className="h-screen w-full md:pl-2">
@@ -83,9 +96,7 @@ export default function DescriptionRightCard() {
           >
             <ArrowBackIcon />
           </Button>
-          <div className="text-xl md:text-3xl font-semibold">
-            {l?.description}
-          </div>
+          <div className="text-xl md:text-3xl font-semibold">{"Youtube"}</div>
         </div>
         <Button
           className="hidden md:flex"
@@ -93,11 +104,11 @@ export default function DescriptionRightCard() {
           size="lg"
           color="primary"
           isLoading={loading}
-          isDisabled={
-            newDescription?.length <= textLimit && newDescription?.length > 0
-              ? false
-              : true
-          }
+          //   isDisabled={
+          //     newDescription?.length <= textLimit && newDescription?.length > 0
+          //       ? false
+          //       : true
+          //   }
           onPress={handleSave}
         >
           {`${l?.title_save}`}
@@ -108,11 +119,11 @@ export default function DescriptionRightCard() {
           size="md"
           color="default"
           variant="flat"
-          isDisabled={
-            newDescription?.length <= textLimit && newDescription?.length > 0
-              ? false
-              : true
-          }
+          //   isDisabled={
+          //     newDescription?.length <= textLimit && newDescription?.length > 0
+          //       ? false
+          //       : true
+          //   }
           isLoading={loading}
           onPress={handleSave}
           isIconOnly
@@ -122,11 +133,35 @@ export default function DescriptionRightCard() {
       </div>
       <ScrollShadow className="h-[92vh]" hideScrollBar={true}>
         <div className="mb-12 mt-2 text-default-400 md:flex hidden">
-          {l?.service_description_title}
+          {l?.youtube_description}
         </div>
         <div className="w-full flex justify-center items-center">
           <div className="w-full max-w-2xl flex flex-col justify-center items-center">
-            <div className="text-default-400 text-xs mt-5 mb-1 pl-4 select-none self-start">
+            <Input
+              isClearable
+              className="max-w-96 m-2"
+              placeholder={"Youtube link"}
+              variant="bordered"
+              size="lg"
+              radius="full"
+              defaultValue={newYoutube} // Use ref for value
+              onValueChange={(youtubeUrl) => {
+                const videoId = extractVideoId(youtubeUrl);
+                setNewYoutube(videoId);
+              }}
+              //   onValueChange={(youtubeUrl) => setNewYoutube(youtubeUrl)}
+              onClear={() => setNewYoutube("")}
+              startContent={
+                <YouTubeIcon className="text-xl text-default-400" />
+              }
+            />
+
+            <YouTubeEmbed
+              videoid={newYoutube ? newYoutube : "ogfYd705cRs"}
+              height={400}
+              params="controls=0"
+            />
+            {/* <div className="text-default-400 text-xs mt-5 mb-1 pl-4 select-none self-start">
               {newDescription?.length <= textLimit &&
                 `${textLimit - newDescription?.length} ${
                   l?.character_available
@@ -140,8 +175,8 @@ export default function DescriptionRightCard() {
                   </div>
                 </div>
               )}
-            </div>
-            <Textarea
+            </div> */}
+            {/* <Textarea
               // className="max-w-2xl h-[50vh]"
               classNames={{
                 base: "max-w-2xl",
@@ -152,7 +187,7 @@ export default function DescriptionRightCard() {
               variant="bordered"
               defaultValue={description}
               onValueChange={(v) => setNewDescription(v)}
-            />
+            /> */}
           </div>
         </div>
       </ScrollShadow>
