@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
-import { Button, ScrollShadow, Input } from "@nextui-org/react";
+import { Button, Input } from "@nextui-org/react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter, usePathname } from "next/navigation";
-import { setAd, setAds } from "@/redux/features/editor/editorSlice";
-import ErrorIcon from "@mui/icons-material/Error";
+import { setAd, setAds, setPopUp } from "@/redux/features/editor/editorSlice";
 import YouTubeIcon from "@mui/icons-material/YouTube";
-import { YouTubeEmbed } from "@next/third-parties/google";
 
 import SaveIcon from "@mui/icons-material/Save";
 
@@ -23,13 +21,16 @@ export default function YoutubeRightCard() {
   const [loading, setLoading] = useState(false);
   const [newYoutube, setNewYoutube] = useState(youtube);
   const [youtubeId, setYoutubeId] = useState("ogfYd705cRs");
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
-  // const extractVideoId = (url) => {
-  //   const regex =
-  //     /(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([^&]+)|youtu\.be\/([^?&]+)/;
-  //   const match = url.match(regex);
-  //   return match ? match[1] || match[2] : "";
-  // };
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 767px)"); // Tailwind's md breakpoint
+    const handleResize = () => setIsSmallScreen(mediaQuery.matches);
+    handleResize(); // Initialize state
+    mediaQuery.addEventListener("change", handleResize);
+    return () => mediaQuery.removeEventListener("change", handleResize);
+  }, []);
+
   const extractVideoId = (url) => {
     if (typeof url !== "string" || !url.trim()) {
       return ""; // Return an empty string if the URL is invalid
@@ -63,9 +64,9 @@ export default function YoutubeRightCard() {
       console.log(error);
     } finally {
       setLoading(false);
-      // if (isSmallScreen) {
-      //   dispatch(setPopUp());
-      // }
+      if (isSmallScreen) {
+        dispatch(setPopUp());
+      }
     }
   };
 
@@ -90,10 +91,10 @@ export default function YoutubeRightCard() {
   }, []);
 
   return (
-    <div className="h-screen w-full md:pl-2">
+    <div className="md:h-screen w-full md:pl-2">
       <div className="flex justify-between items-start mb-2 max-w-[1600px]">
         <div className="flex justify-center items-center gap-3">
-          <Button
+          {/* <Button
             className="md:hidden flex"
             isIconOnly
             radius="full"
@@ -105,7 +106,7 @@ export default function YoutubeRightCard() {
             }}
           >
             <ArrowBackIcon />
-          </Button>
+          </Button> */}
           <div className="text-xl md:text-3xl font-semibold">{"Youtube"}</div>
         </div>
         <Button
@@ -148,7 +149,7 @@ export default function YoutubeRightCard() {
         <div className=" mt-2 text-default-400 md:flex hidden">
           {l?.youtube_description}
         </div>
-        <div className=" h-full flex flex-col justify-center items-center p-2 pt-10 pb-10">
+        <div className=" h-full flex flex-col justify-center items-center md:p-2 md:pt-10 pb-10">
           <div className="w-full flex justify-center items-center">
             <div className="w-full flex flex-col justify-center items-center ">
               <Input

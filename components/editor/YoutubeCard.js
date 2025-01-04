@@ -1,6 +1,6 @@
 import { Card, CardBody } from "@nextui-org/react";
 import { useSelector, useDispatch } from "react-redux";
-import { setFocus } from "@/redux/features/editor/editorSlice";
+import { setFocus, setPopUp } from "@/redux/features/editor/editorSlice";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import { useRouter, usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -25,6 +25,9 @@ export default function YoutubeCard() {
 
   const handlePress = () => {
     dispatch(setFocus("youtube"));
+    if (isSmallScreen) {
+      dispatch(setPopUp());
+    }
     // if (isSmallScreen) {
     //   router.push(`/${currentLocale}/editor/mobile/youtube`);
     // }

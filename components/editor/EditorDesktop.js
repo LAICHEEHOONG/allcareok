@@ -115,7 +115,7 @@ export default function EditorDesktop() {
               <AreaCard />
               <ContactCard />
               <DescriptionCard />
-            
+
               {/* <MapCard /> */}
               <YoutubeCard />
               <VerifyCard />
@@ -152,7 +152,7 @@ function DrawerEditor({ cardFocus }) {
       {/* <DrawerTrigger asChild>{children}</DrawerTrigger> */}
       <DrawerContent>
         <div className="mx-auto w-full max-w-sm p-2 ">
-          <DrawerHeader>
+          <DrawerHeader className="hidden">
             <DrawerTitle></DrawerTitle>
             <DrawerDescription>
               {/* Upload your service poster with contact info, service details, and
@@ -163,6 +163,7 @@ function DrawerEditor({ cardFocus }) {
           <DrawerFooter>
             {cardFocus === "title" && <TitleRightCard />}
             {cardFocus === "service" && <ServiceRightCard />}
+            {cardFocus === "youtube" && <YoutubeRightCard />}
           </DrawerFooter>
         </div>
       </DrawerContent>
