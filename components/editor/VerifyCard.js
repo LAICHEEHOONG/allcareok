@@ -21,7 +21,7 @@ export default function VerifyCard() {
         <div className="flex flex-col justify-start gap-1">
           <div className="font-medium ">{l?.verify_title}</div>
           <div className="text-base text-default-400  ">
-            {l?.verify_content_1}
+            {l?.verify_content}
           </div>
         </div>
       </CardBody>
