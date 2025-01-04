@@ -34,8 +34,9 @@ export default function YoutubeRightCard() {
     if (typeof url !== "string" || !url.trim()) {
       return ""; // Return an empty string if the URL is invalid
     }
-  
-    const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|shorts\/)|youtu\.be\/)([^?&]+)/;
+
+    const regex =
+      /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|shorts\/)|youtu\.be\/)([^?&]+)/;
     const match = url.match(regex);
     return match ? match[1] : "";
   };
@@ -147,7 +148,7 @@ export default function YoutubeRightCard() {
         <div className=" mt-2 text-default-400 md:flex hidden">
           {l?.youtube_description}
         </div>
-        <div className=" h-full flex flex-col justify-center items-center pt-10">
+        <div className=" h-full flex flex-col justify-center items-center p-2 pt-10 pb-10">
           <div className="w-full flex justify-center items-center">
             <div className="w-full flex flex-col justify-center items-center ">
               <Input
@@ -190,54 +191,6 @@ export default function YoutubeRightCard() {
             </div>
           </div>
         </div>
-        {/* <div className="mb-2 mt-2 text-default-400 md:flex hidden">
-          {l?.youtube_description}
-        </div>
-        <div className="w-full flex justify-center items-center">
-          <div className="w-full flex flex-col justify-center items-center ">
-            <Input
-              isClearable
-              className="max-w-96 m-2 mb-6"
-              placeholder={"Youtube link"}
-              variant="bordered"
-              size="lg"
-              radius="full"
-              defaultValue={newYoutube} // Use ref for value
-              onValueChange={(youtubeUrl) => {
-                const videoId = extractVideoId(youtubeUrl);
-                setNewYoutube(videoId);
-                console.log(videoId)
-              }}
-              //   onValueChange={(youtubeUrl) => setNewYoutube(youtubeUrl)}
-              onClear={() => setNewYoutube("")}
-              startContent={
-                <YouTubeIcon className="text-xl text-default-400" />
-              }
-            />
-
-            <div className="w-full max-w-[1200px]">
-              <div className="relative overflow-hidden rounded-lg w-full aspect-video">
-                <iframe
-                  className="absolute inset-0 w-full h-full rounded-lg"
-                  src={`https://www.youtube.com/embed/${
-                    newYoutube ? newYoutube : "ogfYd705cRs"
-                  }`}
-                  title="YouTube video"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-              </div>
-
-            </div>
- 
-
-
-
-
-     
-          </div>
-        </div> */}
       </div>
     </div>
   );

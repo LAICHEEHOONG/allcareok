@@ -106,7 +106,9 @@
     "description_placeholder": "在此输入您的服务内容",
     "verify_title": "验证广告",
     "verify_content_1":"验证广告可以提高可信度、增加可见性，并增强客户信心，与更多用户建立信任。",
-    "youtube_description": "添加一个展示您服务的 YouTube 视频链接。这可以帮助吸引更多客户，并更好地了解您提供的服务。"
+    "youtube_description": "添加一个展示您服务的 YouTube 视频链接。这可以帮助吸引更多客户，并更好地了解您提供的服务。",
+    "youtube_add_title": "添加 YouTube 视频链接"
+
 
   }
 }
