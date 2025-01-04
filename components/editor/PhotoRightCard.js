@@ -94,7 +94,7 @@ export default function PhotoRightCard() {
     ];
 
     return (
-      <div className="">
+      <div className="p-1">
         {manageAd?._id ? (
           <div className="">
             <div className="flex justify-between mb-7 w-full">
@@ -160,7 +160,7 @@ export default function PhotoRightCard() {
         ) : (
           <Masonry
             breakpointCols={breakpointColumnsObj}
-            className="my-masonry-grid max-w-[1500px]"
+            className="my-masonry-grid max-w-[1500px] "
             columnClassName="my-masonry-grid_column"
           >
             {(!ad.photo || ad?.photo?.length === 0) &&
@@ -182,7 +182,7 @@ export default function PhotoRightCard() {
             {ad?.photo?.length > 0 &&
               !manageAd?._id &&
               ad.photo.map((item, i) => (
-                <div key={item.url} className="flex justify-center">
+                <div key={item.url} className="flex justify-center ">
                   <Card
                     isPressable
                     className=""
