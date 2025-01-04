@@ -107,10 +107,10 @@
     "verify_title": "验证广告",
     "verify_content": "您的广告尚未验证",
     "youtube_description": "添加一个展示您服务的 YouTube 视频链接。这可以帮助吸引更多客户，并更好地了解您提供的服务。",
-    "youtube_add_title": "添加 YouTube 视频链接"
-
-
+    "youtube_add_title": "添加 YouTube 视频链接",
+    "upload_limit": "上传限制已达",
+    "upload_limit_description": "您最多只能上传10张照片。",
+    "ad_limit": "广告限制已达",
+    "ad_limit_description": "您最多只能添加10项服务。"
   }
 }
-
-

@@ -50,6 +50,8 @@ export default function PhotoRightCard() {
   const ad = useSelector((state) => state.editor.ad);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [photos, setPhotos] = useState([]);
+  const [limitPhotos, setLimitPhotos] = useState([]);
+
   const [loading, setLoading] = useState(false);
   const [loading2, setLoading2] = useState(false);
   const [manageAd, setManageAd] = useState({});
@@ -57,6 +59,18 @@ export default function PhotoRightCard() {
   const router = useRouter();
   const pathName = usePathname();
   const currentLocale = pathName.split("/")[1] || "en";
+
+  const LIMIT_PHOTO = 10;
+
+  useEffect(() => {
+    const dbPhotos = ad?.photo || [];
+    setLimitPhotos(photos.slice(0, LIMIT_PHOTO - dbPhotos.length));
+  }, [photos]);
+
+  // useEffect(() => {
+  //   let dbPhotos = ad?.photo || [];
+  //   setPhotos(photos.slice(0, limitPhoto - dbPhotos.length));
+  // }, [photos]);
 
   // useEffect(() => {
   //   if (ad?.photo?.length >= 10) {
@@ -122,7 +136,7 @@ export default function PhotoRightCard() {
     return (
       <div className="p-1">
         {manageAd?._id ? (
-          <div className="">
+          <div>
             <div className="flex justify-between mb-7 w-full">
               <Button
                 isIconOnly
@@ -360,7 +374,8 @@ export default function PhotoRightCard() {
         };
 
         const responses = await Promise.all(
-          photos.map((photo) => uploadPhoto(photo))
+          // photos.map((photo) => uploadPhoto(photo))
+          limitPhotos.map((photo) => uploadPhoto(photo))
         );
 
         let photo_ = responses.map((item) => ({
@@ -441,19 +456,30 @@ export default function PhotoRightCard() {
     }
   };
 
+  const runToast = () => {
+    toast.warning(`${l?.upload_limit}`, {
+      description: `${l?.upload_limit_description}`,
+      action: {
+        label: "OK",
+        onClick: () => console.log("Upload Limit Reached"),
+      },
+    });
+  };
+
   const handlePress = () => {
-    if (ad?.photo.length <= 10) {
+    if (ad?.photo.length < 10) {
       onOpen();
     } else {
+      runToast();
       // toast("You can only upload 10 photos");
-      console.log("toast");
-      toast("Upload Limit Reached", {
-        description: "You can only upload up to 10 photos.",
-        action: {
-          label: "OK",
-          onClick: () => console.log("Acknowledged"),
-        },
-      });
+      // console.log("toast");
+      // toast("Upload Limit Reached", {
+      //   description: "You can only upload up to 10 photos.",
+      //   action: {
+      //     label: "OK",
+      //     onClick: () => console.log("Acknowledged"),
+      //   },
+      // });
 
       // toast("Event has been created", {
       //   description: "Sunday, December 03, 2023 at 9:00 AM",
@@ -677,7 +703,7 @@ export default function PhotoRightCard() {
         </div>
         <M />
       </ScrollShadow>
-      {/* <Toaster /> */}
+      {/* <Toaster position='top-center' richColors /> */}
     </div>
   );
 }

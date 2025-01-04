@@ -14,6 +14,7 @@ import { setAdsID, setAd } from "@/redux/features/editor/editorSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import Masonry from "react-masonry-css";
+import { toast } from "sonner";
 
 const breakpointColumnsObj = {
   default: 5,
@@ -29,7 +30,7 @@ export default function Dashboard() {
   const pathName = usePathname();
   const currentLocale = pathName.split("/")[1] || "en";
   const ads = useSelector((state) => state.editor.ads);
-  const lang = useSelector((state) => state.auth.lang?.listing_editor_card);
+  const l = useSelector((state) => state.auth.lang?.listing_editor_card);
   const adsId = useSelector((state) => state.editor.adsId);
 
   useEffect(() => {
@@ -45,6 +46,20 @@ export default function Dashboard() {
     dispatch(setAdsID(id));
     dispatch(setAd(AD_[0]));
     router.push(`/${currentLocale}/editor`);
+  };
+
+  const handleAddAD = () => {
+    if (ads.length >= 10) {
+      toast.warning(`${l?.ad_limit}`, {
+        description: `${l?.ad_limit_description}`,
+        action: {
+          label: "OK",
+          onClick: () => console.log("Add Ad Limit Reached"),
+        },
+      });
+    } else {
+      router.push(`/${currentLocale}/editor`);
+    }
   };
 
   return (
@@ -65,7 +80,7 @@ export default function Dashboard() {
               <ArrowBackIcon />
             </Button>
             <div className="text-3xl font-semibold">
-              {lang?.your_listing ? lang?.your_listing : "Your Listing"}
+              {l?.your_listing ? l?.your_listing : "Your Listing"}
             </div>
           </div>
 
@@ -75,9 +90,10 @@ export default function Dashboard() {
             radius="full"
             color="default"
             variant="flat"
-            onPress={() => {
-              router.push(`/${currentLocale}/editor`);
-            }}
+            onPress={handleAddAD}
+            // onPress={() => {
+            //   router.push(`/${currentLocale}/editor`);
+            // }}
           >
             <AddIcon />
           </Button>

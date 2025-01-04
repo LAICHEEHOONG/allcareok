@@ -108,6 +108,10 @@
     "verify_content": "Your ad has not been verified",
     "youtube_title": "YouTube video link",
     "youtube_description": "Add a link to a YouTube video showcasing your services. This can help attract more customers and provide a better understanding of what you offer.",
-    "youtube_add_title": "Add YouTube video link"
+    "youtube_add_title": "Add YouTube video link",
+    "upload_limit": "Upload Limit Reached",
+    "upload_limit_description": "You can only upload up to 10 photos.",
+    "ad_limit": "Ad Limit Reached",
+    "ad_limit_description": "You can only add up to 10 services."
   }
 }
