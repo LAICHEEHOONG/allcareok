@@ -18,6 +18,7 @@ import {
   CardBody,
   Image,
   Button,
+  Skeleton,
 } from "@nextui-org/react";
 import { signOut, signIn } from "next-auth/react";
 import { useSelector } from "react-redux";
@@ -55,12 +56,29 @@ export function DrawerProfile({ children, bottom_navigation }) {
               <div className="flex gap-5">
                 <Avatar isBordered radius="full" size="md" src={auth.image} />
                 <div className="flex flex-col gap-1 items-start justify-center">
-                  <h4 className="text-small font-semibold leading-none text-default-600">
+                  {/* <h4 className="text-small font-semibold leading-none text-default-600">
                     {auth.name}
-                  </h4>
-                  <h5 className="text-small tracking-tight text-default-400">
+                  </h4> */}
+                  {/* <h5 className="text-small tracking-tight text-default-400">
                     {auth.email}
-                  </h5>
+                  </h5> */}
+                  {/* <Skeleton className="h-4 w-32 rounded-xl" />
+                    <Skeleton className="h-3 w-44 rounded-xl" /> */}
+
+                  {auth.name ? (
+                    <h4 className="text-small font-semibold leading-none text-default-600">
+                      {auth.name}
+                    </h4>
+                  ) : (
+                    <Skeleton className="h-4 w-32 rounded-xl" />
+                  )}
+                  {auth.email ? (
+                    <h5 className="text-small tracking-tight text-default-400">
+                      {auth.email}
+                    </h5>
+                  ) : (
+                    <Skeleton className="h-3 w-44 rounded-xl" />
+                  )}
                 </div>
               </div>
             </DrawerTitle>
