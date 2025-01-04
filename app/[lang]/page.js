@@ -20,6 +20,8 @@ import { useRouter, usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
 
 import axios from "axios"; // Ensure axios is imported
+// import { Toaster } from "@/components/ui/sonner";
+// import { Toaster } from "sonner";
 
 async function getCountryFromIP() {
   try {
@@ -100,6 +102,7 @@ export default function Home() {
           <Fruits />
         </div>
       </main>
+      {/* <Toaster /> */}
       <footer className=""> </footer>
     </div>
   );

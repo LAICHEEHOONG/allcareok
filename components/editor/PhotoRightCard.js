@@ -28,6 +28,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { deleteImages } from "@/util/deleteImage";
 import { useRouter, usePathname } from "next/navigation";
 import { RiGalleryView2 } from "react-icons/ri";
+import { toast } from "sonner";
 
 const breakpointColumnsObj = {
   default: 4,
@@ -56,6 +57,29 @@ export default function PhotoRightCard() {
   const router = useRouter();
   const pathName = usePathname();
   const currentLocale = pathName.split("/")[1] || "en";
+
+  // useEffect(() => {
+  //   if (ad?.photo?.length >= 10) {
+  //     // If the ad photos already exceed the limit, clear additional photos
+  //     setPhotos([]);
+  //   } else {
+  //     const totalPhotos = photos.length + (ad?.photo?.length || 0);
+  //     if (totalPhotos > 10) {
+  //       const maxPhotosToAdd = 10 - (ad?.photo?.length || 0);
+  //       setPhotos((prevPhotos) => prevPhotos.slice(0, maxPhotosToAdd));
+  //     }
+  //   }
+  // }, [photos, ad?.photo]);
+
+  // useEffect(() => {
+  //   const limitPhoto = photos.length + ad?.photo.length
+  //   if (limitPhoto > 10) {
+  //     setPhotos(photos.slice(0, 10 - ad?.photo.length));
+  //   }
+  //   // if(ad?.photo?.length > 10){
+  //   //   setPhotos(ad.photo.slice(0, 10));
+  //   // }
+  // }, [photos]);
 
   // Remove the preview image from the state
   useEffect(() => {
@@ -214,7 +238,7 @@ export default function PhotoRightCard() {
       </div>
     );
   };
-  
+
   const M2 = () => {
     return (
       <Masonry
@@ -416,6 +440,30 @@ export default function PhotoRightCard() {
       setLoading2(false);
     }
   };
+
+  const handlePress = () => {
+    if (ad?.photo.length <= 10) {
+      onOpen();
+    } else {
+      // toast("You can only upload 10 photos");
+      console.log("toast");
+      toast("Upload Limit Reached", {
+        description: "You can only upload up to 10 photos.",
+        action: {
+          label: "OK",
+          onClick: () => console.log("Acknowledged"),
+        },
+      });
+
+      // toast("Event has been created", {
+      //   description: "Sunday, December 03, 2023 at 9:00 AM",
+      //   action: {
+      //     label: "Undo",
+      //     onClick: () => console.log("Undo"),
+      //   },
+      // })
+    }
+  };
   return (
     <div className="h-screen w-full md:pl-2">
       <div className="flex justify-between items-start mb-2 max-w-[1600px]">
@@ -445,7 +493,23 @@ export default function PhotoRightCard() {
             variant="flat"
             radius="full"
             startContent={<FilterIcon />}
-            onPress={onOpen}
+            onPress={handlePress}
+            // onPress={() => {
+            //   if (ad?.photo.length <= 10) {
+            //     onOpen();
+            //   } else {
+            //     // toast("You can only upload 10 photos");
+            //     console.log("toast")
+
+            //     toast("Event has been created", {
+            //       description: "Sunday, December 03, 2023 at 9:00 AM",
+            //       action: {
+            //         label: "Undo",
+            //         onClick: () => console.log("Undo"),
+            //       },
+            //     })
+            //   }
+            // }}
           >
             {l?.add_photo ? l.add_photo : "Add photos"}
           </Button>
@@ -457,7 +521,24 @@ export default function PhotoRightCard() {
             isIconOnly
             // size={'lg'}
             // startContent={<FilterIcon />}
-            onPress={onOpen}
+            // onPress={onOpen}
+            onPress={handlePress}
+
+            // onPress={() => {
+            //   if (ad?.photo.length <= 10) {
+            //     onOpen();
+            //   } else {
+            //     // toast("You can only upload 10 photos");
+            //     console.log("toast")
+            //     toast("Event has been created", {
+            //       description: "Sunday, December 03, 2023 at 9:00 AM",
+            //       action: {
+            //         label: "Undo",
+            //         onClick: () => console.log("Undo"),
+            //       },
+            //     })
+            //   }
+            // }}
           >
             <FilterIcon fontSize={"small"} />
           </Button>
@@ -596,6 +677,7 @@ export default function PhotoRightCard() {
         </div>
         <M />
       </ScrollShadow>
+      {/* <Toaster /> */}
     </div>
   );
 }
