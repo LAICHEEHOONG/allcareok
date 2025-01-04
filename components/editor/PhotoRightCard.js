@@ -176,8 +176,8 @@ export default function PhotoRightCard() {
                     alt="Card service demo"
                     className="object-cover rounded-xl"
                     src={item.image}
-                    width={270}
-                    height={270}
+                    width={550}
+                    height={400}
                   />
                 </div>
               ))}
