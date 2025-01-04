@@ -10,6 +10,7 @@ export default function TitleCard() {
   const ad = useSelector((state) => state.editor?.ad);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
+  //function to check if the screen is small
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 767px)"); // Tailwind's md breakpoint
     const handleResize = () => setIsSmallScreen(mediaQuery.matches);

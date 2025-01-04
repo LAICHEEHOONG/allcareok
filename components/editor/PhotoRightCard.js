@@ -30,11 +30,11 @@ import { useRouter, usePathname } from "next/navigation";
 import { RiGalleryView2 } from "react-icons/ri";
 
 const breakpointColumnsObj = {
-  default: 5,
-  1650: 4,
-  1320: 3,
-  1111: 2,
-  820: 1,
+  default: 4,
+  // 1650: 4,
+  1900: 3,
+  1500: 2,
+  1100: 1,
 };
 
 const breakpointColumnsObj_2 = {
@@ -57,12 +57,14 @@ export default function PhotoRightCard() {
   const pathName = usePathname();
   const currentLocale = pathName.split("/")[1] || "en";
 
+  // Remove the preview image from the state
   useEffect(() => {
     if (!user) {
       router.push(`/`);
     }
   }, []);
 
+  // Remove the preview image from the state
   const filterOurPreview = (previewToRemove) => {
     setPhotos((prev) =>
       prev.filter((item) => item.preview !== previewToRemove)
@@ -160,8 +162,8 @@ export default function PhotoRightCard() {
         ) : (
           <Masonry
             breakpointCols={breakpointColumnsObj}
-            className="my-masonry-grid max-w-[1500px] "
-            columnClassName="my-masonry-grid_column"
+            className="my-masonry-grid max-w-[1600px]"
+            columnClassName="my-masonry-grid_column "
           >
             {(!ad.photo || ad?.photo?.length === 0) &&
               items.map((item) => (
@@ -182,7 +184,7 @@ export default function PhotoRightCard() {
             {ad?.photo?.length > 0 &&
               !manageAd?._id &&
               ad.photo.map((item, i) => (
-                <div key={item.url} className="flex justify-center ">
+                <div key={item.url} className="flex justify-center">
                   <Card
                     isPressable
                     className=""
@@ -199,8 +201,8 @@ export default function PhotoRightCard() {
                           alt="Card service"
                           className="object-cover rounded-xl cursor-pointer"
                           src={item.url}
-                          width={400}
-                          height={357}
+                          width={550}
+                          height={400}
                         />
                       </div>
                     </CardBody>
