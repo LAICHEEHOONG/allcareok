@@ -87,7 +87,7 @@ export default function EditorDesktop() {
   }, []);
 
   return (
-    <div className="flex h-screen m-3 md:justify-start justify-center ">
+    <div className="flex h-screen m-3 md:justify-start justify-center  w-full max-w-[2000px]">
       {/* Left Section */}
       <div className="flex flex-col w-full md:w-[330px]">
         <div className="flex flex-col ">

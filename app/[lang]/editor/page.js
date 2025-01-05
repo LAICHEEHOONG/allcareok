@@ -4,7 +4,7 @@ import EditorDesktop from "@/components/editor/EditorDesktop";
 
 export default function Editor() {
   return (
-    <div>
+    <div className="flex justify-center">
       <EditorDesktop />
       {/* <Toaster position='top-center' richColors /> */}
     </div>
