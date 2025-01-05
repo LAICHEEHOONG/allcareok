@@ -12,7 +12,7 @@ export default function AllProvider({ children }) {
     <Provider store={store}>
       <SessionProvider>
         <NextUIProvider>{children}</NextUIProvider>
-        <Toaster position="top-center" richColors />
+        <Toaster position="top-center"  />
       </SessionProvider>
       <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />
     </Provider>

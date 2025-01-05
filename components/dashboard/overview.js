@@ -18,8 +18,8 @@ export default function Overview() {
 
   return (
     <>
-      <div className="hidden sm:flex flex-col w-full h-[766px] justify-center">
-        <div className="fixed top-0 w-full bg-white">
+      <div className="hidden sm:flex flex-col w-full h-screen justify-center  ">
+        <div className="fixed top-0 w-full bg-white ">
           <div className="flex justify-between m-8">
             <Image
               className="min-w-[37px]"
@@ -38,7 +38,8 @@ export default function Overview() {
             </Button>
           </div>
         </div>
-        <div className="flex justify-center items-center">
+
+        <div className="flex justify-center items-center ">
           <div className="w-1/2 flex items-center justify-center">
             <p className="text-5xl font-medium max-w-2xl m-10 leading-tight">
               {overview?.main}
@@ -49,11 +50,27 @@ export default function Overview() {
             <div className="max-w-lg m-7 mr-12">
               <div className="flex gap-3 text-2xl font-medium">
                 <div>1</div>
-                <div>{overview?.title_1}</div>
+                <div          style={{
+                  display: "-webkit-box",
+                  WebkitBoxOrient: "vertical",
+                  overflow: "hidden",
+                  WebkitLineClamp: 1,
+                }}>{overview?.title_1}</div>
               </div>
-              <div className="text-gray-500 ml-6 mt-2 mb-7 text-lg">
+              <div
+                className="text-gray-500 ml-6 mt-2 mb-7 text-lg"
+                style={{
+                  display: "-webkit-box",
+                  WebkitBoxOrient: "vertical",
+                  overflow: "hidden",
+                  WebkitLineClamp: 2,
+                }}
+              >
                 {overview?.content_1}
               </div>
+              {/* <div className="text-gray-500 ml-6 mt-2 mb-7 text-lg">
+                {overview?.content_1}
+              </div> */}
               <Divider />
             </div>
 
@@ -62,7 +79,15 @@ export default function Overview() {
                 <div>2</div>
                 <div>{overview?.title_2}</div>
               </div>
-              <div className="text-gray-500 ml-6 mt-2 mb-7">
+              <div
+                className="text-gray-500 ml-6 mt-2 mb-7"
+                style={{
+                  display: "-webkit-box",
+                  WebkitBoxOrient: "vertical",
+                  overflow: "hidden",
+                  WebkitLineClamp: 2,
+                }}
+              >
                 {overview?.content_2}
               </div>
               <Divider />
@@ -73,14 +98,22 @@ export default function Overview() {
                 <div>3</div>
                 <div>{overview?.title_3}</div>
               </div>
-              <div className="text-gray-500 ml-6 mt-2 mb-7">
+              <div
+                className="text-gray-500 ml-6 mt-2 mb-7"
+                style={{
+                  display: "-webkit-box",
+                  WebkitBoxOrient: "vertical",
+                  overflow: "hidden",
+                  WebkitLineClamp: 2,
+                }}
+              >
                 {overview?.content_3}
               </div>
             </div>
           </div>
         </div>
 
-        <div className="fixed bottom-0 w-full bg-white">
+        <div className="fixed bottom-0 w-full bg-white ">
           <Divider className="h-1" />
           <div className="flex justify-end m-4 mr-14">
             <Button
