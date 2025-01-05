@@ -1,7 +1,7 @@
 import { Button, Divider, Image } from "@nextui-org/react";
 import { useRouter, usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Overview() {
   const router = useRouter();
@@ -9,12 +9,18 @@ export default function Overview() {
   const pathname = usePathname();
   const currentLocale = pathname.split("/")[1] || "en";
   const session = useSelector((state) => state.auth.session);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!session) {
       router.push(`/`);
     }
   }, []);
+
+  const handlePress = () => {
+    setLoading(true);
+    router.push(`/${currentLocale}/editor`);
+  };
 
   return (
     <div className=" w-full max-w-[2000px]">
@@ -141,9 +147,11 @@ export default function Overview() {
             color="danger"
             radius="full"
             size="lg"
-            onPress={() => {
-              router.push(`/${currentLocale}/editor`);
-            }}
+            onPress={handlePress}
+            isLoading={loading}
+            // onPress={() => {
+            //   router.push(`/${currentLocale}/editor`);
+            // }}
           >
             {overview?.get_started}
           </Button>
@@ -173,6 +181,7 @@ export default function Overview() {
               color="default"
               variant="bordered"
               size="sm"
+      
               onPress={() => router.push(`/${currentLocale}`)}
             >
               {overview?.exit}
@@ -217,9 +226,11 @@ export default function Overview() {
               radius="full"
               size="lg"
               fullWidth={true}
-              onPress={() => {
-                router.push(`/${currentLocale}/editor`);
-              }}
+              onPress={handlePress}
+              isLoading={loading}
+              // onPress={() => {
+              //   router.push(`/${currentLocale}/editor`);
+              // }}
             >
               {overview?.get_started}
             </Button>

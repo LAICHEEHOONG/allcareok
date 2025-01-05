@@ -18,10 +18,10 @@ import { toast } from "sonner";
 
 const breakpointColumnsObj = {
   default: 5,
-  1450: 4,
+  1500: 4,
   1150: 3,
-  850: 2,
-  570: 1,
+  900: 2,
+  650: 1,
 };
 
 export default function Dashboard() {
@@ -63,88 +63,90 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="m-10 flex justify-center items-center">
-      <div className="w-full">
-        <div className="flex justify-between mb-10">
-          <div className="flex gap-4">
+    <div className="w-full flex justify-center">
+      <div className="m-10 flex justify-center items-center w-full max-w-[2000px]">
+        <div className="w-full">
+          <div className="flex justify-between mb-10">
+            <div className="flex gap-4">
+              <Button
+                isIconOnly
+                aria-label="back to home page button"
+                radius="full"
+                color="default"
+                variant="flat"
+                onPress={() => {
+                  router.push(`/${currentLocale}`);
+                }}
+              >
+                <ArrowBackIcon />
+              </Button>
+              <div className="text-3xl font-semibold">
+                {l?.your_listing ? l?.your_listing : "Your Listing"}
+              </div>
+            </div>
+
             <Button
               isIconOnly
-              aria-label="back to home page button"
+              aria-label="new ad"
               radius="full"
               color="default"
               variant="flat"
-              onPress={() => {
-                router.push(`/${currentLocale}`);
-              }}
+              onPress={handleAddAD}
+              // onPress={() => {
+              //   router.push(`/${currentLocale}/editor`);
+              // }}
             >
-              <ArrowBackIcon />
+              <AddIcon />
             </Button>
-            <div className="text-3xl font-semibold">
-              {l?.your_listing ? l?.your_listing : "Your Listing"}
-            </div>
           </div>
-
-          <Button
-            isIconOnly
-            aria-label="new ad"
-            radius="full"
-            color="default"
-            variant="flat"
-            onPress={handleAddAD}
-            // onPress={() => {
-            //   router.push(`/${currentLocale}/editor`);
-            // }}
+          <Masonry
+            breakpointCols={breakpointColumnsObj}
+            className="my-masonry-grid"
+            columnClassName="my-masonry-grid_column"
           >
-            <AddIcon />
-          </Button>
+            {ads.map((item) => (
+              <Card
+                key={item._id}
+                className="flex mb-2"
+                isPressable
+                shadow="sm"
+                onPress={() => {
+                  selectedCard(item._id);
+                }}
+              >
+                <CardBody className="overflow-visible p-0">
+                  <Image
+                    alt="Card background"
+                    className="z-0 object-cover"
+                    src={
+                      item.photo.length === 0
+                        ? "/images/handyman_2.webp"
+                        : item.photo[0].url
+                    }
+                    width={500}
+                    height={300}
+                  />
+                  {adsId === item._id && (
+                    <>
+                      {/* Dark transparent overlay */}
+                      <div className="absolute inset-0 bg-black bg-opacity-50 rounded-xl z-40"></div>
+                      {/* Centered spinner */}
+                      <div className="absolute inset-0 flex items-center justify-center z-40">
+                        <Spinner color="default" size="lg" />
+                      </div>
+                    </>
+                  )}
+                </CardBody>
+                <CardFooter className="text-small flex-col items-start overflow-visible truncate max-w-[250px]">
+                  <b className="truncate max-w-[240px]">{item?.title}</b>
+                  <p className="text-default-500 truncate max-w-[240px]">
+                    {"Ipoh, Perak"}
+                  </p>
+                </CardFooter>
+              </Card>
+            ))}
+          </Masonry>
         </div>
-        <Masonry
-          breakpointCols={breakpointColumnsObj}
-          className="my-masonry-grid"
-          columnClassName="my-masonry-grid_column"
-        >
-          {ads.map((item) => (
-            <Card
-              key={item._id}
-              className="flex mb-2"
-              isPressable
-              shadow="sm"
-              onPress={() => {
-                selectedCard(item._id);
-              }}
-            >
-              <CardBody className="overflow-visible p-0">
-                <Image
-                  alt="Card background"
-                  className="z-0 object-cover"
-                  src={
-                    item.photo.length === 0
-                      ? "/images/handyman_2.webp"
-                      : item.photo[0].url
-                  }
-                  width={500}
-                  height={300}
-                />
-                {adsId === item._id && (
-                  <>
-                    {/* Dark transparent overlay */}
-                    <div className="absolute inset-0 bg-black bg-opacity-50 rounded-xl z-40"></div>
-                    {/* Centered spinner */}
-                    <div className="absolute inset-0 flex items-center justify-center z-40">
-                      <Spinner color="default" size="lg" />
-                    </div>
-                  </>
-                )}
-              </CardBody>
-              <CardFooter className="text-small flex-col items-start overflow-visible truncate max-w-[250px]">
-                <b className="truncate max-w-[240px]">{item?.title}</b>
-                <p className="text-default-500 truncate max-w-[240px]">
-                  {"Ipoh, Perak"}
-                </p>
-              </CardFooter>
-            </Card>
-          ))}
-        </Masonry>
       </div>
     </div>
   );
