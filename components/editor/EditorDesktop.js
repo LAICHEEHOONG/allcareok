@@ -40,6 +40,7 @@ import ContactRightCard from "./ContactRightCard";
 import DescriptionRightCard from "./DescriptionRightCard";
 import VerifyCard from "./VerifyCard";
 import YoutubeRightCard from "./YoutubeRightCard";
+import VeryRightCard from "./VerifyRightCard";
 
 export default function EditorDesktop() {
   const dispatch = useDispatch();
@@ -137,6 +138,7 @@ export default function EditorDesktop() {
         {cardFocus === "contact" && <ContactRightCard />}
         {cardFocus === "description" && <DescriptionRightCard />}
         {cardFocus === "youtube" && <YoutubeRightCard />}
+        {cardFocus === "verify" && <VeryRightCard />}
       </div>
       {/* Right Mobile */}
       <DrawerEditor cardFocus={cardFocus} />

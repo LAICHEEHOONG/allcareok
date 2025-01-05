@@ -112,6 +112,12 @@
     "upload_limit": "Upload Limit Reached",
     "upload_limit_description": "You can only upload up to 10 photos.",
     "ad_limit": "Ad Limit Reached",
-    "ad_limit_description": "You can only add up to 10 services."
+    "ad_limit_description": "You can only add up to 10 services.",
+    "verify_top_content": "Upload Your Documents for Verification",
+    "learn_more": "Learn more",
+    "verify_upload_title": "Document Submission",
+    "verify_upload_content": "Advertisers need to upload necessary identification or business documents",
+    "verify_btn_title": "Review",
+    "verify_btn_content": "Our team will review the submitted documents to ensure they meet the verification requirements"
   }
 }

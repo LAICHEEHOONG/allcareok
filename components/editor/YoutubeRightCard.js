@@ -16,11 +16,11 @@ export default function YoutubeRightCard() {
   const l = useSelector((state) => state.auth?.lang?.listing_editor_card);
   const router = useRouter();
   const pathName = usePathname();
-  const currentLocale = pathName.split("/")[1] || "en";
+  // const currentLocale = pathName.split("/")[1] || "en";
   const youtube = useSelector((state) => state.editor.ad?.youtube);
   const [loading, setLoading] = useState(false);
   const [newYoutube, setNewYoutube] = useState(youtube);
-  const [youtubeId, setYoutubeId] = useState("ogfYd705cRs");
+  const [youtubeId, setYoutubeId] = useState("");
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {
@@ -80,7 +80,6 @@ export default function YoutubeRightCard() {
 
   useEffect(() => {
     setYoutubeId(extractVideoId(newYoutube));
-    // setYoutubeId(newYoutube);
   }, [newYoutube]);
 
   // Redirect to home page if ad is not found
@@ -180,7 +179,7 @@ export default function YoutubeRightCard() {
                     //   newYoutube ? newYoutube : "ogfYd705cRs"
                     // }`}
                     src={`https://www.youtube.com/embed/${
-                      youtubeId ? youtubeId : "ogfYd705cRs"
+                      youtubeId ? youtubeId : "MXTbTpzs7tU"
                     }`}
                     title="YouTube video"
                     frameBorder="0"

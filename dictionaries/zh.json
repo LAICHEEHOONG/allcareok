@@ -111,6 +111,12 @@
     "upload_limit": "上传限制已达",
     "upload_limit_description": "您最多只能上传10张照片。",
     "ad_limit": "广告限制已达",
-    "ad_limit_description": "您最多只能添加10项服务。"
+    "ad_limit_description": "您最多只能添加10项服务。",
+    "verify_top_content": "上传您的文件以进行验证",
+    "learn_more": "了解详情",
+    "verify_upload_title": "文件提交",
+    "verify_upload_content": "广告商需上传必要的身份证明或商业文件",
+    "verify_btn_title": "审核",
+    "verify_btn_content": "我们的团队将审核提交的文件，以确保它们符合验证要求"
   }
 }
