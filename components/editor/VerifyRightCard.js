@@ -148,11 +148,11 @@ export default function VeryRightCard() {
             <CardBody>
               <div className="flex justify-between">
                 <div className="flex flex-col justify-center tracking-wider">
-                  <div className="text-md leading-10 w-full max-w-[250px]">
-                    {l.verify_upload_title}
+                  <div className="text-md leading-10 w-full max-w-[250px] font-semibold">
+                    {l?.verify_upload_title}
                   </div>
                   <div className="text-small tracking-wide text-default-400 w-full max-w-[250px]">
-                    {l.verify_upload_content}
+                    {l?.verify_upload_content}
                   </div>
                 </div>
                 <Image
@@ -178,7 +178,7 @@ export default function VeryRightCard() {
             <CardBody>
               <div className="flex justify-between">
                 <div className="flex flex-col justify-center  w-full max-w-[250px] ">
-                  <p className="text-md leading-10 w-full max-w-[250px]">
+                  <p className="text-md leading-10 w-full max-w-[250px] font-semibold ">
                     {l?.verify_btn_title}
                   </p>
                   <p className="text-small tracking-wide text-default-400 w-full max-w-[250px]">
@@ -201,6 +201,7 @@ export default function VeryRightCard() {
             variant="light"
             startContent={<HelpOutlineIcon />}
             fullWidth={true}
+            size="lg"
           >
             {l?.learn_more}
           </Button>
