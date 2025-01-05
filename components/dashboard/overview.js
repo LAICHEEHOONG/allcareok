@@ -17,10 +17,28 @@ export default function Overview() {
   }, []);
 
   return (
-    <>
-      <div className="hidden sm:flex flex-col w-full h-screen justify-center  ">
-        <div className="fixed top-0 w-full bg-white ">
-          <div className="flex justify-between m-8">
+    <div className=" w-full max-w-[2000px]">
+      <div className="hidden sm:flex flex-col w-full h-screen  ">
+        <div className="flex justify-between h-[10vh] p-3">
+          <Image
+            className="min-w-[37px]"
+            width={37}
+            radius="none"
+            alt="Allcareok logo"
+            src="/images/allcareok_logo.png"
+          />
+          <Button
+            radius="full"
+            color="default"
+            variant="bordered"
+            onPress={() => router.push(`/${currentLocale}`)}
+          >
+            {overview?.exit}
+          </Button>
+        </div>
+
+        {/* <div className="fixed top-0 w-full bg-white "> */}
+        {/* <div className="flex justify-between">
             <Image
               className="min-w-[37px]"
               width={37}
@@ -36,10 +54,10 @@ export default function Overview() {
             >
               {overview?.exit}
             </Button>
-          </div>
-        </div>
+          </div> */}
+        {/* </div> */}
 
-        <div className="flex justify-center items-center ">
+        <div className="flex justify-center items-center h-[80vh] ">
           <div className="w-1/2 flex items-center justify-center">
             <p className="text-5xl font-medium max-w-2xl m-10 leading-tight">
               {overview?.main}
@@ -50,12 +68,16 @@ export default function Overview() {
             <div className="max-w-lg m-7 mr-12">
               <div className="flex gap-3 text-2xl font-medium">
                 <div>1</div>
-                <div          style={{
-                  display: "-webkit-box",
-                  WebkitBoxOrient: "vertical",
-                  overflow: "hidden",
-                  WebkitLineClamp: 1,
-                }}>{overview?.title_1}</div>
+                <div
+                  style={{
+                    display: "-webkit-box",
+                    WebkitBoxOrient: "vertical",
+                    overflow: "hidden",
+                    WebkitLineClamp: 1,
+                  }}
+                >
+                  {overview?.title_1}
+                </div>
               </div>
               <div
                 className="text-gray-500 ml-6 mt-2 mb-7 text-lg"
@@ -113,7 +135,20 @@ export default function Overview() {
           </div>
         </div>
 
-        <div className="fixed bottom-0 w-full bg-white ">
+        <Divider className="h-1" />
+        <div className="h-[10vh] flex justify-end items-center p-2">
+          <Button
+            color="danger"
+            radius="full"
+            size="lg"
+            onPress={() => {
+              router.push(`/${currentLocale}/editor`);
+            }}
+          >
+            {overview?.get_started}
+          </Button>
+        </div>
+        {/* <div className="fixed bottom-0 w-full bg-white ">
           <Divider className="h-1" />
           <div className="flex justify-end m-4 mr-14">
             <Button
@@ -127,7 +162,7 @@ export default function Overview() {
               {overview?.get_started}
             </Button>
           </div>
-        </div>
+        </div> */}
       </div>
       {/* MOBILE */}
       <div className="sm:hidden w-full h-full flex justify-center items-center">
@@ -191,6 +226,6 @@ export default function Overview() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
