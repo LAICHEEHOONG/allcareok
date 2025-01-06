@@ -67,34 +67,6 @@ export default function PhotoRightCard() {
     setLimitPhotos(photos.slice(0, LIMIT_PHOTO - dbPhotos.length));
   }, [photos]);
 
-  // useEffect(() => {
-  //   let dbPhotos = ad?.photo || [];
-  //   setPhotos(photos.slice(0, limitPhoto - dbPhotos.length));
-  // }, [photos]);
-
-  // useEffect(() => {
-  //   if (ad?.photo?.length >= 10) {
-  //     // If the ad photos already exceed the limit, clear additional photos
-  //     setPhotos([]);
-  //   } else {
-  //     const totalPhotos = photos.length + (ad?.photo?.length || 0);
-  //     if (totalPhotos > 10) {
-  //       const maxPhotosToAdd = 10 - (ad?.photo?.length || 0);
-  //       setPhotos((prevPhotos) => prevPhotos.slice(0, maxPhotosToAdd));
-  //     }
-  //   }
-  // }, [photos, ad?.photo]);
-
-  // useEffect(() => {
-  //   const limitPhoto = photos.length + ad?.photo.length
-  //   if (limitPhoto > 10) {
-  //     setPhotos(photos.slice(0, 10 - ad?.photo.length));
-  //   }
-  //   // if(ad?.photo?.length > 10){
-  //   //   setPhotos(ad.photo.slice(0, 10));
-  //   // }
-  // }, [photos]);
-
   // Remove the preview image from the state
   useEffect(() => {
     if (!user) {
@@ -374,7 +346,6 @@ export default function PhotoRightCard() {
         };
 
         const responses = await Promise.all(
-          // photos.map((photo) => uploadPhoto(photo))
           limitPhotos.map((photo) => uploadPhoto(photo))
         );
 
@@ -471,23 +442,6 @@ export default function PhotoRightCard() {
       onOpen();
     } else {
       runToast();
-      // toast("You can only upload 10 photos");
-      // console.log("toast");
-      // toast("Upload Limit Reached", {
-      //   description: "You can only upload up to 10 photos.",
-      //   action: {
-      //     label: "OK",
-      //     onClick: () => console.log("Acknowledged"),
-      //   },
-      // });
-
-      // toast("Event has been created", {
-      //   description: "Sunday, December 03, 2023 at 9:00 AM",
-      //   action: {
-      //     label: "Undo",
-      //     onClick: () => console.log("Undo"),
-      //   },
-      // })
     }
   };
   return (
