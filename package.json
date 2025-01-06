@@ -19,6 +19,8 @@
     "@radix-ui/react-dialog": "^1.1.2",
     "@radix-ui/react-slot": "^1.1.0",
     "@reduxjs/toolkit": "^2.3.0",
+    "@stripe/react-stripe-js": "^3.1.1",
+    "@stripe/stripe-js": "^5.4.0",
     "axios": "^1.7.9",
     "class-variance-authority": "^0.7.0",
     "cloudinary": "^2.5.1",
@@ -42,6 +44,7 @@
     "react-redux": "^9.1.2",
     "recharts": "^2.13.3",
     "sonner": "^1.7.1",
+    "stripe": "^17.5.0",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^1.1.1"
