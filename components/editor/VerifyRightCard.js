@@ -13,8 +13,7 @@ import {
   ModalBody,
   ModalFooter,
   Divider,
-  useDisclosure
-
+  useDisclosure,
 } from "@nextui-org/react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useSelector, useDispatch } from "react-redux";
@@ -31,7 +30,6 @@ import AddIcon from "@mui/icons-material/Add";
 import FilterIcon from "@mui/icons-material/Filter";
 import { useDropzone } from "react-dropzone";
 
-
 const breakpointColumnsObj_2 = {
   default: 2,
 };
@@ -41,6 +39,7 @@ export default function VeryRightCard() {
   const user = useSelector((state) => state.auth._id);
   const adsId = useSelector((state) => state.editor?.adsId);
   const ad = useSelector((state) => state.editor?.ad);
+  const verification = useSelector((state) => state.editor?.ad?.verification);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [photos, setPhotos] = useState([]);
   const [limitPhotos, setLimitPhotos] = useState([]);
@@ -54,8 +53,8 @@ export default function VeryRightCard() {
   const LIMIT_PHOTO = 10;
 
   useEffect(() => {
-    const dbPhotos = ad?.photo || [];
-    setLimitPhotos(photos.slice(0, LIMIT_PHOTO - dbPhotos.length));
+    // const dbVerification = ad?.photo || [];
+    setLimitPhotos(photos.slice(0, LIMIT_PHOTO - verification.length));
   }, [photos]);
 
   useEffect(() => {
@@ -173,7 +172,6 @@ export default function VeryRightCard() {
     }
   };
 
-
   const submitToCloudinary = async () => {
     try {
       setLoading(true);
@@ -212,7 +210,7 @@ export default function VeryRightCard() {
           contact,
           youtube,
           adsId,
-          verification
+          verification,
         });
       }
     } catch (err) {
@@ -233,7 +231,7 @@ export default function VeryRightCard() {
   };
 
   const handlePress = () => {
-    if (ad?.photo.length < 10) {
+    if (verification.length < LIMIT_PHOTO) {
       onOpen();
     } else {
       runToast();
@@ -318,53 +316,23 @@ export default function VeryRightCard() {
             {l?.verify_title}
           </div>
         </div>
-        {/* <Button
-          className="hidden md:flex"
-          radius="full"
-          size="lg"
-          color="primary"
-          isLoading={loading}
-          onPress={handleSave}
-        >
-          {`${l?.title_save}`}
-        </Button> */}
-        {/* <Button
-          className="flex md:hidden"
-          radius="full"
-          size="md"
-          color="default"
-          variant="flat"
-          isLoading={loading}
-          onPress={handleSave}
-          isIconOnly
-        >
-          <SaveIcon />
-        </Button> */}
       </div>
       <div className=" mt-2 text-default-400 md:flex hidden">
         {l?.verify_top_content}
       </div>
       <div className=" w-full max-w-[1600px]  flex justify-center h-[80vh]">
-        {/* <div className=" mt-2 text-default-400 md:flex hidden">
-          {l?.verify_title}
-        </div> */}
         <div className="w-full max-w-[500px] flex flex-col justify-center items-center ">
-          <Card
-            className="m-2 mb-4 w-full"
-            isPressable
-            onPress={handlePress}
-            //   isPressable={!blockServiceBtn}
-            //   isDisabled={blockServiceBtn}
-            // onPress={() => {
-            //   changeRouter();
-            // }}
-            //   onPress={changeRouter}
-          >
+          <Card className="m-2 mb-4 w-full" isPressable onPress={handlePress}>
             <CardBody>
               <div className="flex justify-between">
                 <div className="flex flex-col justify-center tracking-wider">
                   <div className="text-md leading-10 w-full max-w-[250px] font-semibold">
                     {l?.verify_upload_title}
+                  </div>
+                  <div className="text-small tracking-wide text-default-400 w-full max-w-[250px]">
+                    {verification &&
+                      verification.length > 0 &&
+                      `${verification.length} photos`}
                   </div>
                   <div className="text-small tracking-wide text-default-400 w-full max-w-[250px]">
                     {l?.verify_upload_content}
@@ -545,14 +513,6 @@ export default function VeryRightCard() {
             </ModalContent>
           </Modal>
         </div>
-
-        {/* <div className=" h-full flex flex-col justify-center items-center md:p-2 md:pt-10 pb-10">
-          <div className="w-full flex justify-center items-center">
-            <div className="w-full flex flex-col justify-center items-center ">
-         
-            </div>
-          </div>
-        </div> */}
       </div>
     </div>
   );
