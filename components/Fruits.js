@@ -1,6 +1,6 @@
-'use client'
+"use client";
 
-import {Card, CardBody, CardFooter, Image} from "@nextui-org/react";
+import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 
 export default function Fruits() {
   const list = [
@@ -49,9 +49,14 @@ export default function Fruits() {
   return (
     <div className="gap-2 grid grid-cols-2 sm:grid-cols-4">
       {list.map((item, index) => (
-        <Card shadow="sm" key={index} isPressable onPress={() => console.log("item pressed")}>
+        <Card
+          shadow="sm"
+          key={index}
+          isPressable
+          onPress={() => console.log("item pressed")}
+        >
           <CardBody className="overflow-visible p-0">
-            <Image 
+            <Image
               shadow="sm"
               radius="lg"
               width="100%"
