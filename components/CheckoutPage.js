@@ -47,7 +47,7 @@ const CheckoutPage = ({ amount }) => {
       elements,
       clientSecret,
       confirmParams: {
-        return_url: `http://www.localhost:3000/en/payment-success?amount=${amount}`,
+        return_url: `https://www.allcareok.com/en/payment-success?amount=${amount}`,
       },
     });
 

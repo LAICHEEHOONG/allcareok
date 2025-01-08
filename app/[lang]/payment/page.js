@@ -29,7 +29,7 @@ export default function Payment() {
         options={{
           mode: "payment",
           amount: convertToSubcurrency(amount),
-          currency: "usd",
+          currency: "myr",
         }}
       >
         <CheckoutPage amount={amount} />
