@@ -78,23 +78,44 @@ export async function POST(req) {
           console.log("Checkout session saved successfully");
 
           // Find and update the related ad using clientReferenceId
+          // const updatedAd = await AD.findOneAndUpdate(
+          //   { _id: session.client_reference_id }, // Match the ad by _id
+          //   {
+          //     "reviewPayment.sessionId": session.id,
+          //     "reviewPayment.clientReferenceId": session.client_reference_id,
+          //     "reviewPayment.customerDetails": {
+          //       name: session.customer_details.name,
+          //       email: session.customer_details.email,
+          //     },
+          //     "reviewPayment.amountTotal": session.amount_total,
+          //     "reviewPayment.currency": session.currency,
+          //     "reviewPayment.paymentStatus": session.payment_status,
+          //     "reviewPayment.paymentIntentId": session.payment_intent,
+          //     "reviewPayment.successUrl": session.success_url,
+          //     "reviewPayment.createdAt": new Date(session.created * 1000),
+          //   },
+          //   { new: true } // Return the updated document
+          // );
+
           const updatedAd = await AD.findOneAndUpdate(
             { _id: session.client_reference_id }, // Match the ad by _id
             {
-              "reviewPayment.sessionId": session.id,
-              "reviewPayment.clientReferenceId": session.client_reference_id,
-              "reviewPayment.customerDetails": {
-                name: session.customer_details.name,
-                email: session.customer_details.email,
+              $set: {
+                "reviewPayment.sessionId": session.id,
+                "reviewPayment.clientReferenceId": session.client_reference_id,
+                "reviewPayment.customerDetails": {
+                  name: session.customer_details.name,
+                  email: session.customer_details.email,
+                },
+                "reviewPayment.amountTotal": session.amount_total,
+                "reviewPayment.currency": session.currency,
+                "reviewPayment.paymentStatus": session.payment_status,
+                "reviewPayment.paymentIntentId": session.payment_intent,
+                "reviewPayment.successUrl": session.success_url,
+                "reviewPayment.createdAt": new Date(session.created * 1000), // Convert timestamp
               },
-              "reviewPayment.amountTotal": session.amount_total,
-              "reviewPayment.currency": session.currency,
-              "reviewPayment.paymentStatus": session.payment_status,
-              "reviewPayment.paymentIntentId": session.payment_intent,
-              "reviewPayment.successUrl": session.success_url,
-              "reviewPayment.createdAt": new Date(session.created * 1000),
             },
-            { new: true } // Return the updated document
+            { new: true, upsert: true } // Create document if it doesn't exist
           );
 
           if (updatedAd) {
@@ -108,6 +129,7 @@ export async function POST(req) {
       }
 
       handleCheckoutSessionCompleted(res);
+      return NextResponse.json({ status: "success" });
     }
 
     // Check if the event is for a successful payment
@@ -141,7 +163,7 @@ export async function POST(req) {
     // }
   } catch (error) {
     console.error("Error processing webhook:", error);
-    // return NextResponse.json({ status: "failed", error });
+    return NextResponse.json({ status: "failed", error });
   }
 }
 
