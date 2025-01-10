@@ -4,6 +4,9 @@ import dbConnect from "@/lib/dbConnect";
 // import dbConnect from "../../lib/mongodb";
 import Payment from "@/models/Payment";
 import Checker from "@/models/Checker";
+import CheckoutSession from "@/models/CheckoutSession";
+// import CheckoutSession from "@/models/CheckoutSession";
+
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -23,6 +26,37 @@ export async function POST(req) {
 
     const checker = new Checker({ Fire: "fire", FireType: event.type });
     await checker.save();
+
+    if (event.type === "checkout.session.completed") {
+      // const RES = res?.data?.object;
+      async function handleCheckoutSessionCompleted(webhookData) {
+        try {
+          const session = webhookData?.data?.object;
+
+          const newSession = new CheckoutSession({
+            sessionId: session.id,
+            clientReferenceId: session.client_reference_id,
+            customerDetails: {
+              name: session.customer_details.name,
+              email: session.customer_details.email,
+            },
+            amountTotal: session.amount_total,
+            currency: session.currency,
+            paymentStatus: session.payment_status,
+            paymentIntentId: session.payment_intent,
+            successUrl: session.success_url,
+            createdAt: new Date(session.created * 1000), // Convert timestamp to JavaScript Date
+          });
+
+          await newSession.save();
+          console.log("Checkout session saved successfully");
+        } catch (error) {
+          console.error("Error saving checkout session:", error);
+        }
+      }
+
+      handleCheckoutSessionCompleted(res)
+    }
 
     // Check if the event is for a successful payment
     if (event.type === "payment_intent.succeeded") {
