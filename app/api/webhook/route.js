@@ -1,10 +1,10 @@
 import Stripe from "stripe";
 import { NextResponse, NextRequest } from "next/server";
 import dbConnect from "@/lib/dbConnect";
-import Payment from "@/models/Payment";
-import Checker from "@/models/Checker";
+// import Payment from "@/models/Payment";
+// import Checker from "@/models/Checker";
 import CheckoutSession from "@/models/CheckoutSession";
-import AD from "@/models/ad";
+// import AD from "@/models/ad";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 

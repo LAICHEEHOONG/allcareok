@@ -37,6 +37,7 @@ const breakpointColumnsObj_2 = {
 export default function VeryRightCard() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth._id);
+  const email = useSelector((state) => state.auth.email);
   const adsId = useSelector((state) => state.editor?.adsId);
   const ad = useSelector((state) => state.editor?.ad);
   const verification = useSelector((state) => state.editor?.ad?.verification);
@@ -357,7 +358,7 @@ export default function VeryRightCard() {
             //   changeRouter();
             // }}
             onPress={() => {
-              router.push(`https://buy.stripe.com/fZe3cF7puamEbAsaEJ?client_reference_id=${ad._id}`)
+              router.push(`https://buy.stripe.com/fZe3cF7puamEbAsaEJ?client_reference_id=${ad._id}&prefilled_email=${email}`)
               // open new tab
               // window.open(
               //   `https://buy.stripe.com/fZe3cF7puamEbAsaEJ?client_reference_id=${ad._id}`,
