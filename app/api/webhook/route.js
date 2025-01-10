@@ -97,32 +97,32 @@ export async function POST(req) {
           //   { new: true } // Return the updated document
           // );
 
-          const updatedAd = await AD.findOneAndUpdate(
-            { _id: session.client_reference_id }, // Match the ad by _id
-            {
-              $set: {
-                "reviewPayment.sessionId": session.id,
-                "reviewPayment.clientReferenceId": session.client_reference_id,
-                "reviewPayment.customerDetails": {
-                  name: session.customer_details.name,
-                  email: session.customer_details.email,
-                },
-                "reviewPayment.amountTotal": session.amount_total,
-                "reviewPayment.currency": session.currency,
-                "reviewPayment.paymentStatus": session.payment_status,
-                "reviewPayment.paymentIntentId": session.payment_intent,
-                "reviewPayment.successUrl": session.success_url,
-                "reviewPayment.createdAt": new Date(session.created * 1000), // Convert timestamp
-              },
-            },
-            { new: true, upsert: true } // Create document if it doesn't exist
-          );
+          // const updatedAd = await AD.findOneAndUpdate(
+          //   { _id: session.client_reference_id }, // Match the ad by _id
+          //   {
+          //     $set: {
+          //       "reviewPayment.sessionId": session.id,
+          //       "reviewPayment.clientReferenceId": session.client_reference_id,
+          //       "reviewPayment.customerDetails": {
+          //         name: session.customer_details.name,
+          //         email: session.customer_details.email,
+          //       },
+          //       "reviewPayment.amountTotal": session.amount_total,
+          //       "reviewPayment.currency": session.currency,
+          //       "reviewPayment.paymentStatus": session.payment_status,
+          //       "reviewPayment.paymentIntentId": session.payment_intent,
+          //       "reviewPayment.successUrl": session.success_url,
+          //       "reviewPayment.createdAt": new Date(session.created * 1000), // Convert timestamp
+          //     },
+          //   },
+          //   { new: true, upsert: true } // Create document if it doesn't exist
+          // );
 
-          if (updatedAd) {
-            console.log("Ad updated successfully:", updatedAd);
-          } else {
-            console.error("No matching Ad found to update.");
-          }
+          // if (updatedAd) {
+          //   console.log("Ad updated successfully:", updatedAd);
+          // } else {
+          //   console.error("No matching Ad found to update.");
+          // }
         } catch (error) {
           console.error("Error handling checkout session:", error);
         }

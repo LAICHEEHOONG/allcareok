@@ -357,11 +357,14 @@ export default function VeryRightCard() {
             //   changeRouter();
             // }}
             onPress={() => {
+              router.push(`https://buy.stripe.com/fZe3cF7puamEbAsaEJ?client_reference_id=${ad._id}`)
               // open new tab
-              window.open(
-                `https://buy.stripe.com/fZe3cF7puamEbAsaEJ?client_reference_id=${ad._id}`,
-                "_blank"
-              );
+              // window.open(
+              //   `https://buy.stripe.com/fZe3cF7puamEbAsaEJ?client_reference_id=${ad._id}`,
+              //   "_blank"
+              // );
+
+              //https://buy.stripe.com/test_bIY28Wbkf8yLdgs3ch?client_reference_id=123
             }}
           >
             <CardBody>
