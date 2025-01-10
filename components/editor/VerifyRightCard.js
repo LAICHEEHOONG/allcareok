@@ -350,13 +350,19 @@ export default function VeryRightCard() {
           </Card>
           <Card
             className="m-2 mb-4 w-full"
-            // isPressable
+            isPressable
             //   isPressable={!blockServiceBtn}
             //   isDisabled={blockServiceBtn}
             // onPress={() => {
             //   changeRouter();
             // }}
-            //   onPress={changeRouter}
+            onPress={() => {
+              // open new tab
+              window.open(
+                `https://buy.stripe.com/fZe3cF7puamEbAsaEJ?client_reference_id=${ad._id}`,
+                "_blank"
+              );
+            }}
           >
             <CardBody>
               <div className="flex justify-between">
