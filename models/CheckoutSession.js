@@ -4,7 +4,7 @@ const checkoutSessionSchema = new mongoose.Schema({
   sessionId: {
     type: String,
     required: true,
-    unique: true, // Ensures no duplicate sessions
+    // unique: true, // Ensures no duplicate sessions
   },
   clientReferenceId: {
     type: String,

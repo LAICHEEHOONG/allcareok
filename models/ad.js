@@ -9,7 +9,7 @@ const photoSchema = new Schema({
 const reviewPaymentSchema = new Schema({
   sessionId: {
     type: String,
-    unique: true, // Ensures no duplicate sessions
+    // unique: true, // Ensures no duplicate sessions
   },
   clientReferenceId: {
     type: String, // Optional based on your app logic
