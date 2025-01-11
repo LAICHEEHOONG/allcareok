@@ -1,52 +1,37 @@
-// // import Stripe from "stripe";
-// const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY); // Replace with your Stripe Secret Key
-
-// export default async function PaymentSuccess({ searchParams: { amount } }) {
-
-//   async function getCheckoutSession(sessionId) {
-//     try {
-//       const session = await stripe.checkout.sessions.retrieve(sessionId);
-//       console.log("Checkout Session Data:", session);
-//       return session;
-//     } catch (error) {
-//       console.error("Error fetching Checkout Session:", error);
-//     }
-//   }
-
-//   // Replace with your actual session ID
-
-//   getCheckoutSession(amount);
-//   return (
-//     <main className="max-w-6xl mx-auto p-10 text-white text-center border m-10 rounded-md bg-gradient-to-tr from-blue-500 to-purple-500">
-//       <div className="mb-10">
-//         <h1 className="text-4xl font-extrabold mb-2">Thank you!</h1>
-//         <h2 className="text-2xl">You successfully sent</h2>
-
-//         <div className="bg-white p-2 rounded-md text-purple-500 mt-5 text-4xl font-bold">
-//           ${amount}
-//         </div>
-//       </div>
-//     </main>
-//   );
-// }
-
 "use client";
 import { useSearchParams } from "next/navigation";
-// import Stripe from "stripe";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getSessionId } from "@/lib/action/adAction";
+import TaskAltIcon from "@mui/icons-material/TaskAlt";
+import { Spinner } from "@nextui-org/react";
 
 export default function PaymentSuccess() {
+  const paymentInfo = {
+    processing: {
+      title: "Processing Your Payment",
+      content:
+        "Your payment is being processed. Please do not close or refresh this page to ensure a smooth transaction. This may take a few moments.",
+      loading: true,
+    },
+    successful: {
+      title: "Payment Successful",
+      content:
+        "Thank you for your payment! Your transaction has been completed successfully. You may now close this page or continue browsing.",
+      loading: false,
+    },
+  };
   const searchParams = useSearchParams();
-  const sessionId = searchParams.get("sessionId"); // Retrieve the 'amount' parameter
-  // const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-
-  // Replace with your actual session ID
+  const sessionId = searchParams.get("sessionId");
+  const [info, setInfo] = useState(paymentInfo.processing);
 
   useEffect(() => {
-    const getCheckoutSession = async ( sessionId ) => {
+    const getCheckoutSession = async (sessionId) => {
       try {
         const ans = await getSessionId({ sessionId });
+        if (ans) {
+          setInfo(paymentInfo.successful);
+        }
+
         console.log(ans);
       } catch (error) {
         console.log(error);
@@ -56,15 +41,20 @@ export default function PaymentSuccess() {
   }, [sessionId]);
 
   return (
-    <main className="max-w-6xl mx-auto p-10 text-white text-center border m-10 rounded-md bg-gradient-to-tr from-blue-500 to-purple-500">
-      <div className="mb-10">
-        <h1 className="text-4xl font-extrabold mb-2">Thank you!</h1>
-        <h2 className="text-2xl">You successfully sent</h2>
-
-        <div className="bg-white p-2 rounded-md text-purple-500 mt-5 text-4xl font-bold">
-          ${sessionId}
-        </div>
+    <div className="flex flex-col justify-center items-center  p-2 m-4 h-screen">
+      <div className="m-2">
+        {info.loading ? (
+          <Spinner size="lg" />
+        ) : (
+          <TaskAltIcon style={{ fontSize: "69px", color: "#44c678" }} />
+        )}
+        {/* <Spinner color="danger" labelColor="danger" size="lg" /> */}
+        {/* <TaskAltIcon style={{ fontSize: '69px', color: '#44c678' }} /> */}
       </div>
-    </main>
+      <div className="font-bold text-2xl m-3 tracking-wide">{info.title}</div>
+      <div className="text-default-400 tracking-wide text-center w-full max-w-[600px]">
+        {info.content}
+      </div>
+    </div>
   );
 }

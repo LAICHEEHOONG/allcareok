@@ -352,20 +352,14 @@ export default function VeryRightCard() {
           <Card
             className="m-2 mb-4 w-full"
             isPressable
-            //   isPressable={!blockServiceBtn}
-            //   isDisabled={blockServiceBtn}
-            // onPress={() => {
-            //   changeRouter();
-            // }}
             onPress={() => {
-              router.push(`https://buy.stripe.com/fZe3cF7puamEbAsaEJ?client_reference_id=${ad._id}&prefilled_email=${email}`)
-              // open new tab
-              // window.open(
-              //   `https://buy.stripe.com/fZe3cF7puamEbAsaEJ?client_reference_id=${ad._id}`,
-              //   "_blank"
-              // );
+              // live
+              router.push(
+                `https://buy.stripe.com/fZe3cF7puamEbAsaEJ?client_reference_id=${ad._id}&prefilled_email=${email}`
+              );
 
-              //https://buy.stripe.com/test_bIY28Wbkf8yLdgs3ch?client_reference_id=123
+              // test
+              // router.push(`https://buy.stripe.com/test_8wMcNAdsn2anfoA14a?client_reference_id=${ad._id}&prefilled_email=${email}`)
             }}
           >
             <CardBody>
