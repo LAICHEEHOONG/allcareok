@@ -26,7 +26,6 @@ const reviewPaymentSchema = new Schema({
   },
   paymentStatus: {
     type: String,
-    enum: ['paid', 'unpaid', 'failed'],
   },
   paymentIntentId: {
     type: String,
