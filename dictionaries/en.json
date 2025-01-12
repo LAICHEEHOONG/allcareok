@@ -118,6 +118,8 @@
     "verify_upload_title": "Document Submission",
     "verify_upload_content": "Advertisers need to upload necessary identification or business documents",
     "verify_btn_title": "Review",
-    "verify_btn_content": "Our team will review the submitted documents to ensure they meet the verification requirements"
+    "verify_btn_content": "Our team will review the submitted documents to ensure they meet the verification requirements. A review fee of $5 USD will apply.",
+    "payment_success_title": "Payment Successful",
+    "payment_success_content": "Thank you for your payment! Your documents have been submitted for review. Our team will complete the review process within 1 to 3 business days."
   }
 }

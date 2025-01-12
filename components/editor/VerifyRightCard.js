@@ -41,6 +41,7 @@ export default function VeryRightCard() {
   const adsId = useSelector((state) => state.editor?.adsId);
   const ad = useSelector((state) => state.editor?.ad);
   const verification = useSelector((state) => state.editor?.ad?.verification);
+  const reviewStatus = useSelector((state) => state.editor?.ad?.reviewStatus);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [photos, setPhotos] = useState([]);
   const [limitPhotos, setLimitPhotos] = useState([]);
@@ -240,7 +241,7 @@ export default function VeryRightCard() {
   };
 
   const handlePayment = () => {
-    const mode = "live";
+    const mode = "test";
     if (mode === "live") {
       router.push(
         `https://buy.stripe.com/fZe3cF7puamEbAsaEJ?client_reference_id=${ad._id}&prefilled_email=${email}`
@@ -296,13 +297,14 @@ export default function VeryRightCard() {
                   <div className="text-md leading-10 w-full max-w-[250px] font-semibold">
                     {l?.verify_upload_title}
                   </div>
-                  <div className="text-small tracking-wide text-default-400 w-full max-w-[250px]">
-                    {verification &&
-                      verification.length > 0 &&
-                      `${verification.length} photos`}
-                  </div>
+
                   <div className="text-small tracking-wide text-default-400 w-full max-w-[250px]">
                     {l?.verify_upload_content}
+                  </div>
+                  <div className="text-small tracking-wide text-default-400 w-full max-w-[250px] flex justify-end">
+                    {verification &&
+                      verification.length > 0 &&
+                      `${verification.length} photo`}
                   </div>
                 </div>
                 <Image
@@ -315,42 +317,64 @@ export default function VeryRightCard() {
               </div>
             </CardBody>
           </Card>
-          <Card
-            className="m-2 mb-4 w-full"
-            isPressable
-            onPress={handlePayment}
-            // onPress={() => {
-            //   // live
-            //   router.push(
-            //     `https://buy.stripe.com/fZe3cF7puamEbAsaEJ?client_reference_id=${ad._id}&prefilled_email=${email}`
-            //   );
-
-            //   // test;
-            //   // router.push(
-            //   //   `https://buy.stripe.com/test_8wMcNAdsn2anfoA14a?client_reference_id=${ad._id}&prefilled_email=${email}`
-            //   // );
-            // }}
-          >
-            <CardBody>
-              <div className="flex justify-between">
-                <div className="flex flex-col justify-center  w-full max-w-[250px] ">
-                  <p className="text-md leading-10 w-full max-w-[250px] font-semibold ">
-                    {l?.verify_btn_title}
-                  </p>
-                  <p className="text-small tracking-wide text-default-400 w-full max-w-[250px]">
-                    {l?.verify_btn_content}
-                  </p>
+          {reviewStatus === "Payment Pending" && (
+            <Card
+              className="m-2 mb-4 w-full"
+              isPressable={verification?.length > 0 ? true : false}
+              onPress={handlePayment}
+              isDisabled={verification?.length > 0 ? false : true}
+            >
+              <CardBody>
+                <div className="flex justify-between">
+                  <div className="flex flex-col justify-center  w-full max-w-[250px] ">
+                    <p className="text-md leading-10 w-full max-w-[250px] font-semibold ">
+                      {l?.verify_btn_title}
+                    </p>
+                    <p className="text-small tracking-wide text-default-400 w-full max-w-[250px]">
+                      {l?.verify_btn_content}
+                    </p>
+                  </div>
+                  <Image
+                    alt="Card background"
+                    className="object-cover rounded-xl"
+                    src="/images/verify.png"
+                    width={170}
+                    height={170}
+                  />
                 </div>
-                <Image
-                  alt="Card background"
-                  className="object-cover rounded-xl"
-                  src="/images/verify.png"
-                  width={170}
-                  height={170}
-                />
-              </div>
-            </CardBody>
-          </Card>
+              </CardBody>
+            </Card>
+          )}
+
+          {reviewStatus === "Under Review" && (
+            <Card
+              className="m-2 mb-4 w-full"
+              // isPressable
+              // onPress={handlePayment}
+              isDisabled={verification?.length > 0 ? false : true}
+            >
+              <CardBody>
+                <div className="flex justify-between">
+                  <div className="flex flex-col justify-center  w-full max-w-[250px] ">
+                    <p className="text-md leading-10 w-full max-w-[250px] font-semibold ">
+                      {l?.payment_success_title}
+                    </p>
+                    <p className="text-small tracking-wide text-default-400 w-full max-w-[250px]">
+                      {l?.payment_success_content}
+                    </p>
+                  </div>
+                  <Image
+                    alt="Card background"
+                    className="object-cover rounded-xl"
+                    src="/images/payment_successful.png"
+                    width={170}
+                    height={170}
+                  />
+                </div>
+              </CardBody>
+            </Card>
+          )}
+
           <Button
             color="default"
             radius="full"

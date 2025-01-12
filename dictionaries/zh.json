@@ -117,6 +117,8 @@
     "verify_upload_title": "文件提交",
     "verify_upload_content": "广告商需上传必要的身份证明或商业文件",
     "verify_btn_title": "审核",
-    "verify_btn_content": "我们的团队将审核提交的文件，以确保它们符合验证要求"
+    "verify_btn_content": "我们的团队将审核提交的文件，以确保它们符合验证要求。审核费用为 5 美元。",
+    "payment_success_title": "付款成功",
+    "payment_success_content": "感谢您的付款！您的文件已提交审核。我们的团队将在 1 至 3 个工作日内完成审核过程。"
   }
 }
