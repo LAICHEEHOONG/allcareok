@@ -239,63 +239,6 @@ export default function VeryRightCard() {
     }
   };
 
-  //   const youtube = useSelector((state) => state.editor.ad?.youtube);
-  //   const [loading, setLoading] = useState(false);
-  //   const [newYoutube, setNewYoutube] = useState(youtube);
-  //   const [youtubeId, setYoutubeId] = useState("ogfYd705cRs");
-  //   const [isSmallScreen, setIsSmallScreen] = useState(false);
-
-  //   useEffect(() => {
-  //     const mediaQuery = window.matchMedia("(max-width: 767px)"); // Tailwind's md breakpoint
-  //     const handleResize = () => setIsSmallScreen(mediaQuery.matches);
-  //     handleResize(); // Initialize state
-  //     mediaQuery.addEventListener("change", handleResize);
-  //     return () => mediaQuery.removeEventListener("change", handleResize);
-  //   }, []);
-
-  //   const fetchAds = async () => {
-  //     try {
-  //       const ads = await findUserAds({ user: ad.user }); // Pass only the userId
-  //       dispatch(setAds(ads));
-  //     } catch (error) {
-  //       console.error("Error fetching user ads:", error);
-  //     }
-  //   };
-
-  //   const toDB = async (adsId, newYoutube_) => {
-  //     try {
-  //       setLoading(true);
-  //       const updateYoutube = await createAD({
-  //         ...ad,
-  //         adsId,
-  //         youtube: newYoutube_,
-  //       });
-  //       dispatch(setAd(updateYoutube));
-  //     } catch (error) {
-  //       console.log(error);
-  //     } finally {
-  //       setLoading(false);
-  //       if (isSmallScreen) {
-  //         dispatch(setPopUp());
-  //       }
-  //     }
-  //   };
-
-  //   const handleSave = () => {
-  //     const adsId = ad._id;
-  //     const youtube_ = newYoutube;
-
-  //     toDB(adsId, youtube_);
-  //     fetchAds();
-  //   };
-
-  // Redirect to home page if ad is not found
-  //   useEffect(() => {
-  //     if (!ad?.user) {
-  //       router.push(`/`);
-  //     }
-  //   }, []);
-
   return (
     <div className="md:h-screen w-full md:pl-2">
       <div className="flex justify-between items-start mb-2 max-w-[1600px]">
@@ -357,7 +300,6 @@ export default function VeryRightCard() {
               router.push(
                 `https://buy.stripe.com/fZe3cF7puamEbAsaEJ?client_reference_id=${ad._id}&prefilled_email=${email}`
               );
-              //https://buy.stripe.com/fZe3cF7puamEbAsaEJ?prefilled_email=l%40gmail.com&client_reference_id=123
 
               // test
               // router.push(`https://buy.stripe.com/test_8wMcNAdsn2anfoA14a?client_reference_id=${ad._id}&prefilled_email=${email}`)

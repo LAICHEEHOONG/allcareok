@@ -7,6 +7,7 @@ import { Spinner } from "@nextui-org/react";
 
 export default function PaymentSuccess() {
   const paymentInfo = {
+    
     processing: {
       title: "Processing Your Payment",
       content:
