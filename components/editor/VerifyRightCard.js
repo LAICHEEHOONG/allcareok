@@ -239,6 +239,29 @@ export default function VeryRightCard() {
     }
   };
 
+  const handlePayment = () => {
+    const mode = "live";
+    if (mode === "live") {
+      router.push(
+        `https://buy.stripe.com/fZe3cF7puamEbAsaEJ?client_reference_id=${ad._id}&prefilled_email=${email}`
+      );
+    } else {
+      router.push(
+        `https://buy.stripe.com/test_8wMcNAdsn2anfoA14a?client_reference_id=${ad._id}&prefilled_email=${email}`
+      );
+    }
+
+    // live
+    // router.push(
+    //   `https://buy.stripe.com/fZe3cF7puamEbAsaEJ?client_reference_id=${ad._id}&prefilled_email=${email}`
+    // );
+
+    // test;
+    // router.push(
+    //   `https://buy.stripe.com/test_8wMcNAdsn2anfoA14a?client_reference_id=${ad._id}&prefilled_email=${email}`
+    // );
+  };
+
   return (
     <div className="md:h-screen w-full md:pl-2">
       <div className="flex justify-between items-start mb-2 max-w-[1600px]">
@@ -295,17 +318,18 @@ export default function VeryRightCard() {
           <Card
             className="m-2 mb-4 w-full"
             isPressable
-            onPress={() => {
-              // live
-              router.push(
-                `https://buy.stripe.com/fZe3cF7puamEbAsaEJ?client_reference_id=${ad._id}&prefilled_email=${email}`
-              );
+            onPress={handlePayment}
+            // onPress={() => {
+            //   // live
+            //   router.push(
+            //     `https://buy.stripe.com/fZe3cF7puamEbAsaEJ?client_reference_id=${ad._id}&prefilled_email=${email}`
+            //   );
 
-              // test;
-              // router.push(
-              //   `https://buy.stripe.com/test_8wMcNAdsn2anfoA14a?client_reference_id=${ad._id}&prefilled_email=${email}`
-              // );
-            }}
+            //   // test;
+            //   // router.push(
+            //   //   `https://buy.stripe.com/test_8wMcNAdsn2anfoA14a?client_reference_id=${ad._id}&prefilled_email=${email}`
+            //   // );
+            // }}
           >
             <CardBody>
               <div className="flex justify-between">
