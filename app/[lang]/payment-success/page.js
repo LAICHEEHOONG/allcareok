@@ -31,10 +31,11 @@ export default function PaymentSuccess() {
         if (ans) {
           setInfo(paymentInfo.successful);
         }
-
+        console.log('payment success')
         console.log(ans);
       } catch (error) {
         console.log(error);
+        console.log('payment failed')
       }
     };
     getCheckoutSession(sessionId);
