@@ -80,7 +80,12 @@ const adSchema = new mongoose.Schema(
       /* HTML content stored as a string */
     },
     reviewPayment: reviewPaymentSchema,
-  
+    reviewStatus: {
+      type: String,
+      enum: ['Approved', 'Under Review', 'Rejected', 'Payment Pending'], // Define allowed values
+      default: 'Payment Pending', // Set the default value
+    },
+    
   },
   {
     timestamps: true,

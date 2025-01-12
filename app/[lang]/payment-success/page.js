@@ -2,13 +2,12 @@
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getSessionId } from "@/lib/action/adAction";
-
+import { useRouter } from "next/navigation";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
-import { Spinner } from "@nextui-org/react";
+import { Spinner, Button } from "@nextui-org/react";
 
 export default function PaymentSuccess() {
   const paymentInfo = {
-    
     processing: {
       title: "Processing Your Payment",
       content:
@@ -25,18 +24,25 @@ export default function PaymentSuccess() {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get("sessionId");
   const [info, setInfo] = useState(paymentInfo.processing);
+  const router = useRouter();
 
   useEffect(() => {
     const getCheckoutSession = async (sessionId) => {
       try {
         const ans = await getSessionId({ sessionId });
-        if (ans) {
-          setInfo(paymentInfo.successful);
-        }
         console.log(ans);
+
+        if (ans.success) {
+          setInfo(paymentInfo.successful);
+          console.log("payment success");
+        } else {
+          console.log("payment failed");
+          router.push("/");
+        }
       } catch (error) {
         console.log(error);
-        console.log('payment failed')
+        console.log("payment failed");
+        router.push("/");
       }
     };
     getCheckoutSession(sessionId);
@@ -57,6 +63,21 @@ export default function PaymentSuccess() {
       <div className="text-default-400 tracking-wide text-center w-full max-w-[600px]">
         {info.content}
       </div>
+      {!info.loading && (
+        <div className=" w-full flex justify-center items-center m-6">
+          <Button
+            radius="full"
+            size="lg"
+            color="primary"
+            onPress={() => {
+              router.push("/");
+            }}
+            // onPress={handleSave}
+          >
+            Home Page
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
