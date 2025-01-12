@@ -45,7 +45,7 @@ export default function VeryRightCard() {
   const [photos, setPhotos] = useState([]);
   const [limitPhotos, setLimitPhotos] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [loading2, setLoading2] = useState(false);
+  // const [loading2, setLoading2] = useState(false);
   const l = useSelector((state) => state.auth?.lang?.listing_editor_card);
   const router = useRouter();
   const pathName = usePathname();
@@ -357,6 +357,7 @@ export default function VeryRightCard() {
               router.push(
                 `https://buy.stripe.com/fZe3cF7puamEbAsaEJ?client_reference_id=${ad._id}&prefilled_email=${email}`
               );
+              //https://buy.stripe.com/fZe3cF7puamEbAsaEJ?prefilled_email=l%40gmail.com&client_reference_id=123
 
               // test
               // router.push(`https://buy.stripe.com/test_8wMcNAdsn2anfoA14a?client_reference_id=${ad._id}&prefilled_email=${email}`)
