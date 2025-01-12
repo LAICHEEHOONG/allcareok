@@ -301,7 +301,7 @@ export default function VeryRightCard() {
                 `https://buy.stripe.com/fZe3cF7puamEbAsaEJ?client_reference_id=${ad._id}&prefilled_email=${email}`
               );
 
-              // test
+              // test;
               // router.push(`https://buy.stripe.com/test_8wMcNAdsn2anfoA14a?client_reference_id=${ad._id}&prefilled_email=${email}`)
             }}
           >
