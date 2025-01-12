@@ -43,26 +43,6 @@ export default function Overview() {
           </Button>
         </div>
 
-        {/* <div className="fixed top-0 w-full bg-white "> */}
-        {/* <div className="flex justify-between">
-            <Image
-              className="min-w-[37px]"
-              width={37}
-              radius="none"
-              alt="Allcareok logo"
-              src="/images/allcareok_logo.png"
-            />
-            <Button
-              radius="full"
-              color="default"
-              variant="bordered"
-              onPress={() => router.push(`/${currentLocale}`)}
-            >
-              {overview?.exit}
-            </Button>
-          </div> */}
-        {/* </div> */}
-
         <div className="flex justify-center items-center h-[80vh] ">
           <div className="w-1/2 flex items-center justify-center">
             <p className="text-5xl font-medium max-w-2xl m-10 leading-tight">
@@ -181,7 +161,6 @@ export default function Overview() {
               color="default"
               variant="bordered"
               size="sm"
-      
               onPress={() => router.push(`/${currentLocale}`)}
             >
               {overview?.exit}

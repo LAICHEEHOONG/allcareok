@@ -302,7 +302,9 @@ export default function VeryRightCard() {
               );
 
               // test;
-              // router.push(`https://buy.stripe.com/test_8wMcNAdsn2anfoA14a?client_reference_id=${ad._id}&prefilled_email=${email}`)
+              // router.push(
+              //   `https://buy.stripe.com/test_8wMcNAdsn2anfoA14a?client_reference_id=${ad._id}&prefilled_email=${email}`
+              // );
             }}
           >
             <CardBody>
