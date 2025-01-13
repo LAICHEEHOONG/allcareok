@@ -120,6 +120,10 @@
     "verify_btn_title": "Review",
     "verify_btn_content": "Our team will review the submitted documents to ensure they meet the verification requirements. A review fee of $5 USD will apply.",
     "payment_success_title": "Payment Successful",
-    "payment_success_content": "Thank you for your payment! Your documents have been submitted for review. Our team will complete the review process within 1 to 3 business days."
+    "payment_success_content": "Thank you for your payment! Your documents have been submitted for review. Our team will complete the review process within 1 to 3 business days.",
+    "approved_title": "Approved",
+    "approved_content": "Congratulations! Your application has been approved. You will now see your verification status as 'Verified' on your profile.",
+    "rejected_title": "Rejected",
+    "rejected_content": "We are sorry, but your application has been rejected. If you have any questions, please contact us at allcareok@gmail.com. You can also review your information and try submitting again."
   }
 }

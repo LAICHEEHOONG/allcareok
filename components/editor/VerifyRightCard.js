@@ -46,7 +46,6 @@ export default function VeryRightCard() {
   const [photos, setPhotos] = useState([]);
   const [limitPhotos, setLimitPhotos] = useState([]);
   const [loading, setLoading] = useState(false);
-  // const [loading2, setLoading2] = useState(false);
   const l = useSelector((state) => state.auth?.lang?.listing_editor_card);
   const router = useRouter();
   const pathName = usePathname();
@@ -337,7 +336,7 @@ export default function VeryRightCard() {
                   <Image
                     alt="Card background"
                     className="object-cover rounded-xl"
-                    src="/images/verify.png"
+                    src="/images/payment.png"
                     width={170}
                     height={170}
                   />
@@ -366,7 +365,54 @@ export default function VeryRightCard() {
                   <Image
                     alt="Card background"
                     className="object-cover rounded-xl"
-                    src="/images/payment_successful.png"
+                    src="/images/under_review.png"
+                    width={170}
+                    height={170}
+                  />
+                </div>
+              </CardBody>
+            </Card>
+          )}
+
+          {reviewStatus === "Approved" && (
+            <Card className="m-2 mb-4 w-full">
+              <CardBody>
+                <div className="flex justify-between">
+                  <div className="flex flex-col justify-center  w-full max-w-[250px] ">
+                    <p className="text-md leading-10 w-full max-w-[250px] font-semibold ">
+                      {l?.approved_title}
+                    </p>
+                    <p className="text-small tracking-wide text-default-400 w-full max-w-[250px]">
+                      {l?.approved_content}
+                    </p>
+                  </div>
+                  <Image
+                    alt="Card background"
+                    className="object-cover rounded-xl"
+                    src="/images/approved.png"
+                    width={170}
+                    height={170}
+                  />
+                </div>
+              </CardBody>
+            </Card>
+          )}
+          {reviewStatus === "Rejected" && (
+            <Card className="m-2 mb-4 w-full">
+              <CardBody>
+                <div className="flex justify-between">
+                  <div className="flex flex-col justify-center  w-full max-w-[250px] ">
+                    <p className="text-md leading-10 w-full max-w-[250px] font-semibold ">
+                      {l?.rejected_title}
+                    </p>
+                    <p className="text-small tracking-wide text-default-400 w-full max-w-[250px]">
+                      {l?.rejected_content}
+                    </p>
+                  </div>
+                  <Image
+                    alt="Card background"
+                    className="object-cover rounded-xl"
+                    src="/images/rejected.png"
                     width={170}
                     height={170}
                   />
