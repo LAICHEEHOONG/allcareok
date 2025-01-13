@@ -10,7 +10,7 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useRouter, usePathname } from "next/navigation";
-import { setAdsID, setAd } from "@/redux/features/editor/editorSlice";
+import { setAdsID, setAd, setFocus } from "@/redux/features/editor/editorSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import Masonry from "react-masonry-css";
@@ -36,6 +36,7 @@ export default function Dashboard() {
   useEffect(() => {
     dispatch(setAdsID(""));
     dispatch(setAd({}));
+    dispatch(setFocus('photo'))
     if (ads.length === 0) {
       router.push(`/${currentLocale}`);
     }
@@ -49,7 +50,7 @@ export default function Dashboard() {
   };
 
   const handleAddAD = () => {
-    if (ads.length >= 10) {
+    if (ads?.length >= 10) {
       toast.warning(`${l?.ad_limit}`, {
         description: `${l?.ad_limit_description}`,
         action: {
