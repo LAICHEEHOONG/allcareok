@@ -88,12 +88,8 @@ export function DrawerProfile({ children, bottom_navigation }) {
           <Divider className="mb-4" />
           <Card
             className="m-2 mb-4"
-            // isPressable
             isPressable={!blockServiceBtn}
             isDisabled={blockServiceBtn}
-            // onPress={() => {
-            //   changeRouter();
-            // }}
             onPress={changeRouter}
           >
             <CardBody>

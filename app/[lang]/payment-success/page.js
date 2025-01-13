@@ -45,13 +45,10 @@ export default function PaymentSuccess() {
         } else {
           setInfo(paymentInfo.failed);
           console.log("payment failed");
-          // router.push("/");
         }
       } catch (error) {
         console.log(error);
         setInfo(paymentInfo.failed);
-
-        // router.push("/");
       }
     };
     getCheckoutSession(sessionId);
@@ -67,13 +64,6 @@ export default function PaymentSuccess() {
         {info.title === "Payment Failed" && (
           <ErrorOutlineIcon style={{ fontSize: "69px", color: "#f31260" }} />
         )}
-        {/* {info.loading ? (
-          <Spinner size="lg" />
-        ) : (
-          <TaskAltIcon style={{ fontSize: "69px", color: "#44c678" }} />
-        )} */}
-        {/* <Spinner color="danger" labelColor="danger" size="lg" /> */}
-        {/* <TaskAltIcon style={{ fontSize: '69px', color: '#44c678' }} /> */}
       </div>
       <div className="font-bold text-2xl m-3 tracking-wide">{info.title}</div>
       <div className="text-default-400 tracking-wide text-center w-full max-w-[600px]">
@@ -86,31 +76,13 @@ export default function PaymentSuccess() {
           size="lg"
           color="primary"
           isDisabled={info.loading}
-          // isLoading={info.loading}
           onPress={() => {
             router.push("/");
           }}
-          // onPress={handleSave}
         >
           Home Page
         </Button>
       </div>
-      {/* {!info.loading && (
-        <div className=" w-full flex justify-center items-center m-6">
-          <Button
-            radius="full"
-            size="lg"
-            color="primary"
-            isLoading={info.loading}
-            onPress={() => {
-              router.push("/");
-            }}
-            // onPress={handleSave}
-          >
-            Home Page
-          </Button>
-        </div>
-      )} */}
     </div>
   );
 }

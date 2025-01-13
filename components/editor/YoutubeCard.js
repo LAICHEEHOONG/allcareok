@@ -34,20 +34,7 @@ export default function YoutubeCard() {
     // Add other logic if needed
   };
 
-  // const servicesItems = [
-  //   {
-  //     label: "https://www.youtube.com/watch?v=QLH26YLnQvkx",
-  //     icon: YouTubeIcon,
-  //   },
-  //   {
-  //     label: "https://www.youtube.com/watch?v=QLH26YLnQvkx",
-  //     icon: YouTubeIcon,
-  //   },
-  //   {
-  //     label: "https://www.youtube.com/watch?v=QLH26YLnQvkx",
-  //     icon: YouTubeIcon,
-  //   },
-  // ];
+
   return (
     <Card
       className={`m-5 p-1 w-11/12 ${

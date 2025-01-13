@@ -304,30 +304,31 @@ export default function VeryRightCard() {
           <Card className="m-2 mb-4 w-full" isPressable onPress={handlePress}>
             <CardBody>
               <div className="flex justify-between">
-                <div className="flex flex-col justify-center tracking-wider">
+                <div className="flex flex-col justify-center md:tracking-wider m-1">
                   <div className="text-md leading-10 w-full max-w-[250px] font-semibold">
                     {l?.verify_upload_title}
                   </div>
 
-                  <div className="text-small tracking-wide text-default-400 w-full max-w-[250px]">
+                  <div className="text-small md:tracking-wide text-default-400 w-full max-w-[250px]">
                     {l?.verify_upload_content}
                   </div>
-                  <div className="text-small tracking-wide text-default-400 w-full max-w-[250px] flex justify-end">
+                  <div className="text-xs md:tracking-wide text-default-300 w-full max-w-[250px] flex md:justify-end justify-start mt-2">
                     {verification &&
                       verification.length > 0 &&
                       `${verification.length} photo`}
                   </div>
                 </div>
-                <Image
-                  alt="Card background"
-                  className="object-cover rounded-xl"
-                  src="/images/ic.jpeg"
-                  width={170}
-                  height={170}
-                />
+                <div className=" h-full flex justify-center items-center">
+                  <Image
+                    alt="Card background"
+                    className="object-cover rounded-xl w-full md:max-w-[170px] max-w-[140px]"
+                    src="/images/ic.jpeg"
+                  />
+                </div>
               </div>
             </CardBody>
           </Card>
+
           {reviewStatus === "Payment Pending" && (
             <Card
               className="m-2 mb-4 w-full"
@@ -337,27 +338,53 @@ export default function VeryRightCard() {
             >
               <CardBody>
                 <div className="flex justify-between">
-                  <div className="flex flex-col justify-center  w-full max-w-[250px] ">
-                    <p className="text-md leading-10 w-full max-w-[250px] font-semibold ">
+                  <div className="flex flex-col justify-center md:tracking-wider m-1">
+                    <div className="text-md leading-10 w-full max-w-[250px] font-semibold">
                       {l?.verify_btn_title}
-                    </p>
-                    <p className="text-small tracking-wide text-default-400 w-full max-w-[250px]">
+                    </div>
+
+                    <div className="text-small md:tracking-wide text-default-400 w-full max-w-[250px]">
                       {l?.verify_btn_content}
-                    </p>
+                    </div>
                   </div>
-                  <Image
-                    alt="Card background"
-                    className="object-cover rounded-xl"
-                    src="/images/payment.png"
-                    width={170}
-                    height={170}
-                  />
+                  <div className=" h-full flex justify-center items-center">
+                    <Image
+                      alt="Card background"
+                      className="object-cover rounded-xl w-full md:max-w-[170px] max-w-[140px]"
+                      src="/images/payment.png"
+                    />
+                  </div>
                 </div>
               </CardBody>
             </Card>
           )}
 
           {reviewStatus === "Under Review" && (
+            <Card className="m-2 mb-4 w-full">
+              <CardBody>
+                <div className="flex justify-between">
+                  <div className="flex flex-col justify-center md:tracking-wider m-1">
+                    <div className="text-md leading-10 w-full max-w-[250px] font-semibold">
+                      {l?.payment_success_title}
+                    </div>
+
+                    <div className="text-small md:tracking-wide text-default-400 w-full max-w-[250px]">
+                      {l?.payment_success_content}
+                    </div>
+                  </div>
+                  <div className=" h-full flex justify-center items-center">
+                    <Image
+                      alt="Card background"
+                      className="object-cover rounded-xl w-full md:max-w-[170px] max-w-[140px]"
+                      src="/images/under_review.png"
+                    />
+                  </div>
+                </div>
+              </CardBody>
+            </Card>
+          )}
+
+          {/* {reviewStatus === "Under Review" && (
             <Card
               className="m-2 mb-4 w-full"
               // isPressable
@@ -384,8 +411,33 @@ export default function VeryRightCard() {
                 </div>
               </CardBody>
             </Card>
-          )}
+          )} */}
 
+          {reviewStatus === "Approved" && (
+            <Card className="m-2 mb-4 w-full">
+              <CardBody>
+                <div className="flex justify-between">
+                  <div className="flex flex-col justify-center md:tracking-wider m-1">
+                    <div className="text-md leading-10 w-full max-w-[250px] font-semibold">
+                      {l?.approved_title}
+                    </div>
+
+                    <div className="text-small md:tracking-wide text-default-400 w-full max-w-[250px]">
+                      {l?.approved_content}
+                    </div>
+                  </div>
+                  <div className=" h-full flex justify-center items-center">
+                    <Image
+                      alt="Card background"
+                      className="object-cover rounded-xl w-full md:max-w-[170px] max-w-[140px]"
+                      src="/images/approved.png"
+                    />
+                  </div>
+                </div>
+              </CardBody>
+            </Card>
+          )}
+          {/* 
           {reviewStatus === "Approved" && (
             <Card className="m-2 mb-4 w-full">
               <CardBody>
@@ -408,8 +460,32 @@ export default function VeryRightCard() {
                 </div>
               </CardBody>
             </Card>
-          )}
+          )} */}
           {reviewStatus === "Rejected" && (
+            <Card className="m-2 mb-4 w-full">
+              <CardBody>
+                <div className="flex justify-between">
+                  <div className="flex flex-col justify-center md:tracking-wider m-1">
+                    <div className="text-md leading-10 w-full max-w-[250px] font-semibold">
+                      {l?.rejected_title}
+                    </div>
+
+                    <div className="text-small md:tracking-wide text-default-400 w-full max-w-[250px]">
+                      {l?.rejected_content}
+                    </div>
+                  </div>
+                  <div className=" h-full flex justify-center items-center">
+                    <Image
+                      alt="Card background"
+                      className="object-cover rounded-xl w-full md:max-w-[170px] max-w-[140px]"
+                      src="/images/rejected.png"
+                    />
+                  </div>
+                </div>
+              </CardBody>
+            </Card>
+          )}
+          {/* {reviewStatus === "Rejected" && (
             <Card className="m-2 mb-4 w-full">
               <CardBody>
                 <div className="flex justify-between">
@@ -431,18 +507,8 @@ export default function VeryRightCard() {
                 </div>
               </CardBody>
             </Card>
-          )}
-          {/* 
-          <Button
-            color="default"
-            radius="full"
-            variant="light"
-            startContent={<HelpOutlineIcon />}
-            fullWidth={true}
-            size="lg"
-          >
-            {l?.learn_more}
-          </Button> */}
+          )} */}
+
           <Drawer_ l={l} />
           <Modal
             isOpen={isOpen}

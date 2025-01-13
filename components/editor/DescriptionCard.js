@@ -37,22 +37,11 @@ export default function DescriptionCard() {
       }`}
       isPressable
       onPress={handlePress}
-      // onPress={() => {
-      //   dispatch(setFocus("description"));
-      // }}
     >
       <CardBody className="">
         <div className="flex flex-col justify-start gap-1">
           <div className="font-medium ">{l?.description}</div>
-          {/* <div className="text-base text-default-400 whitespace-pre-line truncate">{description}</div> */}
-          <div
-            className="text-base text-default-400 overflow-hidden text-ellipsis break-words max-h-[100px] line-clamp-3"
-            // style={{
-            //   display: "-webkit-box",
-            //   WebkitBoxOrient: "vertical",
-            //   WebkitLineClamp: 3,
-            // }}
-          >
+          <div className="text-base text-default-400 overflow-hidden text-ellipsis break-words max-h-[100px] line-clamp-3">
             {description}
           </div>
         </div>
