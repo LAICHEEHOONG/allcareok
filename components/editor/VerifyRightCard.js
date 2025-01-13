@@ -242,7 +242,7 @@ export default function VeryRightCard() {
   };
 
   const handlePayment = () => {
-    const mode = "test";
+    const mode = "live";
     if (verification?.length === 0) {
       toast.warning(`${l?.payment_submit_title}`, {
         description: `${l?.payment_submit_content}`,
