@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import {
   Button,
-  Input,
   Card,
   CardBody,
   Image,
@@ -14,14 +13,17 @@ import {
   ModalFooter,
   Divider,
   useDisclosure,
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerBody,
+  DrawerFooter,
 } from "@nextui-org/react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter, usePathname } from "next/navigation";
 import { setAd, setAds, setPopUp } from "@/redux/features/editor/editorSlice";
-import YouTubeIcon from "@mui/icons-material/YouTube";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-import SaveIcon from "@mui/icons-material/Save";
 import { createAD, findUserAds } from "@/lib/action/adAction";
 import { toast } from "sonner";
 import Masonry from "react-masonry-css";
@@ -241,14 +243,24 @@ export default function VeryRightCard() {
 
   const handlePayment = () => {
     const mode = "test";
-    if (mode === "live") {
-      router.push(
-        `https://buy.stripe.com/fZe3cF7puamEbAsaEJ?client_reference_id=${ad._id}&prefilled_email=${email}`
-      );
+    if (verification?.length === 0) {
+      toast.warning(`${l?.payment_submit_title}`, {
+        description: `${l?.payment_submit_content}`,
+        action: {
+          label: "OK",
+          onClick: () => console.log("Submit Documents Before Payment"),
+        },
+      });
     } else {
-      router.push(
-        `https://buy.stripe.com/test_8wMcNAdsn2anfoA14a?client_reference_id=${ad._id}&prefilled_email=${email}`
-      );
+      if (mode === "live") {
+        router.push(
+          `https://buy.stripe.com/fZe3cF7puamEbAsaEJ?client_reference_id=${ad._id}&prefilled_email=${email}`
+        );
+      } else {
+        router.push(
+          `https://buy.stripe.com/test_8wMcNAdsn2anfoA14a?client_reference_id=${ad._id}&prefilled_email=${email}`
+        );
+      }
     }
 
     // live
@@ -319,7 +331,7 @@ export default function VeryRightCard() {
           {reviewStatus === "Payment Pending" && (
             <Card
               className="m-2 mb-4 w-full"
-              isPressable={verification?.length > 0 ? true : false}
+              isPressable
               onPress={handlePayment}
               isDisabled={verification?.length > 0 ? false : true}
             >
@@ -420,7 +432,7 @@ export default function VeryRightCard() {
               </CardBody>
             </Card>
           )}
-
+          {/* 
           <Button
             color="default"
             radius="full"
@@ -430,7 +442,8 @@ export default function VeryRightCard() {
             size="lg"
           >
             {l?.learn_more}
-          </Button>
+          </Button> */}
+          <Drawer_ l={l} />
           <Modal
             isOpen={isOpen}
             onOpenChange={onOpenChange}
@@ -558,5 +571,78 @@ export default function VeryRightCard() {
         </div>
       </div>
     </div>
+  );
+}
+
+function Drawer_({ l }) {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const u = useSelector(
+    (state) => state.auth?.lang?.listing_editor_card?.understanding
+  );
+
+  return (
+    <>
+      <Button
+        color="default"
+        radius="full"
+        variant="light"
+        startContent={<HelpOutlineIcon />}
+        fullWidth={true}
+        size="lg"
+        onPress={onOpen}
+      >
+        {l?.learn_more}
+      </Button>
+      <Drawer isOpen={isOpen} onOpenChange={onOpenChange} backdrop="blur">
+        <DrawerContent>
+          {(onClose) => (
+            <>
+              <DrawerHeader className="flex flex-col gap-1">
+                {u?.title}
+              </DrawerHeader>
+              <DrawerBody>
+                <section className="mb-4">
+                  <h2 className="text-lg font-bold mb-2">{u?.why}</h2>
+                  <ul className="list-disc ml-5 space-y-2 text-default-600">
+                    {u?.why_content.map((item, index) => (
+                      <li key={index}>{item}</li>
+                    ))}
+                  </ul>
+                </section>
+                <section className="mb-4">
+                  <h2 className="text-lg font-bold mb-2">{u?.process}</h2>
+                  <ol className="list-decimal ml-5 space-y-2 text-default-600">
+                    {u?.process_steps.map((step, index) => (
+                      <li key={index}>{step}</li>
+                    ))}
+                  </ol>
+                </section>
+                <section className="mb-4">
+                  <h2 className="text-lg font-bold mb-2">
+                    {u?.failed_verification}
+                  </h2>
+                  <p className="text-default-600">
+                    {u?.failed_verification_content}
+                  </p>
+                </section>
+                <section>
+                  <h2 className="text-lg font-bold mb-2">{u?.benefits}</h2>
+                  <ul className="list-disc ml-5 space-y-2 text-default-600">
+                    {u?.benefits_content.map((benefit, index) => (
+                      <li key={index}>{benefit}</li>
+                    ))}
+                  </ul>
+                </section>
+              </DrawerBody>
+              <DrawerFooter>
+                <Button color="danger" variant="light" onPress={onClose}>
+                  Close
+                </Button>
+              </DrawerFooter>
+            </>
+          )}
+        </DrawerContent>
+      </Drawer>
+    </>
   );
 }

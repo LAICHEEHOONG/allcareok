@@ -124,6 +124,32 @@
     "approved_title": "Approved",
     "approved_content": "Congratulations! Your application has been approved. You will now see your verification status as 'Verified' on your profile.",
     "rejected_title": "Rejected",
-    "rejected_content": "We are sorry, but your application has been rejected. If you have any questions, please contact us at allcareok@gmail.com. You can also review your information and try submitting again."
+    "rejected_content": "We are sorry, but your application has been rejected. If you have any questions, please contact us at allcareok@gmail.com. You can also review your information and try submitting again.",
+    "payment_submit_title": "Submit Documents Before Payment",
+    "payment_submit_content": "Submit at least one document photo for review before making a payment.",
+    "understanding": {
+      "title": "Understanding Verified Ads",
+      "content": "Verified ads play a crucial role in building trust between service providers and customers. By ensuring that all posted ads meet certain authenticity standards, we create a safe and reliable marketplace for everyone.",
+      "why": "Why Verify Ads?",
+      "why_content": [
+        "Credibility: Verified ads confirm the legitimacy of services or products, enhancing trust between users.",
+        "Visibility: Verified ads are often ranked higher in search results, ensuring they reach a wider audience.",
+        "User Confidence: Ads that are reviewed and approved give customers greater confidence to engage."
+      ],
+      "process": "Verification Process",
+      "process_steps": [
+        "Document Submission: Advertisers must upload the necessary identification or business documents, such as an ID card, passport, or company registration proof.",
+        "Review Process: Our team will review the submitted documents to ensure they meet the verification requirements.",
+        "Approval: Once approved, the ad will receive a 'Verified' badge, increasing its visibility."
+      ],
+      "failed_verification": "What If Verification Fails?",
+      "failed_verification_content": "If your ad fails verification, don’t worry! You can review the feedback, make the necessary corrections, and resubmit your documents. Resubmitting documents is free, but each verification request requires a $5 fee for the review process.",
+      "benefits": "Benefits of Verified Ads",
+      "benefits_content": [
+        "Credibility: Builds trust between service providers and customers.",
+        "Enhanced Visibility: Increases the likelihood of reaching a broader audience.",
+        "Better User Experience: Creates a secure and professional environment for transactions."
+      ]
+    }
   }
 }
