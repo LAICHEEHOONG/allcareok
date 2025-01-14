@@ -10,10 +10,10 @@ export default function YoutubeCard() {
   const l = useSelector((state) => state.auth?.lang?.listing_editor_card);
   const cardFocus = useSelector((state) => state.editor?.cardFocus);
   const youtube = useSelector((state) => state.editor.ad?.youtube);
-  const router = useRouter();
+  // const router = useRouter();
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const pathName = usePathname();
-  const currentLocale = pathName.split("/")[1] || "en";
+  // const currentLocale = pathName.split("/")[1] || "en";
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 767px)"); // Tailwind's md breakpoint

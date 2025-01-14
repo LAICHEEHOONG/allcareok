@@ -38,8 +38,8 @@ const breakpointColumnsObj_2 = {
 
 export default function VeryRightCard() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth._id);
-  const email = useSelector((state) => state.auth.email);
+  const user = useSelector((state) => state.auth?._id);
+  const email = useSelector((state) => state.auth?.email);
   const adsId = useSelector((state) => state.editor?.adsId);
   const ad = useSelector((state) => state.editor?.ad);
   const verification = useSelector((state) => state.editor?.ad?.verification);
@@ -56,15 +56,15 @@ export default function VeryRightCard() {
   const LIMIT_PHOTO = 10;
 
   useEffect(() => {
-    // const dbVerification = ad?.photo || [];
-    setLimitPhotos(photos.slice(0, LIMIT_PHOTO - verification.length));
-  }, [photos]);
-
-  useEffect(() => {
     if (!user) {
       router.push(`/`);
     }
   }, []);
+
+  useEffect(() => {
+    // const dbVerification = ad?.photo || [];
+    setLimitPhotos(photos.slice(0, LIMIT_PHOTO - verification?.length));
+  }, [photos]);
 
   // Remove the preview image from the state
   const filterOurPreview = (previewToRemove) => {
@@ -178,7 +178,7 @@ export default function VeryRightCard() {
   const submitToCloudinary = async () => {
     try {
       setLoading(true);
-      if (photos.length > 0) {
+      if (photos?.length > 0) {
         // setLoading(true);
         const URL = process.env.NEXT_PUBLIC_CLOUDINARY_URL;
         const uploadPhoto = async (photo) => {
@@ -234,7 +234,7 @@ export default function VeryRightCard() {
   };
 
   const handlePress = () => {
-    if (verification.length < LIMIT_PHOTO) {
+    if (verification?.length < LIMIT_PHOTO) {
       onOpen();
     } else {
       runToast();
@@ -314,8 +314,8 @@ export default function VeryRightCard() {
                   </div>
                   <div className="text-xs md:tracking-wide text-default-300 w-full max-w-[250px] flex md:justify-end justify-start mt-2">
                     {verification &&
-                      verification.length > 0 &&
-                      `${verification.length} photo`}
+                      verification?.length > 0 &&
+                      `${verification?.length} photo`}
                   </div>
                 </div>
                 <div className=" h-full flex justify-center items-center">
@@ -383,35 +383,6 @@ export default function VeryRightCard() {
               </CardBody>
             </Card>
           )}
-
-          {/* {reviewStatus === "Under Review" && (
-            <Card
-              className="m-2 mb-4 w-full"
-              // isPressable
-              // onPress={handlePayment}
-              isDisabled={verification?.length > 0 ? false : true}
-            >
-              <CardBody>
-                <div className="flex justify-between">
-                  <div className="flex flex-col justify-center  w-full max-w-[250px] ">
-                    <p className="text-md leading-10 w-full max-w-[250px] font-semibold ">
-                      {l?.payment_success_title}
-                    </p>
-                    <p className="text-small tracking-wide text-default-400 w-full max-w-[250px]">
-                      {l?.payment_success_content}
-                    </p>
-                  </div>
-                  <Image
-                    alt="Card background"
-                    className="object-cover rounded-xl"
-                    src="/images/under_review.png"
-                    width={170}
-                    height={170}
-                  />
-                </div>
-              </CardBody>
-            </Card>
-          )} */}
 
           {reviewStatus === "Approved" && (
             <Card className="m-2 mb-4 w-full">
