@@ -82,10 +82,9 @@ const adSchema = new mongoose.Schema(
     reviewPayment: reviewPaymentSchema,
     reviewStatus: {
       type: String,
-      enum: ['Approved', 'Under Review', 'Rejected', 'Payment Pending'], // Define allowed values
-      default: 'Payment Pending', // Set the default value
+      enum: ["Approved", "Under Review", "Rejected", "Payment Pending"], // Define allowed values
+      default: "Payment Pending", // Set the default value
     },
-    
   },
   {
     timestamps: true,
@@ -103,7 +102,6 @@ adSchema.index({
 const AD = mongoose.models.AD || mongoose.model("AD", adSchema);
 
 export default AD;
-
 
 // import mongoose from "mongoose";
 // const { Schema } = mongoose;

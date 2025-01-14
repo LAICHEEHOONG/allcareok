@@ -8,7 +8,7 @@ import ServiceCard from "./ServiceCard";
 import AreaCard from "./AreaCard";
 import ContactCard from "./ContactCard";
 import DescriptionCard from "./DescriptionCard";
-import MapCard from "./MapCard";
+// import MapCard from "./MapCard";
 import YoutubeCard from "./YoutubeCard";
 import DeleteCard from "./DeleteCard";
 import DeleteRightCard from "./DeleteRightCard";
@@ -41,6 +41,7 @@ import DescriptionRightCard from "./DescriptionRightCard";
 import VerifyCard from "./VerifyCard";
 import YoutubeRightCard from "./YoutubeRightCard";
 import VeryRightCard from "./VerifyRightCard";
+import BoostsRightCard from "./BoostsRightCard";
 
 export default function EditorDesktop() {
   const dispatch = useDispatch();
@@ -139,6 +140,7 @@ export default function EditorDesktop() {
         {cardFocus === "description" && <DescriptionRightCard />}
         {cardFocus === "youtube" && <YoutubeRightCard />}
         {cardFocus === "verify" && <VeryRightCard />}
+        {cardFocus === "boosts" && <BoostsRightCard />}
       </div>
       {/* Right Mobile */}
       <DrawerEditor cardFocus={cardFocus} />

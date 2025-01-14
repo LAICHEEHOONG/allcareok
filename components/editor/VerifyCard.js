@@ -8,6 +8,7 @@ export default function VerifyCard() {
   const dispatch = useDispatch();
   const cardFocus = useSelector((state) => state.editor?.cardFocus);
   const l = useSelector((state) => state.auth?.lang?.listing_editor_card);
+  const reviewStatus = useSelector((state) => state.editor?.ad?.reviewStatus);
   const router = useRouter();
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const pathName = usePathname();
@@ -43,7 +44,10 @@ export default function VerifyCard() {
         <div className="flex flex-col justify-start gap-1">
           <div className="font-medium ">{l?.verify_title}</div>
           <div className="text-base text-default-400  ">
-            {l?.verify_content}
+            {reviewStatus === "Payment Pending" && l?.verify_pending}
+            {reviewStatus === "Under Review" && l?.verify_review}
+            {reviewStatus === "Approved" && l?.verify_approved}
+            {reviewStatus === "Rejected" && l?.verify_rejected}
           </div>
         </div>
       </CardBody>

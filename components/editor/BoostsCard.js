@@ -10,9 +10,7 @@ export default function BoostsCard() {
   return (
     <Card
       className={`m-5 p-1 w-11/12 ${
-        cardFocus === "boosts"
-          ? "md:border-solid md:border-2 md:border-black"
-          : ""
+        cardFocus === "boosts" ? " md:border-2 md:border-black" : ""
       }`}
       isPressable
       onPress={() => {
