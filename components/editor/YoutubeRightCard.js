@@ -93,19 +93,7 @@ export default function YoutubeRightCard() {
     <div className="md:h-screen w-full md:pl-2">
       <div className="flex justify-between items-start mb-2 max-w-[1600px]">
         <div className="flex justify-center items-center gap-3">
-          {/* <Button
-            className="md:hidden flex"
-            isIconOnly
-            radius="full"
-            color="default"
-            variant="flat"
-            aria-label="Back button"
-            onPress={() => {
-              router.push(`/${currentLocale}/editor`);
-            }}
-          >
-            <ArrowBackIcon />
-          </Button> */}
+
           <div className="text-xl md:text-3xl font-semibold">{"Youtube"}</div>
         </div>
         <Button
@@ -114,11 +102,7 @@ export default function YoutubeRightCard() {
           size="lg"
           color="primary"
           isLoading={loading}
-          //   isDisabled={
-          //     newDescription?.length <= textLimit && newDescription?.length > 0
-          //       ? false
-          //       : true
-          //   }
+ 
           onPress={handleSave}
         >
           {`${l?.title_save}`}
@@ -129,11 +113,7 @@ export default function YoutubeRightCard() {
           size="md"
           color="default"
           variant="flat"
-          //   isDisabled={
-          //     newDescription?.length <= textLimit && newDescription?.length > 0
-          //       ? false
-          //       : true
-          //   }
+
           isLoading={loading}
           onPress={handleSave}
           isIconOnly

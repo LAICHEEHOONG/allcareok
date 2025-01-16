@@ -3,6 +3,9 @@ import {
   Button,
   Card,
   CardBody,
+  CardHeader,
+  CardFooter,
+  Link,
   Image,
   ScrollShadow,
   Spinner,
@@ -31,10 +34,21 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import AddIcon from "@mui/icons-material/Add";
 import FilterIcon from "@mui/icons-material/Filter";
 import { useDropzone } from "react-dropzone";
+import CheckIcon from "@mui/icons-material/Check";
 
 // const breakpointColumnsObj_2 = {
 //   default: 2,
 // };
+
+const breakpointColumnsObj = {
+  default: 3,
+  1200: 2,
+  900: 1
+  // 1700: 3,
+  // 1400: 2,
+  // 1111: 2,
+  // 1050: 1,
+};
 
 export default function BoostsRightCard() {
   const dispatch = useDispatch();
@@ -66,11 +80,11 @@ export default function BoostsRightCard() {
   //   }, [photos]);
 
   // Remove the preview image from the state
-//   const filterOurPreview = (previewToRemove) => {
-//     setPhotos((prev) =>
-//       prev.filter((item) => item.preview !== previewToRemove)
-//     );
-//   };
+  //   const filterOurPreview = (previewToRemove) => {
+  //     setPhotos((prev) =>
+  //       prev.filter((item) => item.preview !== previewToRemove)
+  //     );
+  //   };
 
   //   const M2 = () => {
   //     return (
@@ -133,31 +147,31 @@ export default function BoostsRightCard() {
   //     );
   //   };
 
-//   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
-//     if (acceptedFiles?.length) {
-//       // console.log(acceptedFiles);
-//       setPhotos((previousFiles) => [
-//         ...previousFiles,
-//         ...acceptedFiles.map((file) =>
-//           Object.assign(file, { preview: URL.createObjectURL(file) })
-//         ),
-//       ]);
-//     }
+  //   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
+  //     if (acceptedFiles?.length) {
+  //       // console.log(acceptedFiles);
+  //       setPhotos((previousFiles) => [
+  //         ...previousFiles,
+  //         ...acceptedFiles.map((file) =>
+  //           Object.assign(file, { preview: URL.createObjectURL(file) })
+  //         ),
+  //       ]);
+  //     }
 
-//     if (rejectedFiles?.length) {
-//       setRejected((previousFiles) => [...previousFiles, ...rejectedFiles]);
-//     }
-//   }, []);
+  //     if (rejectedFiles?.length) {
+  //       setRejected((previousFiles) => [...previousFiles, ...rejectedFiles]);
+  //     }
+  //   }, []);
 
-//   const { getRootProps, getInputProps, isDragActive } = useDropzone({
-//     accept: {
-//       "image/*": [],
-//     },
-//     maxSize: 10485760,
-//     onDrop,
-//   });
+  //   const { getRootProps, getInputProps, isDragActive } = useDropzone({
+  //     accept: {
+  //       "image/*": [],
+  //     },
+  //     maxSize: 10485760,
+  //     onDrop,
+  //   });
 
-//   const closeModal = () => setPhotos([]);
+  //   const closeModal = () => setPhotos([]);
 
   const submitToMongoDB = async (data) => {
     try {
@@ -281,14 +295,30 @@ export default function BoostsRightCard() {
             <ArrowBackIcon />
           </Button>
           <div className="text-xl md:text-3xl font-semibold">
-            {l?.boosts_card_title}
+            {"Boost Your Service Ad to Top Rankings!"}
           </div>
         </div>
       </div>
       <div className=" mt-2 text-default-400 md:flex hidden">
-        {l?.boosts_card_content}
+        {"Discover the ideal plan, beginning at under $7 per week."}
       </div>
-      <div className=" w-full max-w-[1600px]  flex justify-center h-[80vh]">
+      <ScrollShadow className="w-full max-w-[1600px] h-[85vh] mt-5 flex justify-center border-2">
+        {/* <div className="flex flex-col justify-center items-center border-2">
+          <div className="text-default-400">Pricing</div>
+          <div className="text-3xl font-semibold ">Boost Your Service Ad to Top Rankings!</div>
+          <div>Discover the ideal plan, beginning at under $7 per week.</div>
+        </div> */}
+        <Masonry
+          breakpointCols={breakpointColumnsObj}
+          className="my-masonry-grid border-2 border-red-500 mt-2"
+          columnClassName="my-masonry-grid_column "
+        >
+          <PriceCard />
+          <PriceCard />
+          <PriceCard />
+        </Masonry>
+      </ScrollShadow>
+      {/* <div className=" w-full max-w-[1600px]  flex justify-center h-[80vh]">
         <div className="w-full max-w-[500px] flex flex-col justify-center items-center ">
           <Card className="m-2 mb-4 w-full" isPressable onPress={handlePress}>
             <CardBody>
@@ -301,11 +331,7 @@ export default function BoostsRightCard() {
                   <div className="text-small md:tracking-wide text-default-400 w-full max-w-[250px]">
                     {l?.verify_upload_content}
                   </div>
-                  <div className="text-xs md:tracking-wide text-default-300 w-full max-w-[250px] flex md:justify-end justify-start mt-2">
-                    {/* {verification &&
-                      verification?.length > 0 &&
-                      `${verification?.length} photo`} */}
-                  </div>
+                  <div className="text-xs md:tracking-wide text-default-300 w-full max-w-[250px] flex md:justify-end justify-start mt-2"></div>
                 </div>
                 <div className=" h-full flex justify-center items-center">
                   <Image
@@ -318,240 +344,66 @@ export default function BoostsRightCard() {
             </CardBody>
           </Card>
 
-          {/* {reviewStatus === "Payment Pending" && (
-            <Card
-              className="m-2 mb-4 w-full"
-              isPressable
-              onPress={handlePayment}
-              isDisabled={verification?.length > 0 ? false : true}
-            >
-              <CardBody>
-                <div className="flex justify-between">
-                  <div className="flex flex-col justify-center md:tracking-wider m-1">
-                    <div className="text-md leading-10 w-full max-w-[250px] font-semibold">
-                      {l?.verify_btn_title}
-                    </div>
-
-                    <div className="text-small md:tracking-wide text-default-400 w-full max-w-[250px]">
-                      {l?.verify_btn_content}
-                    </div>
-                  </div>
-                  <div className=" h-full flex justify-center items-center">
-                    <Image
-                      alt="Card background"
-                      className="object-cover rounded-xl w-full md:max-w-[170px] max-w-[140px]"
-                      src="/images/payment.png"
-                    />
-                  </div>
-                </div>
-              </CardBody>
-            </Card>
-          )}
-
-          {reviewStatus === "Under Review" && (
-            <Card className="m-2 mb-4 w-full">
-              <CardBody>
-                <div className="flex justify-between">
-                  <div className="flex flex-col justify-center md:tracking-wider m-1">
-                    <div className="text-md leading-10 w-full max-w-[250px] font-semibold">
-                      {l?.payment_success_title}
-                    </div>
-
-                    <div className="text-small md:tracking-wide text-default-400 w-full max-w-[250px]">
-                      {l?.payment_success_content}
-                    </div>
-                  </div>
-                  <div className=" h-full flex justify-center items-center">
-                    <Image
-                      alt="Card background"
-                      className="object-cover rounded-xl w-full md:max-w-[170px] max-w-[140px]"
-                      src="/images/under_review.png"
-                    />
-                  </div>
-                </div>
-              </CardBody>
-            </Card>
-          )}
-
-          {reviewStatus === "Approved" && (
-            <Card className="m-2 mb-4 w-full">
-              <CardBody>
-                <div className="flex justify-between">
-                  <div className="flex flex-col justify-center md:tracking-wider m-1">
-                    <div className="text-md leading-10 w-full max-w-[250px] font-semibold">
-                      {l?.approved_title}
-                    </div>
-
-                    <div className="text-small md:tracking-wide text-default-400 w-full max-w-[250px]">
-                      {l?.approved_content}
-                    </div>
-                  </div>
-                  <div className=" h-full flex justify-center items-center">
-                    <Image
-                      alt="Card background"
-                      className="object-cover rounded-xl w-full md:max-w-[170px] max-w-[140px]"
-                      src="/images/approved.png"
-                    />
-                  </div>
-                </div>
-              </CardBody>
-            </Card>
-          )}
-       
-
-          {reviewStatus === "Rejected" && (
-            <Card className="m-2 mb-4 w-full">
-              <CardBody>
-                <div className="flex justify-between">
-                  <div className="flex flex-col justify-center md:tracking-wider m-1">
-                    <div className="text-md leading-10 w-full max-w-[250px] font-semibold">
-                      {l?.rejected_title}
-                    </div>
-
-                    <div className="text-small md:tracking-wide text-default-400 w-full max-w-[250px]">
-                      {l?.rejected_content}
-                    </div>
-                  </div>
-                  <div className=" h-full flex justify-center items-center">
-                    <Image
-                      alt="Card background"
-                      className="object-cover rounded-xl w-full md:max-w-[170px] max-w-[140px]"
-                      src="/images/rejected.png"
-                    />
-                  </div>
-                </div>
-              </CardBody>
-            </Card>
-          )} */}
-
           <Drawer_ l={l} />
-          {/* <Modal
-            isOpen={isOpen}
-            onOpenChange={onOpenChange}
-            backdrop="blur"
-            size="lg"
-            onClose={closeModal}
-          >
-            <ModalContent>
-              {(onClose) => (
-                <>
-                  <ModalHeader className="flex flex-col gap-1 ">
-                    <div className="flex justify-between items-center  ">
-                      <Button
-                        isIconOnly
-                        radius="full"
-                        color="default"
-                        variant="light"
-                        aria-label="add photo"
-                        onPress={() =>
-                          document.getElementById("fileInput").click()
-                        }
-                      >
-                        <AddIcon />
-                      </Button>
-                      <div className="flex-1 text-center">
-                        <div>{l?.photo_upload}</div>
-                        <div className="text-xs font-light tracking-tight text-default-500 ">
-                          {photos?.length === 0
-                            ? l?.no_items_selected
-                            : `${photos.length} ${l?.items_selected}`}
-                        </div>
-                      </div>
-                    </div>
-                  </ModalHeader>
-                  <ModalBody>
-                    {photos?.length === 0 ? (
-                      <div
-                        {...getRootProps({
-                          className: `p-8 border-dashed border-2 border-slate-400  ${
-                            isDragActive && `bg-slate-100`
-                          } cursor-pointer rounded-lg`,
-                        })}
-                      >
-                        <div className="flex flex-col items-center justify-center gap-4">
-                          <FilterIcon sx={{ fontSize: 50 }} />
-                          <div className="text-xl font-semibold hidden md:flex">
-                            {l?.drag}
-                          </div>
-                          <div className="text-xs font-light hidden md:flex">
-                            {l?.browse}
-                          </div>
-                          <Button
-                            radius="full"
-                            size="lg"
-                            onPress={() =>
-                              document.getElementById("fileInput").click()
-                            }
-                            color="primary"
-                          >
-                            {l?.browseBtn}
-                          </Button>
-                          <input
-                            id="fileInput"
-                            type="file"
-                            multiple
-                            accept="image/*"
-                            className="hidden"
-                            onChange={(e) => {
-                              const files = Array.from(e.target.files).map(
-                                (file) =>
-                                  Object.assign(file, {
-                                    preview: URL.createObjectURL(file),
-                                  })
-                              );
-                              setPhotos((prev) => [...prev, ...files]);
-                            }}
-                          />
-                        </div>
-                      </div>
-                    ) : (
-                      <ScrollShadow className="max-h-[400px]">
-                        <M2 />
-                      </ScrollShadow>
-                    )}
-                  </ModalBody>
-                  <ModalFooter>
-                    <div className="flex flex-col gap-4 w-full">
-                      <Divider />
-                      <div className="flex justify-between items-center">
-                        <Button
-                          variant="light"
-                          onPress={() => {
-                            closeModal();
-                            onClose();
-                          }}
-                          size="lg"
-                          radius="full"
-                        >
-                          {photos?.length === 0 ? l?.done : l?.cancel}
-                        </Button>
-                        <Button
-                          color="primary"
-                          onPress={async () => {
-                            try {
-                              //   await submitToCloudinary(); // Wait for the upload to complete
-                              onClose(); // Close the modal only after upload completes
-                            } catch (error) {
-                              console.error("Upload failed:", error); // Handle any errors
-                            }
-                          }}
-                          size="lg"
-                          radius="full"
-                          isDisabled={photos?.length === 0 ? true : false}
-                          isLoading={loading}
-                        >
-                          {l?.upload}
-                        </Button>
-                      </div>
-                    </div>
-                  </ModalFooter>
-                </>
-              )}
-            </ModalContent>
-          </Modal> */}
         </div>
-      </div>
+      </div> */}
     </div>
+  );
+}
+
+// import {Card, CardHeader, CardBody, CardFooter, Divider, Link, Image} from "@nextui-org/react";
+
+function PriceCard() {
+  return (
+    <Card className="max-w-[300px] m-2">
+      <CardHeader className="flex gap-3 p-4">
+        {/* <Image
+          alt="nextui logo"
+          height={40}
+          radius="sm"
+          src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
+          width={40}
+        /> */}
+        <div className="flex flex-col">
+          <p className="text-md">Free</p>
+          <p className="text-small text-default-500">
+            Free Starter Plan: Perfect for New Users to Try!
+          </p>
+        </div>
+      </CardHeader>
+      <Divider />
+      <CardBody>
+        <div className="p-4 flex flex-col">
+          <div className="text-3xl font-semibold mb-3">Free</div>
+
+          <div className="flex items-center gap-2">
+            <CheckIcon fontSize="small" />
+            <p className="text-small text-default-500">Standard Ranking</p>
+          </div>
+          <div className="flex items-center gap-2">
+            <CheckIcon fontSize="small" />
+            <p className="text-small text-default-500">Email Support</p>
+          </div>
+        </div>
+      </CardBody>
+      {/* <Divider /> */}
+      <CardFooter>
+        <div className="w-full flex justify-center items-center p-4">
+        <Button
+          radius="full"
+          size="lg"
+          color="primary"
+          isDisabled
+          // isLoading={loading}
+          // onPress={handleSave}
+        >
+          Continue with Free
+        </Button>
+        </div>
+ 
+
+      </CardFooter>
+    </Card>
   );
 }
 
