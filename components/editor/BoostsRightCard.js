@@ -21,6 +21,7 @@ import {
   DrawerHeader,
   DrawerBody,
   DrawerFooter,
+  Spacer,
 } from "@nextui-org/react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useSelector, useDispatch } from "react-redux";
@@ -42,8 +43,8 @@ import CheckIcon from "@mui/icons-material/Check";
 
 const breakpointColumnsObj = {
   default: 3,
-  1200: 2,
-  900: 1
+  1260: 2,
+  980: 1,
   // 1700: 3,
   // 1400: 2,
   // 1111: 2,
@@ -66,6 +67,57 @@ export default function BoostsRightCard() {
   const router = useRouter();
   const pathName = usePathname();
   const currentLocale = pathName.split("/")[1] || "en";
+
+  const pricingOptions = [
+    {
+      title: "Free",
+      description: "Free Starter Plan: Perfect for New Users to Try!",
+      price: "Free",
+      features: ["Standard Ranking", "Email Support", "Forever"],
+      buttonText: "Continue with Free",
+      onPress: () => console.log("Selected Free Plan"),
+      isDisabled: true,
+    },
+    {
+      title: "Plus",
+      description:
+        "Plus Plan: Experience a taste of top rankings for 7 days at just $7!",
+      price: "$7",
+      features: ["Top Ranking", "Priority Email Support", "7 Days"],
+      buttonText: "Upgrade to Plus",
+      onPress: () => console.log("Selected Plus Plan"),
+      isDisabled: false,
+    },
+    {
+      title: "Pro",
+      description:
+        "Pro Plan: Get top rankings for 30 days at just $20 and maximize your ad's reach!",
+      price: "$20",
+      features: ["Top Ranking", "Priority Email Support", "30 Days"],
+      buttonText: "Ugrade to Pro",
+      onPress: () => console.log("Contacting Sales"),
+      isDisabled: false, // Example: Disable button if needed
+    },
+  ];
+
+  // export default function BoostsRightCard() {
+  //   return (
+  //     <div className="flex flex-wrap justify-center gap-4">
+  //       {pricingOptions.map((option, index) => (
+  //         <PriceCard
+  //           key={index}
+  //           title={option.title}
+  //           description={option.description}
+  //           price={option.price}
+  //           features={option.features}
+  //           buttonText={option.buttonText}
+  //           onPress={option.onPress}
+  //           isDisabled={option.isDisabled}
+  //         />
+  //       ))}
+  //     </div>
+  //   );
+  // }
 
   //   const LIMIT_PHOTO = 10;
 
@@ -295,29 +347,38 @@ export default function BoostsRightCard() {
             <ArrowBackIcon />
           </Button>
           <div className="text-xl md:text-3xl font-semibold">
-            {"Boost Your Service Ad to Top Rankings!"}
+            {"Boost Your Ad to Top Rankings!"}
           </div>
         </div>
       </div>
       <div className=" mt-2 text-default-400 md:flex hidden">
         {"Discover the ideal plan, beginning at under $7 per week."}
       </div>
-      <ScrollShadow className="w-full max-w-[1600px] h-[85vh] mt-5 flex justify-center border-2">
-        {/* <div className="flex flex-col justify-center items-center border-2">
-          <div className="text-default-400">Pricing</div>
-          <div className="text-3xl font-semibold ">Boost Your Service Ad to Top Rankings!</div>
-          <div>Discover the ideal plan, beginning at under $7 per week.</div>
-        </div> */}
-        <Masonry
-          breakpointCols={breakpointColumnsObj}
-          className="my-masonry-grid border-2 border-red-500 mt-2"
-          columnClassName="my-masonry-grid_column "
-        >
-          <PriceCard />
-          <PriceCard />
-          <PriceCard />
-        </Masonry>
-      </ScrollShadow>
+      {/* <div className=" pt-10 "> */}
+        <ScrollShadow className=" h-[88vh] xl:flex xl:items-center">
+          <div className="  w-full max-w-[1600px] flex justify-center ">
+            <Masonry
+              breakpointCols={breakpointColumnsObj}
+              className="my-masonry-grid"
+              columnClassName="my-masonry-grid_column m-2"
+            >
+              {pricingOptions.map((option, index) => (
+                <PriceCard
+                  key={index}
+                  title={option.title}
+                  description={option.description}
+                  price={option.price}
+                  features={option.features}
+                  buttonText={option.buttonText}
+                  onPress={option.onPress}
+                  isDisabled={option.isDisabled}
+                />
+              ))}
+            </Masonry>
+          </div>
+        </ScrollShadow>
+      {/* </div> */}
+
       {/* <div className=" w-full max-w-[1600px]  flex justify-center h-[80vh]">
         <div className="w-full max-w-[500px] flex flex-col justify-center items-center ">
           <Card className="m-2 mb-4 w-full" isPressable onPress={handlePress}>
@@ -353,55 +414,103 @@ export default function BoostsRightCard() {
 
 // import {Card, CardHeader, CardBody, CardFooter, Divider, Link, Image} from "@nextui-org/react";
 
-function PriceCard() {
+// function PriceCard() {
+//   return (
+//     <Card className="max-w-[300px] mt-4">
+//       <CardHeader className="flex gap-3 p-4">
+//         {/* <Image
+//           alt="nextui logo"
+//           height={40}
+//           radius="sm"
+//           src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
+//           width={40}
+//         /> */}
+//         <div className="flex flex-col">
+//           <p className="text-md">Free</p>
+//           <p className="text-small text-default-500">
+//             Free Starter Plan: Perfect for New Users to Try!
+//           </p>
+//         </div>
+//       </CardHeader>
+//       <Divider />
+//       <CardBody>
+//         <div className="p-4 flex flex-col">
+//           <div className="text-3xl font-semibold mb-3">Free</div>
+
+//           <div className="flex items-center gap-2">
+//             <CheckIcon fontSize="small" />
+//             <p className="text-small text-default-500">Standard Ranking</p>
+//           </div>
+//           <div className="flex items-center gap-2">
+//             <CheckIcon fontSize="small" />
+//             <p className="text-small text-default-500">Email Support</p>
+//           </div>
+//         </div>
+//       </CardBody>
+//       {/* <Divider /> */}
+//       <CardFooter>
+//         <div className="w-full flex justify-center items-center p-4">
+//         <Button
+//           radius="full"
+//           size="lg"
+//           color="primary"
+//           isDisabled
+//           // isLoading={loading}
+//           // onPress={handleSave}
+//         >
+//           Continue with Free
+//         </Button>
+//         </div>
+
+//       </CardFooter>
+//     </Card>
+//   );
+// }
+
+function PriceCard({
+  title,
+  description,
+  price,
+  features,
+  buttonText,
+  onPress,
+  isDisabled = false,
+}) {
   return (
-    <Card className="max-w-[300px] m-2">
+    <Card
+      className="max-w-[300px] mt-4"
+      // className={`max-w-[300px] mt-4 ${title === 'Free' && 'lg:flex hidden'}`}
+    >
       <CardHeader className="flex gap-3 p-4">
-        {/* <Image
-          alt="nextui logo"
-          height={40}
-          radius="sm"
-          src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
-          width={40}
-        /> */}
         <div className="flex flex-col">
-          <p className="text-md">Free</p>
-          <p className="text-small text-default-500">
-            Free Starter Plan: Perfect for New Users to Try!
-          </p>
+          <p className="text-md">{title}</p>
+          <p className="text-small text-default-500">{description}</p>
         </div>
       </CardHeader>
       <Divider />
       <CardBody>
         <div className="p-4 flex flex-col">
-          <div className="text-3xl font-semibold mb-3">Free</div>
-
-          <div className="flex items-center gap-2">
-            <CheckIcon fontSize="small" />
-            <p className="text-small text-default-500">Standard Ranking</p>
-          </div>
-          <div className="flex items-center gap-2">
-            <CheckIcon fontSize="small" />
-            <p className="text-small text-default-500">Email Support</p>
-          </div>
+          <div className="text-3xl font-semibold mb-3">{price}</div>
+          {features.map((feature, index) => (
+            <div key={index} className="flex items-center gap-2">
+              <CheckIcon fontSize="small" />
+              <p className="text-small text-default-500">{feature}</p>
+            </div>
+          ))}
         </div>
       </CardBody>
-      {/* <Divider /> */}
       <CardFooter>
         <div className="w-full flex justify-center items-center p-4">
-        <Button
-          radius="full"
-          size="lg"
-          color="primary"
-          isDisabled
-          // isLoading={loading}
-          // onPress={handleSave}
-        >
-          Continue with Free
-        </Button>
+          <Button
+            radius="full"
+            size="lg"
+            color="primary"
+            isDisabled={isDisabled}
+            onPress={onPress}
+          >
+            {buttonText}
+          </Button>
         </div>
- 
-
       </CardFooter>
     </Card>
   );
