@@ -53,6 +53,8 @@ export default function BoostsRightCard() {
   const email = useSelector((state) => state.auth?.email);
   const adsId = useSelector((state) => state.editor?.adsId);
   const ad = useSelector((state) => state.editor?.ad);
+  const [isExpired, setIsExpired] = useState(true);
+
   //   const verification = useSelector((state) => state.editor?.ad?.verification);
   //   const reviewStatus = useSelector((state) => state.editor?.ad?.reviewStatus);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -65,8 +67,16 @@ export default function BoostsRightCard() {
   const currentLocale = pathName.split("/")[1] || "en";
   const mode = "test";
 
+  useEffect(() => {
+    if (ad?.topRanking) {
+      setIsExpired(isTopRankingExpired(ad.topRanking));
+    } else {
+      setIsExpired(true); // No ranking means it is "expired"
+    }
+  }, [ad?.topRanking]);
+
   const handlePlus = () => {
-    console.log('handlePlus')
+    console.log("handlePlus");
     if (mode === "live") {
       router.push(
         `https://buy.stripe.com/dR63cFdNS1Q8fQIaEK?client_reference_id=${ad._id}&prefilled_email=${email}`
@@ -79,14 +89,14 @@ export default function BoostsRightCard() {
   };
 
   const handlePro = () => {
-    console.log('handlePro')
+    console.log("handlePro");
     if (mode === "live") {
       router.push(
-        `https://buy.stripe.com/5kAcNf39e0M4fQI3cj?client_reference_id=${ad._id}&prefilled_email=${email}&utm_campaign=pro`
+        `https://buy.stripe.com/5kAcNf39e0M4fQI3cj?client_reference_id=${ad._id}&prefilled_email=${email}`
       );
     } else {
       router.push(
-        `https://buy.stripe.com/test_14kfZM9c79CPfoA5ks?prefilled_email=${email}&client_reference_id=${ad._id}&utm_campaign=pro`
+        `https://buy.stripe.com/test_14kfZM9c79CPfoA5ks?prefilled_email=${email}&client_reference_id=${ad._id}`
       );
     }
   };
@@ -116,7 +126,7 @@ export default function BoostsRightCard() {
         "Get top rankings for 30 days at just $20 and maximize your ad's reach!",
       price: "$20",
       features: ["Top Ranking", "Priority Email Support", "30 Days"],
-      buttonText: "Ugrade to Pro",
+      buttonText: "Upgrade to Pro",
       onPress: () => handlePro(),
       isDisabled: false, // Example: Disable button if needed
     },
@@ -209,116 +219,69 @@ export default function BoostsRightCard() {
       <div className=" mt-2 text-default-400 md:flex hidden">
         {"Discover the ideal plan, beginning at under $7 per week."}
       </div>
-      {/* <div className=" pt-10 "> */}
+
       <ScrollShadow className=" h-[88vh] xl:flex xl:items-center">
         <div className="  w-full max-w-[1600px] flex justify-center ">
-          <Masonry
-            breakpointCols={breakpointColumnsObj}
-            className="my-masonry-grid"
-            columnClassName="my-masonry-grid_column m-2"
-          >
-            {pricingOptions.map((option, index) => (
-              <PriceCard
-                key={index}
-                title={option.title}
-                description={option.description}
-                price={option.price}
-                features={option.features}
-                buttonText={option.buttonText}
-                onPress={option.onPress}
-                isDisabled={option.isDisabled}
-              />
-            ))}
-          </Masonry>
+          {isExpired ? (
+            <Masonry
+              breakpointCols={breakpointColumnsObj}
+              className="my-masonry-grid"
+              columnClassName="my-masonry-grid_column m-2"
+            >
+              {pricingOptions.map((option, index) => (
+                <PriceCard
+                  key={index}
+                  title={option.title}
+                  description={option.description}
+                  price={option.price}
+                  features={option.features}
+                  buttonText={option.buttonText}
+                  onPress={option.onPress}
+                  isDisabled={option.isDisabled}
+                />
+              ))}
+            </Masonry>
+          ) : (
+            <TopRanking date={ad?.topRanking} />
+          )}
         </div>
       </ScrollShadow>
-      {/* </div> */}
-
-      {/* <div className=" w-full max-w-[1600px]  flex justify-center h-[80vh]">
-        <div className="w-full max-w-[500px] flex flex-col justify-center items-center ">
-          <Card className="m-2 mb-4 w-full" isPressable onPress={handlePress}>
-            <CardBody>
-              <div className="flex justify-between">
-                <div className="flex flex-col justify-center md:tracking-wider m-1">
-                  <div className="text-md leading-10 w-full max-w-[250px] font-semibold">
-                    {l?.verify_upload_title}
-                  </div>
-
-                  <div className="text-small md:tracking-wide text-default-400 w-full max-w-[250px]">
-                    {l?.verify_upload_content}
-                  </div>
-                  <div className="text-xs md:tracking-wide text-default-300 w-full max-w-[250px] flex md:justify-end justify-start mt-2"></div>
-                </div>
-                <div className=" h-full flex justify-center items-center">
-                  <Image
-                    alt="Card background"
-                    className="object-cover rounded-xl w-full md:max-w-[170px] max-w-[140px]"
-                    src="/images/ic.jpeg"
-                  />
-                </div>
-              </div>
-            </CardBody>
-          </Card>
-
-          <Drawer_ l={l} />
-        </div>
-      </div> */}
     </div>
   );
 }
 
-// import {Card, CardHeader, CardBody, CardFooter, Divider, Link, Image} from "@nextui-org/react";
+function TopRanking({ date }) {
+  // Convert the date from MongoDB (ISO format) to a Date object
+  const rankingDate = new Date(date);
 
-// function PriceCard() {
+  // Format the date to "Fri Jan 17, 2025"
+  const formattedDate = rankingDate.toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "2-digit",
+    year: "numeric",
+  });
+
+  // Calculate the remaining days
+  const today = new Date();
+  const timeDiff = rankingDate - today; // Difference in milliseconds
+  const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24)); // Convert to days
+
+  return (
+    <div>
+      <div>{formattedDate}</div>
+      <div>{daysLeft > 0 ? `${daysLeft} Days Left of Top Search Ranking!` : "Ranking Expired"}</div>
+    </div>
+  );
+}
+
+// function TopRanking({ date }) {
+//   const days = date - new Date()
 //   return (
-//     <Card className="max-w-[300px] mt-4">
-//       <CardHeader className="flex gap-3 p-4">
-//         {/* <Image
-//           alt="nextui logo"
-//           height={40}
-//           radius="sm"
-//           src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
-//           width={40}
-//         /> */}
-//         <div className="flex flex-col">
-//           <p className="text-md">Free</p>
-//           <p className="text-small text-default-500">
-//             Free Starter Plan: Perfect for New Users to Try!
-//           </p>
-//         </div>
-//       </CardHeader>
-//       <Divider />
-//       <CardBody>
-//         <div className="p-4 flex flex-col">
-//           <div className="text-3xl font-semibold mb-3">Free</div>
-
-//           <div className="flex items-center gap-2">
-//             <CheckIcon fontSize="small" />
-//             <p className="text-small text-default-500">Standard Ranking</p>
-//           </div>
-//           <div className="flex items-center gap-2">
-//             <CheckIcon fontSize="small" />
-//             <p className="text-small text-default-500">Email Support</p>
-//           </div>
-//         </div>
-//       </CardBody>
-//       {/* <Divider /> */}
-//       <CardFooter>
-//         <div className="w-full flex justify-center items-center p-4">
-//         <Button
-//           radius="full"
-//           size="lg"
-//           color="primary"
-//           isDisabled
-//           // isLoading={loading}
-//           // onPress={handleSave}
-//         >
-//           Continue with Free
-//         </Button>
-//         </div>
-
-//       </CardFooter>
-//     </Card>
+//     <div>
+//       <div>{date}</div>
+//       <div>{`${days} Days Left of Top Search Ranking!`}</div>
+//     </div>
 //   );
 // }
 
@@ -443,3 +406,10 @@ function Drawer_({ l }) {
     </>
   );
 }
+
+const isTopRankingExpired = (topRanking) => {
+  if (!topRanking) return true; // Null means expired or not set
+  const currentDate = new Date();
+
+  return new Date(topRanking) <= currentDate; // Expired if ranking date is in the past
+};
