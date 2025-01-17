@@ -252,7 +252,7 @@ export default function VeryRightCard() {
         },
       });
     } else {
-      if (mode === "live") {
+      if (mode === "test") {
         router.push(
           `https://buy.stripe.com/fZe3cF7puamEbAsaEJ?client_reference_id=${ad._id}&prefilled_email=${email}`
         );

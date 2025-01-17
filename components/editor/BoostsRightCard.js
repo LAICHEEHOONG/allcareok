@@ -45,10 +45,6 @@ const breakpointColumnsObj = {
   default: 3,
   1260: 2,
   980: 1,
-  // 1700: 3,
-  // 1400: 2,
-  // 1111: 2,
-  // 1050: 1,
 };
 
 export default function BoostsRightCard() {
@@ -67,6 +63,33 @@ export default function BoostsRightCard() {
   const router = useRouter();
   const pathName = usePathname();
   const currentLocale = pathName.split("/")[1] || "en";
+  const mode = "test";
+
+  const handlePlus = () => {
+    console.log('handlePlus')
+    if (mode === "live") {
+      router.push(
+        `https://buy.stripe.com/dR63cFdNS1Q8fQIaEK?client_reference_id=${ad._id}&prefilled_email=${email}`
+      );
+    } else {
+      router.push(
+        `https://buy.stripe.com/test_eVa7tgcoj4iv0tGbIP?prefilled_email=${email}&client_reference_id=${ad._id}`
+      );
+    }
+  };
+
+  const handlePro = () => {
+    console.log('handlePro')
+    if (mode === "live") {
+      router.push(
+        `https://buy.stripe.com/5kAcNf39e0M4fQI3cj?client_reference_id=${ad._id}&prefilled_email=${email}&utm_campaign=pro`
+      );
+    } else {
+      router.push(
+        `https://buy.stripe.com/test_14kfZM9c79CPfoA5ks?prefilled_email=${email}&client_reference_id=${ad._id}&utm_campaign=pro`
+      );
+    }
+  };
 
   const pricingOptions = [
     {
@@ -80,150 +103,30 @@ export default function BoostsRightCard() {
     },
     {
       title: "Plus",
-      description:
-        "Plus Plan: Experience a taste of top rankings for 7 days at just $7!",
+      description: "Experience a taste of top rankings for 7 days at just $7!",
       price: "$7",
       features: ["Top Ranking", "Priority Email Support", "7 Days"],
       buttonText: "Upgrade to Plus",
-      onPress: () => console.log("Selected Plus Plan"),
+      onPress: () => handlePlus(),
       isDisabled: false,
     },
     {
       title: "Pro",
       description:
-        "Pro Plan: Get top rankings for 30 days at just $20 and maximize your ad's reach!",
+        "Get top rankings for 30 days at just $20 and maximize your ad's reach!",
       price: "$20",
       features: ["Top Ranking", "Priority Email Support", "30 Days"],
       buttonText: "Ugrade to Pro",
-      onPress: () => console.log("Contacting Sales"),
+      onPress: () => handlePro(),
       isDisabled: false, // Example: Disable button if needed
     },
   ];
-
-  // export default function BoostsRightCard() {
-  //   return (
-  //     <div className="flex flex-wrap justify-center gap-4">
-  //       {pricingOptions.map((option, index) => (
-  //         <PriceCard
-  //           key={index}
-  //           title={option.title}
-  //           description={option.description}
-  //           price={option.price}
-  //           features={option.features}
-  //           buttonText={option.buttonText}
-  //           onPress={option.onPress}
-  //           isDisabled={option.isDisabled}
-  //         />
-  //       ))}
-  //     </div>
-  //   );
-  // }
-
-  //   const LIMIT_PHOTO = 10;
 
   useEffect(() => {
     if (!user) {
       router.push(`/`);
     }
   }, []);
-
-  //   useEffect(() => {
-  //     setLimitPhotos(photos.slice(0, LIMIT_PHOTO - verification?.length));
-  //   }, [photos]);
-
-  // Remove the preview image from the state
-  //   const filterOurPreview = (previewToRemove) => {
-  //     setPhotos((prev) =>
-  //       prev.filter((item) => item.preview !== previewToRemove)
-  //     );
-  //   };
-
-  //   const M2 = () => {
-  //     return (
-  //       <Masonry
-  //         breakpointCols={breakpointColumnsObj_2}
-  //         className="my-masonry-grid"
-  //         columnClassName="my-masonry-grid_column"
-  //       >
-  //         {photos.map((item) => (
-  //           <div key={item.preview} className="relative">
-  //             <Image
-  //               alt="Card background"
-  //               className="object-cover rounded-xl md:h-[240px] sm:h-[220px] h-[200px]"
-  //               src={item.preview}
-  //               width={240}
-  //               // height={240}
-  //             />
-
-  //             {loading && (
-  //               <>
-  //                 {/* Dark transparent overlay */}
-  //                 <div className="absolute inset-0 bg-black bg-opacity-50 rounded-xl z-40"></div>
-  //                 {/* Centered spinner */}
-  //                 <div className="absolute inset-0 flex items-center justify-center z-40">
-  //                   <Spinner color="default" />
-  //                 </div>
-  //               </>
-  //             )}
-
-  //             <Button
-  //               isIconOnly
-  //               color="primary"
-  //               aria-label="delete image"
-  //               radius="full"
-  //               size="sm"
-  //               className="absolute top-2 right-2 z-30"
-  //               variant="shadow"
-  //               onPress={() => filterOurPreview(item.preview)}
-  //             >
-  //               <DeleteForeverIcon sx={{ fontSize: 22 }} />
-  //             </Button>
-  //           </div>
-  //         ))}
-  //         <input
-  //           id="fileInput"
-  //           type="file"
-  //           multiple
-  //           accept="image/*"
-  //           className="hidden"
-  //           onChange={(e) => {
-  //             const files = Array.from(e.target.files).map((file) =>
-  //               Object.assign(file, {
-  //                 preview: URL.createObjectURL(file),
-  //               })
-  //             );
-  //             setPhotos((prev) => [...prev, ...files]);
-  //           }}
-  //         />
-  //       </Masonry>
-  //     );
-  //   };
-
-  //   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
-  //     if (acceptedFiles?.length) {
-  //       // console.log(acceptedFiles);
-  //       setPhotos((previousFiles) => [
-  //         ...previousFiles,
-  //         ...acceptedFiles.map((file) =>
-  //           Object.assign(file, { preview: URL.createObjectURL(file) })
-  //         ),
-  //       ]);
-  //     }
-
-  //     if (rejectedFiles?.length) {
-  //       setRejected((previousFiles) => [...previousFiles, ...rejectedFiles]);
-  //     }
-  //   }, []);
-
-  //   const { getRootProps, getInputProps, isDragActive } = useDropzone({
-  //     accept: {
-  //       "image/*": [],
-  //     },
-  //     maxSize: 10485760,
-  //     onDrop,
-  //   });
-
-  //   const closeModal = () => setPhotos([]);
 
   const submitToMongoDB = async (data) => {
     try {
@@ -239,54 +142,6 @@ export default function BoostsRightCard() {
       console.log(error);
     }
   };
-
-  //   const submitToCloudinary = async () => {
-  //     try {
-  //       setLoading(true);
-  //       if (photos?.length > 0) {
-  //         // setLoading(true);
-  //         const URL = process.env.NEXT_PUBLIC_CLOUDINARY_URL;
-  //         const uploadPhoto = async (photo) => {
-  //           const photoFormData = new FormData();
-  //           photoFormData.append("file", photo);
-  //           photoFormData.append("upload_preset", "model_preset");
-  //           const response = await fetch(URL, {
-  //             method: "POST",
-  //             body: photoFormData,
-  //           });
-
-  //           return response.json();
-  //         };
-
-  //         const responses = await Promise.all(
-  //           limitPhotos.map((photo) => uploadPhoto(photo))
-  //         );
-
-  //         let photo_ = responses.map((item) => ({
-  //           url: item.secure_url,
-  //           publicId: item.public_id,
-  //         }));
-
-  //         // await submitToMongoDB({ photo, user, adsId });
-  //         let { user, photo, service, area, contact, youtube, verification } = ad;
-  //         verification = [...verification, ...photo_];
-  //         await submitToMongoDB({
-  //           user,
-  //           photo,
-  //           service,
-  //           area,
-  //           contact,
-  //           youtube,
-  //           adsId,
-  //           verification,
-  //         });
-  //       }
-  //     } catch (err) {
-  //       console.log(err);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
 
   const runToast = () => {
     // toast.warning(`${l?.upload_limit}`, {
@@ -355,28 +210,28 @@ export default function BoostsRightCard() {
         {"Discover the ideal plan, beginning at under $7 per week."}
       </div>
       {/* <div className=" pt-10 "> */}
-        <ScrollShadow className=" h-[88vh] xl:flex xl:items-center">
-          <div className="  w-full max-w-[1600px] flex justify-center ">
-            <Masonry
-              breakpointCols={breakpointColumnsObj}
-              className="my-masonry-grid"
-              columnClassName="my-masonry-grid_column m-2"
-            >
-              {pricingOptions.map((option, index) => (
-                <PriceCard
-                  key={index}
-                  title={option.title}
-                  description={option.description}
-                  price={option.price}
-                  features={option.features}
-                  buttonText={option.buttonText}
-                  onPress={option.onPress}
-                  isDisabled={option.isDisabled}
-                />
-              ))}
-            </Masonry>
-          </div>
-        </ScrollShadow>
+      <ScrollShadow className=" h-[88vh] xl:flex xl:items-center">
+        <div className="  w-full max-w-[1600px] flex justify-center ">
+          <Masonry
+            breakpointCols={breakpointColumnsObj}
+            className="my-masonry-grid"
+            columnClassName="my-masonry-grid_column m-2"
+          >
+            {pricingOptions.map((option, index) => (
+              <PriceCard
+                key={index}
+                title={option.title}
+                description={option.description}
+                price={option.price}
+                features={option.features}
+                buttonText={option.buttonText}
+                onPress={option.onPress}
+                isDisabled={option.isDisabled}
+              />
+            ))}
+          </Masonry>
+        </div>
+      </ScrollShadow>
       {/* </div> */}
 
       {/* <div className=" w-full max-w-[1600px]  flex justify-center h-[80vh]">
