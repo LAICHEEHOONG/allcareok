@@ -221,7 +221,7 @@ export default function BoostsRightCard() {
       </div>
 
       <ScrollShadow className=" h-[88vh] xl:flex xl:items-center">
-        <div className="  w-full max-w-[1600px] flex justify-center ">
+        <div className="  w-full max-w-[1600px] flex justify-center">
           {isExpired ? (
             <Masonry
               breakpointCols={breakpointColumnsObj}
@@ -260,17 +260,16 @@ function TopRanking({ date }) {
     month: "short",
     day: "2-digit",
     year: "numeric",
-  });
-
+  }).replace(/,/g, "");
   // Calculate the remaining days
   const today = new Date();
   const timeDiff = rankingDate - today; // Difference in milliseconds
   const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24)); // Convert to days
 
   return (
-    <div>
-      <div>{formattedDate}</div>
-      <div>{daysLeft > 0 ? `${daysLeft} Days Left of Top Search Ranking!` : "Ranking Expired"}</div>
+    <div className="flex flex-col justify-center items-center h-[80vh] gap-4">
+      <div className="text-5xl font-semibold">{formattedDate}</div>
+      <div className="text-small text-default-500">{daysLeft > 0 ? `${daysLeft} Days Left of Top Search Ranking!` : "Ranking Expired"}</div>
     </div>
   );
 }
@@ -301,7 +300,7 @@ function PriceCard({
     >
       <CardHeader className="flex gap-3 p-4">
         <div className="flex flex-col">
-          <p className="text-md">{title}</p>
+          <p className="text-md font-semibold">{title}</p>
           <p className="text-small text-default-500">{description}</p>
         </div>
       </CardHeader>
