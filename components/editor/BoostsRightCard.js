@@ -1,19 +1,19 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import {
   Button,
   Card,
   CardBody,
   CardHeader,
   CardFooter,
-  Link,
-  Image,
+  // Link,
+  // Image,
   ScrollShadow,
-  Spinner,
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
+  // Spinner,
+  // Modal,
+  // ModalContent,
+  // ModalHeader,
+  // ModalBody,
+  // ModalFooter,
   Divider,
   useDisclosure,
   Drawer,
@@ -21,20 +21,20 @@ import {
   DrawerHeader,
   DrawerBody,
   DrawerFooter,
-  Spacer,
+  // Spacer,
 } from "@nextui-org/react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useRouter, usePathname } from "next/navigation";
-import { setAd, setAds, setPopUp } from "@/redux/features/editor/editorSlice";
+// import { setAd, setAds, setPopUp } from "@/redux/features/editor/editorSlice";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-import { createAD, findUserAds } from "@/lib/action/adAction";
-import { toast } from "sonner";
+// import { createAD, findUserAds } from "@/lib/action/adAction";
+// import { toast } from "sonner";
 import Masonry from "react-masonry-css";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import AddIcon from "@mui/icons-material/Add";
-import FilterIcon from "@mui/icons-material/Filter";
-import { useDropzone } from "react-dropzone";
+// import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+// import AddIcon from "@mui/icons-material/Add";
+// import FilterIcon from "@mui/icons-material/Filter";
+// import { useDropzone } from "react-dropzone";
 import CheckIcon from "@mui/icons-material/Check";
 
 // const breakpointColumnsObj_2 = {
@@ -48,19 +48,19 @@ const breakpointColumnsObj = {
 };
 
 export default function BoostsRightCard() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const user = useSelector((state) => state.auth?._id);
   const email = useSelector((state) => state.auth?.email);
-  const adsId = useSelector((state) => state.editor?.adsId);
+  // const adsId = useSelector((state) => state.editor?.adsId);
   const ad = useSelector((state) => state.editor?.ad);
   const [isExpired, setIsExpired] = useState(true);
 
   //   const verification = useSelector((state) => state.editor?.ad?.verification);
   //   const reviewStatus = useSelector((state) => state.editor?.ad?.reviewStatus);
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [photos, setPhotos] = useState([]);
-  const [limitPhotos, setLimitPhotos] = useState([]);
-  const [loading, setLoading] = useState(false);
+  // const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  // const [photos, setPhotos] = useState([]);
+  // const [limitPhotos, setLimitPhotos] = useState([]);
+  // const [loading, setLoading] = useState(false);
   const l = useSelector((state) => state.auth?.lang?.listing_editor_card);
   const router = useRouter();
   const pathName = usePathname();
@@ -103,30 +103,41 @@ export default function BoostsRightCard() {
 
   const pricingOptions = [
     {
-      title: "Free",
-      description: "Free Starter Plan: Perfect for New Users to Try!",
-      price: "Free",
-      features: ["Standard Ranking", "Email Support", "Forever"],
-      buttonText: "Continue with Free",
+      title: l?.boosts_right?.plan_free?.plan,
+      description: l?.boosts_right?.plan_free?.description,
+      price: l?.boosts_right?.plan_free?.plan,
+      features: [
+        l?.boosts_right?.plan_free?.features_1,
+        l?.boosts_right?.plan_free?.features_2,
+        l?.boosts_right?.plan_free?.features_3,
+      ],
+      buttonText: l?.boosts_right?.plan_free?.buttonText,
       onPress: () => console.log("Selected Free Plan"),
       isDisabled: true,
     },
     {
-      title: "Plus",
-      description: "Experience a taste of top rankings for 7 days at just $7!",
-      price: "$7",
-      features: ["Top Ranking", "Priority Email Support", "7 Days"],
-      buttonText: "Upgrade to Plus",
+      title: l?.boosts_right?.plan_plus?.plan,
+      description: l?.boosts_right?.plan_plus?.description,
+      price: "RM20",
+      features: [
+        l?.boosts_right?.plan_plus?.features_1,
+        l?.boosts_right?.plan_plus?.features_2,
+        l?.boosts_right?.plan_plus?.features_3,
+      ],
+      buttonText: l?.boosts_right?.plan_plus?.buttonText,
       onPress: () => handlePlus(),
       isDisabled: false,
     },
     {
-      title: "Pro",
-      description:
-        "Get top rankings for 30 days at just $20 and maximize your ad's reach!",
-      price: "$20",
-      features: ["Top Ranking", "Priority Email Support", "30 Days"],
-      buttonText: "Upgrade to Pro",
+      title: l?.boosts_right?.plan_pro?.plan,
+      description: l?.boosts_right?.plan_pro?.description,
+      price: "RM60",
+      features: [
+        l?.boosts_right?.plan_pro?.features_1,
+        l?.boosts_right?.plan_pro?.features_2,
+        l?.boosts_right?.plan_pro?.features_3,
+      ],
+      buttonText: l?.boosts_right?.plan_pro?.buttonText,
       onPress: () => handlePro(),
       isDisabled: false, // Example: Disable button if needed
     },
@@ -138,61 +149,51 @@ export default function BoostsRightCard() {
     }
   }, []);
 
-  const submitToMongoDB = async (data) => {
-    try {
-      if (adsId) {
-        const updateAD = await createAD(data);
-        dispatch(setAd(updateAD));
-        const ads = await findUserAds({ user }); // Pass only the userId
-        dispatch(setAds(ads));
-      } else {
-        console.log("adsId not found");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const submitToMongoDB = async (data) => {
+  //   try {
+  //     if (adsId) {
+  //       const updateAD = await createAD(data);
+  //       dispatch(setAd(updateAD));
+  //       const ads = await findUserAds({ user }); // Pass only the userId
+  //       dispatch(setAds(ads));
+  //     } else {
+  //       console.log("adsId not found");
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  const runToast = () => {
-    // toast.warning(`${l?.upload_limit}`, {
-    //   description: `${l?.upload_limit_description}`,
-    //   action: {
-    //     label: "OK",
-    //     onClick: () => console.log("Upload Limit Reached"),
-    //   },
-    // });
-  };
+  // const handlePress = () => {
+  //   // if (verification?.length < LIMIT_PHOTO) {
+  //   //   onOpen();
+  //   // } else {
+  //   //   runToast();
+  //   // }
+  // };
 
-  const handlePress = () => {
-    // if (verification?.length < LIMIT_PHOTO) {
-    //   onOpen();
-    // } else {
-    //   runToast();
-    // }
-  };
-
-  const handlePayment = () => {
-    // const mode = "live";
-    // if (verification?.length === 0) {
-    //   toast.warning(`${l?.payment_submit_title}`, {
-    //     description: `${l?.payment_submit_content}`,
-    //     action: {
-    //       label: "OK",
-    //       onClick: () => console.log("Submit Documents Before Payment"),
-    //     },
-    //   });
-    // } else {
-    //   if (mode === "live") {
-    //     router.push(
-    //       `https://buy.stripe.com/fZe3cF7puamEbAsaEJ?client_reference_id=${ad._id}&prefilled_email=${email}`
-    //     );
-    //   } else {
-    //     router.push(
-    //       `https://buy.stripe.com/test_8wMcNAdsn2anfoA14a?client_reference_id=${ad._id}&prefilled_email=${email}`
-    //     );
-    //   }
-    // }
-  };
+  // const handlePayment = () => {
+  //   // const mode = "live";
+  //   // if (verification?.length === 0) {
+  //   //   toast.warning(`${l?.payment_submit_title}`, {
+  //   //     description: `${l?.payment_submit_content}`,
+  //   //     action: {
+  //   //       label: "OK",
+  //   //       onClick: () => console.log("Submit Documents Before Payment"),
+  //   //     },
+  //   //   });
+  //   // } else {
+  //   //   if (mode === "live") {
+  //   //     router.push(
+  //   //       `https://buy.stripe.com/fZe3cF7puamEbAsaEJ?client_reference_id=${ad._id}&prefilled_email=${email}`
+  //   //     );
+  //   //   } else {
+  //   //     router.push(
+  //   //       `https://buy.stripe.com/test_8wMcNAdsn2anfoA14a?client_reference_id=${ad._id}&prefilled_email=${email}`
+  //   //     );
+  //   //   }
+  //   // }
+  // };
 
   return (
     <div className="md:h-screen w-full md:pl-2">
@@ -212,12 +213,12 @@ export default function BoostsRightCard() {
             <ArrowBackIcon />
           </Button>
           <div className="text-xl md:text-3xl font-semibold">
-            {"Boost Your Ad to Top Rankings!"}
+            {l?.boosts_right?.title}
           </div>
         </div>
       </div>
       <div className=" mt-2 text-default-400 md:flex hidden">
-        {"Discover the ideal plan, beginning at under $7 per week."}
+        {l?.boosts_right?.content}
       </div>
 
       <ScrollShadow className=" h-[88vh] xl:flex xl:items-center">
@@ -243,7 +244,7 @@ export default function BoostsRightCard() {
                 ))}
               </Masonry>
               <div className=" flex justify-center items-center">
-                <Drawer_ />
+                <Drawer_  l={l} />
               </div>
             </div>
           ) : (
@@ -255,7 +256,7 @@ export default function BoostsRightCard() {
   );
 }
 
-function TopRanking({ date }) {
+function TopRanking({ date, l }) {
   // Convert the date from MongoDB (ISO format) to a Date object
   const rankingDate = new Date(date);
 
@@ -276,12 +277,12 @@ function TopRanking({ date }) {
   return (
     <div className="flex flex-col justify-center items-center h-[70vh] gap-4 ">
       <div className="text-5xl lg:text-7xl font-bold">{formattedDate}</div>
-      <div className="text-small mb-5">
+      <div className="text-lg mb-5">
         {daysLeft > 0
-          ? `${daysLeft} Days Left of Top Search Ranking!`
-          : "Ranking Expired"}
+          ? `${daysLeft} ${l?.boosts_right?.days_left}`
+          : `${l?.boosts_right?.exp}`}
       </div>
-      <Drawer_ />
+      <Drawer_ l={l} />
     </div>
   );
 }
@@ -301,9 +302,9 @@ function PriceCard({
       // className={`max-w-[300px] mt-4 ${title === 'Free' && 'lg:flex hidden'}`}
     >
       <CardHeader className="flex gap-3 p-4">
-        <div className="flex flex-col">
-          <p className="text-md font-semibold">{title}</p>
-          <p className="text-small text-default-500">{description}</p>
+        <div className="flex flex-col gap-2">
+          <p className="text-lg font-semibold">{title}</p>
+          <p className="text-small text-default-500 h-[40px]">{description}</p>
         </div>
       </CardHeader>
       <Divider />
@@ -335,7 +336,7 @@ function PriceCard({
   );
 }
 
-function Drawer_() {
+function Drawer_({l}) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const u = useSelector(
     (state) => state.auth?.lang?.listing_editor_card?.question_ranking
@@ -352,7 +353,7 @@ function Drawer_() {
         size="lg"
         onPress={onOpen}
       >
-        {"Questions"}
+        {l?.boosts_right?.question_btn}
       </Button>
       <Drawer isOpen={isOpen} onOpenChange={onOpenChange} backdrop="blur">
         <DrawerContent>
@@ -388,12 +389,7 @@ function Drawer_() {
                 </section>
                 <section>
                   <h2 className="text-lg font-bold mb-2">{u?.payment}</h2>
-                  <p className="text-default-600">
-                    {u?.payment_content}
-                    {/* {u?.payment_content.map((benefit, index) => (
-                      <li key={index}>{benefit}</li>
-                    ))} */}
-                  </p>
+                  <p className="text-default-600">{u?.payment_content}</p>
                 </section>
               </DrawerBody>
               <DrawerFooter>

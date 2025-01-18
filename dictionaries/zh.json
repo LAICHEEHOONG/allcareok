@@ -152,6 +152,56 @@
         "增强可见性：提高接触更广泛受众的可能性。",
         "更好的用户体验：打造一个安全、专业的交易环境。"
       ]
+    },
+    "question_ranking": {
+      "title": "了解广告排名",
+      "why": "为什么选择排名计划？",
+      "why_content": [
+        "可见性：排名靠前的广告在搜索结果中更显眼，吸引更多关注。",
+        "价值：精准曝光提高了客户互动的成功率。",
+        "灵活性：用户可以选择符合自身需求和预算的排名计划。"
+      ],
+      "process": "排名流程",
+      "process_steps": [
+        "计划选择：广告主根据自己的喜好选择免费、Plus 或 Pro 排名计划。",
+        "支付：完成选定计划的安全支付。",
+        "排名升级：支付成功后，广告将自动升级并在搜索结果中排名更高。"
+      ],
+      "failed_verification": "如果支付出现问题怎么办？",
+      "failed_verification_content": "如果您在支付过程中遇到问题，请通过 allcareok@gmail.com 联系我们的支持团队。注意：支付不可退款，请在完成交易前确保您的选择准确无误。",
+      "payment": "支付条款",
+      "payment_content": "排名计划的支付为最终支付，不可退款。支付成功后，排名日期将自动更新，延长广告的可见时长。如需支付相关问题的帮助，请通过 allcareok@gmail.com 联系我们的支持团队。"
+    },
+    "boosts_right": {
+      "title": "将您的广告提升至顶级排名！",
+      "content": "发现理想计划，每周低至 RM 20。",
+      "days_left": "天顶级搜索排名！",
+      "exp": "排名已过期",
+      "question_btn": "了解广告排名",
+      "plan_free": {
+        "plan": "免费",
+        "description": "免费起步计划：完美适合新用户尝试！",
+        "features_1": "标准排名",
+        "features_2": "电子邮件支持",
+        "features_3": "永久有效",
+        "buttonText": "继续免费使用"
+      },
+      "plan_plus": {
+        "plan": "Plus",
+        "description": "仅需 RM 20，体验顶级排名 7 天！",
+        "features_1": "顶级排名",
+        "features_2": "优先电子邮件支持",
+        "features_3": "7 天",
+        "buttonText": "升级为高级"
+      },
+      "plan_pro": {
+        "plan": "Pro",
+        "description": "仅需 RM 60，获得 30 天顶级排名，最大化广告效果！",
+        "features_1": "顶级排名",
+        "features_2": "优先电子邮件支持",
+        "features_3": "30 天",
+        "buttonText": "升级为专业"
+      }
     }
   }
 }

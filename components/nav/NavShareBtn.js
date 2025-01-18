@@ -33,7 +33,8 @@ export default function NavShareBtn({ share, myService }) {
       size="lg"
       onPress={changeRouter}
       // onPress={() => changeRouter()}
-      isLoading={blockServiceBtn}
+      isDisabled={blockServiceBtn}
+      // isLoading={blockServiceBtn}
     >
       {ads.length === 0 ? share : myService}
     </Button>

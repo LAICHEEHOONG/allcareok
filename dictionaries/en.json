@@ -171,6 +171,37 @@
       "failed_verification_content": "If you face issues with your payment, please contact our support team at allcareok@gmail.com. Note: Payments are non-refundable, so ensure your selection is accurate before completing the transaction.",
       "payment": "Payment Terms",
       "payment_content": "Payments for ranking plans are final and non-refundable. Upon successful payment, the ranking date will automatically renew, extending your ad's visibility duration. For assistance with payment-related issues, please contact our support team at allcareok@gmail.com."
+    },
+    "boosts_right": {
+      "title": "Boost Your Ad to Top Rankings!",
+      "content": "Discover the ideal plan, beginning at under RM 20 per week.",
+      "days_left": "Days Left of Top Search Ranking!",
+      "exp": "Ranking Expired",
+      "question_btn": "Questions",
+      "plan_free": {
+        "plan": "Free",
+        "description": "Free Starter Plan: Perfect for New Users to Try!",
+        "features_1": "Standard Ranking",
+        "features_2": "Email Support",
+        "features_3": "Forever",
+        "buttonText": "Continue with Free"
+      },
+      "plan_plus": {
+        "plan": "Plus",
+        "description": "Experience a taste of top rankings for 7 days at just RM 20!",
+        "features_1": "Top Ranking",
+        "features_2": "Priority Email Support",
+        "features_3": "7 Days",
+        "buttonText": "Upgrade to Plus"
+      },
+      "plan_pro": {
+        "plan": "Pro",
+        "description": "Get top rankings for 30 days at just RM 60 and maximize your ad's reach!",
+        "features_1": "Top Ranking",
+        "features_2": "Priority Email Support",
+        "features_3": "30 Days",
+        "buttonText": "Upgrade to Pro"
+      }
     }
   }
 }
