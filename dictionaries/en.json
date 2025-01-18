@@ -132,7 +132,6 @@
     "payment_submit_content": "Submit at least one document photo for review before making a payment.",
     "understanding": {
       "title": "Understanding Verified Ads",
-      "content": "Verified ads play a crucial role in building trust between service providers and customers. By ensuring that all posted ads meet certain authenticity standards, we create a safe and reliable marketplace for everyone.",
       "why": "Why Verify Ads?",
       "why_content": [
         "Credibility: Verified ads confirm the legitimacy of services or products, enhancing trust between users.",
@@ -153,6 +152,28 @@
         "Enhanced Visibility: Increases the likelihood of reaching a broader audience.",
         "Better User Experience: Creates a secure and professional environment for transactions."
       ]
+    },
+    "question_ranking": {
+      "title": "Understanding Ad Ranking",
+      "why": "Why Choose Ranking Plans?",
+      "why_content": [
+        "Visibility: Higher-ranked ads appear prominently in search results, capturing more attention.",
+        "Value: Targeted exposure increases the chances of successful customer engagement.",
+        "Flexibility: Users can select ranking plans that suit their needs and budget."
+      ],
+      "process": "Ranking Process",
+      "process_steps": [
+        "Plan Selection: Advertisers choose from our Free, Plus, or Pro ranking plans based on their preferences.",
+        "Payment: Complete a secure payment for your selected plan.",
+        "Ranking Upgrade: Ads are automatically upgraded and placed higher in search results upon successful payment."
+      ],
+      "failed_verification": "What If Payment Issues Occur?",
+      "failed_verification_content": "If you face issues with your payment, please contact our support team at allcareok@gmail.com. Note: Payments are non-refundable, so ensure your selection is accurate before completing the transaction.",
+      "payment": "Payment Terms",
+      "payment_content": "Payments for ranking plans are final and non-refundable. Upon successful payment, the ranking date will automatically renew, extending your ad's visibility duration. For assistance with payment-related issues, please contact our support team at allcareok@gmail.com."
     }
   }
 }
+
+
+

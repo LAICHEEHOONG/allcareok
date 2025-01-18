@@ -221,28 +221,33 @@ export default function BoostsRightCard() {
       </div>
 
       <ScrollShadow className=" h-[88vh] xl:flex xl:items-center">
-        <div className="  w-full max-w-[1600px] flex justify-center">
+        <div className="w-full max-w-[1600px] flex justify-center">
           {isExpired ? (
-            <Masonry
-              breakpointCols={breakpointColumnsObj}
-              className="my-masonry-grid"
-              columnClassName="my-masonry-grid_column m-2"
-            >
-              {pricingOptions.map((option, index) => (
-                <PriceCard
-                  key={index}
-                  title={option.title}
-                  description={option.description}
-                  price={option.price}
-                  features={option.features}
-                  buttonText={option.buttonText}
-                  onPress={option.onPress}
-                  isDisabled={option.isDisabled}
-                />
-              ))}
-            </Masonry>
+            <div>
+              <Masonry
+                breakpointCols={breakpointColumnsObj}
+                className="my-masonry-grid"
+                columnClassName="my-masonry-grid_column m-2"
+              >
+                {pricingOptions.map((option, index) => (
+                  <PriceCard
+                    key={index}
+                    title={option.title}
+                    description={option.description}
+                    price={option.price}
+                    features={option.features}
+                    buttonText={option.buttonText}
+                    onPress={option.onPress}
+                    isDisabled={option.isDisabled}
+                  />
+                ))}
+              </Masonry>
+              <div className=" flex justify-center items-center">
+                <Drawer_ />
+              </div>
+            </div>
           ) : (
-            <TopRanking date={ad?.topRanking} />
+            <TopRanking date={ad?.topRanking} l={l} />
           )}
         </div>
       </ScrollShadow>
@@ -255,34 +260,31 @@ function TopRanking({ date }) {
   const rankingDate = new Date(date);
 
   // Format the date to "Fri Jan 17, 2025"
-  const formattedDate = rankingDate.toLocaleDateString("en-US", {
-    weekday: "short",
-    month: "short",
-    day: "2-digit",
-    year: "numeric",
-  }).replace(/,/g, "");
+  const formattedDate = rankingDate
+    .toLocaleDateString("en-US", {
+      weekday: "short",
+      month: "short",
+      day: "2-digit",
+      year: "numeric",
+    })
+    .replace(/,/g, "");
   // Calculate the remaining days
   const today = new Date();
   const timeDiff = rankingDate - today; // Difference in milliseconds
   const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24)); // Convert to days
 
   return (
-    <div className="flex flex-col justify-center items-center h-[80vh] gap-4">
-      <div className="text-5xl font-semibold">{formattedDate}</div>
-      <div className="text-small text-default-500">{daysLeft > 0 ? `${daysLeft} Days Left of Top Search Ranking!` : "Ranking Expired"}</div>
+    <div className="flex flex-col justify-center items-center h-[70vh] gap-4 ">
+      <div className="text-5xl lg:text-7xl font-bold">{formattedDate}</div>
+      <div className="text-small mb-5">
+        {daysLeft > 0
+          ? `${daysLeft} Days Left of Top Search Ranking!`
+          : "Ranking Expired"}
+      </div>
+      <Drawer_ />
     </div>
   );
 }
-
-// function TopRanking({ date }) {
-//   const days = date - new Date()
-//   return (
-//     <div>
-//       <div>{date}</div>
-//       <div>{`${days} Days Left of Top Search Ranking!`}</div>
-//     </div>
-//   );
-// }
 
 function PriceCard({
   title,
@@ -333,10 +335,10 @@ function PriceCard({
   );
 }
 
-function Drawer_({ l }) {
+function Drawer_() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const u = useSelector(
-    (state) => state.auth?.lang?.listing_editor_card?.understanding
+    (state) => state.auth?.lang?.listing_editor_card?.question_ranking
   );
 
   return (
@@ -345,12 +347,12 @@ function Drawer_({ l }) {
         color="default"
         radius="full"
         variant="light"
-        startContent={<HelpOutlineIcon />}
-        fullWidth={true}
+        endContent={<HelpOutlineIcon />}
+        // fullWidth={true}
         size="lg"
         onPress={onOpen}
       >
-        {l?.learn_more}
+        {"Questions"}
       </Button>
       <Drawer isOpen={isOpen} onOpenChange={onOpenChange} backdrop="blur">
         <DrawerContent>
@@ -385,12 +387,13 @@ function Drawer_({ l }) {
                   </p>
                 </section>
                 <section>
-                  <h2 className="text-lg font-bold mb-2">{u?.benefits}</h2>
-                  <ul className="list-disc ml-5 space-y-2 text-default-600">
-                    {u?.benefits_content.map((benefit, index) => (
+                  <h2 className="text-lg font-bold mb-2">{u?.payment}</h2>
+                  <p className="text-default-600">
+                    {u?.payment_content}
+                    {/* {u?.payment_content.map((benefit, index) => (
                       <li key={index}>{benefit}</li>
-                    ))}
-                  </ul>
+                    ))} */}
+                  </p>
                 </section>
               </DrawerBody>
               <DrawerFooter>
