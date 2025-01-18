@@ -40,6 +40,7 @@ export default function VeryRightCard() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth?._id);
   const email = useSelector((state) => state.auth?.email);
+  const country = useSelector((state) => state.auth?.country);
   const adsId = useSelector((state) => state.editor?.adsId);
   const ad = useSelector((state) => state.editor?.ad);
   const verification = useSelector((state) => state.editor?.ad?.verification);
@@ -52,6 +53,15 @@ export default function VeryRightCard() {
   const router = useRouter();
   const pathName = usePathname();
   const currentLocale = pathName.split("/")[1] || "en";
+  const [currency, setCurrency] = useState("$5 USD");
+
+  useEffect(() => {
+    if (country === "Malaysia") {
+      setCurrency("RM 20");
+    } else {
+      setCurrency("$5 USD");
+    }
+  }, [country]);
 
   const LIMIT_PHOTO = 10;
 
@@ -252,10 +262,16 @@ export default function VeryRightCard() {
         },
       });
     } else {
-      if (mode === "test") {
-        router.push(
-          `https://buy.stripe.com/fZe3cF7puamEbAsaEJ?client_reference_id=${ad._id}&prefilled_email=${email}`
-        );
+      if (mode === "live") {
+        if (country === "Malaysia") {
+          router.push(
+            `https://buy.stripe.com/00g6oR7pu9iA0VOdQZ?client_reference_id=${ad._id}&prefilled_email=${email}`
+          );
+        } else {
+          router.push(
+            `https://buy.stripe.com/3csdRj9xC0M433W4go?prefilled_email=${email}client_reference_id=${ad._id}`
+          );
+        }
       } else {
         router.push(
           `https://buy.stripe.com/test_8wMcNAdsn2anfoA14a?client_reference_id=${ad._id}&prefilled_email=${email}`
@@ -344,7 +360,8 @@ export default function VeryRightCard() {
                     </div>
 
                     <div className="text-small md:tracking-wide text-default-400 w-full max-w-[250px]">
-                      {l?.verify_btn_content}
+                      <div>{l?.verify_btn_content}</div>
+                      <div>{`${l?.verify_fee} ${currency}`}</div>
                     </div>
                   </div>
                   <div className=" h-full flex justify-center items-center">
@@ -408,30 +425,6 @@ export default function VeryRightCard() {
               </CardBody>
             </Card>
           )}
-          {/* 
-          {reviewStatus === "Approved" && (
-            <Card className="m-2 mb-4 w-full">
-              <CardBody>
-                <div className="flex justify-between">
-                  <div className="flex flex-col justify-center  w-full max-w-[250px] ">
-                    <p className="text-md leading-10 w-full max-w-[250px] font-semibold ">
-                      {l?.approved_title}
-                    </p>
-                    <p className="text-small tracking-wide text-default-400 w-full max-w-[250px]">
-                      {l?.approved_content}
-                    </p>
-                  </div>
-                  <Image
-                    alt="Card background"
-                    className="object-cover rounded-xl"
-                    src="/images/approved.png"
-                    width={170}
-                    height={170}
-                  />
-                </div>
-              </CardBody>
-            </Card>
-          )} */}
           {reviewStatus === "Rejected" && (
             <Card className="m-2 mb-4 w-full">
               <CardBody>
@@ -456,29 +449,6 @@ export default function VeryRightCard() {
               </CardBody>
             </Card>
           )}
-          {/* {reviewStatus === "Rejected" && (
-            <Card className="m-2 mb-4 w-full">
-              <CardBody>
-                <div className="flex justify-between">
-                  <div className="flex flex-col justify-center  w-full max-w-[250px] ">
-                    <p className="text-md leading-10 w-full max-w-[250px] font-semibold ">
-                      {l?.rejected_title}
-                    </p>
-                    <p className="text-small tracking-wide text-default-400 w-full max-w-[250px]">
-                      {l?.rejected_content}
-                    </p>
-                  </div>
-                  <Image
-                    alt="Card background"
-                    className="object-cover rounded-xl"
-                    src="/images/rejected.png"
-                    width={170}
-                    height={170}
-                  />
-                </div>
-              </CardBody>
-            </Card>
-          )} */}
 
           <Drawer_ l={l} />
           <Modal

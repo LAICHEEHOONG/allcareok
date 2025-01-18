@@ -86,6 +86,7 @@
     "make_cover": "设为封面",
     "boosts_card_title": "提升您的服务",
     "boosts_card_content": "选择理想的计划来提升您的服务名次。",
+    "boosts_card_content_2": "最高排名有效期至 ",
     "title_right_label": "标题",
     "character_available": "可用字符数",
     "over_limit": "字符超出限制",
@@ -120,7 +121,8 @@
     "verify_upload_title": "文件提交",
     "verify_upload_content": "广告商需上传必要的身份证明或商业文件",
     "verify_btn_title": "审核",
-    "verify_btn_content": "我们的团队将审核提交的文件，以确保它们符合验证要求。审核费用为 5 美元。",
+    "verify_btn_content": "我们的团队将审核提交的文件，以确保它们符合验证要求。",
+    "verify_fee": "审核费用为",
     "payment_success_title": "付款成功",
     "payment_success_content": "感谢您的付款！您的文件将在1-3个工作日内审核完成。",
     "approved_title": "通过",
@@ -192,7 +194,7 @@
         "features_1": "顶级排名",
         "features_2": "优先电子邮件支持",
         "features_3": "7 天",
-        "buttonText": "升级为高级"
+        "buttonText": "升级为 Plus"
       },
       "plan_pro": {
         "plan": "Pro",
@@ -200,7 +202,7 @@
         "features_1": "顶级排名",
         "features_2": "优先电子邮件支持",
         "features_3": "30 天",
-        "buttonText": "升级为专业"
+        "buttonText": "升级为 Pro"
       }
     }
   }

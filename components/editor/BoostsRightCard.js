@@ -37,10 +37,6 @@ import Masonry from "react-masonry-css";
 // import { useDropzone } from "react-dropzone";
 import CheckIcon from "@mui/icons-material/Check";
 
-// const breakpointColumnsObj_2 = {
-//   default: 2,
-// };
-
 const breakpointColumnsObj = {
   default: 3,
   1260: 2,
@@ -48,24 +44,15 @@ const breakpointColumnsObj = {
 };
 
 export default function BoostsRightCard() {
-  // const dispatch = useDispatch();
   const user = useSelector((state) => state.auth?._id);
   const email = useSelector((state) => state.auth?.email);
-  // const adsId = useSelector((state) => state.editor?.adsId);
   const ad = useSelector((state) => state.editor?.ad);
   const [isExpired, setIsExpired] = useState(true);
-
-  //   const verification = useSelector((state) => state.editor?.ad?.verification);
-  //   const reviewStatus = useSelector((state) => state.editor?.ad?.reviewStatus);
-  // const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  // const [photos, setPhotos] = useState([]);
-  // const [limitPhotos, setLimitPhotos] = useState([]);
-  // const [loading, setLoading] = useState(false);
   const l = useSelector((state) => state.auth?.lang?.listing_editor_card);
   const router = useRouter();
   const pathName = usePathname();
   const currentLocale = pathName.split("/")[1] || "en";
-  const mode = "test";
+  const mode = "live";
 
   useEffect(() => {
     if (ad?.topRanking) {
@@ -149,52 +136,6 @@ export default function BoostsRightCard() {
     }
   }, []);
 
-  // const submitToMongoDB = async (data) => {
-  //   try {
-  //     if (adsId) {
-  //       const updateAD = await createAD(data);
-  //       dispatch(setAd(updateAD));
-  //       const ads = await findUserAds({ user }); // Pass only the userId
-  //       dispatch(setAds(ads));
-  //     } else {
-  //       console.log("adsId not found");
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // const handlePress = () => {
-  //   // if (verification?.length < LIMIT_PHOTO) {
-  //   //   onOpen();
-  //   // } else {
-  //   //   runToast();
-  //   // }
-  // };
-
-  // const handlePayment = () => {
-  //   // const mode = "live";
-  //   // if (verification?.length === 0) {
-  //   //   toast.warning(`${l?.payment_submit_title}`, {
-  //   //     description: `${l?.payment_submit_content}`,
-  //   //     action: {
-  //   //       label: "OK",
-  //   //       onClick: () => console.log("Submit Documents Before Payment"),
-  //   //     },
-  //   //   });
-  //   // } else {
-  //   //   if (mode === "live") {
-  //   //     router.push(
-  //   //       `https://buy.stripe.com/fZe3cF7puamEbAsaEJ?client_reference_id=${ad._id}&prefilled_email=${email}`
-  //   //     );
-  //   //   } else {
-  //   //     router.push(
-  //   //       `https://buy.stripe.com/test_8wMcNAdsn2anfoA14a?client_reference_id=${ad._id}&prefilled_email=${email}`
-  //   //     );
-  //   //   }
-  //   // }
-  // };
-
   return (
     <div className="md:h-screen w-full md:pl-2">
       <div className="flex justify-between items-start mb-2 max-w-[1600px]">
@@ -243,8 +184,8 @@ export default function BoostsRightCard() {
                   />
                 ))}
               </Masonry>
-              <div className=" flex justify-center items-center">
-                <Drawer_  l={l} />
+              <div className=" flex justify-center items-center m-5">
+                <Drawer_ l={l} />
               </div>
             </div>
           ) : (
@@ -276,8 +217,10 @@ function TopRanking({ date, l }) {
 
   return (
     <div className="flex flex-col justify-center items-center h-[70vh] gap-4 ">
-      <div className="text-5xl lg:text-7xl font-bold">{formattedDate}</div>
-      <div className="text-lg mb-5">
+      <div className="text-5xl lg:text-7xl font-bold tracking-widest">
+        {formattedDate}
+      </div>
+      <div className="text-xl mb-20 tracking-widest">
         {daysLeft > 0
           ? `${daysLeft} ${l?.boosts_right?.days_left}`
           : `${l?.boosts_right?.exp}`}
@@ -336,7 +279,7 @@ function PriceCard({
   );
 }
 
-function Drawer_({l}) {
+function Drawer_({ l }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const u = useSelector(
     (state) => state.auth?.lang?.listing_editor_card?.question_ranking
