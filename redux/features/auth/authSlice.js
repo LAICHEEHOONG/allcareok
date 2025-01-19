@@ -12,12 +12,16 @@ const initialState = {
   country: "",
   session: null,
   status: "",
+  dbCountry: ""
 };
 
 export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    setDBCountry: (state, action) => {
+      state.dbCountry = action.payload
+    },
     signInStatus: (state, action) => {
       state.signIn = action.payload;
     },
@@ -55,7 +59,8 @@ export const {
   setLang,
   setCountry,
   setSession,
-  setStatus
+  setStatus,
+  setDBCountry
 } = authSlice.actions;
 
 export default authSlice.reducer;

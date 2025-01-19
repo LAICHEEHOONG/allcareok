@@ -8,7 +8,6 @@ import ServiceCard from "./ServiceCard";
 import AreaCard from "./AreaCard";
 import ContactCard from "./ContactCard";
 import DescriptionCard from "./DescriptionCard";
-// import MapCard from "./MapCard";
 import YoutubeCard from "./YoutubeCard";
 import DeleteCard from "./DeleteCard";
 import DeleteRightCard from "./DeleteRightCard";
@@ -23,6 +22,8 @@ import {
   setFocus,
   setPopUp,
 } from "@/redux/features/editor/editorSlice";
+import { setDBCountry } from "@/redux/features/auth/authSlice";
+import { getUserCountry } from "@/lib/action/userAction";
 import { findUserAds } from "@/lib/action/adAction";
 import {
   Drawer,
@@ -53,6 +54,21 @@ export default function EditorDesktop() {
   const isEffectRan = useRef(false);
   const pathName = usePathname();
   const currentLocale = pathName.split("/")[1] || "en";
+  useEffect(() => {
+    const dbCountry = async () => {
+      try {
+        let res = await getUserCountry({ id: user });
+        dispatch(setDBCountry(res));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  
+    // Only call dbCountry if user is not '', undefined, or null
+    if (user !== '' && user !== undefined && user !== null) {
+      dbCountry();
+    }
+  }, [user]);
 
   useEffect(() => {
     if (!isEffectRan.current) {
