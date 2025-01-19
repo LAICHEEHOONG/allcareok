@@ -48,7 +48,7 @@ export default function AreaRightCard() {
   const pathName = usePathname();
   const currentLocale = pathName.split("/")[1] || "en";
   const area = useSelector((state) => state.editor?.ad?.area);
-  const userCountry = useSelector((state) => state.auth?.country) || "";
+  const userCountry = useSelector((state) => state.auth?.dbCountry) || "";
   const initialArea = {
     country: area?.country,
     state: area?.state,
