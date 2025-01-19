@@ -45,6 +45,7 @@ const breakpointColumnsObj = {
 
 export default function BoostsRightCard() {
   const user = useSelector((state) => state.auth?._id);
+  const country = useSelector(state => state.auth?.dbCountry)
   const email = useSelector((state) => state.auth?.email);
   const ad = useSelector((state) => state.editor?.ad);
   const [isExpired, setIsExpired] = useState(true);
@@ -53,6 +54,15 @@ export default function BoostsRightCard() {
   const pathName = usePathname();
   const currentLocale = pathName.split("/")[1] || "en";
   const mode = "live";
+  const [currency, setCurrency] = useState({plus: "5 USD", pro: "14 USD"});
+
+  useEffect(() => {
+    if(country === 'Malaysia') {
+      setCurrency({plus: "RM 20", pro: "RM 60"})
+    } else {
+      setCurrency({plus: "$ 5", pro: "$ 14"})
+    }
+  }, [country])
 
   useEffect(() => {
     if (ad?.topRanking) {
@@ -105,7 +115,7 @@ export default function BoostsRightCard() {
     {
       title: l?.boosts_right?.plan_plus?.plan,
       description: l?.boosts_right?.plan_plus?.description,
-      price: "RM20",
+      price: currency.plus,
       features: [
         l?.boosts_right?.plan_plus?.features_1,
         l?.boosts_right?.plan_plus?.features_2,
@@ -118,7 +128,7 @@ export default function BoostsRightCard() {
     {
       title: l?.boosts_right?.plan_pro?.plan,
       description: l?.boosts_right?.plan_pro?.description,
-      price: "RM60",
+      price: currency.pro,
       features: [
         l?.boosts_right?.plan_pro?.features_1,
         l?.boosts_right?.plan_pro?.features_2,

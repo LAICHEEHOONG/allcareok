@@ -40,7 +40,7 @@ export default function VeryRightCard() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth?._id);
   const email = useSelector((state) => state.auth?.email);
-  const country = useSelector((state) => state.auth?.country);
+  const country = useSelector((state) => state.auth?.dbCountry);
   const adsId = useSelector((state) => state.editor?.adsId);
   const ad = useSelector((state) => state.editor?.ad);
   const verification = useSelector((state) => state.editor?.ad?.verification);
