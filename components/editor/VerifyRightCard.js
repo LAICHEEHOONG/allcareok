@@ -18,6 +18,7 @@ import {
   DrawerHeader,
   DrawerBody,
   DrawerFooter,
+  Chip,
 } from "@nextui-org/react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useSelector, useDispatch } from "react-redux";
@@ -54,6 +55,12 @@ export default function VeryRightCard() {
   const pathName = usePathname();
   const currentLocale = pathName.split("/")[1] || "en";
   const [currency, setCurrency] = useState("$5 USD");
+  const verificationUrl = {
+    TEST: `https://buy.stripe.com/6oE28BcJOcuMdIA3co?prefilled_email=${email}&client_reference_id=${ad._id}`,
+    MY: `https://buy.stripe.com/00g6oR7pu9iA0VOdQZ?prefilled_email=${email}&client_reference_id=${ad._id}`,
+    USD: `https://buy.stripe.com/3csdRj9xC0M433W4go?prefilled_email=${email}&client_reference_id=${ad._id}`,
+  };
+  const mode = "test";
 
   useEffect(() => {
     if (country === "Malaysia") {
@@ -72,7 +79,6 @@ export default function VeryRightCard() {
   }, []);
 
   useEffect(() => {
-    // const dbVerification = ad?.photo || [];
     setLimitPhotos(photos.slice(0, LIMIT_PHOTO - verification?.length));
   }, [photos]);
 
@@ -252,7 +258,6 @@ export default function VeryRightCard() {
   };
 
   const handlePayment = () => {
-    const mode = "live";
     if (verification?.length === 0) {
       toast.warning(`${l?.payment_submit_title}`, {
         description: `${l?.payment_submit_content}`,
@@ -263,31 +268,15 @@ export default function VeryRightCard() {
       });
     } else {
       if (mode === "live") {
-        if (country === "Malaysia") {
-          router.push(
-            `https://buy.stripe.com/00g6oR7pu9iA0VOdQZ?client_reference_id=${ad._id}&prefilled_email=${email}`
-          );
+        if (country?.toLowerCase() === "malaysia") {
+          router.push(verificationUrl.MY);
         } else {
-          router.push(
-            `https://buy.stripe.com/3csdRj9xC0M433W4go?prefilled_email=${email}client_reference_id=${ad._id}`
-          );
+          router.push(verificationUrl.USD);
         }
       } else {
-        router.push(
-          `https://buy.stripe.com/test_8wMcNAdsn2anfoA14a?client_reference_id=${ad._id}&prefilled_email=${email}`
-        );
+        router.push(verificationUrl.TEST);
       }
     }
-
-    // live
-    // router.push(
-    //   `https://buy.stripe.com/fZe3cF7puamEbAsaEJ?client_reference_id=${ad._id}&prefilled_email=${email}`
-    // );
-
-    // test;
-    // router.push(
-    //   `https://buy.stripe.com/test_8wMcNAdsn2anfoA14a?client_reference_id=${ad._id}&prefilled_email=${email}`
-    // );
   };
 
   return (
@@ -354,14 +343,33 @@ export default function VeryRightCard() {
             >
               <CardBody>
                 <div className="flex justify-between">
-                  <div className="flex flex-col justify-center md:tracking-wider m-1">
-                    <div className="text-md leading-10 w-full max-w-[250px] font-semibold">
-                      {l?.verify_btn_title}
+                  <div className="flex flex-col justify-center md:tracking-wider m-1 ">
+                    <div className="w-full max-w-[250px]  flex justify-between pr-6 md:pr-0">
+                      <div className="text-md leading-10 font-semibold">
+                        {l?.verify_btn_title}
+                      </div>
+                      <Chip
+                        className="mt-2"
+                        variant="flat"
+                        color="success"
+                        size="sm"
+                      >{`${currency}`}</Chip>
                     </div>
+                    {/* <div className="text-md leading-10 w-full max-w-[250px] font-semibold border-2">
+                      {l?.verify_btn_title}
+                    </div> */}
 
                     <div className="text-small md:tracking-wide text-default-400 w-full max-w-[250px]">
                       <div>{l?.verify_btn_content}</div>
-                      <div>{`${l?.verify_fee} ${currency}`}</div>
+                      {/* <div className="flex md:justify-end">
+                        <Chip
+                          className="mt-2"
+                          variant="flat"
+                          color="success"
+                        >{`${currency}`}</Chip>
+                      </div> */}
+
+                      {/* <Chip className="mt-2" variant='flat' color="success">{`${l?.verify_fee} ${currency}`}</Chip> */}
                     </div>
                   </div>
                   <div className=" h-full flex justify-center items-center">

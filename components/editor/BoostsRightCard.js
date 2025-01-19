@@ -60,7 +60,7 @@ export default function BoostsRightCard() {
     if(country === 'Malaysia') {
       setCurrency({plus: "RM 20", pro: "RM 60"})
     } else {
-      setCurrency({plus: "$ 5", pro: "$ 14"})
+      setCurrency({plus: "$ 5", pro: "$ 15"})
     }
   }, [country])
 
