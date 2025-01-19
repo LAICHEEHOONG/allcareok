@@ -15,13 +15,16 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ['user', 'admin'],
-      default: 'user',
+      enum: ["user", "admin"],
+      default: "user",
     },
     language: {
       type: String,
-      default: 'en',
-    }
+      default: "en",
+    },
+    country: {
+      type: String,
+    },
   },
   {
     timestamps: true,

@@ -14,7 +14,7 @@ import {
   setBlockServiceBtn,
 } from "@/redux/features/editor/editorSlice";
 import { useSession } from "next-auth/react";
-import { signUp } from "@/lib/action/userAction";
+import { signUp, updateUserCountry } from "@/lib/action/userAction";
 import { findUserAds } from "@/lib/action/adAction";
 import { useRouter, usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
@@ -39,17 +39,30 @@ export default function Home() {
   const router = useRouter();
   const pathName = usePathname();
   const user = useSelector((state) => state.auth?._id);
+  const country = useSelector((state) => state.auth?.country);
 
   useEffect(() => {
     getCountryFromIP().then((country) => {
       dispatch(setCountry(country));
     });
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     dispatch(setSession(session));
     dispatch(setStatus(status));
   }, [session, dispatch, status]);
+
+  useEffect(() => {
+    if (user && country && country.trim()) {
+      updateUserCountry({ id: user, country })
+        .then(() => {
+          console.log("Country updated successfully.");
+        })
+        .catch((error) => {
+          console.error("Error updating country:", error);
+        });
+    }
+  }, [user, country]);
 
   const redirectedPathName = (locale) => {
     if (!pathName) return "/";
