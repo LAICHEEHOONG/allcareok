@@ -11,11 +11,10 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useRouter, usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
 import { DrawerProfile } from "../DrawerProfile";
-import { useSession, signIn } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { DrawerLanguage } from "../DrawerLanguage";
 
 export default function NavBottom({ bottom_navigation }) {
-  // const { data: session, status } = useSession();
   const session = useSelector((state) => state.auth.session);
 
   const router = useRouter();
@@ -48,7 +47,7 @@ export default function NavBottom({ bottom_navigation }) {
       const currentScrollY = window.scrollY;
 
       // If at the top of the page, always show the navigation
-      if (currentScrollY === 0) {
+      if (currentScrollY <= 0) {
         setIsVisible(true);
       } else if (currentScrollY > lastScrollY) {
         // Scrolling down
