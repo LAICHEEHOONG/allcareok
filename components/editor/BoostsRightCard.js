@@ -237,10 +237,10 @@ function TopRanking({ date, l }) {
 
   return (
     <div className="flex flex-col justify-center items-center h-[70vh] gap-4">
-      <div className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-widest">
+      <div className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-widest text-center">
         {formattedDate}
       </div>
-      <div className=" md:text-xl mb-20 tracking-widest">
+      <div className=" md:text-xl mb-20 tracking-widest text-center">
         {daysLeft > 0
           ? `${daysLeft} ${l?.boosts_right?.days_left}`
           : `${l?.boosts_right?.exp}`}
