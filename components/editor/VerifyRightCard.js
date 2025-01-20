@@ -42,6 +42,7 @@ export default function VeryRightCard() {
   const user = useSelector((state) => state.auth?._id);
   const email = useSelector((state) => state.auth?.email);
   const country = useSelector((state) => state.auth?.dbCountry);
+  const mode = useSelector(state => state.editor?.mode)
   const adsId = useSelector((state) => state.editor?.adsId);
   const ad = useSelector((state) => state.editor?.ad);
   const verification = useSelector((state) => state.editor?.ad?.verification);
@@ -57,10 +58,9 @@ export default function VeryRightCard() {
   const [currency, setCurrency] = useState("$5 USD");
   const verificationUrl = {
     TEST: `https://buy.stripe.com/6oE28BcJOcuMdIA3co?prefilled_email=${email}&client_reference_id=${ad._id}`,
-    MY: `https://buy.stripe.com/00g6oR7pu9iA0VOdQZ?prefilled_email=${email}&client_reference_id=${ad._id}`,
+    MYR: `https://buy.stripe.com/00g6oR7pu9iA0VOdQZ?prefilled_email=${email}&client_reference_id=${ad._id}`,
     USD: `https://buy.stripe.com/3csdRj9xC0M433W4go?prefilled_email=${email}&client_reference_id=${ad._id}`,
   };
-  const mode = "test";
 
   useEffect(() => {
     if (country === "Malaysia") {
@@ -269,7 +269,7 @@ export default function VeryRightCard() {
     } else {
       if (mode === "live") {
         if (country?.toLowerCase() === "malaysia") {
-          router.push(verificationUrl.MY);
+          router.push(verificationUrl.MYR);
         } else {
           router.push(verificationUrl.USD);
         }

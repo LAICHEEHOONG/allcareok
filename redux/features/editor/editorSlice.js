@@ -7,6 +7,7 @@ const initialState = {
   blockServiceBtn: false,
   ad: {},
   popUp: false,
+  mode: "test",
 };
 
 export const editorSlice = createSlice({

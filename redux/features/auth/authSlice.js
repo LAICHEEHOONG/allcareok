@@ -12,7 +12,7 @@ const initialState = {
   country: "",
   session: null,
   status: "",
-  dbCountry: ""
+  dbCountry: "",
 };
 
 export const authSlice = createSlice({

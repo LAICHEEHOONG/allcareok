@@ -45,24 +45,36 @@ const breakpointColumnsObj = {
 
 export default function BoostsRightCard() {
   const user = useSelector((state) => state.auth?._id);
-  const country = useSelector(state => state.auth?.dbCountry)
+  const country = useSelector((state) => state.auth?.dbCountry);
   const email = useSelector((state) => state.auth?.email);
   const ad = useSelector((state) => state.editor?.ad);
+  const mode = useSelector(state => state.editor?.mode)
   const [isExpired, setIsExpired] = useState(true);
   const l = useSelector((state) => state.auth?.lang?.listing_editor_card);
   const router = useRouter();
   const pathName = usePathname();
   const currentLocale = pathName.split("/")[1] || "en";
-  const mode = "live";
-  const [currency, setCurrency] = useState({plus: "5 USD", pro: "14 USD"});
+  const [currency, setCurrency] = useState({ plus: "5 USD", pro: "14 USD" });
+  const paymentUrl = {
+    plusUrl: {
+      TEST: `https://buy.stripe.com/dR63cFdNS1Q8fQIaEK?prefilled_email=${email}&client_reference_id=${ad._id}`,
+      MYR: `https://buy.stripe.com/5kAaF71169iAgUM28i?prefilled_email=${email}&client_reference_id=${ad._id}`,
+      USD: `https://buy.stripe.com/6oEdRjeRW66ofQIfZ9?prefilled_email=${email}&client_reference_id=${ad._id}`,
+    },
+    proUrl: {
+      TEST: `https://buy.stripe.com/5kAcNf39e0M4fQI3cj?prefilled_email=${email}&client_reference_id=${ad._id}`,
+      MYR: `https://buy.stripe.com/14k00taBGgL2bAseV7?prefilled_email=${email}&client_reference_id=${ad._id}`,
+      USD: `https://buy.stripe.com/28o7sV39ecuM8og5ky?prefilled_email=${email}&client_reference_id=${ad._id}`,
+    },
+  };
 
   useEffect(() => {
-    if(country === 'Malaysia') {
-      setCurrency({plus: "RM 20", pro: "RM 60"})
+    if (country === "Malaysia") {
+      setCurrency({ plus: "RM 20", pro: "RM 60" });
     } else {
-      setCurrency({plus: "$ 5", pro: "$ 15"})
+      setCurrency({ plus: "$ 5", pro: "$ 15" });
     }
-  }, [country])
+  }, [country]);
 
   useEffect(() => {
     if (ad?.topRanking) {
@@ -73,28 +85,26 @@ export default function BoostsRightCard() {
   }, [ad?.topRanking]);
 
   const handlePlus = () => {
-    console.log("handlePlus");
     if (mode === "live") {
-      router.push(
-        `https://buy.stripe.com/dR63cFdNS1Q8fQIaEK?client_reference_id=${ad._id}&prefilled_email=${email}`
-      );
+      if (country?.toLowerCase() === "malaysia") {
+        router.push(paymentUrl.plusUrl.MYR);
+      } else {
+        router.push(paymentUrl.plusUrl.USD);
+      }
     } else {
-      router.push(
-        `https://buy.stripe.com/test_eVa7tgcoj4iv0tGbIP?prefilled_email=${email}&client_reference_id=${ad._id}`
-      );
+      router.push(paymentUrl.plusUrl.TEST);
     }
   };
 
   const handlePro = () => {
-    console.log("handlePro");
     if (mode === "live") {
-      router.push(
-        `https://buy.stripe.com/5kAcNf39e0M4fQI3cj?client_reference_id=${ad._id}&prefilled_email=${email}`
-      );
+      if (country?.toLowerCase() === "malaysia") {
+        router.push(paymentUrl.proUrl.MYR);
+      } else {
+        router.push(paymentUrl.proUrl.USD);
+      }
     } else {
-      router.push(
-        `https://buy.stripe.com/test_14kfZM9c79CPfoA5ks?prefilled_email=${email}&client_reference_id=${ad._id}`
-      );
+      router.push(paymentUrl.proUrl.TEST);
     }
   };
 
