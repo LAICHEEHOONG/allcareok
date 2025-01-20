@@ -32,8 +32,9 @@ export default function NavBottom({ bottom_navigation }) {
     pathname.endsWith("/payment-success") ||
     pathname.endsWith("/editor/mobile/verify") ||
     pathname.endsWith("/payment-plus") ||
-    pathname.endsWith("/payment-pro");
-
+    pathname.endsWith("/payment-pro") ||
+    pathname.endsWith("/editor/mobile/boosts");
+    
   const currentLocale = pathname.split("/")[1] || "en";
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);

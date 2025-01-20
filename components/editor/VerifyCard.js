@@ -21,6 +21,7 @@ export default function VerifyCard() {
     mediaQuery.addEventListener("change", handleResize);
     return () => mediaQuery.removeEventListener("change", handleResize);
   }, []);
+  
   const handlePress = () => {
     dispatch(setFocus("verify"));
     if (isSmallScreen) {
