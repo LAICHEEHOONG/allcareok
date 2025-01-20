@@ -1,6 +1,6 @@
 "use client";
 
-import { Autocomplete, AutocompleteItem, Button } from "@nextui-org/react";
+import { Autocomplete, AutocompleteItem, Button } from "@heroui/react";
 import SearchIcon from "@mui/icons-material/Search";
 import PlaceIcon from "@mui/icons-material/Place";
 import { animals } from "./data";

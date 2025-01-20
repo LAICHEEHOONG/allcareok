@@ -1,4 +1,4 @@
-import { Input, Button, ScrollShadow } from "@nextui-org/react";
+import { Input, Button, ScrollShadow } from "@heroui/react";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import ErrorIcon from "@mui/icons-material/Error";

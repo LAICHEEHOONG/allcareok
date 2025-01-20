@@ -7,7 +7,7 @@ import {
   ModalFooter,
   useDisclosure,
   ScrollShadow,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteAd, findUserAds } from "@/lib/action/adAction";

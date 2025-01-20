@@ -1,4 +1,4 @@
-import { Button, ScrollShadow } from "@nextui-org/react";
+import { Button, ScrollShadow } from "@heroui/react";
 import { getCarouselItems } from "../carouselItems";
 import { useSelector, useDispatch } from "react-redux";
 import AddIcon from "@mui/icons-material/Add";

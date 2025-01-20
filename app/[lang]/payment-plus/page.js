@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { getSessionId, getSessionIdPlus } from "@/lib/action/adAction";
 import { useRouter } from "next/navigation";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
-import { Spinner, Button } from "@nextui-org/react";
+import { Spinner, Button } from "@heroui/react";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
 export default function PaymentPlus() {

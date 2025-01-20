@@ -1,4 +1,4 @@
-import { Button, Divider, Image } from "@nextui-org/react";
+import { Button, Divider, Image } from "@heroui/react";
 import { useRouter, usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";

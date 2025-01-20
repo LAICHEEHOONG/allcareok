@@ -5,7 +5,7 @@ import {
   DropdownMenu,
   DropdownItem,
   Button,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import LanguageIcon from "@mui/icons-material/Language";
 import { i18n } from "@/i18n.config";
 import { useRouter, usePathname } from "next/navigation";

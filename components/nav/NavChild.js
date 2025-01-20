@@ -5,7 +5,7 @@ import {
   NavbarContent,
   NavbarItem,
   Divider,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import AllcareokLogo from "./AllcareokLogo.js";
 import SearchField from "./SearchField.js";
 import ProfileMenu from "./ProfileMenu.js";

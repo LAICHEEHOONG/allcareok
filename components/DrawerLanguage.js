@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Listbox, ListboxItem } from "@nextui-org/react";
+import { Listbox, ListboxItem } from "@heroui/react";
 import {
   Drawer,
   DrawerContent,

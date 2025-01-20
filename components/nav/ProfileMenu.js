@@ -6,7 +6,7 @@ import {
   DropdownItem,
   Button,
   Avatar,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import MenuIcon from "@mui/icons-material/Menu";
 import GoogleIcon from "@mui/icons-material/Google";
 import { signIn, signOut } from "next-auth/react";

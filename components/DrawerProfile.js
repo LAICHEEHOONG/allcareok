@@ -19,7 +19,7 @@ import {
   Image,
   Button,
   Skeleton,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { signOut, signIn } from "next-auth/react";
 import { useSelector } from "react-redux";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";

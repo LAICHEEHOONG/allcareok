@@ -1,4 +1,4 @@
-import { Card, CardBody } from "@nextui-org/react";
+import { Card, CardBody } from "@heroui/react";
 import { useSelector, useDispatch } from "react-redux";
 import { setFocus } from "@/redux/features/editor/editorSlice";
 import { GoogleMapsEmbed } from "@next/third-parties/google";

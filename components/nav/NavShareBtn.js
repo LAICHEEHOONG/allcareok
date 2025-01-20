@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@nextui-org/react";
+import { Button } from "@heroui/react";
 import { useRouter, usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
 import { signIn } from "next-auth/react";

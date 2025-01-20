@@ -19,7 +19,7 @@ import {
   DrawerBody,
   DrawerFooter,
   Chip,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter, usePathname } from "next/navigation";

@@ -16,7 +16,7 @@ import {
   AutocompleteItem,
   Avatar,
   Input,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { useSelector, useDispatch } from "react-redux";
 import Masonry from "react-masonry-css";
 import { useEffect, useState } from "react";
@@ -27,7 +27,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useRouter, usePathname } from "next/navigation";
 import AddLocationIcon from "@mui/icons-material/AddLocation";
 import { countryData } from "@/lib/countryData";
-import { Switch } from "@nextui-org/react";
+import { Switch } from "@heroui/react";
 import { GoogleMapsEmbed } from "@next/third-parties/google";
 import FlagIcon from "@mui/icons-material/Flag";
 

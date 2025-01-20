@@ -1,5 +1,5 @@
 "use client";
-import { ScrollShadow, Button } from "@nextui-org/react";
+import { ScrollShadow, Button } from "@heroui/react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useRouter, usePathname } from "next/navigation";
 import PhotoCard from "./PhotoCard";

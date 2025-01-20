@@ -6,7 +6,7 @@ import {
   CardBody,
   CardFooter,
   Spinner,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import AddIcon from "@mui/icons-material/Add";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useRouter, usePathname } from "next/navigation";

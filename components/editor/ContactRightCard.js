@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Button, ScrollShadow, Input } from "@nextui-org/react";
+import { Button, ScrollShadow, Input } from "@heroui/react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter, usePathname } from "next/navigation";

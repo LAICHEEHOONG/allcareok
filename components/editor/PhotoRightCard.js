@@ -13,7 +13,7 @@ import {
   Chip,
   Card,
   CardBody,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { useSelector, useDispatch } from "react-redux";
 import FilterIcon from "@mui/icons-material/Filter";
 import Masonry from "react-masonry-css";

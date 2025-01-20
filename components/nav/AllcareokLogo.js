@@ -1,5 +1,5 @@
 "use client";
-import { Image } from "@nextui-org/react";
+import { Image } from "@heroui/react";
 import { useRouter, usePathname } from "next/navigation";
 
 export default function AllcareokLogo({ isDashboard }) {
