@@ -32,7 +32,8 @@ export default function NavBottom({ bottom_navigation }) {
     pathname.endsWith("/editor/mobile/verify") ||
     pathname.endsWith("/payment-plus") ||
     pathname.endsWith("/payment-pro") ||
-    pathname.endsWith("/editor/mobile/boosts");
+    pathname.endsWith("/editor/mobile/boosts") ||
+    pathname.endsWith("/one_nine_nine_zero");
     
   const currentLocale = pathname.split("/")[1] || "en";
   const [isVisible, setIsVisible] = useState(true);
@@ -74,6 +75,10 @@ export default function NavBottom({ bottom_navigation }) {
     if (language === "zh") {
       setLan("中文");
     }
+    if (language === "ms") {
+      setLan("Malay");
+    }
+
   }, [language]);
 
   return (

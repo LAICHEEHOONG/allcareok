@@ -10,22 +10,12 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import GoogleIcon from "@mui/icons-material/Google";
 import { signIn, signOut } from "next-auth/react";
-// import { useEffect } from "react";
-// import { signUp } from "@/lib/action/userAction";
 import { useDispatch, useSelector } from "react-redux";
-// import { userInfo, signInStatus } from "@/redux/features/auth/authSlice";
 import { useRouter, usePathname } from "next/navigation";
-// import { findUserAds } from "@/lib/action/adAction";
-// import {
-//   setAds,
-//   setBlockServiceBtn,
-// } from "@/redux/features/editor/editorSlice";
 
 export default function ProfileMenu({ navigation }) {
-  // const { data: session, status } = useSession();
   const session = useSelector((state) => state.auth.session);
   const status = useSelector((state) => state.auth.status);
-  const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
   const user = useSelector((state) => state.auth._id);
   const router = useRouter();
@@ -46,49 +36,6 @@ export default function ProfileMenu({ navigation }) {
       router.push(`/${currentLocale}/dashboard`);
     }
   };
-
-  // const redirectedPathName = (locale) => {
-  //   if (!pathName) return "/";
-  //   const segments = pathName.split("/");
-  //   segments[1] = locale;
-  //   return segments.join("/");
-  // };
-
-  // useEffect(() => {
-  //   const signUpUser = async (user) => {
-  //     try {
-  //       dispatch(setBlockServiceBtn(true));
-  //       const res = await signUp(user);
-  //       router.push(redirectedPathName(res.language));
-  //       dispatch(userInfo(res));
-  //     } catch (err) {
-  //       console.log(err);
-  //     } finally {
-  //       dispatch(setBlockServiceBtn(false));
-  //     }
-  //   };
-
-  //   if (session) {
-  //     signUpUser(session.user);
-  //     dispatch(signInStatus(status));
-  //   }
-  // }, [session]);
-
-  // useEffect(() => {
-  //   // Only fetch ads if the userId is available
-  //   if (!user) return;
-
-  //   const fetchAds = async () => {
-  //     try {
-  //       const ads = await findUserAds({ user }); // Pass only the userId
-  //       dispatch(setAds(ads));
-  //     } catch (error) {
-  //       console.error("Error fetching user ads:", error);
-  //     }
-  //   };
-
-  //   fetchAds();
-  // }, [user]); // Add userId as a dependency
 
   return (
     <Dropdown>
@@ -117,9 +64,6 @@ export default function ProfileMenu({ navigation }) {
         <DropdownItem
           key={navigation.share}
           textValue="share services"
-          // onPress={() => {
-          //   changeRouter();
-          // }}
           onPress={changeRouter}
           isDisabled={blockServiceBtn}
         >
@@ -139,6 +83,7 @@ export default function ProfileMenu({ navigation }) {
             {navigation.logout}
           </DropdownItem>
         )}
+   
       </DropdownMenu>
     </Dropdown>
   );

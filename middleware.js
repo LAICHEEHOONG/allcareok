@@ -14,7 +14,8 @@ const protectedPaths = [
   "/editor/mobile/contact",
   "/editor/mobile/description",
   "/editor/mobile/verify",
-  "/editor/mobile/boosts"
+  "/editor/mobile/boosts",
+  "/one_nine_nine_zero"
 ];
 
 function getProtectedRoutes(protectedPaths, locales) {
