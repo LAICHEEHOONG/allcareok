@@ -194,7 +194,7 @@ export default function PhotoRightCard() {
             {ad?.photo?.length > 0 &&
               !manageAd?._id &&
               ad.photo.map((item, i) => (
-                <div key={item.url} className="flex justify-center">
+                <div key={item.url + i} className="flex justify-center">
                   <Card
                     isPressable
                     className=""
