@@ -100,6 +100,10 @@ const adSchema = new mongoose.Schema(
       type: Boolean,
       default: false, // Adding the block key with default value
     },
+    views: {
+      type: Number,
+      default: 0, // Default value for views
+    },
   },
   {
     timestamps: true,
