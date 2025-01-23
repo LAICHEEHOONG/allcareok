@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { adminKey } from "@/lib/action/userAction";
 import { useSelector } from "react-redux";
 import AdminPhoto from "@/components/AdminDashboard/AdminPhoto";
+import AdminReview from "@/components/AdminDashboard/AdminReview";
 import { Tabs, Tab, Card, CardBody } from "@heroui/react";
 
 export default function OneNineNineZero() {
@@ -76,13 +77,10 @@ export default function OneNineNineZero() {
                 </CardBody>
               </Card>
             </Tab>
-            <Tab key="music" title="Music">
+            <Tab key="review" title="Review">
               <Card>
                 <CardBody>
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur.
+                  <AdminReview />
                 </CardBody>
               </Card>
             </Tab>

@@ -25,7 +25,7 @@ export default function AdminPhoto() {
           loading: false,
           exchangeUrl: "",
         }));
-        console.log(arrPhotos);
+        // console.log(arrPhotos);
         setPhotos(arrPhotos);
       } catch (error) {
         console.log(error);
@@ -79,7 +79,7 @@ export default function AdminPhoto() {
         photoId,
         newUrl,
       });
-      console.log(updatePhotoByPhotoId_);
+      // console.log(updatePhotoByPhotoId_);
 
       if (updatePhotoByPhotoId_.success) {
         setPhotos((prevPhotos) =>

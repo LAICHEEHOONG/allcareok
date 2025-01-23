@@ -54,7 +54,7 @@ export default function Home() {
     if (user && country && country.trim()) {
       updateUserCountry({ id: user, country })
         .then(() => {
-          console.log("Country updated successfully.");
+          // console.log("Country updated successfully.");
         })
         .catch((error) => {
           console.error("Error updating country:", error);
