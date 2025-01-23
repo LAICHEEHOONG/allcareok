@@ -90,6 +90,16 @@ const adSchema = new mongoose.Schema(
       type: Date, // Use the Date type to store the ranking date
       default: null, // Default value can be null if not set
     },
+    reports: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Report", // 关联 `reportSchema`
+      },
+    ],
+    block: {
+      type: Boolean,
+      default: false, // Adding the block key with default value
+    },
   },
   {
     timestamps: true,
@@ -107,5 +117,3 @@ adSchema.index({
 const AD = mongoose.models.AD || mongoose.model("AD", adSchema);
 
 export default AD;
-
-

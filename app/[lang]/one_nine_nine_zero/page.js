@@ -84,7 +84,7 @@ export default function OneNineNineZero() {
                 </CardBody>
               </Card>
             </Tab>
-            <Tab key="videos" title="Videos">
+            <Tab key="report" title="Report">
               <Card>
                 <CardBody>
                   Excepteur sint occaecat cupidatat non proident, sunt in culpa
