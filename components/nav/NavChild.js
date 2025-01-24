@@ -72,9 +72,12 @@ export default function NavChild({ navigation, service_type, poppins, dic }) {
       {isDashboard ? (
         <></>
       ) : (
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center ">
           <Divider className="m-3" />
+          <div className="w-full max-w-[2300px] flex justify-center items-center">
           <NavCarousel service_type={service_type} />
+
+          </div>
         </div>
       )}
     </>

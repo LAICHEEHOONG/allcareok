@@ -17,42 +17,74 @@ import ElderlyWomanIcon from "@mui/icons-material/ElderlyWoman";
 import { LuBaby } from "react-icons/lu";
 import { FaPeopleGroup } from "react-icons/fa6";
 
-// export const getCarouselItems = (service_type) => [
-//   { label: service_type.home_cleaning, icon: GiBroom, id: "home_cleaning"},
-//   { label: service_type.aircon_servicing, icon: TbAirConditioning },
-//   { label: service_type.move_in_out_cleaning, icon: HouseIcon },
-//   { label: service_type.sofa_cleaning, icon: ChairIcon },
-//   { label: service_type.mattress_cleaning, icon: BedIcon },
-//   { label: service_type.curtain_cleaning, icon: GiTheaterCurtains },
-//   { label: service_type.car_washing, icon: LocalCarWashIcon },
-//   { label: service_type.disinfection_service, icon: BiSolidVirusBlock },
-//   { label: service_type.landscaping_service, icon: ForestIcon },
-//   { label: service_type.handyman_services, icon: HandymanIcon },
-//   { label: service_type.painting_services, icon: FormatPaintIcon },
-//   { label: service_type.moving_service, icon: FaBox },
-//   { label: service_type.flooring_services, icon: GiFloorPolisher },
-//   { label: service_type.pest_control, icon: PestControlIcon },
-//   { label: service_type.elderly_care, icon: ElderlyWomanIcon },
-//   { label: service_type.child_care, icon: LuBaby },
-//   { label: service_type.full_time_maid, icon: FaPeopleGroup },
-// ];
-
 export const getCarouselItems = (service_type) => [
   { label: service_type.home_cleaning, icon: GiBroom, id: "home_cleaning" },
-  { label: service_type.aircon_servicing, icon: TbAirConditioning, id: "aircon_servicing" },
-  { label: service_type.move_in_out_cleaning, icon: HouseIcon, id: "move_in_out_cleaning" },
+  {
+    label: service_type.aircon_servicing,
+    icon: TbAirConditioning,
+    id: "aircon_servicing",
+  },
+  {
+    label: service_type.move_in_out_cleaning,
+    icon: HouseIcon,
+    id: "move_in_out_cleaning",
+  },
   { label: service_type.sofa_cleaning, icon: ChairIcon, id: "sofa_cleaning" },
-  { label: service_type.mattress_cleaning, icon: BedIcon, id: "mattress_cleaning" },
-  { label: service_type.curtain_cleaning, icon: GiTheaterCurtains, id: "curtain_cleaning" },
-  { label: service_type.car_washing, icon: LocalCarWashIcon, id: "car_washing" },
-  { label: service_type.disinfection_service, icon: BiSolidVirusBlock, id: "disinfection_service" },
-  { label: service_type.landscaping_service, icon: ForestIcon, id: "landscaping_service" },
-  { label: service_type.handyman_services, icon: HandymanIcon, id: "handyman_services" },
-  { label: service_type.painting_services, icon: FormatPaintIcon, id: "painting_services" },
+  {
+    label: service_type.mattress_cleaning,
+    icon: BedIcon,
+    id: "mattress_cleaning",
+  },
+  {
+    label: service_type.curtain_cleaning,
+    icon: GiTheaterCurtains,
+    id: "curtain_cleaning",
+  },
+  {
+    label: service_type.car_washing,
+    icon: LocalCarWashIcon,
+    id: "car_washing",
+  },
+  {
+    label: service_type.disinfection_service,
+    icon: BiSolidVirusBlock,
+    id: "disinfection_service",
+  },
+  {
+    label: service_type.landscaping_service,
+    icon: ForestIcon,
+    id: "landscaping_service",
+  },
+  {
+    label: service_type.handyman_services,
+    icon: HandymanIcon,
+    id: "handyman_services",
+  },
+  {
+    label: service_type.painting_services,
+    icon: FormatPaintIcon,
+    id: "painting_services",
+  },
   { label: service_type.moving_service, icon: FaBox, id: "moving_service" },
-  { label: service_type.flooring_services, icon: GiFloorPolisher, id: "flooring_services" },
-  { label: service_type.pest_control, icon: PestControlIcon, id: "pest_control" },
-  { label: service_type.elderly_care, icon: ElderlyWomanIcon, id: "elderly_care" },
+  {
+    label: service_type.flooring_services,
+    icon: GiFloorPolisher,
+    id: "flooring_services",
+  },
+  {
+    label: service_type.pest_control,
+    icon: PestControlIcon,
+    id: "pest_control",
+  },
+  {
+    label: service_type.elderly_care,
+    icon: ElderlyWomanIcon,
+    id: "elderly_care",
+  },
   { label: service_type.child_care, icon: LuBaby, id: "child_care" },
-  { label: service_type.full_time_maid, icon: FaPeopleGroup, id: "full_time_maid" },
+  {
+    label: service_type.full_time_maid,
+    icon: FaPeopleGroup,
+    id: "full_time_maid",
+  },
 ];
