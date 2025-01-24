@@ -5,7 +5,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import PlaceIcon from "@mui/icons-material/Place";
 import { animals } from "./data";
 import { useDispatch } from "react-redux";
-import { setSearchValue } from "@/redux/features/search/page";
+import { setSearchValue } from "@/redux/features/search/searchSlice";
 
 export default function SearchField({ navigation }) {
   const dispatch = useDispatch();

@@ -18,8 +18,8 @@ import { signUp, updateUserCountry } from "@/lib/action/userAction";
 import { findUserAds } from "@/lib/action/adAction";
 import { useRouter, usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
-
 import axios from "axios"; // Ensure axios is imported
+import ADCard from "@/components/Home/ADCard";
 
 async function getCountryFromIP() {
   try {
@@ -108,9 +108,10 @@ export default function Home() {
   return (
     <div>
       <main className="flex justify-center flex-col items-center">
-        <div className="m-2">
-          <Fruits />
-          <Fruits />
+        <div className="w-full max-w-[2500px]">
+          <ADCard />
+          {/* <Fruits />
+          <Fruits /> */}
         </div>
       </main>
       <footer className=""> </footer>

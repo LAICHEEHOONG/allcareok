@@ -23,7 +23,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "../ui/carousel";
-import { Card, CardContent } from "../ui/card";
+// import { Card, CardContent } from "../ui/card";
 import Autoplay from "embla-carousel-autoplay";
 
 export default function DeleteRightCard() {
@@ -194,7 +194,7 @@ export default function DeleteRightCard() {
         <div className="py-4 m-2 flex flex-col justify-center items-center">
   
           {ad?.photo?.length > 0 ? (
-            <CarouselDemo ad={ad} />
+            <CarouselPhoto ad={ad} />
           ) : (
             <Image
               alt="Card service demo"
@@ -209,7 +209,7 @@ export default function DeleteRightCard() {
   );
 }
 
-function CarouselDemo({ ad }) {
+function CarouselPhoto({ ad }) {
   const plugin = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
 
   return (

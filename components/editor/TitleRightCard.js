@@ -86,12 +86,12 @@ export default function TitleRightCard() {
         className="max-h-32 md:max-h-48 max-w-80 md:max-w-2xl text-4xl md:text-5xl text-center"
         hideScrollBar={true}
       >
-        <div className="select-none font-semibold text-ellipsis overflow-hidden">
+        <div className="select-none font-semibold text-ellipsis overflow-hidden p-2">
           {title_}
         </div>
       </ScrollShadow>
 
-      <div className=" w-full flex pt-5 mb-10 justify-center items-center">
+      <div className=" w-full flex pt-5 mb-10 justify-center items-center m-2">
         <Button
           radius="full"
           size="lg"

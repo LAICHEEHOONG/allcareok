@@ -36,7 +36,7 @@ export default function Dashboard() {
   useEffect(() => {
     dispatch(setAdsID(""));
     dispatch(setAd({}));
-    dispatch(setFocus('photo'))
+    dispatch(setFocus("photo"));
     if (ads.length === 0) {
       router.push(`/${currentLocale}`);
     }
@@ -93,9 +93,6 @@ export default function Dashboard() {
               color="default"
               variant="flat"
               onPress={handleAddAD}
-              // onPress={() => {
-              //   router.push(`/${currentLocale}/editor`);
-              // }}
             >
               <AddIcon />
             </Button>
@@ -140,8 +137,8 @@ export default function Dashboard() {
                 </CardBody>
                 <CardFooter className="text-small flex-col items-start overflow-visible truncate max-w-[250px]">
                   <b className="truncate max-w-[240px]">{item?.title}</b>
-                  <p className="text-default-500 truncate max-w-[240px]">
-                    {"Ipoh, Perak"}
+                  <p className="text-default-500 truncate max-w-[240px] capitalize">
+                    {`${item.area?.town} ${item.area?.city} ${item.area?.state} ${item.area?.country}`}
                   </p>
                 </CardFooter>
               </Card>
