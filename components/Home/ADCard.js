@@ -66,10 +66,6 @@ const breakpointColumnsObj = {
   1250: 3,
   950: 2,
   550: 1,
-  // 1500: 4,
-  // 1150: 3,
-  // 900: 2,
-  // 650: 1,
 };
 
 function AD({ ad }) {
@@ -79,11 +75,11 @@ function AD({ ad }) {
   return (
     <Card className="m-1 mt-3 ">
       <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-        <p className="text-tiny uppercase font-bold w-full max-w-[200px] truncate">{`${
-          ad.area?.town && ad.area?.town + ","
-        } ${ad.area?.city && ad.area?.city + ","} ${
-          ad.area?.state && ad.area?.state + ","
-        } ${ad.area?.country}`}</p>
+        <p className="text-base capitalize font-medium w-full max-w-[200px] truncate">
+          {`${ad.area?.town || ad.area?.city || ad.area?.state || ""}, ${
+            ad.area?.country || ""
+          }`}
+        </p>
       </CardHeader>
       <CardBody className="overflow-visible py-2">
         <Carousel
@@ -119,11 +115,10 @@ function AD({ ad }) {
             align: "start",
             loop: true,
             dragFree: true,
+            
           }}
         >
           <CarouselContent className="-ml-1">
-    
-
             {ad?.service.map((serv, i) => {
               const match = carouselItems.find((item) => item.id === serv);
               return match ? (
@@ -132,9 +127,10 @@ function AD({ ad }) {
                   className="pl-1 basis-1/7 cursor-pointer group select-none z-30"
                 >
                   <div className="flex flex-col justify-center items-center p-2">
-                    <match.icon className="w-6 h-6 text-default-400" />
+                    <match.icon className="w-4 h-4 text-default-400" />
                     <div
-                      className={`text-xs font-semibold mt-1 text-default-400 truncate w-full max-w-[90px]`}
+                      className={` mt-1 text-default-400 truncate w-full max-w-[100px]`}
+                      style={{fontSize: '8px'}}
                     >
                       {match.label}
                     </div>
@@ -147,42 +143,6 @@ function AD({ ad }) {
           <CarouselNext className="hidden sm:flex" /> */}
         </Carousel>
       </CardFooter>
-
-      {/* <CardFooter className="text-small justify-between">
-        <div className="w-full flex gap-2 justify-between m-1 border-1">
-          {ad?.service.map((serv, i) => {
-            const match = carouselItems.find((item) => item.id === serv);
-            console.log(match);
-            return match ? (
-              <div
-                key={serv + i}
-                className="flex flex-col justify-center items-center "
-              >
-                <match.icon className="w-6 h-6 text-default-500" />
-                <div className={`text-xs font-semibold mt-1 text-default-500`}>
-                  {match.label}
-                </div>
-              </div>
-            ) : null;
-          })}
-        </div>
-      </CardFooter> */}
     </Card>
-    //   <div className="flex justify-center flex-col items-center gap-1 m-3 active:scale-85 transition-transform">
-    //   <Icon
-    //     className={`w-6 h-6 ${
-    //       activeIndex === label ? "text-black" : "text-default-500"
-    //     } group-hover:text-default-900`}
-    //   />
-    //   <div
-    //     className={`text-xs font-semibold mt-1 group-hover:text-default-900 ${
-    //       activeIndex === label
-    //         ? "text-black border-b-2 border-black pb-3"
-    //         : "text-default-500"
-    //     }`}
-    //   >
-    //     {label}
-    //   </div>
-    // </div>
   );
 }
