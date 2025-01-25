@@ -3,7 +3,14 @@ import { useEffect, useRef } from "react";
 import { setADS } from "@/redux/features/ad/adSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Masonry from "react-masonry-css";
-import { Image, Card, CardBody, CardFooter, CardHeader } from "@heroui/react";
+import {
+  Image,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  ScrollShadow,
+} from "@heroui/react";
 import {
   Carousel,
   CarouselContent,
@@ -77,16 +84,6 @@ function AD({ ad }) {
         } ${ad.area?.city && ad.area?.city + ","} ${
           ad.area?.state && ad.area?.state + ","
         } ${ad.area?.country}`}</p>
-
-        {/* <div className="w-full flex gap-2 justify-between m-1">
-          {ad?.service.map((serv) => {
-            const match = carouselItems.find((item) => item.id === serv);
-            return match ? <match.icon className="w-6 h-6 m-1" /> : null;
-          })}
-
-        </div> */}
-        {/* <small className="text-default-500">12 Tracks</small>
-        <h4 className="font-bold text-large">Frontend Radio</h4> */}
       </CardHeader>
       <CardBody className="overflow-visible py-2">
         <Carousel
@@ -97,8 +94,8 @@ function AD({ ad }) {
           }}
         >
           <CarouselContent className="">
-            {ad.photo.map((item) => (
-              <CarouselItem key={item.url} className="">
+            {ad.photo.map((item, i) => (
+              <CarouselItem key={item.url + i} className="">
                 <div className=" flex justify-center items-center h-full">
                   <Image
                     alt={"ads image"}
@@ -114,41 +111,92 @@ function AD({ ad }) {
           </CarouselContent>
         </Carousel>
       </CardBody>
-      <CardFooter className="text-small justify-between">
-        <div className="w-full flex gap-2 justify-between m-1">
+
+      <CardFooter>
+        <Carousel
+          className="w-full"
+          opts={{
+            align: "start",
+            loop: true,
+            dragFree: true,
+          }}
+        >
+          <CarouselContent className="-ml-1">
+            {/* {carouselItems.map(({ label, icon: Icon }, idx) => (
+              <CarouselItem
+                key={idx}
+                className="pl-1 basis-1/7 cursor-pointer group select-none z-30"
+              >
+                <div className="flex justify-center flex-col items-center gap-1 m-3 active:scale-85 transition-transform">
+                  <Icon className={`w-6 h-6 text-default-500`} />
+                  <div
+                    className={`text-xs font-semibold mt-1 text-default-500`}
+                  >
+                    {"label"}
+                  </div>
+                </div>
+              </CarouselItem>
+            ))} */}
+
+            {ad?.service.map((serv, i) => {
+              const match = carouselItems.find((item) => item.id === serv);
+              return match ? (
+                <CarouselItem
+                  key={serv + i}
+                  className="pl-1 basis-1/7 cursor-pointer group select-none z-30"
+                >
+                  <div className="flex flex-col justify-center items-center p-2">
+                    <match.icon className="w-6 h-6 text-default-500" />
+                    <div
+                      className={`text-xs font-semibold mt-1 text-default-500 truncate w-full max-w-[70px]`}
+                    >
+                      {match.label}
+                    </div>
+                  </div>
+                </CarouselItem>
+              ) : null;
+            })}
+          </CarouselContent>
+          {/* <CarouselPrevious className="hidden sm:flex" />
+          <CarouselNext className="hidden sm:flex" /> */}
+        </Carousel>
+      </CardFooter>
+
+      {/* <CardFooter className="text-small justify-between">
+        <div className="w-full flex gap-2 justify-between m-1 border-1">
           {ad?.service.map((serv, i) => {
             const match = carouselItems.find((item) => item.id === serv);
+            console.log(match);
             return match ? (
-              <match.icon className="w-6 h-6" key={serv + i} />
+              <div
+                key={serv + i}
+                className="flex flex-col justify-center items-center "
+              >
+                <match.icon className="w-6 h-6 text-default-500" />
+                <div className={`text-xs font-semibold mt-1 text-default-500`}>
+                  {match.label}
+                </div>
+              </div>
             ) : null;
           })}
         </div>
-      </CardFooter>
+      </CardFooter> */}
     </Card>
-    // <div className="">
-    //   <Carousel
-    //     className="w-full"
-    //     opts={{
-    //       align: "start",
-    //       loop: true,
-    //     }}
+    //   <div className="flex justify-center flex-col items-center gap-1 m-3 active:scale-85 transition-transform">
+    //   <Icon
+    //     className={`w-6 h-6 ${
+    //       activeIndex === label ? "text-black" : "text-default-500"
+    //     } group-hover:text-default-900`}
+    //   />
+    //   <div
+    //     className={`text-xs font-semibold mt-1 group-hover:text-default-900 ${
+    //       activeIndex === label
+    //         ? "text-black border-b-2 border-black pb-3"
+    //         : "text-default-500"
+    //     }`}
     //   >
-    //     <CarouselContent className="">
-    //       {ad.photo.map((item) => (
-    //         <CarouselItem key={item.url} className="">
-    //           <div className=" flex justify-center items-center">
-    //             <Image
-    //               alt={"ads image"}
-    //               className="object-cover w-[350px] h-[400px]"
-    //               radius="lg"
-    //               // shadow="sm"
-    //               src={item.url}
-    //             />
-    //           </div>
-    //         </CarouselItem>
-    //       ))}
-    //     </CarouselContent>
-    //   </Carousel>
+    //     {label}
+    //   </div>
     // </div>
   );
 }
