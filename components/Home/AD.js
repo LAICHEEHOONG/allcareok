@@ -20,11 +20,14 @@ export default function AD({ ad }) {
 
   return (
     <Card className="m-1 mt-3 ">
-      <CardHeader className="pb-0 pt-2 px-4  flex justify-between items-center">
+      <CardHeader className="p-3  flex justify-between items-center">
         <p className="text-base capitalize font-medium w-full max-w-[200px] pr-1 truncate">
-          {`${ad.area?.town || ad.area?.city || ad.area?.state || ""}, ${
+          {/* {`${ad.area?.town || ad.area?.city || ad.area?.state || ""} ${
             ad.area?.country || ""
-          }`}
+          }`} */}
+          {`${ad.area?.town || ad.area?.city || ad.area?.state || ""}${
+            ad.area?.town || ad.area?.city || ad.area?.state ? ", " : ""
+          }${ad.area?.country}`}
         </p>
         <Carousel
           className="w-full max-w-[115px]"
@@ -43,7 +46,7 @@ export default function AD({ ad }) {
                   key={serv + i}
                   className="pl-1 basis-1/7 cursor-pointer group select-none z-30 flex justify-center items-center"
                 >
-                  <Chip
+                  {/* <Chip
                     className="p-2"
                     color="default"
                     startContent={<match.icon className="w-4 h-4" />}
@@ -55,6 +58,25 @@ export default function AD({ ad }) {
                       style={{ fontSize: "12px" }}
                     >
                       {match.label}
+                    </div>
+                  </Chip> */}
+                  <Chip
+                    // className="p-2"
+                    color="default"
+                    // startContent={<match.icon className="w-4 h-4" />}
+                    variant="flat"
+                    size="md"
+                  >
+                    <div className="w-full flex justify-center items-center gap-3">
+                      <div>
+                        <match.icon className="w-4 h-4" />
+                      </div>
+                      <div
+                        className=" truncate w-[60px] "
+                        style={{ fontSize: "12px" }}
+                      >
+                        {match.label}
+                      </div>
                     </div>
                   </Chip>
                 </CarouselItem>
@@ -72,7 +94,36 @@ export default function AD({ ad }) {
           }}
         >
           <CarouselContent className="">
-            {ad.photo.map((item, i) => (
+            {ad.photo.length > 0 ? (
+              ad.photo.map((item, i) => (
+                <CarouselItem key={item.url + i} className="">
+                  <div className="flex justify-center items-start h-full">
+                    <Image
+                      alt={"ads image"}
+                      className="object-cover rounded-xl"
+                      radius="lg"
+                      src={item.url}
+                      width={350}
+                      height={437.5}
+                    />
+                  </div>
+                </CarouselItem>
+              ))
+            ) : (
+              <CarouselItem key="default" className="">
+                <div className="flex justify-center items-start h-full">
+                  <Image
+                    alt="default ad image"
+                    className="object-cover rounded-xl"
+                    radius="lg"
+                    src="/images/plumber.png"
+                    width={350}
+                    height={437.5}
+                  />
+                </div>
+              </CarouselItem>
+            )}
+            {/* {ad.photo.map((item, i) => (
               <CarouselItem key={item.url + i} className="">
                 <div className=" flex justify-center items-start h-full ">
                   <Image
@@ -86,7 +137,7 @@ export default function AD({ ad }) {
                   />
                 </div>
               </CarouselItem>
-            ))}
+            ))} */}
           </CarouselContent>
         </Carousel>
       </CardBody>
