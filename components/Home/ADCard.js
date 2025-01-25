@@ -77,7 +77,7 @@ function AD({ ad }) {
   const carouselItems = getCarouselItems(service_type);
 
   return (
-    <Card className="py-4  m-1 mt-3">
+    <Card className="m-1 mt-3 ">
       <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
         <p className="text-tiny uppercase font-bold w-full max-w-[200px] truncate">{`${
           ad.area?.town && ad.area?.town + ","
@@ -112,7 +112,7 @@ function AD({ ad }) {
         </Carousel>
       </CardBody>
 
-      <CardFooter>
+      <CardFooter className="p-0">
         <Carousel
           className="w-full"
           opts={{
@@ -122,21 +122,7 @@ function AD({ ad }) {
           }}
         >
           <CarouselContent className="-ml-1">
-            {/* {carouselItems.map(({ label, icon: Icon }, idx) => (
-              <CarouselItem
-                key={idx}
-                className="pl-1 basis-1/7 cursor-pointer group select-none z-30"
-              >
-                <div className="flex justify-center flex-col items-center gap-1 m-3 active:scale-85 transition-transform">
-                  <Icon className={`w-6 h-6 text-default-500`} />
-                  <div
-                    className={`text-xs font-semibold mt-1 text-default-500`}
-                  >
-                    {"label"}
-                  </div>
-                </div>
-              </CarouselItem>
-            ))} */}
+    
 
             {ad?.service.map((serv, i) => {
               const match = carouselItems.find((item) => item.id === serv);
@@ -146,9 +132,9 @@ function AD({ ad }) {
                   className="pl-1 basis-1/7 cursor-pointer group select-none z-30"
                 >
                   <div className="flex flex-col justify-center items-center p-2">
-                    <match.icon className="w-6 h-6 text-default-500" />
+                    <match.icon className="w-6 h-6 text-default-400" />
                     <div
-                      className={`text-xs font-semibold mt-1 text-default-500 truncate w-full max-w-[70px]`}
+                      className={`text-xs font-semibold mt-1 text-default-400 truncate w-full max-w-[90px]`}
                     >
                       {match.label}
                     </div>
