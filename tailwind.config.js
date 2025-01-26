@@ -60,7 +60,14 @@ module.exports = {
       },
       screens: {
         x2200l: "2200px",
-        x2160l: "2160px",
+        x1980l: "1980px",
+        x1725l: "1725px",
+        x1640l: "1640px",
+        x1470l: "1470px",
+        x1440l: "1440px",
+        x1128l: "1128px",
+        x950l: "950px",
+        x550l: "550px",
         xs: "370px", // Custom breakpoint for 370px
       },
     },

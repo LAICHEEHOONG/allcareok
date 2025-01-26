@@ -108,7 +108,7 @@ export default function Home() {
   return (
     <div>
       <main className="flex justify-center flex-col items-center">
-        <div className="w-full max-w-[2300px] pl-3 p-5">
+        <div className="w-full max-w-[2300px] p-2 sm:p-10 x1440l:p-20 pt-0"  >
           <ADCard />
           {/* <Fruits />
           <Fruits /> */}

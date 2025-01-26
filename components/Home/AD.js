@@ -17,10 +17,10 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 export default function AD({ ad }) {
   const service_type = useSelector((state) => state.auth?.lang?.service_type);
   const carouselItems = getCarouselItems(service_type);
-  const plugin = useRef(Autoplay({ delay: 10000, stopOnInteraction: true }));
+  const plugin = useRef(Autoplay({ delay: 8000, stopOnInteraction: true }));
 
   return (
-    <Card className="p-2" shadow="none">
+    <Card className="p-3 " shadow="none">
       <CardHeader className="flex justify-center">
         <div className="flex justify-center items-center gap-1 ">
           <LocationOnIcon className="w-4 h-4 mt-1" />
@@ -46,14 +46,24 @@ export default function AD({ ad }) {
                   key={item.url + i}
                   className="flex justify-center items-start "
                 >
-                  <div className="flex justify-center items-start h-full  w-full max-w-[400px]">
+                  <div className="flex justify-center items-start h-full  w-full">
                     <Image
                       alt={"ads image"}
-                      className="object-cover rounded-xl w-[500px] h-[625px] x2160l:w-[450px] x2160l:h-[562px]  x2200l:w-[358px] x2200l:h-[447px]"
+                      className={`object-cover rounded-xl 
+                     w-[333px] h-[400px]
+                     x550l:w-[280px] x550l:h-[340px]
+                     sm:w-[300px] sm:h-[360px]
+                     md:w-[400px] md:h-[450px]
+                     x950l:w-[300px] x950l:h-[360px] 
+                     x1128l:w-[240px] x1128l:h-[300px]  
+                     xl:w-[280px] xl:h-[340px]  
+                     x1470l:w-[333px] x1470l:h-[400px]
+                     x1640l:w-[300px] x1640l:h-[360px]   
+                     x1980l:w-[333px] x1980l:h-[400px]
+                      `}
                       radius="lg"
                       src={item.url}
-                      // width={400}
-                      // height={450}
+      
                     />
                   </div>
                 </CarouselItem>
@@ -63,7 +73,17 @@ export default function AD({ ad }) {
                 <div className="flex justify-center items-start h-full">
                   <Image
                     alt="default ad image"
-                    className="object-cover rounded-xl w-[500px] h-[625px] x2160l:w-[450px] x2160l:h-[562px] x2200l:w-[358px] x2200l:h-[447px]"
+                    className="object-cover rounded-xl
+                     w-[333px] h-[400px]
+                     x550l:w-[280px] x550l:h-[340px]
+                     sm:w-[300px] sm:h-[360px]
+                     md:w-[400px] md:h-[450px]
+                     x950l:w-[300px] x950l:h-[360px] 
+                     x1128l:w-[240px] x1128l:h-[300px]  
+                     xl:w-[280px] xl:h-[340px]  
+                     x1470l:w-[333px] x1470l:h-[400px]
+                     x1640l:w-[300px] x1640l:h-[360px]   
+                     x1980l:w-[333px] x1980l:h-[400px]"
                     radius="lg"
                     src="/images/plumber.png"
                     // width={400}

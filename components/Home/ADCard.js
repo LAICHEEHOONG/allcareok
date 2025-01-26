@@ -33,7 +33,7 @@ export default function ADCard() {
       <Masonry
         breakpointCols={breakpointColumnsObj}
         className="my-masonry-grid"
-        columnClassName="my-masonry-grid_column border-1"
+        columnClassName="my-masonry-grid_column"
       >
         {ADS.map((item) => (
           <AD key={item._id} ad={item} />
@@ -45,11 +45,19 @@ export default function ADCard() {
 
 const breakpointColumnsObj = {
   default: 6,
-  2200: 5,
-  2050: 4,
-  1450: 3,
-  1150: 2,
-  750: 1,
+  1879: 5,
+  1639: 4,
+  1127: 3,
+  949: 2,
+  549: 1,
+  // 1969: 4,
+  // 1724: 3,
+  // 1469: 2,
+  // 1279: 1,
+  // 2049: 4,
+  // 1450: 3,
+  // 1150: 2,
+  // 750: 1,
 };
 
 // function AD({ ad }) {
