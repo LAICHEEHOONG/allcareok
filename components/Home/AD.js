@@ -21,7 +21,7 @@ export default function AD({ ad }) {
   return (
     <Card className="pb-10" shadow="none">
       <CardHeader className=" w-full h-[40px] flex justify-center items-center mt-3">
-        <div className="w-full max-w-[350px] flex justify-between items-center ">
+        <div className="w-full max-w-[350px] flex justify-between items-center pr-2">
           <p className="text-base capitalize font-medium w-full max-w-[200px] pr-1 truncate">
             {`${ad.area?.town || ad.area?.city || ad.area?.state || ""}${
               ad.area?.town || ad.area?.city || ad.area?.state ? ", " : ""
@@ -36,7 +36,7 @@ export default function AD({ ad }) {
             }}
             plugins={[plugin.current]}
           >
-            <CarouselContent className="-ml-1">
+            <CarouselContent className="-ml-1 ">
               {ad?.service.map((serv, i) => {
                 const match = carouselItems.find((item) => item.id === serv);
                 return match ? (
@@ -50,7 +50,7 @@ export default function AD({ ad }) {
                           <match.icon className="w-4 h-4" />
                         </div>
                         <div
-                          className=" truncate w-[60px] "
+                          className=" truncate w-[59px] "
                           style={{ fontSize: "12px" }}
                         >
                           {match.label}
