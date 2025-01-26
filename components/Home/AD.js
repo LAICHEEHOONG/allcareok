@@ -49,11 +49,11 @@ export default function AD({ ad }) {
                   <div className="flex justify-center items-start h-full  w-full max-w-[400px]">
                     <Image
                       alt={"ads image"}
-                      className="object-cover rounded-xl w-[500px] lg:w-[400px]"
+                      className="object-cover rounded-xl w-[500px] h-[625px] x2160l:w-[450px] x2160l:h-[562px]  x2200l:w-[358px] x2200l:h-[447px]"
                       radius="lg"
                       src={item.url}
                       // width={400}
-                      height={450}
+                      // height={450}
                     />
                   </div>
                 </CarouselItem>
@@ -63,11 +63,11 @@ export default function AD({ ad }) {
                 <div className="flex justify-center items-start h-full">
                   <Image
                     alt="default ad image"
-                    className="object-cover rounded-xl w-[500px] lg:w-[400px]"
+                    className="object-cover rounded-xl w-[500px] h-[625px] x2160l:w-[450px] x2160l:h-[562px] x2200l:w-[358px] x2200l:h-[447px]"
                     radius="lg"
                     src="/images/plumber.png"
                     // width={400}
-                    height={450}
+                    // height={450}
                   />
                 </div>
               </CarouselItem>

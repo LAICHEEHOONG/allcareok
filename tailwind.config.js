@@ -59,6 +59,8 @@ module.exports = {
         sm: "calc(var(--radius) - 4px)",
       },
       screens: {
+        x2200l: "2200px",
+        x2160l: "2160px",
         xs: "370px", // Custom breakpoint for 370px
       },
     },
