@@ -45,11 +45,11 @@ export default function ADCard() {
 
 const breakpointColumnsObj = {
   default: 6,
-  2000: 5,
-  1700: 4,
+  2100: 5,
+  1750: 4,
   1400: 3,
-  1023: 2,
-  700: 1,
+  1050: 2,
+  750: 1,
 };
 
 // function AD({ ad }) {
