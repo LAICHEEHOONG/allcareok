@@ -1,25 +1,8 @@
 import { findAllAds } from "@/lib/action/adAction";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { setADS } from "@/redux/features/ad/adSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Masonry from "react-masonry-css";
-import {
-  Image,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  ScrollShadow,
-} from "@heroui/react";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "../ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
-import { getCarouselItems } from "../carouselItems";
 import AD from "./AD";
 
 export default function ADCard() {
@@ -49,7 +32,7 @@ export default function ADCard() {
     <div className="w-full">
       <Masonry
         breakpointCols={breakpointColumnsObj}
-        className="my-masonry-grid "
+        className="my-masonry-grid"
         columnClassName="my-masonry-grid_column "
       >
         {ADS.map((item) => (
@@ -63,10 +46,10 @@ export default function ADCard() {
 const breakpointColumnsObj = {
   default: 6,
   2000: 5,
-  1600: 4,
-  1250: 3,
-  950: 2,
-  550: 1,
+  1700: 4,
+  1400: 3,
+  1023: 2,
+  700: 1,
 };
 
 // function AD({ ad }) {
@@ -116,7 +99,7 @@ const breakpointColumnsObj = {
 //             align: "start",
 //             loop: true,
 //             dragFree: true,
-            
+
 //           }}
 //         >
 //           <CarouselContent className="-ml-1">
