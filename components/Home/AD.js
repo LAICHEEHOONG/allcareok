@@ -28,7 +28,7 @@ export default function AD({ ad }) {
             }${ad.area?.country}`}
           </p>
           <Carousel
-            className="w-full max-w-[115px]"
+            className="w-full max-w-[105px]"
             opts={{
               align: "start",
               loop: true,
@@ -45,13 +45,13 @@ export default function AD({ ad }) {
                     className="pl-1 basis-1/7 cursor-pointer group select-none z-30 flex justify-center items-center"
                   >
                     <Chip color="default" variant="flat" size="md">
-                      <div className="w-full flex justify-center items-center gap-3">
+                      <div className="w-full flex justify-center items-center gap-2">
                         <div>
-                          <match.icon className="w-4 h-4" />
+                          <match.icon className="w-3 h-3" />
                         </div>
                         <div
                           className=" truncate w-[59px] "
-                          style={{ fontSize: "12px" }}
+                          style={{ fontSize: "10px" }}
                         >
                           {match.label}
                         </div>
