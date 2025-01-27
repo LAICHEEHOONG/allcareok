@@ -15,13 +15,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import Masonry from "react-masonry-css";
 import { toast } from "sonner";
+import AD from "@/components/Home/AD";
 
 const breakpointColumnsObj = {
-  default: 5,
-  1500: 4,
-  1150: 3,
-  900: 2,
-  650: 1,
+  default: 6,
+  1879: 5,
+  1639: 4,
+  1127: 3,
+  949: 2,
+  549: 1,
 };
 
 export default function Dashboard() {
@@ -65,7 +67,7 @@ export default function Dashboard() {
 
   return (
     <div className="w-full flex justify-center">
-      <div className="m-10 flex justify-center items-center w-full max-w-[2000px]">
+      <div className="w-full max-w-[2300px] p-2 pt-2 sm:p-10 sm:pt-2 x1440l:p-20 x1440l:pt-2">
         <div className="w-full">
           <div className="flex justify-between mb-10">
             <div className="flex gap-4">
@@ -103,45 +105,47 @@ export default function Dashboard() {
             columnClassName="my-masonry-grid_column"
           >
             {ads.map((item) => (
-              <Card
-                key={item._id}
-                className="flex mb-2"
-                isPressable
-                shadow="sm"
-                onPress={() => {
-                  selectedCard(item._id);
-                }}
-              >
-                <CardBody className="overflow-visible p-0">
-                  <Image
-                    alt="Card background"
-                    className="z-0 object-cover"
-                    src={
-                      item.photo.length === 0
-                        ? "/images/handyman_2.webp"
-                        : item.photo[0].url
-                    }
-                    width={500}
-                    height={300}
-                  />
-                  {adsId === item._id && (
-                    <>
-                      {/* Dark transparent overlay */}
-                      <div className="absolute inset-0 bg-black bg-opacity-50 rounded-xl z-40"></div>
-                      {/* Centered spinner */}
-                      <div className="absolute inset-0 flex items-center justify-center z-40">
-                        <Spinner color="default" size="lg" />
-                      </div>
-                    </>
-                  )}
-                </CardBody>
-                <CardFooter className="text-small flex-col items-start overflow-visible truncate max-w-[250px]">
-                  <b className="truncate max-w-[240px]">{item?.title}</b>
-                  <p className="text-default-500 truncate max-w-[240px] capitalize">
-                    {`${item.area?.town} ${item.area?.city} ${item.area?.state} ${item.area?.country}`}
-                  </p>
-                </CardFooter>
-              </Card>
+              <AD key={item._id} ad={item} />
+
+              // <Card
+              //   key={item._id}
+              //   className="flex mb-2"
+              //   isPressable
+              //   shadow="sm"
+              //   onPress={() => {
+              //     selectedCard(item._id);
+              //   }}
+              // >
+              //   <CardBody className="overflow-visible p-0">
+              //     <Image
+              //       alt="Card background"
+              //       className="z-0 object-cover"
+              //       src={
+              //         item.photo.length === 0
+              //           ? "/images/handyman_2.webp"
+              //           : item.photo[0].url
+              //       }
+              //       width={500}
+              //       height={300}
+              //     />
+              //     {adsId === item._id && (
+              //       <>
+              //         {/* Dark transparent overlay */}
+              //         <div className="absolute inset-0 bg-black bg-opacity-50 rounded-xl z-40"></div>
+              //         {/* Centered spinner */}
+              //         <div className="absolute inset-0 flex items-center justify-center z-40">
+              //           <Spinner color="default" size="lg" />
+              //         </div>
+              //       </>
+              //     )}
+              //   </CardBody>
+              //   <CardFooter className="text-small flex-col items-start overflow-visible truncate max-w-[250px]">
+              //     <b className="truncate max-w-[240px]">{item?.title}</b>
+              //     <p className="text-default-500 truncate max-w-[240px] capitalize">
+              //       {`${item.area?.town} ${item.area?.city} ${item.area?.state} ${item.area?.country}`}
+              //     </p>
+              //   </CardFooter>
+              // </Card>
             ))}
           </Masonry>
         </div>
