@@ -17,10 +17,10 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 export default function AD({ ad, fn, adsId }) {
   const service_type = useSelector((state) => state.auth?.lang?.service_type);
   const carouselItems = getCarouselItems(service_type);
-  const plugin = useRef(Autoplay({ delay: 5000, stopOnInteraction: true }));
+  const plugin = useRef(Autoplay({ delay: 7000, stopOnInteraction: true }));
 
   return (
-    <Card className="p-3 pt-0 "  >
+    <Card className="p-3 pt-0 ">
       <CardHeader className="flex justify-center h-[52px]">
         {(ad.area?.town ||
           ad.area?.city ||
@@ -138,7 +138,11 @@ export default function AD({ ad, fn, adsId }) {
                     key={serv + i}
                     className="pl-1 basis-1/7 cursor-pointer group select-none z-30 flex justify-center items-center"
                   >
-                    <Chip
+                    <div className="flex justify-center items-center gap-2 m-1 mr-2">  
+                      <match.icon className="w-4 h-4 " />
+                      <div className="font-light">{match.label}</div>
+                    </div>
+                    {/* <Chip
                       color="default"
                       startContent={
                         <match.icon className="w-4 h-4 " />
@@ -148,7 +152,7 @@ export default function AD({ ad, fn, adsId }) {
                       // className="bg-white "
                     >
                       <div className="font-light ">{match.label}</div>
-                    </Chip>
+                    </Chip> */}
                   </CarouselItem>
                 ) : null;
               })}
