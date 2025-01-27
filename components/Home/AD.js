@@ -4,7 +4,6 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
-  ScrollShadow,
   Chip,
 } from "@heroui/react";
 import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel";
@@ -17,10 +16,10 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 export default function AD({ ad }) {
   const service_type = useSelector((state) => state.auth?.lang?.service_type);
   const carouselItems = getCarouselItems(service_type);
-  const plugin = useRef(Autoplay({ delay: 8000, stopOnInteraction: true }));
+  const plugin = useRef(Autoplay({ delay: 5000, stopOnInteraction: true }));
 
   return (
-    <Card className="p-3 " shadow="none">
+    <Card className="p-3  " >
       <CardHeader className="flex justify-center">
         <div className="flex justify-center items-center gap-1 ">
           <LocationOnIcon className="w-4 h-4 mt-1" />
@@ -37,6 +36,7 @@ export default function AD({ ad }) {
           opts={{
             align: "start",
             loop: true,
+            dragFree: false,
           }}
         >
           <CarouselContent className="">
@@ -63,7 +63,6 @@ export default function AD({ ad }) {
                       `}
                       radius="lg"
                       src={item.url}
-      
                     />
                   </div>
                 </CarouselItem>
@@ -86,8 +85,6 @@ export default function AD({ ad }) {
                      x1980l:w-[333px] x1980l:h-[400px]"
                     radius="lg"
                     src="/images/plumber.png"
-                    // width={400}
-                    // height={450}
                   />
                 </div>
               </CarouselItem>
@@ -96,13 +93,13 @@ export default function AD({ ad }) {
         </Carousel>
       </CardBody>
       <CardFooter className=" flex justify-center p-3 ">
-        <div className=" w-full max-w-[400px] h-[30px]">
+        <div className=" w-full max-w-[400px] h-[20px]">
           <Carousel
             className="w-full max-w-[400px]"
             opts={{
               align: "start",
               loop: true,
-              dragFree: false,
+              dragFree: true,
             }}
             plugins={[plugin.current]}
           >
@@ -121,7 +118,7 @@ export default function AD({ ad }) {
                       }
                       variant="light"
                       size="md"
-                      className="border-1"
+                      className=""
                     >
                       <div className="text-default-400">{match.label}</div>
                     </Chip>

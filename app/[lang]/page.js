@@ -108,10 +108,8 @@ export default function Home() {
   return (
     <div>
       <main className="flex justify-center flex-col items-center">
-        <div className="w-full max-w-[2300px] p-2 sm:p-10 x1440l:p-20 pt-0"  >
+        <div className="w-full max-w-[2300px] p-2 pt-0 sm:p-10 sm:pt-0 x1440l:p-20 x1440l:pt-0 "  >
           <ADCard />
-          {/* <Fruits />
-          <Fruits /> */}
         </div>
       </main>
       <footer className=""> </footer>
