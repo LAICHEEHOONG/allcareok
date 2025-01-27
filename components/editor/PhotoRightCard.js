@@ -31,11 +31,12 @@ import { RiGalleryView2 } from "react-icons/ri";
 import { toast } from "sonner";
 
 const breakpointColumnsObj = {
-  default: 4,
-  // 1650: 4,
-  1900: 3,
-  1500: 2,
-  1100: 1,
+  default: 6,
+  1879: 5,
+  1639: 4,
+  1177: 3,
+  1100: 2,
+  850: 1,
 };
 
 const breakpointColumnsObj_2 = {
@@ -106,7 +107,7 @@ export default function PhotoRightCard() {
     ];
 
     return (
-      <div className="p-1">
+      <div className="x950l:p-10 x950l:pt-0 lg:p-1">
         {manageAd?._id ? (
           <div>
             <div className="flex justify-between mb-7 w-full">
@@ -197,8 +198,9 @@ export default function PhotoRightCard() {
                 <div key={item.url + i} className="flex justify-center">
                   <Card
                     isPressable
-                    className=""
+                    className="p-2"
                     onPress={() => setManageAd(item)}
+                   shadow="none"
                   >
                     <CardBody className="m-0 p-0">
                       <div className="relative">
@@ -207,12 +209,25 @@ export default function PhotoRightCard() {
                             Cover
                           </Chip>
                         )}
-                        <Image
+                        {/* <Image
                           alt="Card service"
                           className="object-cover rounded-xl cursor-pointer"
                           src={item.url}
                           width={550}
                           height={400}
+                        /> */}
+                        <Image
+                          alt={"ads image"}
+                          className="object-cover rounded-xl
+                  
+                          w-[300px] h-[360px] 
+                          x1128l:w-[240px] x1128l:h-[300px]  
+                          xl:w-[280px] xl:h-[340px]  
+                          x1470l:w-[333px] x1470l:h-[400px]
+                          x1640l:w-[300px] x1640l:h-[360px]   
+                          x1980l:w-[333px] x1980l:h-[400px]"
+                          radius="lg"
+                          src={item.url}
                         />
                       </div>
                     </CardBody>
@@ -224,6 +239,13 @@ export default function PhotoRightCard() {
       </div>
     );
   };
+
+  // x550l:w-[280px] x550l:h-[340px]
+  // sm:w-[300px] sm:h-[360px]
+  // md:w-[400px] md:h-[450px]
+  // x950l:w-[300px] x950l:h-[360px]
+  // x1128l:w-[240px] x1128l:h-[300px]
+  // xl:w-[280px] xl:h-[340px]
 
   const M2 = () => {
     return (
