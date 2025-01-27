@@ -20,16 +20,29 @@ export default function AD({ ad, fn, adsId }) {
   const plugin = useRef(Autoplay({ delay: 5000, stopOnInteraction: true }));
 
   return (
-    <Card className="p-3">
-      <CardHeader className="flex justify-center">
-        <div className="flex justify-center items-center gap-1 ">
+    <Card className="p-3 pt-0 "  >
+      <CardHeader className="flex justify-center h-[52px]">
+        {(ad.area?.town ||
+          ad.area?.city ||
+          ad.area?.state ||
+          ad.area?.country) && (
+          <div className="flex justify-center items-center gap-1">
+            <LocationOnIcon className="w-4 h-4 mt-1" />
+            <div className="text-base capitalize font-medium w-full max-w-[240px] truncate mt-1">
+              {`${ad.area?.town || ad.area?.city || ad.area?.state || ""}${
+                ad.area?.town || ad.area?.city || ad.area?.state ? ", " : ""
+              }${ad.area?.country}`}
+            </div>
+          </div>
+        )}
+        {/* <div className="flex justify-center items-center gap-1 ">
           <LocationOnIcon className="w-4 h-4 mt-1" />
-          <div className="text-base capitalize font-medium w-full max-w-[400px] truncate mt-1 ">
+          <div className="text-base capitalize font-medium w-full max-w-[240px] truncate mt-1 ">
             {`${ad.area?.town || ad.area?.city || ad.area?.state || ""}${
               ad.area?.town || ad.area?.city || ad.area?.state ? ", " : ""
             }${ad.area?.country}`}
           </div>
-        </div>
+        </div> */}
       </CardHeader>
       <CardBody className="overflow-visible p-0">
         <Carousel
@@ -128,13 +141,13 @@ export default function AD({ ad, fn, adsId }) {
                     <Chip
                       color="default"
                       startContent={
-                        <match.icon className="w-4 h-4 text-default-400" />
+                        <match.icon className="w-4 h-4 " />
                       }
                       variant="light"
                       size="md"
-                      className=""
+                      // className="bg-white "
                     >
-                      <div className="text-default-400">{match.label}</div>
+                      <div className="font-light ">{match.label}</div>
                     </Chip>
                   </CarouselItem>
                 ) : null;
