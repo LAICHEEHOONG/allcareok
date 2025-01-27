@@ -105,7 +105,14 @@ export default function Dashboard() {
             columnClassName="my-masonry-grid_column"
           >
             {ads.map((item) => (
-              <AD key={item._id} ad={item} />
+              <AD
+                key={item._id}
+                ad={item}
+                fn={() => {
+                  selectedCard(item._id);
+                }}
+                adsId={adsId}
+              />
 
               // <Card
               //   key={item._id}

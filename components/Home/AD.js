@@ -5,6 +5,7 @@ import {
   CardFooter,
   CardHeader,
   Chip,
+  Spinner,
 } from "@heroui/react";
 import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,13 +14,13 @@ import { useRef } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 
-export default function AD({ ad }) {
+export default function AD({ ad, fn, adsId }) {
   const service_type = useSelector((state) => state.auth?.lang?.service_type);
   const carouselItems = getCarouselItems(service_type);
   const plugin = useRef(Autoplay({ delay: 5000, stopOnInteraction: true }));
 
   return (
-    <Card className="p-3  " >
+    <Card className="p-3">
       <CardHeader className="flex justify-center">
         <div className="flex justify-center items-center gap-1 ">
           <LocationOnIcon className="w-4 h-4 mt-1" />
@@ -32,11 +33,14 @@ export default function AD({ ad }) {
       </CardHeader>
       <CardBody className="overflow-visible p-0">
         <Carousel
-          className="w-full"
+          className="w-full cursor-pointer"
           opts={{
             align: "start",
             loop: true,
             dragFree: false,
+          }}
+          onClick={() => {
+            fn();
           }}
         >
           <CarouselContent className="">
@@ -91,6 +95,16 @@ export default function AD({ ad }) {
             )}
           </CarouselContent>
         </Carousel>
+        {adsId && adsId === ad._id && (
+          <>
+            {/* Dark transparent overlay */}
+            <div className="absolute inset-0 bg-black bg-opacity-50 rounded-xl z-40"></div>
+            {/* Centered spinner */}
+            <div className="absolute inset-0 flex items-center justify-center z-40">
+              <Spinner color="default" size="lg" />
+            </div>
+          </>
+        )}
       </CardBody>
       <CardFooter className=" flex justify-center p-3 ">
         <div className=" w-full max-w-[400px] h-[20px]">
