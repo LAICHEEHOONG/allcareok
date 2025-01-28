@@ -63,9 +63,9 @@ export default function EditorDesktop() {
         console.log(error);
       }
     };
-  
+
     // Only call dbCountry if user is not '', undefined, or null
-    if (user !== '' && user !== undefined && user !== null) {
+    if (user !== "" && user !== undefined && user !== null) {
       dbCountry();
     }
   }, [user]);
@@ -149,7 +149,12 @@ export default function EditorDesktop() {
         {/* <p className="text-white text-2xl">Right 50%</p> */}
         {cardFocus === "photo" && <PhotoRightCard />}
         {cardFocus === "delete" && <DeleteRightCard />}
-        {cardFocus === "title" && <TitleRightCard />}
+
+        {cardFocus === "title" && (
+          <div className="w-full">
+            <TitleRightCard />
+          </div>
+        )}
         {cardFocus === "service" && <ServiceRightCard />}
         {cardFocus === "area" && <AreaRightCard />}
         {cardFocus === "contact" && <ContactRightCard />}

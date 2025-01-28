@@ -1,4 +1,4 @@
-import { Button, ScrollShadow } from "@heroui/react";
+import { Button, ScrollShadow, Card, CardBody } from "@heroui/react";
 import { getCarouselItems } from "../carouselItems";
 import { useSelector, useDispatch } from "react-redux";
 import AddIcon from "@mui/icons-material/Add";
@@ -9,8 +9,8 @@ import { createAD, findUserAds } from "@/lib/action/adAction";
 import Masonry from "react-masonry-css";
 
 const breakpointColumnsObj = {
-  default: 2,
-  1300: 1,
+  default: 4,
+  1023: 1,
 };
 
 export default function ServiceRightCard() {
@@ -99,9 +99,9 @@ export default function ServiceRightCard() {
   }, []);
 
   return (
-    <div className="h-[50vh] md:h-screen w-full ">
-      <div className="flex justify-center items-start mb-5">
-        <div className="w-full max-w-[910px]  flex justify-between items-center">
+    <div className="h-[50vh] md:h-screen w-full  ">
+      <div className="flex justify-center items-start mb-5  max-w-[910px]">
+        <div className="w-full max-w-[910px]  flex justify-between items-center ">
           <div className="text-2xl md:text-3xl font-semibold">
             {`${l?.service}`}
           </div>
@@ -119,20 +119,20 @@ export default function ServiceRightCard() {
 
       <ScrollShadow
         hideScrollBar
-        className="flex flex-col items-center  w-full h-[40vh] md:h-[90vh] "
+        className="flex flex-col items-center  w-full h-[40vh] md:h-[90vh] border-1"
       >
-        <div className="mb-6 mt-2 text-default-400 hidden md:block  w-full max-w-[910px]">
+        <div className="mb-6 mt-2 text-default-400 hidden md:block  self-start w-full max-w-[910px]">
           {l?.service_type_title}
         </div>
         <Masonry
           breakpointCols={breakpointColumnsObj}
-          className="my-masonry-grid !w-full max-w-[1000px] "
-          columnClassName="my-masonry-grid_column flex flex-col gap-3 items-center p-5"
+          className="my-masonry-grid !w-full border-2 lg:mt-10"
+          columnClassName="my-masonry-grid_column flex flex-col gap-3 items-center p-5 "
         >
-          {serviceItem.map(({ label, icon: Icon, selected }, idx) => (
+          {/* {serviceItem.map(({ label, icon: Icon, selected }, idx) => (
             <div
               key={idx}
-              className="text-default-500 flex justify-between items-center w-full max-w-[400px]  m-3 "
+              className="text-default-500 flex justify-between items-center w-full max-w-[300px]  m-3 "
             >
               <div className="flex gap-5">
                 <Icon className={`w-6 h-6 `} />
@@ -153,6 +153,33 @@ export default function ServiceRightCard() {
                 {selected ? <CheckIcon /> : <AddIcon />}
               </Button>
             </div>
+          ))} */}
+          {serviceItem.map(({ label, icon: Icon, selected }, idx) => (
+            <Card key={idx} className="w-full max-w-[300px]">
+              <CardBody>
+                <div className="text-default-500 flex justify-between items-center w-full max-w-[270px]  p-3 ">
+                  <div className="flex gap-5">
+                    <Icon className={`w-6 h-6 `} />
+                    <div className="truncate w-full max-w-[150px]">{label}</div>
+                  </div>
+
+                  <Button
+                  
+                    isIconOnly
+                    color={selected ? "primary" : "default"}
+                    aria-label="service selector Icon"
+                    radius="full"
+                    variant={selected ? "solid" : "flat"}
+                    size="sm"
+                    onPress={() => {
+                      handleAddService(label);
+                    }}
+                  >
+                    {selected ? <CheckIcon /> : <AddIcon />}
+                  </Button>
+                </div>
+              </CardBody>
+            </Card>
           ))}
         </Masonry>
       </ScrollShadow>

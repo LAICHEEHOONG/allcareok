@@ -13,7 +13,6 @@ export default function ADCard() {
     const findAllAds_ = async () => {
       try {
         const res = await findAllAds();
-        console.log(res);
         if (res.success) {
           dispatch(setADS(res.data));
         }
@@ -23,10 +22,6 @@ export default function ADCard() {
     };
     findAllAds_();
   }, []);
-
-  useEffect(() => {
-    console.log(ADS);
-  }, [ADS]);
 
   return (
     <div className="w-full ">

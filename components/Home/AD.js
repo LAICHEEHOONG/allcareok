@@ -28,7 +28,7 @@ export default function AD({ ad, fn, adsId }) {
           ad.area?.country) && (
           <div className="flex justify-center items-center gap-1">
             <LocationOnIcon className="w-4 h-4 mt-1" />
-            <div className="text-base capitalize font-medium w-full max-w-[240px] truncate mt-1">
+            <div className="text-base capitalize font-medium w-full max-w-[240px] truncate mt-1 tracking-widest ">
               {`${ad.area?.town || ad.area?.city || ad.area?.state || ""}${
                 ad.area?.town || ad.area?.city || ad.area?.state ? ", " : ""
               }${ad.area?.country}`}
@@ -130,8 +130,8 @@ export default function AD({ ad, fn, adsId }) {
                     key={serv + i}
                     className={`pl-1 basis-1/7 cursor-pointer group select-none z-30 flex justify-center items-center w-full max-w-[300px]`}>
                     <div className="flex justify-center items-center gap-2 m-1 mr-2 ">
-                      <match.icon className="!w-6 !h-6 " />
-                      <div className="font-light w-full max-w-[200px] truncate">{match.label}</div>
+                      <match.icon className="!w-6 !h-6 text-default-400" />
+                      <div className="font-light w-full max-w-[200px] truncate tracking-widest text-default-400">{match.label}</div>
                     </div>
                   </CarouselItem>
                 ) : null;
