@@ -30,6 +30,7 @@ import { countryData } from "@/lib/countryData";
 import { Switch } from "@heroui/react";
 import { GoogleMapsEmbed } from "@next/third-parties/google";
 import FlagIcon from "@mui/icons-material/Flag";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 const breakpointColumnsObj = {
   default: 4,
@@ -325,8 +326,60 @@ export default function AreaRightCard() {
 
   const MapCard2 = () => {
     return (
-      <div className="flex justify-center items-center m-4 h-[80vh]">
-        <Card className="w-full mt-5 max-w-[900px]">
+      <div className="flex flex-col justify-center items-center m-4 h-[80vh]">
+        {/* <div className="pb-0 p-2 px-4 flex-col items-start uppercase tracking-wide">
+          <p className="text-tiny  font-bold">{area?.state}</p>
+          <small className="text-default-500 ">{area?.country}</small>
+          <h4 className="font-bold text-large ">{`${area?.city} ${area?.town}`}</h4>
+        </div> */}
+        {(area?.town || area?.city || area?.state || area?.country) && (
+          <div className="flex justify-center items-center gap-1">
+            <LocationOnIcon className="w-4 h-4 mt-1" />
+            <div className="text-base capitalize font-medium w-full max-w-[240px] truncate mt-1 tracking-widest ">
+              {`${area?.town || area?.city || area?.state || ""}${
+                area?.town || area?.city || area?.state ? ", " : ""
+              }${area?.country}`}
+            </div>
+          </div>
+        )}
+        <Card className="w-full mt-2 max-w-[900px]">
+          {/* <CardHeader className="pb-0 p-2 px-4 flex-col items-start uppercase tracking-wide">
+            <p className="text-tiny  font-bold">{area?.state}</p>
+            <small className="text-default-500 ">{area?.country}</small>
+            <h4 className="font-bold text-large ">{`${area?.city} ${area?.town}`}</h4>
+          </CardHeader> */}
+          <CardBody className={`h-[500px]`}>
+            <GoogleMapsEmbed
+              className="bg-black h-[500px]"
+     
+              apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
+              width="100%"
+              mode="place"
+              q={`${area?.town},${area?.city},${area?.state},${area?.country}`}
+            />
+            {/* <div className="md:hidden">
+              <GoogleMapsEmbed
+                className="bg-black"
+                apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
+                width="100%"
+                height="450"
+                mode="place"
+                q={`${area?.town},${area?.city},${area?.state},${area?.country}`}
+              />
+            </div>
+            <div className="md:block hidden">
+              <GoogleMapsEmbed
+                className="bg-black"
+                apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
+                width="100%"
+                height="500"
+                mode="place"
+                q={`${area?.town},${area?.city},${area?.state},${area?.country}`}
+              />
+            </div> */}
+          </CardBody>
+        </Card>
+        {/* <Card className="w-full mt-5 max-w-[900px]">
           <CardHeader className="pb-0 p-2 px-4 flex-col items-start uppercase tracking-wide">
             <p className="text-tiny  font-bold">{area?.state}</p>
             <small className="text-default-500 ">{area?.country}</small>
@@ -354,7 +407,7 @@ export default function AreaRightCard() {
               />
             </div>
           </CardBody>
-        </Card>
+        </Card> */}
       </div>
     );
   };
