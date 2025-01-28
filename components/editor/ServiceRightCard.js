@@ -101,9 +101,9 @@ export default function ServiceRightCard() {
   }, []);
 
   return (
-    <div className="h-[50vh] md:h-screen w-full  ">
-      <div className="flex justify-center items-start mb-5  max-w-[910px]">
-        <div className="w-full max-w-[910px]  flex justify-between items-center ">
+    <div className="h-[50vh] md:h-screen w-full">
+      <div className="flex justify-between  mb-5">
+        <div className="w-full  flex justify-between items-center ">
           <div className="text-2xl md:text-3xl font-semibold">
             {`${l?.service}`}
           </div>
@@ -123,7 +123,7 @@ export default function ServiceRightCard() {
         hideScrollBar
         className="flex flex-col items-center  w-full h-[40vh] md:h-[90vh] "
       >
-        <div className="mb-6 mt-2 text-default-400 hidden md:block  self-start w-full max-w-[910px]">
+        <div className="mb-6 mt-2 text-default-400 hidden md:block  self-start w-full ">
           {l?.service_type_title}
         </div>
         <Masonry
