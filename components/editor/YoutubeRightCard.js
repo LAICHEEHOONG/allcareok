@@ -129,8 +129,8 @@ export default function YoutubeRightCard() {
           {l?.youtube_description}
         </div>
         <div className=" h-full flex flex-col justify-center items-center md:p-2 md:pt-10 pb-10">
-          <div className="w-full flex justify-center items-center">
-            <div className="w-full flex flex-col justify-center items-center ">
+          <div className="w-full flex justify-center items-center ">
+            <div className="w-full flex flex-col justify-center items-center md:py-20 lg:py-14">
               <Input
                 isClearable
                 className="max-w-96 mb-6"

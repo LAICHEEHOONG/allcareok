@@ -142,12 +142,10 @@ export default function DescriptionRightCard() {
               )}
             </div>
             <Textarea
-              // className="max-w-2xl h-[50vh]"
               classNames={{
                 base: "max-w-2xl",
-                input: "resize-y min-h-[64vh]",
+                input: "resize-y lg:min-h-[64vh] sm:min-h-[600px] min-h-[400px]" ,
               }}
-              // label="Description"
               placeholder={l?.description_placeholder}
               variant="bordered"
               defaultValue={description}

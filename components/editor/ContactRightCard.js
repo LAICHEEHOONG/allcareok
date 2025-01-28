@@ -227,7 +227,7 @@ export default function ContactRightCard() {
         <div className="mb-12 mt-2 text-default-400 md:flex hidden">
           {l?.service_contact_title}
         </div>
-        <div className="w-full flex flex-col justify-center items-center lg:py-32">
+        <div className="w-full flex flex-col justify-center items-center 2xl:py-32 ">
           <M />
         </div>
 
