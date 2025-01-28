@@ -10,7 +10,9 @@ import Masonry from "react-masonry-css";
 
 const breakpointColumnsObj = {
   default: 4,
-  1023: 1,
+  1466: 3,
+  1220: 2,
+  950: 1,
 };
 
 export default function ServiceRightCard() {
@@ -119,15 +121,15 @@ export default function ServiceRightCard() {
 
       <ScrollShadow
         hideScrollBar
-        className="flex flex-col items-center  w-full h-[40vh] md:h-[90vh] border-1"
+        className="flex flex-col items-center  w-full h-[40vh] md:h-[90vh] "
       >
         <div className="mb-6 mt-2 text-default-400 hidden md:block  self-start w-full max-w-[910px]">
           {l?.service_type_title}
         </div>
         <Masonry
           breakpointCols={breakpointColumnsObj}
-          className="my-masonry-grid !w-full border-2 lg:mt-10"
-          columnClassName="my-masonry-grid_column flex flex-col gap-3 items-center p-5 "
+          className="my-masonry-grid !w-full lg:mt-10"
+          columnClassName="my-masonry-grid_column flex flex-col gap-3 items-center py-6"
         >
           {/* {serviceItem.map(({ label, icon: Icon, selected }, idx) => (
             <div
@@ -155,7 +157,7 @@ export default function ServiceRightCard() {
             </div>
           ))} */}
           {serviceItem.map(({ label, icon: Icon, selected }, idx) => (
-            <Card key={idx} className="w-full max-w-[300px]">
+            <Card key={idx} className="w-full max-w-[300px]  ">
               <CardBody>
                 <div className="text-default-500 flex justify-between items-center w-full max-w-[270px]  p-3 ">
                   <div className="flex gap-5">
