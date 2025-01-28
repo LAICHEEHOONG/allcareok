@@ -348,26 +348,18 @@ export default function AreaRightCard() {
             <small className="text-default-500 ">{area?.country}</small>
             <h4 className="font-bold text-large ">{`${area?.city} ${area?.town}`}</h4>
           </CardHeader> */}
-          <CardBody className={`h-[500px]`}>
-            <GoogleMapsEmbed
-              className="bg-black h-[500px]"
-     
-              apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
-              width="100%"
-              mode="place"
-              q={`${area?.town},${area?.city},${area?.state},${area?.country}`}
-            />
-            {/* <div className="md:hidden">
+          <CardBody >
+            <div className="sm:hidden">
               <GoogleMapsEmbed
                 className="bg-black"
                 apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
                 width="100%"
-                height="450"
+                height="350"
                 mode="place"
                 q={`${area?.town},${area?.city},${area?.state},${area?.country}`}
               />
             </div>
-            <div className="md:block hidden">
+            <div className="sm:block hidden">
               <GoogleMapsEmbed
                 className="bg-black"
                 apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
@@ -376,7 +368,7 @@ export default function AreaRightCard() {
                 mode="place"
                 q={`${area?.town},${area?.city},${area?.state},${area?.country}`}
               />
-            </div> */}
+            </div>
           </CardBody>
         </Card>
         {/* <Card className="w-full mt-5 max-w-[900px]">
