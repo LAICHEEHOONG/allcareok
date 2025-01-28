@@ -348,7 +348,7 @@ export default function AreaRightCard() {
             <small className="text-default-500 ">{area?.country}</small>
             <h4 className="font-bold text-large ">{`${area?.city} ${area?.town}`}</h4>
           </CardHeader> */}
-          <CardBody >
+          <CardBody className="p-0" >
             <div className="sm:hidden">
               <GoogleMapsEmbed
                 className="bg-black"
