@@ -145,7 +145,7 @@ export default function EditorDesktop() {
       </div>
 
       {/* Right Section */}
-      <div className="w-full hidden md:flex items-center justify-center">
+      <div className="w-full max-w-[1600px] hidden md:flex items-center justify-center">
         {/* <p className="text-white text-2xl">Right 50%</p> */}
         {cardFocus === "photo" && <PhotoRightCard />}
         {cardFocus === "delete" && <DeleteRightCard />}

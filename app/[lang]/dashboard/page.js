@@ -34,6 +34,7 @@ export default function Dashboard() {
   const ads = useSelector((state) => state.editor.ads);
   const l = useSelector((state) => state.auth.lang?.listing_editor_card);
   const adsId = useSelector((state) => state.editor.adsId);
+  const role = useSelector(state => state.auth?.role);
 
   useEffect(() => {
     dispatch(setAdsID(""));
@@ -51,8 +52,28 @@ export default function Dashboard() {
     router.push(`/${currentLocale}/editor`);
   };
 
+  // const handleAddAD = () => {
+  //   if (ads?.length >= 10) {
+  //     toast.warning(`${l?.ad_limit}`, {
+  //       description: `${l?.ad_limit_description}`,
+  //       action: {
+  //         label: "OK",
+  //         onClick: () => console.log("Add Ad Limit Reached"),
+  //       },
+  //     });
+  //   } else {
+  //     router.push(`/${currentLocale}/editor`);
+  //   }
+  // };
   const handleAddAD = () => {
+    if (role === "admin") {
+      // Admins can add unlimited ads
+      router.push(`/${currentLocale}/editor`);
+      return;
+    }
+  
     if (ads?.length >= 10) {
+      // Show warning for non-admins when ad limit is reached
       toast.warning(`${l?.ad_limit}`, {
         description: `${l?.ad_limit_description}`,
         action: {
@@ -64,6 +85,7 @@ export default function Dashboard() {
       router.push(`/${currentLocale}/editor`);
     }
   };
+  
 
   return (
     <div className="w-full flex justify-center">
@@ -113,46 +135,6 @@ export default function Dashboard() {
                 }}
                 adsId={adsId}
               />
-
-              // <Card
-              //   key={item._id}
-              //   className="flex mb-2"
-              //   isPressable
-              //   shadow="sm"
-              //   onPress={() => {
-              //     selectedCard(item._id);
-              //   }}
-              // >
-              //   <CardBody className="overflow-visible p-0">
-              //     <Image
-              //       alt="Card background"
-              //       className="z-0 object-cover"
-              //       src={
-              //         item.photo.length === 0
-              //           ? "/images/handyman_2.webp"
-              //           : item.photo[0].url
-              //       }
-              //       width={500}
-              //       height={300}
-              //     />
-              //     {adsId === item._id && (
-              //       <>
-              //         {/* Dark transparent overlay */}
-              //         <div className="absolute inset-0 bg-black bg-opacity-50 rounded-xl z-40"></div>
-              //         {/* Centered spinner */}
-              //         <div className="absolute inset-0 flex items-center justify-center z-40">
-              //           <Spinner color="default" size="lg" />
-              //         </div>
-              //       </>
-              //     )}
-              //   </CardBody>
-              //   <CardFooter className="text-small flex-col items-start overflow-visible truncate max-w-[250px]">
-              //     <b className="truncate max-w-[240px]">{item?.title}</b>
-              //     <p className="text-default-500 truncate max-w-[240px] capitalize">
-              //       {`${item.area?.town} ${item.area?.city} ${item.area?.state} ${item.area?.country}`}
-              //     </p>
-              //   </CardFooter>
-              // </Card>
             ))}
           </Masonry>
         </div>

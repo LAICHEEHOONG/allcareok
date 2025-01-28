@@ -35,14 +35,6 @@ export default function AD({ ad, fn, adsId }) {
             </div>
           </div>
         )}
-        {/* <div className="flex justify-center items-center gap-1 ">
-          <LocationOnIcon className="w-4 h-4 mt-1" />
-          <div className="text-base capitalize font-medium w-full max-w-[240px] truncate mt-1 ">
-            {`${ad.area?.town || ad.area?.city || ad.area?.state || ""}${
-              ad.area?.town || ad.area?.city || ad.area?.state ? ", " : ""
-            }${ad.area?.country}`}
-          </div>
-        </div> */}
       </CardHeader>
       <CardBody className="overflow-visible p-0">
         <Carousel
@@ -126,33 +118,21 @@ export default function AD({ ad, fn, adsId }) {
             opts={{
               align: "start",
               loop: true,
-              dragFree: true,
+              dragFree: false,
             }}
             plugins={[plugin.current]}
           >
-            <CarouselContent className="-ml-1 ">
+            <CarouselContent className="-ml-1">
               {ad?.service.map((serv, i) => {
                 const match = carouselItems.find((item) => item.id === serv);
                 return match ? (
                   <CarouselItem
                     key={serv + i}
-                    className="pl-1 basis-1/7 cursor-pointer group select-none z-30 flex justify-center items-center"
-                  >
-                    <div className="flex justify-center items-center gap-2 m-1 mr-2">  
+                    className={`pl-1 basis-1/7 cursor-pointer group select-none z-30 flex justify-center items-center w-full max-w-[300px]`}>
+                    <div className="flex justify-center items-center gap-2 m-1 mr-2 ">
                       <match.icon className="w-4 h-4 " />
-                      <div className="font-light">{match.label}</div>
+                      <div className="font-light w-full max-w-[200px] truncate">{match.label}</div>
                     </div>
-                    {/* <Chip
-                      color="default"
-                      startContent={
-                        <match.icon className="w-4 h-4 " />
-                      }
-                      variant="light"
-                      size="md"
-                      // className="bg-white "
-                    >
-                      <div className="font-light ">{match.label}</div>
-                    </Chip> */}
                   </CarouselItem>
                 ) : null;
               })}

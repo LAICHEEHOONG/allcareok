@@ -48,12 +48,12 @@ export default function PhotoCard() {
           </div>
 
           <Image
-            className="flex justify-center items-center mt-4 object-cover max-h-[270px]"
-            width={270}
+            className="flex justify-center items-center mt-4 object-cover w-[250px] h-[300px]"
+            // width={270}
             // height={270}
             alt="photos upload poster"
             // src="/images/childcare.jpeg"
-            src={photo?.length > 0 ? photo[0].url : "/images/childcare.jpeg"}
+            src={photo?.length > 0 ? photo[0].url : "/images/childcare_poster.jpeg"}
           />
         </div>
       </CardBody>

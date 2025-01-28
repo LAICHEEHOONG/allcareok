@@ -31,8 +31,8 @@ import { RiGalleryView2 } from "react-icons/ri";
 import { toast } from "sonner";
 
 const breakpointColumnsObj = {
-  default: 6,
-  1879: 5,
+  default: 5,
+  // 1879: 5,
   1639: 4,
   1177: 3,
   1100: 2,
@@ -86,11 +86,11 @@ export default function PhotoRightCard() {
     const items = [
       {
         label: l?.handyman ? l.handyman : "Handyman",
-        image: "/images/handyman_2.webp",
+        image: "/images/handyman_poster.png",
       },
       {
         label: l?.cleaning ? l.cleaning : "Cleaning",
-        image: "/images/cleaning_2.jpeg",
+        image: "/images/cleaning_poster.jpeg",
       },
       {
         label: l?.childcare ? l.childcare : "Childcare",
@@ -107,7 +107,7 @@ export default function PhotoRightCard() {
     ];
 
     return (
-      <div className="x950l:p-10 x950l:pt-0 lg:p-1">
+      <div className="x950l:p-10 x950l:pt-0 lg:p-1 ">
         {manageAd?._id ? (
           <div>
             <div className="flex justify-between mb-7 w-full">
@@ -153,8 +153,13 @@ export default function PhotoRightCard() {
                 </Button>
               </div>
             </div>
-            <div className="flex justify-center items-center  ">
+            <div className="flex justify-center items-center md:p-10">
               <Image
+                className="object-cover rounded-xl w-[400px] h-[500px]"
+                alt="delete photo"
+                src={manageAd.url}
+              />
+              {/* <Image
                 alt="Card service demo"
                 className="object-cover rounded-xl hidden md:flex"
                 src={manageAd.url}
@@ -167,7 +172,7 @@ export default function PhotoRightCard() {
                 src={manageAd.url}
                 width={400}
                 height={400}
-              />
+              /> */}
             </div>
           </div>
         ) : (
@@ -183,13 +188,30 @@ export default function PhotoRightCard() {
                   className=" flex flex-col justify-center items-center"
                 >
                   <h4 className="font-bold text-large m-1">{item.label}</h4>
-                  <Image
-                    alt="Card service demo"
-                    className="object-cover rounded-xl"
-                    src={item.image}
-                    width={550}
-                    height={400}
-                  />
+                  <Card
+                    isPressable
+                    className="p-2"
+                    onPress={() => setManageAd(item)}
+                    shadow="none"
+                  >
+                    <CardBody className="m-0 p-0">
+                      <div className="relative">
+                        <Image
+                          alt="Card service demo"
+                          className="object-cover rounded-xl               
+                    w-[300px] h-[360px] 
+                    x1128l:w-[240px] x1128l:h-[300px]  
+                    xl:w-[280px] xl:h-[340px]  
+                    x1470l:w-[333px] x1470l:h-[400px]
+                    x1640l:w-[300px] x1640l:h-[360px]   
+                    x1980l:w-[333px] x1980l:h-[400px]"
+                          src={item.image}
+                          // width={550}
+                          // height={400}
+                        />
+                      </div>
+                    </CardBody>
+                  </Card>
                 </div>
               ))}
             {ad?.photo?.length > 0 &&
@@ -200,7 +222,7 @@ export default function PhotoRightCard() {
                     isPressable
                     className="p-2"
                     onPress={() => setManageAd(item)}
-                   shadow="none"
+                    shadow="none"
                   >
                     <CardBody className="m-0 p-0">
                       <div className="relative">
@@ -209,17 +231,10 @@ export default function PhotoRightCard() {
                             Cover
                           </Chip>
                         )}
-                        {/* <Image
-                          alt="Card service"
-                          className="object-cover rounded-xl cursor-pointer"
-                          src={item.url}
-                          width={550}
-                          height={400}
-                        /> */}
+
                         <Image
                           alt={"ads image"}
-                          className="object-cover rounded-xl
-                  
+                          className="object-cover rounded-xl               
                           w-[300px] h-[360px] 
                           x1128l:w-[240px] x1128l:h-[300px]  
                           xl:w-[280px] xl:h-[340px]  
