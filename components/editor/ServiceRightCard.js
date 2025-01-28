@@ -166,7 +166,6 @@ export default function ServiceRightCard() {
                   </div>
 
                   <Button
-                  
                     isIconOnly
                     color={selected ? "primary" : "default"}
                     aria-label="service selector Icon"
