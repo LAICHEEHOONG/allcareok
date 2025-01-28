@@ -6,13 +6,13 @@
     "my_service": "Perkhidmatan Saya",
     "placeholder": "Di mana...",
     "login": "Log Masuk",
-    "whishlists": "Senarai Keinginan",
+    "whishlists": "Wishlists",
     "help": "Pusat Bantuan",
     "logout": "Log Keluar"
   },
   "bottom_navigation": {
     "explore": "Teroka",
-    "whishlists": "Senarai Keinginan",
+    "whishlists": "Wishlists",
     "profile": "Profil",
     "login": "Log Masuk",
     "drawerTitle": "Pilih Bahasa",
