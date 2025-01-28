@@ -19,7 +19,7 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import PublicIcon from "@mui/icons-material/Public";
 import { createAD, findUserAds } from "@/lib/action/adAction";
-import SaveIcon from '@mui/icons-material/Save';
+import SaveIcon from "@mui/icons-material/Save";
 
 export default function ContactRightCard() {
   const dispatch = useDispatch();
@@ -152,14 +152,14 @@ export default function ContactRightCard() {
     return (
       <Masonry
         breakpointCols={breakpointColumnsObj}
-        className="my-masonry-grid !w-full !max-w-[900px]"
-        columnClassName="my-masonry-grid_column flex flex-col gap-3 items-center p-5 "
+        className="my-masonry-grid !w-full"
+        columnClassName="my-masonry-grid_column flex flex-col items-center justify-center"
       >
         {servicesItems.map((item, i) => (
           <Input
             key={item.name}
             isClearable
-            className="max-w-96 m-2"
+            className="w-full p-5"
             placeholder={item.label}
             variant="bordered"
             size="lg"
@@ -227,17 +227,23 @@ export default function ContactRightCard() {
         <div className="mb-12 mt-2 text-default-400 md:flex hidden">
           {l?.service_contact_title}
         </div>
-        <div className="w-full flex justify-center items-center">
-          <div className="w-full max-w-[1500px] flex justify-center items-center ">
+        <div className="w-full flex flex-col justify-center items-center lg:py-32">
+          <M />
+        </div>
+
+        {/* <div className="w-full flex justify-center items-center border-1">
+          <div className="flex w-full justify-center items-center border-1">
             <M />
           </div>
-        </div>
+        </div> */}
       </ScrollShadow>
     </div>
   );
 }
 
 const breakpointColumnsObj = {
-  default: 2,
+  default: 4,
+  1760: 3,
+  1443: 2,
   1024: 1,
 };
