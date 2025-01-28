@@ -10,28 +10,34 @@ import {
 import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel";
 import { useDispatch, useSelector } from "react-redux";
 import { getCarouselItems } from "../carouselItems";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 export default function AD({ ad, fn, adsId }) {
-  const service_type = useSelector((state) => state.auth?.lang?.service_type);
-  const carouselItems = getCarouselItems(service_type);
+  const service_type = useSelector((state) => state?.auth?.lang?.service_type);
+  // const carouselItems = getCarouselItems(service_type) || [];
   const plugin = useRef(Autoplay({ delay: 7000, stopOnInteraction: true }));
+
+  const [carouselItems, setCarouselItems] = useState([]);
+
+  useEffect(() => {
+    setCarouselItems(getCarouselItems(service_type));
+  }, [service_type]);
 
   return (
     <Card className="p-3 pt-0 ">
       <CardHeader className="flex justify-center h-[52px]">
-        {(ad.area?.town ||
-          ad.area?.city ||
-          ad.area?.state ||
-          ad.area?.country) && (
+        {(ad?.area?.town ||
+          ad?.area?.city ||
+          ad?.area?.state ||
+          ad?.area?.country) && (
           <div className="flex justify-center items-center gap-1">
             <LocationOnIcon className="w-4 h-4 mt-1" />
             <div className="text-base capitalize font-medium w-full max-w-[240px] truncate mt-1 tracking-widest ">
-              {`${ad.area?.town || ad.area?.city || ad.area?.state || ""}${
-                ad.area?.town || ad.area?.city || ad.area?.state ? ", " : ""
-              }${ad.area?.country}`}
+              {`${ad?.area?.town || ad?.area?.city || ad?.area?.state || ""}${
+                ad?.area?.town || ad?.area?.city || ad?.area?.state ? ", " : ""
+              }${ad?.area?.country}`}
             </div>
           </div>
         )}
@@ -49,8 +55,8 @@ export default function AD({ ad, fn, adsId }) {
           }}
         >
           <CarouselContent className="">
-            {ad.photo.length > 0 ? (
-              ad.photo.map((item, i) => (
+            {ad?.photo?.length > 0 ? (
+              ad?.photo?.map((item, i) => (
                 <CarouselItem
                   key={item.url + i}
                   className="flex justify-center items-start "
@@ -100,11 +106,10 @@ export default function AD({ ad, fn, adsId }) {
             )}
           </CarouselContent>
         </Carousel>
-        {adsId && adsId === ad._id && (
+        {adsId && adsId === ad?._id && (
           <>
-            {/* Dark transparent overlay */}
             <div className="absolute inset-0 bg-black bg-opacity-50 rounded-xl z-40"></div>
-            {/* Centered spinner */}
+
             <div className="absolute inset-0 flex items-center justify-center z-40">
               <Spinner color="default" size="lg" />
             </div>
@@ -123,15 +128,18 @@ export default function AD({ ad, fn, adsId }) {
             plugins={[plugin.current]}
           >
             <CarouselContent className="-ml-1">
-              {ad?.service.map((serv, i) => {
-                const match = carouselItems.find((item) => item.id === serv);
+              {ad?.service?.map((serv, i) => {
+                const match = carouselItems.find((item) => item?.id === serv);
                 return match ? (
                   <CarouselItem
                     key={serv + i}
-                    className={`pl-1 basis-1/7 cursor-pointer group select-none z-30 flex justify-center items-center w-full max-w-[300px]`}>
+                    className={`pl-1 basis-1/7 cursor-pointer group select-none z-30 flex justify-center items-center w-full max-w-[300px]`}
+                  >
                     <div className="flex justify-center items-center gap-2 m-1 mr-2 ">
                       <match.icon className="!w-6 !h-6 text-default-400" />
-                      <div className="font-light w-full max-w-[200px] truncate tracking-widest text-default-400">{match.label}</div>
+                      <div className="font-light w-full max-w-[200px] truncate tracking-widest text-default-400">
+                        {match?.label}
+                      </div>
                     </div>
                   </CarouselItem>
                 ) : null;
