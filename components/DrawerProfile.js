@@ -107,7 +107,7 @@ export function DrawerProfile({ children, bottom_navigation }) {
                 <Image
                   alt="Card background"
                   className="object-cover rounded-xl"
-                  src="/images/service_logo_ai.png"
+                  src="/images/service_logo_ai-min.png"
                   width={170}
                 />
               </div>
