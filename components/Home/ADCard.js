@@ -4,35 +4,34 @@ import { setADS } from "@/redux/features/ad/adSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Masonry from "react-masonry-css";
 import AD from "./AD";
-import { Spinner, Image } from "@heroui/react";
 import { useState } from "react";
 import { SyncLoader } from "react-spinners";
 import { Fade } from "react-awesome-reveal";
 
 export default function ADCard() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const ADS = useSelector((state) => state.ADS.ADS);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const findAllAds_ = async () => {
-      try {
-        const res = await findAllAds();
-        if (res.success) {
-          dispatch(setADS(res.data));
-        }
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    findAllAds_();
-  }, []);
+  // useEffect(() => {
+  //   const findAllAds_ = async () => {
+  //     try {
+  //       const res = await findAllAds();
+  //       if (res.success) {
+  //         dispatch(setADS(res.data));
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   findAllAds_();
+  // }, []);
 
   return (
     <div className="w-full ">
-      {loading && (
+      {ADS && ADS.length === 0 && (
         <div className="flex flex-col gap-3 justify-center items-center h-[60vh] w-full ">
           <Fade direction="up" cascade>
             <p

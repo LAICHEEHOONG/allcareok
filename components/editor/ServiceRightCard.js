@@ -131,37 +131,13 @@ export default function ServiceRightCard() {
           className="my-masonry-grid !w-full lg:mt-10"
           columnClassName="my-masonry-grid_column flex flex-col gap-3 items-center py-6"
         >
-          {/* {serviceItem.map(({ label, icon: Icon, selected }, idx) => (
-            <div
-              key={idx}
-              className="text-default-500 flex justify-between items-center w-full max-w-[300px]  m-3 "
-            >
-              <div className="flex gap-5">
-                <Icon className={`w-6 h-6 `} />
-                <div>{label}</div>
-              </div>
 
-              <Button
-                isIconOnly
-                color={selected ? "primary" : "default"}
-                aria-label="service selector Icon"
-                radius="full"
-                variant={selected ? "solid" : "flat"}
-                size="sm"
-                onPress={() => {
-                  handleAddService(label);
-                }}
-              >
-                {selected ? <CheckIcon /> : <AddIcon />}
-              </Button>
-            </div>
-          ))} */}
           {serviceItem.map(({ label, icon: Icon, selected }, idx) => (
             <Card key={idx} className="w-full max-w-[300px]  ">
               <CardBody>
                 <div className="text-default-500 flex justify-between items-center w-full max-w-[270px]  p-3 ">
-                  <div className="flex gap-5">
-                    <Icon className={`w-6 h-6 `} />
+                  <div className="flex justify-center items-center gap-5">
+                    <Icon className={`!w-7 !h-7 `} />
                     <div className="truncate w-full max-w-[150px]">{label}</div>
                   </div>
 

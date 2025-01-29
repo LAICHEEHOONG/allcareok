@@ -1,5 +1,5 @@
 "use client";
-import Fruits from "@/components/Fruits";
+// import Fruits from "@/components/Fruits";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import {
@@ -15,11 +15,12 @@ import {
 } from "@/redux/features/editor/editorSlice";
 import { useSession } from "next-auth/react";
 import { signUp, updateUserCountry } from "@/lib/action/userAction";
-import { findUserAds } from "@/lib/action/adAction";
+import { findUserAds, findAllAds } from "@/lib/action/adAction";
 import { useRouter, usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
 import axios from "axios"; // Ensure axios is imported
 import ADCard from "@/components/Home/ADCard";
+import { setADS } from "@/redux/features/ad/adSlice";
 
 async function getCountryFromIP() {
   try {
@@ -105,10 +106,24 @@ export default function Home() {
     fetchAds();
   }, [user]); // Add userId as a dependency
 
+  useEffect(() => {
+    const findAllAds_ = async () => {
+      try {
+        const res = await findAllAds();
+        if (res.success) {
+          dispatch(setADS(res.data));
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    findAllAds_();
+  }, []);
+
   return (
     <div>
       <main className="flex justify-center flex-col items-center">
-        <div className="w-full max-w-[2300px] p-2 pt-2 sm:p-10 sm:pt-2 x1440l:p-20 x1440l:pt-2"  >
+        <div className="w-full max-w-[2300px] p-2 pt-2 sm:p-10 sm:pt-2 x1440l:p-20 x1440l:pt-2">
           <ADCard />
         </div>
       </main>
