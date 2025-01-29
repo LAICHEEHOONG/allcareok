@@ -54,9 +54,9 @@ export default function ADCard() {
         className="my-masonry-grid"
         columnClassName="my-masonry-grid_column"
       >
-        {ADS.map((item) => (
+        {ADS.map((item, i) => (
           <AD
-            key={item._id}
+            key={item._id + i} 
             ad={item}
             fn={() => {
               console.log("image clicked");

@@ -1,6 +1,6 @@
 "use client";
 // import Fruits from "@/components/Fruits";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   setCountry,
@@ -15,12 +15,21 @@ import {
 } from "@/redux/features/editor/editorSlice";
 import { useSession } from "next-auth/react";
 import { signUp, updateUserCountry } from "@/lib/action/userAction";
-import { findUserAds, findAllAds } from "@/lib/action/adAction";
+import {
+  findUserAds,
+  findAllAds,
+  getAdsWithPagination,
+} from "@/lib/action/adAction";
 import { useRouter, usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
 import axios from "axios"; // Ensure axios is imported
 import ADCard from "@/components/Home/ADCard";
-import { setADS } from "@/redux/features/ad/adSlice";
+import {
+  setADS,
+  setPagination,
+  setStandbyADS,
+} from "@/redux/features/ad/adSlice";
+import { useInView } from "react-intersection-observer";
 
 async function getCountryFromIP() {
   try {
@@ -39,6 +48,14 @@ export default function Home() {
   const pathName = usePathname();
   const user = useSelector((state) => state.auth?._id);
   const country = useSelector((state) => state.auth?.country);
+  const { ref, inView } = useInView({
+    triggerOnce: false, // Set to true if you only want it to trigger once
+    threshold: 0.5, // Fires when at least 50% of the element is visible
+    rootMargin: "100px 0px", // Adjust when it triggers (100px before it reaches the viewport)
+  });
+  const standby_ADS = useSelector((state) => state.ADS.standby_ADS);
+  const ADS = useSelector((state) => state.ADS.ADS);
+  const page = useSelector((state) => state.ADS.page);
 
   useEffect(() => {
     getCountryFromIP().then((country) => {
@@ -107,24 +124,77 @@ export default function Home() {
   }, [user]); // Add userId as a dependency
 
   useEffect(() => {
-    const findAllAds_ = async () => {
+    const getAdsWithPagination_ = async () => {
       try {
-        const res = await findAllAds();
+        const res = await getAdsWithPagination({
+          query: { page: 1, limit: 18 },
+        });
         if (res.success) {
-          dispatch(setADS(res.data));
+          console.log(res.data);
+          dispatch(setADS(res.data.ads.slice(0, 12)));
+          dispatch(setStandbyADS(res.data.ads.slice(12, 18)));
+          dispatch(
+            setPagination({
+              page: 3,
+            })
+          );
         }
       } catch (error) {
         console.log(error);
       }
     };
-    findAllAds_();
+    getAdsWithPagination_();
   }, []);
+
+  useEffect(() => {
+    if (!inView) return;
+    const getAdsWithPagination_ = async () => {
+      try {
+        dispatch(setADS([...ADS, ...standby_ADS]));
+        const res = await getAdsWithPagination({
+          query: { page: page + 1, limit: 6 },
+        });
+        if (res.success) {
+          dispatch(setStandbyADS(res.data.ads));
+          dispatch(
+            setPagination({
+              total: res.data.total,
+              page: res.data.page,
+              limit: res.data.limit,
+              totalPages: res.data.totalPages,
+            })
+          );
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getAdsWithPagination_();
+  }, [inView]);
+
+  // useEffect(() => {
+  //   const findAllAds_ = async () => {
+  //     try {
+  //       const res = await findAllAds();
+  //       if (res.success) {
+  //         dispatch(setADS(res.data));
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   findAllAds_();
+  // }, []);
 
   return (
     <div>
       <main className="flex justify-center flex-col items-center">
         <div className="w-full max-w-[2300px] p-2 pt-2 sm:p-10 sm:pt-2 x1440l:p-20 x1440l:pt-2">
           <ADCard />
+          <div
+            ref={ref}
+            className=" w-full h-[50px]"
+          />
         </div>
       </main>
       <footer className=""> </footer>
