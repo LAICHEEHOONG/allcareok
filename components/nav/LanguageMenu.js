@@ -18,7 +18,7 @@ export default function LanguageMenu() {
   const router = useRouter();
   const pathname = usePathname();
   const id = useSelector((state) => state.auth._id);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const redirectedPathName = (locale) => {
     if (!pathname) return "/";
@@ -29,7 +29,7 @@ export default function LanguageMenu() {
 
   const changeLanguage = async (locale) => {
     try {
-      router.push(redirectedPathName(locale)); // Navigate to the new language route
+      router.push(redirectedPathName(locale), { scroll: false }); // Navigate to the new language route
 
       if (id) {
         await updateUserLanguage({ id, locale }); // Update the user's language preference
@@ -40,7 +40,7 @@ export default function LanguageMenu() {
   };
 
   useEffect(() => {
-    dispatch(updateLanguage(pathname))
+    dispatch(updateLanguage(pathname));
   }, []);
 
   return (
@@ -62,14 +62,12 @@ export default function LanguageMenu() {
           return (
             <DropdownItem
               key={locale}
-              // onPress={() => router.push(redirectedPathName(locale))}
               onPress={() => changeLanguage(locale)}
               textValue={locale}
             >
               {locale === "en" && "English"}
               {locale === "zh" && "中文"}
               {locale === "ms" && "Malay"}
-
             </DropdownItem>
           );
         })}

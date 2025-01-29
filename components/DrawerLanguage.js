@@ -33,6 +33,69 @@ export function DrawerLanguage({ children, bottom_navigation }) {
   );
 }
 
+// function ListBox_() {
+//   const router = useRouter();
+//   const pathname = usePathname();
+//   const id = useSelector((state) => state.auth._id);
+//   const language = useSelector((state) => state.auth.language);
+//   const [selectedKeys, setSelectedKeys] = useState(new Set([language]));
+
+//   const redirectedPathName = (locale) => {
+//     if (!pathname) return "/";
+//     const segments = pathname.split("/");
+//     segments[1] = locale;
+//     return segments.join("/");
+//   };
+
+//   useEffect(() => {
+//     const changeLanguage = async (locale) => {
+//       try {
+//         router.push(redirectedPathName(locale), { scroll: false }); // Navigate to the new language route
+
+//         if (id) {
+//           await updateUserLanguage({ id, locale }); // Update the user's language preference
+//         }
+//       } catch (error) {
+//         console.log("Failed to update language:", error);
+//       }
+//     };
+
+//     if (selectedKeys.size > 0) {
+//       const locale = Array.from(selectedKeys).join(", "); // Convert Set to a single string value
+//       changeLanguage(locale);
+//     }
+//   }, [selectedKeys]);
+
+//   return (
+//     <div className="flex flex-col gap-2 justify-center items-center">
+//       <ListboxWrapper>
+//         <Listbox
+//           aria-label="Single selection example"
+//           variant="flat"
+//           disallowEmptySelection
+//           selectionMode="single"
+//           selectedKeys={selectedKeys}
+//           onSelectionChange={setSelectedKeys}
+//         >
+//           {i18n.locales.map((locale) => {
+//             let lan;
+//             if (locale === "en") {
+//               lan = "English";
+//             }
+//             if (locale === "zh") {
+//               lan = "中文";
+//             }
+//             if (locale === "ms") {
+//               lan = "Malay";
+//             }
+//             return <ListboxItem key={locale}>{lan}</ListboxItem>;
+//           })}
+//         </Listbox>
+//       </ListboxWrapper>
+//     </div>
+//   );
+// }
+
 function ListBox_() {
   const router = useRouter();
   const pathname = usePathname();
@@ -47,24 +110,21 @@ function ListBox_() {
     return segments.join("/");
   };
 
-  useEffect(() => {
-    const changeLanguage = async (locale) => {
-      try {
-        router.push(redirectedPathName(locale)); // Navigate to the new language route
+  const handleSelectionChange = async (newKeys) => {
+    const locale = Array.from(newKeys).join(", ");
+    setSelectedKeys(newKeys);
 
-        if (id) {
-          await updateUserLanguage({ id, locale }); // Update the user's language preference
-        }
-      } catch (error) {
-        console.error("Failed to update language:", error);
+    try {
+      router.push(redirectedPathName(locale), { scroll: false });
+
+      if (id) {
+        await updateUserLanguage({ id, locale });
       }
-    };
-
-    if (selectedKeys.size > 0) {
-      const locale = Array.from(selectedKeys).join(", "); // Convert Set to a single string value
-      changeLanguage(locale);
+    } catch (error) {
+      console.log("Failed to update language:", error);
     }
-  }, [selectedKeys]);
+  };
+
 
   return (
     <div className="flex flex-col gap-2 justify-center items-center">
@@ -75,7 +135,7 @@ function ListBox_() {
           disallowEmptySelection
           selectionMode="single"
           selectedKeys={selectedKeys}
-          onSelectionChange={setSelectedKeys}
+          onSelectionChange={handleSelectionChange} // Directly handle selection change
         >
           {i18n.locales.map((locale) => {
             let lan;
