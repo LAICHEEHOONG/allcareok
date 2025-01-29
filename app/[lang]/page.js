@@ -74,7 +74,7 @@ export default function Home() {
       try {
         dispatch(setBlockServiceBtn(true));
         const res = await signUp(user);
-        router.push(redirectedPathName(res.language));
+        router.push(redirectedPathName(res.language), { scroll: false });
         dispatch(userInfo(res));
       } catch (err) {
         console.log(err);
