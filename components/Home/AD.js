@@ -57,57 +57,57 @@
 //               fn();
 //             }}
 //           >
-//             <CarouselContent className="">
-//               {ad?.photo?.length > 0 ? (
-//                 ad?.photo?.map((item, i) => (
-//                   <CarouselItem
-//                   key={`${item._id}-${item.url}-${i}-${crypto.randomUUID()}`}
-//                     className="flex justify-center items-start "
-//                   >
-//                     <div className="flex justify-center items-start h-full  w-full">
-//                       <Image
-//                         alt={"ads image"}
-//                         className={`object-cover rounded-xl 
-//                      w-[333px] h-[400px]
-//                      x550l:w-[280px] x550l:h-[340px]
-//                      sm:w-[300px] sm:h-[360px]
-//                      md:w-[400px] md:h-[450px]
-//                      x950l:w-[300px] x950l:h-[360px] 
-//                      x1128l:w-[240px] x1128l:h-[300px]  
-//                      xl:w-[280px] xl:h-[340px]  
-//                      x1470l:w-[333px] x1470l:h-[400px]
-//                      x1640l:w-[300px] x1640l:h-[360px]   
-//                      x1980l:w-[333px] x1980l:h-[400px]
-//                       `}
-//                         radius="lg"
-//                         src={item.url}
-//                       />
-//                     </div>
-//                   </CarouselItem>
-//                 ))
-//               ) : (
-//                 <CarouselItem className="">
-//                   <div className="flex justify-center items-start h-full">
-//                     <Image
-//                       alt="default ad image"
-//                       className="object-cover rounded-xl
-//                      w-[333px] h-[400px]
-//                      x550l:w-[280px] x550l:h-[340px]
-//                      sm:w-[300px] sm:h-[360px]
-//                      md:w-[400px] md:h-[450px]
-//                      x950l:w-[300px] x950l:h-[360px] 
-//                      x1128l:w-[240px] x1128l:h-[300px]  
-//                      xl:w-[280px] xl:h-[340px]  
-//                      x1470l:w-[333px] x1470l:h-[400px]
-//                      x1640l:w-[300px] x1640l:h-[360px]   
-//                      x1980l:w-[333px] x1980l:h-[400px]"
-//                       radius="lg"
-//                       src="/images/plumber.png"
-//                     />
-//                   </div>
-//                 </CarouselItem>
-//               )}
-//             </CarouselContent>
+            // <CarouselContent className="">
+            //   {ad?.photo?.length > 0 ? (
+            //     ad?.photo?.map((item, i) => (
+            //       <CarouselItem
+            //       key={`${item._id}-${item.url}-${i}-${crypto.randomUUID()}`}
+            //         className="flex justify-center items-start "
+            //       >
+            //         <div className="flex justify-center items-start h-full  w-full">
+            //           <Image
+            //             alt={"ads image"}
+            //             className={`object-cover rounded-xl 
+            //          w-[333px] h-[400px]
+            //          x550l:w-[280px] x550l:h-[340px]
+            //          sm:w-[300px] sm:h-[360px]
+            //          md:w-[400px] md:h-[450px]
+            //          x950l:w-[300px] x950l:h-[360px] 
+            //          x1128l:w-[240px] x1128l:h-[300px]  
+            //          xl:w-[280px] xl:h-[340px]  
+            //          x1470l:w-[333px] x1470l:h-[400px]
+            //          x1640l:w-[300px] x1640l:h-[360px]   
+            //          x1980l:w-[333px] x1980l:h-[400px]
+            //           `}
+            //             radius="lg"
+            //             src={item.url}
+            //           />
+            //         </div>
+            //       </CarouselItem>
+            //     ))
+            //   ) : (
+            //     <CarouselItem className="">
+            //       <div className="flex justify-center items-start h-full">
+            //         <Image
+            //           alt="default ad image"
+            //           className="object-cover rounded-xl
+            //          w-[333px] h-[400px]
+            //          x550l:w-[280px] x550l:h-[340px]
+            //          sm:w-[300px] sm:h-[360px]
+            //          md:w-[400px] md:h-[450px]
+            //          x950l:w-[300px] x950l:h-[360px] 
+            //          x1128l:w-[240px] x1128l:h-[300px]  
+            //          xl:w-[280px] xl:h-[340px]  
+            //          x1470l:w-[333px] x1470l:h-[400px]
+            //          x1640l:w-[300px] x1640l:h-[360px]   
+            //          x1980l:w-[333px] x1980l:h-[400px]"
+            //           radius="lg"
+            //           src="/images/plumber.png"
+            //         />
+            //       </div>
+            //     </CarouselItem>
+            //   )}
+            // </CarouselContent>
 //           </Carousel>
 //           {adsId && adsId === ad?._id && (
 //             <>
@@ -185,7 +185,7 @@ export default function AD({ ad, fn, adsId }) {
 
   useEffect(() => {
     setCarouselItems(getCarouselItems(service_type));
-    setTimeout(() => setLoading(false), 2000); // Simulate loading
+    setTimeout(() => setLoading(false), 1000); // Simulate loading
   }, [service_type]);
 
   return (
@@ -218,7 +218,21 @@ export default function AD({ ad, fn, adsId }) {
           <CarouselContent>
             {loading ? ( // Show Skeleton if loading
               <CarouselItem className="flex justify-center items-start">
-                <Skeleton className="w-[333px] h-[400px] rounded-xl" />
+                <Skeleton 
+                // className="w-[333px] h-[400px] rounded-xl"
+                className={`object-cover rounded-xl 
+                  w-[333px] h-[400px]
+                  x550l:w-[280px] x550l:h-[340px]
+                  sm:w-[300px] sm:h-[360px]
+                  md:w-[400px] md:h-[450px]
+                  x950l:w-[300px] x950l:h-[360px] 
+                  x1128l:w-[240px] x1128l:h-[300px]  
+                  xl:w-[280px] xl:h-[340px]  
+                  x1470l:w-[333px] x1470l:h-[400px]
+                  x1640l:w-[300px] x1640l:h-[360px]   
+                  x1980l:w-[333px] x1980l:h-[400px]
+                   `}
+                 />
               </CarouselItem>
             ) : ad?.photo?.length > 0 ? (
               ad?.photo?.map((item, i) => (
@@ -229,7 +243,19 @@ export default function AD({ ad, fn, adsId }) {
                   <div className="flex justify-center items-start h-full w-full">
                     <Image
                       alt="ads image"
-                      className="object-cover rounded-xl w-[333px] h-[400px]"
+                      // className="object-cover rounded-xl w-[333px] h-[400px]"
+                      className={`object-cover rounded-xl 
+                        w-[333px] h-[400px]
+                        x550l:w-[280px] x550l:h-[340px]
+                        sm:w-[300px] sm:h-[360px]
+                        md:w-[400px] md:h-[450px]
+                        x950l:w-[300px] x950l:h-[360px] 
+                        x1128l:w-[240px] x1128l:h-[300px]  
+                        xl:w-[280px] xl:h-[340px]  
+                        x1470l:w-[333px] x1470l:h-[400px]
+                        x1640l:w-[300px] x1640l:h-[360px]   
+                        x1980l:w-[333px] x1980l:h-[400px]
+                         `}
                       radius="lg"
                       src={item.url}
                     />
@@ -240,7 +266,19 @@ export default function AD({ ad, fn, adsId }) {
               <CarouselItem className="flex justify-center items-start h-full">
                 <Image
                   alt="default ad image"
-                  className="object-cover rounded-xl w-[333px] h-[400px]"
+                  // className="object-cover rounded-xl w-[333px] h-[400px]"
+                  className={`object-cover rounded-xl 
+                    w-[333px] h-[400px]
+                    x550l:w-[280px] x550l:h-[340px]
+                    sm:w-[300px] sm:h-[360px]
+                    md:w-[400px] md:h-[450px]
+                    x950l:w-[300px] x950l:h-[360px] 
+                    x1128l:w-[240px] x1128l:h-[300px]  
+                    xl:w-[280px] xl:h-[340px]  
+                    x1470l:w-[333px] x1470l:h-[400px]
+                    x1640l:w-[300px] x1640l:h-[360px]   
+                    x1980l:w-[333px] x1980l:h-[400px]
+                     `}
                   radius="lg"
                   src="/images/plumber.png"
                 />
@@ -260,11 +298,11 @@ export default function AD({ ad, fn, adsId }) {
       </CardBody>
 
       {/* Card Footer with Skeleton */}
-      <CardFooter className="flex justify-center p-3">
+      <CardFooter className="flex justify-center p-0 m-0">
         {loading ? (
           <Skeleton className="w-[300px] h-[20px] rounded-full" /> // Skeleton for footer
         ) : (
-          <div className="w-full max-w-[400px] h-[20px]">
+          <div className="w-full flex justify-center items-center max-w-[300px]   h-[55px]">
             <Carousel
               className="w-full max-w-[400px]"
               opts={{ align: "start", loop: true, dragFree: false }}
