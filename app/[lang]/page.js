@@ -19,6 +19,7 @@ import {
   findUserAds,
   findAllAds,
   getAdsWithPagination,
+  getAdsFast,
 } from "@/lib/action/adAction";
 import { useRouter, usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
@@ -30,6 +31,7 @@ import {
   setStandbyADS,
 } from "@/redux/features/ad/adSlice";
 import { useInView } from "react-intersection-observer";
+import { LogoSpinner } from "@/components/LogoSpinner";
 
 async function getCountryFromIP() {
   try {
@@ -56,6 +58,7 @@ export default function Home() {
   const standby_ADS = useSelector((state) => state.ADS.standby_ADS);
   const ADS = useSelector((state) => state.ADS.ADS);
   const page = useSelector((state) => state.ADS.page);
+  const totalPages = useSelector(state => state.ADS.totalPages)
 
   useEffect(() => {
     getCountryFromIP().then((country) => {
@@ -124,36 +127,12 @@ export default function Home() {
   }, [user]); // Add userId as a dependency
 
   useEffect(() => {
-    const getAdsWithPagination_ = async () => {
+    const getAdsFast_ = async () => {
+      console.log('getAdsFast_')
       try {
-        const res = await getAdsWithPagination({
-          query: { page: 1, limit: 18 },
-        });
-        if (res.success) {
-          console.log(res.data);
-          dispatch(setADS(res.data.ads.slice(0, 12)));
-          dispatch(setStandbyADS(res.data.ads.slice(12, 18)));
-          dispatch(
-            setPagination({
-              page: 3,
-            })
-          );
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getAdsWithPagination_();
-  }, []);
-
-  useEffect(() => {
-    if (!inView) return;
-    const getAdsWithPagination_ = async () => {
-      try {
-        dispatch(setADS([...ADS, ...standby_ADS]));
-        const res = await getAdsWithPagination({
-          query: { page: page + 1, limit: 6 },
-        });
+        // if (!inView) return;
+        // dispatch(setADS([...ADS, ...standby_ADS]));
+        const res = await getAdsFast({ query: { page: page + 1, limit: 10 } });
         if (res.success) {
           dispatch(setStandbyADS(res.data.ads));
           dispatch(
@@ -169,8 +148,94 @@ export default function Home() {
         console.log(error);
       }
     };
-    getAdsWithPagination_();
+
+    if (inView) {
+      // Ensure ADS is not empty before triggering fetching
+      getAdsFast_();
+    }
   }, [inView]);
+
+  useEffect(() => {
+    if (standby_ADS.length > 0) {
+      dispatch(setADS([...ADS, ...standby_ADS]));
+      dispatch(setStandbyADS([]));
+    }
+  }, [standby_ADS]);
+
+  // useEffect(() => {
+  //   const getAdsFast_ = async () => {
+  //     try {
+  //       if (!inView) return;
+  //       if (standby_ADS.length > 0) {
+  //         dispatch(setADS([...ADS, ...standby_ADS]));
+  //       }
+  //       const res = await getAdsFast({ query: { page: page + 1, limit: 3 } });
+  //       if (res.success) {
+  //         dispatch(setStandbyADS(res.data.ads));
+  //         dispatch(
+  //           setPagination({
+  //             total: res.data.total,
+  //             page: res.data.page,
+  //             limit: res.data.limit,
+  //             totalPages: res.data.totalPages,
+  //           })
+  //         );
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   getAdsFast_();
+  // }, [inView]);
+
+  // useEffect(() => {
+  //   const getAdsWithPagination_ = async () => {
+  //     try {
+  //       const res = await getAdsWithPagination({
+  //         query: { page: 1, limit: 18 },
+  //       });
+  //       if (res.success) {
+  //         console.log(res.data);
+  //         dispatch(setADS(res.data.ads.slice(0, 12)));
+  //         dispatch(setStandbyADS(res.data.ads.slice(12, 18)));
+  //         dispatch(
+  //           setPagination({
+  //             page: 3,
+  //           })
+  //         );
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   getAdsWithPagination_();
+  // }, []);
+
+  // useEffect(() => {
+  //   if (!inView) return;
+  //   const getAdsWithPagination_ = async () => {
+  //     try {
+  //       dispatch(setADS([...ADS, ...standby_ADS]));
+  //       const res = await getAdsWithPagination({
+  //         query: { page: page + 1, limit: 6 },
+  //       });
+  //       if (res.success) {
+  //         dispatch(setStandbyADS(res.data.ads));
+  //         dispatch(
+  //           setPagination({
+  //             total: res.data.total,
+  //             page: res.data.page,
+  //             limit: res.data.limit,
+  //             totalPages: res.data.totalPages,
+  //           })
+  //         );
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   getAdsWithPagination_();
+  // }, [inView]);
 
   // useEffect(() => {
   //   const findAllAds_ = async () => {
@@ -193,8 +258,10 @@ export default function Home() {
           <ADCard />
           <div
             ref={ref}
-            className=" w-full h-[50px]"
-          />
+            className=" w-full h-[100px] flex justify-center items-center"
+          >
+            {page > 1 && page < totalPages && <LogoSpinner text={false} />}
+          </div>
         </div>
       </main>
       <footer className=""> </footer>

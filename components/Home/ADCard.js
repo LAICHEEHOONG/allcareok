@@ -7,6 +7,7 @@ import AD from "./AD";
 import { useState } from "react";
 import { SyncLoader } from "react-spinners";
 import { Fade } from "react-awesome-reveal";
+import { LogoSpinner } from "../LogoSpinner";
 
 export default function ADCard() {
   // const dispatch = useDispatch();
@@ -33,7 +34,8 @@ export default function ADCard() {
     <div className="w-full ">
       {ADS && ADS.length === 0 && (
         <div className="flex flex-col gap-3 justify-center items-center h-[60vh] w-full ">
-          <Fade direction="up" cascade>
+          <LogoSpinner text={true} />
+          {/* <Fade direction="up" cascade>
             <p
               className={`font-bold text-inherit ml-2 text-2xl `}
               style={{ color: "#f31260" }}
@@ -46,7 +48,7 @@ export default function ADCard() {
             margin={4}
             speedMultiplier={0.9}
             size={25}
-          />
+          /> */}
         </div>
       )}
       <Masonry
@@ -56,7 +58,7 @@ export default function ADCard() {
       >
         {ADS.map((item, i) => (
           <AD
-            key={item._id + i} 
+            key={item._id + i}
             ad={item}
             fn={() => {
               console.log("image clicked");

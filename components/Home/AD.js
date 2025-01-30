@@ -26,7 +26,7 @@ export default function AD({ ad, fn, adsId }) {
   }, [service_type]);
 
   return (
-    <Fade triggerOnce>
+    // <Fade triggerOnce>
       <Card className="p-3 pt-0 ">
         <CardHeader className="flex justify-center h-[52px]">
           {(ad?.area?.town ||
@@ -154,7 +154,7 @@ export default function AD({ ad, fn, adsId }) {
           </div>
         </CardFooter>
       </Card>
-    </Fade>
+    // </Fade>
   );
 }
 
