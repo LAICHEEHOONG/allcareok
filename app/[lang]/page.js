@@ -149,7 +149,7 @@ export default function Home() {
       }
     };
 
-    if (inView) {
+    if (inView && page <= totalPages) {
       // Ensure ADS is not empty before triggering fetching
       getAdsFast_();
     }
@@ -157,7 +157,7 @@ export default function Home() {
 
   useEffect(() => {
     if (standby_ADS.length > 0) {
-      dispatch(setADS([...ADS, ...standby_ADS]));
+      dispatch(setADS(standby_ADS));
       dispatch(setStandbyADS([]));
     }
   }, [standby_ADS]);
@@ -260,7 +260,7 @@ export default function Home() {
             ref={ref}
             className=" w-full h-[100px] flex justify-center items-center"
           >
-            {page > 1 && page < totalPages && <LogoSpinner text={false} />}
+            {page >= 1 && page < totalPages && <LogoSpinner text={false} />}
           </div>
         </div>
       </main>

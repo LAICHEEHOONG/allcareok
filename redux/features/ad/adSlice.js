@@ -14,7 +14,7 @@ export const ADSSlice = createSlice({
   initialState,
   reducers: {
     setADS: (state, action) => {
-      state.ADS = action.payload;
+      state.ADS = [...state.ADS, ...action.payload];
     },
     setStandbyADS: (state, action) => {
       state.standby_ADS = action.payload;
