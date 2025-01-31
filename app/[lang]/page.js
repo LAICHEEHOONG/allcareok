@@ -378,8 +378,7 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
-  Spinner,
-  Skeleton,
+
 } from "@heroui/react";
 import Autoplay from "embla-carousel-autoplay";
 import {
@@ -480,7 +479,7 @@ export default function Home() {
     if (inView && page <= totalPages) {
       const fetchMoreAds = async () => {
         try {
-          // setLoading(true);
+    
           const res = await getAdsFast({
             query: { page: page + 1, limit: 10 },
           });
@@ -490,8 +489,6 @@ export default function Home() {
           }
         } catch (error) {
           console.error(error);
-        } finally {
-          // setTimeout(() => setLoading(false), 1000); // Only keep the Skeleton for 1s
         }
       };
       fetchMoreAds();
@@ -528,47 +525,49 @@ export default function Home() {
                 columnClassName="my-masonry-grid_column"
               >
                 {ADS.map((ad, i) => (
-                  <Card key={ad._id + i} className="p-3 pt-0 pb-0 rounded-xl">
-                    <CardHeader className="flex justify-center h-[52px]">
-                      {(ad?.area?.town ||
-                        ad?.area?.city ||
-                        ad?.area?.state ||
-                        ad?.area?.country) && (
-                        <div className="flex justify-center items-center gap-1">
-                          <LocationOnIcon className="w-4 h-4 mt-1" />
-                          <div className="text-base capitalize font-medium w-full max-w-[240px] truncate mt-1 tracking-widest">
-                            {`${
-                              ad?.area?.town ||
-                              ad?.area?.city ||
-                              ad?.area?.state ||
-                              ""
-                            }${
-                              ad?.area?.town ||
-                              ad?.area?.city ||
-                              ad?.area?.state
-                                ? ", "
-                                : ""
-                            }${ad?.area?.country}`}
+                  <Fade key={ad._id + i} triggerOnce>
+                    <Card className="p-3 pt-0 pb-0 rounded-xl">
+                      <CardHeader className="flex justify-center h-[52px]">
+                        {(ad?.area?.town ||
+                          ad?.area?.city ||
+                          ad?.area?.state ||
+                          ad?.area?.country) && (
+                          <div className="flex justify-center items-center gap-1">
+                            <LocationOnIcon className="w-4 h-4 mt-1" />
+                            <div className="text-base capitalize font-medium w-full max-w-[240px] truncate mt-1 tracking-widest">
+                              {`${
+                                ad?.area?.town ||
+                                ad?.area?.city ||
+                                ad?.area?.state ||
+                                ""
+                              }${
+                                ad?.area?.town ||
+                                ad?.area?.city ||
+                                ad?.area?.state
+                                  ? ", "
+                                  : ""
+                              }${ad?.area?.country}`}
+                            </div>
                           </div>
-                        </div>
-                      )}
-                    </CardHeader>
+                        )}
+                      </CardHeader>
 
-                    <CardBody className="overflow-visible p-0">
-                      <Carousel
-                        className="w-full cursor-pointer"
-                        opts={{ align: "start", loop: true, dragFree: false }}
-                      >
-                        <CarouselContent>
-                          {ad.photo?.length ? (
-                            ad.photo.map((item, idx) => (
-                              <CarouselItem
-                                key={idx}
-                                className="flex justify-center items-start"
-                              >
-                                <Image
-                                  // className="object-cover rounded-xl w-[333px] h-[400px]"
-                                  className={`object-cover rounded-xl 
+                      <CardBody className="overflow-visible p-0">
+                        <Carousel
+                          className="w-full cursor-pointer"
+                          opts={{ align: "start", loop: true, dragFree: false }}
+                        >
+                          <CarouselContent>
+                            {ad.photo?.length ? (
+                              ad.photo.map((item, idx) => (
+                                <CarouselItem
+                                  key={idx}
+                                  className="flex justify-center items-start"
+                                >
+                                  <Image
+                                    // className="object-cover rounded-xl w-[333px] h-[400px]"
+
+                                    className={`object-cover rounded-xl 
                                     w-[333px] h-[400px]
                                     x550l:w-[280px] x550l:h-[340px]
                                     sm:w-[300px] sm:h-[360px]
@@ -580,16 +579,15 @@ export default function Home() {
                                     x1640l:w-[300px] x1640l:h-[360px]   
                                     x1980l:w-[333px] x1980l:h-[400px]
                                      `}
-                                  src={item.url}
-                                  alt="ad image"
-                                />
-                              </CarouselItem>
-                            ))
-                          ) : (
-                            <CarouselItem>
-                              <Image
-                                // className="object-cover rounded-xl w-[333px] h-[400px]"
-                                className={`object-cover rounded-xl 
+                                    src={item.url}
+                                    alt="ad image"
+                                  />
+                                </CarouselItem>
+                              ))
+                            ) : (
+                              <CarouselItem>
+                                <Image
+                                  className={`object-cover rounded-xl 
                                   w-[333px] h-[400px]
                                   x550l:w-[280px] x550l:h-[340px]
                                   sm:w-[300px] sm:h-[360px]
@@ -601,17 +599,17 @@ export default function Home() {
                                   x1640l:w-[300px] x1640l:h-[360px]   
                                   x1980l:w-[333px] x1980l:h-[400px]
                                    `}
-                                src="/images/plumber.png"
-                                alt="default image"
-                              />
-                            </CarouselItem>
-                          )}
-                        </CarouselContent>
-                      </Carousel>
-                    </CardBody>
-                    <CardFooter className="flex justify-center p-0 m-0">
-                      <ADFooter ad={ad} />
-                      {/* <div className="w-full max-w-[400px] h-[10px] ">
+                                  src="/images/plumber.png"
+                                  alt="default image"
+                                />
+                              </CarouselItem>
+                            )}
+                          </CarouselContent>
+                        </Carousel>
+                      </CardBody>
+                      <CardFooter className="flex justify-center p-0 m-0">
+                        <ADFooter ad={ad} />
+                        {/* <div className="w-full max-w-[400px] h-[10px] ">
                         <Carousel
                           className="w-full max-w-[400px]"
                           opts={{
@@ -647,8 +645,9 @@ export default function Home() {
                           </CarouselContent>
                         </Carousel>
                       </div> */}
-                    </CardFooter>
-                  </Card>
+                      </CardFooter>
+                    </Card>
+                  </Fade>
                 ))}
               </Masonry>
             )}
