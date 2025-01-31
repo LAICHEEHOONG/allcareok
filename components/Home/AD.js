@@ -232,7 +232,8 @@ export default function AD({ ad, fn, adsId }) {
               {ad?.photo?.length > 0 ? (
                 ad?.photo?.map((item, i) => (
                   <CarouselItem
-                    key={`${item._id}-${item.url}-${i}-${crypto.randomUUID()}`}
+                    // key={`${item._id}-${item.url}-${i}-${crypto.randomUUID()}`}
+                    key={`${crypto.randomUUID()}`}
                     className="flex justify-center items-start"
                   >
                     <div className="flex justify-center items-start h-full w-full">
@@ -305,7 +306,7 @@ export default function AD({ ad, fn, adsId }) {
                     );
                     return match ? (
                       <CarouselItem
-                        key={`${ad._id}-${serv}-${i}-${crypto.randomUUID()}`}
+                        key={`${crypto.randomUUID()}`}
                         className="pl-1 basis-1/7 cursor-pointer group select-none z-30 flex justify-center items-center w-full max-w-[300px]"
                       >
                         <Fade>

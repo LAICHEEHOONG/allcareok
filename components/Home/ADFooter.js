@@ -28,7 +28,7 @@ export const ADFooter = ({ ad }) => {
             const match = carouselItems.find((item) => item?.id === serv);
             return match ? (
               <CarouselItem
-                key={`${ad._id}-${serv}-${i}-${crypto.randomUUID()}`}
+                key={`${crypto.randomUUID()}`}
                 className="pl-1 basis-1/7 cursor-pointer group select-none z-30 flex justify-center items-center w-full max-w-[300px]"
               >
                 <Fade>

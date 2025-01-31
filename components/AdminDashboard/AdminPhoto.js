@@ -97,6 +97,10 @@ export default function AdminPhoto() {
     }
   };
 
+  useEffect(() => {
+    console.log(photos);
+  }, [photos]);
+
   return (
     <div className="w-full flex flex-col justify-center items-center">
       <div className="w-full p-5">
@@ -119,7 +123,7 @@ export default function AdminPhoto() {
                   className="object-cover h-[240px] w-[240px] cursor-pointer"
                   radius="lg"
                   shadow="sm"
-                  src={p.url}
+                  src={p?.exchangeUrl ? p.exchangeUrl : p.url}
                   width="100%"
                   onClick={() => handleDownload(p.url)} // Trigger download on click
                 />
