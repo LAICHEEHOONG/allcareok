@@ -6,7 +6,7 @@ const initialState = {
   total: 0,
   page: 0,
   limit: 0,
-  totalPages: 0,
+  totalPages: 1,
 };
 
 export const ADSSlice = createSlice({

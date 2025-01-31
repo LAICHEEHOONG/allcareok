@@ -372,14 +372,7 @@ import {
   setStandbyADS,
 } from "@/redux/features/ad/adSlice";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import {
-  Image,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-
-} from "@heroui/react";
+import { Image, Card, CardBody, CardFooter, CardHeader } from "@heroui/react";
 import Autoplay from "embla-carousel-autoplay";
 import {
   Carousel,
@@ -415,6 +408,7 @@ export default function Home() {
   const plugin = useRef(Autoplay({ delay: 7000, stopOnInteraction: true }));
   const [carouselItems, setCarouselItems] = useState([]);
   const service_type = useSelector((state) => state?.auth?.lang?.service_type);
+  const [starter, setStarter] = useState(false);
 
   const redirectedPathName = (locale) => {
     if (!pathName) return "/";
@@ -475,32 +469,39 @@ export default function Home() {
     fetchAds();
   }, [user]);
 
+  // fectch data
   useEffect(() => {
-    if (inView && page <= totalPages) {
-      const fetchMoreAds = async () => {
-        try {
-    
-          const res = await getAdsFast({
-            query: { page: page + 1, limit: 10 },
-          });
-          if (res.success) {
-            dispatch(setStandbyADS(res.data.ads));
-            dispatch(setPagination(res.data));
-          }
-        } catch (error) {
-          console.error(error);
+    const fetchMoreAds = async () => {
+      try {
+        const res = await getAdsFast({
+          query: { page: page + 1, limit: 10 },
+        });
+        if (res.success) {
+          dispatch(setStandbyADS(res.data.ads));
+          dispatch(setPagination(res.data));
         }
-      };
+      } catch (error) {
+        console.error(error);
+      } finally {
+        if (!starter) {
+          setTimeout(() => {
+            setStarter(true);
+          }, 2000);
+        }
+      }
+    };
+    if (standby_ADS.length === 0 && page <= totalPages) {
       fetchMoreAds();
     }
-  }, [inView]);
+  }, [standby_ADS]);
 
+  // show data
   useEffect(() => {
     if (standby_ADS.length > 0) {
       dispatch(setADS(standby_ADS));
       dispatch(setStandbyADS([]));
     }
-  }, [standby_ADS]);
+  }, [inView]);
 
   return (
     <div>
@@ -508,7 +509,7 @@ export default function Home() {
         <div className="w-full max-w-[2300px] p-2 pt-2 sm:p-10 sm:pt-2 x1440l:p-20 x1440l:pt-2">
           <div className="w-full">
             {ADS.length === 0 ? (
-              <div className="flex flex-col gap-3 justify-center items-center h-[60vh] w-full">
+              <div className="flex flex-col gap-3 justify-center items-center h-[60vh] w-full ">
                 <LogoSpinner text={true} />
               </div>
             ) : (
@@ -652,12 +653,20 @@ export default function Home() {
               </Masonry>
             )}
           </div>
-          <div
-            ref={ref}
-            className="w-full h-[100px] flex justify-center items-center"
-          >
-            {page >= 1 && page < totalPages && <LogoSpinner text={false} />}
-          </div>
+          {/* <div className={`w-full h-[2000px] bg-red-300 ${starter && 'hidden'}`}>
+
+          </div> */}
+          {/* <div className={`${starter ? 'h-0' : 'h-screen'} w-full flex justify-center items-end`}>
+
+          </div> */}
+          {starter && (
+            <div
+              ref={ref}
+              className={`w-full h-[100px] flex justify-center items-center `}
+            >
+              {page <= totalPages && page > 1 && <LogoSpinner text={false} />}
+            </div>
+          )}
         </div>
       </main>
     </div>
