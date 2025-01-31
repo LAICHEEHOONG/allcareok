@@ -379,6 +379,8 @@ import {
   CardFooter,
   CardHeader,
   Avatar,
+  Chip,
+  Button,
 } from "@heroui/react";
 import Autoplay from "embla-carousel-autoplay";
 import {
@@ -390,6 +392,7 @@ import { LogoSpinner } from "@/components/LogoSpinner";
 import { getCarouselItems } from "@/components/carouselItems";
 import { ADFooter } from "@/components/Home/ADFooter";
 import { countryFlag } from "@/components/countryFlag";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 async function getCountryFromIP() {
   try {
@@ -519,8 +522,6 @@ export default function Home() {
     }
   }, [page]);
 
-
-
   return (
     <div className="pb-20">
       <main className="flex justify-center flex-col items-center">
@@ -618,8 +619,6 @@ export default function Home() {
                                   className="flex justify-center items-start"
                                 >
                                   <Image
-                                    // className="object-cover rounded-xl w-[333px] h-[400px]"
-
                                     className={`object-cover rounded-xl 
                                     w-[333px] h-[400px]
                                     x550l:w-[280px] x550l:h-[340px]
@@ -659,6 +658,46 @@ export default function Home() {
                             )}
                           </CarouselContent>
                         </Carousel>
+                        <>
+                          {/* <div className="absolute inset-0 bg-black bg-opacity-50 rounded-xl z-40"></div> */}
+                          {/* <div className="absolute inset-0 flex justify-start z-40"> */}
+                          {/* <Spinner color="default" size="lg" /> */}
+                          {/* </div> */}
+                          <div
+                            className={`absolute inset-x-0 top-0 z-40 flex ${
+                              ad.reviewStatus === "Approved"
+                                ? "justify-between"
+                                : "justify-end"
+                            } items-center p-2`}
+                          >
+                            {ad.reviewStatus === "Approved" && (
+                              <Chip
+                                avatar={
+                                  <Avatar
+                                    name="allcareok"
+                                    src="https://www.allcareok.com/images/allcareok_logo.png"
+                                  />
+                                }
+                                variant="shadow"
+                                className="bg-white"
+                              >
+                                <div className="font-medium tracking-wider">Verified</div>
+                              </Chip>
+                            )}
+
+                            <Button
+                              isIconOnly
+                              aria-label="Like"
+                              className=""
+                              size="sm"
+                              variant="flat" //solid
+                              radius="full"
+                              color="danger"
+                            >
+                              <FavoriteBorderIcon style={{ color: "white" }} />
+                            </Button>
+                          </div>
+                        </>
                       </CardBody>
                       <CardFooter className="flex justify-center p-0">
                         <ADFooter ad={ad} />

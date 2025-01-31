@@ -165,7 +165,7 @@ import {
   CardFooter,
   CardHeader,
   Spinner,
-  Avatar
+  Avatar,
 } from "@heroui/react";
 import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel";
 import { useSelector } from "react-redux";
@@ -175,6 +175,7 @@ import Autoplay from "embla-carousel-autoplay";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { Fade } from "react-awesome-reveal";
 import { countryFlag } from "../countryFlag";
+import { LogoSpinner } from "../LogoSpinner";
 
 export default function AD({ ad, fn, adsId }) {
   const service_type = useSelector((state) => state?.auth?.lang?.service_type);
@@ -198,14 +199,15 @@ export default function AD({ ad, fn, adsId }) {
             <div className="flex justify-center items-center gap-2">
               {ad?.area?.country ? (
                 <Avatar
-                src={
-                  countryFlag.find(
-                    (country) =>
-                      country.value.trim().toLowerCase() === ad.area.country.trim().toLowerCase()
-                  )?.description || ""
-                }
+                  src={
+                    countryFlag.find(
+                      (country) =>
+                        country.value.trim().toLowerCase() ===
+                        ad.area.country.trim().toLowerCase()
+                    )?.description || ""
+                  }
                   alt={ad.area.country}
-                      className="max-w-5 h-5 w-full"
+                  className="max-w-5 h-5 w-full"
                 />
               ) : (
                 <LocationOnIcon className="w-4 h-4 mt-1" />
@@ -283,9 +285,10 @@ export default function AD({ ad, fn, adsId }) {
 
           {adsId && adsId === ad?._id && (
             <>
-              <div className="absolute inset-0 bg-black bg-opacity-50 rounded-xl z-40"></div>
+              <div className="absolute inset-0 bg-pink-300 bg-opacity-50 rounded-xl z-40"></div>
               <div className="absolute inset-0 flex items-center justify-center z-40">
-                <Spinner color="default" size="lg" />
+                {/* <Spinner color="default" size="lg" /> */}
+                <LogoSpinner text={false} />
               </div>
             </>
           )}
