@@ -474,7 +474,7 @@ export default function Home() {
     const fetchMoreAds = async () => {
       try {
         const res = await getAdsFast({
-          query: { page: page + 1, limit: 10 },
+          query: { page: page + 1, limit: 12 },
         });
         if (res.success) {
           dispatch(setStandbyADS(res.data.ads));
@@ -498,10 +498,18 @@ export default function Home() {
   // show data
   useEffect(() => {
     if (standby_ADS.length > 0) {
-      dispatch(setADS(standby_ADS));
-      dispatch(setStandbyADS([]));
+      setTimeout(() => {
+        dispatch(setADS(standby_ADS));
+        dispatch(setStandbyADS([]));
+      }, 500);
     }
   }, [inView]);
+
+  useEffect(() => {
+    if (page > totalPages) {
+      setStarter(false);
+    }
+  }, [page]);
 
   return (
     <div>
@@ -527,7 +535,7 @@ export default function Home() {
               >
                 {ADS.map((ad, i) => (
                   <Fade key={ad._id + i} triggerOnce>
-                    <Card className="p-3 pt-0 pb-0 rounded-xl">
+                    <Card className="p-3 pb-1 pt-0 rounded-xl">
                       <CardHeader className="flex justify-center h-[52px]">
                         {(ad?.area?.town ||
                           ad?.area?.city ||
@@ -608,7 +616,7 @@ export default function Home() {
                           </CarouselContent>
                         </Carousel>
                       </CardBody>
-                      <CardFooter className="flex justify-center p-0 m-0">
+                      <CardFooter className="flex justify-center p-0">
                         <ADFooter ad={ad} />
                         {/* <div className="w-full max-w-[400px] h-[10px] ">
                         <Carousel
@@ -662,7 +670,7 @@ export default function Home() {
           {starter && (
             <div
               ref={ref}
-              className={`w-full h-[100px] flex justify-center items-center `}
+              className={`w-full h-[300px] flex justify-center items-center `}
             >
               {page <= totalPages && page > 1 && <LogoSpinner text={false} />}
             </div>

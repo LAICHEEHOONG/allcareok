@@ -186,7 +186,7 @@ export default function AD({ ad, fn, adsId }) {
 
   return (
     <Fade triggerOnce>
-      <Card className="p-3 pt-0 rounded-xl">
+      <Card className="p-3 pb-1 pt-0 rounded-xl">
         {/* Ensure full rounded corners */}
         <CardHeader className="flex justify-center h-[52px]">
           {(ad?.area?.town ||
@@ -274,11 +274,11 @@ export default function AD({ ad, fn, adsId }) {
           )}
         </CardBody>
         {/* Card Footer with Skeleton */}
-        <CardFooter className="flex justify-center p-0 m-0">
+        <CardFooter className="flex justify-center p-0 ">
           {
-            <div className="w-full flex justify-center items-center max-w-[300px]   h-[55px]">
+            <div className="w-full flex justify-center items-center max-w-[300px] h-[35px] ">
               <Carousel
-                className="w-full max-w-[400px]"
+                className="w-full max-w-[400px] "
                 opts={{ align: "start", loop: true, dragFree: false }}
                 plugins={[plugin.current]}
               >

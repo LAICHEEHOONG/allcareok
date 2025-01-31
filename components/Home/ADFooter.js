@@ -13,9 +13,9 @@ export const ADFooter = ({ ad }) => {
     setCarouselItems(getCarouselItems(service_type));
   }, [service_type]);
   return (
-    <div className="w-full flex justify-center items-center max-w-[300px]   h-[55px] ">
+    <div className="w-full flex justify-center items-center max-w-[300px] h-[35px] ">
       <Carousel
-        className="w-full"
+        className="w-full max-w-[400px]"
         opts={{
           align: "start",
           loop: true,
@@ -32,7 +32,7 @@ export const ADFooter = ({ ad }) => {
                 className="pl-1 basis-1/7 cursor-pointer group select-none z-30 flex justify-center items-center w-full max-w-[300px]"
               >
                 <Fade>
-                  <div className="flex justify-center items-center gap-2 m-1 mr-2 -mt-1 ">
+                  <div className="flex justify-center items-center gap-2 m-1 mr-2 ">
                     <match.icon className="!w-6 !h-6 text-default-400" />
                     <div className="font-light w-full max-w-[200px] truncate tracking-widest text-default-400">
                       {match?.label}
