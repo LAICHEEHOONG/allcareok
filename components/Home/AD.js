@@ -165,6 +165,7 @@ import {
   CardFooter,
   CardHeader,
   Spinner,
+  Avatar
 } from "@heroui/react";
 import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel";
 import { useSelector } from "react-redux";
@@ -173,6 +174,7 @@ import { useRef, useEffect, useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { Fade } from "react-awesome-reveal";
+import { countryFlag } from "../countryFlag";
 
 export default function AD({ ad, fn, adsId }) {
   const service_type = useSelector((state) => state?.auth?.lang?.service_type);
@@ -193,9 +195,23 @@ export default function AD({ ad, fn, adsId }) {
             ad?.area?.city ||
             ad?.area?.state ||
             ad?.area?.country) && (
-            <div className="flex justify-center items-center gap-1">
-              <LocationOnIcon className="w-4 h-4 mt-1" />
-              <div className="text-base capitalize font-medium w-full max-w-[240px] truncate mt-1 tracking-widest">
+            <div className="flex justify-center items-center gap-2">
+              {ad?.area?.country ? (
+                <Avatar
+                src={
+                  countryFlag.find(
+                    (country) =>
+                      country.value.trim().toLowerCase() === ad.area.country.trim().toLowerCase()
+                  )?.description || ""
+                }
+                  alt={ad.area.country}
+                      className="max-w-5 h-5 w-full"
+                />
+              ) : (
+                <LocationOnIcon className="w-4 h-4 mt-1" />
+              )}
+
+              <div className="text-base capitalize font-medium w-full max-w-[220px] truncate tracking-widest">
                 {`${ad?.area?.town || ad?.area?.city || ad?.area?.state || ""}${
                   ad?.area?.town || ad?.area?.city || ad?.area?.state
                     ? ", "

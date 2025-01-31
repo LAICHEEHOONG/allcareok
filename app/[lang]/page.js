@@ -372,7 +372,14 @@ import {
   setStandbyADS,
 } from "@/redux/features/ad/adSlice";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import { Image, Card, CardBody, CardFooter, CardHeader } from "@heroui/react";
+import {
+  Image,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Avatar,
+} from "@heroui/react";
 import Autoplay from "embla-carousel-autoplay";
 import {
   Carousel,
@@ -382,6 +389,7 @@ import {
 import { LogoSpinner } from "@/components/LogoSpinner";
 import { getCarouselItems } from "@/components/carouselItems";
 import { ADFooter } from "@/components/Home/ADFooter";
+import { countryFlag } from "@/components/countryFlag";
 
 async function getCountryFromIP() {
   try {
@@ -541,9 +549,43 @@ export default function Home() {
                           ad?.area?.city ||
                           ad?.area?.state ||
                           ad?.area?.country) && (
-                          <div className="flex justify-center items-center gap-1">
-                            <LocationOnIcon className="w-4 h-4 mt-1" />
-                            <div className="text-base capitalize font-medium w-full max-w-[240px] truncate mt-1 tracking-widest">
+                          // <div className="flex justify-center items-center gap-1">
+                          //   <LocationOnIcon className="w-4 h-4 mt-1" />
+                          //   <div className="text-base capitalize font-medium w-full max-w-[240px] truncate mt-1 tracking-widest">
+                          //     {`${
+                          //       ad?.area?.town ||
+                          //       ad?.area?.city ||
+                          //       ad?.area?.state ||
+                          //       ""
+                          //     }${
+                          //       ad?.area?.town ||
+                          //       ad?.area?.city ||
+                          //       ad?.area?.state
+                          //         ? ", "
+                          //         : ""
+                          //     }${ad?.area?.country}`}
+                          //   </div>
+                          // </div>
+                          <div className="flex justify-center items-center gap-2">
+                            {ad?.area?.country ? (
+                              <Avatar
+                                src={
+                                  countryFlag.find(
+                                    (country) =>
+                                      country.value.trim().toLowerCase() ===
+                                      ad.area.country.trim().toLowerCase()
+                                  )?.description || ""
+                                }
+                                showFallback
+                                name={ad.area.country}
+                                // alt={ad.area.country}
+                                className="max-w-5 h-5 w-full"
+                              />
+                            ) : (
+                              <LocationOnIcon className="w-4 h-4 mt-1" />
+                            )}
+
+                            <div className="text-base capitalize font-medium w-full max-w-[220px] truncate tracking-widest">
                               {`${
                                 ad?.area?.town ||
                                 ad?.area?.city ||
