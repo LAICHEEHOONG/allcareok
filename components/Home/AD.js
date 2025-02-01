@@ -23,6 +23,7 @@ import { signIn } from "next-auth/react";
 import { updateUserWishlist } from "@/lib/action/userAction";
 import { showToast } from "@/lib/frontend_tool";
 import { setWishlist } from "@/redux/features/auth/authSlice";
+import { usePathname } from "next/navigation";
 
 export default function AD({ ad, fn, adsId }) {
   const { data: session, status } = useSession();
@@ -35,6 +36,10 @@ export default function AD({ ad, fn, adsId }) {
   const wishlist = useSelector((state) => state.auth?.wishlist);
   const isInWishlist = (adId) => wishlist.includes(adId);
   const [loadingAd, setLoadingAd] = useState({}); // Track loading state per adId
+  const pathname = usePathname();
+
+  const showStatus =
+    pathname.endsWith("/dashboard") || pathname.endsWith("/editor");
 
   useEffect(() => {
     setCarouselItems(getCarouselItems(service_type));
@@ -65,7 +70,6 @@ export default function AD({ ad, fn, adsId }) {
         }
 
         dispatch(setWishlist(res.data.wishlist)); // Update Redux store
-
       }
 
       // await fetchWishlist(); // Get the latest user data with wishlist
@@ -174,48 +178,111 @@ export default function AD({ ad, fn, adsId }) {
               )}
             </CarouselContent>
           </Carousel>
-          <>
-            <div
-              className={`absolute inset-x-0 top-0 z-40 flex ${
-                ad.reviewStatus === "Approved"
-                  ? "justify-between"
-                  : "justify-end"
-              } items-center p-2`}
-            >
-              {ad.reviewStatus === "Approved" && (
-                <Chip
-                  avatar={
-                    <Avatar
-                      name="allcareok"
-                      src="https://www.allcareok.com/images/allcareok_logo.png"
-                    />
-                  }
-                  variant="shadow"
-                  classNames={{
-                    base: "bg-gradient-to-br from-indigo-500 to-pink-500  shadow-pink-500/30",
-                    content: "drop-shadow shadow-black text-white",
-                  }}
-                >
-                  <div className="font-medium tracking-wider">
-                    {l?.verified}
-                  </div>
-                </Chip>
-              )}
-
-              <Button
-                isIconOnly
-                aria-label="Like"
-                size="sm"
-                radius="full"
-                color="danger"
-                variant={isInWishlist(ad._id) ? "solid" : "flat"} // Change based on wishlist
-                isLoading={loadingAd[ad._id] || false} // Only the clicked button will show loading
-                onPress={() => updateUserWishlist_(ad._id)} // Handle wishlist update
+          {showStatus ? (
+            <>
+              <div
+                className={`absolute inset-x-0 top-0 z-40 flex ${
+                  ad.reviewStatus !== "Payment Pending"
+                    ? "justify-between"
+                    : "justify-end"
+                } items-center p-2`}
               >
-                <FavoriteBorderIcon style={{ color: "white" }} />
-              </Button>
-            </div>
-          </>
+                {ad.reviewStatus !== "Payment Pending" && (
+                  <Chip
+                    avatar={
+                      <Avatar
+                        name="allcareok"
+                        src="https://www.allcareok.com/images/allcareok_logo.png"
+                      />
+                    }
+                    variant="shadow"
+                    // classNames={{
+                    //   base: "bg-gradient-to-br from-indigo-500 to-pink-500  shadow-pink-500/30",
+                    //   content: "drop-shadow shadow-black text-white",
+                    // }}
+                    // classNames={{
+                    //   base: "bg-white",
+                    //   content: "drop-shadow shadow-black text-black",
+                    // }}
+                    classNames={{
+                      base:
+                        ad.reviewStatus === "Approved"
+                          ? "bg-green-400"
+                          : ad.reviewStatus === "Under Review"
+                          ? "bg-indigo-400"
+                          : ad.reviewStatus === "Rejected"
+                          ? "bg-pink-400 "
+                          : "bg-default",
+                      content: "drop-shadow shadow-black text-white",
+                    }}
+                  >
+                    <div className="font-medium tracking-wider">
+                      {ad.reviewStatus === "Approved" && l?.approved}
+                      {ad.reviewStatus === "Under Review" && l?.under_review}
+                      {ad.reviewStatus === "Rejected" && l?.rejected}
+                      {/* {l?.verified} */}
+                    </div>
+                  </Chip>
+                )}
+
+                <Button
+                  isIconOnly
+                  aria-label="Like"
+                  size="sm"
+                  radius="full"
+                  color="danger"
+                  variant={isInWishlist(ad._id) ? "solid" : "flat"} // Change based on wishlist
+                  isLoading={loadingAd[ad._id] || false} // Only the clicked button will show loading
+                  onPress={() => updateUserWishlist_(ad._id)} // Handle wishlist update
+                >
+                  <FavoriteBorderIcon style={{ color: "white" }} />
+                </Button>
+              </div>
+            </>
+          ) : (
+            <>
+              <div
+                className={`absolute inset-x-0 top-0 z-40 flex ${
+                  ad.reviewStatus === "Approved"
+                    ? "justify-between"
+                    : "justify-end"
+                } items-center p-2`}
+              >
+                {ad.reviewStatus === "Approved" && (
+                  <Chip
+                    avatar={
+                      <Avatar
+                        name="allcareok"
+                        src="https://www.allcareok.com/images/allcareok_logo.png"
+                      />
+                    }
+                    variant="shadow"
+                    classNames={{
+                      base: "bg-gradient-to-br from-indigo-500 to-pink-500  shadow-pink-500/30",
+                      content: "drop-shadow shadow-black text-white",
+                    }}
+                  >
+                    <div className="font-medium tracking-wider">
+                      {l?.verified}
+                    </div>
+                  </Chip>
+                )}
+
+                <Button
+                  isIconOnly
+                  aria-label="Like"
+                  size="sm"
+                  radius="full"
+                  color="danger"
+                  variant={isInWishlist(ad._id) ? "solid" : "flat"} // Change based on wishlist
+                  isLoading={loadingAd[ad._id] || false} // Only the clicked button will show loading
+                  onPress={() => updateUserWishlist_(ad._id)} // Handle wishlist update
+                >
+                  <FavoriteBorderIcon style={{ color: "white" }} />
+                </Button>
+              </div>
+            </>
+          )}
 
           {adsId && ad?._id && adsId === ad._id ? (
             <>

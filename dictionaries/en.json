@@ -216,6 +216,9 @@
       "title": "Removed from Wishlist!",
       "description": "This advertisement has been removed from your wishlist."
     },
-    "wishlist_page_title": "Wishlists"
+    "wishlist_page_title": "Wishlists",
+    "approved": "Approved",
+    "under_review": "Under Review",
+    "rejected": "Rejected"
   }
 }

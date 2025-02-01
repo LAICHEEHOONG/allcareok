@@ -17,5 +17,25 @@ export const LogoSpinner = ({ text }) => {
 
       <SyncLoader color="#F31260" margin={4} speedMultiplier={0.9} size={25} />
     </div>
+
+    // <div className="flex flex-col justify-center items-center">
+    //   <Fade direction="up" cascade>
+    //     {text && (
+    //       <p
+    //         className={`font-bold text-inherit ml-2 text-2xl `}
+    //         style={{ color: "#f31260" }}
+    //       >
+    //         allcareok
+    //       </p>
+    //     )}
+
+    //     <SyncLoader
+    //       color="#F31260"
+    //       margin={4}
+    //       speedMultiplier={0.9}
+    //       size={25}
+    //     />
+    //   </Fade>
+    // </div>
   );
 };

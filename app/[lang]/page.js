@@ -429,7 +429,7 @@ export default function Home() {
           {starter && (
             <div
               ref={ref}
-              className={`w-full h-[300px] flex justify-center items-center `}
+              className={`w-full h-[100px] flex justify-center items-center `}
             >
               {page <= totalPages && page > 1 && <LogoSpinner text={false} />}
             </div>
