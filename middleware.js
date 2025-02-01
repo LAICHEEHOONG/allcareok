@@ -62,14 +62,14 @@ const middleware = withAuth(
       ...i18n.locales,
     ]);
 
-    console.log("🔍 Checking middleware execution:");
-    console.log("📌 Current Path:", pathname);
-    console.log("🔑 Auth Token:", token ? "✅ Exists" : "❌ Not Found");
-    console.log("🛡️ Protected Paths With Locale:", protectedPathsWithLocale);
-    console.log(
-      "🔄 Redirect Condition:",
-      !token && protectedPathsWithLocale.includes(pathname)
-    );
+    // console.log("🔍 Checking middleware execution:");
+    // console.log("📌 Current Path:", pathname);
+    // console.log("🔑 Auth Token:", token ? "✅ Exists" : "❌ Not Found");
+    // console.log("🛡️ Protected Paths With Locale:", protectedPathsWithLocale);
+    // console.log(
+    //   "🔄 Redirect Condition:",
+    //   !token && protectedPathsWithLocale.includes(pathname)
+    // );
 
     // Add custom header to include the current pathname
     const response = NextResponse.next();

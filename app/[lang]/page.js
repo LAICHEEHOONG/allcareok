@@ -394,8 +394,9 @@ import { LogoSpinner } from "@/components/LogoSpinner";
 import { ADFooter } from "@/components/Home/ADFooter";
 import { countryFlag } from "@/components/countryFlag";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { updateUserWishlist, getUserWishlist } from "@/lib/action/userAction";
+import { updateUserWishlist } from "@/lib/action/userAction";
 import { signIn } from "next-auth/react";
+import { CrashPrevent } from "@/lib/frontend_tool";
 
 async function getCountryFromIP() {
   try {
@@ -549,7 +550,6 @@ export default function Home() {
 
   // const [isLoading, setIsLoading] = useState(false);
 
-
   // Fetch user data to get updated wishlist
   // const fetchWishlist = async () => {
   //   try {
@@ -576,8 +576,8 @@ export default function Home() {
 
     try {
       const res = await updateUserWishlist({ userId: user, adId }); // Update wishlist
-      console.log(res)
-      if(res.success) {
+      console.log(res);
+      if (res.success) {
         dispatch(setWishlist(res.data.wishlist)); // Update Redux store
       }
       // await fetchWishlist(); // Get the latest user data with wishlist
@@ -600,6 +600,7 @@ export default function Home() {
             {ADS.length === 0 ? (
               <div className="flex flex-col gap-3 justify-center items-center h-[60vh] w-full ">
                 <LogoSpinner text={true} />
+                <CrashPrevent />
               </div>
             ) : (
               <Masonry
