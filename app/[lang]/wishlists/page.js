@@ -24,21 +24,42 @@ export default function Wishlists() {
   const wishlistsAd = useSelector((state) => state.wishlists?.wishlistsAd);
   const adsId = ""; //for loading use
 
+  // useEffect(() => {
+  //   const getAdsByIds_ = async () => {
+  //     try {
+  //       const adsData = await getAdsByIds(wishlist);
+  //       console.log(adsData)
+  //       if(adsData.success) {
+  //         dispatch(setWishlistPage(adsData.data))
+  //       }
+  //     } catch (error) {
+  //       console.log(error)
+  //     }
+  //   };
+
+  //   getAdsByIds_();
+  // }, [wishlist]);
+
   useEffect(() => {
+    if (!wishlist || wishlist.length === 0) {
+      dispatch(setWishlistPage([]));
+      return;
+    }
+  
     const getAdsByIds_ = async () => {
       try {
         const adsData = await getAdsByIds(wishlist);
-        if(adsData.success) {
-          console.log(adsData.data);
-          dispatch(setWishlistPage(adsData.data))
+        console.log(adsData);
+        if (adsData.success) {
+          dispatch(setWishlistPage(adsData.data));
         }
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     };
-
+  
     getAdsByIds_();
-  }, []);
+  }, [wishlist]);
 
   return (
     <div className="w-full flex justify-center">
