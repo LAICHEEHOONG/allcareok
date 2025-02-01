@@ -397,6 +397,8 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { updateUserWishlist } from "@/lib/action/userAction";
 import { signIn } from "next-auth/react";
 import { CrashPrevent } from "@/lib/frontend_tool";
+import { toast } from "sonner";
+import { showToast } from "@/lib/frontend_tool";
 
 async function getCountryFromIP() {
   try {
@@ -578,8 +580,16 @@ export default function Home() {
       const res = await updateUserWishlist({ userId: user, adId }); // Update wishlist
       console.log(res);
       if (res.success) {
+        if (res.data.wishlist.length > wishlist.length) {
+          showToast(l?.wishlist_toast?.title, l?.wishlist_toast?.description);
+        }
+        if (res.data.wishlist.length < wishlist.length) {
+          showToast(l?.wishlist_toast_remove?.title, l?.wishlist_toast_remove?.description);
+        }
+
         dispatch(setWishlist(res.data.wishlist)); // Update Redux store
       }
+
       // await fetchWishlist(); // Get the latest user data with wishlist
     } catch (error) {
       console.error("Error updating wishlist:", error);

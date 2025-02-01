@@ -511,22 +511,6 @@ export default function PhotoRightCard() {
             radius="full"
             startContent={<FilterIcon />}
             onPress={handlePress}
-            // onPress={() => {
-            //   if (ad?.photo.length <= 10) {
-            //     onOpen();
-            //   } else {
-            //     // toast("You can only upload 10 photos");
-            //     console.log("toast")
-
-            //     toast("Event has been created", {
-            //       description: "Sunday, December 03, 2023 at 9:00 AM",
-            //       action: {
-            //         label: "Undo",
-            //         onClick: () => console.log("Undo"),
-            //       },
-            //     })
-            //   }
-            // }}
           >
             {l?.add_photo ? l.add_photo : "Add photos"}
           </Button>
@@ -678,7 +662,7 @@ export default function PhotoRightCard() {
         </div>
         <M />
       </ScrollShadow>
-      {/* <Toaster position='top-center' richColors /> */}
+
     </div>
   );
 }

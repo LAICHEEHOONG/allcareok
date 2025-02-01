@@ -52,19 +52,6 @@ export default function Dashboard() {
     router.push(`/${currentLocale}/editor`);
   };
 
-  // const handleAddAD = () => {
-  //   if (ads?.length >= 10) {
-  //     toast.warning(`${l?.ad_limit}`, {
-  //       description: `${l?.ad_limit_description}`,
-  //       action: {
-  //         label: "OK",
-  //         onClick: () => console.log("Add Ad Limit Reached"),
-  //       },
-  //     });
-  //   } else {
-  //     router.push(`/${currentLocale}/editor`);
-  //   }
-  // };
   const handleAddAD = () => {
     if (role === "admin") {
       // Admins can add unlimited ads

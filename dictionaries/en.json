@@ -207,9 +207,14 @@
     }
   },
   "home_card": {
-    "verified" : "Verified"
+    "verified": "Verified",
+    "wishlist_toast": {
+      "title": "Added to Wishlist!",
+      "description": "You can find this advertisement in your wishlist page."
+    },
+    "wishlist_toast_remove": {
+      "title": "Removed from Wishlist!",
+      "description": "This advertisement has been removed from your wishlist."
+    }
   }
 }
-
-
-

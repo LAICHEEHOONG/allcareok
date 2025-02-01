@@ -26,15 +26,8 @@ import {
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useSelector } from "react-redux";
 import { useRouter, usePathname } from "next/navigation";
-// import { setAd, setAds, setPopUp } from "@/redux/features/editor/editorSlice";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-// import { createAD, findUserAds } from "@/lib/action/adAction";
-// import { toast } from "sonner";
 import Masonry from "react-masonry-css";
-// import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-// import AddIcon from "@mui/icons-material/Add";
-// import FilterIcon from "@mui/icons-material/Filter";
-// import { useDropzone } from "react-dropzone";
 import CheckIcon from "@mui/icons-material/Check";
 
 const breakpointColumnsObj = {
