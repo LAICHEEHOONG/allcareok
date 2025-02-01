@@ -104,6 +104,7 @@ const adSchema = new mongoose.Schema(
       type: Number,
       default: 0, // Default value for views
     },
+
   },
   {
     timestamps: true,

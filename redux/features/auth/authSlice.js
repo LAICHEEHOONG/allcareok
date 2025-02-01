@@ -13,6 +13,7 @@ const initialState = {
   session: null,
   status: "",
   dbCountry: "",
+  wishlist: [],
 };
 
 export const authSlice = createSlice({
@@ -20,19 +21,21 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setDBCountry: (state, action) => {
-      state.dbCountry = action.payload
+      state.dbCountry = action.payload;
     },
     signInStatus: (state, action) => {
       state.signIn = action.payload;
     },
     userInfo: (state, action) => {
-      const { email, image, name, role, _id, language } = action.payload;
+      const { email, image, name, role, _id, language, wishlist } =
+        action.payload;
       state.email = email;
       state.image = image;
       state.name = name;
       state.role = role;
       state._id = _id;
       state.language = language;
+      state.wishlist = wishlist;
     },
     updateLanguage: (state, action) => {
       state.language = action.payload.replace(/^\//, "");
@@ -49,6 +52,9 @@ export const authSlice = createSlice({
     setStatus: (state, action) => {
       state.status = action.payload || "";
     },
+    setWishlist: (state, action) => {
+      state.wishlist = action.payload
+    }
   },
 });
 
@@ -60,7 +66,8 @@ export const {
   setCountry,
   setSession,
   setStatus,
-  setDBCountry
+  setDBCountry,
+  setWishlist
 } = authSlice.actions;
 
 export default authSlice.reducer;

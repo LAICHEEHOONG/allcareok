@@ -27,7 +27,8 @@ const userSchema = new mongoose.Schema(
     },
     secret: {
       type: String
-    }
+    },
+    wishlist: [{ type: String }],
   },
   {
     timestamps: true,

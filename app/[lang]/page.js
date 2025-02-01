@@ -345,7 +345,7 @@
 // }
 
 "use client";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setCountry,
@@ -353,6 +353,7 @@ import {
   setStatus,
   userInfo,
   signInStatus,
+  setWishlist,
 } from "@/redux/features/auth/authSlice";
 import {
   setAds,
@@ -382,17 +383,19 @@ import {
   Chip,
   Button,
 } from "@heroui/react";
-import Autoplay from "embla-carousel-autoplay";
+// import Autoplay from "embla-carousel-autoplay";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
 import { LogoSpinner } from "@/components/LogoSpinner";
-import { getCarouselItems } from "@/components/carouselItems";
+// import { getCarouselItems } from "@/components/carouselItems";
 import { ADFooter } from "@/components/Home/ADFooter";
 import { countryFlag } from "@/components/countryFlag";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { updateUserWishlist, getUserWishlist } from "@/lib/action/userAction";
+import { signIn } from "next-auth/react";
 
 async function getCountryFromIP() {
   try {
@@ -418,9 +421,11 @@ export default function Home() {
   const [ref, inView] = useInView();
   // const plugin = useRef(Autoplay({ delay: 7000, stopOnInteraction: true }));
   // const [carouselItems, setCarouselItems] = useState([]);
-  const service_type = useSelector((state) => state?.auth?.lang?.service_type);
+  // const service_type = useSelector((state) => state?.auth?.lang?.service_type);
   const [starter, setStarter] = useState(false);
   const l = useSelector((state) => state.auth?.lang?.home_card);
+  const wishlist = useSelector((state) => state.auth?.wishlist);
+  const [loadingAd, setLoadingAd] = useState({}); // Track loading state per adId
 
   const redirectedPathName = (locale) => {
     if (!pathName) return "/";
@@ -522,6 +527,70 @@ export default function Home() {
       setStarter(false);
     }
   }, [page]);
+
+  // const updateUserWishlist_ = async (adId, userId) => {
+  //   try {
+  //     // run loading
+  //     const res = await updateUserWishlist({
+  //       userId: userId,
+  //       adId: adId,
+  //     });
+  //     console.log(res);
+  //     if (res.success) {
+  //       const res = await signUp(user);
+  //       dispatch(userInfo(res));
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   } finally {
+  //     // stop loading
+  //   }
+  // };
+
+  // const [isLoading, setIsLoading] = useState(false);
+
+
+  // Fetch user data to get updated wishlist
+  // const fetchWishlist = async () => {
+  //   try {
+  //     const res = await getUserWishlist(user); // Fetch the latest user data
+  //     if (res.success) {
+  //       dispatch(setWishlist(res.wishlist)); // Update Redux store
+  //     }
+
+  //     // setWishlist(res.wishlist || []); // Update wishlist state
+  //   } catch (error) {
+  //     console.error("Error fetching user data:", error);
+  //   }
+  // };
+
+  // Handle wishlist update
+  const updateUserWishlist_ = async (adId) => {
+    if (!session) {
+      signIn();
+      return;
+    }
+
+    // setIsLoading(true);
+    setLoadingAd((prev) => ({ ...prev, [adId]: true })); // Set loading for the specific ad
+
+    try {
+      const res = await updateUserWishlist({ userId: user, adId }); // Update wishlist
+      console.log(res)
+      if(res.success) {
+        dispatch(setWishlist(res.data.wishlist)); // Update Redux store
+      }
+      // await fetchWishlist(); // Get the latest user data with wishlist
+    } catch (error) {
+      console.error("Error updating wishlist:", error);
+    } finally {
+      // setIsLoading(false);
+      setLoadingAd((prev) => ({ ...prev, [adId]: false })); // Stop loading for this ad
+    }
+  };
+
+  // Check if the ad is in the wishlist
+  const isInWishlist = (adId) => wishlist.includes(adId);
 
   return (
     <div className="pb-20">
@@ -660,10 +729,6 @@ export default function Home() {
                           </CarouselContent>
                         </Carousel>
                         <>
-                          {/* <div className="absolute inset-0 bg-black bg-opacity-50 rounded-xl z-40"></div> */}
-                          {/* <div className="absolute inset-0 flex justify-start z-40"> */}
-                          {/* <Spinner color="default" size="lg" /> */}
-                          {/* </div> */}
                           <div
                             className={`absolute inset-x-0 top-0 z-40 flex ${
                               ad.reviewStatus === "Approved"
@@ -683,14 +748,17 @@ export default function Home() {
                                 // className="bg-white"
                                 classNames={{
                                   base: "bg-gradient-to-br from-indigo-500 to-pink-500  shadow-pink-500/30",
-                                  content: "drop-shadow shadow-black text-white",
+                                  content:
+                                    "drop-shadow shadow-black text-white",
                                 }}
                               >
-                                <div className="font-medium tracking-wider">{l?.verified}</div>
+                                <div className="font-medium tracking-wider">
+                                  {l?.verified}
+                                </div>
                               </Chip>
                             )}
 
-                            <Button
+                            {/* <Button
                               isIconOnly
                               aria-label="Like"
                               className=""
@@ -698,6 +766,21 @@ export default function Home() {
                               variant="flat" //solid
                               radius="full"
                               color="danger"
+                              //isLoading
+                              onPress={updateUserWishlist_(user, ad._id)}
+                            >
+                              <FavoriteBorderIcon style={{ color: "white" }} />
+                            </Button> */}
+                            <Button
+                              isIconOnly
+                              aria-label="Like"
+                              size="sm"
+                              radius="full"
+                              color="danger"
+                              variant={isInWishlist(ad._id) ? "solid" : "flat"} // Change based on wishlist
+                              // isLoading={isLoading} // Show loading when updating
+                              isLoading={loadingAd[ad._id] || false} // Only the clicked button will show loading
+                              onPress={() => updateUserWishlist_(ad._id)} // Handle wishlist update
                             >
                               <FavoriteBorderIcon style={{ color: "white" }} />
                             </Button>
