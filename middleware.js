@@ -15,7 +15,8 @@ const protectedPaths = [
   "/editor/mobile/description",
   "/editor/mobile/verify",
   "/editor/mobile/boosts",
-  "/one_nine_nine_zero"
+  "/one_nine_nine_zero",
+  "/wishlists",
 ];
 
 function getProtectedRoutes(protectedPaths, locales) {
@@ -55,9 +56,20 @@ const middleware = withAuth(
         !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
     );
 
+
+
     const protectedPathsWithLocale = getProtectedRoutes(protectedPaths, [
       ...i18n.locales,
     ]);
+
+    console.log("🔍 Checking middleware execution:");
+    console.log("📌 Current Path:", pathname);
+    console.log("🔑 Auth Token:", token ? "✅ Exists" : "❌ Not Found");
+    console.log("🛡️ Protected Paths With Locale:", protectedPathsWithLocale);
+    console.log(
+      "🔄 Redirect Condition:",
+      !token && protectedPathsWithLocale.includes(pathname)
+    );
 
     // Add custom header to include the current pathname
     const response = NextResponse.next();
@@ -93,6 +105,36 @@ const middleware = withAuth(
     },
   }
 );
+
+// const middleware = withAuth(
+//   function middleware(request) {
+//     const token = request.nextauth?.token;
+//     const pathname = request.nextUrl.pathname;
+//     const protectedPathsWithLocale = getProtectedRoutes(protectedPaths, i18n.locales);
+
+//     console.log("🔍 Checking middleware execution:");
+//     console.log("📌 Current Path:", pathname);
+//     console.log("🔑 Auth Token:", token ? "✅ Exists" : "❌ Not Found");
+//     console.log("🛡️ Protected Paths With Locale:", protectedPathsWithLocale);
+//     console.log("🔄 Redirect Condition:", !token && protectedPathsWithLocale.includes(pathname));
+
+//     if (!token && protectedPathsWithLocale.includes(pathname)) {
+//       return NextResponse.redirect(
+//         new URL(
+//           `/api/auth/signin?callbackUrl=${encodeURIComponent(pathname)}`,
+//           request.url
+//         )
+//       );
+//     }
+
+//     return NextResponse.next();
+//   },
+//   {
+//     callbacks: {
+//       authorized: ({ token }) => !!token, // Only allow access if a token exists
+//     },
+//   }
+// );
 
 export default middleware;
 

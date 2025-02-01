@@ -8,7 +8,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { getCarouselItems } from "./carouselItems";
-import { Fade } from "react-awesome-reveal";
+
 
 export function NavCarousel({ service_type }) {
   const carouselItems = getCarouselItems(service_type);

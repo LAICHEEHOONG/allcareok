@@ -42,6 +42,8 @@ export default function NavChild({ navigation, service_type, poppins, dic }) {
     pathname.endsWith("/editor/mobile/boosts") ||
     pathname.endsWith("/one_nine_nine_zero");
 
+  const isWishlist = pathname.endsWith("/wishlists");
+
   return (
     <>
       {isDashboard ? (
@@ -51,8 +53,17 @@ export default function NavChild({ navigation, service_type, poppins, dic }) {
           <NavbarBrand className={`${poppins.className} hidden xs:block`}>
             <AllcareokLogo />
           </NavbarBrand>
+          {isWishlist && (
+            <NavbarBrand className={`${poppins.className} block xs:hidden`}>
+              <AllcareokLogo />
+            </NavbarBrand>
+          )}
           <NavbarContent justify="center">
-            <SearchField navigation={navigation} />
+            {!isWishlist ? (
+              <SearchField navigation={navigation} />
+            ) : (
+              <div className="w-[150px] xs:w-[250px] sm:w-[307px] h-[64px]"></div>
+            )}
           </NavbarContent>
           <NavbarContent justify="end">
             <NavbarItem className="hidden sm:flex items-center">
@@ -74,10 +85,11 @@ export default function NavChild({ navigation, service_type, poppins, dic }) {
       ) : (
         <div className="flex flex-col justify-center items-center ">
           <Divider className="m-3" />
-          <div className="w-full max-w-[2300px] flex justify-center items-center">
-          <NavCarousel service_type={service_type} />
-
-          </div>
+          {!isWishlist && (
+            <div className="w-full max-w-[2300px] flex justify-center items-center">
+              <NavCarousel service_type={service_type} />
+            </div>
+          )}
         </div>
       )}
     </>

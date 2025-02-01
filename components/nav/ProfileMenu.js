@@ -38,6 +38,10 @@ export default function ProfileMenu({ navigation }) {
     }
   };
 
+  const handleWishlists = () => {
+    router.push(`/${currentLocale}/wishlists`);
+  }
+
   return (
     <Dropdown>
       <DropdownTrigger>
@@ -59,7 +63,7 @@ export default function ProfileMenu({ navigation }) {
           </DropdownItem>
         )}
 
-        <DropdownItem key={navigation.whishlists} textValue="whish lists">
+        <DropdownItem key={navigation.whishlists} textValue="whish lists" onPress={handleWishlists}>
           {navigation.whishlists}
         </DropdownItem>
         <DropdownItem
