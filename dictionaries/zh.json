@@ -216,6 +216,13 @@
       "title": "已从心愿清单移除！",
       "description": "此广告已从您的心愿清单中移除。"
     },
-    "wishlist_page_title": "心愿清单"
+    "wishlist_page_title": "心愿清单",
+    "approved": "已批准",
+    "under_review": "审核中",
+    "rejected": "已拒绝",
+    "wishlist_empty": {
+      "title": "心愿清单为空",
+      "description": "你还没有添加任何广告到心愿清单。"
+    }
   }
 }

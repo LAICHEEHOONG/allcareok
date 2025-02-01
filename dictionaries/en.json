@@ -219,6 +219,10 @@
     "wishlist_page_title": "Wishlists",
     "approved": "Approved",
     "under_review": "Under Review",
-    "rejected": "Rejected"
+    "rejected": "Rejected",
+    "wishlist_empty": {
+      "title": "Wishlist is Empty",
+      "description": "You haven’t added any ads to your wishlist yet. "
+    }
   }
 }

@@ -12,6 +12,7 @@ import GoogleIcon from "@mui/icons-material/Google";
 import { signIn, signOut } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter, usePathname } from "next/navigation";
+import { toast } from "sonner";
 
 export default function ProfileMenu({ navigation }) {
   const session = useSelector((state) => state.auth.session);
@@ -24,6 +25,8 @@ export default function ProfileMenu({ navigation }) {
   const ads = useSelector((state) => state.editor.ads);
   const blockServiceBtn = useSelector((state) => state.editor.blockServiceBtn);
   const searchValue = useSelector((state) => state.search.value);
+  const wishlist = useSelector((state) => state.auth?.wishlist);
+  const l = useSelector((state) => state.auth?.lang?.home_card);
 
   const changeRouter = () => {
     if (!session) {
@@ -39,8 +42,22 @@ export default function ProfileMenu({ navigation }) {
   };
 
   const handleWishlists = () => {
+    if (wishlist.length === 0) {
+      // showToast(l?.wishlist_toast?.title, l?.wishlist_toast?.description);
+      toast.warning(l?.wishlist_empty?.title, {
+        description: l?.wishlist_empty?.description,
+        action: {
+          label: "OK",
+          // onClick: () => {
+          //   if (typeof fn === "function") fn(); // Check before calling
+          // },
+        },
+      });
+      return;
+    }
+
     router.push(`/${currentLocale}/wishlists`);
-  }
+  };
 
   return (
     <Dropdown>
@@ -63,7 +80,11 @@ export default function ProfileMenu({ navigation }) {
           </DropdownItem>
         )}
 
-        <DropdownItem key={navigation.whishlists} textValue="whish lists" onPress={handleWishlists}>
+        <DropdownItem
+          key={navigation.whishlists}
+          textValue="whish lists"
+          onPress={handleWishlists}
+        >
           {navigation.whishlists}
         </DropdownItem>
         <DropdownItem

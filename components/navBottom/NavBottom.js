@@ -13,10 +13,12 @@ import { useSelector } from "react-redux";
 import { DrawerProfile } from "../DrawerProfile";
 import { signIn } from "next-auth/react";
 import { DrawerLanguage } from "../DrawerLanguage";
+import { toast } from "sonner";
 
 export default function NavBottom({ bottom_navigation }) {
   const session = useSelector((state) => state.auth.session);
-
+  const wishlist = useSelector((state) => state.auth?.wishlist);
+  const l = useSelector((state) => state.auth?.lang?.home_card);
   const router = useRouter();
   const pathname = usePathname();
   const isDashboard =
@@ -81,6 +83,24 @@ export default function NavBottom({ bottom_navigation }) {
 
   }, [language]);
 
+  const handleWishlists = () => {
+    if (wishlist.length === 0) {
+      // showToast(l?.wishlist_toast?.title, l?.wishlist_toast?.description);
+      toast.warning(l?.wishlist_empty?.title, {
+        description: l?.wishlist_empty?.description,
+        action: {
+          label: "OK",
+          // onClick: () => {
+          //   if (typeof fn === "function") fn(); // Check before calling
+          // },
+        },
+      });
+      return;
+    }
+
+    router.push(`/${currentLocale}/wishlists`);
+  };
+
   return (
     <>
       {isDashboard ? (
@@ -122,6 +142,7 @@ export default function NavBottom({ bottom_navigation }) {
                 showLabel
                 onClick={() => {
                   setClickIcon(1);
+                  handleWishlists()
                 }}
               ></BottomNavigationAction>
               <DrawerLanguage bottom_navigation={bottom_navigation}>
