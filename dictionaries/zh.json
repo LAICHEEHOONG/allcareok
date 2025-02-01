@@ -215,6 +215,7 @@
     "wishlist_toast_remove": {
       "title": "已从心愿清单移除！",
       "description": "此广告已从您的心愿清单中移除。"
-    }
+    },
+    "wishlist_page_title": "心愿清单"
   }
 }

@@ -215,6 +215,7 @@
     "wishlist_toast_remove": {
       "title": "Removed from Wishlist!",
       "description": "This advertisement has been removed from your wishlist."
-    }
+    },
+    "wishlist_page_title": "Wishlists"
   }
 }

@@ -1,11 +1,6 @@
 "use client";
 import {
   Button,
-  Image,
-  Card,
-  CardBody,
-  CardFooter,
-  Spinner,
 } from "@heroui/react";
 import AddIcon from "@mui/icons-material/Add";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
