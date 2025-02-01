@@ -7,7 +7,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useRouter, usePathname } from "next/navigation";
 import { setAdsID, setAd, setFocus } from "@/redux/features/editor/editorSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Masonry from "react-masonry-css";
 import { toast } from "sonner";
 import AD from "@/components/Home/AD";
@@ -30,6 +30,7 @@ export default function Dashboard() {
   const l = useSelector((state) => state.auth.lang?.listing_editor_card);
   const adsId = useSelector((state) => state.editor.adsId);
   const role = useSelector(state => state.auth?.role);
+  const [addBtnLoading, setAddBtnLoading] = useState(false)
 
   useEffect(() => {
     dispatch(setAdsID(""));
@@ -48,6 +49,7 @@ export default function Dashboard() {
   };
 
   const handleAddAD = () => {
+    setAddBtnLoading(true)
     if (role === "admin") {
       // Admins can add unlimited ads
       router.push(`/${currentLocale}/editor`);
@@ -63,9 +65,12 @@ export default function Dashboard() {
           onClick: () => console.log("Add Ad Limit Reached"),
         },
       });
+      setAddBtnLoading(false)
     } else {
+
       router.push(`/${currentLocale}/editor`);
     }
+
   };
   
 
@@ -98,6 +103,7 @@ export default function Dashboard() {
               radius="full"
               color="default"
               variant="flat"
+              isLoading={addBtnLoading}
               onPress={handleAddAD}
             >
               <AddIcon />

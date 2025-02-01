@@ -17,9 +17,10 @@ export default function AllcareokLogo({ isDashboard }) {
       <Image
         className="min-w-[37px] "
         width={37}
-        radius="none"
+        radius="full"
         alt="Allcareok logo"
         src="/images/allcareok_logo.png"
+        
       />
 
       <p

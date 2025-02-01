@@ -223,18 +223,21 @@ export default function AD({ ad, fn, adsId }) {
             </div>
           )}
         </CardHeader>
-        {/* Card Body with Skeleton */}
         <CardBody className="overflow-visible p-0">
           <Carousel
             className="w-full cursor-pointer"
             opts={{ align: "start", loop: true, dragFree: false }}
-            onClick={() => fn()}
+            // onClick={() => fn()}
+            onClick={() => {
+              if (typeof fn === "function") {
+                fn();
+              }
+            }}
           >
             <CarouselContent>
               {ad?.photo?.length > 0 ? (
                 ad?.photo?.map((item, i) => (
                   <CarouselItem
-                    // key={`${item._id}-${item.url}-${i}-${crypto.randomUUID()}`}
                     key={`${crypto.randomUUID()}`}
                     className="flex justify-center items-start"
                   >
@@ -283,17 +286,23 @@ export default function AD({ ad, fn, adsId }) {
             </CarouselContent>
           </Carousel>
 
-          {adsId && adsId === ad?._id && (
+          {/* {adsId && adsId === ad?._id && (
             <>
               <div className="absolute inset-0 bg-pink-300 bg-opacity-50 rounded-xl z-40"></div>
               <div className="absolute inset-0 flex items-center justify-center z-40">
-                {/* <Spinner color="default" size="lg" /> */}
                 <LogoSpinner text={false} />
               </div>
             </>
-          )}
+          )} */}
+          {adsId && ad?._id && adsId === ad._id ? (
+            <>
+              <div className="absolute inset-0 bg-pink-300 bg-opacity-50 rounded-xl z-40"></div>
+              <div className="absolute inset-0 flex items-center justify-center z-40">
+                <LogoSpinner text={false} />
+              </div>
+            </>
+          ) : null}
         </CardBody>
-        {/* Card Footer with Skeleton */}
         <CardFooter className="flex justify-center p-0 ">
           {
             <div className="w-full flex justify-center items-center max-w-[300px] h-[35px] ">

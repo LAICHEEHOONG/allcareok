@@ -1,5 +1,5 @@
-'use client'
-// import { Spinner } from "@heroui/react";
+"use client";
+import { Spinner } from "@heroui/react";
 import { LogoSpinner } from "@/components/LogoSpinner";
 
 const Loading = () => {
@@ -11,7 +11,9 @@ const Loading = () => {
     //   </div>
     // </div>
     <div className="h-screen w-full flex justify-center items-center">
-      <LogoSpinner text={true} />
+      <div >
+        <LogoSpinner text={true} />
+      </div>
     </div>
   );
 };
