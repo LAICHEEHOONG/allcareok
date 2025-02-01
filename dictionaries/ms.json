@@ -205,5 +205,8 @@
         "buttonText": "Naik Taraf ke Pro"
       }
     }
+  },
+  "home_card": {
+    "verified" : "Disahkan"
   }
 }

@@ -66,7 +66,7 @@ export default function PaymentPro() {
           <ErrorOutlineIcon style={{ fontSize: "69px", color: "#f31260" }} />
         )}
       </div>
-      <div className="font-bold text-2xl m-3 tracking-wide">{info.title}</div>
+      <div className="font-bold text-xl m-3 tracking-wide">{info.title}</div>
       <div className="text-default-400 tracking-wide text-center w-full max-w-[600px]">
         {info.content}
       </div>

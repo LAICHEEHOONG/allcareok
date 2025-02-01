@@ -205,5 +205,8 @@
         "buttonText": "升级为 Pro"
       }
     }
+  },
+  "home_card": {
+    "verified" : "已验证"
   }
 }

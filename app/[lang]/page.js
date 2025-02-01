@@ -416,10 +416,11 @@ export default function Home() {
   const page = useSelector((state) => state.ADS.page);
   const totalPages = useSelector((state) => state.ADS.totalPages);
   const [ref, inView] = useInView();
-  const plugin = useRef(Autoplay({ delay: 7000, stopOnInteraction: true }));
-  const [carouselItems, setCarouselItems] = useState([]);
+  // const plugin = useRef(Autoplay({ delay: 7000, stopOnInteraction: true }));
+  // const [carouselItems, setCarouselItems] = useState([]);
   const service_type = useSelector((state) => state?.auth?.lang?.service_type);
   const [starter, setStarter] = useState(false);
+  const l = useSelector((state) => state.auth?.lang?.home_card);
 
   const redirectedPathName = (locale) => {
     if (!pathName) return "/";
@@ -448,9 +449,9 @@ export default function Home() {
     }
   }, [session]);
 
-  useEffect(() => {
-    setCarouselItems(getCarouselItems(service_type));
-  }, [service_type]);
+  // useEffect(() => {
+  //   setCarouselItems(getCarouselItems(service_type));
+  // }, [service_type]);
 
   useEffect(() => {
     getCountryFromIP().then((country) => dispatch(setCountry(country)));
@@ -679,9 +680,13 @@ export default function Home() {
                                   />
                                 }
                                 variant="shadow"
-                                className="bg-white"
+                                // className="bg-white"
+                                classNames={{
+                                  base: "bg-gradient-to-br from-indigo-500 to-pink-500  shadow-pink-500/30",
+                                  content: "drop-shadow shadow-black text-white",
+                                }}
                               >
-                                <div className="font-medium tracking-wider">Verified</div>
+                                <div className="font-medium tracking-wider">{l?.verified}</div>
                               </Chip>
                             )}
 

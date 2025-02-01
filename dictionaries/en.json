@@ -205,6 +205,9 @@
         "buttonText": "Upgrade to Pro"
       }
     }
+  },
+  "home_card": {
+    "verified" : "Verified"
   }
 }
 
