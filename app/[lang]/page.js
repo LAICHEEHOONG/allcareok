@@ -137,6 +137,26 @@ export default function Home() {
     fetchAds();
   }, [user]);
 
+  // fectch ads
+  useEffect(() => {
+    const fetchMoreAds = async () => {
+      try {
+        const res = await getAdsFast({
+          query: { page: page + 1, limit: 18 },
+        });
+        if (res.success) {
+          dispatch(setADS(res.data.ads));
+          dispatch(setPagination(res.data));
+        }
+      } catch (error) {
+        console.log(error);
+      } 
+    };
+    if (page <= totalPages && inView) {
+      fetchMoreAds();
+    }
+  }, [inView])
+
   // // fectch data
   // useEffect(() => {
   //   const fetchMoreAds = async () => {
@@ -164,57 +184,57 @@ export default function Home() {
   // }, [standby_ADS]);
 
   // fectch data
-  useEffect(() => {
-    const fetchMoreAds = async () => {
-      try {
-        const res = await getAdsFast({
-          query: { page: page + 1, limit: 18 },
-        });
-        if (res.success) {
-          dispatch(setStandbyADS(res.data.ads));
-          dispatch(setPagination(res.data));
-        }
-      } catch (error) {
-        console.error(error);
-      } finally {
-        if (!starter) {
-          setTimeout(() => {
-            setStarter(true);
-          }, 500);
-        }
-      }
-    };
-    const handleScroll = () => {
-      if (
-        window.innerHeight + window.scrollY >=
-        document.body.offsetHeight - 200
-      ) {
-        // Manually trigger the logic when close to the bottom
+  // useEffect(() => {
+  //   const fetchMoreAds = async () => {
+  //     try {
+  //       const res = await getAdsFast({
+  //         query: { page: page + 1, limit: 18 },
+  //       });
+  //       if (res.success) {
+  //         dispatch(setStandbyADS(res.data.ads));
+  //         dispatch(setPagination(res.data));
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //     } finally {
+  //       if (!starter) {
+  //         setTimeout(() => {
+  //           setStarter(true);
+  //         }, 500);
+  //       }
+  //     }
+  //   };
+  //   const handleScroll = () => {
+  //     if (
+  //       window.innerHeight + window.scrollY >=
+  //       document.body.offsetHeight - 200
+  //     ) {
+  //       // Manually trigger the logic when close to the bottom
 
-        // dispatch(setADS(standby_ADS));
-        // dispatch(setStandbyADS([]));
-        if (standby_ADS.length > 0) {
-          dispatch(setADS(standby_ADS));
-          dispatch(setStandbyADS([]));
-        }
-      }
-    };
-    if (standby_ADS.length === 0 && page <= totalPages) {
-      fetchMoreAds();
-    }
+  //       // dispatch(setADS(standby_ADS));
+  //       // dispatch(setStandbyADS([]));
+  //       if (standby_ADS.length > 0) {
+  //         dispatch(setADS(standby_ADS));
+  //         dispatch(setStandbyADS([]));
+  //       }
+  //     }
+  //   };
+  //   if (standby_ADS.length === 0 && page <= totalPages) {
+  //     fetchMoreAds();
+  //   }
 
-    window.addEventListener("scroll", handleScroll);
+  //   window.addEventListener("scroll", handleScroll);
 
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [standby_ADS]);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, [standby_ADS]);
 
   // show ads
-  useEffect(() => {
-    if (standby_ADS.length > 0) {
-      dispatch(setADS(standby_ADS));
-      dispatch(setStandbyADS([]));
-    }
-  }, [inView]);
+  // useEffect(() => {
+  //   if (standby_ADS.length > 0) {
+  //     dispatch(setADS(standby_ADS));
+  //     dispatch(setStandbyADS([]));
+  //   }
+  // }, [inView]);
 
   // // show data
   // useEffect(() => {
@@ -511,21 +531,21 @@ export default function Home() {
               </Masonry>
             )}
           </div>
-          {/* <div
+          <div
             ref={ref}
-            className={`w-full h-[100px] flex justify-center items-center `}
+            className={`w-full h-[50px] flex justify-center items-center border-2`}
           >
             {page <= totalPages && page > 1 && <LogoSpinner text={false} />}
-          </div> */}
+          </div>
 
-          {starter && (
+          {/* {starter && (
             <div
               ref={ref}
               className={`w-full h-[100px] flex justify-center items-center `}
             >
               {page <= totalPages && page > 1 && <LogoSpinner text={false} />}
             </div>
-          )}
+          )} */}
         </div>
       </main>
     </div>
