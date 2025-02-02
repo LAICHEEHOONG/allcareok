@@ -1,21 +1,43 @@
 "use client";
-import { Spinner } from "@heroui/react";
-import { LogoSpinner } from "@/components/LogoSpinner";
+import { SyncLoader } from "react-spinners";
+import { Fade } from "react-awesome-reveal";
 
-const Loading = () => {
+export default function LogoSpinner({ text = true }) {
+  
   return (
-    // <div className="absolute inset-0 flex items-center justify-center dark text-foreground bg-background">
+    <div className="flex flex-col justify-center items-center ">
+      {text && (
+        <Fade direction="up" cascade className="mr-2">
+          <p
+            className={`font-bold text-inherit ml-2 text-2xl `}
+            style={{ color: "#f31260" }}
+          >
+            allcareok
+          </p>
+        </Fade>
+      )}
 
-    //   <div className="text-center" style={{ transform: "scale(2)" }}>
-    //     <Spinner color="danger" size="lg" />
-    //   </div>
-    // </div>
-    <div className="h-screen w-full flex justify-center items-center">
-      <div >
-        <LogoSpinner text={true} />
-      </div>
+      <SyncLoader  color="#F31260" margin={8} speedMultiplier={0.9} size={20} />
     </div>
-  );
-};
 
-export default Loading;
+    // <div className="flex flex-col justify-center items-center">
+    //   <Fade direction="up" cascade>
+    //     {text && (
+    //       <p
+    //         className={`font-bold text-inherit ml-2 text-2xl `}
+    //         style={{ color: "#f31260" }}
+    //       >
+    //         allcareok
+    //       </p>
+    //     )}
+
+    //     <SyncLoader
+    //       color="#F31260"
+    //       margin={4}
+    //       speedMultiplier={0.9}
+    //       size={25}
+    //     />
+    //   </Fade>
+    // </div>
+  );
+}

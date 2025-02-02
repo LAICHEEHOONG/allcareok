@@ -18,10 +18,10 @@ export default function AllcareokLogo({ isDashboard }) {
       <Image
         className="min-w-[37px] "
         width={37}
-        // radius="full"
         alt="Allcareok logo"
-        src="/images/favicon-32x32.png"
+        src="/images/apple-icon-160.png"
       />
+
       <Fade triggerOnce>
         <p
           className={`font-bold text-inherit ml-2 text-2xl ${
