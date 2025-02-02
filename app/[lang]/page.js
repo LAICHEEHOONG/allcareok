@@ -137,12 +137,38 @@ export default function Home() {
     fetchAds();
   }, [user]);
 
+  // // fectch data
+  // useEffect(() => {
+  //   const fetchMoreAds = async () => {
+  //     try {
+  //       const res = await getAdsFast({
+  //         query: { page: page + 1, limit: 12 },
+  //       });
+  //       if (res.success) {
+  //         dispatch(setStandbyADS(res.data.ads));
+  //         dispatch(setPagination(res.data));
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //     } finally {
+  //       if (!starter) {
+  //         setTimeout(() => {
+  //           setStarter(true);
+  //         }, 500);
+  //       }
+  //     }
+  //   };
+  //   if (standby_ADS.length === 0 && page <= totalPages) {
+  //     fetchMoreAds();
+  //   }
+  // }, [standby_ADS]);
+
   // fectch data
   useEffect(() => {
     const fetchMoreAds = async () => {
       try {
         const res = await getAdsFast({
-          query: { page: page + 1, limit: 12 },
+          query: { page: page + 1, limit: 18 },
         });
         if (res.success) {
           dispatch(setStandbyADS(res.data.ads));
@@ -158,10 +184,37 @@ export default function Home() {
         }
       }
     };
+    const handleScroll = () => {
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 200
+      ) {
+        // Manually trigger the logic when close to the bottom
+
+        // dispatch(setADS(standby_ADS));
+        // dispatch(setStandbyADS([]));
+        if (standby_ADS.length > 0) {
+          dispatch(setADS(standby_ADS));
+          dispatch(setStandbyADS([]));
+        }
+      }
+    };
     if (standby_ADS.length === 0 && page <= totalPages) {
       fetchMoreAds();
     }
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [standby_ADS]);
+
+  // show ads
+  useEffect(() => {
+    if (standby_ADS.length > 0) {
+      dispatch(setADS(standby_ADS));
+      dispatch(setStandbyADS([]));
+    }
+  }, [inView]);
 
   // // show data
   // useEffect(() => {
@@ -173,11 +226,11 @@ export default function Home() {
   //   }
   // }, [inView]);
 
-  useEffect(() => {
-    if (page > totalPages) {
-      setStarter(false);
-    }
-  }, [page]);
+  // useEffect(() => {
+  //   if (page > totalPages) {
+  //     setStarter(false);
+  //   }
+  // }, [page]);
 
   // Handle wishlist update
   const updateUserWishlist_ = async (adId) => {
@@ -242,46 +295,47 @@ export default function Home() {
   //   return () => window.removeEventListener("scroll", handleScroll);
   // }, [standby_ADS]);
 
-  useEffect(() => {
-    let isLoading = false; // Prevent double execution
-  
-    const loadAds = () => {
-      if (isLoading || standby_ADS.length === 0) return; // Avoid double loading
-      isLoading = true; // Mark as loading to prevent duplicate execution
-      dispatch(setADS(standby_ADS));
-      dispatch(setStandbyADS([]));
-      isLoading = false; // Reset after loading
-      // setTimeout(() => {
-      //   dispatch(setADS(standby_ADS));
-      //   dispatch(setStandbyADS([]));
-      //   isLoading = false; // Reset after loading
-      // }, 500);
-    };
-  
-    // If inView is triggered, load ads
-    if (inView) {
-      loadAds();
-    }
-  
-    const handleScroll = () => {
-      if (
-        window.innerHeight + window.scrollY >= document.body.offsetHeight - 200
-      ) {
-        loadAds();
-      }
-    };
-  
-    // Add scroll event listener
-    window.addEventListener("scroll", handleScroll);
-  
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [inView, standby_ADS]);
+  // useEffect(() => {
+  //   let isLoading = false; // Prevent double execution
+
+  //   const loadAds = () => {
+  //     if (isLoading || standby_ADS.length === 0) return; // Avoid double loading
+  //     isLoading = true; // Mark as loading to prevent duplicate execution
+  //     dispatch(setADS(standby_ADS));
+  //     dispatch(setStandbyADS([]));
+  //     isLoading = false; // Reset after loading
+  //     // setTimeout(() => {
+  //     //   dispatch(setADS(standby_ADS));
+  //     //   dispatch(setStandbyADS([]));
+  //     //   isLoading = false; // Reset after loading
+  //     // }, 500);
+  //   };
+
+  //   // If inView is triggered, load ads
+  //   if (inView) {
+  //     loadAds();
+  //   }
+
+  //   const handleScroll = () => {
+  //     if (
+  //       window.innerHeight + window.scrollY >=
+  //       document.body.offsetHeight - 200
+  //     ) {
+  //       loadAds();
+  //     }
+  //   };
+
+  //   // Add scroll event listener
+  //   window.addEventListener("scroll", handleScroll);
+
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, [inView, standby_ADS]);
 
   useEffect(() => {
-    console.log(ADS.length)
-  }, [ADS])
+    console.log(ADS.length);
+  }, [ADS]);
 
   return (
     <div className="pb-20">
@@ -457,6 +511,12 @@ export default function Home() {
               </Masonry>
             )}
           </div>
+          {/* <div
+            ref={ref}
+            className={`w-full h-[100px] flex justify-center items-center `}
+          >
+            {page <= totalPages && page > 1 && <LogoSpinner text={false} />}
+          </div> */}
 
           {starter && (
             <div
