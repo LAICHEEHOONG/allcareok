@@ -72,7 +72,11 @@ export default function Home() {
   const ADS = useSelector((state) => state.ADS.ADS);
   const page = useSelector((state) => state.ADS.page);
   const totalPages = useSelector((state) => state.ADS.totalPages);
-  const [ref, inView] = useInView();
+  // const [ref, inView] = useInView();
+  const [ref, inView] = useInView({
+    threshold: 1, // Increase the percentage of visibility required
+    triggerOnce: false, // Ensure it keeps triggering
+  });
   const [starter, setStarter] = useState(false);
   const l = useSelector((state) => state.auth?.lang?.home_card);
   const wishlist = useSelector((state) => state.auth?.wishlist);
@@ -150,7 +154,7 @@ export default function Home() {
         if (!starter) {
           setTimeout(() => {
             setStarter(true);
-          }, 2000);
+          }, 500);
         }
       }
     };
@@ -214,6 +218,22 @@ export default function Home() {
   // Check if the ad is in the wishlist
   const isInWishlist = (adId) => wishlist.includes(adId);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 200
+      ) {
+        // Manually trigger the logic when close to the bottom
+        dispatch(setADS(standby_ADS));
+        dispatch(setStandbyADS([]));
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [standby_ADS]);
+
   return (
     <div className="pb-20">
       <main className="flex justify-center flex-col items-center">
@@ -238,64 +258,64 @@ export default function Home() {
                 columnClassName="my-masonry-grid_column"
               >
                 {ADS.map((ad, i) => (
-                  <Fade key={ad._id + i} triggerOnce>
-                    <Card className="p-3 pb-1 pt-0 rounded-xl">
-                      <CardHeader className="flex justify-center h-[52px]">
-                        {(ad?.area?.town ||
-                          ad?.area?.city ||
-                          ad?.area?.state ||
-                          ad?.area?.country) && (
-                          <div className="flex justify-center items-center gap-2">
-                            {ad?.area?.country ? (
-                              <Avatar
-                                src={
-                                  countryFlag.find(
-                                    (country) =>
-                                      country.value.trim().toLowerCase() ===
-                                      ad.area.country.trim().toLowerCase()
-                                  )?.description || ""
-                                }
-                                showFallback
-                                name={ad.area.country}
-                                // alt={ad.area.country}
-                                className="max-w-5 h-5 w-full"
-                              />
-                            ) : (
-                              <LocationOnIcon className="w-4 h-4 mt-1" />
-                            )}
+                  // <Fade key={ad._id + i} triggerOnce>
+                  <Card key={ad._id + i} className="p-3 pb-1 pt-0 rounded-xl">
+                    <CardHeader className="flex justify-center h-[52px]">
+                      {(ad?.area?.town ||
+                        ad?.area?.city ||
+                        ad?.area?.state ||
+                        ad?.area?.country) && (
+                        <div className="flex justify-center items-center gap-2">
+                          {ad?.area?.country ? (
+                            <Avatar
+                              src={
+                                countryFlag.find(
+                                  (country) =>
+                                    country.value.trim().toLowerCase() ===
+                                    ad.area.country.trim().toLowerCase()
+                                )?.description || ""
+                              }
+                              showFallback
+                              name={ad.area.country}
+                              // alt={ad.area.country}
+                              className="max-w-5 h-5 w-full"
+                            />
+                          ) : (
+                            <LocationOnIcon className="w-4 h-4 mt-1" />
+                          )}
 
-                            <div className="text-base capitalize font-medium w-full max-w-[220px] truncate tracking-widest">
-                              {`${
-                                ad?.area?.town ||
-                                ad?.area?.city ||
-                                ad?.area?.state ||
-                                ""
-                              }${
-                                ad?.area?.town ||
-                                ad?.area?.city ||
-                                ad?.area?.state
-                                  ? ", "
-                                  : ""
-                              }${ad?.area?.country}`}
-                            </div>
+                          <div className="text-base capitalize font-medium w-full max-w-[220px] truncate tracking-widest">
+                            {`${
+                              ad?.area?.town ||
+                              ad?.area?.city ||
+                              ad?.area?.state ||
+                              ""
+                            }${
+                              ad?.area?.town ||
+                              ad?.area?.city ||
+                              ad?.area?.state
+                                ? ", "
+                                : ""
+                            }${ad?.area?.country}`}
                           </div>
-                        )}
-                      </CardHeader>
+                        </div>
+                      )}
+                    </CardHeader>
 
-                      <CardBody className="overflow-visible p-0">
-                        <Carousel
-                          className="w-full cursor-pointer"
-                          opts={{ align: "start", loop: true, dragFree: false }}
-                        >
-                          <CarouselContent>
-                            {ad.photo?.length ? (
-                              ad.photo.map((item, idx) => (
-                                <CarouselItem
-                                  key={idx}
-                                  className="flex justify-center items-start"
-                                >
-                                  <Image
-                                    className={`object-cover rounded-xl 
+                    <CardBody className="overflow-visible p-0">
+                      <Carousel
+                        className="w-full cursor-pointer"
+                        opts={{ align: "start", loop: true, dragFree: false }}
+                      >
+                        <CarouselContent>
+                          {ad.photo?.length ? (
+                            ad.photo.map((item, idx) => (
+                              <CarouselItem
+                                key={idx}
+                                className="flex justify-center items-start"
+                              >
+                                <Image
+                                  className={`object-cover rounded-xl 
                                     w-[333px] h-[400px]
                                     x550l:w-[280px] x550l:h-[340px]
                                     sm:w-[300px] sm:h-[360px]
@@ -307,15 +327,15 @@ export default function Home() {
                                     x1640l:w-[300px] x1640l:h-[360px]   
                                     x1980l:w-[333px] x1980l:h-[400px]
                                      `}
-                                    src={item.url}
-                                    alt="ad image"
-                                  />
-                                </CarouselItem>
-                              ))
-                            ) : (
-                              <CarouselItem>
-                                <Image
-                                  className={`object-cover rounded-xl 
+                                  src={item.url}
+                                  alt="ad image"
+                                />
+                              </CarouselItem>
+                            ))
+                          ) : (
+                            <CarouselItem>
+                              <Image
+                                className={`object-cover rounded-xl 
                                   w-[333px] h-[400px]
                                   x550l:w-[280px] x550l:h-[340px]
                                   sm:w-[300px] sm:h-[360px]
@@ -327,100 +347,63 @@ export default function Home() {
                                   x1640l:w-[300px] x1640l:h-[360px]   
                                   x1980l:w-[333px] x1980l:h-[400px]
                                    `}
-                                  src="/images/plumber.png"
-                                  alt="default image"
-                                />
-                              </CarouselItem>
-                            )}
-                          </CarouselContent>
-                        </Carousel>
-                        <>
-                          <div
-                            className={`absolute inset-x-0 top-0 z-40 flex ${
-                              ad.reviewStatus === "Approved"
-                                ? "justify-between"
-                                : "justify-end"
-                            } items-center p-2`}
-                          >
-                            {ad.reviewStatus === "Approved" && (
-                              <Chip
-                                avatar={
-                                  <Avatar
-                                    name="allcareok"
-                                    src="https://www.allcareok.com/images/allcareok_logo.png"
-                                  />
-                                }
-                                variant="shadow"
-                                // className="bg-white"
-                                classNames={{
-                                  base: "bg-gradient-to-br from-indigo-500 to-pink-500  shadow-pink-500/30",
-                                  content:
-                                    "drop-shadow shadow-black text-white",
-                                }}
-                              >
-                                <div className="font-medium tracking-wider">
-                                  {l?.verified}
-                                </div>
-                              </Chip>
-                            )}
-
-                            <Button
-                              isIconOnly
-                              aria-label="Like"
-                              size="sm"
-                              radius="full"
-                              color="danger"
-                              variant={isInWishlist(ad._id) ? "solid" : "flat"} // Change based on wishlist
-                              // isLoading={isLoading} // Show loading when updating
-                              isLoading={loadingAd[ad._id] || false} // Only the clicked button will show loading
-                              onPress={() => updateUserWishlist_(ad._id)} // Handle wishlist update
-                            >
-                              <FavoriteBorderIcon style={{ color: "white" }} />
-                            </Button>
-                          </div>
-                        </>
-                      </CardBody>
-                      <CardFooter className="flex justify-center p-0">
-                        <ADFooter ad={ad} />
-                        {/* <div className="w-full max-w-[400px] h-[10px] ">
-                        <Carousel
-                          className="w-full max-w-[400px]"
-                          opts={{
-                            align: "start",
-                            loop: true,
-                            dragFree: false,
-                          }}
-                          plugins={[plugin.current]}
+                                src="/images/plumber.png"
+                                alt="default image"
+                              />
+                            </CarouselItem>
+                          )}
+                        </CarouselContent>
+                      </Carousel>
+                      <>
+                        <div
+                          className={`absolute inset-x-0 top-0 z-40 flex ${
+                            ad.reviewStatus === "Approved"
+                              ? "justify-between"
+                              : "justify-end"
+                          } items-center p-2`}
                         >
-                          <CarouselContent className="-ml-1">
-                            {ad?.service?.map((serv, i) => {
-                              const match = carouselItems.find(
-                                (item) => item?.id === serv
-                              );
-                              return match ? (
-                                <CarouselItem
-                                  key={`${
-                                    ad._id
-                                  }-${serv}-${i}-${crypto.randomUUID()}`}
-                                  className="pl-1 basis-1/7 cursor-pointer group select-none z-30 flex justify-center items-center w-full max-w-[300px]"
-                                >
-                                  <Fade>
-                                    <div className="flex justify-center items-center gap-2 m-1 mr-2 -mt-1 ">
-                                      <match.icon className="!w-6 !h-6 text-default-400" />
-                                      <div className="font-light w-full max-w-[200px] truncate tracking-widest text-default-400">
-                                        {match?.label}
-                                      </div>
-                                    </div>
-                                  </Fade>
-                                </CarouselItem>
-                              ) : null;
-                            })}
-                          </CarouselContent>
-                        </Carousel>
-                      </div> */}
-                      </CardFooter>
-                    </Card>
-                  </Fade>
+                          {ad.reviewStatus === "Approved" && (
+                            <Chip
+                              avatar={
+                                <Avatar
+                                  name="allcareok"
+                                  src="https://www.allcareok.com/images/allcareok_logo.png"
+                                />
+                              }
+                              variant="shadow"
+                              // className="bg-white"
+                              classNames={{
+                                base: "bg-gradient-to-br from-indigo-500 to-pink-500  shadow-pink-500/30",
+                                content: "drop-shadow shadow-black text-white",
+                              }}
+                            >
+                              <div className="font-medium tracking-wider">
+                                {l?.verified}
+                              </div>
+                            </Chip>
+                          )}
+
+                          <Button
+                            isIconOnly
+                            aria-label="Like"
+                            size="sm"
+                            radius="full"
+                            color="danger"
+                            variant={isInWishlist(ad._id) ? "solid" : "flat"} // Change based on wishlist
+                            // isLoading={isLoading} // Show loading when updating
+                            isLoading={loadingAd[ad._id] || false} // Only the clicked button will show loading
+                            onPress={() => updateUserWishlist_(ad._id)} // Handle wishlist update
+                          >
+                            <FavoriteBorderIcon style={{ color: "white" }} />
+                          </Button>
+                        </div>
+                      </>
+                    </CardBody>
+                    <CardFooter className="flex justify-center p-0">
+                      <ADFooter ad={ad} />
+                    </CardFooter>
+                  </Card>
+                  // </Fade>
                 ))}
               </Masonry>
             )}

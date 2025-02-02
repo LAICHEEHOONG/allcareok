@@ -49,7 +49,7 @@ export default function NavChild({ navigation, service_type, poppins, dic }) {
       {isDashboard ? (
         <></>
       ) : (
-        <Navbar shouldHideOnScroll={false}>
+        <Navbar shouldHideOnScroll={false} className={`${isWishlist ? "hidden md:flex" : ""}`} >
           <NavbarBrand className={`${poppins.className} hidden xs:block`}>
             <AllcareokLogo />
           </NavbarBrand>
