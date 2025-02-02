@@ -1,6 +1,7 @@
 "use client";
 import { Image } from "@heroui/react";
 import { useRouter, usePathname } from "next/navigation";
+import { Fade } from "react-awesome-reveal";
 
 export default function AllcareokLogo({ isDashboard }) {
   const router = useRouter();
@@ -17,20 +18,20 @@ export default function AllcareokLogo({ isDashboard }) {
       <Image
         className="min-w-[37px] "
         width={37}
-        radius="full"
+        // radius="full"
         alt="Allcareok logo"
-        src="/images/allcareok_logo.png"
-        
+        src="/images/favicon-32x32.png"
       />
-
-      <p
-        className={`font-bold text-inherit ml-2 text-2xl ${
-          isDashboard ? "" : "hidden md:flex"
-        } `}
-        style={{ color: "#f31260" }}
-      >
-        allcareok
-      </p>
+      <Fade triggerOnce>
+        <p
+          className={`font-bold text-inherit ml-2 text-2xl ${
+            isDashboard ? "" : "hidden md:flex"
+          } `}
+          style={{ color: "#f31260" }}
+        >
+          allcareok
+        </p>
+      </Fade>
     </div>
   );
 }
