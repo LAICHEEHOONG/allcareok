@@ -72,11 +72,11 @@ export default function Home() {
   const ADS = useSelector((state) => state.ADS.ADS);
   const page = useSelector((state) => state.ADS.page);
   const totalPages = useSelector((state) => state.ADS.totalPages);
-  // const [ref, inView] = useInView();
-  const [ref, inView] = useInView({
-    threshold: 1, // Increase the percentage of visibility required
-    triggerOnce: false, // Ensure it keeps triggering
-  });
+  const [ref, inView] = useInView();
+  // const [ref, inView] = useInView({
+  //   threshold: 1, // Increase the percentage of visibility required
+  //   triggerOnce: false, // Ensure it keeps triggering
+  // });
   const [starter, setStarter] = useState(false);
   const l = useSelector((state) => state.auth?.lang?.home_card);
   const wishlist = useSelector((state) => state.auth?.wishlist);
@@ -225,12 +225,20 @@ export default function Home() {
         document.body.offsetHeight - 200
       ) {
         // Manually trigger the logic when close to the bottom
-        dispatch(setADS(standby_ADS));
-        dispatch(setStandbyADS([]));
+
+        // dispatch(setADS(standby_ADS));
+        // dispatch(setStandbyADS([]));
+        if (standby_ADS.length > 0) {
+          setTimeout(() => {
+            dispatch(setADS(standby_ADS));
+            dispatch(setStandbyADS([]));
+          }, 500);
+        }
       }
     };
 
     window.addEventListener("scroll", handleScroll);
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, [standby_ADS]);
 
