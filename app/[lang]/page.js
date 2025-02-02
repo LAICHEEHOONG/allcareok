@@ -24,7 +24,7 @@ import { Fade } from "react-awesome-reveal";
 import {
   setADS,
   setPagination,
-  setStandbyADS,
+  // setStandbyADS,
 } from "@/redux/features/ad/adSlice";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import {
@@ -68,7 +68,7 @@ export default function Home() {
   const pathName = usePathname();
   const user = useSelector((state) => state.auth?._id);
   const country = useSelector((state) => state.auth?.country);
-  const standby_ADS = useSelector((state) => state.ADS.standby_ADS);
+  // const standby_ADS = useSelector((state) => state.ADS.standby_ADS);
   const ADS = useSelector((state) => state.ADS.ADS);
   const page = useSelector((state) => state.ADS.page);
   const totalPages = useSelector((state) => state.ADS.totalPages);
@@ -77,7 +77,7 @@ export default function Home() {
   //   threshold: 1, // Increase the percentage of visibility required
   //   triggerOnce: false, // Ensure it keeps triggering
   // });
-  const [starter, setStarter] = useState(false);
+  // const [starter, setStarter] = useState(false);
   const l = useSelector((state) => state.auth?.lang?.home_card);
   const wishlist = useSelector((state) => state.auth?.wishlist);
   const [loadingAd, setLoadingAd] = useState({}); // Track loading state per adId
@@ -138,25 +138,54 @@ export default function Home() {
   }, [user]);
 
   // fectch ads
+  // useEffect(() => {
+  //   const fetchMoreAds = async () => {
+  //     try {
+  //       const res = await getAdsFast({
+  //         query: { page: page + 1, limit: 20 },
+  //       });
+  //       if (res.success) {
+  //         dispatch(setADS(res.data.ads));
+  //         dispatch(setPagination(res.data));
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   if (page < totalPages && inView) {
+  //     fetchMoreAds();
+  //     // console.log("fetchMoreAds");
+  //   }
+  // }, [inView]);
   useEffect(() => {
     const fetchMoreAds = async () => {
       try {
+        let screenHeight = window.innerHeight;
+        let limit = 20; // Default limit
+  
+        if (screenHeight >= 1400 && screenHeight < 2160) {
+          limit = 40;
+        } else if (screenHeight >= 2160 && screenHeight < 4320) {
+          limit = 80;
+        }
+  
         const res = await getAdsFast({
-          query: { page: page + 1, limit: 18 },
+          query: { page: page + 1, limit: limit },
         });
+  
         if (res.success) {
           dispatch(setADS(res.data.ads));
           dispatch(setPagination(res.data));
         }
       } catch (error) {
         console.log(error);
-      } 
+      }
     };
+  
     if (page < totalPages && inView) {
       fetchMoreAds();
-      console.log('fetchMoreAds')
     }
-  }, [inView])
+  }, [inView]);
 
   // // fectch data
   // useEffect(() => {
@@ -354,6 +383,9 @@ export default function Home() {
   //   };
   // }, [inView, standby_ADS]);
 
+
+
+
   useEffect(() => {
     console.log(ADS.length);
   }, [ADS]);
@@ -480,7 +512,7 @@ export default function Home() {
                       </Carousel>
                       <>
                         <div
-                          className={`absolute inset-x-0 top-0 z-40 flex ${
+                          className={`absolute inset-x-0 top-0 z-30 flex ${
                             ad.reviewStatus === "Approved"
                               ? "justify-between"
                               : "justify-end"
