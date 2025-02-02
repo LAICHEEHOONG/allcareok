@@ -163,15 +163,15 @@ export default function Home() {
     }
   }, [standby_ADS]);
 
-  // show data
-  useEffect(() => {
-    if (standby_ADS.length > 0) {
-      setTimeout(() => {
-        dispatch(setADS(standby_ADS));
-        dispatch(setStandbyADS([]));
-      }, 500);
-    }
-  }, [inView]);
+  // // show data
+  // useEffect(() => {
+  //   if (standby_ADS.length > 0) {
+  //     setTimeout(() => {
+  //       dispatch(setADS(standby_ADS));
+  //       dispatch(setStandbyADS([]));
+  //     }, 500);
+  //   }
+  // }, [inView]);
 
   useEffect(() => {
     if (page > totalPages) {
@@ -218,29 +218,70 @@ export default function Home() {
   // Check if the ad is in the wishlist
   const isInWishlist = (adId) => wishlist.includes(adId);
 
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     if (
+  //       window.innerHeight + window.scrollY >=
+  //       document.body.offsetHeight - 200
+  //     ) {
+  //       // Manually trigger the logic when close to the bottom
+
+  //       // dispatch(setADS(standby_ADS));
+  //       // dispatch(setStandbyADS([]));
+  //       if (standby_ADS.length > 0) {
+  //         setTimeout(() => {
+  //           dispatch(setADS(standby_ADS));
+  //           dispatch(setStandbyADS([]));
+  //         }, 500);
+  //       }
+  //     }
+  //   };
+
+  //   window.addEventListener("scroll", handleScroll);
+
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, [standby_ADS]);
+
   useEffect(() => {
+    let isLoading = false; // Prevent double execution
+  
+    const loadAds = () => {
+      if (isLoading || standby_ADS.length === 0) return; // Avoid double loading
+      isLoading = true; // Mark as loading to prevent duplicate execution
+      dispatch(setADS(standby_ADS));
+      dispatch(setStandbyADS([]));
+      isLoading = false; // Reset after loading
+      // setTimeout(() => {
+      //   dispatch(setADS(standby_ADS));
+      //   dispatch(setStandbyADS([]));
+      //   isLoading = false; // Reset after loading
+      // }, 500);
+    };
+  
+    // If inView is triggered, load ads
+    if (inView) {
+      loadAds();
+    }
+  
     const handleScroll = () => {
       if (
-        window.innerHeight + window.scrollY >=
-        document.body.offsetHeight - 200
+        window.innerHeight + window.scrollY >= document.body.offsetHeight - 200
       ) {
-        // Manually trigger the logic when close to the bottom
-
-        // dispatch(setADS(standby_ADS));
-        // dispatch(setStandbyADS([]));
-        if (standby_ADS.length > 0) {
-          setTimeout(() => {
-            dispatch(setADS(standby_ADS));
-            dispatch(setStandbyADS([]));
-          }, 500);
-        }
+        loadAds();
       }
     };
-
+  
+    // Add scroll event listener
     window.addEventListener("scroll", handleScroll);
+  
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [inView, standby_ADS]);
 
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [standby_ADS]);
+  useEffect(() => {
+    console.log(ADS.length)
+  }, [ADS])
 
   return (
     <div className="pb-20">
