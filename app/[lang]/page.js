@@ -152,8 +152,9 @@ export default function Home() {
         console.log(error);
       } 
     };
-    if (page <= totalPages && inView) {
+    if (page < totalPages && inView) {
       fetchMoreAds();
+      console.log('fetchMoreAds')
     }
   }, [inView])
 
@@ -533,9 +534,9 @@ export default function Home() {
           </div>
           <div
             ref={ref}
-            className={`w-full h-[50px] flex justify-center items-center border-2`}
+            className={`w-full h-[50px] flex justify-center items-center`}
           >
-            {page <= totalPages && page > 1 && <LogoSpinner text={false} />}
+            {page < totalPages && page > 0 && <LogoSpinner text={false} />}
           </div>
 
           {/* {starter && (
