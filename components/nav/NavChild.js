@@ -27,7 +27,7 @@ export default function NavChild({ navigation, service_type, poppins, dic }) {
 
   const pathname = usePathname();
   const isDashboard =
-    pathname.endsWith("/dashboard") ||
+    // pathname.endsWith("/dashboard") ||
     pathname.endsWith("/editor") ||
     pathname.endsWith("/overview") ||
     pathname.endsWith("/editor/mobile/photo") ||
@@ -42,7 +42,8 @@ export default function NavChild({ navigation, service_type, poppins, dic }) {
     pathname.endsWith("/editor/mobile/boosts") ||
     pathname.endsWith("/one_nine_nine_zero");
 
-  const isWishlist = pathname.endsWith("/wishlists");
+  const isWishlist =
+    pathname.endsWith("/wishlists") || pathname.endsWith("/dashboard");
 
   return (
     <>
@@ -88,7 +89,7 @@ export default function NavChild({ navigation, service_type, poppins, dic }) {
         <></>
       ) : (
         <div className="flex flex-col justify-center items-center ">
-          <Divider className="m-3" />
+          <Divider className="m-3 hidden md:flex" />
           {!isWishlist && (
             <div className="w-full max-w-[2300px] flex justify-center items-center">
               <NavCarousel service_type={service_type} />

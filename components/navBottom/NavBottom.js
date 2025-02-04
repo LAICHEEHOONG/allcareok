@@ -22,7 +22,7 @@ export default function NavBottom({ bottom_navigation }) {
   const router = useRouter();
   const pathname = usePathname();
   const isDashboard =
-    pathname.endsWith("/dashboard") ||
+    // pathname.endsWith("/dashboard") ||
     pathname.endsWith("/editor") ||
     pathname.endsWith("/overview") ||
     pathname.endsWith("/editor/mobile/photo") ||
@@ -107,7 +107,7 @@ export default function NavBottom({ bottom_navigation }) {
         <></>
       ) : (
         <motion.div
-          className="fixed bottom-0 z-50 w-full block sm:hidden"
+          className="fixed bottom-0 z-50 w-full block md:hidden"
           animate={{
             y: isVisible ? 0 : 100, // Animate the y-axis position
           }}
