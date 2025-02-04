@@ -162,17 +162,17 @@ export default function Home() {
       try {
         let screenHeight = window.innerHeight;
         let limit = 20; // Default limit
-  
+
         if (screenHeight >= 1400 && screenHeight < 2160) {
           limit = 40;
         } else if (screenHeight >= 2160 && screenHeight < 4320) {
           limit = 80;
         }
-  
+
         const res = await getAdsFast({
           query: { page: page + 1, limit: limit },
         });
-  
+
         if (res.success) {
           dispatch(setADS(res.data.ads));
           dispatch(setPagination(res.data));
@@ -181,7 +181,7 @@ export default function Home() {
         console.log(error);
       }
     };
-  
+
     if (page < totalPages && inView) {
       fetchMoreAds();
     }
@@ -296,15 +296,15 @@ export default function Home() {
       const res = await updateUserWishlist({ userId: user, adId }); // Update wishlist
       console.log(res);
       if (res.success) {
-        if (res.data.wishlist.length > wishlist.length) {
-          showToast(l?.wishlist_toast?.title, l?.wishlist_toast?.description);
-        }
-        if (res.data.wishlist.length < wishlist.length) {
-          showToast(
-            l?.wishlist_toast_remove?.title,
-            l?.wishlist_toast_remove?.description
-          );
-        }
+        // if (res.data.wishlist.length > wishlist.length) {
+        //   showToast(l?.wishlist_toast?.title, l?.wishlist_toast?.description);
+        // }
+        // if (res.data.wishlist.length < wishlist.length) {
+        //   showToast(
+        //     l?.wishlist_toast_remove?.title,
+        //     l?.wishlist_toast_remove?.description
+        //   );
+        // }
 
         dispatch(setWishlist(res.data.wishlist)); // Update Redux store
       }
@@ -383,9 +383,6 @@ export default function Home() {
   //   };
   // }, [inView, standby_ADS]);
 
-
-
-
   useEffect(() => {
     console.log(ADS.length);
   }, [ADS]);
@@ -413,8 +410,7 @@ export default function Home() {
                 className="my-masonry-grid"
                 columnClassName="my-masonry-grid_column"
               >
-                {ADS.map((ad, i) => (
-                  // <Fade key={ad._id + i} triggerOnce>
+                {/* {ADS.map((ad, i) => (
                   <Card key={ad._id + i} className="p-3 pb-1 pt-0 rounded-xl">
                     <CardHeader className="flex justify-center h-[52px]">
                       {(ad?.area?.town ||
@@ -559,7 +555,128 @@ export default function Home() {
                       <ADFooter ad={ad} />
                     </CardFooter>
                   </Card>
-                  // </Fade>
+                ))} */}
+
+                {ADS.filter((ad) => ad.photo?.length > 0).map((ad, i) => (
+                  <Card key={ad._id + i} className="p-3 pb-1 pt-0 rounded-xl">
+                    <CardHeader className="flex justify-center h-[52px]">
+                      {(ad?.area?.town ||
+                        ad?.area?.city ||
+                        ad?.area?.state ||
+                        ad?.area?.country) && (
+                        <div className="flex justify-center items-center gap-2">
+                          {ad?.area?.country ? (
+                            <Avatar
+                              src={
+                                countryFlag.find(
+                                  (country) =>
+                                    country.value.trim().toLowerCase() ===
+                                    ad.area.country.trim().toLowerCase()
+                                )?.description || ""
+                              }
+                              showFallback
+                              name={ad.area.country}
+                              className="max-w-5 h-5 w-full"
+                            />
+                          ) : (
+                            <LocationOnIcon className="w-4 h-4 mt-1" />
+                          )}
+
+                          <div className="text-base capitalize font-medium w-full max-w-[220px] truncate tracking-widest">
+                            {`${
+                              ad?.area?.town ||
+                              ad?.area?.city ||
+                              ad?.area?.state ||
+                              ""
+                            }${
+                              ad?.area?.town ||
+                              ad?.area?.city ||
+                              ad?.area?.state
+                                ? ", "
+                                : ""
+                            }${ad?.area?.country}`}
+                          </div>
+                        </div>
+                      )}
+                    </CardHeader>
+
+                    <CardBody className="overflow-visible p-0">
+                      <Carousel
+                        className="w-full cursor-pointer"
+                        opts={{ align: "start", loop: true, dragFree: false }}
+                      >
+                        <CarouselContent>
+                          {ad.photo.map((item, idx) => (
+                            <CarouselItem
+                              key={idx}
+                              className="flex justify-center items-start"
+                            >
+                              <Image
+                                className={`object-cover rounded-xl 
+                  w-[333px] h-[400px]
+                  x550l:w-[280px] x550l:h-[340px]
+                  sm:w-[300px] sm:h-[360px]
+                  md:w-[400px] md:h-[450px]
+                  x950l:w-[300px] x950l:h-[360px] 
+                  x1128l:w-[240px] x1128l:h-[300px]  
+                  xl:w-[280px] xl:h-[340px]  
+                  x1470l:w-[333px] x1470l:h-[400px]
+                  x1640l:w-[300px] x1640l:h-[360px]   
+                  x1980l:w-[333px] x1980l:h-[400px]
+                `}
+                                src={item.url}
+                                alt="ad image"
+                              />
+                            </CarouselItem>
+                          ))}
+                        </CarouselContent>
+                      </Carousel>
+
+                      <div
+                        className={`absolute inset-x-0 top-0 z-30 flex ${
+                          ad.reviewStatus === "Approved"
+                            ? "justify-between"
+                            : "justify-end"
+                        } items-center p-2`}
+                      >
+                        {ad.reviewStatus === "Approved" && (
+                          <Chip
+                            avatar={
+                              <Avatar
+                                name="allcareok"
+                                src="https://www.allcareok.com/images/allcareok_logo.png"
+                              />
+                            }
+                            variant="shadow"
+                            classNames={{
+                              base: "bg-gradient-to-br from-indigo-500 to-pink-500  shadow-pink-500/30",
+                              content: "drop-shadow shadow-black text-white",
+                            }}
+                          >
+                            <div className="font-medium tracking-wider">
+                              {l?.verified}
+                            </div>
+                          </Chip>
+                        )}
+
+                        <Button
+                          isIconOnly
+                          aria-label="Like"
+                          size="sm"
+                          radius="full"
+                          color="danger"
+                          variant={isInWishlist(ad._id) ? "solid" : "flat"}
+                          isLoading={loadingAd[ad._id] || false}
+                          onPress={() => updateUserWishlist_(ad._id)}
+                        >
+                          <FavoriteBorderIcon style={{ color: "white" }} />
+                        </Button>
+                      </div>
+                    </CardBody>
+                    <CardFooter className="flex justify-center p-0">
+                      <ADFooter ad={ad} />
+                    </CardFooter>
+                  </Card>
                 ))}
               </Masonry>
             )}
