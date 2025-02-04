@@ -37,13 +37,13 @@ export function NavCarousel({ service_type }) {
             <div className="flex justify-center flex-col items-center gap-1 m-3 active:scale-85 transition-transform">
               <Icon
                 className={`w-6 h-6 ${
-                  activeIndex === label ? "text-black" : "text-default-500"
-                } group-hover:text-default-900`}
+                  activeIndex === label ? "text-[#f31260]" : "text-default-500"
+                } group-hover:text-[#f31260]`}
               />
               <div
-                className={`text-xs font-semibold mt-1 group-hover:text-default-900 ${
+                className={`text-xs font-semibold mt-1 group-hover:text-[#f31260] ${
                   activeIndex === label
-                    ? "text-black border-b-2 border-black pb-3"
+                    ? "text-[#f31260] border-b-2 border-[#f31260] pb-3"
                     : "text-default-500"
                 }`}
               >
