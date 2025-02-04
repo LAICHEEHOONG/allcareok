@@ -49,35 +49,43 @@ export default function NavChild({ navigation, service_type, poppins, dic }) {
       {isDashboard ? (
         <></>
       ) : (
-        <Navbar shouldHideOnScroll={false} className={`${isWishlist ? "hidden md:flex" : ""}`} >
-          <NavbarBrand className={`${poppins.className} hidden xs:block`}>
-            <AllcareokLogo />
-          </NavbarBrand>
-          {isWishlist && (
-            <NavbarBrand className={`${poppins.className} block xs:hidden`}>
-              <AllcareokLogo />
-            </NavbarBrand>
-          )}
-          <NavbarContent justify="center">
-            {!isWishlist ? (
-              <SearchField navigation={navigation} />
-            ) : (
-              <div className="w-[150px] xs:w-[250px] sm:w-[307px] h-[64px]"></div>
-            )}
-          </NavbarContent>
-          <NavbarContent justify="end">
-            <NavbarItem className="hidden sm:flex items-center">
-              <NavShareBtn
-                share={navigation.share}
-                myService={navigation.my_service}
-              />
-            </NavbarItem>
-            <NavbarItem className="hidden sm:flex gap-2">
-              <LanguageMenu />
-              <ProfileMenu navigation={navigation} />
-            </NavbarItem>
-          </NavbarContent>
-        </Navbar>
+        <div className="w-full  mt-3 flex justify-center ">
+          <div className=" w-full x1470l:ml-14 x1470l:mr-14 max-w-[2090px]">
+            <Navbar
+              maxWidth="full"
+              shouldHideOnScroll={false}
+              className={`${isWishlist ? "hidden md:flex" : ""} `}
+            >
+              <NavbarBrand className={`${poppins.className} hidden xs:block`}>
+                <AllcareokLogo />
+              </NavbarBrand>
+              {isWishlist && (
+                <NavbarBrand className={`${poppins.className} block xs:hidden`}>
+                  <AllcareokLogo />
+                </NavbarBrand>
+              )}
+              <NavbarContent justify="center">
+                {!isWishlist ? (
+                  <SearchField navigation={navigation} />
+                ) : (
+                  <div className="w-[150px] xs:w-[250px] sm:w-[307px] h-[64px]"></div>
+                )}
+              </NavbarContent>
+              <NavbarContent justify="end">
+                <NavbarItem className="hidden sm:flex items-center">
+                  <NavShareBtn
+                    share={navigation.share}
+                    myService={navigation.my_service}
+                  />
+                </NavbarItem>
+                <NavbarItem className="hidden sm:flex gap-2">
+                  <LanguageMenu />
+                  <ProfileMenu navigation={navigation} />
+                </NavbarItem>
+              </NavbarContent>
+            </Navbar>
+          </div>
+        </div>
       )}
 
       {isDashboard ? (

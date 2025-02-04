@@ -20,7 +20,7 @@ import { useRouter, usePathname } from "next/navigation";
 import axios from "axios";
 import Masonry from "react-masonry-css";
 import { useInView } from "react-intersection-observer";
-import { Fade } from "react-awesome-reveal";
+// import { Fade } from "react-awesome-reveal";
 import {
   setADS,
   setPagination,

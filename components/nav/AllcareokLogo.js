@@ -12,7 +12,7 @@ export default function AllcareokLogo({ isDashboard }) {
 
   return (
     <div
-      className="cursor-pointer flex justify-center items-center"
+      className="cursor-pointer flex justify-start items-center "
       onClick={() => router.push(`/${currentLocale}`)} // Redirect to the current locale
     >
       <Image
