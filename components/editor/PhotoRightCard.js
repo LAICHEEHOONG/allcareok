@@ -29,6 +29,7 @@ import { deleteImages } from "@/util/deleteImage";
 import { useRouter, usePathname } from "next/navigation";
 import { RiGalleryView2 } from "react-icons/ri";
 import { toast } from "sonner";
+import { Fade } from "react-awesome-reveal";
 
 const breakpointColumnsObj = {
   default: 5,
@@ -181,7 +182,7 @@ export default function PhotoRightCard() {
           >
             {(!ad.photo || ad?.photo?.length === 0) &&
               items.map((item) => (
-                <div
+                <Fade
                   key={item.label}
                   className=" flex flex-col justify-center items-center"
                 >
@@ -210,12 +211,12 @@ export default function PhotoRightCard() {
                       </div>
                     </CardBody>
                   </Card>
-                </div>
+                </Fade>
               ))}
             {ad?.photo?.length > 0 &&
               !manageAd?._id &&
               ad.photo.map((item, i) => (
-                <div key={item.url + i} className="flex justify-center">
+                <Fade key={item.url + i} className="flex justify-center">
                   <Card
                     isPressable
                     className="p-2"
@@ -245,7 +246,7 @@ export default function PhotoRightCard() {
                       </div>
                     </CardBody>
                   </Card>
-                </div>
+                </Fade>
               ))}
           </Masonry>
         )}
@@ -488,7 +489,7 @@ export default function PhotoRightCard() {
 
         let { user, photo, service, area, contact, youtube } = ad;
         photo = [...photo, ...photo_];
-        photo = photo.filter(item => item.url && item.publicId);
+        photo = photo.filter((item) => item.url && item.publicId);
 
         await submitToMongoDB({
           user,
