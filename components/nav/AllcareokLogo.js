@@ -16,7 +16,7 @@ export default function AllcareokLogo({ isDashboard }) {
       onClick={() => router.push(`/${currentLocale}`)} // Redirect to the current locale
     >
       <Image
-        className="min-w-[37px] "
+        className={`min-w-[37px] ${isDashboard ? "" : "hidden sm:flex"} `}
         width={37}
         alt="Allcareok logo"
         src="/images/apple-icon-160.png"

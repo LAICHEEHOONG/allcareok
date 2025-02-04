@@ -14,6 +14,7 @@ import { DrawerProfile } from "../DrawerProfile";
 import { signIn } from "next-auth/react";
 import { DrawerLanguage } from "../DrawerLanguage";
 import { toast } from "sonner";
+import { Image } from "@heroui/react";
 
 export default function NavBottom({ bottom_navigation }) {
   const session = useSelector((state) => state.auth.session);
@@ -36,7 +37,7 @@ export default function NavBottom({ bottom_navigation }) {
     pathname.endsWith("/payment-pro") ||
     pathname.endsWith("/editor/mobile/boosts") ||
     pathname.endsWith("/one_nine_nine_zero");
-    
+
   const currentLocale = pathname.split("/")[1] || "en";
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -80,7 +81,6 @@ export default function NavBottom({ bottom_navigation }) {
     if (language === "ms") {
       setLan("Malay");
     }
-
   }, [language]);
 
   const handleWishlists = () => {
@@ -99,6 +99,9 @@ export default function NavBottom({ bottom_navigation }) {
     }
 
     router.push(`/${currentLocale}/wishlists`);
+    setTimeout(() => {
+      setClickIcon(-1);
+    }, 500);
   };
 
   return (
@@ -130,7 +133,23 @@ export default function NavBottom({ bottom_navigation }) {
             >
               <BottomNavigationAction
                 label={bottom_navigation.explore}
-                icon={<SearchIcon />}
+                // icon={<SearchIcon />}
+                icon={
+                  <Image
+                    className="min-w-[20px] "
+                    width={20}
+                    alt="Allcareok logo"
+                    src="/images/apple-icon-160.png"
+                  />
+                }
+                sx={{
+                  // "&.Mui-selected": {
+                  //   color: "#f31260",
+                  // },
+                  "& .MuiBottomNavigationAction-label": {
+                    color: "#f31260",
+                  },
+                }}
                 onClick={() => {
                   router.push(`/${currentLocale}`);
                   setClickIcon(0);
@@ -140,9 +159,17 @@ export default function NavBottom({ bottom_navigation }) {
                 label={bottom_navigation.whishlists}
                 icon={<FavoriteBorderIcon />}
                 showLabel
+                sx={{
+                  "&.Mui-selected": {
+                    color: "#f31260",
+                  },
+                  // "& .MuiBottomNavigationAction-label": {
+                  //   color: "#f31260",
+                  // },
+                }}
                 onClick={() => {
                   setClickIcon(1);
-                  handleWishlists()
+                  handleWishlists();
                 }}
               ></BottomNavigationAction>
               <DrawerLanguage bottom_navigation={bottom_navigation}>
@@ -150,6 +177,11 @@ export default function NavBottom({ bottom_navigation }) {
                   showLabel
                   label={lan}
                   icon={<LanguageIcon />}
+                  sx={{
+                    "&.Mui-selected": {
+                      color: "#f31260",
+                    },
+                  }}
                   onClick={() => {
                     setClickIcon(2);
                   }}
