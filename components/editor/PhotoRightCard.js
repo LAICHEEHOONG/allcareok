@@ -32,7 +32,6 @@ import { toast } from "sonner";
 
 const breakpointColumnsObj = {
   default: 5,
-  // 1879: 5,
   1639: 4,
   1177: 3,
   1100: 2,
@@ -41,7 +40,6 @@ const breakpointColumnsObj = {
 
 const breakpointColumnsObj_2 = {
   default: 2,
-  // 820: 1,
 };
 
 export default function PhotoRightCard() {
@@ -255,13 +253,6 @@ export default function PhotoRightCard() {
     );
   };
 
-  // x550l:w-[280px] x550l:h-[340px]
-  // sm:w-[300px] sm:h-[360px]
-  // md:w-[400px] md:h-[450px]
-  // x950l:w-[300px] x950l:h-[360px]
-  // x1128l:w-[240px] x1128l:h-[300px]
-  // xl:w-[280px] xl:h-[340px]
-
   const M2 = () => {
     return (
       <Masonry
@@ -364,16 +355,120 @@ export default function PhotoRightCard() {
     }
   };
 
+  // const submitToCloudinary = async () => {
+  //   try {
+  //     setLoading(true);
+  //     if (photos.length > 0) {
+  //       const URL = process.env.NEXT_PUBLIC_CLOUDINARY_URL;
+  //       const uploadPhoto = async (photo) => {
+  //         const photoFormData = new FormData();
+  //         photoFormData.append("file", photo);
+  //         photoFormData.append("upload_preset", "model_preset");
+  //         const response = await fetch(URL, {
+  //           method: "POST",
+  //           body: photoFormData,
+  //         });
+
+  //         return response.json();
+  //       };
+
+  //       const responses = await Promise.all(
+  //         limitPhotos.map((photo) => uploadPhoto(photo))
+  //       );
+
+  //       let photo_ = responses.map((item) => ({
+  //         url: item.secure_url,
+  //         publicId: item.public_id,
+  //       }));
+
+  //       // await submitToMongoDB({ photo, user, adsId });
+  //       let { user, photo, service, area, contact, youtube } = ad;
+  //       photo = [...photo, ...photo_];
+  //       await submitToMongoDB({
+  //         user,
+  //         photo,
+  //         service,
+  //         area,
+  //         contact,
+  //         youtube,
+  //         adsId,
+  //       });
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+  const compressImage = (
+    file,
+    maxSizeMB = 2,
+    maxWidth = 1080,
+    maxHeight = 1080
+  ) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+
+      reader.onload = (event) => {
+        // const img = new Image();
+        const img = new window.Image();
+        img.src = event.target.result;
+
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
+
+          let width = img.width;
+          let height = img.height;
+
+          // Resize maintaining aspect ratio
+          if (width > maxWidth || height > maxHeight) {
+            if (width > height) {
+              height = Math.floor((height / width) * maxWidth);
+              width = maxWidth;
+            } else {
+              width = Math.floor((width / height) * maxHeight);
+              height = maxHeight;
+            }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          ctx.drawImage(img, 0, 0, width, height);
+
+          // Convert to Blob
+          canvas.toBlob(
+            (blob) => {
+              if (blob.size / 1024 / 1024 > maxSizeMB) {
+                reject("Compressed image is still too large");
+              } else {
+                resolve(new File([blob], file.name, { type: "image/jpeg" }));
+              }
+            },
+            "image/jpeg",
+            0.7 // Adjust compression quality (0.7 = 70% quality)
+          );
+        };
+      };
+
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
   const submitToCloudinary = async () => {
     try {
       setLoading(true);
       if (photos.length > 0) {
-        // setLoading(true);
         const URL = process.env.NEXT_PUBLIC_CLOUDINARY_URL;
+
         const uploadPhoto = async (photo) => {
+          const compressedPhoto = await compressImage(photo); // Compress before upload
           const photoFormData = new FormData();
-          photoFormData.append("file", photo);
+          photoFormData.append("file", compressedPhoto);
           photoFormData.append("upload_preset", "model_preset");
+
           const response = await fetch(URL, {
             method: "POST",
             body: photoFormData,
@@ -391,9 +486,10 @@ export default function PhotoRightCard() {
           publicId: item.public_id,
         }));
 
-        // await submitToMongoDB({ photo, user, adsId });
         let { user, photo, service, area, contact, youtube } = ad;
         photo = [...photo, ...photo_];
+        photo = photo.filter(item => item.url && item.publicId);
+
         await submitToMongoDB({
           user,
           photo,
@@ -405,12 +501,11 @@ export default function PhotoRightCard() {
         });
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
     } finally {
       setLoading(false);
     }
   };
-
   const makeCover = async () => {
     try {
       setLoading(true);
@@ -662,7 +757,6 @@ export default function PhotoRightCard() {
         </div>
         <M />
       </ScrollShadow>
-
     </div>
   );
 }
