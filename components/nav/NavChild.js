@@ -49,43 +49,39 @@ export default function NavChild({ navigation, service_type, poppins, dic }) {
       {isDashboard ? (
         <></>
       ) : (
-        <div className="w-full  mt-3 flex justify-center ">
-          <div className=" w-full x1470l:ml-14 x1470l:mr-14 max-w-[2090px]">
-            <Navbar
-              maxWidth="full"
-              shouldHideOnScroll={false}
-              className={`${isWishlist ? "hidden md:flex" : ""} `}
-            >
-              <NavbarBrand className={`${poppins.className} hidden xs:block`}>
-                <AllcareokLogo />
-              </NavbarBrand>
-              {isWishlist && (
-                <NavbarBrand className={`${poppins.className} block xs:hidden`}>
-                  <AllcareokLogo />
-                </NavbarBrand>
-              )}
-              <NavbarContent justify="center">
-                {!isWishlist ? (
-                  <SearchField navigation={navigation} />
-                ) : (
-                  <div className="w-[150px] xs:w-[250px] sm:w-[307px] h-[64px]"></div>
-                )}
-              </NavbarContent>
-              <NavbarContent justify="end">
-                <NavbarItem className="hidden sm:flex items-center">
-                  <NavShareBtn
-                    share={navigation.share}
-                    myService={navigation.my_service}
-                  />
-                </NavbarItem>
-                <NavbarItem className="hidden sm:flex gap-2">
-                  <LanguageMenu />
-                  <ProfileMenu navigation={navigation} />
-                </NavbarItem>
-              </NavbarContent>
-            </Navbar>
-          </div>
-        </div>
+        <Navbar
+          maxWidth="full"
+          shouldHideOnScroll={false}
+          className={`${isWishlist ? "hidden md:flex" : ""} mt-3`}
+        >
+          <NavbarBrand className={`${poppins.className} hidden xs:block`}>
+            <AllcareokLogo />
+          </NavbarBrand>
+          {isWishlist && (
+            <NavbarBrand className={`${poppins.className} block xs:hidden`}>
+              <AllcareokLogo />
+            </NavbarBrand>
+          )}
+          <NavbarContent justify="center">
+            {!isWishlist ? (
+              <SearchField navigation={navigation} />
+            ) : (
+              <div className="w-[150px] xs:w-[250px] sm:w-[307px] h-[64px]"></div>
+            )}
+          </NavbarContent>
+          <NavbarContent justify="end">
+            <NavbarItem className="hidden sm:flex items-center">
+              <NavShareBtn
+                share={navigation.share}
+                myService={navigation.my_service}
+              />
+            </NavbarItem>
+            <NavbarItem className="hidden sm:flex gap-2">
+              <LanguageMenu />
+              <ProfileMenu navigation={navigation} />
+            </NavbarItem>
+          </NavbarContent>
+        </Navbar>
       )}
 
       {isDashboard ? (
@@ -103,3 +99,16 @@ export default function NavChild({ navigation, service_type, poppins, dic }) {
     </>
   );
 }
+
+const AcmeLogo = () => {
+  return (
+    <svg fill="none" height="36" viewBox="0 0 32 32" width="36">
+      <path
+        clipRule="evenodd"
+        d="M17.6482 10.1305L15.8785 7.02583L7.02979 22.5499H10.5278L17.6482 10.1305ZM19.8798 14.0457L18.11 17.1983L19.394 19.4511H16.8453L15.1056 22.5499H24.7272L19.8798 14.0457Z"
+        fill="currentColor"
+        fillRule="evenodd"
+      />
+    </svg>
+  );
+};
