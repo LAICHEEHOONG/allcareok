@@ -53,7 +53,7 @@ export default function NavChild({ navigation, service_type, poppins, dic }) {
         <Navbar
           maxWidth="full"
           shouldHideOnScroll={false}
-          className={`${isWishlist ? "hidden md:flex" : ""} mt-3 `}
+          className={`${isWishlist ? "hidden sm:flex" : ""} mt-3 `}
         >
           <NavbarBrand className={`${poppins.className} hidden xs:block`}>
             <AllcareokLogo />
@@ -89,9 +89,9 @@ export default function NavChild({ navigation, service_type, poppins, dic }) {
         <></>
       ) : (
         <div className="flex flex-col justify-center items-center ">
-          <Divider className="m-3 hidden md:flex" />
+          <Divider className="m-3 hidden sm:flex" />
           {!isWishlist && (
-            <div className="w-full max-w-[2300px] flex justify-center items-center">
+            <div className=" w-full flex justify-center items-center  sm:pl-14 sm:pr-14">
               <NavCarousel service_type={service_type} />
             </div>
           )}

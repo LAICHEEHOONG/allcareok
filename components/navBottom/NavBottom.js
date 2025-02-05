@@ -110,7 +110,7 @@ export default function NavBottom({ bottom_navigation }) {
         <></>
       ) : (
         <motion.div
-          className="fixed bottom-0 z-50 w-full block md:hidden"
+          className="fixed bottom-0 z-50 w-full block sm:hidden"
           animate={{
             y: isVisible ? 0 : 100, // Animate the y-axis position
           }}
