@@ -407,11 +407,11 @@ export default function Home() {
                   949: 2,
                   549: 1,
                 }}
-                className="my-masonry-grid"
-                columnClassName="my-masonry-grid_column"
+                className="my-masonry-grid "
+                columnClassName="my-masonry-grid_column flex flex-col items-center sm:items-start"
               >
                 {ADS.filter((ad) => ad.photo?.length > 0).map((ad, i) => (
-                  <Card key={ad._id + i} className="p-3 pb-1 pt-0 rounded-xl">
+                  <Card key={ad._id + i} className="w-full max-w-[400px] x550l:p-3 x550l:pb-1 pt-0 rounded-xl ">
                     <CardHeader className="flex justify-center h-[52px]">
                       {(ad?.area?.town ||
                         ad?.area?.city ||

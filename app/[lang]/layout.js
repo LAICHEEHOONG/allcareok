@@ -35,7 +35,7 @@ export default async function RootLayout({ children, params }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased  w-full flex justify-center`}
       >
-        <div className="w-full max-w-[2300px] x1470l:pl-4 x1470l:pr-4 x950l:pr-16 x950l:pl-16 sm:pr-10 sm:pl-10  x550l:p-3 ">
+        <div className="w-full max-w-[2300px] x1470l:pl-4 x1470l:pr-4 x950l:pr-16 x950l:pl-16 sm:pr-10 sm:pl-10  x550l:p-3 pl-2 pr-2">
           <AllProvider>
    
               <Nav lang={lang} />
