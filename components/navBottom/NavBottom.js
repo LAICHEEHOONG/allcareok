@@ -43,8 +43,9 @@ export default function NavBottom({ bottom_navigation }) {
   const [lastScrollY, setLastScrollY] = useState(0);
   const language = useSelector((state) => state.auth.language);
   const [clickIcon, setClickIcon] = useState(-1);
-
   const [lan, setLan] = useState(language);
+  const [openDrawerLanguage, setOpenDrawerLanguage] = useState(false);
+  const [openDrawerProfile, setOpenDrawerProfile] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -83,6 +84,12 @@ export default function NavBottom({ bottom_navigation }) {
     }
   }, [language]);
 
+  const resetButtonColor = () => {
+    setTimeout(() => {
+      setClickIcon(-1);
+    }, 500);
+  };
+
   const handleWishlists = () => {
     if (wishlist.length === 0) {
       // showToast(l?.wishlist_toast?.title, l?.wishlist_toast?.description);
@@ -99,10 +106,15 @@ export default function NavBottom({ bottom_navigation }) {
     }
 
     router.push(`/${currentLocale}/wishlists`);
-    setTimeout(() => {
-      setClickIcon(-1);
-    }, 500);
+    resetButtonColor();
+    // setTimeout(() => {
+    //   setClickIcon(-1);
+    // }, 500);
   };
+
+  // const handleLanguage = () => {
+  //   setOpenLanguage(true)
+  // };
 
   return (
     <>
@@ -143,9 +155,9 @@ export default function NavBottom({ bottom_navigation }) {
                   />
                 }
                 sx={{
-                  // "&.Mui-selected": {
-                  //   color: "#f31260",
-                  // },
+                  "&.Mui-selected": {
+                    color: "#f31260",
+                  },
                   "& .MuiBottomNavigationAction-label": {
                     color: "#f31260",
                   },
@@ -163,16 +175,30 @@ export default function NavBottom({ bottom_navigation }) {
                   "&.Mui-selected": {
                     color: "#f31260",
                   },
-                  // "& .MuiBottomNavigationAction-label": {
-                  //   color: "#f31260",
-                  // },
                 }}
                 onClick={() => {
                   setClickIcon(1);
                   handleWishlists();
                 }}
               ></BottomNavigationAction>
-              <DrawerLanguage bottom_navigation={bottom_navigation}>
+
+              <BottomNavigationAction
+                showLabel
+                label={lan}
+                icon={<LanguageIcon />}
+                sx={{
+                  "&.Mui-selected": {
+                    color: "#f31260",
+                  },
+                }}
+                onClick={() => {
+                  setClickIcon(2);
+                  setOpenDrawerLanguage(true);
+                  resetButtonColor();
+                }}
+              />
+
+              {/* <DrawerLanguage bottom_navigation={bottom_navigation}>
                 <BottomNavigationAction
                   showLabel
                   label={lan}
@@ -186,27 +212,38 @@ export default function NavBottom({ bottom_navigation }) {
                     setClickIcon(2);
                   }}
                 />
-              </DrawerLanguage>
+              </DrawerLanguage> */}
 
               {session ? (
-                <DrawerProfile bottom_navigation={bottom_navigation}>
-                  <BottomNavigationAction
-                    showLabel
-                    label={bottom_navigation.profile}
-                    icon={<AccountCircleIcon />}
-                    onClick={() => {
-                      setClickIcon(3);
-                    }}
-                  />
-                </DrawerProfile>
+                <BottomNavigationAction
+                  showLabel
+                  label={bottom_navigation.profile}
+                  icon={<AccountCircleIcon />}
+                  sx={{
+                    "&.Mui-selected": {
+                      color: "#f31260",
+                    },
+                  }}
+                  onClick={() => {
+                    setClickIcon(3);
+                    setOpenDrawerProfile(true);
+                    resetButtonColor();
+                  }}
+                />
               ) : (
                 <BottomNavigationAction
                   showLabel
                   label={bottom_navigation.login}
                   icon={<AccountCircleIcon />}
+                  sx={{
+                    "&.Mui-selected": {
+                      color: "#f31260",
+                    },
+                  }}
                   onClick={() => {
                     signIn();
                     setClickIcon(3);
+                    // resetButtonColor();
                   }}
                 />
               )}
@@ -214,6 +251,16 @@ export default function NavBottom({ bottom_navigation }) {
           </Box>
         </motion.div>
       )}
+      <DrawerLanguage
+        bottom_navigation={bottom_navigation}
+        setOpenDrawerLanguage={setOpenDrawerLanguage}
+        openDrawerLanguage={openDrawerLanguage}
+      ></DrawerLanguage>
+      <DrawerProfile
+        bottom_navigation={bottom_navigation}
+        setOpenDrawerProfile={setOpenDrawerProfile}
+        openDrawerProfile={openDrawerProfile}
+      ></DrawerProfile>
     </>
   );
 }

@@ -53,9 +53,9 @@ export default function NavChild({ navigation, service_type, poppins, dic }) {
         <Navbar
           maxWidth="full"
           shouldHideOnScroll={false}
-          className={`${isWishlist ? "hidden sm:flex" : ""} mt-3 `}
+          className={`${isWishlist ? "hidden sm:flex" : ""} mt-3`}
         >
-          <NavbarBrand className={`${poppins.className} hidden xs:block`}>
+          <NavbarBrand className={`${poppins.className} hidden xs:block `}>
             <AllcareokLogo />
           </NavbarBrand>
           {isWishlist && (
@@ -63,14 +63,14 @@ export default function NavChild({ navigation, service_type, poppins, dic }) {
               <AllcareokLogo />
             </NavbarBrand>
           )}
-          <NavbarContent justify="center">
+          <NavbarContent justify="center" className="">
             {!isWishlist ? (
               <SearchField navigation={navigation} />
             ) : (
               <div className="w-[150px] xs:w-[250px] sm:w-[307px] h-[64px]"></div>
             )}
           </NavbarContent>
-          <NavbarContent justify="end">
+          <NavbarContent justify="end" className="hidden xs:flex">
             <NavbarItem className="hidden sm:flex items-center">
               <NavShareBtn
                 share={navigation.share}

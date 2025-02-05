@@ -25,7 +25,12 @@ import { useSelector } from "react-redux";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import { useRouter, usePathname } from "next/navigation";
 
-export function DrawerProfile({ children, bottom_navigation }) {
+export function DrawerProfile({
+  children,
+  bottom_navigation,
+  setOpenDrawerProfile,
+  openDrawerProfile,
+}) {
   const session = useSelector((state) => state.auth.session);
   const auth = useSelector((state) => state.auth);
   const router = useRouter();
@@ -47,8 +52,8 @@ export function DrawerProfile({ children, bottom_navigation }) {
   };
 
   return (
-    <Drawer>
-      <DrawerTrigger asChild>{children}</DrawerTrigger>
+    <Drawer open={openDrawerProfile} onOpenChange={() => setOpenDrawerProfile(openDrawerProfile ? false : true)}>
+      {/* <DrawerTrigger asChild>{children}</DrawerTrigger> */}
       <DrawerContent>
         <div className="mx-auto w-full max-w-sm p-2">
           <DrawerHeader>
@@ -56,8 +61,6 @@ export function DrawerProfile({ children, bottom_navigation }) {
               <div className="flex gap-5">
                 <Avatar isBordered radius="full" size="md" src={auth.image} />
                 <div className="flex flex-col gap-1 items-start justify-center">
-       
-
                   {auth.name ? (
                     <h4 className="text-small font-semibold leading-none text-default-600">
                       {auth.name}

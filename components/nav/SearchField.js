@@ -14,7 +14,7 @@ export default function SearchField({ navigation }) {
   }
 
   return (
-    <div className="flex justify-center items-center gap-2">
+    <div className="flex justify-center items-center gap-2 ">
       <Autocomplete
         allowsCustomValue
         onInputChange={handleOnChange}
