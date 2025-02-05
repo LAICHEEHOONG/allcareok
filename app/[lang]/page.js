@@ -411,7 +411,10 @@ export default function Home() {
                 columnClassName="my-masonry-grid_column flex flex-col items-center sm:items-start"
               >
                 {ADS.filter((ad) => ad.photo?.length > 0).map((ad, i) => (
-                  <Card key={ad._id + i} className="w-full max-w-[400px] x550l:p-3 x550l:pb-1 pt-0 rounded-xl ">
+                  <Card
+                    key={ad._id + i}
+                    className="w-full max-w-[350px] rounded-xl "
+                  >
                     <CardHeader className="flex justify-center h-[52px]">
                       {(ad?.area?.town ||
                         ad?.area?.city ||
@@ -453,7 +456,7 @@ export default function Home() {
                       )}
                     </CardHeader>
 
-                    <CardBody className="overflow-visible p-0">
+                    <CardBody className="overflow-visible p-3 pb-1 pt-0">
                       <Carousel
                         className="w-full cursor-pointer"
                         opts={{ align: "start", loop: true, dragFree: false }}
@@ -464,7 +467,7 @@ export default function Home() {
                               key={idx}
                               className="flex justify-center items-start"
                             >
-                              <Image
+                              {/* <Image
                                 className={`object-cover rounded-xl 
                   w-[333px] h-[400px]
                   x550l:w-[280px] x550l:h-[340px]
@@ -479,6 +482,11 @@ export default function Home() {
                 `}
                                 src={item.url}
                                 alt="ad image"
+                              /> */}
+                              <Image
+                                className={`object-cover rounded-xl w-[310px] xl:h-[400px] x1128l:h-[350px] sm:h-[400px] 550px:h-[320px] h-[400px]`}
+                                src={item.url}
+                                alt="ad image"
                               />
                             </CarouselItem>
                           ))}
@@ -490,7 +498,7 @@ export default function Home() {
                           ad.reviewStatus === "Approved"
                             ? "justify-between"
                             : "justify-end"
-                        } items-center p-2`}
+                        } items-center p-1 pl-6 pr-6`}
                       >
                         {ad.reviewStatus === "Approved" && (
                           <Chip
@@ -540,8 +548,6 @@ export default function Home() {
           >
             {page < totalPages && page > 0 && <LogoSpinner text={false} />}
           </div>
-
- 
         </div>
       </main>
     </div>

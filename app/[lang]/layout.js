@@ -33,9 +33,9 @@ export default async function RootLayout({ children, params }) {
   return (
     <html lang={lang}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased  w-full flex justify-center`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased  w-full flex justify-center p-2 pr-6 pl-6`}
       >
-        <div className="w-full max-w-[2300px] x1470l:pl-4 x1470l:pr-4 x950l:pr-16 x950l:pl-16 sm:pr-10 sm:pl-10  x550l:p-3 pl-2 pr-2">
+        <div className="w-full x1880l:max-w-[2140px] x1640l:max-w-[1780px] x1128l:max-w-[1420px] x950l:max-w-[1090px] max-w-[710px]">
           <AllProvider>
    
               <Nav lang={lang} />
