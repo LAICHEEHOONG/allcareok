@@ -33,13 +33,17 @@ export default async function RootLayout({ children, params }) {
   return (
     <html lang={lang}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased  w-full flex justify-center`}
       >
-        <AllProvider>
-          <Nav lang={lang} />
-          {children}
-          <NavBottomWrap lang={lang} />
-        </AllProvider>
+        <div className="w-full max-w-[2300px] x1470l:pl-4 x1470l:pr-4 x950l:pr-16 x950l:pl-16 sm:pr-10 sm:pl-10  x550l:p-3 ">
+          <AllProvider>
+   
+              <Nav lang={lang} />
+          
+            {children}
+            <NavBottomWrap lang={lang} />
+          </AllProvider>
+        </div>
       </body>
     </html>
   );

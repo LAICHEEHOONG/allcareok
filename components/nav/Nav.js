@@ -18,6 +18,7 @@ export default async function Nav({ lang }) {
       service_type={dic.service_type}
       poppins={poppins}
       dic={dic}
+
     />
   );
 }

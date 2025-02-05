@@ -390,7 +390,7 @@ export default function Home() {
   return (
     <div className="pb-20">
       <main className="flex justify-center flex-col items-center">
-        <div className="w-full max-w-[2300px] p-2 pt-2 sm:p-10 sm:pt-2 x1440l:p-20 x1440l:pt-2">
+        <div className="w-full max-w-[2300px]">
           <div className="w-full">
             {ADS.length === 0 ? (
               <div className="flex flex-col gap-3 justify-center items-center h-[60vh] w-full ">
@@ -410,153 +410,6 @@ export default function Home() {
                 className="my-masonry-grid"
                 columnClassName="my-masonry-grid_column"
               >
-                {/* {ADS.map((ad, i) => (
-                  <Card key={ad._id + i} className="p-3 pb-1 pt-0 rounded-xl">
-                    <CardHeader className="flex justify-center h-[52px]">
-                      {(ad?.area?.town ||
-                        ad?.area?.city ||
-                        ad?.area?.state ||
-                        ad?.area?.country) && (
-                        <div className="flex justify-center items-center gap-2">
-                          {ad?.area?.country ? (
-                            <Avatar
-                              src={
-                                countryFlag.find(
-                                  (country) =>
-                                    country.value.trim().toLowerCase() ===
-                                    ad.area.country.trim().toLowerCase()
-                                )?.description || ""
-                              }
-                              showFallback
-                              name={ad.area.country}
-                              // alt={ad.area.country}
-                              className="max-w-5 h-5 w-full"
-                            />
-                          ) : (
-                            <LocationOnIcon className="w-4 h-4 mt-1" />
-                          )}
-
-                          <div className="text-base capitalize font-medium w-full max-w-[220px] truncate tracking-widest">
-                            {`${
-                              ad?.area?.town ||
-                              ad?.area?.city ||
-                              ad?.area?.state ||
-                              ""
-                            }${
-                              ad?.area?.town ||
-                              ad?.area?.city ||
-                              ad?.area?.state
-                                ? ", "
-                                : ""
-                            }${ad?.area?.country}`}
-                          </div>
-                        </div>
-                      )}
-                    </CardHeader>
-
-                    <CardBody className="overflow-visible p-0">
-                      <Carousel
-                        className="w-full cursor-pointer"
-                        opts={{ align: "start", loop: true, dragFree: false }}
-                      >
-                        <CarouselContent>
-                          {ad.photo?.length ? (
-                            ad.photo.map((item, idx) => (
-                              <CarouselItem
-                                key={idx}
-                                className="flex justify-center items-start"
-                              >
-                                <Image
-                                  className={`object-cover rounded-xl 
-                                    w-[333px] h-[400px]
-                                    x550l:w-[280px] x550l:h-[340px]
-                                    sm:w-[300px] sm:h-[360px]
-                                    md:w-[400px] md:h-[450px]
-                                    x950l:w-[300px] x950l:h-[360px] 
-                                    x1128l:w-[240px] x1128l:h-[300px]  
-                                    xl:w-[280px] xl:h-[340px]  
-                                    x1470l:w-[333px] x1470l:h-[400px]
-                                    x1640l:w-[300px] x1640l:h-[360px]   
-                                    x1980l:w-[333px] x1980l:h-[400px]
-                                     `}
-                                  src={item.url}
-                                  alt="ad image"
-                                />
-                              </CarouselItem>
-                            ))
-                          ) : (
-                            <CarouselItem>
-                              <Image
-                                className={`object-cover rounded-xl 
-                                  w-[333px] h-[400px]
-                                  x550l:w-[280px] x550l:h-[340px]
-                                  sm:w-[300px] sm:h-[360px]
-                                  md:w-[400px] md:h-[450px]
-                                  x950l:w-[300px] x950l:h-[360px] 
-                                  x1128l:w-[240px] x1128l:h-[300px]  
-                                  xl:w-[280px] xl:h-[340px]  
-                                  x1470l:w-[333px] x1470l:h-[400px]
-                                  x1640l:w-[300px] x1640l:h-[360px]   
-                                  x1980l:w-[333px] x1980l:h-[400px]
-                                   `}
-                                src="/images/plumber.png"
-                                alt="default image"
-                              />
-                            </CarouselItem>
-                          )}
-                        </CarouselContent>
-                      </Carousel>
-                      <>
-                        <div
-                          className={`absolute inset-x-0 top-0 z-30 flex ${
-                            ad.reviewStatus === "Approved"
-                              ? "justify-between"
-                              : "justify-end"
-                          } items-center p-2`}
-                        >
-                          {ad.reviewStatus === "Approved" && (
-                            <Chip
-                              avatar={
-                                <Avatar
-                                  name="allcareok"
-                                  src="https://www.allcareok.com/images/allcareok_logo.png"
-                                />
-                              }
-                              variant="shadow"
-                              // className="bg-white"
-                              classNames={{
-                                base: "bg-gradient-to-br from-indigo-500 to-pink-500  shadow-pink-500/30",
-                                content: "drop-shadow shadow-black text-white",
-                              }}
-                            >
-                              <div className="font-medium tracking-wider">
-                                {l?.verified}
-                              </div>
-                            </Chip>
-                          )}
-
-                          <Button
-                            isIconOnly
-                            aria-label="Like"
-                            size="sm"
-                            radius="full"
-                            color="danger"
-                            variant={isInWishlist(ad._id) ? "solid" : "flat"} // Change based on wishlist
-                            // isLoading={isLoading} // Show loading when updating
-                            isLoading={loadingAd[ad._id] || false} // Only the clicked button will show loading
-                            onPress={() => updateUserWishlist_(ad._id)} // Handle wishlist update
-                          >
-                            <FavoriteBorderIcon style={{ color: "white" }} />
-                          </Button>
-                        </div>
-                      </>
-                    </CardBody>
-                    <CardFooter className="flex justify-center p-0">
-                      <ADFooter ad={ad} />
-                    </CardFooter>
-                  </Card>
-                ))} */}
-
                 {ADS.filter((ad) => ad.photo?.length > 0).map((ad, i) => (
                   <Card key={ad._id + i} className="p-3 pb-1 pt-0 rounded-xl">
                     <CardHeader className="flex justify-center h-[52px]">
@@ -688,14 +541,7 @@ export default function Home() {
             {page < totalPages && page > 0 && <LogoSpinner text={false} />}
           </div>
 
-          {/* {starter && (
-            <div
-              ref={ref}
-              className={`w-full h-[100px] flex justify-center items-center `}
-            >
-              {page <= totalPages && page > 1 && <LogoSpinner text={false} />}
-            </div>
-          )} */}
+ 
         </div>
       </main>
     </div>
