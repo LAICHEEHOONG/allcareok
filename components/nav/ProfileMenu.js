@@ -42,6 +42,10 @@ export default function ProfileMenu({ navigation }) {
   };
 
   const handleWishlists = () => {
+    if (!session) {
+      signIn();
+      return;
+    }
     if (wishlist.length === 0) {
       // showToast(l?.wishlist_toast?.title, l?.wishlist_toast?.description);
       toast.warning(l?.wishlist_empty?.title, {
