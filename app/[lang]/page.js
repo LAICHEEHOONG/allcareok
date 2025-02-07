@@ -15,17 +15,16 @@ import {
 } from "@/redux/features/editor/editorSlice";
 import { useSession } from "next-auth/react";
 import { signUp, updateUserCountry } from "@/lib/action/userAction";
-import { findUserAds, getAdsFast } from "@/lib/action/adAction";
+import {
+  findUserAds,
+  getAdsFast,
+  getPaginatedAds,
+} from "@/lib/action/adAction";
 import { useRouter, usePathname } from "next/navigation";
 import axios from "axios";
 import Masonry from "react-masonry-css";
 import { useInView } from "react-intersection-observer";
-// import { Fade } from "react-awesome-reveal";
-import {
-  setADS,
-  setPagination,
-  // setStandbyADS,
-} from "@/redux/features/ad/adSlice";
+import { setADS, setPagination } from "@/redux/features/ad/adSlice";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import {
   Image,
@@ -49,7 +48,6 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { updateUserWishlist } from "@/lib/action/userAction";
 import { signIn } from "next-auth/react";
 import { CrashPrevent } from "@/lib/frontend_tool";
-import { showToast } from "@/lib/frontend_tool";
 
 async function getCountryFromIP() {
   try {
@@ -137,26 +135,6 @@ export default function Home() {
     fetchAds();
   }, [user]);
 
-  // fectch ads
-  // useEffect(() => {
-  //   const fetchMoreAds = async () => {
-  //     try {
-  //       const res = await getAdsFast({
-  //         query: { page: page + 1, limit: 20 },
-  //       });
-  //       if (res.success) {
-  //         dispatch(setADS(res.data.ads));
-  //         dispatch(setPagination(res.data));
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   if (page < totalPages && inView) {
-  //     fetchMoreAds();
-  //     // console.log("fetchMoreAds");
-  //   }
-  // }, [inView]);
   useEffect(() => {
     const fetchMoreAds = async () => {
       try {
@@ -169,7 +147,10 @@ export default function Home() {
           limit = 80;
         }
 
-        const res = await getAdsFast({
+        // const res = await getAdsFast({
+        //   query: { page: page + 1, limit: limit },
+        // });
+        const res = await getPaginatedAds({
           query: { page: page + 1, limit: limit },
         });
 
@@ -187,101 +168,6 @@ export default function Home() {
     }
   }, [inView]);
 
-  // // fectch data
-  // useEffect(() => {
-  //   const fetchMoreAds = async () => {
-  //     try {
-  //       const res = await getAdsFast({
-  //         query: { page: page + 1, limit: 12 },
-  //       });
-  //       if (res.success) {
-  //         dispatch(setStandbyADS(res.data.ads));
-  //         dispatch(setPagination(res.data));
-  //       }
-  //     } catch (error) {
-  //       console.error(error);
-  //     } finally {
-  //       if (!starter) {
-  //         setTimeout(() => {
-  //           setStarter(true);
-  //         }, 500);
-  //       }
-  //     }
-  //   };
-  //   if (standby_ADS.length === 0 && page <= totalPages) {
-  //     fetchMoreAds();
-  //   }
-  // }, [standby_ADS]);
-
-  // fectch data
-  // useEffect(() => {
-  //   const fetchMoreAds = async () => {
-  //     try {
-  //       const res = await getAdsFast({
-  //         query: { page: page + 1, limit: 18 },
-  //       });
-  //       if (res.success) {
-  //         dispatch(setStandbyADS(res.data.ads));
-  //         dispatch(setPagination(res.data));
-  //       }
-  //     } catch (error) {
-  //       console.error(error);
-  //     } finally {
-  //       if (!starter) {
-  //         setTimeout(() => {
-  //           setStarter(true);
-  //         }, 500);
-  //       }
-  //     }
-  //   };
-  //   const handleScroll = () => {
-  //     if (
-  //       window.innerHeight + window.scrollY >=
-  //       document.body.offsetHeight - 200
-  //     ) {
-  //       // Manually trigger the logic when close to the bottom
-
-  //       // dispatch(setADS(standby_ADS));
-  //       // dispatch(setStandbyADS([]));
-  //       if (standby_ADS.length > 0) {
-  //         dispatch(setADS(standby_ADS));
-  //         dispatch(setStandbyADS([]));
-  //       }
-  //     }
-  //   };
-  //   if (standby_ADS.length === 0 && page <= totalPages) {
-  //     fetchMoreAds();
-  //   }
-
-  //   window.addEventListener("scroll", handleScroll);
-
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, [standby_ADS]);
-
-  // show ads
-  // useEffect(() => {
-  //   if (standby_ADS.length > 0) {
-  //     dispatch(setADS(standby_ADS));
-  //     dispatch(setStandbyADS([]));
-  //   }
-  // }, [inView]);
-
-  // // show data
-  // useEffect(() => {
-  //   if (standby_ADS.length > 0) {
-  //     setTimeout(() => {
-  //       dispatch(setADS(standby_ADS));
-  //       dispatch(setStandbyADS([]));
-  //     }, 500);
-  //   }
-  // }, [inView]);
-
-  // useEffect(() => {
-  //   if (page > totalPages) {
-  //     setStarter(false);
-  //   }
-  // }, [page]);
-
   // Handle wishlist update
   const updateUserWishlist_ = async (adId) => {
     if (!session) {
@@ -296,16 +182,6 @@ export default function Home() {
       const res = await updateUserWishlist({ userId: user, adId }); // Update wishlist
       console.log(res);
       if (res.success) {
-        // if (res.data.wishlist.length > wishlist.length) {
-        //   showToast(l?.wishlist_toast?.title, l?.wishlist_toast?.description);
-        // }
-        // if (res.data.wishlist.length < wishlist.length) {
-        //   showToast(
-        //     l?.wishlist_toast_remove?.title,
-        //     l?.wishlist_toast_remove?.description
-        //   );
-        // }
-
         dispatch(setWishlist(res.data.wishlist)); // Update Redux store
       }
 
@@ -320,68 +196,6 @@ export default function Home() {
 
   // Check if the ad is in the wishlist
   const isInWishlist = (adId) => wishlist.includes(adId);
-
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     if (
-  //       window.innerHeight + window.scrollY >=
-  //       document.body.offsetHeight - 200
-  //     ) {
-  //       // Manually trigger the logic when close to the bottom
-
-  //       // dispatch(setADS(standby_ADS));
-  //       // dispatch(setStandbyADS([]));
-  //       if (standby_ADS.length > 0) {
-  //         setTimeout(() => {
-  //           dispatch(setADS(standby_ADS));
-  //           dispatch(setStandbyADS([]));
-  //         }, 500);
-  //       }
-  //     }
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, [standby_ADS]);
-
-  // useEffect(() => {
-  //   let isLoading = false; // Prevent double execution
-
-  //   const loadAds = () => {
-  //     if (isLoading || standby_ADS.length === 0) return; // Avoid double loading
-  //     isLoading = true; // Mark as loading to prevent duplicate execution
-  //     dispatch(setADS(standby_ADS));
-  //     dispatch(setStandbyADS([]));
-  //     isLoading = false; // Reset after loading
-  //     // setTimeout(() => {
-  //     //   dispatch(setADS(standby_ADS));
-  //     //   dispatch(setStandbyADS([]));
-  //     //   isLoading = false; // Reset after loading
-  //     // }, 500);
-  //   };
-
-  //   // If inView is triggered, load ads
-  //   if (inView) {
-  //     loadAds();
-  //   }
-
-  //   const handleScroll = () => {
-  //     if (
-  //       window.innerHeight + window.scrollY >=
-  //       document.body.offsetHeight - 200
-  //     ) {
-  //       loadAds();
-  //     }
-  //   };
-
-  //   // Add scroll event listener
-  //   window.addEventListener("scroll", handleScroll);
-
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, [inView, standby_ADS]);
 
   useEffect(() => {
     console.log(ADS.length);
