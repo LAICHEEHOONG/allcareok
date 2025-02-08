@@ -13,27 +13,16 @@ import { useState, useEffect } from "react";
 export default function SearchField({ navigation }) {
   const [inputValue, setInputValue] = useState("");
   const dispatch = useDispatch();
-  const searchValue = useSelector((state) => state.search.value);
-
-  // const handleSearch = () => {
-  //   const getAreaSuggestions_ = async (query) => {
-  //     try {
-  //       const res = await getAreaSuggestions(query);
-  //       console.log(res);
-  //       // return res.data
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   getAreaSuggestions_(searchValue);
-  // };
 
   let list = useAsyncList({
     async load({ filterText }) {
-      if (!filterText) return { items: [] };
+      // if (!filterText) return { items: [] };
+      if (!filterText.trim()) return { items: [] }; // 🔥 Ensure spaces don’t break the search
+
 
       try {
-        const response = await getAreaSuggestions(filterText);
+        // const response = await getAreaSuggestions(filterText);
+        const response = await getAreaSuggestions(filterText.trim()); // 🔥 Trim spaces before search
         if (!response.success) throw new Error(response.message);
 
         return {
@@ -50,38 +39,28 @@ export default function SearchField({ navigation }) {
   });
 
   useEffect(() => {
-    console.log(inputValue)
-  }, [inputValue])
-  
-  // const handleOnChange = (where) => {
-  //   dispatch(setSearchValue(where));
-  //   setInputValue(value);
-  //   list.setFilterText(value);
-  // };
+    console.log(inputValue);
+  }, [inputValue]);
+
   return (
     <div className="flex justify-center items-center gap-2 ">
       <Autocomplete
         allowsCustomValue
-        // inputValue={inputValue}
-        // inputValue={list.filterText}
         isLoading={list.isLoading}
         items={list.items}
-
-        // onInputChange={handleOnChange}
         placeholder={navigation.placeholder}
-        // defaultInputValue={inputValue}
         variant="flat"
-        // defaultItems={inputValue}
         startContent={<PlaceIcon className="text-gray-400" />}
-
         radius="full"
         size="lg"
         aria-label="search where"
         fullWidth={true}
         onInputChange={(value) => {
           setInputValue(value);
-          list.setFilterText(value);
-          dispatch(setSearchValue(value));
+          list.setFilterText(value.trim()); // 🔥 Trim spaces before setting filter text
+          dispatch(setSearchValue(value.trim())); // 🔥 Ensure Redux gets the trimmed input
+          // list.setFilterText(value);
+          // dispatch(setSearchValue(value));
         }}
       >
         {(item) => (
