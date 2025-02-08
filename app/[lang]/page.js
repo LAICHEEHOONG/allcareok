@@ -197,9 +197,9 @@ export default function Home() {
   // Check if the ad is in the wishlist
   const isInWishlist = (adId) => wishlist.includes(adId);
 
-  useEffect(() => {
-    console.log(ADS.length);
-  }, [ADS]);
+  // useEffect(() => {
+  //   console.log(ADS.length);
+  // }, [ADS]);
 
   return (
     <div className="pb-20">
