@@ -237,12 +237,12 @@ export default function Home() {
   //   console.log("Area:", area || "No area provided");
   // }, [area]);
 
-  useEffect(() => {
-    if (area || serviceType) {
-      dispatch(emptyADS());
-      // dispatch(setFire());
-    }
-  }, [area, serviceType]);
+  // useEffect(() => {
+  //   if (area || serviceType) {
+  //     dispatch(emptyADS());
+  //     // dispatch(setFire());
+  //   }
+  // }, [area, serviceType]);
 
   // useEffect(() => {
   //   if (fire) {
