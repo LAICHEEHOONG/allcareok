@@ -134,6 +134,39 @@ export default function Home() {
     fetchAds();
   }, [user]);
 
+  // useEffect(() => {
+  //   const fetchMoreAds = async () => {
+  //     try {
+  //       let screenHeight = window.innerHeight;
+  //       let limit = 20; // Default limit
+
+  //       if (screenHeight >= 1400 && screenHeight < 2160) {
+  //         limit = 40;
+  //       } else if (screenHeight >= 2160 && screenHeight < 4320) {
+  //         limit = 80;
+  //       }
+
+  //       // const res = await getAdsFast({
+  //       //   query: { page: page + 1, limit: limit },
+  //       // });
+  //       const res = await getPaginatedAds({
+  //         query: { page: page + 1, limit: limit, area: area },
+  //       });
+
+  //       if (res.success) {
+  //         dispatch(setADS(res.data.ads));
+  //         dispatch(setPagination(res.data));
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+
+  //   if (page < totalPages && inView) {
+  //     fetchMoreAds();
+  //   }
+  // }, [inView]);
+
   useEffect(() => {
     const fetchMoreAds = async () => {
       try {
@@ -146,9 +179,6 @@ export default function Home() {
           limit = 80;
         }
 
-        // const res = await getAdsFast({
-        //   query: { page: page + 1, limit: limit },
-        // });
         const res = await getPaginatedAds({
           query: { page: page + 1, limit: limit, area: area },
         });
@@ -162,10 +192,11 @@ export default function Home() {
       }
     };
 
-    if (page < totalPages && inView) {
+    if (page < totalPages && (inView || area)) {
+      dispatch(emptyADS()); // Clear previous ads when area changes
       fetchMoreAds();
     }
-  }, [inView]);
+  }, [inView, area]); // Now also runs when 'area' changes
 
   // Handle wishlist update
   const updateUserWishlist_ = async (adId) => {
