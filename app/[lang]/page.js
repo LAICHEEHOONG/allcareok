@@ -20,7 +20,7 @@ import {
   getAdsFast,
   getPaginatedAds,
 } from "@/lib/action/adAction";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import axios from "axios";
 import Masonry from "react-masonry-css";
 import { useInView } from "react-intersection-observer";
@@ -71,11 +71,13 @@ export default function Home() {
   const page = useSelector((state) => state.ADS.page);
   const totalPages = useSelector((state) => state.ADS.totalPages);
   const [ref, inView] = useInView();
-  const area = useSelector((state) => state.search?.value);
+  // const area = useSelector((state) => state.search?.value);
   const fire = useSelector((state) => state.search?.fire);
   const l = useSelector((state) => state.auth?.lang?.home_card);
   const wishlist = useSelector((state) => state.auth?.wishlist);
   const [loadingAd, setLoadingAd] = useState({}); // Track loading state per adId
+  const searchParams = useSearchParams();
+  const area = searchParams.get("area");
 
   const redirectedPathName = (locale) => {
     if (!pathName) return "/";
@@ -193,13 +195,23 @@ export default function Home() {
 
   // Check if the ad is in the wishlist
   const isInWishlist = (adId) => wishlist.includes(adId);
+  useEffect(() => {
+    console.log("Area:", area || "No area provided");
+  }, [area]);
 
   useEffect(() => {
-    if (fire) {
+    if (area) {
       dispatch(emptyADS());
-      dispatch(setFire());
+      // dispatch(setFire());
     }
-  }, [fire]);
+  }, [area]);
+
+  // useEffect(() => {
+  //   if (fire) {
+  //     dispatch(emptyADS());
+  //     dispatch(setFire());
+  //   }
+  // }, [fire]);
 
   // useEffect(() => {
   //   console.log(ADS.length);

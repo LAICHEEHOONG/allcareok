@@ -8,10 +8,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSearchValue, setFire } from "@/redux/features/search/searchSlice";
 import { getAreaSuggestions } from "@/lib/action/adAction";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function SearchField({ navigation }) {
   const [inputValue, setInputValue] = useState("");
   const dispatch = useDispatch();
+  const router = useRouter();
 
   let list = useAsyncList({
     async load({ filterText }) {
@@ -72,7 +74,9 @@ export default function SearchField({ navigation }) {
         color="danger"
         aria-label="Search Icon"
         radius="full"
-        onPress={() => dispatch(setFire())}
+        onPress={() => router.push(`?area=${inputValue}`)}
+
+        // onPress={() => dispatch(setFire())}
         // onPress={handleSearch}
       >
         <SearchIcon className="w-5" />
