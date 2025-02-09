@@ -4,9 +4,8 @@ import { Autocomplete, AutocompleteItem, Button } from "@heroui/react";
 import { useAsyncList } from "@react-stately/data";
 import SearchIcon from "@mui/icons-material/Search";
 import PlaceIcon from "@mui/icons-material/Place";
-import { animals } from "./data";
 import { useDispatch, useSelector } from "react-redux";
-import { setSearchValue } from "@/redux/features/search/searchSlice";
+import { setSearchValue, setFire } from "@/redux/features/search/searchSlice";
 import { getAreaSuggestions } from "@/lib/action/adAction";
 import { useState, useEffect } from "react";
 
@@ -18,7 +17,6 @@ export default function SearchField({ navigation }) {
     async load({ filterText }) {
       // if (!filterText) return { items: [] };
       if (!filterText.trim()) return { items: [] }; // 🔥 Ensure spaces don’t break the search
-
 
       try {
         // const response = await getAreaSuggestions(filterText);
@@ -74,6 +72,7 @@ export default function SearchField({ navigation }) {
         color="danger"
         aria-label="Search Icon"
         radius="full"
+        onPress={() => dispatch(setFire())}
         // onPress={handleSearch}
       >
         <SearchIcon className="w-5" />

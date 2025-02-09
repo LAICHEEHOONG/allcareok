@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   ADS: [],
-  // standby_ADS: [],
   total: 0,
   page: 0,
   limit: 0,
@@ -25,13 +24,16 @@ export const ADSSlice = createSlice({
       state.limit = action.payload.limit;
       state.totalPages = action.payload.totalPages;
     },
+    emptyADS: (state) => {
+      state.ADS = [];
+      state.total = 0;
+      state.page = 0;
+      state.limit = 0;
+      state.totalPages = 1;
+    },
   },
 });
 
-export const {
-  setADS,
-  setPagination,
-  // setStandbyADS
-} = ADSSlice.actions;
+export const { setADS, setPagination, emptyADS } = ADSSlice.actions;
 
 export default ADSSlice.reducer;

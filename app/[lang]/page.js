@@ -24,7 +24,7 @@ import { useRouter, usePathname } from "next/navigation";
 import axios from "axios";
 import Masonry from "react-masonry-css";
 import { useInView } from "react-intersection-observer";
-import { setADS, setPagination } from "@/redux/features/ad/adSlice";
+import { setADS, setPagination, emptyADS } from "@/redux/features/ad/adSlice";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import {
   Image,
@@ -48,6 +48,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { updateUserWishlist } from "@/lib/action/userAction";
 import { signIn } from "next-auth/react";
 import { CrashPrevent } from "@/lib/frontend_tool";
+import { setFire } from "@/redux/features/search/searchSlice";
 
 async function getCountryFromIP() {
   try {
@@ -66,16 +67,12 @@ export default function Home() {
   const pathName = usePathname();
   const user = useSelector((state) => state.auth?._id);
   const country = useSelector((state) => state.auth?.country);
-  // const standby_ADS = useSelector((state) => state.ADS.standby_ADS);
   const ADS = useSelector((state) => state.ADS.ADS);
   const page = useSelector((state) => state.ADS.page);
   const totalPages = useSelector((state) => state.ADS.totalPages);
   const [ref, inView] = useInView();
-  // const [ref, inView] = useInView({
-  //   threshold: 1, // Increase the percentage of visibility required
-  //   triggerOnce: false, // Ensure it keeps triggering
-  // });
-  // const [starter, setStarter] = useState(false);
+  const area = useSelector((state) => state.search?.value);
+  const fire = useSelector((state) => state.search?.fire);
   const l = useSelector((state) => state.auth?.lang?.home_card);
   const wishlist = useSelector((state) => state.auth?.wishlist);
   const [loadingAd, setLoadingAd] = useState({}); // Track loading state per adId
@@ -151,7 +148,7 @@ export default function Home() {
         //   query: { page: page + 1, limit: limit },
         // });
         const res = await getPaginatedAds({
-          query: { page: page + 1, limit: limit },
+          query: { page: page + 1, limit: limit, area: area },
         });
 
         if (res.success) {
@@ -196,6 +193,13 @@ export default function Home() {
 
   // Check if the ad is in the wishlist
   const isInWishlist = (adId) => wishlist.includes(adId);
+
+  useEffect(() => {
+    if (fire) {
+      dispatch(emptyADS());
+      dispatch(setFire());
+    }
+  }, [fire]);
 
   // useEffect(() => {
   //   console.log(ADS.length);
