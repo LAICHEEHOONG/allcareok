@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   value: "",
-  fire: false
+  serviceType: "",
+  fire: false,
 };
 
 export const searchSlice = createSlice({
@@ -13,11 +14,14 @@ export const searchSlice = createSlice({
       state.value = action.payload;
     },
     setFire: (state) => {
-      state.fire = state.fire ? false : true
-    }
+      state.fire = state.fire ? false : true;
+    },
+    setServiceType: (state, action) => {
+      state.serviceType = action.payload;
+    },
   },
 });
 
-export const { setSearchValue, setFire } = searchSlice.actions;
+export const { setSearchValue, setFire, setServiceType } = searchSlice.actions;
 
 export default searchSlice.reducer;

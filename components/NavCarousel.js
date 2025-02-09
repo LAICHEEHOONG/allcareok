@@ -8,15 +8,42 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { getCarouselItems } from "./carouselItems";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { setServiceType } from "@/redux/features/search/searchSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 
 export function NavCarousel({ service_type }) {
+  const dispatch = useDispatch();
+  const router = useRouter();
   const carouselItems = getCarouselItems(service_type);
   const [activeIndex, setActiveIndex] = useState(null);
+  const area = useSelector((state) => state.search?.value);
+  const serviceType = useSelector((state) => state.search?.serviceType);
 
-  const handleItemClick = (index) => {
-    setActiveIndex(index);
+  const handleItemClick = (label, id) => {
+    if (serviceType === id) {
+      dispatch(setServiceType(""));
+      setActiveIndex(null);
+      router.push(`?area=${area}&serviceType=${""}`);
+      return;
+    }
+    setActiveIndex(label);
+    dispatch(setServiceType(id));
+    router.push(`?area=${area}&serviceType=${id}`);
   };
+  // const handleItemClick = (label, id) => {
+  //   const newServiceType = serviceType === id ? "" : id;
+  //   setActiveIndex(newServiceType ? id : null);
+  //   dispatch(setServiceType(newServiceType));
+
+  //   // Create a clean and structured URL
+  //   const params = new URLSearchParams();
+  //   if (area) params.set("area", area);
+  //   if (newServiceType) params.set("serviceType", newServiceType);
+
+  //   router.push(`?${params.toString()}`);
+  // };
 
   return (
     <Carousel
@@ -29,11 +56,18 @@ export function NavCarousel({ service_type }) {
       }}
     >
       <CarouselContent className="-ml-1">
-        {carouselItems.map(({ label, icon: Icon }, idx) => (
+        {carouselItems.map(({ label, icon: Icon, id }, idx) => (
           <CarouselItem
             key={idx}
             className="pl-1 basis-1/7 cursor-pointer group select-none z-30"
-            onClick={() => handleItemClick(label)}
+            onClick={() => {
+              handleItemClick(label, id);
+            }}
+            // onClick={() => {
+            //   handleItemClick(label);
+            //   dispatch(setServiceType(id));
+            //   router.push(`?area=${area}&serviceType=${id}`);
+            // }}
           >
             {/* <div className="flex justify-center flex-col items-center gap-1 m-3 active:scale-85 transition-transform">
               <Icon

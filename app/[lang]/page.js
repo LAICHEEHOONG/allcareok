@@ -48,7 +48,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { updateUserWishlist } from "@/lib/action/userAction";
 import { signIn } from "next-auth/react";
 import { CrashPrevent } from "@/lib/frontend_tool";
-import { setFire } from "@/redux/features/search/searchSlice";
+// import { setFire } from "@/redux/features/search/searchSlice";
 
 async function getCountryFromIP() {
   try {
@@ -72,12 +72,14 @@ export default function Home() {
   const totalPages = useSelector((state) => state.ADS.totalPages);
   const [ref, inView] = useInView();
   // const area = useSelector((state) => state.search?.value);
-  const fire = useSelector((state) => state.search?.fire);
+  // const fire = useSelector((state) => state.search?.fire);
   const l = useSelector((state) => state.auth?.lang?.home_card);
   const wishlist = useSelector((state) => state.auth?.wishlist);
   const [loadingAd, setLoadingAd] = useState({}); // Track loading state per adId
   const searchParams = useSearchParams();
   const area = searchParams.get("area");
+  const serviceType = searchParams.get("serviceType");
+  // const serviceType = useSelector((state) => state.search?.serviceType);
 
   const redirectedPathName = (locale) => {
     if (!pathName) return "/";
@@ -180,7 +182,12 @@ export default function Home() {
         }
 
         const res = await getPaginatedAds({
-          query: { page: page + 1, limit: limit, area: area },
+          query: {
+            page: page + 1,
+            limit: limit,
+            area: area,
+            service: serviceType,
+          },
         });
 
         if (res.success) {
@@ -192,11 +199,11 @@ export default function Home() {
       }
     };
 
-    if (page < totalPages && (inView || area)) {
+    if (page < totalPages && (inView || area || serviceType)) {
       dispatch(emptyADS()); // Clear previous ads when area changes
       fetchMoreAds();
     }
-  }, [inView, area]); // Now also runs when 'area' changes
+  }, [inView, area, serviceType]); // Now also runs when 'area' changes
 
   // Handle wishlist update
   const updateUserWishlist_ = async (adId) => {
@@ -226,16 +233,16 @@ export default function Home() {
 
   // Check if the ad is in the wishlist
   const isInWishlist = (adId) => wishlist.includes(adId);
-  useEffect(() => {
-    console.log("Area:", area || "No area provided");
-  }, [area]);
+  // useEffect(() => {
+  //   console.log("Area:", area || "No area provided");
+  // }, [area]);
 
   useEffect(() => {
-    if (area) {
+    if (area || serviceType) {
       dispatch(emptyADS());
       // dispatch(setFire());
     }
-  }, [area]);
+  }, [area, serviceType]);
 
   // useEffect(() => {
   //   if (fire) {

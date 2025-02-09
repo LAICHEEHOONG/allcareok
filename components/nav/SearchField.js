@@ -14,6 +14,7 @@ export default function SearchField({ navigation }) {
   const [inputValue, setInputValue] = useState("");
   const dispatch = useDispatch();
   const router = useRouter();
+  const serviceType = useSelector(state => state.search?.serviceType)
 
   let list = useAsyncList({
     async load({ filterText }) {
@@ -32,15 +33,15 @@ export default function SearchField({ navigation }) {
           })),
         };
       } catch (error) {
-        console.log("Error fetching areas:", error);
+        // console.log("Error fetching areas:", error);
         return { items: [] };
       }
     },
   });
 
-  useEffect(() => {
-    console.log(inputValue);
-  }, [inputValue]);
+  // useEffect(() => {
+  //   console.log(inputValue);
+  // }, [inputValue]);
 
   return (
     <div className="flex justify-center items-center gap-2 ">
@@ -74,7 +75,7 @@ export default function SearchField({ navigation }) {
         color="danger"
         aria-label="Search Icon"
         radius="full"
-        onPress={() => router.push(`?area=${inputValue}`)}
+        onPress={() => router.push(`?area=${inputValue}&serviceType=${serviceType}`)}
 
         // onPress={() => dispatch(setFire())}
         // onPress={handleSearch}
