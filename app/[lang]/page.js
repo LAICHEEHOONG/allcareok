@@ -207,14 +207,14 @@ export default function Home() {
       console.log('fetch 1')
     }
 
-    if (preArea !== area || preServiceType !== serviceType) {
-      dispatch(emptyADS()); // Clear previous ads when area changes
-      fetchMoreAds();
-      setPreArea(area);
-      setPreServiceType(serviceType);
-      console.log('fetch 2')
+    // if (preArea !== area || preServiceType !== serviceType) {
+    //   dispatch(emptyADS()); // Clear previous ads when area changes
+    //   fetchMoreAds();
+    //   setPreArea(area);
+    //   setPreServiceType(serviceType);
+    //   console.log('fetch 2')
 
-    }
+    // }
 
     // if (area || serviceType) {
     //   dispatch(emptyADS()); // Clear previous ads when area changes
@@ -225,7 +225,7 @@ export default function Home() {
     //   dispatch(emptyADS()); // Clear previous ads when area changes
     //   fetchMoreAds();
     // }
-  }, [inView, area, serviceType]); // Now also runs when 'area' changes
+  }, [inView]); // Now also runs when 'area' changes
 
   // Handle wishlist update
   const updateUserWishlist_ = async (adId) => {
