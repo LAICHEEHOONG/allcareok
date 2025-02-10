@@ -79,6 +79,8 @@ export default function Home() {
   const searchParams = useSearchParams();
   const area = searchParams.get("area");
   const serviceType = searchParams.get("serviceType");
+  const [preArea, setPreArea] = useState(null);
+  const [preServiceType, setPreServiceType] = useState(null);
   // const serviceType = useSelector((state) => state.search?.serviceType);
 
   const redirectedPathName = (locale) => {
@@ -199,10 +201,27 @@ export default function Home() {
       }
     };
 
-    if (page < totalPages && (inView || area || serviceType)) {
-      dispatch(emptyADS()); // Clear previous ads when area changes
+    if (page < totalPages && inView) {
+      // dispatch(emptyADS()); // Clear previous ads when area changes
       fetchMoreAds();
     }
+
+    if (preArea !== area || preServiceType !== serviceType) {
+      dispatch(emptyADS()); // Clear previous ads when area changes
+      fetchMoreAds();
+      setPreArea(area);
+      setPreServiceType(serviceType);
+    }
+
+    // if (area || serviceType) {
+    //   dispatch(emptyADS()); // Clear previous ads when area changes
+    //   fetchMoreAds();
+    // }
+
+    // if (page < totalPages && (inView || area || serviceType)) {
+    //   dispatch(emptyADS()); // Clear previous ads when area changes
+    //   fetchMoreAds();
+    // }
   }, [inView, area, serviceType]); // Now also runs when 'area' changes
 
   // Handle wishlist update
