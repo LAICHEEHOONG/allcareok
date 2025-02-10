@@ -9,12 +9,13 @@ import { setSearchValue, setFire } from "@/redux/features/search/searchSlice";
 import { getAreaSuggestions } from "@/lib/action/adAction";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { emptyADS } from "@/redux/features/ad/adSlice";
 
 export default function SearchField({ navigation }) {
   const [inputValue, setInputValue] = useState("");
   const dispatch = useDispatch();
   const router = useRouter();
-  const serviceType = useSelector(state => state.search?.serviceType)
+  const serviceType = useSelector((state) => state.search?.serviceType);
 
   let list = useAsyncList({
     async load({ filterText }) {
@@ -42,6 +43,9 @@ export default function SearchField({ navigation }) {
   // useEffect(() => {
   //   console.log(inputValue);
   // }, [inputValue]);
+  const handleSearch = () => {
+    router.push(`?area=${inputValue}&serviceType=${serviceType}`);
+  };
 
   return (
     <div className="flex justify-center items-center gap-2 ">
@@ -75,10 +79,12 @@ export default function SearchField({ navigation }) {
         color="danger"
         aria-label="Search Icon"
         radius="full"
-        onPress={() => router.push(`?area=${inputValue}&serviceType=${serviceType}`)}
+        // onPress={() =>
+        //   router.push(`?area=${inputValue}&serviceType=${serviceType}`)
+        // }
 
         // onPress={() => dispatch(setFire())}
-        // onPress={handleSearch}
+        onPress={handleSearch}
       >
         <SearchIcon className="w-5" />
       </Button>
