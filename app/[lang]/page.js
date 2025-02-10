@@ -204,6 +204,7 @@ export default function Home() {
     if (page < totalPages && inView) {
       // dispatch(emptyADS()); // Clear previous ads when area changes
       fetchMoreAds();
+      return;
     }
 
     if (preArea !== area || preServiceType !== serviceType) {
