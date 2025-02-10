@@ -204,7 +204,7 @@ export default function Home() {
     if (page < totalPages && inView) {
       // dispatch(emptyADS()); // Clear previous ads when area changes
       fetchMoreAds();
-      return;
+      console.log('fetch 1')
     }
 
     if (preArea !== area || preServiceType !== serviceType) {
@@ -212,6 +212,8 @@ export default function Home() {
       fetchMoreAds();
       setPreArea(area);
       setPreServiceType(serviceType);
+      console.log('fetch 2')
+
     }
 
     // if (area || serviceType) {
