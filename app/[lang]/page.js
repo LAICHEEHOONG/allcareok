@@ -285,7 +285,7 @@ export default function Home() {
             {ADS.length === 0 ? (
               <div className="flex flex-col gap-3 justify-center items-center h-[60vh] w-full ">
                 <LogoSpinner text={true} />
-                <CrashPrevent />
+                {/* <CrashPrevent /> */}
               </div>
             ) : (
               <Masonry
