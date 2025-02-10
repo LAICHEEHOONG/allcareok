@@ -79,8 +79,8 @@ export default function Home() {
   const searchParams = useSearchParams();
   const area = searchParams.get("area");
   const serviceType = searchParams.get("serviceType");
-  const [preArea, setPreArea] = useState(null);
-  const [preServiceType, setPreServiceType] = useState(null);
+  // const [preArea, setPreArea] = useState(null);
+  // const [preServiceType, setPreServiceType] = useState(null);
   // const serviceType = useSelector((state) => state.search?.serviceType);
 
   const redirectedPathName = (locale) => {
@@ -171,61 +171,44 @@ export default function Home() {
   //   }
   // }, [inView]);
 
-  useEffect(() => {
-    const fetchMoreAds = async () => {
-      try {
-        let screenHeight = window.innerHeight;
-        let limit = 20; // Default limit
+  // useEffect(() => {
+  //   const fetchMoreAds = async () => {
+  //     try {
+  //       let screenHeight = window.innerHeight;
+  //       let limit = 20; // Default limit
 
-        if (screenHeight >= 1400 && screenHeight < 2160) {
-          limit = 40;
-        } else if (screenHeight >= 2160 && screenHeight < 4320) {
-          limit = 80;
-        }
+  //       if (screenHeight >= 1400 && screenHeight < 2160) {
+  //         limit = 40;
+  //       } else if (screenHeight >= 2160 && screenHeight < 4320) {
+  //         limit = 80;
+  //       }
 
-        const res = await getPaginatedAds({
-          query: {
-            page: page + 1,
-            limit: limit,
-            area: area,
-            service: serviceType,
-          },
-        });
+  //       const res = await getPaginatedAds({
+  //         query: {
+  //           page: page + 1,
+  //           limit: limit,
+  //           area: area,
+  //           service: serviceType,
+  //         },
+  //       });
 
-        if (res.success) {
-          dispatch(setADS(res.data.ads));
-          dispatch(setPagination(res.data));
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  //       if (res.success) {
+  //         dispatch(setADS(res.data.ads));
+  //         dispatch(setPagination(res.data));
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
 
-    if (page < totalPages && inView) {
-      // dispatch(emptyADS()); // Clear previous ads when area changes
-      fetchMoreAds();
-      console.log('fetch 1')
-    }
+  //   if (page < totalPages && inView) {
+  //     // dispatch(emptyADS()); // Clear previous ads when area changes
+  //     fetchMoreAds();
+  //     console.log('fetch 1')
+  //   }
 
-    // if (preArea !== area || preServiceType !== serviceType) {
-    //   dispatch(emptyADS()); // Clear previous ads when area changes
-    //   fetchMoreAds();
-    //   setPreArea(area);
-    //   setPreServiceType(serviceType);
-    //   console.log('fetch 2')
 
-    // }
-
-    // if (area || serviceType) {
-    //   dispatch(emptyADS()); // Clear previous ads when area changes
-    //   fetchMoreAds();
-    // }
-
-    // if (page < totalPages && (inView || area || serviceType)) {
-    //   dispatch(emptyADS()); // Clear previous ads when area changes
-    //   fetchMoreAds();
-    // }
-  }, [inView]); // Now also runs when 'area' changes
+  // }, [inView]); // Now also runs when 'area' changes
 
   // Handle wishlist update
   const updateUserWishlist_ = async (adId) => {
@@ -276,6 +259,80 @@ export default function Home() {
   // useEffect(() => {
   //   console.log(ADS.length);
   // }, [ADS]);
+  // useEffect(() => {
+  //   const fetchMoreAds = async () => {
+  //     try {
+  //       let screenHeight = window.innerHeight;
+  //       let limit = 20; // Default limit
+  
+  //       if (screenHeight >= 1400 && screenHeight < 2160) {
+  //         limit = 40;
+  //       } else if (screenHeight >= 2160 && screenHeight < 4320) {
+  //         limit = 80;
+  //       }
+  
+  //       const res = await getPaginatedAds({
+  //         query: {
+  //           page: 1, // Reset to first page when filters change
+  //           limit: limit,
+  //           area: area,
+  //           service: serviceType,
+  //         },
+  //       });
+  
+  //       if (res.success) {
+  //         dispatch(emptyADS()); // Clear previous ads
+  //         dispatch(setADS(res.data.ads));
+  //         dispatch(setPagination(res.data));
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  
+  //   if (area || serviceType) {
+  //     fetchMoreAds();
+  //     console.log("Fetching ads for new area or serviceType");
+  //   }
+  // }, [area, serviceType]); // Run effect when area or serviceType changes
+  useEffect(() => {
+    const fetchMoreAds = async () => {
+        try {
+            let screenHeight = window.innerHeight;
+            let limit = 20; // Default limit
+
+            if (screenHeight >= 1400 && screenHeight < 2160) {
+                limit = 40;
+            } else if (screenHeight >= 2160 && screenHeight < 4320) {
+                limit = 80;
+            }
+
+            const res = await getPaginatedAds({
+                query: {
+                    page: area || serviceType ? 1 : page + 1, // Reset page if filter changes
+                    limit: limit,
+                    area: area,
+                    service: serviceType,
+                },
+            });
+
+            if (res.success) {
+                if (area || serviceType) {
+                    dispatch(emptyADS()); // Clear ads if filter changed
+                }
+                dispatch(setADS(res.data.ads));
+                dispatch(setPagination(res.data));
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    if ((page < totalPages && inView) || area || serviceType) {
+        fetchMoreAds();
+        console.log("Fetching ads");
+    }
+}, [inView, area, serviceType]);
 
   return (
     <div className="pb-20">
