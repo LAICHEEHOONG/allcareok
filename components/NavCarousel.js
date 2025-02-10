@@ -22,15 +22,15 @@ export function NavCarousel({ service_type }) {
   const serviceType = useSelector((state) => state.search?.serviceType);
 
   const handleItemClick = (label, id) => {
-    // if (serviceType === id) {
-    //   dispatch(setServiceType(""));
-    //   setActiveIndex(null);
-    //   router.push(`?area=${area}&serviceType=${""}`);
-    //   return;
-    // }
+    if (serviceType === id) {
+      dispatch(setServiceType(""));
+      setActiveIndex(null);
+      router.push(`?area=${area ? area : ''}&serviceType=${""}`);
+      return;
+    }
     setActiveIndex(label);
     dispatch(setServiceType(id));
-    router.push(`?area=${area}&serviceType=${id}`);
+    router.push(`?area=${area ? area : ''}&serviceType=${id}`);
   };
   // const handleItemClick = (label, id) => {
   //   const newServiceType = serviceType === id ? "" : id;

@@ -107,7 +107,7 @@ export default function Home() {
         router.push(
           `${redirectedPathName(
             res.language
-          )}?area=${area}&serviceType=${serviceType}`,
+          )}?area=${area ? area : ''}&serviceType=${serviceType ? serviceType : ''}`,
           { scroll: false }
         );
         dispatch(userInfo(res));
