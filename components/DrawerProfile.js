@@ -49,10 +49,18 @@ export function DrawerProfile({
     } else {
       router.push(`/${currentLocale}/dashboard`);
     }
+    setTimeout(() => {
+      setOpenDrawerProfile(false);
+    }, 1000);
   };
 
   return (
-    <Drawer open={openDrawerProfile} onOpenChange={() => setOpenDrawerProfile(openDrawerProfile ? false : true)}>
+    <Drawer
+      open={openDrawerProfile}
+      onOpenChange={() =>
+        setOpenDrawerProfile(openDrawerProfile ? false : true)
+      }
+    >
       {/* <DrawerTrigger asChild>{children}</DrawerTrigger> */}
       <DrawerContent>
         <div className="mx-auto w-full max-w-sm p-2">
