@@ -48,6 +48,8 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { updateUserWishlist } from "@/lib/action/userAction";
 import { signIn } from "next-auth/react";
 import { CrashPrevent } from "@/lib/frontend_tool";
+import { toast } from "sonner";
+
 // import { setFire } from "@/redux/features/search/searchSlice";
 
 async function getCountryFromIP() {
@@ -81,6 +83,7 @@ export default function Home() {
   const serviceType = searchParams.get("serviceType");
   const [prevArea, setPrevArea] = useState(area);
   const [prevServiceType, setPrevServiceType] = useState(serviceType);
+  // const [noAds, setNoAds] = useState(false)
   // const serviceType = useSelector((state) => state.search?.serviceType);
 
   // useEffect(() => {
@@ -105,9 +108,9 @@ export default function Home() {
         dispatch(setBlockServiceBtn(true));
         const res = await signUp(user);
         router.push(
-          `${redirectedPathName(
-            res.language
-          )}?area=${area ? area : ''}&serviceType=${serviceType ? serviceType : ''}`,
+          `${redirectedPathName(res.language)}?area=${
+            area ? area : ""
+          }&serviceType=${serviceType ? serviceType : ""}`,
           { scroll: false }
         );
         dispatch(userInfo(res));
@@ -344,6 +347,18 @@ export default function Home() {
           //   setPrevArea(area); // Update previous values
           //   setPrevServiceType(serviceType);
           // }
+          if (res.data.total === 0) {
+            toast.warning(`Search Ads Not Found`, {
+              description: `The search did not return any ads matching your criteria. `,
+              action: {
+                label: "OK",
+                // onClick: () => console.log("Add Ad Limit Reached"),
+              },
+            });
+            router.push(`${redirectedPathName(res.language)}`, {
+              scroll: false,
+            });
+          }
           dispatch(setADS(res.data.ads));
           dispatch(setPagination(res.data));
         }
@@ -378,11 +393,7 @@ export default function Home() {
       dispatch(emptyADS());
     }
 
-    if (
-      inView ||
-      area !== prevArea ||
-      serviceType !== prevServiceType
-    ) {
+    if (inView || area !== prevArea || serviceType !== prevServiceType) {
       if (page < totalPages) {
         fetchMoreAds();
         console.log("Fetching ads");
