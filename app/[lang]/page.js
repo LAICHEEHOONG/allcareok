@@ -336,7 +336,7 @@ export default function Home() {
           },
         });
 
-        console.log(res);
+        // console.log(res);
 
         if (res.success) {
           // if (area || serviceType) {

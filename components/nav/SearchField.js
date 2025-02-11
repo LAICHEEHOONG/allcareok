@@ -5,11 +5,10 @@ import { useAsyncList } from "@react-stately/data";
 import SearchIcon from "@mui/icons-material/Search";
 import PlaceIcon from "@mui/icons-material/Place";
 import { useDispatch, useSelector } from "react-redux";
-import { setSearchValue, setFire } from "@/redux/features/search/searchSlice";
+import { setSearchValue } from "@/redux/features/search/searchSlice";
 import { getAreaSuggestions } from "@/lib/action/adAction";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { emptyADS } from "@/redux/features/ad/adSlice";
 
 export default function SearchField({ navigation }) {
   const [inputValue, setInputValue] = useState("");
@@ -17,32 +16,54 @@ export default function SearchField({ navigation }) {
   const router = useRouter();
   const serviceType = useSelector((state) => state.search?.serviceType);
 
+  // let list = useAsyncList({
+  //   async load({ filterText }) {
+  //     if (!filterText.trim()) return { items: [] }; // 🔥 Ensure spaces don’t break the search
+
+  //     try {
+  //       const response = await getAreaSuggestions(filterText.trim()); // 🔥 Trim spaces before search
+  //       if (!response.success) {
+  //         console.log(response.message);
+  //       }
+  //       console.log(response);
+  //       return {
+  //         items: response.data.map((area, index) => ({
+  //           id: index,
+  //           name: area,
+  //         })),
+  //       };
+  //     } catch (error) {
+  //       return { items: [] };
+  //     }
+  //   },
+  // });
+
   let list = useAsyncList({
     async load({ filterText }) {
-      // if (!filterText) return { items: [] };
-      if (!filterText.trim()) return { items: [] }; // 🔥 Ensure spaces don’t break the search
-
+      if (!filterText.trim()) return { items: [] };
+  
       try {
-        // const response = await getAreaSuggestions(filterText);
-        const response = await getAreaSuggestions(filterText.trim()); // 🔥 Trim spaces before search
-        if (!response.success) throw new Error(response.message);
-
-        return {
-          items: response.data.map((area, index) => ({
-            id: index,
-            name: area,
-          })),
-        };
+        const response = await getAreaSuggestions(filterText.trim());
+        if (!response.success) {
+          console.log(response.message);
+        }
+        console.log(response);
+  
+        // 🔥 Normalize strings: trim & convert to lowercase, then filter unique values
+        const uniqueAreas = Array.from(
+          new Set(response.data.map(area => area.trim().toLowerCase()))
+        ).map((area, index) => ({
+          id: index,
+          name: area,
+        }));
+  
+        return { items: uniqueAreas };
       } catch (error) {
-        // console.log("Error fetching areas:", error);
         return { items: [] };
       }
     },
   });
 
-  // useEffect(() => {
-  //   console.log(inputValue);
-  // }, [inputValue]);
   const handleSearch = () => {
     router.push(`?area=${inputValue}&serviceType=${serviceType}`);
   };
@@ -51,7 +72,7 @@ export default function SearchField({ navigation }) {
     <div className="flex justify-center items-center gap-2 ">
       <Autocomplete
         allowsCustomValue
-        isLoading={list.isLoading}
+        // isLoading={list.isLoading}
         items={list.items}
         placeholder={navigation.placeholder}
         variant="flat"
@@ -64,8 +85,6 @@ export default function SearchField({ navigation }) {
           setInputValue(value);
           list.setFilterText(value.trim()); // 🔥 Trim spaces before setting filter text
           dispatch(setSearchValue(value.trim())); // 🔥 Ensure Redux gets the trimmed input
-          // list.setFilterText(value);
-          // dispatch(setSearchValue(value));
         }}
       >
         {(item) => (
@@ -79,11 +98,6 @@ export default function SearchField({ navigation }) {
         color="danger"
         aria-label="Search Icon"
         radius="full"
-        // onPress={() =>
-        //   router.push(`?area=${inputValue}&serviceType=${serviceType}`)
-        // }
-
-        // onPress={() => dispatch(setFire())}
         onPress={handleSearch}
       >
         <SearchIcon className="w-5" />
