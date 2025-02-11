@@ -83,6 +83,7 @@ export default function Home() {
   const serviceType = searchParams.get("serviceType");
   const [prevArea, setPrevArea] = useState(area);
   const [prevServiceType, setPrevServiceType] = useState(serviceType);
+  const language = useSelector(state => state.auth?.language)
   // const [noAds, setNoAds] = useState(false)
   // const serviceType = useSelector((state) => state.search?.serviceType);
 
@@ -348,14 +349,16 @@ export default function Home() {
           //   setPrevServiceType(serviceType);
           // }
           if (res.data.total === 0) {
-            toast.warning(`Search Ads Not Found`, {
-              description: `The search did not return any ads matching your criteria. `,
+            toast.warning(`${l?.search_not_found?.title}`, {
+              description: `${l?.search_not_found?.description}`,
               action: {
                 label: "OK",
                 // onClick: () => console.log("Add Ad Limit Reached"),
               },
             });
-            router.push(`${redirectedPathName(res.language)}`, {
+
+        
+            router.push(`${redirectedPathName(language)}`, {
               scroll: false,
             });
           }

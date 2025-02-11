@@ -223,6 +223,10 @@
     "wishlist_empty": {
       "title": "Wishlist is Empty",
       "description": "You haven’t added any ads to your wishlist yet. "
+    },
+    "search_not_found": {
+      "title": "Search Ads Not Found",
+      "description": "The search did not return any ads matching your criteria. "
     }
   }
 }

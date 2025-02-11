@@ -223,6 +223,10 @@
     "wishlist_empty": {
       "title": "心愿清单为空",
       "description": "你还没有添加任何广告到心愿清单。"
+    },
+    "search_not_found": {
+      "title": "未找到搜索广告",
+      "description": "搜索未返回任何匹配的广告。"
     }
   }
 }
