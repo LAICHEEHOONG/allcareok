@@ -17,7 +17,7 @@ import { useSession } from "next-auth/react";
 import { signUp, updateUserCountry } from "@/lib/action/userAction";
 import {
   findUserAds,
-  getAdsFast,
+  // getAdsFast,
   getPaginatedAds,
 } from "@/lib/action/adAction";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
@@ -47,10 +47,8 @@ import { countryFlag } from "@/components/countryFlag";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { updateUserWishlist } from "@/lib/action/userAction";
 import { signIn } from "next-auth/react";
-import { CrashPrevent } from "@/lib/frontend_tool";
+// import { CrashPrevent } from "@/lib/frontend_tool";
 import { toast } from "sonner";
-
-// import { setFire } from "@/redux/features/search/searchSlice";
 
 async function getCountryFromIP() {
   try {
@@ -73,8 +71,6 @@ export default function Home() {
   const page = useSelector((state) => state.ADS.page);
   const totalPages = useSelector((state) => state.ADS.totalPages);
   const [ref, inView] = useInView();
-  // const area = useSelector((state) => state.search?.value);
-  // const fire = useSelector((state) => state.search?.fire);
   const l = useSelector((state) => state.auth?.lang?.home_card);
   const wishlist = useSelector((state) => state.auth?.wishlist);
   const [loadingAd, setLoadingAd] = useState({}); // Track loading state per adId
@@ -83,18 +79,7 @@ export default function Home() {
   const serviceType = searchParams.get("serviceType");
   const [prevArea, setPrevArea] = useState(area);
   const [prevServiceType, setPrevServiceType] = useState(serviceType);
-  const language = useSelector(state => state.auth?.language)
-  // const [noAds, setNoAds] = useState(false)
-  // const serviceType = useSelector((state) => state.search?.serviceType);
-
-  // useEffect(() => {
-  //   const filtersChanged = area !== prevArea || serviceType !== prevServiceType;
-  //   if (filtersChanged) {
-  //     dispatch(emptyADS()); // Clear previous ads only when filters change
-  //     setPrevArea(area); // Update previous values
-  //     setPrevServiceType(serviceType);
-  //   }
-  // }, [area, serviceType]);
+  const language = useSelector((state) => state.auth?.language);
 
   const redirectedPathName = (locale) => {
     if (!pathName) return "/";
@@ -156,77 +141,6 @@ export default function Home() {
     fetchAds();
   }, [user]);
 
-  // useEffect(() => {
-  //   const fetchMoreAds = async () => {
-  //     try {
-  //       let screenHeight = window.innerHeight;
-  //       let limit = 20; // Default limit
-
-  //       if (screenHeight >= 1400 && screenHeight < 2160) {
-  //         limit = 40;
-  //       } else if (screenHeight >= 2160 && screenHeight < 4320) {
-  //         limit = 80;
-  //       }
-
-  //       // const res = await getAdsFast({
-  //       //   query: { page: page + 1, limit: limit },
-  //       // });
-  //       const res = await getPaginatedAds({
-  //         query: { page: page + 1, limit: limit, area: area },
-  //       });
-
-  //       if (res.success) {
-  //         dispatch(setADS(res.data.ads));
-  //         dispatch(setPagination(res.data));
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-
-  //   if (page < totalPages && inView) {
-  //     fetchMoreAds();
-  //   }
-  // }, [inView]);
-
-  // useEffect(() => {
-  //   const fetchMoreAds = async () => {
-  //     try {
-  //       let screenHeight = window.innerHeight;
-  //       let limit = 20; // Default limit
-
-  //       if (screenHeight >= 1400 && screenHeight < 2160) {
-  //         limit = 40;
-  //       } else if (screenHeight >= 2160 && screenHeight < 4320) {
-  //         limit = 80;
-  //       }
-
-  //       const res = await getPaginatedAds({
-  //         query: {
-  //           page: page + 1,
-  //           limit: limit,
-  //           area: area,
-  //           service: serviceType,
-  //         },
-  //       });
-
-  //       if (res.success) {
-  //         dispatch(setADS(res.data.ads));
-  //         dispatch(setPagination(res.data));
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-
-  //   if (page < totalPages && inView) {
-  //     // dispatch(emptyADS()); // Clear previous ads when area changes
-  //     fetchMoreAds();
-  //     console.log('fetch 1')
-  //   }
-
-  // }, [inView]); // Now also runs when 'area' changes
-
   // Handle wishlist update
   const updateUserWishlist_ = async (adId) => {
     if (!session) {
@@ -255,63 +169,7 @@ export default function Home() {
 
   // Check if the ad is in the wishlist
   const isInWishlist = (adId) => wishlist.includes(adId);
-  // useEffect(() => {
-  //   console.log("Area:", area || "No area provided");
-  // }, [area]);
 
-  // useEffect(() => {
-  //   if (area || serviceType) {
-  //     dispatch(emptyADS());
-  //     // dispatch(setFire());
-  //   }
-  // }, [area, serviceType]);
-
-  // useEffect(() => {
-  //   if (fire) {
-  //     dispatch(emptyADS());
-  //     dispatch(setFire());
-  //   }
-  // }, [fire]);
-
-  // useEffect(() => {
-  //   console.log(ADS.length);
-  // }, [ADS]);
-  // useEffect(() => {
-  //   const fetchMoreAds = async () => {
-  //     try {
-  //       let screenHeight = window.innerHeight;
-  //       let limit = 20; // Default limit
-
-  //       if (screenHeight >= 1400 && screenHeight < 2160) {
-  //         limit = 40;
-  //       } else if (screenHeight >= 2160 && screenHeight < 4320) {
-  //         limit = 80;
-  //       }
-
-  //       const res = await getPaginatedAds({
-  //         query: {
-  //           page: 1, // Reset to first page when filters change
-  //           limit: limit,
-  //           area: area,
-  //           service: serviceType,
-  //         },
-  //       });
-
-  //       if (res.success) {
-  //         dispatch(emptyADS()); // Clear previous ads
-  //         dispatch(setADS(res.data.ads));
-  //         dispatch(setPagination(res.data));
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-
-  //   if (area || serviceType) {
-  //     fetchMoreAds();
-  //     console.log("Fetching ads for new area or serviceType");
-  //   }
-  // }, [area, serviceType]); // Run effect when area or serviceType changes
   useEffect(() => {
     const fetchMoreAds = async () => {
       try {
@@ -323,8 +181,6 @@ export default function Home() {
         } else if (screenHeight >= 2160 && screenHeight < 4320) {
           limit = 80;
         }
-        // const filtersChanged =
-        //   area !== prevArea || serviceType !== prevServiceType;
 
         const res = await getPaginatedAds({
           query: {
@@ -337,17 +193,7 @@ export default function Home() {
           },
         });
 
-        // console.log(res);
-
         if (res.success) {
-          // if (area || serviceType) {
-          //   dispatch(emptyADS()); // Clear ads if filter changed
-          // }
-          // if (filtersChanged) {
-          //   dispatch(emptyADS()); // Clear previous ads only when filters change
-          //   setPrevArea(area); // Update previous values
-          //   setPrevServiceType(serviceType);
-          // }
           if (res.data.total === 0) {
             toast.warning(`${l?.search_not_found?.title}`, {
               description: `${l?.search_not_found?.description}`,
@@ -357,7 +203,6 @@ export default function Home() {
               },
             });
 
-        
             router.push(`${redirectedPathName(language)}`, {
               scroll: false,
             });
@@ -369,22 +214,6 @@ export default function Home() {
         console.log(error);
       }
     };
-
-    // const filtersChanged = area !== prevArea || serviceType !== prevServiceType;
-    // if (filtersChanged) {
-    //   dispatch(emptyADS()); // Clear previous ads only when filters change
-    //   setPrevArea(area); // Update previous values
-    //   setPrevServiceType(serviceType);
-    //   // fetchMoreAds();
-    //   // console.log("Fetching ads");
-    // } else {
-    //   if (inView || area || serviceType) {
-    //     if (page < totalPages) {
-    //       fetchMoreAds();
-    //       console.log("Fetching ads");
-    //     }
-    //   }
-    // }
 
     if (area !== prevArea) {
       setPrevArea(area);
@@ -402,14 +231,6 @@ export default function Home() {
         console.log("Fetching ads");
       }
     }
-
-    // console.log(prevArea, area);
-    // console.log(prevServiceType, serviceType);
-    // if ((page < totalPages && inView) || area || serviceType) {
-
-    //   fetchMoreAds();
-    //   console.log("Fetching ads");
-    // }
   }, [inView, area, serviceType, prevArea, prevServiceType]);
 
   return (
@@ -492,22 +313,6 @@ export default function Home() {
                               key={idx}
                               className="flex justify-center items-start"
                             >
-                              {/* <Image
-                                className={`object-cover rounded-xl 
-                  w-[333px] h-[400px]
-                  x550l:w-[280px] x550l:h-[340px]
-                  sm:w-[300px] sm:h-[360px]
-                  md:w-[400px] md:h-[450px]
-                  x950l:w-[300px] x950l:h-[360px] 
-                  x1128l:w-[240px] x1128l:h-[300px]  
-                  xl:w-[280px] xl:h-[340px]  
-                  x1470l:w-[333px] x1470l:h-[400px]
-                  x1640l:w-[300px] x1640l:h-[360px]   
-                  x1980l:w-[333px] x1980l:h-[400px]
-                `}
-                                src={item.url}
-                                alt="ad image"
-                              /> */}
                               <Image
                                 className={`object-cover rounded-xl w-[310px] xl:h-[400px] x1128l:h-[350px] sm:h-[400px] 550px:h-[320px] h-[400px]`}
                                 src={item.url}

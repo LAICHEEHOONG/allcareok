@@ -16,47 +16,25 @@ export default function SearchField({ navigation }) {
   const router = useRouter();
   const serviceType = useSelector((state) => state.search?.serviceType);
 
-  // let list = useAsyncList({
-  //   async load({ filterText }) {
-  //     if (!filterText.trim()) return { items: [] }; // 🔥 Ensure spaces don’t break the search
-
-  //     try {
-  //       const response = await getAreaSuggestions(filterText.trim()); // 🔥 Trim spaces before search
-  //       if (!response.success) {
-  //         console.log(response.message);
-  //       }
-  //       console.log(response);
-  //       return {
-  //         items: response.data.map((area, index) => ({
-  //           id: index,
-  //           name: area,
-  //         })),
-  //       };
-  //     } catch (error) {
-  //       return { items: [] };
-  //     }
-  //   },
-  // });
-
   let list = useAsyncList({
     async load({ filterText }) {
       if (!filterText.trim()) return { items: [] };
-  
+
       try {
         const response = await getAreaSuggestions(filterText.trim());
         if (!response.success) {
           console.log(response.message);
         }
         console.log(response);
-  
+
         // 🔥 Normalize strings: trim & convert to lowercase, then filter unique values
         const uniqueAreas = Array.from(
-          new Set(response.data.map(area => area.trim().toLowerCase()))
+          new Set(response.data.map((area) => area.trim().toLowerCase()))
         ).map((area, index) => ({
           id: index,
           name: area,
         }));
-  
+
         return { items: uniqueAreas };
       } catch (error) {
         return { items: [] };

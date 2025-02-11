@@ -15,9 +15,7 @@ export const ADSSlice = createSlice({
     setADS: (state, action) => {
       state.ADS = [...state.ADS, ...action.payload];
     },
-    // setStandbyADS: (state, action) => {
-    //   state.standby_ADS = action.payload;
-    // },
+
     setPagination: (state, action) => {
       state.total = action.payload.total;
       state.page = action.payload.page;
