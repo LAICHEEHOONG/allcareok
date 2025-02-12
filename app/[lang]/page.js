@@ -245,7 +245,7 @@ export default function Home() {
     if (inView) {
       if (page < totalPages) {
         fetchMoreAds(pageReset_);
-        console.log("Fetching ads");
+        // console.log("Fetching ads");
       }
     }
 

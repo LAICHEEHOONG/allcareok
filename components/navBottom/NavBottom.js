@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import Box from "@mui/material/Box";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import SearchIcon from "@mui/icons-material/Search";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import LanguageIcon from "@mui/icons-material/Language";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -91,6 +90,10 @@ export default function NavBottom({ bottom_navigation }) {
   };
 
   const handleWishlists = () => {
+    if (!session) {
+      signIn();
+      return;
+    }
     if (wishlist.length === 0) {
       // showToast(l?.wishlist_toast?.title, l?.wishlist_toast?.description);
       toast.warning(l?.wishlist_empty?.title, {
@@ -106,7 +109,7 @@ export default function NavBottom({ bottom_navigation }) {
     }
 
     router.push(`/${currentLocale}/wishlists`);
-    resetButtonColor();
+
     // setTimeout(() => {
     //   setClickIcon(-1);
     // }, 500);
@@ -179,6 +182,7 @@ export default function NavBottom({ bottom_navigation }) {
                 onClick={() => {
                   setClickIcon(1);
                   handleWishlists();
+                  resetButtonColor();
                 }}
               ></BottomNavigationAction>
 

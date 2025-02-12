@@ -10,7 +10,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import GoogleIcon from "@mui/icons-material/Google";
 import { signIn, signOut } from "next-auth/react";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import { useRouter, usePathname } from "next/navigation";
 import { toast } from "sonner";
 

@@ -58,7 +58,7 @@ export function NavCarousel({ service_type }) {
     if (selectedService?.label) {
       setActiveIndex(selectedService.label);
     }
-    console.log(serviceType);
+    // console.log(serviceType);
   }, [serviceType]);
 
   // useEffect(() => {
