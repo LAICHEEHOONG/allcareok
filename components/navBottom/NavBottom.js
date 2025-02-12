@@ -19,7 +19,7 @@ export default function NavBottom({ bottom_navigation }) {
   const session = useSelector((state) => state.auth.session);
   const wishlist = useSelector((state) => state.auth?.wishlist);
   const l = useSelector((state) => state.auth?.lang?.home_card);
-  const auth = useSelector((state) => state.auth);
+  // const auth = useSelector((state) => state.auth);
   // const name = useSelector((state) => state.auth?.name);
   const router = useRouter();
   const pathname = usePathname();
@@ -229,16 +229,16 @@ export default function NavBottom({ bottom_navigation }) {
                 <BottomNavigationAction
                   showLabel
                   label={bottom_navigation.profile}
-                  // icon={<AccountCircleIcon />}
-                  icon={
-                    // <Image
-                    //   className="min-w-[20px] "
-                    //   width={20}
-                    //   alt="profile image"
-                    //   src={avatar ? avatar : ''}
-                    // />
-                    <Avatar className="w-6 h-6" name={auth?.name} src={auth?.image} />
-                  }
+                  icon={<AccountCircleIcon />}
+                  // icon={
+                  //   // <Image
+                  //   //   className="min-w-[20px] "
+                  //   //   width={20}
+                  //   //   alt="profile image"
+                  //   //   src={avatar ? avatar : ''}
+                  //   // />
+                  //   <Avatar className="w-6 h-6" name={auth?.name} src={auth?.image} />
+                  // }
                   sx={{
                     "&.Mui-selected": {
                       color: "#f31260",
