@@ -235,7 +235,14 @@ export default function Home() {
       pageReset_ = true;
     }
 
-    if (inView || area !== prevArea || serviceType !== prevServiceType) {
+    // if (inView || area !== prevArea || serviceType !== prevServiceType) {
+    //   if (page < totalPages) {
+    //     fetchMoreAds(pageReset_);
+    //     console.log("Fetching ads");
+    //   }
+    // }
+
+    if (inView) {
       if (page < totalPages) {
         fetchMoreAds(pageReset_);
         console.log("Fetching ads");

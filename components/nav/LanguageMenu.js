@@ -19,10 +19,8 @@ export default function LanguageMenu() {
   const pathname = usePathname();
   const id = useSelector((state) => state.auth._id);
   const dispatch = useDispatch();
-  const area = useSelector(state => state.search?.area)
-  const serviceType = useSelector(state => state.search?.serviceType)
-
-
+  const area = useSelector((state) => state.search?.area);
+  const serviceType = useSelector((state) => state.search?.serviceType);
 
   const redirectedPathName = (locale) => {
     if (!pathname) return "/";
@@ -35,9 +33,9 @@ export default function LanguageMenu() {
     try {
       // router.push(redirectedPathName(locale), { scroll: false }); // Navigate to the new language route
       router.push(
-        `${redirectedPathName(locale)}?area=${
-          area ? area : ""
-        }&serviceType=${serviceType ? serviceType : ""}`,
+        `${redirectedPathName(locale)}?area=${area ? area : ""}&serviceType=${
+          serviceType ? serviceType : ""
+        }`,
         { scroll: false }
       );
 
@@ -52,12 +50,6 @@ export default function LanguageMenu() {
   useEffect(() => {
     dispatch(updateLanguage(pathname));
   }, []);
-
-  useEffect(() => {
-    console.log(serviceType)
-  }, [serviceType])
-
-
 
   return (
     <Dropdown>

@@ -8,7 +8,7 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
-  DrawerTrigger,
+  // DrawerTrigger,
 } from "@/components/ui/drawer";
 import { useSelector } from "react-redux";
 import { i18n } from "@/i18n.config";
@@ -39,6 +39,8 @@ function ListBox_() {
   const id = useSelector((state) => state.auth._id);
   const language = useSelector((state) => state.auth.language);
   const [selectedKeys, setSelectedKeys] = useState(new Set([language]));
+  const area = useSelector((state) => state.search?.area);
+  const serviceType = useSelector((state) => state.search?.serviceType);
 
   const redirectedPathName = (locale) => {
     if (!pathname) return "/";
@@ -52,7 +54,13 @@ function ListBox_() {
     setSelectedKeys(newKeys);
 
     try {
-      router.push(redirectedPathName(locale), { scroll: false });
+      // router.push(redirectedPathName(locale), { scroll: false });
+      router.push(
+        `${redirectedPathName(locale)}?area=${area ? area : ""}&serviceType=${
+          serviceType ? serviceType : ""
+        }`,
+        { scroll: false }
+      );
 
       if (id) {
         await updateUserLanguage({ id, locale });

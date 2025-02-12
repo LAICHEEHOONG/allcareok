@@ -22,7 +22,6 @@ export function NavCarousel({ service_type }) {
   const serviceType = useSelector((state) => state.search?.serviceType);
 
   const handleItemClick = (label, id) => {
-
     if (serviceType === id) {
       dispatch(setServiceType(""));
       setActiveIndex(null);
@@ -34,16 +33,32 @@ export function NavCarousel({ service_type }) {
     router.push(`?area=${area ? area : ""}&serviceType=${id}`);
   };
 
+  // useEffect(() => {
+  //   const selectedService = carouselItems.filter(
+  //     (item) => item.id === serviceType
+  //   );
+  //   if (selectedService[0]?.label) {
+  //     setActiveIndex(selectedService[0]?.label);
+  //   }
+
+  //   if(!serviceType) {
+  //     dispatch(setServiceType(''))
+  //   }
+
+  // }, [serviceType]);
+
   useEffect(() => {
-    const selectedService = carouselItems.filter(
+    if (!serviceType || serviceType === null || serviceType === undefined) {
+      setActiveIndex("");
+    }
+
+    const selectedService = carouselItems.find(
       (item) => item.id === serviceType
     );
-    if(selectedService[0]?.label){
-      setActiveIndex(selectedService[0]?.label);
+    if (selectedService?.label) {
+      setActiveIndex(selectedService.label);
     }
-    // setActiveIndex(selectedService.label);
-
-    // console.log(carouselItems)
+    console.log(serviceType);
   }, [serviceType]);
 
   // useEffect(() => {
