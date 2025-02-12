@@ -53,6 +53,12 @@ export default function LanguageMenu() {
     dispatch(updateLanguage(pathname));
   }, []);
 
+  useEffect(() => {
+    console.log(serviceType)
+  }, [serviceType])
+
+
+
   return (
     <Dropdown>
       <DropdownTrigger>

@@ -15,7 +15,7 @@ export default function SearchField({ navigation }) {
   const dispatch = useDispatch();
   const router = useRouter();
   const serviceType = useSelector((state) => state.search?.serviceType);
-  const area = useSelector(state => state.search?.value)
+  const area = useSelector((state) => state.search?.area);
   const pathName = usePathname();
   const language = useSelector((state) => state.auth?.language);
 
@@ -35,7 +35,6 @@ export default function SearchField({ navigation }) {
         if (!response.success) {
           console.log(response.message);
         }
-        console.log(response);
 
         // 🔥 Normalize strings: trim & convert to lowercase, then filter unique values
         const uniqueAreas = Array.from(
@@ -63,15 +62,13 @@ export default function SearchField({ navigation }) {
   };
 
   useEffect(() => {
-    setInputValue(area)
-    console.log(area)
-  }, [area])
+    setInputValue(area);
+  }, [area]);
 
   return (
     <div className="flex justify-center items-center gap-2 ">
       <Autocomplete
         allowsCustomValue
-        
         // defaultInputValue={inputValue}
         inputValue={inputValue ? inputValue : ""}
         // isLoading={list.isLoading}

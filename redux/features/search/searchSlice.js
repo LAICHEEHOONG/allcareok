@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  value: "",
+  area: "",
   serviceType: "",
 };
 
@@ -10,7 +10,7 @@ export const searchSlice = createSlice({
   initialState,
   reducers: {
     setSearchValue: (state, action) => {
-      state.value = action.payload;
+      state.area = action.payload;
     },
 
     setServiceType: (state, action) => {

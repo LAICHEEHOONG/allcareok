@@ -24,7 +24,7 @@ export default function ProfileMenu({ navigation }) {
   const currentLocale = pathName.split("/")[1] || "en";
   const ads = useSelector((state) => state.editor.ads);
   const blockServiceBtn = useSelector((state) => state.editor.blockServiceBtn);
-  const searchValue = useSelector((state) => state.search.value);
+  const searchValue = useSelector((state) => state.search?.area);
   const wishlist = useSelector((state) => state.auth?.wishlist);
   const l = useSelector((state) => state.auth?.lang?.home_card);
 

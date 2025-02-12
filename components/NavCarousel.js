@@ -18,7 +18,7 @@ export function NavCarousel({ service_type }) {
   const router = useRouter();
   const carouselItems = getCarouselItems(service_type);
   const [activeIndex, setActiveIndex] = useState(null);
-  const area = useSelector((state) => state.search?.value);
+  const area = useSelector((state) => state.search?.area);
   const serviceType = useSelector((state) => state.search?.serviceType);
 
   const handleItemClick = (label, id) => {
