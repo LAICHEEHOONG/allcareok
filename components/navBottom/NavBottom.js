@@ -13,12 +13,14 @@ import { DrawerProfile } from "../DrawerProfile";
 import { signIn } from "next-auth/react";
 import { DrawerLanguage } from "../DrawerLanguage";
 import { toast } from "sonner";
-import { Image } from "@heroui/react";
+import { Image, Avatar } from "@heroui/react";
 
 export default function NavBottom({ bottom_navigation }) {
   const session = useSelector((state) => state.auth.session);
   const wishlist = useSelector((state) => state.auth?.wishlist);
   const l = useSelector((state) => state.auth?.lang?.home_card);
+  const avatar = useSelector((state) => state.auth?.image);
+  const name = useSelector((state) => state.auth?.name);
   const router = useRouter();
   const pathname = usePathname();
   const isDashboard =
@@ -150,10 +152,15 @@ export default function NavBottom({ bottom_navigation }) {
                 label={bottom_navigation.explore}
                 // icon={<SearchIcon />}
                 icon={
-                  <Image
-                    className="min-w-[20px] "
-                    width={20}
-                    alt="Allcareok logo"
+                  // <Image
+                  //   className="min-w-[20px] "
+                  //   width={20}
+                  //   alt="Allcareok logo"
+                  //   src="/images/apple-icon-160.png"
+                  // />
+                  <Avatar
+                    className="w-6 h-6"
+                    name={"Allcareok"}
                     src="/images/apple-icon-160.png"
                   />
                 }
@@ -222,7 +229,16 @@ export default function NavBottom({ bottom_navigation }) {
                 <BottomNavigationAction
                   showLabel
                   label={bottom_navigation.profile}
-                  icon={<AccountCircleIcon />}
+                  // icon={<AccountCircleIcon />}
+                  icon={
+                    // <Image
+                    //   className="min-w-[20px] "
+                    //   width={20}
+                    //   alt="profile image"
+                    //   src={avatar ? avatar : ''}
+                    // />
+                    <Avatar className="w-6 h-6" name={name} src={avatar} />
+                  }
                   sx={{
                     "&.Mui-selected": {
                       color: "#f31260",
