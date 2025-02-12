@@ -8,7 +8,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { getCarouselItems } from "./carouselItems";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { setServiceType } from "@/redux/features/search/searchSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
@@ -22,6 +22,7 @@ export function NavCarousel({ service_type }) {
   const serviceType = useSelector((state) => state.search?.serviceType);
 
   const handleItemClick = (label, id) => {
+
     if (serviceType === id) {
       dispatch(setServiceType(""));
       setActiveIndex(null);
@@ -32,6 +33,24 @@ export function NavCarousel({ service_type }) {
     dispatch(setServiceType(id));
     router.push(`?area=${area ? area : ""}&serviceType=${id}`);
   };
+
+  useEffect(() => {
+    const selectedService = carouselItems.filter(
+      (item) => item.id === serviceType
+    );
+    if(selectedService[0]?.label){
+      setActiveIndex(selectedService[0]?.label);
+    }
+    // setActiveIndex(selectedService.label);
+
+    // console.log(carouselItems)
+  }, [serviceType]);
+
+  // useEffect(() => {
+  //   if(serviceType) {
+  //     setActiveIndex(serviceType)
+  //   }
+  // }, [serviceType])
 
   return (
     <Carousel

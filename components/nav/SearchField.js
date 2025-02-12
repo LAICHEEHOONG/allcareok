@@ -7,14 +7,24 @@ import PlaceIcon from "@mui/icons-material/Place";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearchValue } from "@/redux/features/search/searchSlice";
 import { getAreaSuggestions } from "@/lib/action/adAction";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { useRouter, usePathname } from "next/navigation";
 
 export default function SearchField({ navigation }) {
   const [inputValue, setInputValue] = useState("");
   const dispatch = useDispatch();
   const router = useRouter();
   const serviceType = useSelector((state) => state.search?.serviceType);
+  const area = useSelector(state => state.search?.value)
+  const pathName = usePathname();
+  const language = useSelector((state) => state.auth?.language);
+
+  const redirectedPathName = (locale) => {
+    if (!pathName) return "/";
+    const segments = pathName.split("/");
+    segments[1] = locale;
+    return segments.join("/");
+  };
 
   let list = useAsyncList({
     async load({ filterText }) {
@@ -43,13 +53,27 @@ export default function SearchField({ navigation }) {
   });
 
   const handleSearch = () => {
-    router.push(`?area=${inputValue}&serviceType=${serviceType}`);
+    // router.push(`?area=${inputValue}&serviceType=${serviceType}`);
+    router.push(
+      `${redirectedPathName(language)}?area=${
+        inputValue ? inputValue : ""
+      }&serviceType=${serviceType ? serviceType : ""}`,
+      { scroll: false }
+    );
   };
+
+  useEffect(() => {
+    setInputValue(area)
+    console.log(area)
+  }, [area])
 
   return (
     <div className="flex justify-center items-center gap-2 ">
       <Autocomplete
         allowsCustomValue
+        
+        // defaultInputValue={inputValue}
+        inputValue={inputValue ? inputValue : ""}
         // isLoading={list.isLoading}
         items={list.items}
         placeholder={navigation.placeholder}

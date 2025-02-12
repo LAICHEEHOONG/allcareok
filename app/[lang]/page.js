@@ -49,6 +49,10 @@ import { updateUserWishlist } from "@/lib/action/userAction";
 import { signIn } from "next-auth/react";
 // import { CrashPrevent } from "@/lib/frontend_tool";
 import { toast } from "sonner";
+import {
+  setSearchValue,
+  setServiceType,
+} from "@/redux/features/search/searchSlice";
 
 async function getCountryFromIP() {
   try {
@@ -93,12 +97,15 @@ export default function Home() {
       try {
         dispatch(setBlockServiceBtn(true));
         const res = await signUp(user);
-        router.push(
-          `${redirectedPathName(res.language)}?area=${
-            area ? area : ""
-          }&serviceType=${serviceType ? serviceType : ""}`,
-          { scroll: false }
-        );
+        if (language !== res.language) {
+          router.push(
+            `${redirectedPathName(res.language)}?area=${
+              area ? area : ""
+            }&serviceType=${serviceType ? serviceType : ""}`,
+            { scroll: false }
+          );
+        }
+
         dispatch(userInfo(res));
       } catch (err) {
         console.log(err);
@@ -219,13 +226,13 @@ export default function Home() {
     if (area !== prevArea) {
       setPrevArea(area);
       dispatch(emptyADS());
-      pageReset_ = true
+      pageReset_ = true;
     }
 
     if (serviceType !== prevServiceType) {
       setPrevServiceType(serviceType);
       dispatch(emptyADS());
-      pageReset_ = true
+      pageReset_ = true;
     }
 
     if (inView || area !== prevArea || serviceType !== prevServiceType) {
@@ -234,6 +241,9 @@ export default function Home() {
         console.log("Fetching ads");
       }
     }
+
+    dispatch(setSearchValue(area));
+    dispatch(setServiceType(serviceType));
   }, [inView, area, serviceType, prevArea, prevServiceType]);
 
   return (

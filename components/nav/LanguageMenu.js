@@ -19,6 +19,10 @@ export default function LanguageMenu() {
   const pathname = usePathname();
   const id = useSelector((state) => state.auth._id);
   const dispatch = useDispatch();
+  const area = useSelector(state => state.search?.area)
+  const serviceType = useSelector(state => state.search?.serviceType)
+
+
 
   const redirectedPathName = (locale) => {
     if (!pathname) return "/";
@@ -29,7 +33,13 @@ export default function LanguageMenu() {
 
   const changeLanguage = async (locale) => {
     try {
-      router.push(redirectedPathName(locale), { scroll: false }); // Navigate to the new language route
+      // router.push(redirectedPathName(locale), { scroll: false }); // Navigate to the new language route
+      router.push(
+        `${redirectedPathName(locale)}?area=${
+          area ? area : ""
+        }&serviceType=${serviceType ? serviceType : ""}`,
+        { scroll: false }
+      );
 
       if (id) {
         await updateUserLanguage({ id, locale }); // Update the user's language preference
