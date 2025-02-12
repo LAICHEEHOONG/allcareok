@@ -19,8 +19,8 @@ export default function NavBottom({ bottom_navigation }) {
   const session = useSelector((state) => state.auth.session);
   const wishlist = useSelector((state) => state.auth?.wishlist);
   const l = useSelector((state) => state.auth?.lang?.home_card);
-  const avatar = useSelector((state) => state.auth?.image);
-  const name = useSelector((state) => state.auth?.name);
+  const auth = useSelector((state) => state.auth);
+  // const name = useSelector((state) => state.auth?.name);
   const router = useRouter();
   const pathname = usePathname();
   const isDashboard =
@@ -237,7 +237,7 @@ export default function NavBottom({ bottom_navigation }) {
                     //   alt="profile image"
                     //   src={avatar ? avatar : ''}
                     // />
-                    <Avatar className="w-6 h-6" name={name} src={avatar} />
+                    <Avatar className="w-6 h-6" name={auth?.name} src={auth?.image} />
                   }
                   sx={{
                     "&.Mui-selected": {
