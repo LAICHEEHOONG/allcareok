@@ -171,7 +171,7 @@ export default function Home() {
   const isInWishlist = (adId) => wishlist.includes(adId);
 
   useEffect(() => {
-    const fetchMoreAds = async () => {
+    const fetchMoreAds = async (pageReset) => {
       try {
         let screenHeight = window.innerHeight;
         let limit = 20; // Default limit
@@ -186,7 +186,7 @@ export default function Home() {
           query: {
             // page: area || serviceType ? 1 : page + 1, // Reset page if filter changes
             // page: filtersChanged ? 1 : page + 1, // Reset page only when filters change
-            page: page + 1,
+            page: pageReset ? 1 : page + 1,
             limit: limit,
             area: area ? area : "",
             service: serviceType ? serviceType : "",
@@ -215,19 +215,22 @@ export default function Home() {
       }
     };
 
+    let pageReset_ = false;
     if (area !== prevArea) {
       setPrevArea(area);
       dispatch(emptyADS());
+      pageReset_ = true
     }
 
     if (serviceType !== prevServiceType) {
       setPrevServiceType(serviceType);
       dispatch(emptyADS());
+      pageReset_ = true
     }
 
     if (inView || area !== prevArea || serviceType !== prevServiceType) {
       if (page < totalPages) {
-        fetchMoreAds();
+        fetchMoreAds(pageReset_);
         console.log("Fetching ads");
       }
     }
