@@ -10,7 +10,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import GoogleIcon from "@mui/icons-material/Google";
 import { signIn, signOut } from "next-auth/react";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useRouter, usePathname } from "next/navigation";
 import { toast } from "sonner";
 
@@ -63,6 +63,10 @@ export default function ProfileMenu({ navigation }) {
     router.push(`/${currentLocale}/wishlists`);
   };
 
+  const handleSupport = () => {
+    router.push(`/${currentLocale}/support`);
+  };
+
   return (
     <Dropdown>
       <DropdownTrigger>
@@ -99,7 +103,11 @@ export default function ProfileMenu({ navigation }) {
         >
           {ads.length === 0 ? navigation.share : navigation.my_service}
         </DropdownItem>
-        <DropdownItem key={navigation.help} textValue="help center">
+        <DropdownItem
+          key={navigation.help}
+          textValue="help center"
+          onPress={handleSupport}
+        >
           {navigation.help}
         </DropdownItem>
         {auth.signIn === "authenticated" && (
@@ -131,6 +139,3 @@ export default function ProfileMenu({ navigation }) {
     </Dropdown>
   );
 }
-
-// http://localhost:3000/en/one_nine_nine_zero?secret=17041990
-//    /one_nine_nine_zero
