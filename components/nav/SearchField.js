@@ -85,6 +85,11 @@ export default function SearchField({ navigation }) {
           list.setFilterText(value.trim()); // 🔥 Trim spaces before setting filter text
           dispatch(setSearchValue(value.trim())); // 🔥 Ensure Redux gets the trimmed input
         }}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && inputValue.trim() !== "") {
+            handleSearch();
+          }
+        }}
       >
         {(item) => (
           <AutocompleteItem key={item.id} textValue={item.name}>
