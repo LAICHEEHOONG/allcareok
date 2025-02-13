@@ -54,6 +54,13 @@ export function DrawerProfile({
     }, 1000);
   };
 
+  const handleSupport = () => {
+    router.push(`/${currentLocale}/support`);
+    setTimeout(() => {
+      setOpenDrawerProfile(false);
+    }, 1000);
+  };
+
   return (
     <Drawer
       open={openDrawerProfile}
@@ -123,6 +130,7 @@ export function DrawerProfile({
               radius="full"
               variant="light"
               startContent={<HelpOutlineIcon />}
+              onPress={handleSupport}
             >
               {bottom_navigation.help}
             </Button>

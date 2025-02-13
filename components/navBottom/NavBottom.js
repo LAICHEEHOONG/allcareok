@@ -145,7 +145,7 @@ export default function NavBottom({ bottom_navigation }) {
               value={clickIcon}
               onChange={(event, newValue) => {
                 // Handle navigation state if necessary
-                console.log(newValue);
+                // console.log(newValue);
               }}
             >
               <BottomNavigationAction
@@ -209,36 +209,13 @@ export default function NavBottom({ bottom_navigation }) {
                 }}
               />
 
-              {/* <DrawerLanguage bottom_navigation={bottom_navigation}>
-                <BottomNavigationAction
-                  showLabel
-                  label={lan}
-                  icon={<LanguageIcon />}
-                  sx={{
-                    "&.Mui-selected": {
-                      color: "#f31260",
-                    },
-                  }}
-                  onClick={() => {
-                    setClickIcon(2);
-                  }}
-                />
-              </DrawerLanguage> */}
-
+         
               {session ? (
                 <BottomNavigationAction
                   showLabel
                   label={bottom_navigation.profile}
                   icon={<AccountCircleIcon />}
-                  // icon={
-                  //   // <Image
-                  //   //   className="min-w-[20px] "
-                  //   //   width={20}
-                  //   //   alt="profile image"
-                  //   //   src={avatar ? avatar : ''}
-                  //   // />
-                  //   <Avatar className="w-6 h-6" name={auth?.name} src={auth?.image} />
-                  // }
+          
                   sx={{
                     "&.Mui-selected": {
                       color: "#f31260",
