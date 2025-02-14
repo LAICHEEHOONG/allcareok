@@ -44,14 +44,10 @@ export default function Support() {
 
           <div className="flex flex-col justify-center items-center text-center w-full h-[70vh] p-2">
             <div className="text-5xl font-semibold tracking-wider p-2 ">
-              {/* {l?.title ? l?.title : "Get Support"} */}
               {support.title}
             </div>
             <div className="text-lg tracking-wide p-2 w-full max-w-[800px] ">
               {support.description}
-              {/* {l?.description
-                ? l?.description
-                : "   We are here to assist you during our business hours. Please feel free to contact us for any questions or issues you may have."} */}
             </div>
             <Button
               className="m-2"
