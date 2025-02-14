@@ -20,7 +20,7 @@ export default function Support() {
     if (l) {
       setSupport({ title: l?.title, description: l?.description });
     }
-  }, []);
+  }, [l]);
 
   return (
     <div className="w-full flex justify-center h-screen ">
