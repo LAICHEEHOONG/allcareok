@@ -2,11 +2,25 @@
 import { Button } from "@heroui/react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useRouter, usePathname } from "next/navigation";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 export default function Support() {
   const router = useRouter();
   const pathName = usePathname();
   const currentLocale = pathName.split("/")[1] || "en";
+  const l = useSelector((state) => state.auth?.lang?.support);
+  const [support, setSupport] = useState({
+    title: "Get Support",
+    description:
+      "We are here to assist you during our business hours. Please feel free to contact us for any questions or issues you may have.",
+  });
+
+  useEffect(() => {
+    if (l) {
+      setSupport({ title: l?.title, description: l?.description });
+    }
+  }, []);
 
   return (
     <div className="w-full flex justify-center h-screen ">
@@ -30,11 +44,14 @@ export default function Support() {
 
           <div className="flex flex-col justify-center items-center text-center w-full h-[70vh] p-2">
             <div className="text-5xl font-semibold tracking-wider p-2 ">
-              Get Support
+              {/* {l?.title ? l?.title : "Get Support"} */}
+              {support.title}
             </div>
             <div className="text-lg tracking-wide p-2 w-full max-w-[800px] ">
-              We are here to assist you during our business hours. Please feel
-              free to contact us for any questions or issues you may have.
+              {support.description}
+              {/* {l?.description
+                ? l?.description
+                : "   We are here to assist you during our business hours. Please feel free to contact us for any questions or issues you may have."} */}
             </div>
             <Button
               className="m-2"

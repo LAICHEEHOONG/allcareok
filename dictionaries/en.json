@@ -228,5 +228,9 @@
       "title": "Search Ads Not Found",
       "description": "The search did not return any ads matching your criteria. "
     }
+  },
+  "support": {
+    "title": "Get Support",
+    "description": "We are here to assist you during our business hours. Please feel free to contact us for any questions or issues you may have."
   }
 }
