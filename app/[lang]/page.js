@@ -253,12 +253,19 @@ export default function Home() {
     dispatch(setServiceType(serviceType));
   }, [inView, area, serviceType, prevArea, prevServiceType]);
 
+  // const handleImageClick = (id) => {
+  //   router.push(
+  //     `${redirectedPathName(language)}/ad/${id}`,
+  //     { scroll: false }
+  //   );
+  // }
   const handleImageClick = (id) => {
-    router.push(
-      `${redirectedPathName(language)}/ad/${id}`,
-      { scroll: false }
-    );
-  }
+    // window.open(
+    //   `${redirectedPathName(language)}/ad/${id}`,
+    //   '_blank' // Open in a new tab
+    // );
+
+  };
 
   return (
     <div className="pb-20">
@@ -334,7 +341,7 @@ export default function Home() {
                         className="w-full cursor-pointer"
                         opts={{ align: "start", loop: true, dragFree: false }}
                         onClick={() => {
-                          handleImageClick(ad._id)
+                          handleImageClick(ad._id);
                         }}
                       >
                         <CarouselContent>
