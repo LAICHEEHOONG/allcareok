@@ -16,36 +16,17 @@ export default function Wishlists() {
   const router = useRouter();
   const pathName = usePathname();
   const currentLocale = pathName.split("/")[1] || "en";
-  // const ads = useSelector((state) => state.editor.ads);
   const l = useSelector((state) => state.auth.lang?.home_card);
-  // const adsId = useSelector((state) => state.editor.adsId);
-  // const role = useSelector(state => state.auth?.role);
   const wishlist = useSelector((state) => state.auth?.wishlist);
   const wishlistsAd = useSelector((state) => state.wishlists?.wishlistsAd);
   const adsId = ""; //for loading use
-
-  // useEffect(() => {
-  //   const getAdsByIds_ = async () => {
-  //     try {
-  //       const adsData = await getAdsByIds(wishlist);
-  //       console.log(adsData)
-  //       if(adsData.success) {
-  //         dispatch(setWishlistPage(adsData.data))
-  //       }
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-  //   };
-
-  //   getAdsByIds_();
-  // }, [wishlist]);
 
   useEffect(() => {
     if (!wishlist || wishlist.length === 0) {
       dispatch(setWishlistPage([]));
       return;
     }
-  
+
     const getAdsByIds_ = async () => {
       try {
         const adsData = await getAdsByIds(wishlist);
@@ -57,7 +38,7 @@ export default function Wishlists() {
         console.log(error);
       }
     };
-  
+
     getAdsByIds_();
   }, [wishlist]);
 
@@ -83,17 +64,6 @@ export default function Wishlists() {
                 {l?.wishlist_page_title}
               </div>
             </div>
-
-            {/* <Button
-              isIconOnly
-              aria-label="new ad"
-              radius="full"
-              color="default"
-              variant="flat"
-              onPress={handleAddAD}
-            >
-              <AddIcon />
-            </Button> */}
           </div>
           <Masonry
             breakpointCols={breakpointColumnsObj}
@@ -101,14 +71,7 @@ export default function Wishlists() {
             columnClassName="my-masonry-grid_column"
           >
             {wishlistsAd.map((item) => (
-              <AD
-                key={item._id}
-                ad={item}
-                fn={() => {
-               
-                }}
-                adsId={adsId}
-              />
+              <AD key={item._id} ad={item} fn={() => {}} adsId={adsId} />
             ))}
           </Masonry>
         </div>

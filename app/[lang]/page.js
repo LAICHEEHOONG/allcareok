@@ -253,6 +253,13 @@ export default function Home() {
     dispatch(setServiceType(serviceType));
   }, [inView, area, serviceType, prevArea, prevServiceType]);
 
+  const handleImageClick = (id) => {
+    router.push(
+      `${redirectedPathName(language)}/ad/${id}`,
+      { scroll: false }
+    );
+  }
+
   return (
     <div className="pb-20">
       <main className="flex justify-center flex-col items-center">
@@ -326,6 +333,9 @@ export default function Home() {
                       <Carousel
                         className="w-full cursor-pointer"
                         opts={{ align: "start", loop: true, dragFree: false }}
+                        onClick={() => {
+                          handleImageClick(ad._id)
+                        }}
                       >
                         <CarouselContent>
                           {ad.photo.map((item, idx) => (

@@ -43,7 +43,10 @@ export default function NavChild({ navigation, service_type, poppins, dic }) {
     pathname.endsWith("/one_nine_nine_zero");
 
   const isWishlist =
-    pathname.endsWith("/wishlists") || pathname.endsWith("/dashboard") || pathname.endsWith("/support");
+    pathname.endsWith("/wishlists") ||
+    pathname.endsWith("/dashboard") ||
+    pathname.endsWith("/support") ||
+    pathname.includes("/ad/");
 
   return (
     <>
@@ -100,5 +103,3 @@ export default function NavChild({ navigation, service_type, poppins, dic }) {
     </>
   );
 }
-
-

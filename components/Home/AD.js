@@ -196,14 +196,6 @@ export default function AD({ ad, fn, adsId }) {
                       />
                     }
                     variant="shadow"
-                    // classNames={{
-                    //   base: "bg-gradient-to-br from-indigo-500 to-pink-500  shadow-pink-500/30",
-                    //   content: "drop-shadow shadow-black text-white",
-                    // }}
-                    // classNames={{
-                    //   base: "bg-white",
-                    //   content: "drop-shadow shadow-black text-black",
-                    // }}
                     classNames={{
                       base:
                         ad.reviewStatus === "Approved"
