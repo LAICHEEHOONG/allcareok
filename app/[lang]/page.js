@@ -259,8 +259,12 @@ export default function Home() {
   //   );
   // }
   const handleImageClick = (id) => {
+    // window.open(
+    //   `${redirectedPathName(language)}/ad/${id}`,
+    //   "_blank" // Open in a new tab
+    // );
     window.open(
-      `${redirectedPathName(language)}/ad/${id}`,
+      `${language ? language : "en"}/ad/${id}`,
       "_blank" // Open in a new tab
     );
   };

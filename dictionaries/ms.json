@@ -6,13 +6,13 @@
     "my_service": "Perkhidmatan Saya",
     "placeholder": "Di mana...",
     "login": "Log Masuk",
-    "whishlists": "Wishlists",
+    "whishlists": "Kegemaran",
     "help": "Pusat Bantuan",
     "logout": "Log Keluar"
   },
   "bottom_navigation": {
     "explore": "Teroka",
-    "whishlists": "Wishlists",
+    "whishlists": "Kegemaran",
     "profile": "Profil",
     "login": "Log Masuk",
     "drawerTitle": "Pilih Bahasa",
@@ -20,7 +20,7 @@
     "help": "Lawati Pusat Bantuan",
     "share": "Kongsi Perkhidmatan Anda",
     "my_service": "Perkhidmatan Saya",
-    "shareContent": "Hantar Perkhidmatan & Jana Pendapatan Tambahan dengan Mudah"
+    "shareContent": "Hantar Perkhidmatan & Jana Pendapatan Ekstra dengan Mudah"
   },
   "service_type": {
     "home_cleaning": "Pembersihan Rumah",
@@ -207,6 +207,30 @@
     }
   },
   "home_card": {
-    "verified" : "Disahkan"
+    "verified": "Disahkan",
+    "wishlist_toast": {
+      "title": "Ditambah ke Senarai Hajat!",
+      "description": "Anda boleh menemui iklan ini di halaman senarai hajat anda."
+    },
+    "wishlist_toast_remove": {
+      "title": "Dikeluarkan dari Senarai Hajat!",
+      "description": "Iklan ini telah dikeluarkan dari senarai hajat anda."
+    },
+    "wishlist_page_title": "Senarai Hajat",
+    "approved": "Diluluskan",
+    "under_review": "Sedang Disemak",
+    "rejected": "Ditolak",
+    "wishlist_empty": {
+      "title": "Senarai Hajat Kosong",
+      "description": "Anda belum menambah sebarang iklan ke dalam senarai hajat anda."
+    },
+    "search_not_found": {
+      "title": "Iklan Tidak Ditemui",
+      "description": "Carian tidak menemui sebarang iklan yang sepadan dengan kriteria anda."
+    }
+  },
+  "support": {
+    "title": "Dapatkan Sokongan",
+    "description": "Kami sedia membantu anda semasa waktu perniagaan kami. Sila hubungi kami untuk sebarang pertanyaan atau masalah yang anda hadapi."
   }
 }

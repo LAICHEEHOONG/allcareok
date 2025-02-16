@@ -76,7 +76,7 @@ export default function ShareAD({ slug }) {
   const translations = {
     en: { home: "Home", share: "Share", wishlist: "Wishlist" },
     zh: { home: "主页", share: "分享", wishlist: "心愿单" },
-    ms: { home: "Laman Utama", share: "Kongsi", wishlist: "Wishlist" }, // Malay
+    ms: { home: "Laman Utama", share: "Kongsi", wishlist: "Kegemaran" }, // Malay
   };
 
   const redirectedPathName = (locale) => {
