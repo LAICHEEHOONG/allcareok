@@ -47,7 +47,6 @@ import { countryFlag } from "@/components/countryFlag";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { updateUserWishlist } from "@/lib/action/userAction";
 import { signIn } from "next-auth/react";
-// import { CrashPrevent } from "@/lib/frontend_tool";
 import { toast } from "sonner";
 import {
   setSearchValue,
@@ -260,11 +259,10 @@ export default function Home() {
   //   );
   // }
   const handleImageClick = (id) => {
-    // window.open(
-    //   `${redirectedPathName(language)}/ad/${id}`,
-    //   '_blank' // Open in a new tab
-    // );
-
+    window.open(
+      `${redirectedPathName(language)}/ad/${id}`,
+      "_blank" // Open in a new tab
+    );
   };
 
   return (

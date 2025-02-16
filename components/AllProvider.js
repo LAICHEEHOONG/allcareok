@@ -6,6 +6,8 @@ import { HeroUIProvider } from "@heroui/react";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { SessionProvider } from "next-auth/react";
 import { Toaster } from "./ui/sonner";
+import { useSession } from "next-auth/react";
+
 
 export default function AllProvider({ children }) {
   return (

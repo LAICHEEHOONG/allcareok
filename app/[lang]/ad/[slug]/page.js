@@ -45,7 +45,10 @@ import ShareAD from "@/components/ADPage/Share";
 //   };
 // }
 
-export default async function ADPage() {
+export default async function ADPage({params}) {
+  const slug = (await params).slug
+  console.log(slug)
+
   // console.log(params.slug);
   // const post = await getAdsByIds([slug]); // Deduped fetch
   // const All = await findAllAds();
@@ -54,7 +57,7 @@ export default async function ADPage() {
   return (
     <div className="flex justify-center">
       <div className="w-full max-w-[1120px]">
-        <ShareAD />
+        <ShareAD slug={slug} />
       </div>
       {/* <div>{params?.slug}</div> */}
     </div>
@@ -62,15 +65,15 @@ export default async function ADPage() {
 }
 
 // Return a list of `params` to populate the [slug] dynamic segment
-// export async function generateStaticParams() {
-//   try {
-//     const Allad = await findAllAds();
-//     if (Allad.success) {
-//       return Allad.data.map((ad) => ({ slug: ad._id }));
-//     } else {
-//       console.log(Allad.message);
-//     }
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
+export async function generateStaticParams() {
+  try {
+    const Allad = await findAllAds();
+    if (Allad.success) {
+      return Allad.data.map((ad) => ({ slug: ad._id }));
+    } else {
+      console.log(Allad.message);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
