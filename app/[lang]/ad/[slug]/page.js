@@ -47,7 +47,7 @@ import ShareAD from "@/components/ADPage/Share";
 
 export default async function ADPage({params}) {
   const slug = (await params).slug
-  console.log(slug)
+  // console.log(slug)
 
   // console.log(params.slug);
   // const post = await getAdsByIds([slug]); // Deduped fetch

@@ -71,6 +71,7 @@ export default function ShareAD({ slug }) {
   const area = searchParams.get("area");
   const serviceType = searchParams.get("serviceType");
   const language = useSelector((state) => state.auth?.language);
+  const l = useSelector((state) => state.auth?.lang?.ad_page);
 
   const redirectedPathName = (locale) => {
     if (!pathName) return "/";
@@ -84,14 +85,14 @@ export default function ShareAD({ slug }) {
       try {
         dispatch(setBlockServiceBtn(true));
         const res = await signUp(user);
-        if (language !== res.language) {
-          router.push(
-            `${redirectedPathName(res.language)}?area=${
-              area ? area : ""
-            }&serviceType=${serviceType ? serviceType : ""}`,
-            { scroll: false }
-          );
-        }
+        // if (language !== res.language) {
+        //   router.push(
+        //     `${redirectedPathName(res.language)}?area=${
+        //       area ? area : ""
+        //     }&serviceType=${serviceType ? serviceType : ""}`,
+        //     { scroll: false }
+        //   );
+        // }
 
         dispatch(userInfo(res));
       } catch (err) {
@@ -111,6 +112,19 @@ export default function ShareAD({ slug }) {
     dispatch(setSession(session));
     dispatch(setStatus(status));
   }, [session, status]);
+
+  useEffect(() => {
+    if (!user) return;
+    const fetchAds = async () => {
+      try {
+        const ads = await findUserAds({ user });
+        dispatch(setAds(ads));
+      } catch (error) {
+        console.error("Error fetching user ads:", error);
+      }
+    };
+    fetchAds();
+  }, [user]);
 
   // Handle wishlist update
   const updateUserWishlist_ = async (adId) => {
@@ -219,7 +233,9 @@ export default function ShareAD({ slug }) {
         radius="full"
         onPress={handleBack}
       >
-        Home
+        {language === "en" && "Home"}
+        {language === "zh" && "主页"}
+        {/* {l?.nav ? l?.nav?.home : "Home"} */}
       </Button>
 
       <div className="flex sm:gap-2 gap-5 sm:pr-0 pr-2">
@@ -230,7 +246,9 @@ export default function ShareAD({ slug }) {
           radius="full"
           onPress={sharePage}
         >
-          Share
+          {language === "en" && "Share"}
+          {language === "zh" && "分享"}
+          {/* {l?.nav?.share} */}
         </Button>
         <Button
           className="flex sm:hidden"
@@ -253,7 +271,9 @@ export default function ShareAD({ slug }) {
           isLoading={loadingAd[slug] || false}
           onPress={() => updateUserWishlist_(slug)}
         >
-          Wishlist
+          {language === "en" && "Wishlist"}
+          {language === "zh" && "心愿单"}
+          {/* {l?.nav?.wishlist} */}
         </Button>
 
         <Button

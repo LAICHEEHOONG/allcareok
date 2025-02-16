@@ -232,5 +232,12 @@
   "support": {
     "title": "Get Support",
     "description": "We are here to assist you during our business hours. Please feel free to contact us for any questions or issues you may have."
+  },
+  "ad_page": {
+    "nav": {
+      "home": "Home",
+      "share": "Share",
+      "wishlist": "Wishlist"
+    }
   }
 }
