@@ -1,5 +1,6 @@
 import { getAdsByIds, findAllAds } from "@/lib/action/adAction";
 import ShareAD from "@/components/ADPage/Share";
+import ADCarousel from "@/components/ADPage/ADCarousel";
 
 // export async function generateMetadata({ params }) {
 //   const { slug } = params;
@@ -45,19 +46,41 @@ import ShareAD from "@/components/ADPage/Share";
 //   };
 // }
 
-export default async function ADPage({params}) {
-  const slug = (await params).slug
-  // console.log(slug)
+export default async function ADPage({ params }) {
+  const slug = (await params).slug;
 
-  // console.log(params.slug);
-  // const post = await getAdsByIds([slug]); // Deduped fetch
-  // const All = await findAllAds();
-  // console.log(All)
+  const AD = await getAdsByIds([slug]); // Deduped fetch
+  const {
+    _id,
+    user,
+    photo,
+    title,
+    service,
+    area,
+    contact,
+    youtube,
+    description,
+    reviewStatus,
+    views,
+    createdAt,
+  } = AD.data[0];
 
   return (
     <div className="flex justify-center">
       <div className="w-full max-w-[1120px]">
         <ShareAD slug={slug} />
+        <div className=" h-[2000px] flex">
+          <div className=" h-screen w-full">
+            <div className="flex flex-col">
+              <div className="font-medium text-2xl tracking-wider capitalize">
+                {title}
+              </div>
+            </div>
+          </div>
+          <div className="h-screen w-full max-w-[400px] flex justify-end sticky top-16">
+            <ADCarousel photo={photo} />
+          </div>
+        </div>
       </div>
       {/* <div>{params?.slug}</div> */}
     </div>
