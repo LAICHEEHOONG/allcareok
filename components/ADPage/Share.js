@@ -1,15 +1,146 @@
 "use client";
 import IosShareIcon from "@mui/icons-material/IosShare";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { Button } from "@heroui/react";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getAdsByIds } from "@/lib/action/adAction";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setCountry,
+  setSession,
+  setStatus,
+  userInfo,
+  signInStatus,
+  setWishlist,
+} from "@/redux/features/auth/authSlice";
+import {
+  setAds,
+  setBlockServiceBtn,
+} from "@/redux/features/editor/editorSlice";
+import { useSession } from "next-auth/react";
+import { signUp, updateUserCountry } from "@/lib/action/userAction";
+import {
+  findUserAds,
+  // getAdsFast,
+  getPaginatedAds,
+} from "@/lib/action/adAction";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import axios from "axios";
+import Masonry from "react-masonry-css";
+import { useInView } from "react-intersection-observer";
+import { setADS, setPagination, emptyADS } from "@/redux/features/ad/adSlice";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import {
+  Image,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Avatar,
+  Chip,
+  Button,
+} from "@heroui/react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
+import { LogoSpinner } from "@/components/LogoSpinner";
+import { ADFooter } from "@/components/Home/ADFooter";
+import { countryFlag } from "@/components/countryFlag";
+import { updateUserWishlist } from "@/lib/action/userAction";
+import { signIn } from "next-auth/react";
+import { toast } from "sonner";
+import {
+  setSearchValue,
+  setServiceType,
+} from "@/redux/features/search/searchSlice";
 
 export default function ShareAD({ slug }) {
   const router = useRouter();
   const [adData, setAdData] = useState({});
+
+  const { data: session, status } = useSession();
+  const dispatch = useDispatch();
+  const pathName = usePathname();
+  const user = useSelector((state) => state.auth?._id);
+  const country = useSelector((state) => state.auth?.country);
+  const wishlist = useSelector((state) => state.auth?.wishlist);
+  const [loadingAd, setLoadingAd] = useState({}); // Track loading state per adId
+  const searchParams = useSearchParams();
+  const area = searchParams.get("area");
+  const serviceType = searchParams.get("serviceType");
+  const language = useSelector((state) => state.auth?.language);
+
+  const redirectedPathName = (locale) => {
+    if (!pathName) return "/";
+    const segments = pathName.split("/");
+    segments[1] = locale;
+    return segments.join("/");
+  };
+
+  useEffect(() => {
+    const signUpUser = async (user) => {
+      try {
+        dispatch(setBlockServiceBtn(true));
+        const res = await signUp(user);
+        if (language !== res.language) {
+          router.push(
+            `${redirectedPathName(res.language)}?area=${
+              area ? area : ""
+            }&serviceType=${serviceType ? serviceType : ""}`,
+            { scroll: false }
+          );
+        }
+
+        dispatch(userInfo(res));
+      } catch (err) {
+        console.log(err);
+      } finally {
+        dispatch(setBlockServiceBtn(false));
+      }
+    };
+
+    if (session) {
+      signUpUser(session.user);
+      dispatch(signInStatus(status));
+    }
+  }, [session]);
+
+  useEffect(() => {
+    dispatch(setSession(session));
+    dispatch(setStatus(status));
+  }, [session, status]);
+
+  // Handle wishlist update
+  const updateUserWishlist_ = async (adId) => {
+    if (!session) {
+      signIn();
+      return;
+    }
+
+    // setIsLoading(true);
+    setLoadingAd((prev) => ({ ...prev, [adId]: true })); // Set loading for the specific ad
+
+    try {
+      const res = await updateUserWishlist({ userId: user, adId }); // Update wishlist
+      console.log(res);
+      if (res.success) {
+        dispatch(setWishlist(res.data.wishlist)); // Update Redux store
+      }
+
+      // await fetchWishlist(); // Get the latest user data with wishlist
+    } catch (error) {
+      console.log("Error updating wishlist:", error);
+    } finally {
+      // setIsLoading(false);
+      setLoadingAd((prev) => ({ ...prev, [adId]: false })); // Stop loading for this ad
+    }
+  };
+
+  // Check if the ad is in the wishlist
+  const isInWishlist = (adId) => wishlist.includes(adId);
+
   useEffect(() => {
     const getAdsByIds_ = async () => {
       try {
@@ -54,7 +185,10 @@ export default function ShareAD({ slug }) {
   }, [adData]);
 
   const handleBack = () => {
-    router.push("/");
+    // router.push("/");
+    router.push(`/${language}`, {
+      scroll: false,
+    });
   };
   const sharePage = async () => {
     const pageUrl = window.location.href; // Get current URL
@@ -77,8 +211,7 @@ export default function ShareAD({ slug }) {
     }
   };
   return (
-    <div className="flex justify-between">
-      {/* <div className="text-3xl font-medium tracking-wide">{post.data[0].title}</div> */}
+    <div className="flex justify-between p-2">
       <Button
         // className="hidden sm:flex"
         startContent={<ArrowBackIosIcon />}
@@ -88,14 +221,7 @@ export default function ShareAD({ slug }) {
       >
         Home
       </Button>
-      {/* <Button
-        className="flex lg:hidden"
-        isIconOnly
-        variant="light"
-        radius="full"
-      >
-        <ArrowBackIosIcon />
-      </Button> */}
+
       <div className="flex sm:gap-2 gap-5 sm:pr-0 pr-2">
         <Button
           className="hidden sm:flex"
@@ -111,22 +237,34 @@ export default function ShareAD({ slug }) {
           isIconOnly
           variant="light"
           radius="full"
+          onPress={sharePage}
         >
           <IosShareIcon />
         </Button>
+
         <Button
           className="hidden sm:flex"
           startContent={<FavoriteBorderIcon />}
-          variant="light"
+          // variant="light"
           radius="full"
+          aria-label="Like"
+          color={isInWishlist(slug) ? "danger" : "default"}
+          variant={isInWishlist(slug) ? "solid" : "light"}
+          isLoading={loadingAd[slug] || false}
+          onPress={() => updateUserWishlist_(slug)}
         >
           Wishlist
         </Button>
+
         <Button
           className="flex sm:hidden"
           isIconOnly
-          variant="light"
           radius="full"
+          aria-label="Like"
+          color={isInWishlist(slug) ? "danger" : "default"}
+          variant={isInWishlist(slug) ? "solid" : "light"}
+          isLoading={loadingAd[slug] || false}
+          onPress={() => updateUserWishlist_(slug)}
         >
           <FavoriteBorderIcon />
         </Button>
