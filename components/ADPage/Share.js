@@ -73,6 +73,12 @@ export default function ShareAD({ slug }) {
   const language = useSelector((state) => state.auth?.language);
   const l = useSelector((state) => state.auth?.lang?.ad_page);
 
+  const translations = {
+    en: { home: "Home", share: "Share", wishlist: "Wishlist" },
+    zh: { home: "主页", share: "分享", wishlist: "心愿单" },
+    ms: { home: "Laman Utama", share: "Kongsi", wishlist: "Wishlist" }, // Malay
+  };
+
   const redirectedPathName = (locale) => {
     if (!pathName) return "/";
     const segments = pathName.split("/");
@@ -233,9 +239,9 @@ export default function ShareAD({ slug }) {
         radius="full"
         onPress={handleBack}
       >
-        {language === "en" && "Home"}
-        {language === "zh" && "主页"}
-        {/* {l?.nav ? l?.nav?.home : "Home"} */}
+        {/* {(language === "en" || !language) && "Home"}
+        {language === "zh" && "主页"} */}
+        {translations[language]?.home ? translations[language]?.home : "Home"}
       </Button>
 
       <div className="flex sm:gap-2 gap-5 sm:pr-0 pr-2">
@@ -246,9 +252,11 @@ export default function ShareAD({ slug }) {
           radius="full"
           onPress={sharePage}
         >
-          {language === "en" && "Share"}
-          {language === "zh" && "分享"}
-          {/* {l?.nav?.share} */}
+          {/* {(language === "en" || !language) && "Share"}
+          {language === "zh" && "分享"} */}
+          {translations[language]?.share
+            ? translations[language]?.share
+            : "Share"}
         </Button>
         <Button
           className="flex sm:hidden"
@@ -271,9 +279,12 @@ export default function ShareAD({ slug }) {
           isLoading={loadingAd[slug] || false}
           onPress={() => updateUserWishlist_(slug)}
         >
-          {language === "en" && "Wishlist"}
-          {language === "zh" && "心愿单"}
-          {/* {l?.nav?.wishlist} */}
+           {translations[language]?.wishlist
+            ? translations[language]?.wishlist
+            : "Wishlist"}
+          {/* 分享
+          {(language === "en" || !language) && "Wishlist"}
+          {language === "zh" && "心愿单"} */}
         </Button>
 
         <Button
