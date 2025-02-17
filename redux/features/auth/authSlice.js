@@ -38,7 +38,8 @@ export const authSlice = createSlice({
       state.wishlist = wishlist;
     },
     updateLanguage: (state, action) => {
-      state.language = action.payload.replace(/^\//, "");
+      // state.language = action.payload.replace(/^\//, "");
+      state.language = action.payload;
     },
     setLang: (state, action) => {
       state.lang = action.payload;

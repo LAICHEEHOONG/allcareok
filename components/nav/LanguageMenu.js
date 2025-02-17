@@ -48,7 +48,9 @@ export default function LanguageMenu() {
   };
 
   useEffect(() => {
-    dispatch(updateLanguage(pathname));
+    // dispatch(updateLanguage(pathname));
+    const language = pathname.split("/")[1]; // Extract first segment
+    dispatch(updateLanguage(language)); // Dispatch only the language
   }, []);
 
   return (

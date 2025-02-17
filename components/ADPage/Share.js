@@ -71,7 +71,7 @@ export default function ShareAD({ slug }) {
   const area = searchParams.get("area");
   const serviceType = searchParams.get("serviceType");
   const language = useSelector((state) => state.auth?.language);
-  const l = useSelector((state) => state.auth?.lang?.ad_page);
+  // const l = useSelector((state) => state.auth?.lang?.ad_page);
 
   const translations = {
     en: { home: "Home", share: "Share", wishlist: "Wishlist" },
