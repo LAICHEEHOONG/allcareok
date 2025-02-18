@@ -45,8 +45,10 @@ export default function NavChild({ navigation, service_type, poppins, dic }) {
   const isWishlist =
     pathname.endsWith("/wishlists") ||
     pathname.endsWith("/dashboard") ||
-    pathname.endsWith("/support") ||
-    pathname.includes("/ad/");
+    pathname.endsWith("/support");
+  // pathname.includes("/ad/");
+
+  const isAd = pathname.includes("/ad/");
 
   return (
     <>
@@ -93,7 +95,7 @@ export default function NavChild({ navigation, service_type, poppins, dic }) {
       ) : (
         <div className="flex flex-col justify-center items-center ">
           <Divider className="m-3 hidden sm:flex" />
-          {!isWishlist && (
+          {!isWishlist && !isAd && (
             <div className=" w-full flex justify-center items-center  sm:pl-14 sm:pr-14">
               <NavCarousel service_type={service_type} />
             </div>

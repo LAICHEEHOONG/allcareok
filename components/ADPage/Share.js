@@ -56,7 +56,7 @@ import {
   setServiceType,
 } from "@/redux/features/search/searchSlice";
 
-export default function ShareAD({ slug }) {
+export default function ShareAD({ slug, title }) {
   const router = useRouter();
   const [adData, setAdData] = useState({});
 
@@ -231,18 +231,21 @@ export default function ShareAD({ slug }) {
     }
   };
   return (
-    <div className="flex justify-between p-2">
-      <Button
+    <div className="flex justify-between pt-2 pb-2">
+      {/* <Button
         // className="hidden sm:flex"
         startContent={<ArrowBackIosIcon />}
         variant="light"
         radius="full"
         onPress={handleBack}
-      >
-        {/* {(language === "en" || !language) && "Home"}
+      > */}
+      {/* {(language === "en" || !language) && "Home"}
         {language === "zh" && "主页"} */}
-        {translations[language]?.home ? translations[language]?.home : "Home"}
-      </Button>
+      {/* {translations[language]?.home ? translations[language]?.home : "Home"} */}
+      {/* </Button> */}
+      <div className="font-medium text-2xl tracking-wider capitalize">
+        {title}
+      </div>
 
       <div className="flex sm:gap-2 gap-5 sm:pr-0 pr-2">
         <Button
@@ -251,12 +254,14 @@ export default function ShareAD({ slug }) {
           variant="light"
           radius="full"
           onPress={sharePage}
+          size="sm"
         >
           {/* {(language === "en" || !language) && "Share"}
           {language === "zh" && "分享"} */}
-          {translations[language]?.share
+          {/* {translations[language]?.share
             ? translations[language]?.share
-            : "Share"}
+            : "Share"} */}
+          Share
         </Button>
         <Button
           className="flex sm:hidden"
@@ -278,10 +283,12 @@ export default function ShareAD({ slug }) {
           variant={isInWishlist(slug) ? "solid" : "light"}
           isLoading={loadingAd[slug] || false}
           onPress={() => updateUserWishlist_(slug)}
+          size="sm"
         >
-           {translations[language]?.wishlist
+          {/* {translations[language]?.wishlist
             ? translations[language]?.wishlist
-            : "Wishlist"}
+            : "Wishlist"} */}
+          Wishlist
           {/* 分享
           {(language === "en" || !language) && "Wishlist"}
           {language === "zh" && "心愿单"} */}

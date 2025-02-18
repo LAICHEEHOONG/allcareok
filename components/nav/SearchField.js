@@ -53,8 +53,14 @@ export default function SearchField({ navigation }) {
 
   const handleSearch = () => {
     // router.push(`?area=${inputValue}&serviceType=${serviceType}`);
+    // router.push(
+    //   `${redirectedPathName(language)}?area=${
+    //     inputValue ? inputValue : ""
+    //   }&serviceType=${serviceType ? serviceType : ""}`,
+    //   { scroll: false }
+    // );
     router.push(
-      `${redirectedPathName(language)}?area=${
+      `/${language ? language : "en"}?area=${
         inputValue ? inputValue : ""
       }&serviceType=${serviceType ? serviceType : ""}`,
       { scroll: false }
