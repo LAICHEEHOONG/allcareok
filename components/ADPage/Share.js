@@ -243,7 +243,7 @@ export default function ShareAD({ slug, title }) {
         {language === "zh" && "主页"} */}
       {/* {translations[language]?.home ? translations[language]?.home : "Home"} */}
       {/* </Button> */}
-      <div className="font-medium text-2xl tracking-wider capitalize">
+      <div className="font-semibold text-2xl tracking-wider capitalize">
         {title}
       </div>
 

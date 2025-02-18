@@ -87,10 +87,10 @@ const EmblaCarousel = (props) => {
                     <Image
                       // loading="lazy"
                       // isZoomed
-                      className="z-0 object-cover"
-                      width={375}
-                      // height={567}
-                      height={500}
+                      className="z-0 object-cover x950l:h-[500px] x950l:w-[375px] h-[400px] w-[300px]"
+                      // width={375}
+                      // // height={567}
+                      // height={500}
                       alt="NextUI Fruit Image with Zoom"
                       //   src={`https://res.cloudinary.com/${CLOUDINARY_ENVIRONMENTS}/image/upload/t_auto/${CLOUDINARY_URL_ID}/${modelData?.images[index]?.publicId}.webp`}
                       src={`${photo[index]?.url}`}

@@ -2,50 +2,7 @@ import { getAdsByIds, findAllAds } from "@/lib/action/adAction";
 import ShareAD from "@/components/ADPage/Share";
 import ADCarousel from "@/components/ADPage/ADCarousel";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-
-// export async function generateMetadata({ params }) {
-//   const { slug } = params;
-//   const post = await getAdsByIds([slug]); // Your fetch function
-//   const {
-//     _id,
-//     user,
-//     photo,
-//     title,
-//     service,
-//     area,
-//     contact,
-//     youtube,
-//     description,
-//     reviewStatus,
-//     views,
-//     createdAt,
-//   } = post.data[0];
-
-//   return {
-//     _id,
-//     user,
-//     photo: photo ? photo : [],
-//     title,
-//     service: service ? service : [],
-//     area,
-//     contact,
-//     youtube,
-//     description,
-//     reviewStatus,
-//     views,
-//     createdAt,
-//   };
-// }
-
-// export async function generateMetadata({ params }) {
-//   const { slug } = params;
-//   const post = await getAdsByIds([slug]); // Your fetch function
-//   const { title } = post.data[0];
-
-//   return {
-//     title,
-//   };
-// }
+import Verify from "@/components/ADPage/Verify";
 
 export default async function ADPage({ params }) {
   const slug = (await params).slug;
@@ -81,10 +38,16 @@ export default async function ADPage({ params }) {
               <div className="text-base tracking-widest capitalize">
                 {areaTitle}
               </div>
-              <div className="text-base font-medium tracking-wider">
-                <VisibilityIcon fontSize="small" className="mr-2" />
-                {views} views
-              </div>
+              {reviewStatus === "Approved" ? (
+                <div className="pt-4 pb-4">
+                  <Verify views={views} />
+                </div>
+              ) : (
+                <div className="text-base font-medium tracking-wider">
+                  {views} views
+                </div>
+              )}
+
               {/* <div className="font-medium text-2xl tracking-wider capitalize">
                 {title}
               </div> */}

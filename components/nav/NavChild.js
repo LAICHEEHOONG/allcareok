@@ -96,7 +96,7 @@ export default function NavChild({ navigation, service_type, poppins, dic }) {
         <div className="flex flex-col justify-center items-center ">
           <Divider className="m-3 hidden sm:flex" />
           {!isWishlist && !isAd && (
-            <div className=" w-full flex justify-center items-center  sm:pl-14 sm:pr-14">
+            <div className=" w-full flex justify-center items-center  sm:pl-14 sm:pr-14 mb-3">
               <NavCarousel service_type={service_type} />
             </div>
           )}

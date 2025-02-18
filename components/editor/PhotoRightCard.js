@@ -489,7 +489,8 @@ export default function PhotoRightCard() {
 
         let { user, photo, service, area, contact, youtube } = ad;
         photo = [...photo, ...photo_];
-        photo = photo.filter((item) => item.url && item.publicId);
+        // photo = photo.filter((item) => item.url && item.publicId);
+        photo = photo.filter((item) => item.url);
 
         await submitToMongoDB({
           user,
