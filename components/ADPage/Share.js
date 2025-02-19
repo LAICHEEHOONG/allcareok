@@ -56,7 +56,7 @@ import {
   setServiceType,
 } from "@/redux/features/search/searchSlice";
 
-export default function ShareAD({ slug, title }) {
+export default function ShareAD({ slug, title, share_dic, wishlist_dic}) {
   const router = useRouter();
   const [adData, setAdData] = useState({});
 
@@ -70,21 +70,8 @@ export default function ShareAD({ slug, title }) {
   const searchParams = useSearchParams();
   const area = searchParams.get("area");
   const serviceType = searchParams.get("serviceType");
-  const language = useSelector((state) => state.auth?.language);
+  // const language = useSelector((state) => state.auth?.language);
   // const l = useSelector((state) => state.auth?.lang?.ad_page);
-
-  const translations = {
-    en: { home: "Home", share: "Share", wishlist: "Wishlist" },
-    zh: { home: "主页", share: "分享", wishlist: "心愿单" },
-    ms: { home: "Laman Utama", share: "Kongsi", wishlist: "Kegemaran" }, // Malay
-  };
-
-  const redirectedPathName = (locale) => {
-    if (!pathName) return "/";
-    const segments = pathName.split("/");
-    segments[1] = locale;
-    return segments.join("/");
-  };
 
   useEffect(() => {
     const signUpUser = async (user) => {
@@ -256,23 +243,10 @@ export default function ShareAD({ slug, title }) {
           onPress={sharePage}
           size="sm"
         >
-          {/* {(language === "en" || !language) && "Share"}
-          {language === "zh" && "分享"} */}
-          {/* {translations[language]?.share
-            ? translations[language]?.share
-            : "Share"} */}
-          Share
+          {share_dic}
+          {/* {lang === "en" && "Share"}
+          {lang === "zh" && "分享"} */}
         </Button>
-        {/* <Button
-          className="flex x950l:hidden"
-          isIconOnly
-          variant="light"
-          radius="full"
-          onPress={sharePage}
-          size="sm"
-        >
-          <IosShareIcon />
-        </Button> */}
 
         <Button
           // className="hidden x950l:flex"
@@ -286,28 +260,9 @@ export default function ShareAD({ slug, title }) {
           onPress={() => updateUserWishlist_(slug)}
           size="sm"
         >
-          {/* {translations[language]?.wishlist
-            ? translations[language]?.wishlist
-            : "Wishlist"} */}
-          Wishlist
-          {/* 分享
-          {(language === "en" || !language) && "Wishlist"}
-          {language === "zh" && "心愿单"} */}
+          {wishlist_dic}
+          {/* Wishlist */}
         </Button>
-
-        {/* <Button
-          className="flex x950l:hidden"
-          isIconOnly
-          radius="full"
-          aria-label="Like"
-          color={isInWishlist(slug) ? "danger" : "default"}
-          variant={isInWishlist(slug) ? "solid" : "light"}
-          isLoading={loadingAd[slug] || false}
-          onPress={() => updateUserWishlist_(slug)}
-          size="sm"
-        >
-          <FavoriteBorderIcon />
-        </Button> */}
       </div>
     </div>
   );

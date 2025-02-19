@@ -3,9 +3,13 @@ import ShareAD from "@/components/ADPage/Share";
 import ADCarousel from "@/components/ADPage/ADCarousel";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Verify from "@/components/ADPage/Verify";
+import { getDictionary } from "@/lib/dictionary";
 
 export default async function ADPage({ params }) {
   const slug = (await params).slug;
+  const lang = (await params).lang;
+  const dic = await getDictionary(lang);
+
 
   const AD = await getAdsByIds([slug]); // Deduped fetch
   const {
@@ -31,7 +35,12 @@ export default async function ADPage({ params }) {
   return (
     <div className="flex justify-center">
       <div className="w-full max-w-[1120px] hidden md:block">
-        <ShareAD slug={slug} title={title} />
+        <ShareAD
+          slug={slug}
+          title={title}
+          share_dic={dic?.ad_page?.share}
+          wishlist_dic={dic?.ad_page?.wishlist}
+        />
         <div className=" h-[2000px] flex">
           <div className=" h-screen w-full">
             <div className="flex flex-col">
@@ -40,11 +49,16 @@ export default async function ADPage({ params }) {
               </div>
               {reviewStatus === "Approved" ? (
                 <div className="pt-4 pb-4">
-                  <Verify views={views} />
+                  <Verify
+                    views={views}
+                    views_dic={dic?.ad_page?.views}
+                    verify_dic={dic?.ad_page?.verify}
+                  />
                 </div>
               ) : (
                 <div className="text-base font-medium tracking-wider">
-                  {views} Views
+                  {/* {views} {dic?.ad_page?.views} */}
+                  {`${views} ${dic?.ad_page?.views}`}
                 </div>
               )}
 
@@ -58,7 +72,6 @@ export default async function ADPage({ params }) {
           </div>
         </div>
       </div>
-  
     </div>
   );
 }

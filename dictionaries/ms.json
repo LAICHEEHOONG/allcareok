@@ -232,5 +232,11 @@
   "support": {
     "title": "Dapatkan Sokongan",
     "description": "Kami sedia membantu anda semasa waktu perniagaan kami. Sila hubungi kami untuk sebarang pertanyaan atau masalah yang anda hadapi."
-  }
+  },
+  "ad_page": {
+    "share": "Kongsi",
+    "wishlist": "Kegemaran",
+    "verify": "Iklan yang disahkan oleh AllCareOK memastikan kepercayaan dan kualiti dalam setiap senarai.",
+    "views": "Tayangan"
+}
 }

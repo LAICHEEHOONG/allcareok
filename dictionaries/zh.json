@@ -232,5 +232,11 @@
   "support": {
     "title": "联系我们",
     "description": "我们在营业时间内随时为您提供帮助。如有任何问题或疑虑，请随时联系我们。"
+  },
+  "ad_page": {
+    "share": "分享",
+    "wishlist": "心愿清单",
+    "verify": "由AllCareOK验证的广告确保每条列表的信任和质量。",
+    "views": "浏览量"
   }
 }
