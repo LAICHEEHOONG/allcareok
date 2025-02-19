@@ -243,13 +243,13 @@ export default function ShareAD({ slug, title }) {
         {language === "zh" && "主页"} */}
       {/* {translations[language]?.home ? translations[language]?.home : "Home"} */}
       {/* </Button> */}
-      <div className="font-semibold truncate  text-lg x950l:text-xl lg:text-2xl tracking-wider capitalize">
+      <div className="font-semibold  md:text-lg lg:text-2xl tracking-wider capitalize">
         {title}
       </div>
 
-      <div className="flex sm:gap-2 gap-5 sm:pr-0 pr-2">
+      <div className="flex justify-center items-center">
         <Button
-          className="hidden x950l:flex"
+          // className="hidden x950l:flex"
           startContent={<IosShareIcon />}
           variant="light"
           radius="full"
@@ -263,7 +263,7 @@ export default function ShareAD({ slug, title }) {
             : "Share"} */}
           Share
         </Button>
-        <Button
+        {/* <Button
           className="flex x950l:hidden"
           isIconOnly
           variant="light"
@@ -272,10 +272,10 @@ export default function ShareAD({ slug, title }) {
           size="sm"
         >
           <IosShareIcon />
-        </Button>
+        </Button> */}
 
         <Button
-          className="hidden x950l:flex"
+          // className="hidden x950l:flex"
           startContent={<FavoriteBorderIcon />}
           // variant="light"
           radius="full"
@@ -295,7 +295,7 @@ export default function ShareAD({ slug, title }) {
           {language === "zh" && "心愿单"} */}
         </Button>
 
-        <Button
+        {/* <Button
           className="flex x950l:hidden"
           isIconOnly
           radius="full"
@@ -307,7 +307,7 @@ export default function ShareAD({ slug, title }) {
           size="sm"
         >
           <FavoriteBorderIcon />
-        </Button>
+        </Button> */}
       </div>
     </div>
   );

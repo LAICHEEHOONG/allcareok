@@ -24,7 +24,7 @@ export default function Verify({ views }) {
             src="/images/verified_logo.jpg"
             width={100}
           />
-          <div className="flex flex-col justify-center items-center p-5 ">
+          <div className="flex flex-col justify-center items-center x950l:p-5 p-3">
             <div className="capitalize x950l:text-base text-sm  font-medium max-w-[330px] tracking-wider  ">
               Ads verified by AllCareOK ensure trust and quality in every
               listing.
