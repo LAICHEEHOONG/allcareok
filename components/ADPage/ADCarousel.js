@@ -16,7 +16,9 @@ const ADCarousel = ({ photo }) => {
   const SLIDE_COUNT = photo?.length;
   const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
   return (
-    <div className="" style={{ maxWidth: "375px" }}>
+    <div 
+    // className="w-full max-w-[375px] "
+    >
       <EmblaCarousel slides={SLIDES} options={OPTIONS} photo={photo} />
     </div>
   );
@@ -55,13 +57,13 @@ const EmblaCarousel = (props) => {
   }, [emblaMainApi, onSelect]);
 
   return (
-    <div className="embla">
-      <div className="embla__viewport" ref={emblaMainRef}>
-        <div className="embla__container">
+    <div className="embla   ">
+      <div className="embla__viewport " ref={emblaMainRef}>
+        <div className="embla__container ">
           {slides &&
             slides.map((index) => (
               <div
-                className="embla__slide flex justify-center flex-col  items-center"
+                className="embla__slide flex justify-center flex-col  items-center  w-full x950l:max-w-[375px] max-w-[300px]"
                 key={index}
               >
                 <Fade>
@@ -102,8 +104,8 @@ const EmblaCarousel = (props) => {
         </div>
       </div>
 
-      <div className="embla-thumbs">
-        <div className="embla-thumbs__viewport" ref={emblaThumbsRef}>
+      <div className="embla-thumbs ">
+        <div className="embla-thumbs__viewport " ref={emblaThumbsRef}>
           <div className="embla-thumbs__container">
             {slides &&
               slides.map((index) => (
@@ -113,8 +115,8 @@ const EmblaCarousel = (props) => {
                   selected={index === selectedIndex}
                   index={index}
                   selectedIndex={selectedIndex}
-                //   modelData={modelData}
-                photo={photo}
+                  //   modelData={modelData}
+                  photo={photo}
                 />
               ))}
           </div>
@@ -129,22 +131,30 @@ export const Thumb = (props) => {
 
   return (
     <div
-      className={"embla-thumbs__slide".concat(
-        selected ? " embla-thumbs__slide--selected" : ""
-      )}
-      style={{ marginRight: "-1rem" }}
+      className={`embla-thumbs__slide ${
+        selected ? "embla-thumbs__slide--selected" : ""
+      } x950l:-mr-4 -mr-3`}
+      // className={"embla-thumbs__slide".concat(
+      //   selected ? " embla-thumbs__slide--selected" : ""
+      // ) }
+      // style={{ marginRight: "-1.1rem" }}
     >
-      <Image
-        isZoomed
-        radius="none"
-        onClick={onClick}
-        className={`object-cover ${selectedIndex !== index && "!opacity-40"} `}
-        width={70}
-        height={70}
-        alt="NextUI Fruit Image with Zoom"
-        // src={`https://res.cloudinary.com/${CLOUDINARY_ENVIRONMENTS}/image/upload/t_test_2/${CLOUDINARY_URL_ID}/${modelData.images[index].publicId}.webp`}
-        src={`${photo[index].url}`}
-      />
+      <Fade>
+        <Image
+          isZoomed
+          radius="sm"
+          // radius="none"
+          onClick={onClick}
+          className={`object-cover ${
+            selectedIndex !== index && "!opacity-40"
+          } x950l:w-[60px] w-[55px] h-[60px]`}
+          // width={70}
+          // height={70}
+          alt="NextUI Fruit Image with Zoom"
+          // src={`https://res.cloudinary.com/${CLOUDINARY_ENVIRONMENTS}/image/upload/t_test_2/${CLOUDINARY_URL_ID}/${modelData.images[index].publicId}.webp`}
+          src={`${photo[index].url}`}
+        />
+      </Fade>
     </div>
   );
 };

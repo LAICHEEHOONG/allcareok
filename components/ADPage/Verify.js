@@ -11,27 +11,33 @@ import {
 export default function Verify({ views }) {
   return (
     <Card
-      className="w-full max-w-[600px]"
+      className="w-full max-w-[350px] x950l:max-w-[500px]"
       //   isPressable={!blockServiceBtn}
       //   isDisabled={blockServiceBtn}
       //   onPress={changeRouter}
     >
       <CardBody>
-        <div className="flex justify-between">
+        <div className="flex justify-between items-center">
           <Image
             alt="Card background"
-            className="object-cover rounded-xl"
+            className="object-cover rounded-xl w-full min-w-[100px]"
             src="/images/verified_logo.jpg"
             width={100}
           />
-          <div className="flex justify-center items-center ">
-            <div className="capitalize text-base font-medium max-w-[350px] p-5">
+          <div className="flex flex-col justify-center items-center p-5 ">
+            <div className="capitalize x950l:text-base text-sm  font-medium max-w-[330px] tracking-wider  ">
               Ads verified by AllCareOK ensure trust and quality in every
               listing.
             </div>
+            <div className="block x950l:hidden text-xs font-medium tracking-wider self-end">
+              {views} Views
+            </div>
           </div>
-          <Divider orientation="vertical" />
-          <div className="flex flex-col w-full max-w-[100px] justify-center items-center">
+          <Divider
+            orientation="vertical"
+            className="h-10 w-[1px] x950l:block hidden"
+          />
+          <div className="x950l:flex hidden flex-col w-full max-w-[100px] justify-center items-center">
             <div className="text-2xl font-semibold">{views}</div>
             <div className="text-xs">Views</div>
           </div>

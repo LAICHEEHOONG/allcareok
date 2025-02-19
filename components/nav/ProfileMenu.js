@@ -9,6 +9,7 @@ import {
 } from "@heroui/react";
 import MenuIcon from "@mui/icons-material/Menu";
 import GoogleIcon from "@mui/icons-material/Google";
+import { FcGoogle } from "react-icons/fc";
 import { signIn, signOut } from "next-auth/react";
 import { useSelector } from "react-redux";
 import { useRouter, usePathname } from "next/navigation";
@@ -72,7 +73,12 @@ export default function ProfileMenu({ navigation }) {
       <DropdownTrigger>
         <Button variant="flat" radius="full" size="lg" color="default">
           <MenuIcon />
-          <Avatar src={auth.image} size="sm" />
+          {auth.image ? (
+            <Avatar src={auth.image} size="sm" />
+          ) : (
+            <FcGoogle className="w-8 h-8" />
+          )}
+          {/* <Avatar src={auth.image} size="sm" /> */}
         </Button>
       </DropdownTrigger>
       <DropdownMenu aria-label="Static Actions">
@@ -83,8 +89,11 @@ export default function ProfileMenu({ navigation }) {
             textValue="log in"
             onPress={() => signIn()}
           >
-            <GoogleIcon className="mr-1" />
-            {navigation.login}
+            {/* <GoogleIcon className="mr-1" /> */}
+            <div className="flex gap-1 justify-center items-center">
+              <FcGoogle className="w-6 h-6" />
+              {navigation.login}
+            </div>
           </DropdownItem>
         )}
 

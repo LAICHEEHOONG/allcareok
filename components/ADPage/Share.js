@@ -243,13 +243,13 @@ export default function ShareAD({ slug, title }) {
         {language === "zh" && "主页"} */}
       {/* {translations[language]?.home ? translations[language]?.home : "Home"} */}
       {/* </Button> */}
-      <div className="font-semibold text-2xl tracking-wider capitalize">
+      <div className="font-semibold truncate  text-lg x950l:text-xl lg:text-2xl tracking-wider capitalize">
         {title}
       </div>
 
       <div className="flex sm:gap-2 gap-5 sm:pr-0 pr-2">
         <Button
-          className="hidden sm:flex"
+          className="hidden x950l:flex"
           startContent={<IosShareIcon />}
           variant="light"
           radius="full"
@@ -264,17 +264,18 @@ export default function ShareAD({ slug, title }) {
           Share
         </Button>
         <Button
-          className="flex sm:hidden"
+          className="flex x950l:hidden"
           isIconOnly
           variant="light"
           radius="full"
           onPress={sharePage}
+          size="sm"
         >
           <IosShareIcon />
         </Button>
 
         <Button
-          className="hidden sm:flex"
+          className="hidden x950l:flex"
           startContent={<FavoriteBorderIcon />}
           // variant="light"
           radius="full"
@@ -295,7 +296,7 @@ export default function ShareAD({ slug, title }) {
         </Button>
 
         <Button
-          className="flex sm:hidden"
+          className="flex x950l:hidden"
           isIconOnly
           radius="full"
           aria-label="Like"
@@ -303,6 +304,7 @@ export default function ShareAD({ slug, title }) {
           variant={isInWishlist(slug) ? "solid" : "light"}
           isLoading={loadingAd[slug] || false}
           onPress={() => updateUserWishlist_(slug)}
+          size="sm"
         >
           <FavoriteBorderIcon />
         </Button>

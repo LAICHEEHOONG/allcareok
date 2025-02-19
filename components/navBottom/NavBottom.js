@@ -14,6 +14,8 @@ import { signIn } from "next-auth/react";
 import { DrawerLanguage } from "../DrawerLanguage";
 import { toast } from "sonner";
 import { Image, Avatar } from "@heroui/react";
+import { FcGoogle } from "react-icons/fc";
+
 
 export default function NavBottom({ bottom_navigation }) {
   const session = useSelector((state) => state.auth.session);
@@ -231,7 +233,8 @@ export default function NavBottom({ bottom_navigation }) {
                 <BottomNavigationAction
                   showLabel
                   label={bottom_navigation.login}
-                  icon={<AccountCircleIcon />}
+                  // icon={<AccountCircleIcon />}
+                  icon={<FcGoogle className="w-5 h-5" />}
                   sx={{
                     "&.Mui-selected": {
                       color: "#f31260",

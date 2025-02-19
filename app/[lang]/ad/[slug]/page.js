@@ -30,12 +30,12 @@ export default async function ADPage({ params }) {
 
   return (
     <div className="flex justify-center">
-      <div className="w-full max-w-[1120px]">
+      <div className="w-full max-w-[1120px] hidden md:block">
         <ShareAD slug={slug} title={title} />
         <div className=" h-[2000px] flex">
           <div className=" h-screen w-full">
             <div className="flex flex-col">
-              <div className="text-base tracking-widest capitalize">
+              <div className="text-sm x950l:text-base tracking-widest capitalize">
                 {areaTitle}
               </div>
               {reviewStatus === "Approved" ? (
@@ -44,7 +44,7 @@ export default async function ADPage({ params }) {
                 </div>
               ) : (
                 <div className="text-base font-medium tracking-wider">
-                  {views} views
+                  {views} Views
                 </div>
               )}
 
@@ -53,12 +53,12 @@ export default async function ADPage({ params }) {
               </div> */}
             </div>
           </div>
-          <div className="h-screen w-full max-w-[400px] flex justify-end sticky top-20">
+          <div className="h-screen w-full x950l:max-w-[375px] max-w-[300px]  flex justify-end sticky top-20 ">
             <ADCarousel photo={photo} />
           </div>
         </div>
       </div>
-      {/* <div>{params?.slug}</div> */}
+  
     </div>
   );
 }

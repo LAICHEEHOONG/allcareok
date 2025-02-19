@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setCountry,
@@ -17,7 +17,6 @@ import { useSession } from "next-auth/react";
 import { signUp, updateUserCountry } from "@/lib/action/userAction";
 import {
   findUserAds,
-  // getAdsFast,
   getPaginatedAds,
 } from "@/lib/action/adAction";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
@@ -53,6 +52,12 @@ import {
   setServiceType,
 } from "@/redux/features/search/searchSlice";
 
+const AD_LIMITS = {
+  SMALL: 20,
+  MEDIUM: 40,
+  LARGE: 80,
+};
+
 async function getCountryFromIP() {
   try {
     const response = await axios.get("https://ipapi.co/json/");
@@ -63,70 +68,142 @@ async function getCountryFromIP() {
   }
 }
 
+function AdCard({ ad, handleImageClick, l, loadingAds, updateUserWishlist_, isInWishlist }) {
+  return (
+    <Card className="w-full max-w-[350px] rounded-xl">
+      <CardHeader className="flex justify-center h-[52px]">
+        {(ad?.area?.town || ad?.area?.city || ad?.area?.state || ad?.area?.country) && (
+          <div className="flex justify-center items-center gap-2">
+            {ad?.area?.country ? (
+              <Avatar
+                src={countryFlag.find(country =>
+                  country.value.trim().toLowerCase() === ad.area.country.trim().toLowerCase()
+                )?.description || ""}
+                showFallback
+                name={ad.area.country}
+                className="max-w-5 h-5 w-full"
+              />
+            ) : (
+              <LocationOnIcon className="w-4 h-4 mt-1" />
+            )}
+            <div className="text-base capitalize font-medium w-full max-w-[220px] truncate tracking-widest">
+              {`${ad?.area?.town || ad?.area?.city || ad?.area?.state || ""}${ad?.area?.town || ad?.area?.city || ad?.area?.state ? ", " : ""}${ad?.area?.country}`}
+            </div>
+          </div>
+        )}
+      </CardHeader>
+
+      <CardBody className="overflow-visible p-3 pb-1 pt-0">
+        <Carousel
+          className="w-full cursor-pointer"
+          opts={{ align: "start", loop: true, dragFree: false }}
+          onClick={() => handleImageClick(ad._id)}
+        >
+          <CarouselContent>
+            {ad.photo.map((item, idx) => (
+              <CarouselItem key={idx} className="flex justify-center items-start">
+                <Image
+                  className="object-cover rounded-xl w-[310px] xl:h-[400px] x1128l:h-[350px] sm:h-[400px] 550px:h-[320px] h-[400px]"
+                  src={item.url}
+                  alt="ad image"
+                />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+
+        <div className={`absolute inset-x-0 top-0 z-30 flex ${ad.reviewStatus === "Approved" ? "justify-between" : "justify-end"} items-center p-1 pl-6 pr-6`}>
+          {ad.reviewStatus === "Approved" && (
+            <Chip
+              avatar={<Avatar name="allcareok" src="https://www.allcareok.com/images/allcareok_logo.png" />}
+              variant="shadow"
+              classNames={{
+                base: "bg-gradient-to-br from-indigo-500 to-pink-500 shadow-pink-500/30",
+                content: "drop-shadow shadow-black text-white",
+              }}
+            >
+              <div className="font-medium tracking-wider">{l?.verified}</div>
+            </Chip>
+          )}
+
+          <Button
+            isIconOnly
+            aria-label={isInWishlist(ad._id) ? "Remove from wishlist" : "Add to wishlist"}
+            size="sm"
+            radius="full"
+            color="danger"
+            variant={isInWishlist(ad._id) ? "solid" : "flat"}
+            isLoading={loadingAds[ad._id] || false}
+            onPress={() => updateUserWishlist_(ad._id)}
+          >
+            <FavoriteBorderIcon style={{ color: "white" }} />
+          </Button>
+        </div>
+      </CardBody>
+      <CardFooter className="flex justify-center p-0">
+        <ADFooter ad={ad} />
+      </CardFooter>
+    </Card>
+  );
+}
+
 export default function Home() {
   const { data: session, status } = useSession();
   const dispatch = useDispatch();
   const router = useRouter();
   const pathName = usePathname();
-  const user = useSelector((state) => state.auth?._id);
-  const country = useSelector((state) => state.auth?.country);
-  const ADS = useSelector((state) => state.ADS.ADS);
-  const page = useSelector((state) => state.ADS.page);
-  const totalPages = useSelector((state) => state.ADS.totalPages);
+  const user = useSelector(state => state.auth?._id);
+  const country = useSelector(state => state.auth?.country);
+  const ADS = useSelector(state => state.ADS.ADS);
+  const page = useSelector(state => state.ADS.page);
+  const totalPages = useSelector(state => state.ADS.totalPages);
   const [ref, inView] = useInView();
-  const l = useSelector((state) => state.auth?.lang?.home_card);
-  const wishlist = useSelector((state) => state.auth?.wishlist);
-  const [loadingAd, setLoadingAd] = useState({}); // Track loading state per adId
+  const l = useSelector(state => state.auth?.lang?.home_card);
+  const wishlist = useSelector(state => state.auth?.wishlist);
+  const [loadingAds, setLoadingAds] = useState({});
   const searchParams = useSearchParams();
   const area = searchParams.get("area");
   const serviceType = searchParams.get("serviceType");
   const [prevArea, setPrevArea] = useState(area);
   const [prevServiceType, setPrevServiceType] = useState(serviceType);
-  const language = useSelector((state) => state.auth?.language);
+  const language = useSelector(state => state.auth?.language);
 
-  const redirectedPathName = (locale) => {
+  const redirectedPathName = useCallback((locale) => {
     if (!pathName) return "/";
     const segments = pathName.split("/");
     segments[1] = locale;
     return segments.join("/");
-  };
+  }, [pathName]);
 
   useEffect(() => {
-    const signUpUser = async (user) => {
-      try {
-        dispatch(setBlockServiceBtn(true));
-        const res = await signUp(user);
-        if (language !== res.language) {
-          router.push(
-            `${redirectedPathName(res.language)}?area=${
-              area ? area : ""
-            }&serviceType=${serviceType ? serviceType : ""}`,
-            { scroll: false }
-          );
-        }
-
-        dispatch(userInfo(res));
-      } catch (err) {
-        console.log(err);
-      } finally {
-        dispatch(setBlockServiceBtn(false));
-      }
-    };
-
     if (session) {
+      const signUpUser = async (user) => {
+        try {
+          dispatch(setBlockServiceBtn(true));
+          const res = await signUp(user);
+          if (language !== res.language) {
+            router.push(`${redirectedPathName(res.language)}?area=${area ? area : ""}&serviceType=${serviceType ? serviceType : ""}`, { scroll: false });
+          }
+          dispatch(userInfo(res));
+        } catch (err) {
+          console.log(err);
+        } finally {
+          dispatch(setBlockServiceBtn(false));
+        }
+      };
       signUpUser(session.user);
       dispatch(signInStatus(status));
     }
-  }, [session]);
+  }, [session, status, dispatch, language, area, serviceType, redirectedPathName]);
 
   useEffect(() => {
-    getCountryFromIP().then((country) => dispatch(setCountry(country)));
-  }, []);
+    getCountryFromIP().then(country => dispatch(setCountry(country)));
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(setSession(session));
     dispatch(setStatus(status));
-  }, [session, status]);
+  }, [session, status, dispatch]);
 
   useEffect(() => {
     if (user && country?.trim()) {
@@ -145,53 +222,50 @@ export default function Home() {
       }
     };
     fetchAds();
-  }, [user]);
+  }, [user, dispatch]);
 
-  // Handle wishlist update
-  const updateUserWishlist_ = async (adId) => {
+  const updateUserWishlist_ = useCallback(async (adId) => {
     if (!session) {
       signIn();
       return;
     }
 
-    // setIsLoading(true);
-    setLoadingAd((prev) => ({ ...prev, [adId]: true })); // Set loading for the specific ad
+    setLoadingAds(prev => ({ ...prev, [adId]: true }));
 
     try {
-      const res = await updateUserWishlist({ userId: user, adId }); // Update wishlist
-      console.log(res);
+      const res = await updateUserWishlist({ userId: user, adId });
       if (res.success) {
-        dispatch(setWishlist(res.data.wishlist)); // Update Redux store
+        dispatch(setWishlist(res.data.wishlist));
       }
-
-      // await fetchWishlist(); // Get the latest user data with wishlist
     } catch (error) {
       console.log("Error updating wishlist:", error);
     } finally {
-      // setIsLoading(false);
-      setLoadingAd((prev) => ({ ...prev, [adId]: false })); // Stop loading for this ad
+      setLoadingAds(prev => ({ ...prev, [adId]: false }));
     }
-  };
+  }, [session, user, dispatch]);
 
-  // Check if the ad is in the wishlist
-  const isInWishlist = (adId) => wishlist.includes(adId);
+  const isInWishlist = useCallback((adId) => wishlist.includes(adId), [wishlist]);
+
+  const handleImageClick = useCallback((id) => {
+    window.open(`${language ? language : "en"}/ad/${id}`, "_blank");
+  }, [language]);
+
+  const filteredAds = useMemo(() => ADS.filter(ad => ad.photo?.length > 0), [ADS]);
 
   useEffect(() => {
     const fetchMoreAds = async (pageReset) => {
       try {
         let screenHeight = window.innerHeight;
-        let limit = 20; // Default limit
+        let limit = AD_LIMITS.SMALL;
 
         if (screenHeight >= 1400 && screenHeight < 2160) {
-          limit = 40;
+          limit = AD_LIMITS.MEDIUM;
         } else if (screenHeight >= 2160 && screenHeight < 4320) {
-          limit = 80;
+          limit = AD_LIMITS.LARGE;
         }
 
         const res = await getPaginatedAds({
           query: {
-            // page: area || serviceType ? 1 : page + 1, // Reset page if filter changes
-            // page: filtersChanged ? 1 : page + 1, // Reset page only when filters change
             page: pageReset ? 1 : page + 1,
             limit: limit,
             area: area ? area : "",
@@ -205,13 +279,10 @@ export default function Home() {
               description: `${l?.search_not_found?.description}`,
               action: {
                 label: "OK",
-                // onClick: () => console.log("Add Ad Limit Reached"),
               },
             });
 
-            router.push(`${redirectedPathName(language)}`, {
-              scroll: false,
-            });
+            router.push(`${redirectedPathName(language)}`, { scroll: false });
           }
           dispatch(setADS(res.data.ads));
           dispatch(setPagination(res.data));
@@ -234,40 +305,13 @@ export default function Home() {
       pageReset_ = true;
     }
 
-    // if (inView || area !== prevArea || serviceType !== prevServiceType) {
-    //   if (page < totalPages) {
-    //     fetchMoreAds(pageReset_);
-    //     console.log("Fetching ads");
-    //   }
-    // }
-
-    if (inView) {
-      if (page < totalPages) {
-        fetchMoreAds(pageReset_);
-        // console.log("Fetching ads");
-      }
+    if (inView && page < totalPages) {
+      fetchMoreAds(pageReset_);
     }
 
     dispatch(setSearchValue(area));
     dispatch(setServiceType(serviceType));
-  }, [inView, area, serviceType, prevArea, prevServiceType]);
-
-  // const handleImageClick = (id) => {
-  //   router.push(
-  //     `${redirectedPathName(language)}/ad/${id}`,
-  //     { scroll: false }
-  //   );
-  // }
-  const handleImageClick = (id) => {
-    // window.open(
-    //   `${redirectedPathName(language)}/ad/${id}`,
-    //   "_blank" // Open in a new tab
-    // );
-    window.open(
-      `${language ? language : "en"}/ad/${id}`,
-      "_blank" // Open in a new tab
-    );
-  };
+  }, [inView, area, serviceType, prevArea, prevServiceType, page, totalPages, dispatch, l, language, redirectedPathName]);
 
   return (
     <div className="pb-20">
@@ -277,144 +321,28 @@ export default function Home() {
             {ADS.length === 0 ? (
               <div className="flex flex-col gap-3 justify-center items-center h-[60vh] w-full ">
                 <LogoSpinner text={true} />
-                {/* <CrashPrevent /> */}
               </div>
             ) : (
               <Masonry
-                breakpointCols={{
-                  default: 6,
-                  1879: 5,
-                  1639: 4,
-                  1127: 3,
-                  949: 2,
-                  549: 1,
-                }}
-                className="my-masonry-grid "
+                breakpointCols={{ default: 6, 1879: 5, 1639: 4, 1127: 3, 949: 2, 549: 1 }}
+                className="my-masonry-grid"
                 columnClassName="my-masonry-grid_column flex flex-col items-center sm:items-start"
               >
-                {ADS.filter((ad) => ad.photo?.length > 0).map((ad, i) => (
-                  <Card
-                    key={ad._id + i}
-                    className="w-full max-w-[350px] rounded-xl "
-                  >
-                    <CardHeader className="flex justify-center h-[52px]">
-                      {(ad?.area?.town ||
-                        ad?.area?.city ||
-                        ad?.area?.state ||
-                        ad?.area?.country) && (
-                        <div className="flex justify-center items-center gap-2">
-                          {ad?.area?.country ? (
-                            <Avatar
-                              src={
-                                countryFlag.find(
-                                  (country) =>
-                                    country.value.trim().toLowerCase() ===
-                                    ad.area.country.trim().toLowerCase()
-                                )?.description || ""
-                              }
-                              showFallback
-                              name={ad.area.country}
-                              className="max-w-5 h-5 w-full"
-                            />
-                          ) : (
-                            <LocationOnIcon className="w-4 h-4 mt-1" />
-                          )}
-
-                          <div className="text-base capitalize font-medium w-full max-w-[220px] truncate tracking-widest">
-                            {`${
-                              ad?.area?.town ||
-                              ad?.area?.city ||
-                              ad?.area?.state ||
-                              ""
-                            }${
-                              ad?.area?.town ||
-                              ad?.area?.city ||
-                              ad?.area?.state
-                                ? ", "
-                                : ""
-                            }${ad?.area?.country}`}
-                          </div>
-                        </div>
-                      )}
-                    </CardHeader>
-
-                    <CardBody className="overflow-visible p-3 pb-1 pt-0">
-                      <Carousel
-                        className="w-full cursor-pointer"
-                        opts={{ align: "start", loop: true, dragFree: false }}
-                        onClick={() => {
-                          handleImageClick(ad._id);
-                        }}
-                      >
-                        <CarouselContent>
-                          {ad.photo.map((item, idx) => (
-                            <CarouselItem
-                              key={idx}
-                              className="flex justify-center items-start"
-                            >
-                              <Image
-                                className={`object-cover rounded-xl w-[310px] xl:h-[400px] x1128l:h-[350px] sm:h-[400px] 550px:h-[320px] h-[400px]`}
-                                src={item.url}
-                                alt="ad image"
-                              />
-                            </CarouselItem>
-                          ))}
-                        </CarouselContent>
-                      </Carousel>
-
-                      <div
-                        className={`absolute inset-x-0 top-0 z-30 flex ${
-                          ad.reviewStatus === "Approved"
-                            ? "justify-between"
-                            : "justify-end"
-                        } items-center p-1 pl-6 pr-6`}
-                      >
-                        {ad.reviewStatus === "Approved" && (
-                          <Chip
-                            avatar={
-                              <Avatar
-                                name="allcareok"
-                                src="https://www.allcareok.com/images/allcareok_logo.png"
-                              />
-                            }
-                            variant="shadow"
-                            classNames={{
-                              base: "bg-gradient-to-br from-indigo-500 to-pink-500  shadow-pink-500/30",
-                              content: "drop-shadow shadow-black text-white",
-                            }}
-                          >
-                            <div className="font-medium tracking-wider">
-                              {l?.verified}
-                            </div>
-                          </Chip>
-                        )}
-
-                        <Button
-                          isIconOnly
-                          aria-label="Like"
-                          size="sm"
-                          radius="full"
-                          color="danger"
-                          variant={isInWishlist(ad._id) ? "solid" : "flat"}
-                          isLoading={loadingAd[ad._id] || false}
-                          onPress={() => updateUserWishlist_(ad._id)}
-                        >
-                          <FavoriteBorderIcon style={{ color: "white" }} />
-                        </Button>
-                      </div>
-                    </CardBody>
-                    <CardFooter className="flex justify-center p-0">
-                      <ADFooter ad={ad} />
-                    </CardFooter>
-                  </Card>
+                {filteredAds.map((ad, i) => (
+                  <AdCard 
+                    key={ad._id + i} 
+                    ad={ad} 
+                    handleImageClick={handleImageClick} 
+                    l={l} 
+                    loadingAds={loadingAds} 
+                    updateUserWishlist_={updateUserWishlist_} 
+                    isInWishlist={isInWishlist}
+                  />
                 ))}
               </Masonry>
             )}
           </div>
-          <div
-            ref={ref}
-            className={`w-full h-[50px] flex justify-center items-center`}
-          >
+          <div ref={ref} className="w-full h-[50px] flex justify-center items-center">
             {page < totalPages && page > 0 && <LogoSpinner text={false} />}
           </div>
         </div>
