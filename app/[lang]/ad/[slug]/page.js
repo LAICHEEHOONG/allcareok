@@ -4,12 +4,29 @@ import ADCarousel from "@/components/ADPage/ADCarousel";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Verify from "@/components/ADPage/Verify";
 import { getDictionary } from "@/lib/dictionary";
+import { getUserById } from "@/lib/action/userAction";
+import UserInfo from "@/components/ADPage/UserInfo";
+
+// Define the function outside the main component for better scope management
+async function getUserData(userId) {
+  try {
+    const result = await getUserById({ userId });
+    if (result.success) {
+      return result.data;
+    } else {
+      console.error("Failed to fetch user data:", result.message);
+      return null; // Return null instead of false for clarity
+    }
+  } catch (error) {
+    console.error("An error occurred while fetching user data:", error);
+    return null; // Return null if there's an error
+  }
+}
 
 export default async function ADPage({ params }) {
   const slug = (await params).slug;
   const lang = (await params).lang;
   const dic = await getDictionary(lang);
-
 
   const AD = await getAdsByIds([slug]); // Deduped fetch
   const {
@@ -27,6 +44,10 @@ export default async function ADPage({ params }) {
     createdAt,
   } = AD.data[0];
 
+  // Directly use the promise within the component
+  const userData = await getUserData(user);
+  // const userData = await (getUserData(user));
+
   const areaTitle = Object.values(area)
     .filter((value) => value) // Remove empty values
     .reverse()
@@ -43,7 +64,7 @@ export default async function ADPage({ params }) {
         />
         <div className=" h-[2000px] flex">
           <div className=" h-screen w-full">
-            <div className="flex flex-col">
+            <div className="flex flex-col w-full max-w-[650px] pr-4">
               <div className="text-sm x950l:text-base tracking-widest capitalize">
                 {areaTitle}
               </div>
@@ -57,14 +78,10 @@ export default async function ADPage({ params }) {
                 </div>
               ) : (
                 <div className="text-base font-medium tracking-wider">
-                  {/* {views} {dic?.ad_page?.views} */}
                   {`${views} ${dic?.ad_page?.views}`}
                 </div>
               )}
-
-              {/* <div className="font-medium text-2xl tracking-wider capitalize">
-                {title}
-              </div> */}
+              <UserInfo userData={userData} />
             </div>
           </div>
           <div className="h-screen w-full x950l:max-w-[375px] max-w-[300px]  flex justify-end sticky top-20 ">

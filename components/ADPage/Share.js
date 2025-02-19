@@ -56,7 +56,7 @@ import {
   setServiceType,
 } from "@/redux/features/search/searchSlice";
 
-export default function ShareAD({ slug, title, share_dic, wishlist_dic}) {
+export default function ShareAD({ slug, title, share_dic, wishlist_dic }) {
   const router = useRouter();
   const [adData, setAdData] = useState({});
 
@@ -218,7 +218,7 @@ export default function ShareAD({ slug, title, share_dic, wishlist_dic}) {
     }
   };
   return (
-    <div className="flex justify-between pt-2 pb-2">
+    <div className="flex justify-between pt-2 pb-6">
       {/* <Button
         // className="hidden sm:flex"
         startContent={<ArrowBackIosIcon />}
