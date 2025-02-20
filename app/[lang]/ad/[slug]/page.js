@@ -1,11 +1,12 @@
 import { getAdsByIds, findAllAds } from "@/lib/action/adAction";
 import ShareAD from "@/components/ADPage/Share";
 import ADCarousel from "@/components/ADPage/ADCarousel";
-import VisibilityIcon from "@mui/icons-material/Visibility";
+// import VisibilityIcon from "@mui/icons-material/Visibility";
 import Verify from "@/components/ADPage/Verify";
 import { getDictionary } from "@/lib/dictionary";
 import { getUserById } from "@/lib/action/userAction";
 import UserInfo from "@/components/ADPage/UserInfo";
+import ServiceType from "@/components/ADPage/ServiceType";
 
 // Define the function outside the main component for better scope management
 async function getUserData(userId) {
@@ -82,6 +83,7 @@ export default async function ADPage({ params }) {
                 </div>
               )}
               <UserInfo userData={userData} />
+              <ServiceType service={service} service_type={dic?.service_type} />
             </div>
           </div>
           <div className="h-screen w-full x950l:max-w-[375px] max-w-[300px]  flex justify-end sticky top-20 ">

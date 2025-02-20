@@ -131,7 +131,7 @@ export default function ShareAD({ slug, title, share_dic, wishlist_dic }) {
 
     try {
       const res = await updateUserWishlist({ userId: user, adId }); // Update wishlist
-      console.log(res);
+      // console.log(res);
       if (res.success) {
         dispatch(setWishlist(res.data.wishlist)); // Update Redux store
       }

@@ -12,6 +12,7 @@ export const ADFooter = ({ ad }) => {
   useEffect(() => {
     setCarouselItems(getCarouselItems(service_type));
   }, [service_type]);
+
   return (
     <div className="w-full flex justify-center items-center max-w-[300px] h-[35px] ">
       <Carousel
