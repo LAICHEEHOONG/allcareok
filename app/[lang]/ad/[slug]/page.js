@@ -83,7 +83,7 @@ export default async function ADPage({ params }) {
                 </div>
               )}
               <UserInfo userData={userData} />
-              <ServiceType service={service} service_type={dic?.service_type} />
+              <ServiceType service={service} service_type={dic?.service_type} service_type_description={dic?.service_type_description} />
             </div>
           </div>
           <div className="h-screen w-full x950l:max-w-[375px] max-w-[300px]  flex justify-end sticky top-20 ">

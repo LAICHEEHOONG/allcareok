@@ -41,6 +41,25 @@
     "child_care": "Penjagaan Kanak-Kanak",
     "full_time_maid": "Pembantu Rumah Sepenuh Masa"
   },
+  "service_type_description": {
+    "home_cleaning": "Nikmati rumah bersih dengan perkhidmatan pembersihan menyeluruh yang disesuaikan, meninggalkan setiap sudut segar dan kemas.",
+    "aircon_servicing": "Pastikan penyaman udara anda berfungsi lancar dengan pembaikan dan penyelenggaraan pakar untuk udara sejuk bersih sepanjang tahun.",
+    "move_in_out_cleaning": "Jadikan pemindahan bebas tekanan dengan pembersihan mendalam untuk ruang lama atau baru, bersedia untuk fasa seterusnya.",
+    "sofa_cleaning": "Hidupkan semula sofa anda dengan pembersihan profesional, menghilangkan kotoran dan alergen untuk keselesaan segar.",
+    "mattress_cleaning": "Tidur lebih nyenyak dengan tilam yang disanitasi, bebas dari habuk dan alergen, dibersihkan dengan sempurna.",
+    "curtain_cleaning": "Cerahkan ruang anda dengan langsir yang dibersihkan pakar, menghapus debu dan kotoran sambil mengekalkan kualiti kain.",
+    "car_washing": "Berikan kereta anda kilauan seperti bilik pameran dengan perkhidmatan cucian cekap, dalam dan luar, untuk kenderaan bersih.",
+    "disinfection_service": "Lindungi ruang anda dengan pembasmian kuman menyeluruh, menghapus kuman untuk persekitaran yang selamat dan sihat.",
+    "landscaping_service": "Ubah ruang luar anda dengan perkhidmatan landskap pakar, mencipta halaman cantik dan berfungsi yang anda suka.",
+    "handyman_services": "Selesaikan cepat dengan perkhidmatan tukang mahir untuk pembaikan, pemasangan, dan penambahbaikan rumah yang tepat.",
+    "painting_services": "Segarkan ruang anda dengan pengecatan profesional, memberikan kemasan sempurna dan warna-warna cerah.",
+    "moving_service": "Berpindah dengan mudah menggunakan perkhidmatan boleh dipercayai, mengendalikan barang anda dengan berhati-hati dari mula hingga akhir.",
+    "flooring_services": "Naik taraf lantai anda dengan pemasangan dan pembaikan pakar, memastikan ketahanan dan gaya.",
+    "pest_control": "Hapuskan serangga dengan selamat dan berkesan dengan perkhidmatan kawalan serangga profesional untuk rumah bebas perosak.",
+    "elderly_care": "Sediakan penjagaan penuh kasih sayang untuk warga emas, memastikan keselesaan, keselamatan, dan sokongan mengikut keperluan mereka.",
+    "child_care": "Serahkan anak kecil anda kepada penjagaan penuh kasih, menawarkan keseronokan, keselamatan, dan pembelajaran setiap hari.",
+    "full_time_maid": "Nikmati bantuan harian dengan pembantu rumah sepenuh masa, menjaga rumah anda bersih dan teratur dengan mudah."
+  },
   "overview": {
     "main": "Mudah untuk bermula di Allcareok",
     "title_1": "Beritahu kami tentang perkhidmatan anda",
@@ -238,5 +257,5 @@
     "wishlist": "Kegemaran",
     "verify": "Iklan yang disahkan oleh AllCareOK memastikan kepercayaan dan kualiti dalam setiap senarai.",
     "views": "Tayangan"
-}
+  }
 }

@@ -57,7 +57,7 @@ const EmblaCarousel = (props) => {
   }, [emblaMainApi, onSelect]);
 
   return (
-    <div className="embla   ">
+    <div className="embla">
       <div className="embla__viewport " ref={emblaMainRef}>
         <div className="embla__container ">
           {slides &&
@@ -89,7 +89,7 @@ const EmblaCarousel = (props) => {
                     <Image
                       // loading="lazy"
                       // isZoomed
-                      className="z-0 object-cover x950l:h-[500px] x950l:w-[375px] h-[400px] w-[300px]"
+                      className="z-0 object-cover x950l:h-[500px] x950l:w-[375px] h-[400px] w-[300px] "
                       // width={375}
                       // // height={567}
                       // height={500}
@@ -104,7 +104,7 @@ const EmblaCarousel = (props) => {
         </div>
       </div>
 
-      <div className="embla-thumbs ">
+      <div className="embla-thumbs ml-2 mr-2">
         <div className="embla-thumbs__viewport " ref={emblaThumbsRef}>
           <div className="embla-thumbs__container">
             {slides &&
@@ -134,10 +134,7 @@ export const Thumb = (props) => {
       className={`embla-thumbs__slide ${
         selected ? "embla-thumbs__slide--selected" : ""
       } x950l:-mr-4 -mr-3`}
-      // className={"embla-thumbs__slide".concat(
-      //   selected ? " embla-thumbs__slide--selected" : ""
-      // ) }
-      // style={{ marginRight: "-1.1rem" }}
+ 
     >
       <Fade>
         <Image
@@ -147,9 +144,8 @@ export const Thumb = (props) => {
           onClick={onClick}
           className={`object-cover ${
             selectedIndex !== index && "!opacity-40"
-          } x950l:w-[60px] w-[55px] h-[60px]`}
-          // width={70}
-          // height={70}
+          } x950l:w-[65px] w-[53px] x950l:h-[65px] h-[53px]`}
+
           alt="NextUI Fruit Image with Zoom"
           // src={`https://res.cloudinary.com/${CLOUDINARY_ENVIRONMENTS}/image/upload/t_test_2/${CLOUDINARY_URL_ID}/${modelData.images[index].publicId}.webp`}
           src={`${photo[index].url}`}

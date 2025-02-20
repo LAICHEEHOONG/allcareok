@@ -41,6 +41,25 @@
     "child_care": "儿童照料",
     "full_time_maid": "全职女佣"
   },
+  "service_type_description": {
+    "home_cleaning": "享受量身定制的彻底清洁服务，让您的家一尘不染，每个角落都清新整洁。",
+    "aircon_servicing": "通过专业维修和保养，让您的空调顺畅运行，全年享受凉爽干净的空气。",
+    "move_in_out_cleaning": "通过深度清洁旧居或新家，让搬家无压力，为新篇章做好准备。",
+    "sofa_cleaning": "专业清洁让您的沙发焕然一新，去除污渍和过敏原，带来清新舒适感。",
+    "mattress_cleaning": "清洁消毒床垫，清除尘螨和过敏原，让您睡得更安心。",
+    "curtain_cleaning": "专家清洁窗帘，去除灰尘和污垢，提亮空间同时保护布料质量。",
+    "car_washing": "高效洗车服务，让您的爱车内外光洁如新，展现展厅般的闪耀。",
+    "disinfection_service": "彻底消毒保护您的空间，消除细菌，确保安全健康的环境。",
+    "landscaping_service": "通过专业园艺改造户外空间，打造您喜爱的美丽实用庭院。",
+    "handyman_services": "快速解决修理、安装和家装问题，专业杂工服务让一切井井有条。",
+    "painting_services": "专业油漆服务焕新您的空间，带来完美饰面和鲜艳色彩。",
+    "moving_service": "可靠搬家服务让您轻松搬迁，从头到尾小心处理您的物品。",
+    "flooring_services": "专家安装和修复地板，提升耐用性与风格，升级您的地面。",
+    "pest_control": "安全有效地消灭害虫，专业虫控服务确保您的家无虫害。",
+    "elderly_care": "为长者提供贴心护理，确保舒适、安全和个性化支持。",
+    "child_care": "将您的孩子托付给温馨的看护服务，提供乐趣、安全和每日学习。",
+    "full_time_maid": "全职女佣每日帮忙，让您的家保持清洁与井然有序，无需费心。"
+  },
   "overview": {
     "main": "在 Allcareok 上开始非常简单",
     "title_1": "告诉我们您的服务",

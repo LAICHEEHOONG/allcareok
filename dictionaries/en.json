@@ -41,6 +41,25 @@
     "child_care": "Child Care",
     "full_time_maid": "Full Time Maid"
   },
+  "service_type_description": {
+    "home_cleaning": "Enjoy a spotless home with thorough cleaning services tailored to your needs, leaving every corner fresh and pristine.",
+    "aircon_servicing": "Keep your AC running smoothly with expert repair and maintenance, ensuring cool, clean air all year round.",
+    "move_in_out_cleaning": "Make moving stress-free with deep cleaning for your old or new space, readying it for the next chapter.",
+    "sofa_cleaning": "Revive your sofa with professional cleaning, removing stains and allergens for a fresh, cozy feel.",
+    "mattress_cleaning": "Sleep better with a sanitized mattress, free of dust mites and allergens, cleaned to perfection.",
+    "curtain_cleaning": "Brighten your space with expertly cleaned curtains, removing dust and grime while preserving fabric quality.",
+    "car_washing": "Give your car a showroom shine with efficient washing services, inside and out, for a spotless ride.",
+    "disinfection_service": "Protect your space with thorough disinfection, eliminating germs and ensuring a safe, healthy environment.",
+    "landscaping_service": "Transform your outdoor space with expert landscaping, creating a beautiful, functional yard you’ll love.",
+    "handyman_services": "Fix it fast with skilled handyman services for repairs, installations, and home improvements done right.",
+    "painting_services": "Refresh your space with professional painting, delivering flawless finishes and vibrant colors.",
+    "moving_service": "Move with ease using reliable services, handling your belongings with care from start to finish.",
+    "flooring_services": "Upgrade your floors with expert installation and repair, ensuring durability and style.",
+    "pest_control": "Eliminate pests safely and effectively with professional control services for a pest-free home.",
+    "elderly_care": "Provide compassionate care for seniors, ensuring comfort, safety, and support tailored to their needs.",
+    "child_care": "Trust your little ones to nurturing childcare, offering fun, safety, and learning every day.",
+    "full_time_maid": "Enjoy daily help with a dedicated full-time maid, keeping your home clean and organized effortlessly."
+  },
   "overview": {
     "main": "It’s easy to get started on Allcareok",
     "title_1": "Tell us about your services",
