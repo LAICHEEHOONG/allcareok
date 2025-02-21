@@ -1,12 +1,13 @@
 import { getAdsByIds, findAllAds } from "@/lib/action/adAction";
 import ShareAD from "@/components/ADPage/Share";
 import ADCarousel from "@/components/ADPage/ADCarousel";
-// import VisibilityIcon from "@mui/icons-material/Visibility";
 import Verify from "@/components/ADPage/Verify";
 import { getDictionary } from "@/lib/dictionary";
 import { getUserById } from "@/lib/action/userAction";
 import UserInfo from "@/components/ADPage/UserInfo";
 import ServiceType from "@/components/ADPage/ServiceType";
+import Description_ from "@/components/ADPage/Description_";
+import AreaTitle from "@/components/ADPage/AreaTitle";
 
 // Define the function outside the main component for better scope management
 async function getUserData(userId) {
@@ -63,11 +64,11 @@ export default async function ADPage({ params }) {
           share_dic={dic?.ad_page?.share}
           wishlist_dic={dic?.ad_page?.wishlist}
         />
-        <div className=" h-[2000px] flex">
-          <div className=" h-screen w-full">
+        <div className="flex">
+          <div className="w-full">
             <div className="flex flex-col w-full max-w-[650px] pr-4">
               <div className="text-sm x950l:text-base tracking-widest capitalize">
-                {areaTitle}
+                <AreaTitle areaTitle={areaTitle} />
               </div>
               {reviewStatus === "Approved" ? (
                 <div className="pt-4 pb-4">
@@ -83,10 +84,15 @@ export default async function ADPage({ params }) {
                 </div>
               )}
               <UserInfo userData={userData} />
-              <ServiceType service={service} service_type={dic?.service_type} service_type_description={dic?.service_type_description} />
+              <ServiceType
+                service={service}
+                service_type={dic?.service_type}
+                service_type_description={dic?.service_type_description}
+              />
+              <Description_ description={description} />
             </div>
           </div>
-          <div className="h-screen w-full x950l:max-w-[375px] max-w-[300px]  flex justify-end sticky top-20 ">
+          <div className="h-screen w-full x950l:max-w-[375px] max-w-[300px]  flex justify-end !sticky top-20 ">
             <ADCarousel photo={photo} />
           </div>
         </div>
@@ -96,6 +102,7 @@ export default async function ADPage({ params }) {
 }
 
 // Return a list of `params` to populate the [slug] dynamic segment
+
 export async function generateStaticParams() {
   try {
     const Allad = await findAllAds();

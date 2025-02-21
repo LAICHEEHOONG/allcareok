@@ -55,6 +55,7 @@ import {
   setSearchValue,
   setServiceType,
 } from "@/redux/features/search/searchSlice";
+import { Fade } from "react-awesome-reveal";
 
 export default function ShareAD({ slug, title, share_dic, wishlist_dic }) {
   const router = useRouter();
@@ -218,52 +219,54 @@ export default function ShareAD({ slug, title, share_dic, wishlist_dic }) {
     }
   };
   return (
-    <div className="flex justify-between pt-2 pb-6">
-      {/* <Button
+    <Fade>
+      <div className="flex justify-between pt-2 pb-6">
+        {/* <Button
         // className="hidden sm:flex"
         startContent={<ArrowBackIosIcon />}
         variant="light"
         radius="full"
         onPress={handleBack}
       > */}
-      {/* {(language === "en" || !language) && "Home"}
+        {/* {(language === "en" || !language) && "Home"}
         {language === "zh" && "主页"} */}
-      {/* {translations[language]?.home ? translations[language]?.home : "Home"} */}
-      {/* </Button> */}
-      <div className="font-semibold  md:text-lg lg:text-2xl tracking-wider capitalize">
-        {title}
-      </div>
+        {/* {translations[language]?.home ? translations[language]?.home : "Home"} */}
+        {/* </Button> */}
+        <div className="font-semibold  md:text-lg lg:text-2xl tracking-wider capitalize">
+          {title}
+        </div>
 
-      <div className="flex justify-center items-center">
-        <Button
-          // className="hidden x950l:flex"
-          startContent={<IosShareIcon />}
-          variant="light"
-          radius="full"
-          onPress={sharePage}
-          size="sm"
-        >
-          {share_dic}
-          {/* {lang === "en" && "Share"}
+        <div className="flex justify-center items-center">
+          <Button
+            // className="hidden x950l:flex"
+            startContent={<IosShareIcon />}
+            variant="light"
+            radius="full"
+            onPress={sharePage}
+            size="sm"
+          >
+            {share_dic}
+            {/* {lang === "en" && "Share"}
           {lang === "zh" && "分享"} */}
-        </Button>
+          </Button>
 
-        <Button
-          // className="hidden x950l:flex"
-          startContent={<FavoriteBorderIcon />}
-          // variant="light"
-          radius="full"
-          aria-label="Like"
-          color={isInWishlist(slug) ? "danger" : "default"}
-          variant={isInWishlist(slug) ? "solid" : "light"}
-          isLoading={loadingAd[slug] || false}
-          onPress={() => updateUserWishlist_(slug)}
-          size="sm"
-        >
-          {wishlist_dic}
-          {/* Wishlist */}
-        </Button>
+          <Button
+            // className="hidden x950l:flex"
+            startContent={<FavoriteBorderIcon />}
+            // variant="light"
+            radius="full"
+            aria-label="Like"
+            color={isInWishlist(slug) ? "danger" : "default"}
+            variant={isInWishlist(slug) ? "solid" : "light"}
+            isLoading={loadingAd[slug] || false}
+            onPress={() => updateUserWishlist_(slug)}
+            size="sm"
+          >
+            {wishlist_dic}
+            {/* Wishlist */}
+          </Button>
+        </div>
       </div>
-    </div>
+    </Fade>
   );
 }
