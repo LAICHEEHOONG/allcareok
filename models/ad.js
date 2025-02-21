@@ -1,3 +1,4 @@
+// ad.js
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 
@@ -47,8 +48,8 @@ const adSchema = new mongoose.Schema(
     },
     photo: [photoSchema],
     verification: [photoSchema],
-    title: { type: String, default: "Your service title" },
-    service: [{ type: String }],
+    title: { type: String, default: "Your service title", trim: true }, // Added trim
+    service: [{ type: String, trim: true }], // Added trim for array elements
     area: {
       country: { type: String, default: "" },
       state: { type: String, default: "" },
@@ -77,41 +78,41 @@ const adSchema = new mongoose.Schema(
     description: {
       type: String,
       default: "Enter your service description here",
+      trim: true, // Added trim
       /* HTML content stored as a string */
     },
     reviewPayment: reviewPaymentSchema,
     reviewStatus: {
       type: String,
-      enum: ["Approved", "Under Review", "Rejected", "Payment Pending"], // Define allowed values
-      default: "Payment Pending", // Set the default value
+      enum: ["Approved", "Under Review", "Rejected", "Payment Pending"],
+      default: "Payment Pending",
     },
     planPayment: reviewPaymentSchema,
     topRanking: {
-      type: Date, // Use the Date type to store the ranking date
-      default: null, // Default value can be null if not set
+      type: Date,
+      default: null,
     },
     reports: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Report", // 关联 `reportSchema`
+        ref: "Report",
       },
     ],
     block: {
       type: Boolean,
-      default: false, // Adding the block key with default value
+      default: false,
     },
     views: {
       type: Number,
-      default: 0, // Default value for views
+      default: 0,
     },
-
   },
   {
     timestamps: true,
   }
 );
 
-// Index for efficient searches across all areas
+// Index for efficient searches across all areas (already present)
 adSchema.index({
   "area.country": 1,
   "area.state": 1,
@@ -119,6 +120,83 @@ adSchema.index({
   "area.town": 1,
 });
 
+// Optional text index for basic search fallback (if Atlas Search isn’t used)
+adSchema.index(
+  {
+    title: "text",
+    service: "text",
+    description: "text",
+    "contact.phone": "text",
+    "contact.email": "text",
+    "contact.whatsapp": "text",
+    "contact.telegram": "text",
+    "contact.facebook": "text",
+    "contact.tiktok": "text",
+    "contact.instagram": "text",
+    "contact.youtube": "text",
+    "contact.x": "text",
+    "contact.wechat": "text",
+    "contact.line": "text",
+    "contact.website": "text",
+  },
+  {
+    weights: {
+      title: 10,
+      service: 8,
+      description: 6,
+      "contact.phone": 4,
+      "contact.email": 4,
+      "contact.whatsapp": 3,
+      "contact.telegram": 3,
+      "contact.facebook": 3,
+      "contact.tiktok": 3,
+      "contact.instagram": 3,
+      "contact.youtube": 3,
+      "contact.x": 3,
+      "contact.wechat": 3,
+      "contact.line": 3,
+      "contact.website": 3,
+    },
+    name: "TextSearchIndex",
+  }
+);
+
 const AD = mongoose.models.AD || mongoose.model("AD", adSchema);
+
+/*
+ * MongoDB Atlas Search Index Configuration
+ * This is NOT part of the Mongoose schema. Set it up in MongoDB Atlas:
+ * 1. Go to your Atlas Cluster > "Search" tab > Select the "ads" collection.
+ * 2. Click "Create Search Index" > Use JSON Editor.
+ * 3. Paste the following configuration and name it "default" (or update adAction.js to match your index name):
+ * {
+ *   "mappings": {
+ *     "dynamic": true,
+ *     "fields": {
+ *       "title": { "type": "string" },
+ *       "service": { "type": "string" },
+ *       "description": { "type": "string" },
+ *       "contact": {
+ *         "type": "document",
+ *         "fields": {
+ *           "phone": { "type": "string" },
+ *           "email": { "type": "string" },
+ *           "whatsapp": { "type": "string" },
+ *           "telegram": { "type": "string" },
+ *           "facebook": { "type": "string" },
+ *           "tiktok": { "type": "string" },
+ *           "instagram": { "type": "string" },
+ *           "youtube": { "type": "string" },
+ *           "x": { "type": "string" },
+ *           "wechat": { "type": "string" },
+ *           "line": { "type": "string" },
+ *           "website": { "type": "string" }
+ *         }
+ *       }
+ *     }
+ *   }
+ * }
+ * 4. Save and wait for the index to build.
+ */
 
 export default AD;
