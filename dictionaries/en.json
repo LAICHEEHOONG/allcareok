@@ -256,6 +256,10 @@
     "share": "Share",
     "wishlist": "Wishlist",
     "verify": "Ads verified by AllCareOK ensure trust and quality in every listing.",
-    "views": "Views"
+    "views": "Views",
+    "shared_by": "Shared by",
+    "show_more": "Show more",
+    "show_less": "Show less",
+    "report_btn": "Report this listing"
   }
 }

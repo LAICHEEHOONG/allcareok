@@ -256,6 +256,10 @@
     "share": "Kongsi",
     "wishlist": "Kegemaran",
     "verify": "Iklan yang disahkan oleh AllCareOK memastikan kepercayaan dan kualiti dalam setiap senarai.",
-    "views": "Tayangan"
+    "views": "Tayangan",
+    "shared_by": "Dikongsi oleh",
+    "show_more": "Tunjukkan lebih banyak",
+    "show_less": "Tunjukkan kurang",
+    "report_btn": "Laporkan senarai ini"
   }
 }

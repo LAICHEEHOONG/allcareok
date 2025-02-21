@@ -17,9 +17,9 @@
 import { Divider, Button } from "@heroui/react";
 import { Fade } from "react-awesome-reveal";
 import { useState } from "react";
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
-export default function Description_({ description }) {
+export default function Description_({ description, show_more, show_less }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const previewLength = 200; // Number of characters to show in the preview
 
@@ -42,7 +42,7 @@ export default function Description_({ description }) {
             variant="light"
             radius="full"
           >
-            {isExpanded ? "Show less" : "Show more"}
+            {isExpanded ? show_less : show_more}
           </Button>
         </div>
       )}

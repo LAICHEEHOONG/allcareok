@@ -256,6 +256,10 @@
     "share": "分享",
     "wishlist": "心愿清单",
     "verify": "由AllCareOK验证的广告确保每条列表的信任和质量。",
-    "views": "浏览"
+    "views": "浏览",
+    "shared_by": "分享者",
+    "show_more": "显示更多",
+    "show_less": "显示更少",
+    "report_btn": "举报此服务"
   }
 }

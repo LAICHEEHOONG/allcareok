@@ -43,7 +43,7 @@ import { Avatar, Divider } from "@heroui/react";
 import { formatDistanceToNow } from "date-fns";
 import { Fade } from "react-awesome-reveal";
 
-export default function UserInfo({ userData }) {
+export default function UserInfo({ userData, shared_by }) {
   const [adUser, setAdUser] = useState(userData || null);
   const [createdUntilNow, setCreatedUntilNow] = useState("");
 
@@ -72,7 +72,7 @@ export default function UserInfo({ userData }) {
         <Avatar name={adUser.name} src={adUser.image} className="w-12 h-12" />
         <div className="text-left">
           <div className="w-full max-w-[300px] x950l:max-w-[500px] tracking-wide">
-            <div className="text-lg font-medium truncate">{`Shared by ${adUser.name}`}</div>
+            <div className="text-lg font-medium truncate">{`${shared_by} ${adUser.name}`}</div>
           </div>
           <div className="text-sm text-gray-600 tracking-wide">{`Joined ${createdUntilNow}`}</div>
         </div>
