@@ -37,8 +37,6 @@ export default function Description_({ description }) {
       {isLongDescription && (
         <div>
           <Button
-            // variant="text" // Use a text variant for a subtle look like Airbnb
-            // className="text-blue-600 hover:text-blue-800"
             onPress={() => setIsExpanded(!isExpanded)}
             endContent={<ArrowForwardIosIcon />}
             variant="light"

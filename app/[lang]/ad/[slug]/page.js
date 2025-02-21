@@ -8,6 +8,7 @@ import UserInfo from "@/components/ADPage/UserInfo";
 import ServiceType from "@/components/ADPage/ServiceType";
 import Description_ from "@/components/ADPage/Description_";
 import AreaTitle from "@/components/ADPage/AreaTitle";
+import Report from "@/components/ADPage/Report";
 
 // Define the function outside the main component for better scope management
 async function getUserData(userId) {
@@ -92,8 +93,9 @@ export default async function ADPage({ params }) {
               <Description_ description={description} />
             </div>
           </div>
-          <div className="h-screen w-full x950l:max-w-[375px] max-w-[300px]  flex justify-end !sticky top-20 ">
+          <div className="h-screen w-full x950l:max-w-[375px] max-w-[300px]  flex gap-5 flex-col justify-start items-center sticky top-20">
             <ADCarousel photo={photo} />
+            <Report />
           </div>
         </div>
       </div>
