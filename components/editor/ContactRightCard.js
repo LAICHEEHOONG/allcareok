@@ -231,11 +231,7 @@ export default function ContactRightCard() {
           <M />
         </div>
 
-        {/* <div className="w-full flex justify-center items-center border-1">
-          <div className="flex w-full justify-center items-center border-1">
-            <M />
-          </div>
-        </div> */}
+  
       </ScrollShadow>
     </div>
   );
