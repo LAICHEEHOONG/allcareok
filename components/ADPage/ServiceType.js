@@ -52,7 +52,7 @@ export default function ServiceType({
           </div>
         ) : null;
       })}
-      <Divider />
+      {/* <Divider /> */}
     </Fade>
   );
 }

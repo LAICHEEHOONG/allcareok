@@ -47,7 +47,7 @@ export default function Contact_({ contact }) {
           );
         })}
       </div>
-      <Divider />
+      {/* <Divider /> */}
     </Fade>
   );
 }
