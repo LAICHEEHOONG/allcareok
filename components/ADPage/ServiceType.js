@@ -1,34 +1,3 @@
-// "use client";
-// import { getCarouselItems } from "../carouselItems";
-// import { useEffect, useState } from "react";
-// import { Divider } from "@heroui/react";
-
-// export default function ServiceType({ service, service_type }) {
-//   const [carouselItems, setCarouselItems] = useState([]);
-//   useEffect(() => {
-//     setCarouselItems(getCarouselItems(service_type));
-//   }, [service_type]);
-
-//   useEffect(() => {
-//     console.log(carouselItems);
-//   }, [carouselItems]);
-
-//   return (
-//     <div>
-//       {service?.map((serv, i) => {
-//         const match = carouselItems.find((item) => item?.id === serv);
-//         return match ? (
-//           <div key={`${crypto.randomUUID()}`} className="flex ">
-//             <match.icon className="!w-6 !h-6" />
-//             <div className="text-lg font-semibold">{match?.label}</div>
-//           </div>
-//         ) : null;
-//       })}
-//       <Divider />
-//     </div>
-//   );
-// }
-
 "use client";
 import { getCarouselItems } from "../carouselItems";
 import { useEffect, useState, useMemo } from "react";
@@ -45,7 +14,6 @@ export default function ServiceType({
   // Fetch carousel items based on service_type
   useEffect(() => {
     setCarouselItems(getCarouselItems(service_type, service_type_description));
-
   }, [service_type, service_type_description]);
 
   // Create a map for efficient lookup of carousel items

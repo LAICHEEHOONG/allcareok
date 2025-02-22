@@ -1,5 +1,5 @@
 "use client";
-import ContactRightCard from "@/components/editor/ContactRightCard";
+import ContactRightCard from "@/components/editor/ContactRightCard_ori";
 
 export default function MobileContact() {
   return (

@@ -4,10 +4,22 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter, usePathname } from "next/navigation";
 import { setAd, setAds } from "@/redux/features/editor/editorSlice";
+
 import Masonry from "react-masonry-css";
+import CallIcon from "@mui/icons-material/Call";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import TelegramIcon from "@mui/icons-material/Telegram";
+import { IoLogoWechat } from "react-icons/io5";
+import { FaLine } from "react-icons/fa6";
+import XIcon from "@mui/icons-material/X";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import { FaTiktok } from "react-icons/fa";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
+import PublicIcon from "@mui/icons-material/Public";
 import { createAD, findUserAds } from "@/lib/action/adAction";
 import SaveIcon from "@mui/icons-material/Save";
-import { contactServices } from "@/components/contactServices";
 
 export default function ContactRightCard() {
   const dispatch = useDispatch();
@@ -19,15 +31,90 @@ export default function ContactRightCard() {
   const contact = useSelector((state) => state.editor.ad?.contact);
   const [loading, setLoading] = useState(false);
 
-  const contactRef = useRef({ ...contact });
+  const contactRef = useRef({ ...contact }); // Use a ref for contact data
 
   const handleInputChange = (key, value) => {
-    contactRef.current[key] = value;
+    contactRef.current[key] = value; // Update the ref value
   };
+
+  const servicesItems = [
+    {
+      name: "phone",
+      label: "+60 12-345 6789", // Example Malaysian phone number
+      icon: CallIcon,
+      value: contact?.phone,
+    },
+    {
+      name: "whatsapp",
+      label: "https://wa.me/60123456789", // Example WhatsApp link
+      icon: WhatsAppIcon,
+      value: contact?.whatsapp,
+    },
+    {
+      name: "telegram",
+      label: "@JohnDoe123", // Example Telegram username
+      icon: TelegramIcon,
+      value: contact?.telegram,
+    },
+    {
+      name: "email",
+      label: "johndoe@example.com", // Example email address
+      icon: AlternateEmailIcon,
+      value: contact?.email,
+    },
+    {
+      name: "facebook",
+      label: "facebook.com/JohnDoe", // Example Facebook profile
+      icon: FacebookIcon,
+      value: contact?.facebook,
+    },
+    {
+      name: "tiktok",
+      label: "tiktok.com/@JohnDoe", // Example TikTok username
+      icon: FaTiktok,
+      value: contact?.tiktok,
+    },
+    {
+      name: "instagram",
+      label: "instagram.com/JohnDoe", // Example Instagram profile
+      icon: InstagramIcon,
+      value: contact?.instagram,
+    },
+    {
+      name: "youtube",
+      label: "youtube.com/c/JohnDoeChannel", // Example YouTube channel
+      icon: YouTubeIcon,
+      value: contact?.youtube,
+    },
+    {
+      name: "x",
+      label: "x.com/JohnDoe", // Example X (Twitter) profile
+      icon: XIcon,
+      value: contact?.x,
+    },
+    {
+      name: "wechat",
+      label: "WeChat ID: johndoe123", // Example WeChat ID
+      icon: IoLogoWechat,
+      value: contact?.wechat,
+    },
+    {
+      name: "line",
+      label: "LINE ID: johndoe.line", // Example LINE ID
+      icon: FaLine,
+      value: contact?.line,
+    },
+    {
+      name: "website",
+      label: "https://www.examplewebsite.com", // Example website link
+      icon: PublicIcon,
+      value: contact?.website,
+    },
+  ];
 
   const fetchAds = async () => {
     try {
-      const ads = await findUserAds({ user: ad.user });
+      const ads = await findUserAds({ user: ad.user }); // Pass only the userId
       dispatch(setAds(ads));
     } catch (error) {
       console.error("Error fetching user ads:", error);
@@ -47,12 +134,16 @@ export default function ContactRightCard() {
       console.log(error);
     } finally {
       setLoading(false);
+      // if (isSmallScreen) {
+      //   dispatch(setPopUp());
+      // }
     }
   };
 
   const handleSave = () => {
     const adsId = ad._id;
     const newContact = contactRef.current;
+
     toDB(adsId, newContact);
     fetchAds();
   };
@@ -64,7 +155,7 @@ export default function ContactRightCard() {
         className="my-masonry-grid !w-full"
         columnClassName="my-masonry-grid_column flex flex-col items-center justify-center"
       >
-        {contactServices.map((item) => (
+        {servicesItems.map((item, i) => (
           <Input
             key={item.name}
             isClearable
@@ -73,7 +164,7 @@ export default function ContactRightCard() {
             variant="bordered"
             size="lg"
             radius="full"
-            defaultValue={contactRef.current[item.name]}
+            defaultValue={contactRef.current[item.name]} // Use ref for value
             onValueChange={(v) => handleInputChange(item.name, v)}
             onClear={() => handleInputChange(item.name, "")}
             startContent={<item.icon className="text-xl text-default-400" />}
@@ -124,6 +215,7 @@ export default function ContactRightCard() {
           size="md"
           color="default"
           variant="flat"
+          // color="primary"
           isLoading={loading}
           onPress={handleSave}
           isIconOnly
@@ -135,7 +227,7 @@ export default function ContactRightCard() {
         <div className="mb-12 mt-2 text-default-400 md:flex hidden">
           {l?.service_contact_title}
         </div>
-        <div className="w-full flex flex-col justify-center items-center 2xl:py-32">
+        <div className="w-full flex flex-col justify-center items-center 2xl:py-32 ">
           <M />
         </div>
       </ScrollShadow>
