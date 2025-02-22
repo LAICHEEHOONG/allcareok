@@ -10,6 +10,7 @@ import Description_ from "@/components/ADPage/Description_";
 import AreaTitle from "@/components/ADPage/AreaTitle";
 import Report from "@/components/ADPage/Report";
 import Views_ from "@/components/ADPage/Views_";
+import Contact_ from "@/components/ADPage/Contact_";
 
 // Enable Incremental Static Regeneration (ISR) to update pages periodically
 export const revalidate = 60; // Revalidate every 60 seconds
@@ -102,6 +103,7 @@ export default async function ADPage({ params }) {
                 service_type={dic?.service_type}
                 service_type_description={dic?.service_type_description}
               />
+              <Contact_ contact={contact} />
               <Description_
                 description={description}
                 show_more={dic?.ad_page?.show_more}

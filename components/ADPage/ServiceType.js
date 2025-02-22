@@ -34,7 +34,7 @@ export default function ServiceType({
         const match = itemMap.get(serv);
         return match ? (
           <div key={serv} className="flex items-center gap-2">
-            <match.icon className="!w-6 !h-6 m-4" />
+            <match.icon className="!w-6 !h-6 m-4 text-gray-600" />
             <div className="text-left">
               <div className="w-full max-w-[300px] x950l:max-w-[500px]">
                 <div className="text-lg font-medium truncate tracking-wide">
