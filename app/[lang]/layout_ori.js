@@ -28,12 +28,12 @@ export async function generateStaticParams() {
 
 export default async function RootLayout({ children, params }) {
   const resolvedParams = params instanceof Promise ? await params : params;
-  const lang = resolvedParams?.lang || "en";
+  const lang = resolvedParams?.lang || "en"; // Fallback to 'en' if lang is undefined
 
   return (
     <html lang={lang}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased w-full flex justify-center sm:p-2 sm:pr-6 sm:pl-6`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased  w-full flex justify-center sm:p-2 sm:pr-6 sm:pl-6 `}
       >
         <div className="w-full x1880l:max-w-[2140px] x1640l:max-w-[1780px] x1128l:max-w-[1420px] x950l:max-w-[1090px] max-w-[710px]">
           <AllProvider>
