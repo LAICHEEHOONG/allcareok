@@ -46,7 +46,7 @@ export default function Description_({ description, show_more, show_less }) {
           </Button>
         </div>
       )}
-      <Divider />
+      {/* <Divider /> */}
     </Fade>
   );
 }

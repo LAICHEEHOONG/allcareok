@@ -11,6 +11,9 @@ import AreaTitle from "@/components/ADPage/AreaTitle";
 import Report from "@/components/ADPage/Report";
 import Views_ from "@/components/ADPage/Views_";
 import Contact_ from "@/components/ADPage/Contact_";
+import Map_ from "@/components/ADPage/Map_";
+import Youtube_ from "@/components/ADPage/Youtube_";
+
 
 // Enable Incremental Static Regeneration (ISR) to update pages periodically
 export const revalidate = 60; // Revalidate every 60 seconds
@@ -32,7 +35,7 @@ async function getUserData(userId) {
 
 // Main page component
 export default async function ADPage({ params }) {
-//   const { slug, lang } = params; // Destructure params for clarity
+  //   const { slug, lang } = params; // Destructure params for clarity
   const slug = (await params).slug;
   const lang = (await params).lang;
   const dic = await getDictionary(lang);
@@ -116,6 +119,14 @@ export default async function ADPage({ params }) {
             <Report report_btn={dic?.ad_page?.report_btn} />
           </div>
         </div>
+        <div className="flex justify-between items-center">
+          <div className="w-1/2">
+            <Map_ area={area} />
+          </div>
+          <div className="w-1/2">
+            <Youtube_ youtube={youtube} />
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -138,9 +149,9 @@ export async function generateStaticParams() {
 
 // Optional: Metadata for SEO (Next.js 15 supports this in Server Components)
 export async function generateMetadata({ params }) {
-//   const { slug } = params;
-const slug = (await params).slug;
-const lang = (await params).lang;
+  //   const { slug } = params;
+  const slug = (await params).slug;
+  const lang = (await params).lang;
   const adResult = await getAdsByIds([slug]);
   if (!adResult.success || !adResult.data?.length) {
     return { title: "Ad Not Found" };
