@@ -11,38 +11,28 @@ import AreaTitle from "@/components/ADPage/AreaTitle";
 import Report from "@/components/ADPage/Report";
 import Views_ from "@/components/ADPage/Views_";
 
-// Enable Incremental Static Regeneration (ISR) to update pages periodically
-export const revalidate = 60; // Revalidate every 60 seconds
-
-// Fetch user data with proper error handling
+// Define the function outside the main component for better scope management
 async function getUserData(userId) {
   try {
     const result = await getUserById({ userId });
-    if (!result.success) {
+    if (result.success) {
+      return result.data;
+    } else {
       console.error("Failed to fetch user data:", result.message);
-      return null;
+      return null; // Return null instead of false for clarity
     }
-    return result.data;
   } catch (error) {
-    console.error("Error fetching user data:", error.message);
-    return null;
+    console.error("An error occurred while fetching user data:", error);
+    return null; // Return null if there's an error
   }
 }
 
-// Main page component
 export default async function ADPage({ params }) {
-//   const { slug, lang } = params; // Destructure params for clarity
   const slug = (await params).slug;
   const lang = (await params).lang;
   const dic = await getDictionary(lang);
 
-  // Fetch ad data
-  const adResult = await getAdsByIds([slug]);
-  if (!adResult.success || !adResult.data?.length) {
-    // Handle case where ad is not found
-    return <div>Ad not found</div>;
-  }
-
+  const AD = await getAdsByIds([slug]); // Deduped fetch
   const {
     _id,
     user,
@@ -56,16 +46,16 @@ export default async function ADPage({ params }) {
     reviewStatus,
     views,
     createdAt,
-  } = adResult.data[0];
+  } = AD.data[0];
 
-  // Fetch user data
+  // Directly use the promise within the component
   const userData = await getUserData(user);
+  // const userData = await (getUserData(user));
 
-  // Generate readable area title
   const areaTitle = Object.values(area)
-    .filter(Boolean) // Remove falsy values (null, undefined, empty string)
+    .filter((value) => value) // Remove empty values
     .reverse()
-    .join(" · "); // Use a middle dot for separation
+    .join(" · "); // Join with middle dot
 
   return (
     <div className="flex justify-center">
@@ -91,6 +81,9 @@ export default async function ADPage({ params }) {
                   />
                 </div>
               ) : (
+                // <div className="text-base font-medium tracking-wider">
+                //   {`${views} ${dic?.ad_page?.views}`}
+                // </div>
                 <Views_ views={views} views_text={dic?.ad_page?.views} />
               )}
               <UserInfo
@@ -109,7 +102,7 @@ export default async function ADPage({ params }) {
               />
             </div>
           </div>
-          <div className="h-screen w-full x950l:max-w-[375px] max-w-[300px] flex gap-5 flex-col justify-start items-center sticky top-20">
+          <div className="h-screen w-full x950l:max-w-[375px] max-w-[300px]  flex gap-5 flex-col justify-start items-center sticky top-20">
             <ADCarousel photo={photo} />
             <Report report_btn={dic?.ad_page?.report_btn} />
           </div>
@@ -119,33 +112,17 @@ export default async function ADPage({ params }) {
   );
 }
 
-// Generate static params for pre-rendering
+// Return a list of `params` to populate the [slug] dynamic segment
+
 export async function generateStaticParams() {
   try {
-    const adResult = await findAllAds();
-    if (!adResult.success) {
-      console.error("Failed to fetch ads:", adResult.message);
-      return [];
+    const Allad = await findAllAds();
+    if (Allad.success) {
+      return Allad.data.map((ad) => ({ slug: ad._id }));
+    } else {
+      console.log(Allad.message);
     }
-    return adResult.data.map((ad) => ({ slug: ad._id.toString() })); // Ensure slug is a string
   } catch (error) {
-    console.error("Error generating static params:", error.message);
-    return [];
+    console.log(error);
   }
-}
-
-// Optional: Metadata for SEO (Next.js 15 supports this in Server Components)
-export async function generateMetadata({ params }) {
-//   const { slug } = params;
-const slug = (await params).slug;
-const lang = (await params).lang;
-  const adResult = await getAdsByIds([slug]);
-  if (!adResult.success || !adResult.data?.length) {
-    return { title: "Ad Not Found" };
-  }
-  const { title, description } = adResult.data[0];
-  return {
-    title: `${title} | Allcareok`,
-    description: description.slice(0, 160), // Limit to 160 chars for SEO
-  };
 }
