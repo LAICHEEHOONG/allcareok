@@ -1,9 +1,10 @@
 "use client";
 import { Fade } from "react-awesome-reveal";
+import { Divider } from "@heroui/react";
 
 export default function Youtube_({ youtube }) {
   return (
-    <Fade>
+    <Fade className="flex flex-col  space-y-4 py-4">
       <div className="w-full max-w-[1200px]">
         <div className="relative overflow-hidden rounded-lg w-full aspect-video">
           <iframe
@@ -18,6 +19,7 @@ export default function Youtube_({ youtube }) {
           ></iframe>
         </div>
       </div>
+      {/* <Divider /> */}
     </Fade>
   );
 }

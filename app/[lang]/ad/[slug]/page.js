@@ -101,8 +101,7 @@ export default async function ADPage({ params }) {
                 userData={userData}
                 shared_by={dic?.ad_page?.shared_by}
               />
-              <ServiceType
-                service={service}
+              <ServiceType service={service}
                 service_type={dic?.service_type}
                 service_type_description={dic?.service_type_description}
               />
@@ -112,21 +111,16 @@ export default async function ADPage({ params }) {
                 show_more={dic?.ad_page?.show_more}
                 show_less={dic?.ad_page?.show_less}
               />
+               <Youtube_ youtube={youtube} />
             </div>
           </div>
-          <div className="h-screen w-full x950l:max-w-[375px] max-w-[300px] flex gap-5 flex-col justify-start items-center sticky top-20">
+          <div className="h-full w-full x950l:max-w-[375px] max-w-[300px] flex gap-5 flex-col justify-start items-center sticky top-20">
             <ADCarousel photo={photo} />
             <Report report_btn={dic?.ad_page?.report_btn} />
           </div>
         </div>
-        <div className="flex justify-between items-center">
-          <div className="w-1/2">
-            <Map_ area={area} />
-          </div>
-          <div className="w-1/2">
-            <Youtube_ youtube={youtube} />
-          </div>
-        </div>
+        <Map_ area={area} />
+   
       </div>
     </div>
   );
