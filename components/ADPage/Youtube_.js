@@ -1,8 +1,12 @@
 "use client";
 import { Fade } from "react-awesome-reveal";
-import { Divider } from "@heroui/react";
+import { useState, useEffect } from "react";
 
 export default function Youtube_({ youtube }) {
+  const [youtubeId, setYoutubeId] = useState("");
+  useEffect(() => {
+    setYoutubeId(extractVideoId(youtube));
+  }, [youtube]);
   return (
     <Fade className="flex flex-col  space-y-4 py-4">
       <div className="w-full max-w-[1200px]">
@@ -10,7 +14,7 @@ export default function Youtube_({ youtube }) {
           <iframe
             className="absolute inset-0 w-full h-full rounded-lg"
             src={`https://www.youtube.com/embed/${
-              youtube ? youtube : "MXTbTpzs7tU"
+              youtubeId ? youtubeId : "MXTbTpzs7tU"
             }`}
             title="YouTube video"
             frameBorder="0"
@@ -23,3 +27,14 @@ export default function Youtube_({ youtube }) {
     </Fade>
   );
 }
+
+const extractVideoId = (url) => {
+  if (typeof url !== "string" || !url.trim()) {
+    return ""; // Return an empty string if the URL is invalid
+  }
+
+  const regex =
+    /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|shorts\/)|youtu\.be\/)([^?&]+)/;
+  const match = url.match(regex);
+  return match ? match[1] : "";
+};

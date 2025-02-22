@@ -15,7 +15,7 @@ export default function YoutubeRightCard() {
   const ad = useSelector((state) => state.editor?.ad);
   const l = useSelector((state) => state.auth?.lang?.listing_editor_card);
   const router = useRouter();
-  const pathName = usePathname();
+  // const pathName = usePathname();
   // const currentLocale = pathName.split("/")[1] || "en";
   const youtube = useSelector((state) => state.editor.ad?.youtube);
   const [loading, setLoading] = useState(false);

@@ -19,8 +19,16 @@ export default function Map_({ area }) {
             </div>
           </div>
         )}
-        <Card className="w-full max-w-[1120px] my-12">
+        <Card className="w-full max-w-[1120px] my-6">
           <CardBody className="p-0">
+          <GoogleMapsEmbed
+                className="bg-black"
+                apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
+                width="100%"
+                height="480"
+                mode="place"
+                q={`${area?.town},${area?.city},${area?.state},${area?.country}`}
+              />
             {/* <div className="sm:hidden">
               <GoogleMapsEmbed
                 className="bg-black"
@@ -31,7 +39,7 @@ export default function Map_({ area }) {
                 q={`${area?.town},${area?.city},${area?.state},${area?.country}`}
               />
             </div> */}
-            <div className="md:block hidden">
+            {/* <div className="md:block hidden">
               <GoogleMapsEmbed
                 className="bg-black"
                 apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
@@ -40,7 +48,7 @@ export default function Map_({ area }) {
                 mode="place"
                 q={`${area?.town},${area?.city},${area?.state},${area?.country}`}
               />
-            </div>
+            </div> */}
           </CardBody>
         </Card>
       </div>
