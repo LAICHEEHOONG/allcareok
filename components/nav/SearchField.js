@@ -17,7 +17,7 @@ export default function SearchField({ navigation }) {
   const serviceType = useSelector((state) => state.search?.serviceType);
   const area = useSelector((state) => state.search?.area);
   const language = useSelector((state) => state.auth?.language);
-  const [beforeInputValue, setBeforeInputValue] = useState(area || '')
+  const [beforeInputValue, setBeforeInputValue] = useState(area || "");
 
   let list = useAsyncList({
     async load({ filterText }) {
@@ -45,7 +45,7 @@ export default function SearchField({ navigation }) {
   });
 
   const handleSearch = () => {
-    setBeforeInputValue(inputValue)
+    setBeforeInputValue(inputValue);
     router.push(
       `/${language ? language : "en"}?area=${
         inputValue ? inputValue : ""
@@ -80,7 +80,9 @@ export default function SearchField({ navigation }) {
         }}
         onKeyDown={(e) => {
           if (e.key === "Enter" && inputValue.trim() !== "") {
-            handleSearch();
+            if (beforeInputValue !== area) {
+              handleSearch();
+            }
           }
         }}
       >
