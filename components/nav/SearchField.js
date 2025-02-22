@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSearchValue } from "@/redux/features/search/searchSlice";
 import { getAreaSuggestions } from "@/lib/action/adAction";
 import { useState, useEffect } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function SearchField({ navigation }) {
   const [inputValue, setInputValue] = useState("");
@@ -16,15 +16,8 @@ export default function SearchField({ navigation }) {
   const router = useRouter();
   const serviceType = useSelector((state) => state.search?.serviceType);
   const area = useSelector((state) => state.search?.area);
-  const pathName = usePathname();
   const language = useSelector((state) => state.auth?.language);
-
-  const redirectedPathName = (locale) => {
-    if (!pathName) return "/";
-    const segments = pathName.split("/");
-    segments[1] = locale;
-    return segments.join("/");
-  };
+  const [beforeInputValue, setBeforeInputValue] = useState(area || '')
 
   let list = useAsyncList({
     async load({ filterText }) {
@@ -52,13 +45,7 @@ export default function SearchField({ navigation }) {
   });
 
   const handleSearch = () => {
-    // router.push(`?area=${inputValue}&serviceType=${serviceType}`);
-    // router.push(
-    //   `${redirectedPathName(language)}?area=${
-    //     inputValue ? inputValue : ""
-    //   }&serviceType=${serviceType ? serviceType : ""}`,
-    //   { scroll: false }
-    // );
+    setBeforeInputValue(inputValue)
     router.push(
       `/${language ? language : "en"}?area=${
         inputValue ? inputValue : ""
@@ -109,6 +96,7 @@ export default function SearchField({ navigation }) {
         aria-label="Search Icon"
         radius="full"
         onPress={handleSearch}
+        isDisabled={beforeInputValue !== area ? false : true}
       >
         <SearchIcon className="w-5" />
       </Button>
