@@ -9,6 +9,7 @@ import ServiceType from "@/components/ADPage/ServiceType";
 import Description_ from "@/components/ADPage/Description_";
 import AreaTitle from "@/components/ADPage/AreaTitle";
 import Report from "@/components/ADPage/Report";
+import Views_ from "@/components/ADPage/Views_";
 
 // Define the function outside the main component for better scope management
 async function getUserData(userId) {
@@ -80,17 +81,25 @@ export default async function ADPage({ params }) {
                   />
                 </div>
               ) : (
-                <div className="text-base font-medium tracking-wider">
-                  {`${views} ${dic?.ad_page?.views}`}
-                </div>
+                // <div className="text-base font-medium tracking-wider">
+                //   {`${views} ${dic?.ad_page?.views}`}
+                // </div>
+                <Views_ views={views} views_text={dic?.ad_page?.views} />
               )}
-              <UserInfo userData={userData} shared_by={dic?.ad_page?.shared_by} />
+              <UserInfo
+                userData={userData}
+                shared_by={dic?.ad_page?.shared_by}
+              />
               <ServiceType
                 service={service}
                 service_type={dic?.service_type}
                 service_type_description={dic?.service_type_description}
               />
-              <Description_ description={description} show_more={dic?.ad_page?.show_more} show_less={dic?.ad_page?.show_less} />
+              <Description_
+                description={description}
+                show_more={dic?.ad_page?.show_more}
+                show_less={dic?.ad_page?.show_less}
+              />
             </div>
           </div>
           <div className="h-screen w-full x950l:max-w-[375px] max-w-[300px]  flex gap-5 flex-col justify-start items-center sticky top-20">
