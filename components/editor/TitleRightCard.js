@@ -57,7 +57,7 @@ export default function TitleRightCard() {
   };
 
   return (
-    <div className="w-full flex flex-col justify-center items-center h-full">
+    <div className="w-full flex flex-col justify-center items-center h-full p-2">
       <Input
         isRequired
         labelPlacement="outside"
