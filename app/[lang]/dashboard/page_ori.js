@@ -1,5 +1,7 @@
 "use client";
-import { Button } from "@heroui/react";
+import {
+  Button,
+} from "@heroui/react";
 import AddIcon from "@mui/icons-material/Add";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useRouter, usePathname } from "next/navigation";
@@ -27,8 +29,8 @@ export default function Dashboard() {
   const ads = useSelector((state) => state.editor.ads);
   const l = useSelector((state) => state.auth.lang?.listing_editor_card);
   const adsId = useSelector((state) => state.editor.adsId);
-  const role = useSelector((state) => state.auth?.role);
-  const [addBtnLoading, setAddBtnLoading] = useState(false);
+  const role = useSelector(state => state.auth?.role);
+  const [addBtnLoading, setAddBtnLoading] = useState(false)
 
   useEffect(() => {
     dispatch(setAdsID(""));
@@ -47,13 +49,13 @@ export default function Dashboard() {
   };
 
   const handleAddAD = () => {
-    setAddBtnLoading(true);
+    setAddBtnLoading(true)
     if (role === "admin") {
       // Admins can add unlimited ads
       router.push(`/${currentLocale}/editor`);
       return;
     }
-
+  
     if (ads?.length >= 10) {
       // Show warning for non-admins when ad limit is reached
       toast.warning(`${l?.ad_limit}`, {
@@ -63,17 +65,20 @@ export default function Dashboard() {
           onClick: () => console.log("Add Ad Limit Reached"),
         },
       });
-      setAddBtnLoading(false);
+      setAddBtnLoading(false)
     } else {
+
       router.push(`/${currentLocale}/editor`);
     }
+
   };
+  
 
   return (
     <div className="w-full flex justify-center">
-      <div className="w-full max-w-[2300px]">
+      <div className="w-full max-w-[2300px] p-2 pt-2 sm:p-10 sm:pt-2 x1440l:p-20 x1440l:pt-2">
         <div className="w-full">
-          <div className="flex justify-between mb-10 md:p-0 p-2">
+          <div className="flex justify-between mb-10">
             <div className="flex gap-4">
               <Button
                 isIconOnly
@@ -107,7 +112,7 @@ export default function Dashboard() {
           <Masonry
             breakpointCols={breakpointColumnsObj}
             className="my-masonry-grid"
-            columnClassName="my-masonry-grid_column flex flex-col items-center sm:items-start"
+            columnClassName="my-masonry-grid_column"
           >
             {ads.map((item) => (
               <AD

@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import Masonry from "react-masonry-css";
 import { showToast } from "@/lib/frontend_tool";
-import AD from "@/components/Home/AD";
+import AD from "@/components/Home/AD_ori";
 import { getAdsByIds } from "@/lib/action/adAction";
 import { setWishlistPage } from "@/redux/features/wishlist/wishlistSlice";
 
