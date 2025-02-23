@@ -122,15 +122,15 @@ export default function YoutubeRightCard() {
         </Button>
       </div>
       <div
-        className=" w-full max-w-[1600px]"
+        className=" w-full max-w-[1600px] h-5/6"
         // hideScrollBar={true}
       >
-        <div className=" mt-2 text-default-400 md:flex hidden">
+        <div className=" mt-2 text-default-400 md:flex hidden ">
           {l?.youtube_description}
         </div>
-        <div className=" h-full flex flex-col justify-center items-center md:p-2 md:pt-10 pb-10">
+        <div className=" flex flex-col justify-center items-center p-2 h-3/4">
           <div className="w-full flex justify-center items-center ">
-            <div className="w-full flex flex-col justify-center items-center md:py-20 lg:py-14">
+            <div className="w-full flex flex-col justify-center items-center ">
               <Input
                 isClearable
                 className="max-w-96 mb-6"
@@ -151,7 +151,7 @@ export default function YoutubeRightCard() {
                 }
               />
 
-              <div className="w-full max-w-[1200px]">
+              <div className="w-full max-w-[800px] ">
                 <div className="relative overflow-hidden rounded-lg w-full aspect-video">
                   <iframe
                     className="absolute inset-0 w-full h-full rounded-lg"
