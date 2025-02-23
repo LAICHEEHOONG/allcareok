@@ -1,12 +1,10 @@
 "use client";
 import IosShareIcon from "@mui/icons-material/IosShare";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { useEffect, useState } from "react";
 import { getAdsByIds } from "@/lib/action/adAction";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  setCountry,
   setSession,
   setStatus,
   userInfo,
@@ -18,75 +16,32 @@ import {
   setBlockServiceBtn,
 } from "@/redux/features/editor/editorSlice";
 import { useSession } from "next-auth/react";
-import { signUp, updateUserCountry } from "@/lib/action/userAction";
-import {
-  findUserAds,
-  // getAdsFast,
-  getPaginatedAds,
-} from "@/lib/action/adAction";
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
-import axios from "axios";
-import Masonry from "react-masonry-css";
-import { useInView } from "react-intersection-observer";
-import { setADS, setPagination, emptyADS } from "@/redux/features/ad/adSlice";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import {
-  Image,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Avatar,
-  Chip,
-  Button,
-} from "@heroui/react";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
-import { LogoSpinner } from "@/components/LogoSpinner";
-import { ADFooter } from "@/components/Home/ADFooter";
-import { countryFlag } from "@/components/countryFlag";
+import { signUp } from "@/lib/action/userAction";
+import { findUserAds } from "@/lib/action/adAction";
+import { useRouter } from "next/navigation";
+import { Button } from "@heroui/react";
+
 import { updateUserWishlist } from "@/lib/action/userAction";
 import { signIn } from "next-auth/react";
-import { toast } from "sonner";
-import {
-  setSearchValue,
-  setServiceType,
-} from "@/redux/features/search/searchSlice";
-import { Fade } from "react-awesome-reveal";
 
-export default function ShareAD({ slug, title, share_dic, wishlist_dic }) {
+import { Fade } from "react-awesome-reveal";
+import { addEmailToUserView } from "@/lib/action/adAction";
+
+export default function ShareAD({ slug, title, share_dic, wishlist_dic, _id }) {
   const router = useRouter();
   const [adData, setAdData] = useState({});
-
   const { data: session, status } = useSession();
   const dispatch = useDispatch();
-  const pathName = usePathname();
   const user = useSelector((state) => state.auth?._id);
-  const country = useSelector((state) => state.auth?.country);
+  const email = useSelector((state) => state.auth?.email);
   const wishlist = useSelector((state) => state.auth?.wishlist);
   const [loadingAd, setLoadingAd] = useState({}); // Track loading state per adId
-  const searchParams = useSearchParams();
-  const area = searchParams.get("area");
-  const serviceType = searchParams.get("serviceType");
-  // const language = useSelector((state) => state.auth?.language);
-  // const l = useSelector((state) => state.auth?.lang?.ad_page);
 
   useEffect(() => {
     const signUpUser = async (user) => {
       try {
         dispatch(setBlockServiceBtn(true));
         const res = await signUp(user);
-        // if (language !== res.language) {
-        //   router.push(
-        //     `${redirectedPathName(res.language)}?area=${
-        //       area ? area : ""
-        //     }&serviceType=${serviceType ? serviceType : ""}`,
-        //     { scroll: false }
-        //   );
-        // }
 
         dispatch(userInfo(res));
       } catch (err) {
@@ -192,12 +147,12 @@ export default function ShareAD({ slug, title, share_dic, wishlist_dic }) {
     console.log(adData);
   }, [adData]);
 
-  const handleBack = () => {
-    // router.push("/");
-    router.push(`/${language}`, {
-      scroll: false,
-    });
-  };
+  // const handleBack = () => {
+  //   // router.push("/");
+  //   router.push(`/${language}`, {
+  //     scroll: false,
+  //   });
+  // };
   const sharePage = async () => {
     const pageUrl = window.location.href; // Get current URL
     console.log(pageUrl);
@@ -218,27 +173,29 @@ export default function ShareAD({ slug, title, share_dic, wishlist_dic }) {
       alert("Link copied to clipboard!");
     }
   };
+
+  useEffect(() => {
+    const addEmailToUserView_ = async (email, _id) => {
+      try {
+        const res = await addEmailToUserView({ email, _id });
+        console.log(res.message);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    if (email && _id) {
+      addEmailToUserView_(email, _id);
+    }
+  }, [email, _id]);
   return (
     <Fade triggerOnce>
       <div className="flex justify-between pt-2 pb-6">
-        {/* <Button
-        // className="hidden sm:flex"
-        startContent={<ArrowBackIosIcon />}
-        variant="light"
-        radius="full"
-        onPress={handleBack}
-      > */}
-        {/* {(language === "en" || !language) && "Home"}
-        {language === "zh" && "主页"} */}
-        {/* {translations[language]?.home ? translations[language]?.home : "Home"} */}
-        {/* </Button> */}
         <div className="font-semibold  md:text-lg lg:text-2xl tracking-wider capitalize">
           {title}
         </div>
 
         <div className="flex justify-center items-center">
           <Button
-            // className="hidden x950l:flex"
             startContent={<IosShareIcon />}
             variant="light"
             radius="full"
@@ -246,14 +203,10 @@ export default function ShareAD({ slug, title, share_dic, wishlist_dic }) {
             size="sm"
           >
             {share_dic}
-            {/* {lang === "en" && "Share"}
-          {lang === "zh" && "分享"} */}
           </Button>
 
           <Button
-            // className="hidden x950l:flex"
             startContent={<FavoriteBorderIcon />}
-            // variant="light"
             radius="full"
             aria-label="Like"
             color={isInWishlist(slug) ? "danger" : "default"}
@@ -263,7 +216,6 @@ export default function ShareAD({ slug, title, share_dic, wishlist_dic }) {
             size="sm"
           >
             {wishlist_dic}
-            {/* Wishlist */}
           </Button>
         </div>
       </div>

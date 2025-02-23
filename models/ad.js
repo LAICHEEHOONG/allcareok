@@ -33,15 +33,17 @@ const adSchema = new mongoose.Schema(
     },
     photo: [photoSchema], // Array of photos
     verification: [photoSchema], // Array of verification photos
-    title: { 
-      type: String, 
-      default: "Your service title", 
-      trim: true // Remove leading/trailing whitespace
+    title: {
+      type: String,
+      default: "Your service title",
+      trim: true, // Remove leading/trailing whitespace
     },
-    service: [{ 
-      type: String, 
-      trim: true // Trim each entry in the array
-    }],
+    service: [
+      {
+        type: String,
+        trim: true, // Trim each entry in the array
+      },
+    ],
     area: {
       country: { type: String, default: "" },
       state: { type: String, default: "" },
@@ -62,14 +64,14 @@ const adSchema = new mongoose.Schema(
       line: { type: String, default: "" },
       website: { type: String, default: "" },
     },
-    youtube: { 
-      type: String, 
-      default: "" // For storing YouTube links or embed codes
+    youtube: {
+      type: String,
+      default: "", // For storing YouTube links or embed codes
     },
-    description: { 
-      type: String, 
-      default: "Enter your service description here", 
-      trim: true // Remove leading/trailing whitespace
+    description: {
+      type: String,
+      default: "Enter your service description here",
+      trim: true, // Remove leading/trailing whitespace
     },
     reviewPayment: reviewPaymentSchema, // Payment details for review
     reviewStatus: {
@@ -78,9 +80,9 @@ const adSchema = new mongoose.Schema(
       default: "Payment Pending",
     },
     planPayment: reviewPaymentSchema, // Payment details for plans (e.g., topRanking)
-    topRanking: { 
-      type: Date, 
-      default: null // Date until which the ad is top-ranked
+    topRanking: {
+      type: Date,
+      default: null, // Date until which the ad is top-ranked
     },
     reports: [
       {
@@ -88,13 +90,18 @@ const adSchema = new mongoose.Schema(
         ref: "Report", // Reference to a Report model
       },
     ],
-    block: { 
-      type: Boolean, 
-      default: false // Indicates if the ad is blocked
+    block: {
+      type: Boolean,
+      default: false, // Indicates if the ad is blocked
     },
-    views: { 
-      type: Number, 
-      default: 0 // Tracks ad views
+    views: {
+      type: Number,
+      default: 0, // Tracks ad views
+    },
+    userView: {
+      type: [String],
+      trim: true,
+      default: []
     },
   },
   {

@@ -7,7 +7,7 @@ import { getUserById } from "@/lib/action/userAction";
 import UserInfo from "@/components/ADPage/UserInfo";
 import ServiceType from "@/components/ADPage/ServiceType";
 import Description_ from "@/components/ADPage/Description_";
-import AreaTitle from "@/components/ADPage/AreaTitle";
+// import AreaTitle from "@/components/ADPage/AreaTitle";
 import Report from "@/components/ADPage/Report";
 import Views_ from "@/components/ADPage/Views_";
 import Contact_ from "@/components/ADPage/Contact_";
@@ -78,6 +78,7 @@ export default async function ADPage({ params }) {
           title={title}
           share_dic={dic?.ad_page?.share}
           wishlist_dic={dic?.ad_page?.wishlist}
+          _id={_id}
         />
         <div className="flex">
           <div className="w-full">
