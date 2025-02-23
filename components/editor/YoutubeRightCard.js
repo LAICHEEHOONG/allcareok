@@ -128,7 +128,7 @@ export default function YoutubeRightCard() {
         <div className=" mt-2 text-default-400 md:flex hidden ">
           {l?.youtube_description}
         </div>
-        <div className=" flex flex-col justify-center items-center p-2 h-3/4">
+        <div className=" flex flex-col justify-center items-center mt-2 p-2 h-3/4">
           <div className="w-full flex justify-center items-center ">
             <div className="w-full flex flex-col justify-center items-center ">
               <Input
@@ -151,7 +151,7 @@ export default function YoutubeRightCard() {
                 }
               />
 
-              <div className="w-full max-w-[800px] ">
+              <div className="w-full max-w-[600px] ">
                 <div className="relative overflow-hidden rounded-lg w-full aspect-video">
                   <iframe
                     className="absolute inset-0 w-full h-full rounded-lg"
