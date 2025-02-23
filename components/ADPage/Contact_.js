@@ -27,7 +27,7 @@ export default function Contact_({ contact }) {
   );
 
   return (
-    <Fade className="flex flex-col py-4">
+    <Fade triggerOnce className="flex flex-col py-4">
       <Divider />
       <div className="flex flex-col">
         {filteredServices.map((item) => {

@@ -12,7 +12,7 @@ import { Fade } from "react-awesome-reveal";
 
 export default function Verify({ views, views_dic, verify_dic }) {
   return (
-    <Fade>
+    <Fade triggerOnce>
       <Card className="w-full max-w-[394px] x950l:max-w-[650px] mt-2">
         <CardBody>
           <div className="flex justify-between items-center">

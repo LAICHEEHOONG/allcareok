@@ -12,7 +12,7 @@ export default function Map_({ area }) {
         {(area?.town || area?.city || area?.state || area?.country) && (
           <div className="flex justify-start items-center gap-1 w-full ">
             <LocationOnIcon className="w-5 h-5 mt-1" />
-            <div className="text-xl capitalize font-medium w-full max-w-[240px] truncate mt-1 tracking-widest ">
+            <div className="text-xl capitalize font-medium w-full max-w-[370px] truncate mt-1 tracking-widest ">
               {`${area?.town || area?.city || area?.state || ""}${
                 area?.town || area?.city || area?.state ? ", " : ""
               }${area?.country}`}

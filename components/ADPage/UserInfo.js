@@ -67,7 +67,7 @@ export default function UserInfo({ userData, shared_by }) {
   if (!adUser) return null; // Early return if there's no user data
 
   return (
-    <Fade className="flex flex-col items-start space-y-4 py-4 ">
+    <Fade triggerOnce className="flex flex-col items-start space-y-4 py-4 ">
       <div className="flex items-center space-x-4">
         <Avatar name={adUser.name} src={adUser.image} className="w-12 h-12" />
         <div className="text-left">

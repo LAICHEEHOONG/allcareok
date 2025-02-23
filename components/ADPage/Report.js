@@ -5,7 +5,7 @@ import FlagIcon from "@mui/icons-material/Flag";
 
 export default function Report({ report_btn }) {
   return (
-    <Fade>
+    <Fade triggerOnce>
       <Button
         startContent={<FlagIcon />}
         variant="light"

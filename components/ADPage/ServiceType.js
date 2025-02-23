@@ -29,7 +29,7 @@ export default function ServiceType({
   }, [carouselItems]);
 
   return (
-    <Fade className="flex flex-col gap-4 space-y-4 py-4 ">
+    <Fade triggerOnce className="flex flex-col gap-4 space-y-4 py-4 ">
       <Divider /> 
       {service?.map((serv) => {
         const match = itemMap.get(serv);

@@ -219,7 +219,7 @@ export default function ShareAD({ slug, title, share_dic, wishlist_dic }) {
     }
   };
   return (
-    <Fade>
+    <Fade triggerOnce>
       <div className="flex justify-between pt-2 pb-6">
         {/* <Button
         // className="hidden sm:flex"

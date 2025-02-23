@@ -2,7 +2,7 @@
 import { Fade } from "react-awesome-reveal";
 
 export default function AreaTitle({areaTitle}) {
-    return <Fade>
+    return <Fade triggerOnce>
         {areaTitle}
     </Fade>
 }
