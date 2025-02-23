@@ -105,23 +105,24 @@ export default function DeleteRightCard() {
         </div>
       </div>
       <div className="flex flex-col justify-center items-center gap-5 -mt-6 md:-mt-16 h-[84vh]">
-        <div className=" ">
-          <>
-            <div className=" flex justify-between items-center max-w-[400px] mx-auto">
-              <Button
-                radius="full"
-                color="danger"
-                variant="flat"
-                aria-label="Back button"
-                startContent={<DeleteForeverIcon />}
-                onPress={onOpen}
-              >
-                {l?.delete_btn}
-              </Button>
-              {/* <div className="font-bold text-base md:text-lg pr-2">
+        <ScrollShadow className="w-[400px] py-5 h-[480px] flex flex-col gap-2 items-center ">
+          <div className=" ">
+            <>
+              <div className=" flex justify-between items-center max-w-[400px] mx-auto">
+                <Button
+                  radius="full"
+                  color="danger"
+                  variant="flat"
+                  aria-label="Back button"
+                  startContent={<DeleteForeverIcon />}
+                  onPress={onOpen}
+                >
+                  {l?.delete_btn}
+                </Button>
+                {/* <div className="font-bold text-base md:text-lg pr-2">
                   {ad?.title}
                 </div> */}
-              {/* <div>
+                {/* <div>
                   <Button
                     className="hidden md:flex"
                     radius="full"
@@ -145,58 +146,67 @@ export default function DeleteRightCard() {
                     <DeleteForeverIcon />
                   </Button>
                 </div> */}
-            </div>
+              </div>
 
-            <Modal
-              isOpen={isOpen}
-              onOpenChange={onOpenChange}
-              backdrop={"blur"}
-            >
-              <ModalContent>
-                {(onClose) => (
-                  <>
-                    <ModalBody>
-                      <div className="flex flex-col justify-center items-center gap-5 mt-10">
-                        <Image
-                          alt="Card service demo"
-                          className="object-cover rounded-xl"
-                          src={
-                            ad?.photo?.length > 0
-                              ? ad.photo[0].url
-                              : "/images/handyman_2.webp"
-                          }
-                          width={200}
-                        />
-                        <div className="text-xl font-semibold text-center m-5">
-                          {l?.delete_modal_title
-                            ? l.delete_modal_title
-                            : "Permanently delete this service?"}
+              <Modal
+                isOpen={isOpen}
+                onOpenChange={onOpenChange}
+                backdrop={"blur"}
+              >
+                <ModalContent>
+                  {(onClose) => (
+                    <>
+                      <ModalBody>
+                        <div className="flex flex-col justify-center items-center gap-5 mt-10">
+                          <Image
+                            alt="Card service demo"
+                            className="object-cover rounded-xl"
+                            src={
+                              ad?.photo?.length > 0
+                                ? ad.photo[0].url
+                                : "/images/plumber.png"
+                            }
+                            width={200}
+                          />
+                          <div className="text-xl font-semibold text-center m-5">
+                            {l?.delete_modal_title
+                              ? l.delete_modal_title
+                              : "Permanently delete this service?"}
+                          </div>
                         </div>
-                      </div>
-                    </ModalBody>
-                    <ModalFooter className="flex flex-col">
-                      <Button
-                        color="danger"
-                        onPress={async () => {
-                          await deleteAd_();
-                          onClose();
-                          router.push(`/${currentLocale}/dashboard`);
-                        }}
-                        isLoading={loading}
-                      >
-                        {l?.delete_modal_btn ? l.delete_modal_btn : "Delete"}
-                      </Button>
-                      <Button color="primary" variant="light" onPress={onClose}>
-                        {l?.cancel ? l.cancel : "Cancel"}
-                      </Button>
-                    </ModalFooter>
-                  </>
-                )}
-              </ModalContent>
-            </Modal>
-          </>
-        </div>
-        <div
+                      </ModalBody>
+                      <ModalFooter className="flex flex-col">
+                        <Button
+                          color="danger"
+                          onPress={async () => {
+                            await deleteAd_();
+                            onClose();
+                            router.push(`/${currentLocale}/dashboard`);
+                          }}
+                          isLoading={loading}
+                        >
+                          {l?.delete_modal_btn ? l.delete_modal_btn : "Delete"}
+                        </Button>
+                        <Button
+                          color="primary"
+                          variant="light"
+                          onPress={onClose}
+                        >
+                          {l?.cancel ? l.cancel : "Cancel"}
+                        </Button>
+                      </ModalFooter>
+                    </>
+                  )}
+                </ModalContent>
+              </Modal>
+            </>
+          </div>
+          <div className="w-[320px]">
+            <AD ad={ad} />
+          </div>
+        </ScrollShadow>
+
+        {/* <div
           className={` w-[333px] h-[400px]
                      x550l:w-[280px] x550l:h-[340px]
                      sm:w-[300px] sm:h-[360px]
@@ -207,7 +217,7 @@ export default function DeleteRightCard() {
                      x1980l:w-[333px] x1980l:h-[400px]`}
         >
           <AD ad={ad} />
-        </div>
+        </div> */}
       </div>
       {/* <ScrollShadow className="h-[92vh]" hideScrollBar={true}>
         <div className="text-default-400 mt-6 mb-6 ">
@@ -431,16 +441,16 @@ export default function DeleteRightCard() {
 //             /> */}
 //             <Image
 //               alt={"ads delete"}
-//               className={`object-cover rounded-xl 
+//               className={`object-cover rounded-xl
 //                      w-[333px] h-[400px]
 //                      x550l:w-[280px] x550l:h-[340px]
 //                      sm:w-[300px] sm:h-[360px]
 //                      md:w-[400px] md:h-[450px]
-//                      x950l:w-[300px] x950l:h-[360px] 
-//                      x1128l:w-[240px] x1128l:h-[300px]  
-//                      xl:w-[280px] xl:h-[340px]  
+//                      x950l:w-[300px] x950l:h-[360px]
+//                      x1128l:w-[240px] x1128l:h-[300px]
+//                      xl:w-[280px] xl:h-[340px]
 //                      x1470l:w-[333px] x1470l:h-[400px]
-//                      x1640l:w-[300px] x1640l:h-[360px]   
+//                      x1640l:w-[300px] x1640l:h-[360px]
 //                      x1980l:w-[333px] x1980l:h-[400px]
 //                       `}
 //               radius="lg"
