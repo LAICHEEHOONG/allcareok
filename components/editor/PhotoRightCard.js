@@ -36,9 +36,8 @@ const breakpointColumnsObj = {
   1739: 4,
   1639: 3,
   1128: 2,
-  949:1
+  949: 1,
   // 1050: 1,
-
 };
 
 const breakpointColumnsObj_2 = {
@@ -82,240 +81,262 @@ export default function PhotoRightCard() {
       prev.filter((item) => item.preview !== previewToRemove)
     );
   };
+  const items = [
+    {
+      label: l?.handyman ? l.handyman : "Handyman",
+      image: "/images/handyman_poster.png",
+    },
+    {
+      label: l?.cleaning ? l.cleaning : "Cleaning",
+      image: "/images/cleaning_poster.jpeg",
+    },
+    {
+      label: l?.childcare ? l.childcare : "Childcare",
+      image: "/images/childcare_2.webp",
+    },
+    {
+      label: l?.hourly_maid ? l.hourly_maid : "Hourly Maid",
+      image: "/images/cleaning_1.webp",
+    },
+    {
+      label: l?.plumber ? l.plumber : "Plumber",
+      image: "/images/plumber.png",
+    },
+  ];
 
-  const M = () => {
-    const items = [
-      {
-        label: l?.handyman ? l.handyman : "Handyman",
-        image: "/images/handyman_poster.png",
-      },
-      {
-        label: l?.cleaning ? l.cleaning : "Cleaning",
-        image: "/images/cleaning_poster.jpeg",
-      },
-      {
-        label: l?.childcare ? l.childcare : "Childcare",
-        image: "/images/childcare_2.webp",
-      },
-      {
-        label: l?.hourly_maid ? l.hourly_maid : "Hourly Maid",
-        image: "/images/cleaning_1.webp",
-      },
-      {
-        label: l?.plumber ? l.plumber : "Plumber",
-        image: "/images/plumber.png",
-      },
-    ];
+  // const M = () => {
+  //   const items = [
+  //     {
+  //       label: l?.handyman ? l.handyman : "Handyman",
+  //       image: "/images/handyman_poster.png",
+  //     },
+  //     {
+  //       label: l?.cleaning ? l.cleaning : "Cleaning",
+  //       image: "/images/cleaning_poster.jpeg",
+  //     },
+  //     {
+  //       label: l?.childcare ? l.childcare : "Childcare",
+  //       image: "/images/childcare_2.webp",
+  //     },
+  //     {
+  //       label: l?.hourly_maid ? l.hourly_maid : "Hourly Maid",
+  //       image: "/images/cleaning_1.webp",
+  //     },
+  //     {
+  //       label: l?.plumber ? l.plumber : "Plumber",
+  //       image: "/images/plumber.png",
+  //     },
+  //   ];
 
-    return (
-      <div className="x950l:p-10 x950l:pt-0 lg:p-1 ">
-        {manageAd?._id ? (
-          <div>
-            <div className="flex justify-between mb-7 w-full">
-              <Button
-                isIconOnly
-                radius="full"
-                color="default"
-                variant="flat"
-                aria-label="Back button"
-                onPress={() => {
-                  setManageAd({});
-                }}
-              >
-                <RiGalleryView2 className="text-2xl" />
-              </Button>
-              <div className="flex gap-3">
-                {manageAd._id !== ad.photo[0]?._id && (
-                  <Button
-                    radius="full"
-                    color="default"
-                    variant="flat"
-                    aria-label="Back button"
-                    onPress={() => {
-                      makeCover();
-                    }}
-                    isLoading={loading}
-                  >
-                    {l?.make_cover ? l.make_cover : "Make cover photo"}
-                  </Button>
-                )}
-                <Button
-                  isIconOnly
-                  radius="full"
-                  color="default"
-                  variant="flat"
-                  aria-label="Back button"
-                  onPress={() => {
-                    deletePhoto();
-                  }}
-                  isLoading={loading2}
-                >
-                  <DeleteForeverIcon />
-                </Button>
-              </div>
-            </div>
-            <div className="flex justify-center items-center md:p-10">
-              {/* <Image
-                className="object-cover rounded-xl w-[400px] h-[500px] border-2 border-blue-400"
-                alt="delete photo"
-                src={manageAd.url}
-              /> */}
-                    <Image
-                className="object-cover rounded-xl x950l:w-[400px] x950l:h-[400px] w-[300px] h-[300px]"
-                alt="delete photo"
-                // width={400}
-                // height={400}
-                src={manageAd.url}
-              />
-            </div>
-          </div>
-        ) : (
-          <Masonry
-            breakpointCols={breakpointColumnsObj}
-            className="my-masonry-grid max-w-[1600px]"
-            columnClassName="my-masonry-grid_column "
-          >
-            {(!ad.photo || ad?.photo?.length === 0) &&
-              items.map((item) => (
-                <Fade
-                  key={item.label}
-                  className=" flex flex-col justify-center items-center"
-                >
-                  <h4 className="font-bold text-large m-1">{item.label}</h4>
-                  <Card
-                    isPressable
-                    className="p-2"
-                    onPress={() => setManageAd(item)}
-                    shadow="none"
-                  >
-                    <CardBody className="m-0 p-0">
-                      <div className="relative">
-                        <Image
-                          alt="Card service demo"
-                          className="object-cover rounded-xl"
-                          // className={`object-cover rounded-xl w-[310px] xl:h-[400px] x1128l:h-[350px] sm:h-[400px] 550px:h-[320px] h-[400px]`}
-                          //       className="object-cover rounded-xl
-                          // w-[300px] h-[360px]
-                          // x1128l:w-[240px] x1128l:h-[300px]
-                          // xl:w-[280px] xl:h-[340px]
-                          // x1470l:w-[333px] x1470l:h-[400px]
-                          // x1640l:w-[300px] x1640l:h-[360px]
-                          // x1980l:w-[333px] x1980l:h-[400px]"
-                          src={item.image}
-                          width={300}
-                          height={300}
-                        />
-                      </div>
-                    </CardBody>
-                  </Card>
-                </Fade>
-              ))}
-            {ad?.photo?.length > 0 &&
-              !manageAd?._id &&
-              ad.photo.map((item, i) => (
-                <Fade key={item.url + i} className="flex justify-center">
-                  <Card
-                    isPressable
-                    className="p-2"
-                    onPress={() => setManageAd(item)}
-                    shadow="none"
-                  >
-                    <CardBody className="m-0 p-0">
-                      <div className="relative">
-                        {i === 0 && (
-                          <Chip className="absolute z-40 m-3" color="default">
-                            Cover
-                          </Chip>
-                        )}
+  //   return (
+  // <div className="x950l:p-10 x950l:pt-0 lg:p-1 ">
+  //   {manageAd?._id ? (
+  //     <div>
+  //       <div className="flex justify-between mb-7 w-full">
+  //         <Button
+  //           isIconOnly
+  //           radius="full"
+  //           color="default"
+  //           variant="flat"
+  //           aria-label="Back button"
+  //           onPress={() => {
+  //             setManageAd({});
+  //           }}
+  //         >
+  //           <RiGalleryView2 className="text-2xl" />
+  //         </Button>
+  //         <div className="flex gap-3">
+  //           {manageAd._id !== ad.photo[0]?._id && (
+  //             <Button
+  //               radius="full"
+  //               color="default"
+  //               variant="flat"
+  //               aria-label="Back button"
+  //               onPress={() => {
+  //                 makeCover();
+  //               }}
+  //               isLoading={loading}
+  //             >
+  //               {l?.make_cover ? l.make_cover : "Make cover photo"}
+  //             </Button>
+  //           )}
+  //           <Button
+  //             isIconOnly
+  //             radius="full"
+  //             color="default"
+  //             variant="flat"
+  //             aria-label="Back button"
+  //             onPress={() => {
+  //               deletePhoto();
+  //             }}
+  //             isLoading={loading2}
+  //           >
+  //             <DeleteForeverIcon />
+  //           </Button>
+  //         </div>
+  //       </div>
+  //       <div className="flex justify-center items-center md:p-10">
+  //         {/* <Image
+  //           className="object-cover rounded-xl w-[400px] h-[500px] border-2 border-blue-400"
+  //           alt="delete photo"
+  //           src={manageAd.url}
+  //         /> */}
+  //               <Image
+  //           className="object-cover rounded-xl x950l:w-[400px] x950l:h-[400px] w-[300px] h-[300px]"
+  //           alt="delete photo"
+  //           // width={400}
+  //           // height={400}
+  //           src={manageAd.url}
+  //         />
+  //       </div>
+  //     </div>
+  //   ) : (
+  //     <Masonry
+  //       breakpointCols={breakpointColumnsObj}
+  //       className="my-masonry-grid max-w-[1600px]"
+  //       columnClassName="my-masonry-grid_column "
+  //     >
+  //       {(!ad.photo || ad?.photo?.length === 0) &&
+  //         items.map((item) => (
+  //           <Fade
+  //             key={item.label}
+  //             className=" flex flex-col justify-center items-center"
+  //           >
+  //             <h4 className="font-bold text-large m-1">{item.label}</h4>
+  //             <Card
+  //               isPressable
+  //               className="p-2"
+  //               onPress={() => setManageAd(item)}
+  //               shadow="none"
+  //             >
+  //               <CardBody className="m-0 p-0">
+  //                 <div className="relative">
+  //                   <Image
+  //                     alt="Card service demo"
+  //                     className="object-cover rounded-xl"
+  //                     // className={`object-cover rounded-xl w-[310px] xl:h-[400px] x1128l:h-[350px] sm:h-[400px] 550px:h-[320px] h-[400px]`}
+  //                     //       className="object-cover rounded-xl
+  //                     // w-[300px] h-[360px]
+  //                     // x1128l:w-[240px] x1128l:h-[300px]
+  //                     // xl:w-[280px] xl:h-[340px]
+  //                     // x1470l:w-[333px] x1470l:h-[400px]
+  //                     // x1640l:w-[300px] x1640l:h-[360px]
+  //                     // x1980l:w-[333px] x1980l:h-[400px]"
+  //                     src={item.image}
+  //                     width={300}
+  //                     height={300}
+  //                   />
+  //                 </div>
+  //               </CardBody>
+  //             </Card>
+  //           </Fade>
+  //         ))}
+  //       {ad?.photo?.length > 0 &&
+  //         !manageAd?._id &&
+  //         ad.photo.map((item, i) => (
+  //           <Fade key={item.url + i} className="flex justify-center">
+  //             <Card
+  //               isPressable
+  //               className="p-2"
+  //               onPress={() => setManageAd(item)}
+  //               shadow="none"
+  //             >
+  //               <CardBody className="m-0 p-0">
+  //                 <div className="relative">
+  //                   {i === 0 && (
+  //                     <Chip className="absolute z-40 m-3" color="default">
+  //                       Cover
+  //                     </Chip>
+  //                   )}
 
-                        <Image
-                          alt={"ads image"}
-                          className="object-cover rounded-xl "
+  //                   <Image
+  //                     alt={"ads image"}
+  //                     className="object-cover rounded-xl "
 
-                          // className={`object-cover rounded-xl w-[310px] xl:h-[400px] x1128l:h-[350px] sm:h-[400px] 550px:h-[320px] h-[400px]`}
-                          // className="object-cover rounded-xl
-                          // w-[300px] h-[360px]
-                          // x1128l:w-[240px] x1128l:h-[300px]
-                          // xl:w-[280px] xl:h-[340px]
-                          // x1470l:w-[333px] x1470l:h-[400px]
-                          // x1640l:w-[300px] x1640l:h-[360px]
-                          // x1980l:w-[333px] x1980l:h-[400px]"
-                          radius="lg"
-                          src={item.url}
-                          width={300}
-                          height={300}
-                        />
-                      </div>
-                    </CardBody>
-                  </Card>
-                </Fade>
-              ))}
-          </Masonry>
-        )}
-      </div>
-    );
-  };
+  //                     // className={`object-cover rounded-xl w-[310px] xl:h-[400px] x1128l:h-[350px] sm:h-[400px] 550px:h-[320px] h-[400px]`}
+  //                     // className="object-cover rounded-xl
+  //                     // w-[300px] h-[360px]
+  //                     // x1128l:w-[240px] x1128l:h-[300px]
+  //                     // xl:w-[280px] xl:h-[340px]
+  //                     // x1470l:w-[333px] x1470l:h-[400px]
+  //                     // x1640l:w-[300px] x1640l:h-[360px]
+  //                     // x1980l:w-[333px] x1980l:h-[400px]"
+  //                     radius="lg"
+  //                     src={item.url}
+  //                     width={300}
+  //                     height={300}
+  //                   />
+  //                 </div>
+  //               </CardBody>
+  //             </Card>
+  //           </Fade>
+  //         ))}
+  //     </Masonry>
+  //   )}
+  // </div>
+  //   );
+  // };
 
-  const M2 = () => {
-    return (
-      <Masonry
-        breakpointCols={breakpointColumnsObj_2}
-        className="my-masonry-grid"
-        columnClassName="my-masonry-grid_column"
-      >
-        {photos.map((item) => (
-          <div key={item.preview} className="relative">
-            <Image
-              alt="Card background"
-              className="object-cover rounded-xl md:h-[240px] sm:h-[220px] h-[200px] "
-              src={item.preview}
-              width={240}
-              // height={240}
-            />
+  // const M2 = () => {
+  //   return (
+  //     <Masonry
+  //       breakpointCols={breakpointColumnsObj_2}
+  //       className="my-masonry-grid"
+  //       columnClassName="my-masonry-grid_column"
+  //     >
+  //       {photos.map((item) => (
+  //         <div key={item.preview} className="relative">
+  //           <Image
+  //             alt="Card background"
+  //             className="object-cover rounded-xl md:h-[240px] sm:h-[220px] h-[200px] "
+  //             src={item.preview}
+  //             width={240}
+  //             // height={240}
+  //           />
 
-            {loading && (
-              <>
-                {/* Dark transparent overlay */}
-                <div className="absolute inset-0 bg-black bg-opacity-50 rounded-xl z-40"></div>
-                {/* Centered spinner */}
-                <div className="absolute inset-0 flex items-center justify-center z-40">
-                  <Spinner color="default" />
-                </div>
-              </>
-            )}
+  //           {loading && (
+  //             <>
+  //               {/* Dark transparent overlay */}
+  //               <div className="absolute inset-0 bg-black bg-opacity-50 rounded-xl z-40"></div>
+  //               {/* Centered spinner */}
+  //               <div className="absolute inset-0 flex items-center justify-center z-40">
+  //                 <Spinner color="default" />
+  //               </div>
+  //             </>
+  //           )}
 
-            <Button
-              isIconOnly
-              color="primary"
-              aria-label="delete image"
-              radius="full"
-              size="sm"
-              className="absolute top-2 right-2 z-30"
-              variant="shadow"
-              onPress={() => filterOurPreview(item.preview)}
-            >
-              <DeleteForeverIcon sx={{ fontSize: 22 }} />
-            </Button>
-          </div>
-        ))}
-        <input
-          id="fileInput"
-          type="file"
-          multiple
-          accept="image/*"
-          className="hidden"
-          onChange={(e) => {
-            const files = Array.from(e.target.files).map((file) =>
-              Object.assign(file, {
-                preview: URL.createObjectURL(file),
-              })
-            );
-            setPhotos((prev) => [...prev, ...files]);
-          }}
-        />
-      </Masonry>
-    );
-  };
+  //           <Button
+  //             isIconOnly
+  //             color="primary"
+  //             aria-label="delete image"
+  //             radius="full"
+  //             size="sm"
+  //             className="absolute top-2 right-2 z-30"
+  //             variant="shadow"
+  //             onPress={() => filterOurPreview(item.preview)}
+  //           >
+  //             <DeleteForeverIcon sx={{ fontSize: 22 }} />
+  //           </Button>
+  //         </div>
+  //       ))}
+  //       <input
+  //         id="fileInput"
+  //         type="file"
+  //         multiple
+  //         accept="image/*"
+  //         className="hidden"
+  //         onChange={(e) => {
+  //           const files = Array.from(e.target.files).map((file) =>
+  //             Object.assign(file, {
+  //               preview: URL.createObjectURL(file),
+  //             })
+  //           );
+  //           setPhotos((prev) => [...prev, ...files]);
+  //         }}
+  //       />
+  //     </Masonry>
+  //   );
+  // };
 
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     if (acceptedFiles?.length) {
@@ -658,7 +679,64 @@ export default function PhotoRightCard() {
                       </div>
                     ) : (
                       <ScrollShadow className="max-h-[400px]">
-                        <M2 />
+                        {/* <M2 /> */}
+                        <Masonry
+                          breakpointCols={breakpointColumnsObj_2}
+                          className="my-masonry-grid"
+                          columnClassName="my-masonry-grid_column"
+                        >
+                          {photos.map((item) => (
+                            <div key={item.preview} className="relative">
+                              <Image
+                                alt="Card background"
+                                className="object-cover rounded-xl md:h-[240px] sm:h-[220px] h-[200px] "
+                                src={item.preview}
+                                width={240}
+                                // height={240}
+                              />
+
+                              {loading && (
+                                <>
+                                  {/* Dark transparent overlay */}
+                                  <div className="absolute inset-0 bg-black bg-opacity-50 rounded-xl z-40"></div>
+                                  {/* Centered spinner */}
+                                  <div className="absolute inset-0 flex items-center justify-center z-40">
+                                    <Spinner color="default" />
+                                  </div>
+                                </>
+                              )}
+
+                              <Button
+                                isIconOnly
+                                color="primary"
+                                aria-label="delete image"
+                                radius="full"
+                                size="sm"
+                                className="absolute top-2 right-2 z-30"
+                                variant="shadow"
+                                onPress={() => filterOurPreview(item.preview)}
+                              >
+                                <DeleteForeverIcon sx={{ fontSize: 22 }} />
+                              </Button>
+                            </div>
+                          ))}
+                          <input
+                            id="fileInput"
+                            type="file"
+                            multiple
+                            accept="image/*"
+                            className="hidden"
+                            onChange={(e) => {
+                              const files = Array.from(e.target.files).map(
+                                (file) =>
+                                  Object.assign(file, {
+                                    preview: URL.createObjectURL(file),
+                                  })
+                              );
+                              setPhotos((prev) => [...prev, ...files]);
+                            }}
+                          />
+                        </Masonry>
                       </ScrollShadow>
                     )}
                   </ModalBody>
@@ -708,9 +786,153 @@ export default function PhotoRightCard() {
           {l?.photo_upload_description
             ? l.photo_upload_description
             : `Upload your service poster with contact info, service details, and
-        coverage area. Include real case photos to assist customers.`}
+          coverage area. Include real case photos to assist customers.`}
         </div>
-        <M />
+        {/* <M /> */}
+        <div className="x950l:p-10 x950l:pt-0 lg:p-1 ">
+          {manageAd?._id ? (
+            <div>
+              <div className="flex justify-between mb-7 w-full">
+                <Button
+                  isIconOnly
+                  radius="full"
+                  color="default"
+                  variant="flat"
+                  aria-label="Back button"
+                  onPress={() => {
+                    setManageAd({});
+                  }}
+                >
+                  <RiGalleryView2 className="text-2xl" />
+                </Button>
+                <div className="flex gap-3">
+                  {manageAd._id !== ad.photo[0]?._id && (
+                    <Button
+                      radius="full"
+                      color="default"
+                      variant="flat"
+                      aria-label="Back button"
+                      onPress={() => {
+                        makeCover();
+                      }}
+                      isLoading={loading}
+                    >
+                      {l?.make_cover ? l.make_cover : "Make cover photo"}
+                    </Button>
+                  )}
+                  <Button
+                    isIconOnly
+                    radius="full"
+                    color="default"
+                    variant="flat"
+                    aria-label="Back button"
+                    onPress={() => {
+                      deletePhoto();
+                    }}
+                    isLoading={loading2}
+                  >
+                    <DeleteForeverIcon />
+                  </Button>
+                </div>
+              </div>
+              <div className="flex justify-center items-center md:p-10">
+                {/* <Image
+                  className="object-cover rounded-xl w-[400px] h-[500px] border-2 border-blue-400"
+                  alt="delete photo"
+                  src={manageAd.url}
+                /> */}
+                <Image
+                  className="object-cover rounded-xl x950l:w-[400px] x950l:h-[400px] w-[300px] h-[300px]"
+                  alt="delete photo"
+                  // width={400}
+                  // height={400}
+                  src={manageAd.url}
+                />
+              </div>
+            </div>
+          ) : (
+            <Masonry
+              breakpointCols={breakpointColumnsObj}
+              className="my-masonry-grid max-w-[1600px]"
+              columnClassName="my-masonry-grid_column "
+            >
+              {(!ad.photo || ad?.photo?.length === 0) &&
+                items.map((item) => (
+                  <Fade
+                    key={item.label}
+                    className=" flex flex-col justify-center items-center"
+                  >
+                    <h4 className="font-bold text-large m-1">{item.label}</h4>
+                    <Card
+                      isPressable
+                      className="p-2"
+                      onPress={() => setManageAd(item)}
+                      shadow="none"
+                    >
+                      <CardBody className="m-0 p-0">
+                        <div className="relative">
+                          <Image
+                            alt="Card service demo"
+                            className="object-cover rounded-xl"
+                            // className={`object-cover rounded-xl w-[310px] xl:h-[400px] x1128l:h-[350px] sm:h-[400px] 550px:h-[320px] h-[400px]`}
+                            //       className="object-cover rounded-xl
+                            // w-[300px] h-[360px]
+                            // x1128l:w-[240px] x1128l:h-[300px]
+                            // xl:w-[280px] xl:h-[340px]
+                            // x1470l:w-[333px] x1470l:h-[400px]
+                            // x1640l:w-[300px] x1640l:h-[360px]
+                            // x1980l:w-[333px] x1980l:h-[400px]"
+                            src={item.image}
+                            width={300}
+                            height={300}
+                          />
+                        </div>
+                      </CardBody>
+                    </Card>
+                  </Fade>
+                ))}
+              {ad?.photo?.length > 0 &&
+                !manageAd?._id &&
+                ad.photo.map((item, i) => (
+                  <Fade key={item.url + i} className="flex justify-center">
+                    <Card
+                      isPressable
+                      className="p-2"
+                      onPress={() => setManageAd(item)}
+                      shadow="none"
+                    >
+                      <CardBody className="m-0 p-0">
+                        <div className="relative">
+                          {i === 0 && (
+                            <Chip className="absolute z-40 m-3" color="default">
+                              Cover
+                            </Chip>
+                          )}
+
+                          <Image
+                            alt={"ads image"}
+                            className="object-cover rounded-xl "
+                            // className={`object-cover rounded-xl w-[310px] xl:h-[400px] x1128l:h-[350px] sm:h-[400px] 550px:h-[320px] h-[400px]`}
+                            // className="object-cover rounded-xl
+                            // w-[300px] h-[360px]
+                            // x1128l:w-[240px] x1128l:h-[300px]
+                            // xl:w-[280px] xl:h-[340px]
+                            // x1470l:w-[333px] x1470l:h-[400px]
+                            // x1640l:w-[300px] x1640l:h-[360px]
+                            // x1980l:w-[333px] x1980l:h-[400px]"
+                            radius="lg"
+                            src={item.url}
+                            width={300}
+                            height={300}
+                          />
+                        </div>
+                      </CardBody>
+                    </Card>
+                  </Fade>
+                ))}
+            </Masonry>
+          )}
+        </div>
       </ScrollShadow>
     </div>
   );
