@@ -3,6 +3,7 @@ import { Button } from "@heroui/react";
 import { useRouter, usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
 import { signIn } from "next-auth/react";
+import { Fade } from "react-awesome-reveal";
 
 export default function NavShareBtn({ share, myService }) {
   const session = useSelector((state) => state.auth.session);
@@ -17,6 +18,7 @@ export default function NavShareBtn({ share, myService }) {
       signIn();
       return;
     }
+
     if (ads.length === 0) {
       router.push(`/${currentLocale}/overview`);
     } else {
@@ -25,18 +27,18 @@ export default function NavShareBtn({ share, myService }) {
   };
 
   return (
-    <Button
-      className="hidden lg:flex"
-      color="default"
-      variant="light"
-      radius="full"
-      size="lg"
-      onPress={changeRouter}
-      // onPress={() => changeRouter()}
-      isDisabled={blockServiceBtn}
-      // isLoading={blockServiceBtn}
-    >
-      {ads.length === 0 ? share : myService}
-    </Button>
+    <Fade delay={5000}>
+      <Button
+        className="hidden lg:flex"
+        color="default"
+        variant="light"
+        radius="full"
+        size="lg"
+        onPress={changeRouter}
+        isDisabled={blockServiceBtn}
+      >
+        {ads.length === 0 ? share : myService}
+      </Button>
+    </Fade>
   );
 }

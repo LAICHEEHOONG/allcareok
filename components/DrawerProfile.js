@@ -24,6 +24,7 @@ import { signOut, signIn } from "next-auth/react";
 import { useSelector } from "react-redux";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import { useRouter, usePathname } from "next/navigation";
+import { Fade } from "react-awesome-reveal";
 
 export function DrawerProfile({
   children,
@@ -97,6 +98,7 @@ export function DrawerProfile({
           </DrawerHeader>
 
           <Divider className="mb-4" />
+          <Fade delay={500}>
           <Card
             className="m-2 mb-4"
             isPressable={!blockServiceBtn}
@@ -124,6 +126,7 @@ export function DrawerProfile({
               </div>
             </CardBody>
           </Card>
+          </Fade>
           <DrawerFooter>
             <Button
               color="default"
