@@ -33,10 +33,12 @@ import { Fade } from "react-awesome-reveal";
 
 const breakpointColumnsObj = {
   default: 5,
-  1639: 4,
-  1177: 3,
-  1100: 2,
-  850: 1,
+  1739: 4,
+  1639: 3,
+  1128: 2,
+  949:1
+  // 1050: 1,
+
 };
 
 const breakpointColumnsObj_2 = {
@@ -153,25 +155,18 @@ export default function PhotoRightCard() {
               </div>
             </div>
             <div className="flex justify-center items-center md:p-10">
-              <Image
-                className="object-cover rounded-xl w-[400px] h-[500px]"
+              {/* <Image
+                className="object-cover rounded-xl w-[400px] h-[500px] border-2 border-blue-400"
                 alt="delete photo"
                 src={manageAd.url}
-              />
-              {/* <Image
-                alt="Card service demo"
-                className="object-cover rounded-xl hidden md:flex"
-                src={manageAd.url}
-                width={600}
-                height={600}
-              />
-              <Image
-                alt="Card service demo"
-                className="object-cover rounded-xl flex md:hidden"
-                src={manageAd.url}
-                width={400}
-                height={400}
               /> */}
+                    <Image
+                className="object-cover rounded-xl x950l:w-[400px] x950l:h-[400px] w-[300px] h-[300px]"
+                alt="delete photo"
+                // width={400}
+                // height={400}
+                src={manageAd.url}
+              />
             </div>
           </div>
         ) : (
@@ -197,16 +192,18 @@ export default function PhotoRightCard() {
                       <div className="relative">
                         <Image
                           alt="Card service demo"
-                          className="object-cover rounded-xl               
-                    w-[300px] h-[360px] 
-                    x1128l:w-[240px] x1128l:h-[300px]  
-                    xl:w-[280px] xl:h-[340px]  
-                    x1470l:w-[333px] x1470l:h-[400px]
-                    x1640l:w-[300px] x1640l:h-[360px]   
-                    x1980l:w-[333px] x1980l:h-[400px]"
+                          className="object-cover rounded-xl"
+                          // className={`object-cover rounded-xl w-[310px] xl:h-[400px] x1128l:h-[350px] sm:h-[400px] 550px:h-[320px] h-[400px]`}
+                          //       className="object-cover rounded-xl
+                          // w-[300px] h-[360px]
+                          // x1128l:w-[240px] x1128l:h-[300px]
+                          // xl:w-[280px] xl:h-[340px]
+                          // x1470l:w-[333px] x1470l:h-[400px]
+                          // x1640l:w-[300px] x1640l:h-[360px]
+                          // x1980l:w-[333px] x1980l:h-[400px]"
                           src={item.image}
-                          // width={550}
-                          // height={400}
+                          width={300}
+                          height={300}
                         />
                       </div>
                     </CardBody>
@@ -233,15 +230,20 @@ export default function PhotoRightCard() {
 
                         <Image
                           alt={"ads image"}
-                          className="object-cover rounded-xl               
-                          w-[300px] h-[360px] 
-                          x1128l:w-[240px] x1128l:h-[300px]  
-                          xl:w-[280px] xl:h-[340px]  
-                          x1470l:w-[333px] x1470l:h-[400px]
-                          x1640l:w-[300px] x1640l:h-[360px]   
-                          x1980l:w-[333px] x1980l:h-[400px]"
+                          className="object-cover rounded-xl "
+
+                          // className={`object-cover rounded-xl w-[310px] xl:h-[400px] x1128l:h-[350px] sm:h-[400px] 550px:h-[320px] h-[400px]`}
+                          // className="object-cover rounded-xl
+                          // w-[300px] h-[360px]
+                          // x1128l:w-[240px] x1128l:h-[300px]
+                          // xl:w-[280px] xl:h-[340px]
+                          // x1470l:w-[333px] x1470l:h-[400px]
+                          // x1640l:w-[300px] x1640l:h-[360px]
+                          // x1980l:w-[333px] x1980l:h-[400px]"
                           radius="lg"
                           src={item.url}
+                          width={300}
+                          height={300}
                         />
                       </div>
                     </CardBody>
@@ -265,7 +267,7 @@ export default function PhotoRightCard() {
           <div key={item.preview} className="relative">
             <Image
               alt="Card background"
-              className="object-cover rounded-xl md:h-[240px] sm:h-[220px] h-[200px]"
+              className="object-cover rounded-xl md:h-[240px] sm:h-[220px] h-[200px] "
               src={item.preview}
               width={240}
               // height={240}
@@ -355,52 +357,6 @@ export default function PhotoRightCard() {
       console.log(error);
     }
   };
-
-  // const submitToCloudinary = async () => {
-  //   try {
-  //     setLoading(true);
-  //     if (photos.length > 0) {
-  //       const URL = process.env.NEXT_PUBLIC_CLOUDINARY_URL;
-  //       const uploadPhoto = async (photo) => {
-  //         const photoFormData = new FormData();
-  //         photoFormData.append("file", photo);
-  //         photoFormData.append("upload_preset", "model_preset");
-  //         const response = await fetch(URL, {
-  //           method: "POST",
-  //           body: photoFormData,
-  //         });
-
-  //         return response.json();
-  //       };
-
-  //       const responses = await Promise.all(
-  //         limitPhotos.map((photo) => uploadPhoto(photo))
-  //       );
-
-  //       let photo_ = responses.map((item) => ({
-  //         url: item.secure_url,
-  //         publicId: item.public_id,
-  //       }));
-
-  //       // await submitToMongoDB({ photo, user, adsId });
-  //       let { user, photo, service, area, contact, youtube } = ad;
-  //       photo = [...photo, ...photo_];
-  //       await submitToMongoDB({
-  //         user,
-  //         photo,
-  //         service,
-  //         area,
-  //         contact,
-  //         youtube,
-  //         adsId,
-  //       });
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
 
   const compressImage = (
     file,
@@ -617,9 +573,6 @@ export default function PhotoRightCard() {
             variant="flat"
             radius="full"
             isIconOnly
-            // size={'lg'}
-            // startContent={<FilterIcon />}
-            // onPress={onOpen}
             onPress={handlePress}
           >
             <FilterIcon fontSize={"small"} />
