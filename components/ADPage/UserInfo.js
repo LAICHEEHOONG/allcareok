@@ -77,7 +77,7 @@ export default function UserInfo({ userData, shared_by }) {
           <div className="text-sm text-gray-600 tracking-wide">{`Joined ${createdUntilNow}`}</div>
         </div>
       </div>
-      <Divider className="w-full" />
+      {/* <Divider className="w-full" /> */}
     </Fade>
   );
 }

@@ -30,6 +30,7 @@ export default function ServiceType({
 
   return (
     <Fade className="flex flex-col gap-4 space-y-4 py-4 ">
+      <Divider /> 
       {service?.map((serv) => {
         const match = itemMap.get(serv);
         return match ? (

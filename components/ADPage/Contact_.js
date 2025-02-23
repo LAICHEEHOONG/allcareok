@@ -27,27 +27,24 @@ export default function Contact_({ contact }) {
   );
 
   return (
-    <Fade>
-      <div className="flex flex-col mb-4">
+    <Fade className="flex flex-col py-4">
+      <Divider />
+      <div className="flex flex-col">
         {filteredServices.map((item) => {
           const Icon = item.icon; // Get the icon component
           const contactValue = contact[item.name]; // Get the actual value from props
 
           return (
-            <div
-              key={item.name}
-              className="flex items-center space-x-3"
-            >
+            <div key={item.name} className="flex items-center space-x-3 ">
               <Icon className="!w-6 !h-6 m-4 text-gray-600" />
-              {/* <div className="flex-shrink-0 text-gray-600 !w-6 !h-6 m-4 border-1 justify-center items-center">
-                <Icon /> 
-              </div> */}
-              <div className="text-gray-800 break-all">{contactValue}</div>
+
+              <div className="text-gray-800 break-all truncate">
+                {contactValue}
+              </div>
             </div>
           );
         })}
       </div>
-      {/* <Divider /> */}
     </Fade>
   );
 }
