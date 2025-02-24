@@ -7,6 +7,11 @@ const photoSchema = new Schema({
   publicId: { type: String },
 });
 
+const reportSchema = new Schema({
+  title: { type: String },
+  email: { type: String },
+});
+
 // Schema for payment details (used in reviewPayment and planPayment)
 const reviewPaymentSchema = new Schema({
   sessionId: { type: String },
@@ -84,12 +89,7 @@ const adSchema = new mongoose.Schema(
       type: Date,
       default: null, // Date until which the ad is top-ranked
     },
-    reports: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Report", // Reference to a Report model
-      },
-    ],
+    report: [reportSchema],
     block: {
       type: Boolean,
       default: false, // Indicates if the ad is blocked
@@ -101,7 +101,7 @@ const adSchema = new mongoose.Schema(
     userView: {
       type: [String],
       trim: true,
-      default: []
+      default: [],
     },
   },
   {
@@ -109,57 +109,19 @@ const adSchema = new mongoose.Schema(
   }
 );
 
-adSchema.index({ "area.country": 1, "area.state": 1, "area.city": 1, "area.town": 1 });
+adSchema.index({
+  "area.country": 1,
+  "area.state": 1,
+  "area.city": 1,
+  "area.town": 1,
+});
 adSchema.index({ service: 1 });
-// Index for efficient location-based queries
-// adSchema.index({
-//   "area.country": 1,
-//   "area.state": 1,
-//   "area.city": 1,
-//   "area.town": 1,
-// });
 
 // Optional additional indexes for frequent queries (uncomment if needed)
-// adSchema.index({ block: 1, topRanking: -1 }); // For queries filtering by block and sorting by topRanking
-// adSchema.index({ reviewStatus: 1 }); // For filtering by review status
+adSchema.index({ block: 1, topRanking: -1 }); // For queries filtering by block and sorting by topRanking
+adSchema.index({ reviewStatus: 1 }); // For filtering by review status
 
 // Create or retrieve the AD model
 const AD = mongoose.models.AD || mongoose.model("AD", adSchema);
-
-/*
- * MongoDB Atlas Search Index Configuration
- * This is NOT part of the Mongoose schema. Set it up in MongoDB Atlas:
- * 1. Go to your Atlas Cluster > "Search" tab > Select the "ads" collection.
- * 2. Click "Create Search Index" > Use JSON Editor.
- * 3. Paste the following configuration and name it "default" (or update adAction.js to match your index name):
- * {
- *   "mappings": {
- *     "dynamic": true,
- *     "fields": {
- *       "title": { "type": "string" },
- *       "service": { "type": "string" },
- *       "description": { "type": "string" },
- *       "contact": {
- *         "type": "document",
- *         "fields": {
- *           "phone": { "type": "string" },
- *           "email": { "type": "string" },
- *           "whatsapp": { "type": "string" },
- *           "telegram": { "type": "string" },
- *           "facebook": { "type": "string" },
- *           "tiktok": { "type": "string" },
- *           "instagram": { "type": "string" },
- *           "youtube": { "type": "string" },
- *           "x": { "type": "string" },
- *           "wechat": { "type": "string" },
- *           "line": { "type": "string" },
- *           "website": { "type": "string" }
- *         }
- *       }
- *     }
- *   }
- * }
- * 4. Save and wait for the index to build.
- */
 
 export default AD;

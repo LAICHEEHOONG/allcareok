@@ -15,11 +15,14 @@ import {
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { signIn } from "next-auth/react";
+import { addReportToAd } from "@/lib/action/adAction";
+// reportAd({ adId, reportedEmail, reportTitle })
 
-export default function Report({ report_btn }) {
+export default function Report({ report_btn, _id }) {
   const email = useSelector((state) => state.auth?.email);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [checked, setChecked] = useState("");
+  const [loading, setLoading] = useState(false);
   const reportTitile = [
     `It’s inaccurate or incorrect`,
     `It’s not a real advertisement`,
@@ -29,15 +32,45 @@ export default function Report({ report_btn }) {
   ];
 
   const handleCheck = (title) => {
-    if(title === checked && title !== '') {
-      setChecked('')
+    if (title === checked && title !== "") {
+      setChecked("");
     } else {
       setChecked(title);
     }
   };
 
-  const handleReport = () => {
+  // const reportAd_ = async (adId, reportedEmail, reportTitle, onClose) => {
+  //   try {
+  //     setLoading(true);
+  //     const res = await reportAd({ adId, reportedEmail, reportTitle });
+  //     console.log(res);
+  //   } catch (error) {
+  //     console.log(error);
+  //   } finally {
+  //     setLoading(false);
+  //     onClose();
+  //   }
+  // };
+
+  const addReportToAd_ = async (_id, email, title, fn) => {
+    try {
+      setLoading(true)
+      const res = await addReportToAd({_id, email, title})
+      console.log(res)
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setLoading(false)
+      fn()
+    }
+  };
+
+  const handleReport = (onClose) => {
     if (email) {
+      if (email && checked && _id) {
+        addReportToAd_(_id, email, checked, onClose)
+        // reportAd_(adId, email, checked, onClose);
+      }
       console.log("report");
     } else {
       signIn();
@@ -103,7 +136,8 @@ export default function Report({ report_btn }) {
                   color="primary"
                   radius="full"
                   isDisabled={checked ? false : true}
-                  onPress={handleReport}
+                  onPress={() => handleReport(onClose)}
+                  isLoading={loading}
                 >
                   Report
                 </Button>

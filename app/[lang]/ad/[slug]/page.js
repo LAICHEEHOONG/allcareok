@@ -83,9 +83,6 @@ export default async function ADPage({ params }) {
         <div className="flex">
           <div className="w-full">
             <div className="flex flex-col w-full max-w-[650px] pr-4">
-              {/* <div className="text-sm x950l:text-base tracking-widest capitalize">
-                <AreaTitle areaTitle={areaTitle} />
-              </div> */}
               {reviewStatus === "Approved" ? (
                 <div className="pt-4 pb-4">
                   <Verify
@@ -124,7 +121,7 @@ export default async function ADPage({ params }) {
           </div>
           <div className="h-full w-full x950l:max-w-[375px] max-w-[300px] flex gap-5 flex-col justify-start items-center sticky top-20">
             <ADCarousel photo={photo} />
-            <Report report_btn={dic?.ad_page?.report_btn} />
+            <Report report_btn={dic?.ad_page?.report_btn} _id={_id} />
           </div>
         </div>
         <Map_ area={area} />
