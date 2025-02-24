@@ -49,6 +49,8 @@ import {
   setServiceType,
 } from "@/redux/features/search/searchSlice";
 
+import Link from "next/link";
+
 async function getCountryFromIP() {
   try {
     const response = await axios.get("https://ipapi.co/json/");
@@ -321,7 +323,7 @@ export default function HomeClient({
                     </CardHeader>
 
                     <CardBody className="overflow-visible p-3 pb-1 pt-0">
-                      <Carousel
+                      {/* <Carousel
                         className="w-full cursor-pointer"
                         opts={{ align: "start", loop: true, dragFree: false }}
                         onClick={() => handleImageClick(ad._id)}
@@ -340,8 +342,31 @@ export default function HomeClient({
                             </CarouselItem>
                           ))}
                         </CarouselContent>
-                      </Carousel>
-
+                      </Carousel> */}
+                      <Link
+                        href={`/${language ? language : "en"}/ad/${ad._id}`}
+                        target="_blank"
+                      >
+                        <Carousel
+                          className="w-full cursor-pointer"
+                          opts={{ align: "start", loop: true, dragFree: false }}
+                        >
+                          <CarouselContent>
+                            {ad.photo.map((item, idx) => (
+                              <CarouselItem
+                                key={idx}
+                                className="flex justify-center items-start"
+                              >
+                                <Image
+                                  className="object-cover rounded-xl w-[310px] xl:h-[400px] x1128l:h-[350px] sm:h-[400px] 550px:h-[320px] h-[400px]"
+                                  src={item.url}
+                                  alt="ad image"
+                                />
+                              </CarouselItem>
+                            ))}
+                          </CarouselContent>
+                        </Carousel>
+                      </Link>
                       <div
                         className={`absolute inset-x-0 top-0 z-30 flex ${
                           ad.reviewStatus === "Approved"
