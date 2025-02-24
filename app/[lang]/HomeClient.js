@@ -87,6 +87,7 @@ export default function HomeClient({
 
   // Initialize Redux store with server-fetched data
   useEffect(() => {
+    dispatch(emptyADS());
     dispatch(setADS(initialAds));
     dispatch(setPagination(initialPagination));
   }, [initialAds, initialPagination, dispatch]);
