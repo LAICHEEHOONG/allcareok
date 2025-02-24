@@ -25,8 +25,10 @@ import {
   DropdownItem,
 } from "@heroui/react";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import { useRouter } from "next/navigation";
 
 export default function AdminReview() {
+  const router = useRouter();
   const [clientData, setClientData] = useState([]);
 
   useEffect(() => {
@@ -41,6 +43,13 @@ export default function AdminReview() {
     };
     fetchAdsWithValidReviewStatus_();
   }, []);
+
+  const handleView = (_id) => {
+    if (_id) {
+      // router.push(`/en/ad/${_id}`);
+      window.open(`/ad/${_id}`, "_blank");
+    }
+  };
 
   return (
     <div>
@@ -70,7 +79,12 @@ export default function AdminReview() {
                 {item.reviewPayment?.paymentStatus}
               </TableCell>
               <TableCell>
-                <Button radius="full" isIconOnly aria-label="View">
+                <Button
+                  radius="full"
+                  isIconOnly
+                  aria-label="View"
+                  onPress={() => handleView(item._id)}
+                >
                   <VisibilityIcon />
                 </Button>
               </TableCell>
