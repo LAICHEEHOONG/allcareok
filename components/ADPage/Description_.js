@@ -30,7 +30,7 @@ export default function Description_({ description, show_more, show_less }) {
     : description;
 
   return (
-    <Fade  triggerOnceclassName="flex flex-col space-y-4 py-4">
+    <Fade  triggerOnce className="flex flex-col space-y-4 py-4">
       <Divider />
       <div className="whitespace-pre-wrap text-lg text-gray-800">
         {isExpanded ? description : previewText}
