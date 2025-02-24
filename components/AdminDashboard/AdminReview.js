@@ -25,10 +25,8 @@ import {
   DropdownItem,
 } from "@heroui/react";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { useRouter } from "next/navigation";
 
 export default function AdminReview() {
-  const router = useRouter();
   const [clientData, setClientData] = useState([]);
 
   useEffect(() => {

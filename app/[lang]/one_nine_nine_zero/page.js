@@ -6,6 +6,7 @@ import { adminKey } from "@/lib/action/userAction";
 import { useSelector } from "react-redux";
 import AdminPhoto from "@/components/AdminDashboard/AdminPhoto";
 import AdminReview from "@/components/AdminDashboard/AdminReview";
+import AdminReport from "@/components/AdminDashboard/AdminReport";
 import { Tabs, Tab, Card, CardBody } from "@heroui/react";
 
 export default function OneNineNineZero() {
@@ -24,7 +25,6 @@ export default function OneNineNineZero() {
     const adminKey_ = async () => {
       try {
         const res = await adminKey({ _id });
-        console.log(res);
         if (!res.pass) {
           router.push("/");
         }
@@ -87,8 +87,7 @@ export default function OneNineNineZero() {
             <Tab key="report" title="Report">
               <Card>
                 <CardBody>
-                  Excepteur sint occaecat cupidatat non proident, sunt in culpa
-                  qui officia deserunt mollit anim id est laborum.
+                  <AdminReport />
                 </CardBody>
               </Card>
             </Tab>
