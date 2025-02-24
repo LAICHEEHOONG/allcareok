@@ -65,10 +65,10 @@ export default async function ADPage({ params }) {
   const userData = await getUserData(user);
 
   // Generate readable area title
-  const areaTitle = Object.values(area)
-    .filter(Boolean) // Remove falsy values (null, undefined, empty string)
-    .reverse()
-    .join(" · "); // Use a middle dot for separation
+  // const areaTitle = Object.values(area)
+  //   .filter(Boolean) // Remove falsy values (null, undefined, empty string)
+  //   .reverse()
+  //   .join(" · "); // Use a middle dot for separation
 
   return (
     <div className="flex justify-center">
@@ -121,7 +121,7 @@ export default async function ADPage({ params }) {
           </div>
           <div className="h-full w-full x950l:max-w-[375px] max-w-[300px] flex gap-5 flex-col justify-start items-center sticky top-20">
             <ADCarousel photo={photo} />
-            <Report report_btn={dic?.ad_page?.report_btn} _id={_id} />
+            <Report report_btn={dic?.ad_page?.report_btn} _id={_id} ad_page={dic?.ad_page} />
           </div>
         </div>
         <Map_ area={area} />

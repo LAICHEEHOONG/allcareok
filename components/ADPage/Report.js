@@ -18,18 +18,25 @@ import { signIn } from "next-auth/react";
 import { addReportToAd } from "@/lib/action/adAction";
 // reportAd({ adId, reportedEmail, reportTitle })
 
-export default function Report({ report_btn, _id }) {
+export default function Report({ report_btn, _id, ad_page }) {
   const email = useSelector((state) => state.auth?.email);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [checked, setChecked] = useState("");
   const [loading, setLoading] = useState(false);
   const reportTitile = [
-    `It’s inaccurate or incorrect`,
-    `It’s not a real advertisement`,
-    `It’s a scam`,
-    `It’s offensive`,
-    `It’s something else`,
+    `${ad_page?.report_complain_1}`,
+    `${ad_page?.report_complain_2}`,
+    `${ad_page?.report_complain_3}`,
+    `${ad_page?.report_complain_4}`,
+    `${ad_page?.report_complain_5}`,
   ];
+  // const reportTitile = [
+  //   `It’s inaccurate or incorrect`,
+  //   `It’s not a real advertisement`,
+  //   `It’s a scam`,
+  //   `It’s offensive`,
+  //   `It’s something else`,
+  // ];
 
   const handleCheck = (title) => {
     if (title === checked && title !== "") {
@@ -54,21 +61,21 @@ export default function Report({ report_btn, _id }) {
 
   const addReportToAd_ = async (_id, email, title, fn) => {
     try {
-      setLoading(true)
-      const res = await addReportToAd({_id, email, title})
-      console.log(res)
+      setLoading(true);
+      const res = await addReportToAd({ _id, email, title });
+      console.log(res);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     } finally {
-      setLoading(false)
-      fn()
+      setLoading(false);
+      fn();
     }
   };
 
   const handleReport = (onClose) => {
     if (email) {
       if (email && checked && _id) {
-        addReportToAd_(_id, email, checked, onClose)
+        addReportToAd_(_id, email, checked, onClose);
         // reportAd_(adId, email, checked, onClose);
       }
       console.log("report");
@@ -100,10 +107,12 @@ export default function Report({ report_btn, _id }) {
             <>
               <ModalHeader className="flex flex-col gap-1">
                 <div className="capitalize text-xl font-semibold">
-                  Why are you reporting this advertisement?
+                  {ad_page?.report_modal_title}
+                  {/* Why are you reporting this advertisement? */}
                 </div>
                 <div className="capitalize text-sm font-normal">
-                  This won’t be shared with the host.
+                  {ad_page?.report_modal_content}
+                  {/* This won’t be shared with the host. */}
                 </div>
               </ModalHeader>
               <ModalBody>

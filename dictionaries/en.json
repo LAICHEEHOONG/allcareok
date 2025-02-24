@@ -260,6 +260,13 @@
     "shared_by": "Shared by",
     "show_more": "Show more",
     "show_less": "Show less",
-    "report_btn": "Report this listing"
+    "report_btn": "Report this listing",
+    "report_modal_title": "Why are you reporting this advertisement?",
+    "report_modal_content": "This won’t be shared with the host.",
+    "report_complain_1": "It’s inaccurate or incorrect",
+    "report_complain_2": "It’s not a real advertisement",
+    "report_complain_3": "It’s a scam",
+    "report_complain_4": "It’s offensive",
+    "report_complain_5": "It’s something else"
   }
 }

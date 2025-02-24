@@ -260,6 +260,13 @@
     "shared_by": "分享者",
     "show_more": "显示更多",
     "show_less": "显示更少",
-    "report_btn": "举报此服务"
+    "report_btn": "举报此服务",
+    "report_modal_title": "您为什么要举报这条广告？",
+    "report_modal_content": "您的反馈信息不会透露给广告发布者。",
+    "report_complain_1": "信息不准确或错误",
+    "report_complain_2": "不是真实广告",
+    "report_complain_3": "涉嫌诈骗",
+    "report_complain_4": "内容令人不适",
+    "report_complain_5": "其他原因"
   }
 }

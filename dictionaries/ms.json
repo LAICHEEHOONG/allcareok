@@ -260,6 +260,13 @@
     "shared_by": "Dikongsi oleh",
     "show_more": "Tunjukkan lebih banyak",
     "show_less": "Tunjukkan kurang",
-    "report_btn": "Laporkan senarai ini"
+    "report_btn": "Laporkan senarai ini",
+    "report_modal_title": "Mengapa anda melaporkan iklan ini?",
+    "report_modal_content": "Maklumat ini tidak akan dikongsi dengan pengiklan.",
+    "report_complain_1": "Maklumat tidak tepat atau salah",
+    "report_complain_2": "Bukan iklan sebenar",
+    "report_complain_3": "Penipuan",
+    "report_complain_4": "Kandungan menyinggung perasaan",
+    "report_complain_5": "Sebab lain"
   }
 }
