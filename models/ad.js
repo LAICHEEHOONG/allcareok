@@ -109,13 +109,15 @@ const adSchema = new mongoose.Schema(
   }
 );
 
+adSchema.index({ "area.country": 1, "area.state": 1, "area.city": 1, "area.town": 1 });
+adSchema.index({ service: 1 });
 // Index for efficient location-based queries
-adSchema.index({
-  "area.country": 1,
-  "area.state": 1,
-  "area.city": 1,
-  "area.town": 1,
-});
+// adSchema.index({
+//   "area.country": 1,
+//   "area.state": 1,
+//   "area.city": 1,
+//   "area.town": 1,
+// });
 
 // Optional additional indexes for frequent queries (uncomment if needed)
 // adSchema.index({ block: 1, topRanking: -1 }); // For queries filtering by block and sorting by topRanking

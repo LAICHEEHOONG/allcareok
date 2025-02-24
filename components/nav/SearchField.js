@@ -79,7 +79,7 @@ export default function SearchField({ navigation }) {
           dispatch(setSearchValue(value.trim())); // 🔥 Ensure Redux gets the trimmed input
         }}
         onKeyDown={(e) => {
-          if (e.key === "Enter" && inputValue.trim() !== "") {
+          if (e.key === "Enter" && inputValue?.trim() !== "") {
             if (beforeInputValue !== area) {
               handleSearch();
             }
