@@ -195,43 +195,9 @@ export default function ShareADMobile({
   // }, [email, _id]);
   return (
     <Fade triggerOnce>
-      <div className="font-semibold text-base tracking-wider capitalize  py-3 ">
+      <div className="font-semibold text-lg tracking-wider capitalize  pt-3">
         {title}
       </div>
-      {/* <div className="flex flex-col pt-2 pb-6">
-        <div className="font-semibold  md:text-lg lg:text-2xl tracking-wider capitalize border-1">
-          {title}
-        </div>
-
-        <div className="flex justify-between items-center border-1">
-          <Button
-      
-            variant="light"
-            radius="full"
-            onPress={sharePage}
-            size="sm"
-            isIconOnly
-          >
-            <IosShareIcon />
-    
-          </Button>
-
-          <Button
-          
-            radius="full"
-            aria-label="Like"
-            color={isInWishlist(slug) ? "danger" : "default"}
-            variant={isInWishlist(slug) ? "solid" : "light"}
-            isLoading={loadingAd[slug] || false}
-            onPress={() => updateUserWishlist_(slug)}
-            size="sm"
-            isIconOnly
-          >
-   
-            <FavoriteBorderIcon />
-          </Button>
-        </div>
-      </div> */}
     </Fade>
   );
 }
