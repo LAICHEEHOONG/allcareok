@@ -13,7 +13,7 @@ import { Fade } from "react-awesome-reveal";
 export default function Verify({ views, views_dic, verify_dic }) {
   return (
     <Fade triggerOnce>
-      <Card className="w-full max-w-[394px] x950l:max-w-[650px] mt-2">
+      <Card className="w-full md:max-w-[394px] x950l:max-w-[650px] sm:max-w-[650px] max-w-[394px] mt-2">
         <CardBody>
           <div className="flex justify-between items-center">
             <Image
@@ -22,19 +22,19 @@ export default function Verify({ views, views_dic, verify_dic }) {
               src="/images/verified_logo.jpg"
               width={100}
             />
-            <div className="flex flex-col justify-center items-center x950l:p-5 p-3">
-              <div className="capitalize x950l:text-base text-sm  font-medium max-w-[330px] tracking-wider  ">
+            <div className="flex flex-col justify-center items-center x950l:p-5 md:p-3 p-5">
+              <div className="capitalize x950l:text-base md:text-sm sm:text-base text-sm font-medium max-w-[330px] tracking-wider  ">
                 {verify_dic}
               </div>
-              <div className="block x950l:hidden text-xs font-medium tracking-wider self-end absolute bottom-2 right-2 ">
+              <div className="md:block x950l:hidden sm:hidden block text-xs font-medium tracking-wider self-end absolute bottom-2 right-2 ">
                 {`${views} ${views_dic}`}
               </div>
             </div>
             <Divider
               orientation="vertical"
-              className="h-10 w-[1px] x950l:block hidden"
+              className="h-10 w-[1px] x950l:block md:hidden sm:block hidden"
             />
-            <div className="x950l:flex hidden flex-col w-full max-w-[100px] justify-center items-center">
+            <div className="x950l:flex md:hidden sm:flex hidden flex-col w-full max-w-[100px] justify-center items-center ">
               <div className="text-2xl font-semibold">{views}</div>
               <div className="text-xs">{views_dic}</div>
             </div>

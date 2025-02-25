@@ -29,7 +29,7 @@ import { addEmailToUserView } from "@/lib/action/adAction";
 
 export default function ShareAD({ slug, title, share_dic, wishlist_dic, _id }) {
   const router = useRouter();
-  const [adData, setAdData] = useState({});
+  // const [adData, setAdData] = useState({});
   const { data: session, status } = useSession();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth?._id);
@@ -104,48 +104,48 @@ export default function ShareAD({ slug, title, share_dic, wishlist_dic, _id }) {
   // Check if the ad is in the wishlist
   const isInWishlist = (adId) => wishlist.includes(adId);
 
-  useEffect(() => {
-    const getAdsByIds_ = async () => {
-      try {
-        const ad = await getAdsByIds([slug]);
-        const {
-          _id,
-          user,
-          photo,
-          title,
-          service,
-          area,
-          contact,
-          youtube,
-          description,
-          reviewStatus,
-          views,
-          createdAt,
-        } = ad.data[0];
-        setAdData({
-          _id,
-          user,
-          photo,
-          title,
-          service,
-          area,
-          contact,
-          youtube,
-          description,
-          reviewStatus,
-          views,
-          createdAt,
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    }; // Your fetch function
-    getAdsByIds_();
-  }, [slug]);
+  // useEffect(() => {
+  //   const getAdsByIds_ = async () => {
+  //     try {
+  //       const ad = await getAdsByIds([slug]);
+  //       const {
+  //         _id,
+  //         user,
+  //         photo,
+  //         title,
+  //         service,
+  //         area,
+  //         contact,
+  //         youtube,
+  //         description,
+  //         reviewStatus,
+  //         views,
+  //         createdAt,
+  //       } = ad.data[0];
+  //       setAdData({
+  //         _id,
+  //         user,
+  //         photo,
+  //         title,
+  //         service,
+  //         area,
+  //         contact,
+  //         youtube,
+  //         description,
+  //         reviewStatus,
+  //         views,
+  //         createdAt,
+  //       });
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }; // Your fetch function
+  //   getAdsByIds_();
+  // }, [slug]);
 
-  useEffect(() => {
-    console.log(adData);
-  }, [adData]);
+  // useEffect(() => {
+  //   console.log(adData);
+  // }, [adData]);
 
   // const handleBack = () => {
   //   // router.push("/");
@@ -178,7 +178,7 @@ export default function ShareAD({ slug, title, share_dic, wishlist_dic, _id }) {
     const addEmailToUserView_ = async (email, _id) => {
       try {
         const res = await addEmailToUserView({ email, _id });
-        console.log(res.message);
+        // console.log(res.message);
       } catch (error) {
         console.log(error);
       }

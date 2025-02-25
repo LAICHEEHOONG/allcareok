@@ -72,7 +72,7 @@ export default async function ADPage({ params }) {
       <div className="w-full max-w-[768px] md:hidden p-2 flex flex-col ">
         <MobileShareBtn slug={slug} _id={_id} />
         <div className="w-full flex justify-center items-center ">
-          <div className="max-w-[300px]">
+          <div className="max-w-[367px]">
             <ADCarousel photo={photo} />
           </div>
         </div>
@@ -83,7 +83,7 @@ export default async function ADPage({ params }) {
           wishlist_dic={dic?.ad_page?.wishlist}
           _id={_id}
         />
-        <div className="flex flex-col w-full max-w-[650px] pr-4">
+        <div className="flex flex-col w-full max-w-[650px] md:pr-4">
           {reviewStatus === "Approved" ? (
             <div className="pt-4 pb-4">
               <Verify
@@ -117,7 +117,7 @@ export default async function ADPage({ params }) {
           {youtube && <Youtube_ youtube={youtube} />}
         </div>
         <Map_ area={area} />
-        <div className="w-full flex justify-center items-center pb-10">
+        <div className="w-full flex justify-center items-center pb-14">
           <Report
             report_btn={dic?.ad_page?.report_btn}
             _id={_id}

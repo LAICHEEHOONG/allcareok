@@ -106,44 +106,45 @@ export default function MobileShareBtn({
   // Check if the ad is in the wishlist
   const isInWishlist = (adId) => wishlist.includes(adId);
 
-  useEffect(() => {
-    const getAdsByIds_ = async () => {
-      try {
-        const ad = await getAdsByIds([slug]);
-        const {
-          _id,
-          user,
-          photo,
-          title,
-          service,
-          area,
-          contact,
-          youtube,
-          description,
-          reviewStatus,
-          views,
-          createdAt,
-        } = ad.data[0];
-        setAdData({
-          _id,
-          user,
-          photo,
-          title,
-          service,
-          area,
-          contact,
-          youtube,
-          description,
-          reviewStatus,
-          views,
-          createdAt,
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    }; // Your fetch function
-    getAdsByIds_();
-  }, [slug]);
+  // useEffect(() => {
+  //   const getAdsByIds_ = async () => {
+  //     try {
+  //       const ad = await getAdsByIds([slug]);
+  //       const {
+  //         _id,
+  //         user,
+  //         photo,
+  //         title,
+  //         service,
+  //         area,
+  //         contact,
+  //         youtube,
+  //         description,
+  //         reviewStatus,
+  //         views,
+  //         createdAt,
+  //       } = ad.data[0];
+
+  //       // setAdData({
+  //       //   _id,
+  //       //   user,
+  //       //   photo,
+  //       //   title,
+  //       //   service,
+  //       //   area,
+  //       //   contact,
+  //       //   youtube,
+  //       //   description,
+  //       //   reviewStatus,
+  //       //   views,
+  //       //   createdAt,
+  //       // });
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }; // Your fetch function
+  //   getAdsByIds_();
+  // }, [slug]);
 
 
 

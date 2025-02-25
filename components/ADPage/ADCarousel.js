@@ -16,7 +16,7 @@ const ADCarousel = ({ photo }) => {
   const SLIDE_COUNT = photo?.length;
   const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
   return (
-    <div 
+    <div
     // className="w-full max-w-[375px] "
     >
       <EmblaCarousel slides={SLIDES} options={OPTIONS} photo={photo} />
@@ -58,12 +58,15 @@ const EmblaCarousel = (props) => {
 
   return (
     <div className="embla">
-      <div className="embla__viewport " ref={emblaMainRef}>
+      <div
+        className="embla__viewport "
+        ref={emblaMainRef}
+      >
         <div className="embla__container ">
           {slides &&
             slides.map((index) => (
               <div
-                className="embla__slide flex justify-center flex-col  items-center  w-full x950l:max-w-[375px] max-w-[300px]"
+                className="embla__slide flex justify-center flex-col  items-center "
                 key={index}
               >
                 <Fade>
@@ -87,20 +90,60 @@ const EmblaCarousel = (props) => {
                       </Button>
                     </CardHeader>
                     <Image
-                      // loading="lazy"
-                      // isZoomed
-                      className="z-0 object-cover x950l:h-[500px] x950l:w-[375px] h-[400px] w-[300px] "
-                      // width={375}
-                      // // height={567}
-                      // height={500}
-                      alt="NextUI Fruit Image with Zoom"
-                      //   src={`https://res.cloudinary.com/${CLOUDINARY_ENVIRONMENTS}/image/upload/t_auto/${CLOUDINARY_URL_ID}/${modelData?.images[index]?.publicId}.webp`}
+                      className="z-0 object-cover x950l:block md:hidden block"
+                      width={367}
+                      height={500}
+                      // className="z-0 object-cover x950l:h-[500px] x950l:w-[375px] h-[400px] w-[300px] "
+                      alt="service photo"
+                      src={`${photo[index]?.url}`}
+                    />
+                    <Image
+                      className="z-0 object-cover x950l:hidden md:block hidden"
+                      width={367}
+                      height={400}
+                      // className="z-0 object-cover x950l:h-[500px] x950l:w-[375px] h-[400px] w-[300px] "
+                      alt="service photo"
                       src={`${photo[index]?.url}`}
                     />
                   </Card>
                 </Fade>
               </div>
             ))}
+          {/* {slides &&
+            slides.map((index) => (
+              <div
+                className="embla__slide flex justify-center flex-col  items-center  w-full x950l:max-w-[375px] max-w-[300px] border-2 border-red-500 "
+                key={index}
+              >
+                <Fade>
+                  <Card className="border-none" shadow="none">
+                    <CardHeader className="absolute z-10 top-1 flex-col !items-end">
+                      <Button
+                        className="backdrop-filter backdrop-blur bg-opacity-30 bg-white"
+                        size="sm"
+                        isIconOnly
+                        radius="full"
+                        aria-label="Take a photo"
+                        onPress={() => {
+                          window.open(
+                            photo[index].url,
+                            "_blank",
+                            "noopener,noreferrer"
+                          );
+                        }}
+                      >
+                        <FullscreenIcon />
+                      </Button>
+                    </CardHeader>
+                    <Image
+                      className="z-0 object-cover x950l:h-[500px] x950l:w-[375px] h-[400px] w-[300px] "
+                      alt="NextUI Fruit Image with Zoom"
+                      src={`${photo[index]?.url}`}
+                    />
+                  </Card>
+                </Fade>
+              </div>
+            ))} */}
         </div>
       </div>
 
@@ -134,7 +177,6 @@ export const Thumb = (props) => {
       className={`embla-thumbs__slide ${
         selected ? "embla-thumbs__slide--selected" : ""
       } x950l:-mr-4 -mr-3`}
- 
     >
       <Fade>
         <Image
@@ -145,7 +187,6 @@ export const Thumb = (props) => {
           className={`object-cover ${
             selectedIndex !== index && "!opacity-40"
           } x950l:w-[65px] w-[53px] x950l:h-[65px] h-[53px]`}
-
           alt="NextUI Fruit Image with Zoom"
           // src={`https://res.cloudinary.com/${CLOUDINARY_ENVIRONMENTS}/image/upload/t_test_2/${CLOUDINARY_URL_ID}/${modelData.images[index].publicId}.webp`}
           src={`${photo[index].url}`}
