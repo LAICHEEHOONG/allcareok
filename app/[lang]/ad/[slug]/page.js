@@ -117,7 +117,7 @@ export default async function ADPage({ params }) {
           {youtube && <Youtube_ youtube={youtube} />}
         </div>
         <Map_ area={area} />
-        <div className="w-full flex justify-center items-center pb-7">
+        <div className="w-full flex justify-center items-center pb-10">
           <Report
             report_btn={dic?.ad_page?.report_btn}
             _id={_id}
