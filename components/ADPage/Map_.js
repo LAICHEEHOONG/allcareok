@@ -55,7 +55,7 @@ export default function Map_({ area }) {
     );
   };
   return (
-    <Fade className="flex flex-col">
+    <Fade triggerOnce className="flex flex-col">
       <Divider className="mb-12 my-4" />
       <MapCard />
     </Fade>
