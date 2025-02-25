@@ -20,6 +20,7 @@ export default function Wishlists() {
   const wishlist = useSelector((state) => state.auth?.wishlist);
   const wishlistsAd = useSelector((state) => state.wishlists?.wishlistsAd);
   const adsId = ""; //for loading use
+  const language = useSelector((state) => state.auth?.language);
 
   useEffect(() => {
     if (!wishlist || wishlist.length === 0) {
@@ -41,6 +42,11 @@ export default function Wishlists() {
 
     getAdsByIds_();
   }, [wishlist]);
+
+  const handleImageClick = (id) => {
+    // window.open(`${language ? language : "en"}/ad/${id}`, "_blank");
+    router.push(`/${currentLocale}/ad/${id}`);
+  };
 
   return (
     <div className="w-full flex justify-center">
@@ -71,7 +77,7 @@ export default function Wishlists() {
             columnClassName="my-masonry-grid_column"
           >
             {wishlistsAd.map((item) => (
-              <AD key={item._id} ad={item} fn={() => {}} adsId={adsId} />
+              <AD key={item._id} ad={item} fn={() => {handleImageClick(item._id)}} adsId={adsId} />
             ))}
           </Masonry>
         </div>
