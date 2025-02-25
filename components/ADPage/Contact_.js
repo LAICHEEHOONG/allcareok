@@ -18,7 +18,7 @@
 // Contact_.js
 import { Fade } from "react-awesome-reveal";
 import { contactServices } from "../contactServices";
-import { Divider } from "@heroui/react";
+import { Divider, Snippet } from "@heroui/react";
 
 export default function Contact_({ contact }) {
   // Filter contact services based on provided contact object and non-empty values
@@ -35,13 +35,32 @@ export default function Contact_({ contact }) {
           const contactValue = contact[item.name]; // Get the actual value from props
 
           return (
-            <div key={item.name} className="flex items-center space-x-3 ">
-              <Icon className="!w-6 !h-6 m-4 text-gray-600" />
+            // <div key={item.name} className="flex items-center space-x-3 ">
+            //   <Icon className="!w-6 !h-6 m-4 text-gray-600" />
 
-              <div className="text-gray-800 break-all truncate">
-                {contactValue}
+            //   <div className="text-gray-800 break-all truncate">
+            //     {contactValue}
+            //   </div>
+            // </div>
+            <Snippet
+              key={item.name}
+              // symbol={
+              //   <div>
+              //     <Icon className="!w-6 !h-6 " />
+              //   </div>
+              // }
+              symbol={""}
+              className="m-2  "
+              color="default"
+              size="sm"
+              radius="lg"
+              variant="shadow"
+            >
+              <div className="flex justify-center items-center gap-3" > 
+                <Icon className="!w-5 !h-5 ml-1 " />
+                <div>{contactValue}</div>
               </div>
-            </div>
+            </Snippet>
           );
         })}
       </div>

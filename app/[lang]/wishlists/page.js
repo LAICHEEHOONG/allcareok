@@ -20,7 +20,7 @@ export default function Wishlists() {
   const wishlist = useSelector((state) => state.auth?.wishlist);
   const wishlistsAd = useSelector((state) => state.wishlists?.wishlistsAd);
   const adsId = ""; //for loading use
-  const language = useSelector((state) => state.auth?.language);
+  // const language = useSelector((state) => state.auth?.language);
 
   useEffect(() => {
     if (!wishlist || wishlist.length === 0) {
