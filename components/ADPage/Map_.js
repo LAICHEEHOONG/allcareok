@@ -21,15 +21,15 @@ export default function Map_({ area }) {
         )}
         <Card className="w-full max-w-[1120px] my-6">
           <CardBody className="p-0">
-          <GoogleMapsEmbed
+          {/* <GoogleMapsEmbed
                 className="bg-black"
                 apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
                 width="100%"
                 height="480"
                 mode="place"
                 q={`${area?.town},${area?.city},${area?.state},${area?.country}`}
-              />
-            {/* <div className="sm:hidden">
+              /> */}
+            <div className="md:hidden">
               <GoogleMapsEmbed
                 className="bg-black"
                 apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
@@ -38,8 +38,8 @@ export default function Map_({ area }) {
                 mode="place"
                 q={`${area?.town},${area?.city},${area?.state},${area?.country}`}
               />
-            </div> */}
-            {/* <div className="md:block hidden">
+            </div>
+            <div className="md:block hidden">
               <GoogleMapsEmbed
                 className="bg-black"
                 apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
@@ -48,7 +48,7 @@ export default function Map_({ area }) {
                 mode="place"
                 q={`${area?.town},${area?.city},${area?.state},${area?.country}`}
               />
-            </div> */}
+            </div>
           </CardBody>
         </Card>
       </div>
