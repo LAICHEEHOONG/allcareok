@@ -44,11 +44,6 @@ export default function Contact_({ contact }) {
             // </div>
             <Snippet
               key={item.name}
-              // symbol={
-              //   <div>
-              //     <Icon className="!w-6 !h-6 " />
-              //   </div>
-              // }
               symbol={""}
               className="m-2  "
               color="default"
@@ -56,7 +51,7 @@ export default function Contact_({ contact }) {
               radius="lg"
               variant="shadow"
             >
-              <div className="flex justify-center items-center gap-3" > 
+              <div className="flex justify-center items-center gap-3">
                 <Icon className="!w-5 !h-5 ml-1 " />
                 <div>{contactValue}</div>
               </div>

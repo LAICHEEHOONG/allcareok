@@ -1,13 +1,13 @@
 "use client";
-import { CheckUser } from "@/lib/frontend_tool";
+// import { CheckUser } from "@/lib/frontend_tool";
 import { Button } from "@heroui/react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useRouter, usePathname } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Masonry from "react-masonry-css";
-import { showToast } from "@/lib/frontend_tool";
-import AD from "@/components/Home/AD_ori";
+// import { showToast } from "@/lib/frontend_tool";
+import AD from "@/components/Home/AD";
 import { getAdsByIds } from "@/lib/action/adAction";
 import { setWishlistPage } from "@/redux/features/wishlist/wishlistSlice";
 
@@ -50,9 +50,9 @@ export default function Wishlists() {
 
   return (
     <div className="w-full flex justify-center">
-      <div className="w-full max-w-[2300px] p-2 pt-2 sm:p-10 sm:pt-2 x1440l:p-20 x1440l:pt-2">
+      <div className="w-full max-w-[2300px] ">
         <div className="w-full">
-          <div className="flex justify-start mb-10">
+          <div className="flex justify-start mb-10 md:p-0 p-2">
             <div className="flex gap-4">
               <Button
                 isIconOnly
@@ -74,7 +74,7 @@ export default function Wishlists() {
           <Masonry
             breakpointCols={breakpointColumnsObj}
             className="my-masonry-grid"
-            columnClassName="my-masonry-grid_column"
+            columnClassName="my-masonry-grid_column flex flex-col items-center sm:items-start"
           >
             {wishlistsAd.map((item) => (
               <AD key={item._id} ad={item} fn={() => {handleImageClick(item._id)}} adsId={adsId} />

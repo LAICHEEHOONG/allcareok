@@ -25,7 +25,7 @@ import {
 } from "../ui/carousel";
 // import { Card, CardContent } from "../ui/card";
 import Autoplay from "embla-carousel-autoplay";
-import AD from "../Home/AD_ori";
+import AD from "../Home/AD";
 
 export default function DeleteRightCard() {
   const dispatch = useDispatch();
