@@ -49,7 +49,7 @@ export default function Contact_({ contact }) {
               color="default"
               size="sm"
               radius="lg"
-              variant="shadow"
+              // variant="shadow"
             >
               <div className="flex justify-center items-center gap-3">
                 <Icon className="!w-5 !h-5 ml-1 " />
