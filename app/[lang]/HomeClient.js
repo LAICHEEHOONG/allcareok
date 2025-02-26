@@ -252,8 +252,8 @@ export default function HomeClient({
   ]);
 
   const handleImageClick = (id) => {
-    window.open(`${language ? language : "en"}/ad/${id}`, "_blank");
-    // router.push(`/${language ? language : "en"}/ad/${id}`);
+    // window.open(`${language ? language : "en"}/ad/${id}`, "_blank");
+    router.push(`/${language ? language : "en"}/ad/${id}`, { scroll: false });
   };
 
   return (
@@ -325,7 +325,7 @@ export default function HomeClient({
 
                     <CardBody className="overflow-visible p-3 pb-1 pt-0">
                       <Carousel
-                        className="w-full cursor-pointer hidden md:block"
+                        className="w-full cursor-pointer block md:hidden"
                         opts={{ align: "start", loop: true, dragFree: false }}
                         onClick={() => handleImageClick(ad._id)}
                       >
@@ -346,12 +346,12 @@ export default function HomeClient({
                       </Carousel>
 
                       <Link
-                        className="block md:hidden"
+                        // className="hidden md:block"
                         href={`/${language ? language : "en"}/ad/${ad._id}`}
-                        // target="_blank"
+                        target="_blank"
                       >
                         <Carousel
-                          className="w-full cursor-pointer"
+                          className="w-full cursor-pointer hidden md:block"
                           opts={{
                             align: "start",
                             loop: true,
