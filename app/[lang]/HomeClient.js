@@ -253,6 +253,7 @@ export default function HomeClient({
 
   const handleImageClick = (id) => {
     window.open(`${language ? language : "en"}/ad/${id}`, "_blank");
+    // router.push(`/${language ? language : "en"}/ad/${id}`);
   };
 
   return (
@@ -323,8 +324,8 @@ export default function HomeClient({
                     </CardHeader>
 
                     <CardBody className="overflow-visible p-3 pb-1 pt-0">
-                      {/* <Carousel
-                        className="w-full cursor-pointer"
+                      <Carousel
+                        className="w-full cursor-pointer hidden md:block"
                         opts={{ align: "start", loop: true, dragFree: false }}
                         onClick={() => handleImageClick(ad._id)}
                       >
@@ -342,14 +343,20 @@ export default function HomeClient({
                             </CarouselItem>
                           ))}
                         </CarouselContent>
-                      </Carousel> */}
+                      </Carousel>
+
                       <Link
+                        className="block md:hidden"
                         href={`/${language ? language : "en"}/ad/${ad._id}`}
-                        target="_blank"
+                        // target="_blank"
                       >
                         <Carousel
                           className="w-full cursor-pointer"
-                          opts={{ align: "start", loop: true, dragFree: false }}
+                          opts={{
+                            align: "start",
+                            loop: true,
+                            dragFree: false,
+                          }}
                         >
                           <CarouselContent>
                             {ad.photo.map((item, idx) => (
@@ -367,6 +374,7 @@ export default function HomeClient({
                           </CarouselContent>
                         </Carousel>
                       </Link>
+
                       <div
                         className={`absolute inset-x-0 top-0 z-30 flex ${
                           ad.reviewStatus === "Approved"

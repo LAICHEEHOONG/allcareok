@@ -26,7 +26,7 @@ export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }
 
-export default async function RootLayout({ children, params }) {
+export default async function RootLayout({ children, params, modal }) {
   const resolvedParams = params instanceof Promise ? await params : params;
   const lang = resolvedParams?.lang || "en";
 
@@ -39,6 +39,7 @@ export default async function RootLayout({ children, params }) {
           <AllProvider>
             <Nav lang={lang} />
             {children}
+            {modal}
             <NavBottomWrap lang={lang} />
           </AllProvider>
         </div>
