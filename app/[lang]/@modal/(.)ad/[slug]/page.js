@@ -69,7 +69,7 @@ export default async function ADPage({ params }) {
 
       <div className="flex justify-center">
         {/* mobile */}
-        <div className="w-full max-w-[768px] md:hidden p-2 flex flex-col ">
+        <div className="w-full max-w-[768px] md:hidden p-0 pt-7 flex flex-col ">
           <MobileShareBtn slug={slug} _id={_id} />
           <div className="w-full flex justify-center items-center ">
             <div className="max-w-[367px]">

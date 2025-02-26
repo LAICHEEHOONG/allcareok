@@ -71,7 +71,7 @@ export default function UserInfo({ userData, shared_by }) {
       <div className="flex items-center space-x-4">
         <Avatar name={adUser.name} src={adUser.image} className="w-12 h-12" />
         <div className="text-left">
-          <div className="w-full max-w-[300px] x950l:max-w-[500px] tracking-wide">
+          <div className="w-full max-w-[260px] x950l:max-w-[500px] tracking-wide">
             <div className="text-lg font-medium truncate">{`${shared_by} ${adUser.name}`}</div>
           </div>
           <div className="text-sm text-gray-600 tracking-wide">{`Joined ${createdUntilNow}`}</div>

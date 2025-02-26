@@ -21,16 +21,18 @@ export default function InterceptionAD({ children }) {
   return (
     <>
       <Drawer
-        placement="right"
-        size="full"
+        placement="bottom"
+        size="xl"
         isOpen={isOpen}
         // onOpenChange={onOpenChange}
+        backdrop="blur"
+  
         onOpenChange={(open) => {
           // onOpenChange(open);
           if (!open) router.back(); // Navigate back when modal closes
         }}
       >
-        <DrawerContent>
+        <DrawerContent >
           {(onClose) => {
             // Custom close function that also navigates back
             const handleClose = () => {
@@ -50,7 +52,12 @@ export default function InterceptionAD({ children }) {
               <>
                 <DrawerBody>{children}</DrawerBody>
                 <DrawerFooter>
-                  <Button radius="full" size="sm" color="primary" onPress={handleClose}>
+                  <Button
+                    radius="full"
+                    size="sm"
+                    color="primary"
+                    onPress={handleClose}
+                  >
                     Back
                   </Button>
                 </DrawerFooter>
