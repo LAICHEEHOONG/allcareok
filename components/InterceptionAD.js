@@ -14,19 +14,19 @@ import { useRouter } from "next/navigation";
 export default function InterceptionAD({ children }) {
   const router = useRouter();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [backdropType, setBackdropType] = useState("opaque");
+  // const [backdropType, setBackdropType] = useState("opaque");
   // useEffect(() => {
   //   onOpen(); // Open the drawer when the component mounts
   // }, []);
 
   useEffect(() => {
     // Detect if the user is on iOS
-    const isIOS =
-      typeof window !== "undefined" &&
-      /iPad|iPhone|iPod/.test(navigator.userAgent) &&
-      !window.MSStream;
+    // const isIOS =
+    //   typeof window !== "undefined" &&
+    //   /iPad|iPhone|iPod/.test(navigator.userAgent) &&
+    //   !window.MSStream;
 
-    setBackdropType(isIOS ? "blur" : "opaque");
+    // setBackdropType(isIOS ? "blur" : "opaque");
 
     onOpen(); // Open the drawer when the component mounts
   }, []);
@@ -38,7 +38,7 @@ export default function InterceptionAD({ children }) {
         size="xl"
         isOpen={isOpen}
         // onOpenChange={onOpenChange}
-        backdrop={backdropType} // Dynamically set the backdrop type
+        backdrop="blur" // Dynamically set the backdrop type
         onOpenChange={(open) => {
           // onOpenChange(open);
           if (!open) router.back(); // Navigate back when modal closes
