@@ -26,7 +26,7 @@ export default function InterceptionAD({ children }) {
         isOpen={isOpen}
         // onOpenChange={onOpenChange}
         onOpenChange={(open) => {
-          onOpenChange(open);
+          // onOpenChange(open);
           if (!open) router.back(); // Navigate back when modal closes
         }}
       >
@@ -34,7 +34,7 @@ export default function InterceptionAD({ children }) {
           {(onClose) => {
             // Custom close function that also navigates back
             const handleClose = () => {
-              onClose();
+              // onClose();
               router.back();
             };
             // const handleClose = () => {
