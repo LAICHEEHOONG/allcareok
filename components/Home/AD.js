@@ -132,25 +132,6 @@ export default function AD({ ad, fn, adsId }) {
                   key={`${crypto.randomUUID()}`}
                   className="flex justify-center items-start"
                 >
-                  {/* <div className="flex justify-center items-start h-full w-full">
-                        <Image
-                          alt="ads image"
-                          className={`object-cover rounded-xl 
-                          w-[333px] h-[400px]
-                          x550l:w-[280px] x550l:h-[340px]
-                          sm:w-[300px] sm:h-[360px]
-                          md:w-[400px] md:h-[450px]
-                          x950l:w-[300px] x950l:h-[360px] 
-                          x1128l:w-[240px] x1128l:h-[300px]  
-                          xl:w-[280px] xl:h-[340px]  
-                          x1470l:w-[333px] x1470l:h-[400px]
-                          x1640l:w-[300px] x1640l:h-[360px]   
-                          x1980l:w-[333px] x1980l:h-[400px]
-                           `}
-                          radius="lg"
-                          src={item.url}
-                        />
-                      </div> */}
                   <Image
                     className={`object-cover rounded-xl w-[310px] xl:h-[400px] x1128l:h-[350px] sm:h-[400px] 550px:h-[320px] h-[400px]`}
                     src={item.url}
@@ -159,31 +140,9 @@ export default function AD({ ad, fn, adsId }) {
                 </CarouselItem>
               ))
             ) : (
-              <CarouselItem
-                className="flex justify-center items-start"
-
-                // className="flex justify-center items-start h-full"
-              >
-                {/* <Image
-                    alt="default ad image"
-                    className={`object-cover rounded-xl 
-                      w-[333px] h-[400px]
-                      x550l:w-[280px] x550l:h-[340px]
-                      sm:w-[300px] sm:h-[360px]
-                      md:w-[400px] md:h-[450px]
-                      x950l:w-[300px] x950l:h-[360px] 
-                      x1128l:w-[240px] x1128l:h-[300px]  
-                      xl:w-[280px] xl:h-[340px]  
-                      x1470l:w-[333px] x1470l:h-[400px]
-                      x1640l:w-[300px] x1640l:h-[360px]   
-                      x1980l:w-[333px] x1980l:h-[400px]
-                       `}
-                    radius="lg"
-                    src="/images/plumber.png"
-                  /> */}
+              <CarouselItem className="flex justify-center items-start">
                 <Image
                   className={`object-cover rounded-xl w-[310px] xl:h-[400px] x1128l:h-[350px] sm:h-[400px] 550px:h-[320px] h-[400px]`}
-                  // className={`object-cover rounded-xl w-[310px] xl:h-[400px] x1128l:h-[350px] sm:h-[400px] 550px:h-[320px] h-[400px]`}
                   src="/images/plumber.png"
                   alt="ad image"
                 />

@@ -48,8 +48,8 @@ import {
   setSearchValue,
   setServiceType,
 } from "@/redux/features/search/searchSlice";
-
 import Link from "next/link";
+import { setClickADValue } from "@/redux/features/clickAD/clickADSlice";
 
 async function getCountryFromIP() {
   try {
@@ -90,6 +90,7 @@ export default function HomeClient({
   const [prevArea, setPrevArea] = useState(initialArea);
   const [prevServiceType, setPrevServiceType] = useState(initialServiceType);
   const language = useSelector((state) => state.auth?.language);
+  const clickAD = useSelector((state) => state.clickAD.ID);
 
   // Initialize Redux store with server-fetched data
   useEffect(() => {
@@ -257,6 +258,7 @@ export default function HomeClient({
 
   const handleImageClick = (id) => {
     // window.open(`${language ? language : "en"}/ad/${id}`, "_blank");
+    dispatch(setClickADValue(id));
     router.push(`/${language ? language : "en"}/ad/${id}`, { scroll: false });
   };
 
@@ -344,6 +346,14 @@ export default function HomeClient({
                                 src={item.url}
                                 alt="ad image"
                               />
+                              {ad._id === clickAD ? (
+                                <>
+                                  {/* <div className="absolute inset-0 bg-pink-300 bg-opacity-50 rounded-xl z-40 "></div> */}
+                                  <div className="absolute inset-0 flex items-center justify-center z-40">
+                                    <LogoSpinner text={true} />
+                                  </div>
+                                </>
+                              ) : null}
                             </CarouselItem>
                           ))}
                         </CarouselContent>

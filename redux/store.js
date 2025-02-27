@@ -4,6 +4,7 @@ import editorSlice from "./features/editor/editorSlice";
 import searchSlice from "./features/search/searchSlice";
 import ADSSlice from "./features/ad/adSlice";
 import wishlistsSlice from "./features/wishlist/wishlistSlice";
+import clickADSlice from "./features/clickAD/clickADSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export const store = configureStore({
     search: searchSlice,
     ADS: ADSSlice,
     wishlists: wishlistsSlice,
+    clickAD: clickADSlice,
   },
 });

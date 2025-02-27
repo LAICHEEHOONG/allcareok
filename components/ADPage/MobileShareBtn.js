@@ -26,18 +26,19 @@ import { signIn } from "next-auth/react";
 
 import { Fade } from "react-awesome-reveal";
 import { addEmailToUserView } from "@/lib/action/adAction";
+import { setClickADValue } from "@/redux/features/clickAD/clickADSlice";
 
-export default function MobileShareBtn({
-  slug,
-  _id,
-}) {
-
+export default function MobileShareBtn({ slug, _id }) {
   const { data: session, status } = useSession();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth?._id);
   const email = useSelector((state) => state.auth?.email);
   const wishlist = useSelector((state) => state.auth?.wishlist);
   const [loadingAd, setLoadingAd] = useState({}); // Track loading state per adId
+
+  useEffect(() => {
+    dispatch(setClickADValue(""));
+  }, []);
 
   useEffect(() => {
     const signUpUser = async (user) => {
@@ -105,48 +106,6 @@ export default function MobileShareBtn({
 
   // Check if the ad is in the wishlist
   const isInWishlist = (adId) => wishlist.includes(adId);
-
-  // useEffect(() => {
-  //   const getAdsByIds_ = async () => {
-  //     try {
-  //       const ad = await getAdsByIds([slug]);
-  //       const {
-  //         _id,
-  //         user,
-  //         photo,
-  //         title,
-  //         service,
-  //         area,
-  //         contact,
-  //         youtube,
-  //         description,
-  //         reviewStatus,
-  //         views,
-  //         createdAt,
-  //       } = ad.data[0];
-
-  //       // setAdData({
-  //       //   _id,
-  //       //   user,
-  //       //   photo,
-  //       //   title,
-  //       //   service,
-  //       //   area,
-  //       //   contact,
-  //       //   youtube,
-  //       //   description,
-  //       //   reviewStatus,
-  //       //   views,
-  //       //   createdAt,
-  //       // });
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }; // Your fetch function
-  //   getAdsByIds_();
-  // }, [slug]);
-
-
 
   const sharePage = async () => {
     const pageUrl = window.location.href; // Get current URL
