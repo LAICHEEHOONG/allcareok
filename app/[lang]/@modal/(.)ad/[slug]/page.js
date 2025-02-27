@@ -65,8 +65,7 @@ export default async function ADPage({ params }) {
   const userData = await getUserData(user);
 
   return (
-    <InterceptionAD>
-
+    <InterceptionAD back={dic?.ad_page?.back}>
       <div className="flex justify-center">
         {/* mobile */}
         <div className="w-full max-w-[768px] md:hidden p-0 pt-7 flex flex-col ">

@@ -8,26 +8,14 @@ import {
   Button,
   useDisclosure,
 } from "@heroui/react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-export default function InterceptionAD({ children }) {
+export default function InterceptionAD({ children, back }) {
   const router = useRouter();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  // const [backdropType, setBackdropType] = useState("opaque");
-  // useEffect(() => {
-  //   onOpen(); // Open the drawer when the component mounts
-  // }, []);
 
   useEffect(() => {
-    // Detect if the user is on iOS
-    // const isIOS =
-    //   typeof window !== "undefined" &&
-    //   /iPad|iPhone|iPod/.test(navigator.userAgent) &&
-    //   !window.MSStream;
-
-    // setBackdropType(isIOS ? "blur" : "opaque");
-
     onOpen(); // Open the drawer when the component mounts
   }, []);
 
@@ -35,10 +23,10 @@ export default function InterceptionAD({ children }) {
     <>
       <Drawer
         placement="bottom"
-        size="xl"
+        size="full"
         isOpen={isOpen}
         // onOpenChange={onOpenChange}
-        backdrop="blur" // Dynamically set the backdrop type
+        // backdrop="blur" // Dynamically set the backdrop type
         onOpenChange={(open) => {
           // onOpenChange(open);
           if (!open) router.back(); // Navigate back when modal closes
@@ -55,14 +43,16 @@ export default function InterceptionAD({ children }) {
             return (
               <>
                 <DrawerBody>{children}</DrawerBody>
-                <DrawerFooter>
+                <DrawerFooter className="border-1">
                   <Button
+                    className="border-1"
                     radius="full"
                     size="sm"
                     color="primary"
                     onPress={handleClose}
+                    fullWidth={true}
                   >
-                    Back
+                    {back}
                   </Button>
                 </DrawerFooter>
               </>
