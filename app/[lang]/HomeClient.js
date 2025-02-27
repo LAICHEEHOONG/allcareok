@@ -61,6 +61,10 @@ async function getCountryFromIP() {
   }
 }
 
+function isAdUrl(url) {
+  return /^\/[^/]+\/ad\/[^/]+$/.test(url);
+}
+
 export default function HomeClient({
   initialAds,
   initialPagination,
@@ -220,12 +224,12 @@ export default function HomeClient({
     };
 
     let pageReset_ = false;
-    if (area !== prevArea) {
+    if (area !== prevArea && !isAdUrl(pathName)) {
       setPrevArea(area);
       dispatch(emptyADS());
       pageReset_ = true;
     }
-    if (serviceType !== prevServiceType) {
+    if (serviceType !== prevServiceType && !isAdUrl(pathName)) {
       setPrevServiceType(serviceType);
       dispatch(emptyADS());
       pageReset_ = true;
