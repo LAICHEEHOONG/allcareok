@@ -43,6 +43,7 @@ import VerifyCard from "./VerifyCard";
 import YoutubeRightCard from "./YoutubeRightCard";
 import VeryRightCard from "./VerifyRightCard";
 import BoostsRightCard from "./BoostsRightCard";
+import ViewADCard from "./ViewADCard";
 
 export default function EditorDesktop() {
   const dispatch = useDispatch();
@@ -133,11 +134,10 @@ export default function EditorDesktop() {
               <AreaCard />
               <ContactCard />
               <DescriptionCard />
-
-              {/* <MapCard /> */}
               <YoutubeCard />
               <VerifyCard />
               <BoostsCard />
+              <ViewADCard adsId={adsId} />
               <DeleteCard />
             </ScrollShadow>
           </div>

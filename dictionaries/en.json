@@ -223,6 +223,10 @@
         "features_3": "30 Days",
         "buttonText": "Upgrade to Pro"
       }
+    },
+    "view_ad": {
+      "title": "View",
+      "content": "View your ad as it appears to customers."
     }
   },
   "home_card": {

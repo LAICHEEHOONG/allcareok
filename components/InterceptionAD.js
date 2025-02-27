@@ -43,17 +43,20 @@ export default function InterceptionAD({ children, back }) {
             return (
               <>
                 <DrawerBody>{children}</DrawerBody>
-                <DrawerFooter className="border-1">
-                  <Button
-                    className="border-1"
-                    radius="full"
-                    size="sm"
-                    color="primary"
-                    onPress={handleClose}
-                    fullWidth={true}
-                  >
-                    {back}
-                  </Button>
+                <DrawerFooter className="">
+                  <div className="w-full flex justify-center items-center">
+                    <div className="w-full max-w-[1120px] ">
+                      <Button
+                        radius="full"
+                        size="sm"
+                        color="primary"
+                        onPress={handleClose}
+                        fullWidth={true}
+                      >
+                        {back}
+                      </Button>
+                    </div>
+                  </div>
                 </DrawerFooter>
               </>
             );

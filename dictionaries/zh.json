@@ -223,6 +223,10 @@
         "features_3": "30 天",
         "buttonText": "升级为 Pro"
       }
+    },
+    "view_ad": {
+      "title": "查看",
+      "content": "查看您的广告，了解客户的浏览方式。"
     }
   },
   "home_card": {
