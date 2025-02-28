@@ -25,6 +25,8 @@ export default function InterceptionAD({ children, back }) {
         placement="bottom"
         size="full"
         isOpen={isOpen}
+        hideCloseButton
+        // className="!p-0 !m-0"
         // onOpenChange={onOpenChange}
         // backdrop="blur" // Dynamically set the backdrop type
         onOpenChange={(open) => {
@@ -42,8 +44,10 @@ export default function InterceptionAD({ children, back }) {
 
             return (
               <>
-                <DrawerBody>{children}</DrawerBody>
-                <DrawerFooter className="">
+                <DrawerBody 
+                className="p-2"
+                >{children}</DrawerBody>
+                <DrawerFooter >
                   <div className="w-full flex justify-center items-center">
                     <div className="w-full max-w-[1120px] ">
                       <Button
