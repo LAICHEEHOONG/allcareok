@@ -35,13 +35,7 @@ export default function Contact_({ contact }) {
           const contactValue = contact[item.name]; // Get the actual value from props
 
           return (
-            // <div key={item.name} className="flex items-center space-x-3 ">
-            //   <Icon className="!w-6 !h-6 m-4 text-gray-600" />
-
-            //   <div className="text-gray-800 break-all truncate">
-            //     {contactValue}
-            //   </div>
-            // </div>
+   
             <Snippet
               key={item.name}
               symbol={""}
@@ -49,11 +43,11 @@ export default function Contact_({ contact }) {
               color="default"
               size="sm"
               radius="lg"
-              // variant="shadow"
             >
               <div className="flex justify-center items-center gap-3">
                 <Icon className="!w-5 !h-5 ml-1 " />
-                <div>{contactValue}</div>
+
+                <div className="truncate w-full max-w-[400px]">{contactValue}</div>
               </div>
             </Snippet>
           );
