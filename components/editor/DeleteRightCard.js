@@ -96,7 +96,7 @@ export default function DeleteRightCard() {
           </div>
         </div>
       </div>
-      <div className=" h-[91vh] flex justify-center items-center">
+      <div className=" flex justify-center my-5">
         {/* <ScrollShadow
           hideScrollBar
           className="w-[400px] py-5 h-[480px] flex flex-col gap-2 items-center "
