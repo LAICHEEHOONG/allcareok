@@ -77,7 +77,7 @@
     "title": "标题",
     "service": "服务类型",
     "area": "服务区域",
-    "contact": "联系方式和社交链接",
+    "contact": "联系方式",
     "description": "描述",
     "location": "位置",
     "delete": "删除服务",
