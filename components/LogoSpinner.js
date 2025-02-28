@@ -3,7 +3,7 @@ import { Fade } from "react-awesome-reveal";
 
 export const LogoSpinner = ({ text }) => {
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex flex-col justify-center items-center ">
       {text && (
         <Fade direction="up" cascade className="mr-2">
           <p

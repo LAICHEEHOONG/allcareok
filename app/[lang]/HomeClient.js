@@ -349,7 +349,7 @@ export default function HomeClient({
                               {ad._id === clickAD ? (
                                 <>
                                   {/* <div className="absolute inset-0 bg-pink-300 bg-opacity-50 rounded-xl z-40 "></div> */}
-                                  <div className="absolute inset-0 flex items-center justify-center z-40">
+                                  <div className="absolute inset-0 flex items-center justify-center z-40 ml-3">
                                     <LogoSpinner text={true} />
                                   </div>
                                 </>
