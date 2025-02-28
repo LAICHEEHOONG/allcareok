@@ -268,9 +268,12 @@ export default function HomeClient({
         <div className="w-full max-w-[2300px]">
           <div className="w-full">
             {ADS.length === 0 ? (
-              <div className="flex flex-col gap-3 justify-center items-center h-[60vh] w-full">
-                <LogoSpinner text={true} />
-              </div>
+              // <div className="flex flex-col gap-3 justify-center items-center h-[60vh] w-full">
+              //   <LogoSpinner text={true} />
+              // </div>
+              <div className="flex flex-col gap-3 justify-center items-center w-full h-[60vh]">
+              <LogoSpinner text={true} />
+            </div>
             ) : (
               <Masonry
                 breakpointCols={{

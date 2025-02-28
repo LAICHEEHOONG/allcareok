@@ -96,8 +96,8 @@ export default function DeleteRightCard() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center gap-5 -mt-6 md:-mt-16 h-[84vh]">
-        <ScrollShadow
+      <div className=" h-[91vh] flex justify-center items-center">
+        {/* <ScrollShadow
           hideScrollBar
           className="w-[400px] py-5 h-[480px] flex flex-col gap-2 items-center "
         >
@@ -172,7 +172,98 @@ export default function DeleteRightCard() {
           <div className="w-[320px]">
             <AD ad={ad} />
           </div>
-        </ScrollShadow>
+        </ScrollShadow> */}
+        <div
+          // hideScrollBar
+          // className="w-[400px] py-5 h-[480px] flex flex-col gap-2 items-center border-2"
+          className="flex flex-col gap-2 items-center "
+        >
+          <div className=" ">
+            <>
+              {/* <div className=" flex justify-between items-center max-w-[400px] mx-auto">
+                <Button
+                  radius="full"
+                  color="danger"
+                  variant="flat"
+                  aria-label="Back button"
+                  startContent={<DeleteForeverIcon />}
+                  onPress={onOpen}
+                >
+                  {l?.delete_btn}
+                </Button>
+              </div> */}
+
+              <Modal
+                isOpen={isOpen}
+                onOpenChange={onOpenChange}
+                backdrop={"blur"}
+              >
+                <ModalContent>
+                  {(onClose) => (
+                    <>
+                      <ModalBody>
+                        <div className="flex flex-col justify-center items-center gap-5 mt-10">
+                          <Image
+                            alt="Card service demo"
+                            className="object-cover rounded-xl"
+                            src={
+                              ad?.photo?.length > 0
+                                ? ad.photo[0].url
+                                : "/images/plumber.png"
+                            }
+                            width={200}
+                          />
+                          <div className="text-xl font-semibold text-center m-5">
+                            {l?.delete_modal_title
+                              ? l.delete_modal_title
+                              : "Permanently delete this service?"}
+                          </div>
+                        </div>
+                      </ModalBody>
+                      <ModalFooter className="flex flex-col">
+                        <Button
+                          color="danger"
+                          onPress={async () => {
+                            await deleteAd_();
+                            onClose();
+                            router.push(`/${currentLocale}/dashboard`);
+                          }}
+                          isLoading={loading}
+                        >
+                          {l?.delete_modal_btn ? l.delete_modal_btn : "Delete"}
+                        </Button>
+                        <Button
+                          color="primary"
+                          variant="light"
+                          onPress={onClose}
+                        >
+                          {l?.cancel ? l.cancel : "Cancel"}
+                        </Button>
+                      </ModalFooter>
+                    </>
+                  )}
+                </ModalContent>
+              </Modal>
+            </>
+          </div>
+          <div className=" flex flex-col gap-4 items-center">
+            <AD ad={ad} />
+            <Button
+                  radius="full"
+                  color="danger"
+                  variant="flat"
+                  fullWidth
+                  aria-label="Back button"
+                  startContent={<DeleteForeverIcon />}
+                  onPress={onOpen}
+                >
+                  {l?.delete_btn}
+                </Button>
+            {/* <div className=" flex justify-between items-center max-w-[400px] mx-auto">
+      
+              </div> */}
+          </div>
+        </div>
       </div>
     </div>
   );
