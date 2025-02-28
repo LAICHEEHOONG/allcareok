@@ -29,6 +29,8 @@ export default function ViewADCard({ adsId }) {
   const handlePress = () => {
     dispatch(setFocus("view"));
     router.push(`/${language ? language : "en"}/ad/${adsId}`);
+    dispatch(setFocus("photo"));
+
     // if (isSmallScreen) {
     //   dispatch(setPopUp());
     // }
