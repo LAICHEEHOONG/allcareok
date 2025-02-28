@@ -46,8 +46,7 @@ export default function Contact_({ contact }) {
             >
               <div className="flex justify-center items-center gap-3">
                 <Icon className="!w-5 !h-5 ml-1 " />
-
-                <div className="truncate w-full max-w-[400px]">{contactValue}</div>
+                <div className="truncate w-full sm:max-w-[400px] max-w-[250px]">{contactValue}</div>
               </div>
             </Snippet>
           );
