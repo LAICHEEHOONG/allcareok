@@ -59,8 +59,15 @@ export default function DeleteRightCard() {
     const deleteAllPhoto = async () => {
       try {
         const publicIds = ad.photo.map((item) => item.publicId);
+        const verificationPublicIds = ad.verification.map(
+          (item) => item.publicId
+        );
+
         if (publicIds && publicIds?.length > 0) {
-          await deleteImages(publicIds); // Assuming deleteImages handles arrays of publicIds
+          await deleteImages([...publicIds]); // Assuming deleteImages handles arrays of publicIds
+        }
+        if(verificationPublicIds && verificationPublicIds?.length > 0){
+          await deleteImages([...verificationPublicIds]); // Assuming deleteImages handles arrays of publicIds
         }
       } catch (error) {
         console.log(error);
@@ -249,16 +256,16 @@ export default function DeleteRightCard() {
           <div className=" flex flex-col gap-4 items-center">
             <AD ad={ad} />
             <Button
-                  radius="full"
-                  color="danger"
-                  variant="flat"
-                  fullWidth
-                  aria-label="Back button"
-                  startContent={<DeleteForeverIcon />}
-                  onPress={onOpen}
-                >
-                  {l?.delete_btn}
-                </Button>
+              radius="full"
+              color="danger"
+              variant="flat"
+              fullWidth
+              aria-label="Back button"
+              startContent={<DeleteForeverIcon />}
+              onPress={onOpen}
+            >
+              {l?.delete_btn}
+            </Button>
             {/* <div className=" flex justify-between items-center max-w-[400px] mx-auto">
       
               </div> */}
