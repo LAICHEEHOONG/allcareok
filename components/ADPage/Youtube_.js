@@ -14,7 +14,7 @@ export default function Youtube_({ youtube }) {
           <iframe
             className="absolute inset-0 w-full h-full rounded-lg"
             src={`https://www.youtube.com/embed/${
-              youtubeId ? youtubeId : "MXTbTpzs7tU"
+              youtubeId ? youtubeId : ""
             }`}
             title="YouTube video"
             frameBorder="0"

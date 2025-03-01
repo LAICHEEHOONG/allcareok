@@ -51,7 +51,7 @@ export default function Wishlists() {
   return (
     <div className="w-full flex justify-center">
       <div className="w-full max-w-[2300px] ">
-        <div className="w-full">
+        <div className="w-full pb-20">
           <div className="flex justify-start mb-10 md:p-0 p-2">
             <div className="flex gap-4">
               <Button

@@ -1,13 +1,5 @@
 "use client";
-import {
-  Avatar,
-  Divider,
-  Card,
-  CardBody,
-  Image,
-  Button,
-  Skeleton,
-} from "@heroui/react";
+import { Divider, Card, CardBody, Image } from "@heroui/react";
 import { Fade } from "react-awesome-reveal";
 
 export default function Verify({ views, views_dic, verify_dic }) {
