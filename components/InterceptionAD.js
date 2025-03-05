@@ -51,8 +51,9 @@ export default function InterceptionAD({ children, back }) {
                   <div className="w-full flex justify-center items-center">
                     <div className="w-full max-w-[1120px] ">
                       <Button
+                      className="z-50"
                         radius="full"
-                        size="sm"
+                        size="md"
                         color="primary"
                         onPress={handleClose}
                         fullWidth={true}
