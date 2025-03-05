@@ -1,3 +1,5 @@
+//app/[lang]/ad/[slug]/page.js
+
 import { getAdsByIds, findAllAds } from "@/lib/action/adAction";
 import ShareAD from "@/components/ADPage/ShareAD";
 import ADCarousel from "@/components/ADPage/ADCarousel";
@@ -208,7 +210,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }) {
   //   const { slug } = params;
   const slug = (await params).slug;
-  const lang = (await params).lang;
+  // const lang = (await params).lang;
   const adResult = await getAdsByIds([slug]);
   if (!adResult.success || !adResult.data?.length) {
     return { title: "Ad Not Found" };
