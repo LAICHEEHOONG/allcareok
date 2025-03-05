@@ -263,13 +263,11 @@ export default function HomeClient({
   };
 
   return (
-    <div className="pb-20">
+    <section className="pb-20">
       <main className="flex justify-center flex-col items-center">
         <div className="w-full max-w-[2300px]">
           <div className="w-full">
-            {ADS.length ===
-            0 ? // <div className="flex flex-col gap-3 justify-center items-center h-[60vh] w-full">
-            //   <LogoSpinner text={true} />
+            {ADS.length === 0 ? //   <LogoSpinner text={true} /> // <div className="flex flex-col gap-3 justify-center items-center h-[60vh] w-full">
             // </div>
             null : (
               <Masonry
@@ -344,7 +342,13 @@ export default function HomeClient({
                               <Image
                                 className={`object-cover rounded-xl w-[310px] xl:h-[400px] x1128l:h-[350px] sm:h-[400px] 550px:h-[320px] h-[400px]`}
                                 src={item.url}
-                                alt="ad image"
+                                // alt="ad image"
+                                alt={`${ad?.serviceType || "Service"} in ${
+                                  ad?.area?.city ||
+                                  ad?.area?.country ||
+                                  "Your Area"
+                                } - Ad ${ad._id}`}
+                                loading={idx === 0 ? "eager" : "lazy"}
                               />
                               {ad._id === clickAD ? (
                                 <>
@@ -381,7 +385,13 @@ export default function HomeClient({
                                 <Image
                                   className="object-cover rounded-xl w-[310px] xl:h-[400px] x1128l:h-[350px] sm:h-[400px] 550px:h-[320px] h-[400px]"
                                   src={item.url}
-                                  alt="ad image"
+                                  // alt="ad image"
+                                  alt={`${ad?.serviceType || "Service"} in ${
+                                    ad?.area?.city ||
+                                    ad?.area?.country ||
+                                    "Your Area"
+                                  } - Ad ${ad._id}`}
+                                  loading={idx === 0 ? "eager" : "lazy"}
                                 />
                               </CarouselItem>
                             ))}
@@ -445,6 +455,6 @@ export default function HomeClient({
           </div>
         </div>
       </main>
-    </div>
+    </section>
   );
 }
