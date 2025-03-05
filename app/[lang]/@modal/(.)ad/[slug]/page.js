@@ -59,6 +59,7 @@ export default async function ADPage({ params }) {
     reviewStatus,
     views,
     createdAt,
+    block,
   } = adResult.data[0];
 
   // Fetch user data
@@ -66,7 +67,7 @@ export default async function ADPage({ params }) {
 
   return (
     <InterceptionAD back={dic?.ad_page?.back}>
-      <div className="flex justify-center">
+      <div className={`flex justify-center ${block && "blur-sm"}`}>
         {/* mobile */}
         <div className="w-full max-w-[768px] md:hidden p-0 pt-7 flex flex-col ">
           <MobileShareBtn slug={slug} _id={_id} />

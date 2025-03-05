@@ -44,14 +44,12 @@ export default function InterceptionAD({ children, back }) {
 
             return (
               <>
-                <DrawerBody 
-                className="p-2"
-                >{children}</DrawerBody>
-                <DrawerFooter >
+                <DrawerBody className="p-2">{children}</DrawerBody>
+                <DrawerFooter>
                   <div className="w-full flex justify-center items-center">
                     <div className="w-full max-w-[1120px] ">
                       <Button
-                      className="z-50"
+                        className="z-50"
                         radius="full"
                         size="md"
                         color="primary"
