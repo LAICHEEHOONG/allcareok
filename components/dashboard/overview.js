@@ -31,7 +31,7 @@ export default function Overview() {
             width={37}
             radius="none"
             alt="Allcareok logo"
-            src="/images/allcareok_logo.png"
+            src="/images/apple-icon-160.png"
           />
           <Button
             radius="full"
