@@ -159,7 +159,7 @@ export default withAuth(
   function middleware(request) {
     const pathname = request.nextUrl.pathname;
 
-    if (pathname === "/sitemap.xml") {
+    if (pathname === "/sitemap.xml" || pathname === "/robots.txt") {
       return NextResponse.next();
     }
 
