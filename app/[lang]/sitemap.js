@@ -23,12 +23,12 @@ export default async function sitemap() {
       changeFrequency: "daily",
       priority: 1.0,
       // Optional: Add alternate language versions
-      // alternates: {
-      //   languages: locales.reduce((acc, loc) => {
-      //     acc[loc] = `${baseUrl}/${loc}`;
-      //     return acc;
-      //   }, {}),
-      // },
+      alternates: {
+        languages: locales.reduce((acc, loc) => {
+          acc[loc] = `${baseUrl}/${loc}`;
+          return acc;
+        }, {}),
+      },
     }));
 
     // Dynamic ad pages
@@ -41,12 +41,12 @@ export default async function sitemap() {
         changeFrequency: "weekly",
         priority: 0.8,
         // Optional: Add alternate language versions
-        // alternates: {
-        //   languages: locales.reduce((acc, loc) => {
-        //     acc[loc] = `${baseUrl}/${loc}/ad/${ad._id}`;
-        //     return acc;
-        //   }, {}),
-        // },
+        alternates: {
+          languages: locales.reduce((acc, loc) => {
+            acc[loc] = `${baseUrl}/${loc}/ad/${ad._id}`;
+            return acc;
+          }, {}),
+        },
       }));
     });
 
