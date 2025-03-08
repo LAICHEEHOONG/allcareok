@@ -4,6 +4,7 @@ import AllProvider from "@/components/AllProvider";
 import Nav from "@/components/nav/Nav";
 import { i18n } from "@/i18n.config";
 import NavBottomWrap from "@/components/navBottom/NavBottomWrap";
+import Script from 'next/script';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -32,6 +33,14 @@ export default async function RootLayout({ children, params, modal }) {
 
   return (
     <html lang={lang}>
+      <head>
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5418411936016586"
+          strategy="afterInteractive"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased w-full flex justify-center sm:p-2 sm:pr-6 sm:pl-6`}
       >
