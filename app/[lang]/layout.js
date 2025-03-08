@@ -34,11 +34,17 @@ export default async function RootLayout({ children, params, modal }) {
   return (
     <html lang={lang}>
       <head>
-        <script
+        {/* <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5418411936016586"
           crossorigin="anonymous"
-        ></script>
+        ></script> */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5418411936016586"
+          strategy="afterInteractive" // Load after page is interactive
+          crossOrigin="anonymous"
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased w-full flex justify-center sm:p-2 sm:pr-6 sm:pl-6`}
