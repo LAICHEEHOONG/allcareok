@@ -34,7 +34,7 @@ export default async function sitemap() {
     // Dynamic ad pages
     const adPages = ads.flatMap((ad) => {
       const lastModified = ad.updatedAt || ad.createdAt || currentDate;
-      
+
       return locales.map((locale) => ({
         url: `${baseUrl}/${locale}/ad/${ad._id}`,
         lastModified,
@@ -50,7 +50,16 @@ export default async function sitemap() {
       }));
     });
 
-    return [...staticPages, ...adPages];
+    return [
+      ...staticPages,
+      ...adPages,
+      {
+        url: `${baseUrl}/favicon.ico`,
+        lastModified: new Date(),
+        changeFrequency: "weekly",
+        priority: 0.5,
+      },
+    ];
   } catch (error) {
     console.error("Error generating sitemap:", error);
     // Return minimal sitemap in case of error
