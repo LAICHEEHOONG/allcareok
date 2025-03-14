@@ -39,7 +39,10 @@
     "pest_control": "Pest Control",
     "elderly_care": "Elderly Care",
     "child_care": "Child Care",
-    "full_time_maid": "Full Time Maid"
+    "full_time_maid": "Maid",
+    "nurse": "Nurse",
+    "renovate": "Renovate",
+    "pet_grooming": "Pet Grooming"
   },
   "service_type_description": {
     "home_cleaning": "Enjoy a spotless home with thorough cleaning services tailored to your needs, leaving every corner fresh and pristine.",
@@ -58,7 +61,11 @@
     "pest_control": "Eliminate pests safely and effectively with professional control services for a pest-free home.",
     "elderly_care": "Provide compassionate care for seniors, ensuring comfort, safety, and support tailored to their needs.",
     "child_care": "Trust your little ones to nurturing childcare, offering fun, safety, and learning every day.",
-    "full_time_maid": "Enjoy daily help with a dedicated full-time maid, keeping your home clean and organized effortlessly."
+    "full_time_maid": "Enjoy daily help with a dedicated maid, keeping your home clean and organized effortlessly.",
+    "nurse": "Receive expert care from skilled nurses, providing medical support and assistance for your health needs.",
+    "renovate": "Renovate your space with expert services, transforming your home with quality upgrades and improvements.",
+    "pet_grooming": "Keep your pets looking and feeling their best with professional grooming services, ensuring cleanliness, comfort, and style."
+
   },
   "overview": {
     "main": "It’s easy to get started on Allcareok",

@@ -39,7 +39,32 @@
     "pest_control": "害虫控制",
     "elderly_care": "老人照护",
     "child_care": "儿童照料",
-    "full_time_maid": "全职女佣"
+    "full_time_maid": "女佣",
+    "nurse": "看护",
+    "renovate": "装修",
+    "pet_grooming": "宠物美容",
+    "electrical_services": "电工服务",
+    "plumbing_services": "水管维修",
+    "roof_repair": "屋顶维修",
+    "carpentry_services": "木工服务",
+    "glass_repair": "玻璃维修",
+    "locksmith_services": "开锁服务",
+    "appliance_repair": "家电维修",
+    "interior_design": "室内设计",
+    "event_catering": "活动餐饮",
+    "security_services": "安保服务",
+    "laundry_services": "洗衣服务",
+    "babysitting": "临时保姆",
+    "massage_therapy": "按摩理疗",
+    "personal_driver": "私人司机",
+    "private_tutoring": "私人家教",
+    "computer_repair": "电脑维修",
+    "phone_repair": "手机维修",
+    "car_rental": "汽车租赁",
+    "furniture_assembly": "家具安装",
+    "pool_maintenance": "游泳池维护"
+
+    
   },
   "service_type_description": {
     "home_cleaning": "享受量身定制的彻底清洁服务，让您的家一尘不染，每个角落都清新整洁。",
@@ -58,7 +83,10 @@
     "pest_control": "安全有效地消灭害虫，专业虫控服务确保您的家无虫害。",
     "elderly_care": "为长者提供贴心护理，确保舒适、安全和个性化支持。",
     "child_care": "将您的孩子托付给温馨的看护服务，提供乐趣、安全和每日学习。",
-    "full_time_maid": "全职女佣每日帮忙，让您的家保持清洁与井然有序，无需费心。"
+    "full_time_maid": "女佣每日帮忙，让您的家保持清洁与井然有序，无需费心。",
+    "nurse": "专业护士提供全面看护，确保病患得到最佳医疗和生活支持。",
+    "renovate": "专业装修服务，让您的家焕然一新，提升舒适度和美观性。",
+    "pet_grooming": "宠物美容服务让您的宠物焕然一新，保持清洁健康的外表。"
   },
   "overview": {
     "main": "在 Allcareok 上开始非常简单",

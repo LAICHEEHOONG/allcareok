@@ -39,7 +39,10 @@
     "pest_control": "Kawalan Perosak",
     "elderly_care": "Penjagaan Warga Emas",
     "child_care": "Penjagaan Kanak-Kanak",
-    "full_time_maid": "Pembantu Rumah Sepenuh Masa"
+    "full_time_maid": "Pembantu Rumah Sepenuh Masa",
+    "nurse": "Jururawat",
+    "renovate": "Ubahsuai",
+    "pet_grooming": "Penjagaan Haiwan Peliharaan"
   },
   "service_type_description": {
     "home_cleaning": "Nikmati rumah bersih dengan perkhidmatan pembersihan menyeluruh yang disesuaikan, meninggalkan setiap sudut segar dan kemas.",
@@ -58,7 +61,10 @@
     "pest_control": "Hapuskan serangga dengan selamat dan berkesan dengan perkhidmatan kawalan serangga profesional untuk rumah bebas perosak.",
     "elderly_care": "Sediakan penjagaan penuh kasih sayang untuk warga emas, memastikan keselesaan, keselamatan, dan sokongan mengikut keperluan mereka.",
     "child_care": "Serahkan anak kecil anda kepada penjagaan penuh kasih, menawarkan keseronokan, keselamatan, dan pembelajaran setiap hari.",
-    "full_time_maid": "Nikmati bantuan harian dengan pembantu rumah sepenuh masa, menjaga rumah anda bersih dan teratur dengan mudah."
+    "full_time_maid": "Nikmati bantuan harian dengan pembantu rumah sepenuh masa, menjaga rumah anda bersih dan teratur dengan mudah.",
+    "nurse": "Dapatkan sokongan kesihatan yang diperlukan dengan jururawat profesional.",
+    "renovate": "Ubahsuai ruang anda dengan perkhidmatan renovasi pakar, membawa idea anda kepada kenyataan.",
+    "pet_grooming": "Berikan haiwan kesayangan anda penjagaan yang mereka layak, menjaga kebersihan dan keselesaan mereka."
   },
   "overview": {
     "main": "Mudah untuk bermula di Allcareok",
