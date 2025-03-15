@@ -159,7 +159,7 @@ export default withAuth(
   function middleware(request) {
     const pathname = request.nextUrl.pathname;
 
-    if (pathname === "/sitemap.xml" || pathname === "/robots.txt" || pathname === "/ads.txt") {
+    if (pathname === "/sitemap.xml" || pathname === "/robots.txt" || pathname === "/ads.txt" || pathname === "/apple-icon.png") {
       return NextResponse.next();
     }
 
