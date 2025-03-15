@@ -52,7 +52,7 @@ export default async function Page({ searchParams }) {
   const initialAdsResponse = await getPaginatedAds({
     query: {
       page: 1,
-      limit: 20, // Default limit; adjust based on your needs
+      limit: 40, // Default limit; adjust based on your needs
       area,
       service: serviceType,
     },

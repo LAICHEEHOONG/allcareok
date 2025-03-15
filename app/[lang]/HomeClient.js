@@ -192,11 +192,11 @@ export default function HomeClient({
     const fetchMoreAds = async (pageReset) => {
       try {
         let screenHeight = window.innerHeight;
-        let limit = 20;
+        let limit = 40;
         if (screenHeight >= 1400 && screenHeight < 2160) {
-          limit = 40;
-        } else if (screenHeight >= 2160 && screenHeight < 4320) {
           limit = 80;
+        } else if (screenHeight >= 2160 && screenHeight < 4320) {
+          limit = 160;
         }
 
         const res = await getPaginatedAds({
