@@ -10,9 +10,10 @@ export async function generateMetadata({ searchParams }) {
   const area = (await searchParams)?.area || "";
   const serviceType = (await searchParams)?.serviceType || "";
 
-  const title = `${serviceType ? `${serviceType} Services` : "Services"} in ${
-    area || "Your Area"
-  } | AllCareOK`;
+  // const title = `${serviceType ? `${serviceType} Services` : "Services"} in ${
+  //   area || "Your Area"
+  // } | AllCareOK`;
+  const title = `AllCareOK`;
   const description = `Find ${
     serviceType ? `${serviceType.toLowerCase()} ` : ""
   }services in ${
