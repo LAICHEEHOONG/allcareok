@@ -45,7 +45,7 @@ export default function NavChild({ navigation, service_type, poppins, dic }) {
   const isWishlist =
     pathname.endsWith("/wishlists") ||
     pathname.endsWith("/dashboard") ||
-    pathname.endsWith("/support");
+    pathname.endsWith("/support") || pathname.includes("/privacy-policy");
   // pathname.includes("/ad/");
 
   const isAd = pathname.includes("/ad/");

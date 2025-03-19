@@ -68,6 +68,9 @@ export default function ProfileMenu({ navigation }) {
     router.push(`/${currentLocale}/support`);
   };
 
+  const handlePrivacy = () => {
+    router.push(`/${currentLocale}/privacy-policy`);
+  };
   return (
     <Dropdown>
       <DropdownTrigger>
@@ -118,6 +121,13 @@ export default function ProfileMenu({ navigation }) {
           onPress={handleSupport}
         >
           {navigation.help}
+        </DropdownItem>
+        <DropdownItem
+          key={navigation.privacy_policy}
+          textValue="Privacy Policy"
+          onPress={handlePrivacy}
+        >
+          {navigation.privacy_policy}
         </DropdownItem>
         {auth.signIn === "authenticated" && (
           <DropdownItem
