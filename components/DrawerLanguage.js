@@ -15,9 +15,19 @@ import { i18n } from "@/i18n.config";
 import { useRouter, usePathname } from "next/navigation";
 import { updateUserLanguage } from "@/lib/action/userAction";
 
-export function DrawerLanguage({ children, bottom_navigation, setOpenDrawerLanguage,openDrawerLanguage }) {
+export function DrawerLanguage({
+  children,
+  bottom_navigation,
+  setOpenDrawerLanguage,
+  openDrawerLanguage,
+}) {
   return (
-    <Drawer open={openDrawerLanguage} onOpenChange={() => setOpenDrawerLanguage(openDrawerLanguage ? false : true)}>
+    <Drawer
+      open={openDrawerLanguage}
+      onOpenChange={() =>
+        setOpenDrawerLanguage(openDrawerLanguage ? false : true)
+      }
+    >
       {/* <DrawerTrigger asChild>{children}</DrawerTrigger> */}
       <DrawerContent>
         <div className="mx-auto w-full max-w-sm p-2 ">
@@ -54,14 +64,18 @@ function ListBox_() {
     setSelectedKeys(newKeys);
 
     try {
-      // router.push(redirectedPathName(locale), { scroll: false });
-      router.push(
+      // router.push(
+      //   `${redirectedPathName(locale)}?area=${area ? area : ""}&serviceType=${
+      //     serviceType ? serviceType : ""
+      //   }`,
+      //   { scroll: false }
+      // );
+      window.open(
         `${redirectedPathName(locale)}?area=${area ? area : ""}&serviceType=${
           serviceType ? serviceType : ""
         }`,
-        { scroll: false }
+        "_blank"
       );
-
       if (id) {
         await updateUserLanguage({ id, locale });
       }

@@ -31,12 +31,17 @@ export default function LanguageMenu() {
 
   const changeLanguage = async (locale) => {
     try {
-      // router.push(redirectedPathName(locale), { scroll: false }); // Navigate to the new language route
-      router.push(
+      // router.push(
+      //   `${redirectedPathName(locale)}?area=${area ? area : ""}&serviceType=${
+      //     serviceType ? serviceType : ""
+      //   }`,
+      //   { scroll: false }
+      // );
+      window.open(
         `${redirectedPathName(locale)}?area=${area ? area : ""}&serviceType=${
           serviceType ? serviceType : ""
         }`,
-        { scroll: false }
+        "_blank"
       );
 
       if (id) {
